@@ -1,0 +1,19 @@
+c:\users\young\onedrive\documentos\visual studio 2015\Projects\Trabalho_BD_IHC\Trabalho_BD_IHC\bin\Debug\Trabalho_BD_IHC.exe.config
+c:\users\young\onedrive\documentos\visual studio 2015\Projects\Trabalho_BD_IHC\Trabalho_BD_IHC\bin\Debug\Trabalho_BD_IHC.exe
+c:\users\young\onedrive\documentos\visual studio 2015\Projects\Trabalho_BD_IHC\Trabalho_BD_IHC\bin\Debug\Trabalho_BD_IHC.pdb
+c:\users\young\onedrive\documentos\visual studio 2015\Projects\Trabalho_BD_IHC\Trabalho_BD_IHC\obj\Debug\Trabalho_BD_IHC.csprojResolveAssemblyReference.cache
+c:\users\young\onedrive\documentos\visual studio 2015\Projects\Trabalho_BD_IHC\Trabalho_BD_IHC\obj\Debug\App.g.cs
+c:\users\young\onedrive\documentos\visual studio 2015\Projects\Trabalho_BD_IHC\Trabalho_BD_IHC\obj\Debug\Trabalho_BD_IHC_MarkupCompile.cache
+c:\users\young\onedrive\documentos\visual studio 2015\Projects\Trabalho_BD_IHC\Trabalho_BD_IHC\obj\Debug\Trabalho_BD_IHC_MarkupCompile.lref
+c:\users\young\onedrive\documentos\visual studio 2015\Projects\Trabalho_BD_IHC\Trabalho_BD_IHC\obj\Debug\Trabalho_BD_IHC.g.resources
+c:\users\young\onedrive\documentos\visual studio 2015\Projects\Trabalho_BD_IHC\Trabalho_BD_IHC\obj\Debug\Trabalho_BD_IHC.Properties.Resources.resources
+c:\users\young\onedrive\documentos\visual studio 2015\Projects\Trabalho_BD_IHC\Trabalho_BD_IHC\obj\Debug\Trabalho_BD_IHC.csproj.GenerateResource.Cache
+c:\users\young\onedrive\documentos\visual studio 2015\Projects\Trabalho_BD_IHC\Trabalho_BD_IHC\obj\Debug\Trabalho_BD_IHC.exe
+c:\users\young\onedrive\documentos\visual studio 2015\Projects\Trabalho_BD_IHC\Trabalho_BD_IHC\obj\Debug\Trabalho_BD_IHC.pdb
+C:\Users\young\OneDrive\Documentos\Visual Studio 2015\Projects\Trabalho_BD_IHC\Trabalho_BD_IHC\obj\Debug\Main.g.cs
+C:\Users\young\OneDrive\Documentos\Visual Studio 2015\Projects\Trabalho_BD_IHC\Trabalho_BD_IHC\obj\Debug\Main.baml
+C:\Users\young\OneDrive\Documentos\Visual Studio 2015\Projects\Trabalho_BD_IHC\Trabalho_BD_IHC\obj\Debug\Login.g.cs
+C:\Users\young\OneDrive\Documentos\Visual Studio 2015\Projects\Trabalho_BD_IHC\Trabalho_BD_IHC\obj\Debug\Login.baml
+C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\bin\Debug\Trabalho_BD_IHC.exe.config
+C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\Trabalho_BD_IHC.exe
+C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\Trabalho_BD_IHC.pdb

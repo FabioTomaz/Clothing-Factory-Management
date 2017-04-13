@@ -1,0 +1,92 @@
+﻿<Window x:Class="Trabalho_BD_IHC.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Trabalho_BD_IHC"
+        mc:Ignorable="d"
+        Title="Gestão de Produção, Stock e Venda" Height="400" MinHeight="250" Width="700" MinWidth="685">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TabControl x:Name="tabControl" Grid.Column="0" HorizontalAlignment="Stretch" Grid.Row="0" VerticalAlignment="Stretch">
+            <TabItem Header="Minha Conta" IsEnabled="False">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+            <TabItem Header="Clientes"  IsEnabled="False">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+            <TabItem Header="Encomendas"  IsEnabled="False">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+            <TabItem Header="Produtos"  IsEnabled="False">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+            <TabItem Header="Matérias Primas"  IsEnabled="False">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.05*"/>
+                        <ColumnDefinition Width="0.3*"/>
+                        <ColumnDefinition Width="0.05*"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="0.05*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition Height="0.5*"/>
+                    </Grid.RowDefinitions>
+                    <Label x:Name="operacoesLabel1" Content="Operações" Grid.Column="1" VerticalAlignment="Center"/>
+                    <Label x:Name="materiaisTexteisLabel" Content="Lista de Matérias Primas em Armazem" Grid.Column="3" Grid.Row="0" VerticalAlignment="Center"/>
+                    <ListBox x:Name="materiaisTexteisListBox" Grid.Column="3" Grid.Row="1" Grid.RowSpan="5"/>
+                    <Button x:Name="adicionarMateriaisTexteis" Content="Adicionar Empregado" Grid.Column="1" Grid.Row="1"/>
+                    <Button x:Name="removerMateriaisTexteis" Content="Remover Empregado" Grid.Column="1" Grid.Row="3"/>
+                    <Button x:Name="pesquisarMateriaisTexteis" Content="Editar Empregado" Grid.Column="1" Grid.Row="5"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Recursos Humanos" >
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.05*"></ColumnDefinition>
+                        <ColumnDefinition Width="0.3*"></ColumnDefinition>
+                        <ColumnDefinition Width="0.05*"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width="0.05*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition Height="0.5*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Label x:Name="operacoesLabel" Content="Operações" Grid.Column="1" VerticalAlignment="Center"/>
+                    <Label x:Name="empregadosLabel" Content="Lista de Empregados da Filial" Grid.Column="3" Grid.Row="0" VerticalAlignment="Center"/>
+                    <ListBox x:Name="empregadosListBox" Grid.Row="1" Grid.RowSpan="5" Grid.ColumnSpan="4" Margin="-37,0,227,0"/>
+                    <Button x:Name="adicionarEmpregado" Content="Adicionar Empregado" Grid.Column="1" Grid.Row="1"/>
+                    <Button x:Name="removerEmpregado" Content="Remover Empregado" Grid.Column="1" Grid.Row="3"/>
+                    <Button x:Name="editarEmpregado" Content="Editar Empregado" Grid.Column="1" Grid.Row="5"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Estatisticas"  IsEnabled="False">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+            <TabItem Header="Defenições"  IsEnabled="False">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+            <TabItem Header="Ajuda" >
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

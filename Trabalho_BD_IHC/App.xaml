@@ -1,0 +1,9 @@
+﻿<Application x:Class="Trabalho_BD_IHC.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Trabalho_BD_IHC"
+             StartupUri="Main.xaml">
+    <Application.Resources>
+         
+    </Application.Resources>
+</Application>
