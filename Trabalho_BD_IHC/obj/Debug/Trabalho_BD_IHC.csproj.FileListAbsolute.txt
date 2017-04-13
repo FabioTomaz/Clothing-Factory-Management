@@ -17,3 +17,16 @@ C:\Users\young\OneDrive\Documentos\Visual Studio 2015\Projects\Trabalho_BD_IHC\T
 C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\bin\Debug\Trabalho_BD_IHC.exe.config
 C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\Trabalho_BD_IHC.exe
 C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\Trabalho_BD_IHC.pdb
+C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\bin\Debug\Trabalho_BD_IHC.exe
+C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\bin\Debug\Trabalho_BD_IHC.pdb
+C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\Trabalho_BD_IHC.csprojResolveAssemblyReference.cache
+C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\Login.g.cs
+C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\Main.g.cs
+C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\App.g.cs
+C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\Trabalho_BD_IHC_MarkupCompile.cache
+C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\Trabalho_BD_IHC_MarkupCompile.lref
+C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\Login.baml
+C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\Main.baml
+C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\Trabalho_BD_IHC.g.resources
+C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\Trabalho_BD_IHC.Properties.Resources.resources
+C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\Trabalho_BD_IHC.csproj.GenerateResource.Cache

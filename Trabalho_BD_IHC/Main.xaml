@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Trabalho_BD_IHC"
         mc:Ignorable="d"
-        Title="Gestão de Produção, Stock e Venda" Height="400" MinHeight="250" Width="700" MinWidth="685">
+        Title="Gestão de Produção, Stock e Venda" Height="400" MinHeight="300" Width="700" MinWidth="685">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -14,19 +14,70 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <TabControl x:Name="tabControl" Grid.Column="0" HorizontalAlignment="Stretch" Grid.Row="0" VerticalAlignment="Stretch">
-            <TabItem Header="Minha Conta" IsEnabled="False">
-                <Grid Background="#FFE5E5E5"/>
+            <TabItem Header="Minha Conta" IsEnabled="True">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.2*"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="0.1*"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="0.1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.1*"/>
+                        <RowDefinition Height="1.3*"/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition Height="0.1*"/>
+                    </Grid.RowDefinitions>
+                    <GroupBox Header="Informações de Login" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="1">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="Nº de Funcionário" Grid.Row="0" Grid.Column="0"></Label>
+                            <Label Content="PassWord" Grid.Row="1" Grid.Column="0"></Label>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Header="Informações Pessoais" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2" Grid.RowSpan="4">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Label Content="Nome: " Grid.Row="0"></Label>
+                            <Label Content="E-Mail: " Grid.Row="1"></Label>
+                            <Label Content="Telefone: " Grid.Row="2"></Label>
+                            <Label Content="Salário: " Grid.Row="3"></Label>
+                            <Label Content="Hora de Entrada: " Grid.Row="4"></Label>
+                            <Label Content="Hora de Saída: " Grid.Row="5"></Label>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Header="Imagem de Perfil" Grid.Row="1" Grid.RowSpan="3" Grid.Column="4">
+                        <Image Source="login.jpg"></Image>
+                    </GroupBox>
+                    <Button Content="Alterar Foto" Grid.Column="4" Grid.Row="4" VerticalAlignment="Center"/>
+                    <Button Content="Alterar Informações Pessoais" Grid.Column="4" Grid.Row="5" VerticalAlignment="Top"/>
+                    <Button Content="Alterar PassWord" Grid.Column="4" Grid.Row="5" VerticalAlignment="Bottom"/>
+                </Grid>
             </TabItem>
-            <TabItem Header="Clientes"  IsEnabled="False">
-                <Grid Background="#FFE5E5E5"/>
-            </TabItem>
-            <TabItem Header="Encomendas"  IsEnabled="False">
-                <Grid Background="#FFE5E5E5"/>
-            </TabItem>
-            <TabItem Header="Produtos"  IsEnabled="False">
-                <Grid Background="#FFE5E5E5"/>
-            </TabItem>
-            <TabItem Header="Matérias Primas"  IsEnabled="False">
+            <TabItem Header="Clientes"  IsEnabled="True">
                 <Grid Background="#FFE5E5E5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.05*"/>
@@ -42,14 +93,98 @@
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
-                        <RowDefinition Height="0.5*"/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Label x:Name="operacoesLabel4" Content="Operações" Grid.Column="1" VerticalAlignment="Center"/>
+                    <Label x:Name="clientesLabel" Content="Lista de Clientes Registados na Empresa" Grid.Column="3" Grid.Row="0" VerticalAlignment="Center"/>
+                    <ListBox x:Name="clientesListBox" Grid.Column="3" Grid.Row="1" Grid.RowSpan="7"/>
+                    <Button x:Name="registarCliente" Content="Registar Cliente" Grid.Column="1" Grid.Row="1"/>
+                    <Button x:Name="editarCliente" Content="Editar Cliente" Grid.Column="1" Grid.Row="3"/>
+                    <Button x:Name="removerCliente" Content="Remover Cliente" Grid.Column="1" Grid.Row="5"/>
+                    <Button x:Name="pesquisarCliente" Content="Pesquisar Cliente" Grid.Column="1" Grid.Row="7"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Encomendas"  IsEnabled="True">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.05*"/>
+                        <ColumnDefinition Width="0.3*"/>
+                        <ColumnDefinition Width="0.05*"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="0.05*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Label x:Name="operacoesLabel3" Content="Operações" Grid.Column="1" VerticalAlignment="Center"/>
+                    <Label x:Name="encomendasLabel" Content="Lista de Encomendas da Empresa" Grid.Column="3" Grid.Row="0" VerticalAlignment="Center"/>
+                    <ListBox x:Name="encomendasListBox" Grid.Column="3" Grid.Row="1" Grid.RowSpan="7"/>
+                    <Button x:Name="registarEncomenda" Content="Registar Encomenda" Grid.Column="1" Grid.Row="1"/>
+                    <Button x:Name="editarEncomenda" Content="Editar Encomenda" Grid.Column="1" Grid.Row="3"/>
+                    <Button x:Name="pesquisarEncomenda" Content="Pesquisar Encomenda" Grid.Column="1" Grid.Row="5"/>
+                    <Button x:Name="entregarEncomenda" Content="Entregar Encomenda" Grid.Column="1" Grid.Row="7"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Produtos"  IsEnabled="True">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.05*"/>
+                        <ColumnDefinition Width="0.3*"/>
+                        <ColumnDefinition Width="0.05*"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="0.05*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Label x:Name="operacoesLabel2" Content="Operações" Grid.Column="1" VerticalAlignment="Center"/>
+                    <Label x:Name="ProdutosLabel" Content="Lista de Produtos da Empresa" Grid.Column="3" Grid.Row="0" VerticalAlignment="Center"/>
+                    <ListBox x:Name="produtosListBox" Grid.Column="3" Grid.Row="1" Grid.RowSpan="5"/>
+                    <Button x:Name="produzirProdutos" Content="Produzir Produtos" Grid.Column="1" Grid.Row="1"/>
+                    <Button x:Name="registarDesenho" Content="Registar Desenho" Grid.Column="1" Grid.Row="3"/>
+                    <Button x:Name="pesquisarProduto" Content="Pesquisar Produto" Grid.Column="1" Grid.Row="5"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Matérias Primas"  IsEnabled="True">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.05*"/>
+                        <ColumnDefinition Width="0.3*"/>
+                        <ColumnDefinition Width="0.05*"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="0.05*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Label x:Name="operacoesLabel1" Content="Operações" Grid.Column="1" VerticalAlignment="Center"/>
                     <Label x:Name="materiaisTexteisLabel" Content="Lista de Matérias Primas em Armazem" Grid.Column="3" Grid.Row="0" VerticalAlignment="Center"/>
                     <ListBox x:Name="materiaisTexteisListBox" Grid.Column="3" Grid.Row="1" Grid.RowSpan="5"/>
-                    <Button x:Name="adicionarMateriaisTexteis" Content="Adicionar Empregado" Grid.Column="1" Grid.Row="1"/>
-                    <Button x:Name="removerMateriaisTexteis" Content="Remover Empregado" Grid.Column="1" Grid.Row="3"/>
-                    <Button x:Name="pesquisarMateriaisTexteis" Content="Editar Empregado" Grid.Column="1" Grid.Row="5"/>
+                    <Button x:Name="adicionarMateriaisTexteis" Content="Encomendar Materiais" Grid.Column="1" Grid.Row="1"/>
+                    <Button x:Name="removerMateriaisTexteis" Content="Remover Materiais" Grid.Column="1" Grid.Row="3"/>
+                    <Button x:Name="pesquisarMateriaisTexteis" Content="Pesquisar Materiais" Grid.Column="1" Grid.Row="5"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Recursos Humanos" >
@@ -68,14 +203,17 @@
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
-                        <RowDefinition Height="0.5*"></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
                     <Label x:Name="operacoesLabel" Content="Operações" Grid.Column="1" VerticalAlignment="Center"/>
                     <Label x:Name="empregadosLabel" Content="Lista de Empregados da Filial" Grid.Column="3" Grid.Row="0" VerticalAlignment="Center"/>
-                    <ListBox x:Name="empregadosListBox" Grid.Row="1" Grid.RowSpan="5" Grid.ColumnSpan="4" Margin="-37,0,227,0"/>
+                    <ListBox x:Name="empregadosListBox" Grid.Row="1" Grid.RowSpan="7" Grid.Column="3"/>
                     <Button x:Name="adicionarEmpregado" Content="Adicionar Empregado" Grid.Column="1" Grid.Row="1"/>
                     <Button x:Name="removerEmpregado" Content="Remover Empregado" Grid.Column="1" Grid.Row="3"/>
                     <Button x:Name="editarEmpregado" Content="Editar Empregado" Grid.Column="1" Grid.Row="5"/>
+                    <Button x:Name="pesquisarEmpregado" Content="Pesquisar Empregado" Grid.Column="1" Grid.Row="7"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Estatisticas"  IsEnabled="False">
