@@ -15,9 +15,9 @@
         </Grid.RowDefinitions>
         <TabControl x:Name="tabControl" Grid.Column="0" HorizontalAlignment="Stretch" Grid.Row="0" VerticalAlignment="Stretch">
             <TabItem Header="Minha Conta" IsEnabled="True">
-                <Grid Background="#FFE5E5E5">
+                <Grid Background="White">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.2*"/>
+                        <ColumnDefinition Width="0.1*"/>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                         <ColumnDefinition Width="0.1*"/>
@@ -70,7 +70,7 @@
                         </Grid>
                     </GroupBox>
                     <GroupBox Header="Imagem de Perfil" Grid.Row="1" Grid.RowSpan="3" Grid.Column="4">
-                        <Image Source="login.jpg"></Image>
+                        <Image Source="login.png"></Image>
                     </GroupBox>
                     <Button Content="Alterar Foto" Grid.Column="4" Grid.Row="4" VerticalAlignment="Center"/>
                     <Button Content="Alterar Informações Pessoais" Grid.Column="4" Grid.Row="5" VerticalAlignment="Top"/>
@@ -78,7 +78,7 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Clientes"  IsEnabled="True">
-                <Grid Background="#FFE5E5E5">
+                <Grid Background="WhiteSmoke">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.05*"/>
                         <ColumnDefinition Width="0.3*"/>
@@ -107,7 +107,7 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Encomendas"  IsEnabled="True">
-                <Grid Background="#FFE5E5E5">
+                <Grid Background="WhiteSmoke">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.05*"/>
                         <ColumnDefinition Width="0.3*"/>
@@ -136,7 +136,7 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Produtos"  IsEnabled="True">
-                <Grid Background="#FFE5E5E5">
+                <Grid Background="WhiteSmoke">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.05*"/>
                         <ColumnDefinition Width="0.3*"/>
@@ -162,7 +162,7 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Matérias Primas"  IsEnabled="True">
-                <Grid Background="#FFE5E5E5">
+                <Grid Background="WhiteSmoke">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.05*"/>
                         <ColumnDefinition Width="0.3*"/>
@@ -188,7 +188,7 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Recursos Humanos" >
-                <Grid Background="#FFE5E5E5">
+                <Grid Background="WhiteSmoke">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.05*"></ColumnDefinition>
                         <ColumnDefinition Width="0.3*"></ColumnDefinition>
@@ -223,7 +223,7 @@
                 <Grid Background="#FFE5E5E5"/>
             </TabItem>
             <TabItem Header="Ajuda" >
-                <Grid Background="#FFE5E5E5"/>
+                <Grid Background="White"/>
             </TabItem>
         </TabControl>
     </Grid>
