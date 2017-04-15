@@ -30,3 +30,6 @@ C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\Trabalho_BD_IHC.g.r
 C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\Trabalho_BD_IHC.Properties.Resources.resources
 C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\Trabalho_BD_IHC.csproj.GenerateResource.Cache
 C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\Main.g.cs
+C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\bin\Debug\Trabalho_BD_IHC.exe.config
+C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\obj\Debug\Trabalho_BD_IHC.exe
+C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\obj\Debug\Trabalho_BD_IHC.pdb
