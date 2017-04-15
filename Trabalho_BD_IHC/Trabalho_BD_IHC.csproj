@@ -55,6 +55,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="GestorProducao.cs" />
+    <Compile Include="GestorRecursosHumanos.cs" />
+    <Compile Include="GestorStocks.cs" />
+    <Compile Include="GestorVendas.cs" />
+    <Compile Include="Produto.cs" />
+    <Compile Include="Utilizador.cs" />
     <Page Include="Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -63,10 +69,25 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="AcessoriosCostura.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Bordado.cs" />
+    <Compile Include="Botao.cs" />
+    <Compile Include="Cliente.cs" />
+    <Compile Include="Desenho.cs" />
+    <Compile Include="Elastico.cs" />
+    <Compile Include="Encomenda.cs" />
+    <Compile Include="Estampagem.cs" />
+    <Compile Include="Etiqueta.cs" />
+    <Compile Include="Fecho.cs" />
+    <Compile Include="filial.cs" />
+    <Compile Include="FitaVelcro.cs" />
+    <Compile Include="Fornecedor.cs" />
+    <Compile Include="Impressao.cs" />
+    <Compile Include="Linha.cs" />
     <Compile Include="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
@@ -76,6 +97,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MaterialTextil.cs" />
+    <Compile Include="Modelo.cs" />
+    <Compile Include="Mola.cs" />
+    <Compile Include="Pano.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

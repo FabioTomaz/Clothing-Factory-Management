@@ -343,105 +343,113 @@ namespace Trabalho_BD_IHC {
             switch (connectionId)
             {
             case 1:
-            this.tabControl = ((System.Windows.Controls.TabControl)(target));
+            
+            #line 8 "..\..\Main.xaml"
+            ((Trabalho_BD_IHC.MainWindow)(target)).Loaded += new System.Windows.RoutedEventHandler(this.Window_Loaded);
+            
+            #line default
+            #line hidden
             return;
             case 2:
-            this.operacoesLabel4 = ((System.Windows.Controls.Label)(target));
+            this.tabControl = ((System.Windows.Controls.TabControl)(target));
             return;
             case 3:
-            this.clientesLabel = ((System.Windows.Controls.Label)(target));
+            this.operacoesLabel4 = ((System.Windows.Controls.Label)(target));
             return;
             case 4:
-            this.clientesListBox = ((System.Windows.Controls.ListBox)(target));
+            this.clientesLabel = ((System.Windows.Controls.Label)(target));
             return;
             case 5:
-            this.registarCliente = ((System.Windows.Controls.Button)(target));
+            this.clientesListBox = ((System.Windows.Controls.ListBox)(target));
             return;
             case 6:
-            this.editarCliente = ((System.Windows.Controls.Button)(target));
+            this.registarCliente = ((System.Windows.Controls.Button)(target));
             return;
             case 7:
-            this.removerCliente = ((System.Windows.Controls.Button)(target));
+            this.editarCliente = ((System.Windows.Controls.Button)(target));
             return;
             case 8:
-            this.pesquisarCliente = ((System.Windows.Controls.Button)(target));
+            this.removerCliente = ((System.Windows.Controls.Button)(target));
             return;
             case 9:
-            this.operacoesLabel3 = ((System.Windows.Controls.Label)(target));
+            this.pesquisarCliente = ((System.Windows.Controls.Button)(target));
             return;
             case 10:
-            this.encomendasLabel = ((System.Windows.Controls.Label)(target));
+            this.operacoesLabel3 = ((System.Windows.Controls.Label)(target));
             return;
             case 11:
-            this.encomendasListBox = ((System.Windows.Controls.ListBox)(target));
+            this.encomendasLabel = ((System.Windows.Controls.Label)(target));
             return;
             case 12:
-            this.registarEncomenda = ((System.Windows.Controls.Button)(target));
+            this.encomendasListBox = ((System.Windows.Controls.ListBox)(target));
             return;
             case 13:
-            this.editarEncomenda = ((System.Windows.Controls.Button)(target));
+            this.registarEncomenda = ((System.Windows.Controls.Button)(target));
             return;
             case 14:
-            this.pesquisarEncomenda = ((System.Windows.Controls.Button)(target));
+            this.editarEncomenda = ((System.Windows.Controls.Button)(target));
             return;
             case 15:
-            this.entregarEncomenda = ((System.Windows.Controls.Button)(target));
+            this.pesquisarEncomenda = ((System.Windows.Controls.Button)(target));
             return;
             case 16:
-            this.operacoesLabel2 = ((System.Windows.Controls.Label)(target));
+            this.entregarEncomenda = ((System.Windows.Controls.Button)(target));
             return;
             case 17:
-            this.ProdutosLabel = ((System.Windows.Controls.Label)(target));
+            this.operacoesLabel2 = ((System.Windows.Controls.Label)(target));
             return;
             case 18:
-            this.produtosListBox = ((System.Windows.Controls.ListBox)(target));
+            this.ProdutosLabel = ((System.Windows.Controls.Label)(target));
             return;
             case 19:
-            this.produzirProdutos = ((System.Windows.Controls.Button)(target));
+            this.produtosListBox = ((System.Windows.Controls.ListBox)(target));
             return;
             case 20:
-            this.registarDesenho = ((System.Windows.Controls.Button)(target));
+            this.produzirProdutos = ((System.Windows.Controls.Button)(target));
             return;
             case 21:
-            this.pesquisarProduto = ((System.Windows.Controls.Button)(target));
+            this.registarDesenho = ((System.Windows.Controls.Button)(target));
             return;
             case 22:
-            this.operacoesLabel1 = ((System.Windows.Controls.Label)(target));
+            this.pesquisarProduto = ((System.Windows.Controls.Button)(target));
             return;
             case 23:
-            this.materiaisTexteisLabel = ((System.Windows.Controls.Label)(target));
+            this.operacoesLabel1 = ((System.Windows.Controls.Label)(target));
             return;
             case 24:
-            this.materiaisTexteisListBox = ((System.Windows.Controls.ListBox)(target));
+            this.materiaisTexteisLabel = ((System.Windows.Controls.Label)(target));
             return;
             case 25:
-            this.adicionarMateriaisTexteis = ((System.Windows.Controls.Button)(target));
+            this.materiaisTexteisListBox = ((System.Windows.Controls.ListBox)(target));
             return;
             case 26:
-            this.removerMateriaisTexteis = ((System.Windows.Controls.Button)(target));
+            this.adicionarMateriaisTexteis = ((System.Windows.Controls.Button)(target));
             return;
             case 27:
-            this.pesquisarMateriaisTexteis = ((System.Windows.Controls.Button)(target));
+            this.removerMateriaisTexteis = ((System.Windows.Controls.Button)(target));
             return;
             case 28:
-            this.operacoesLabel = ((System.Windows.Controls.Label)(target));
+            this.pesquisarMateriaisTexteis = ((System.Windows.Controls.Button)(target));
             return;
             case 29:
-            this.empregadosLabel = ((System.Windows.Controls.Label)(target));
+            this.operacoesLabel = ((System.Windows.Controls.Label)(target));
             return;
             case 30:
-            this.empregadosListBox = ((System.Windows.Controls.ListBox)(target));
+            this.empregadosLabel = ((System.Windows.Controls.Label)(target));
             return;
             case 31:
-            this.adicionarEmpregado = ((System.Windows.Controls.Button)(target));
+            this.empregadosListBox = ((System.Windows.Controls.ListBox)(target));
             return;
             case 32:
-            this.removerEmpregado = ((System.Windows.Controls.Button)(target));
+            this.adicionarEmpregado = ((System.Windows.Controls.Button)(target));
             return;
             case 33:
-            this.editarEmpregado = ((System.Windows.Controls.Button)(target));
+            this.removerEmpregado = ((System.Windows.Controls.Button)(target));
             return;
             case 34:
+            this.editarEmpregado = ((System.Windows.Controls.Button)(target));
+            return;
+            case 35:
             this.pesquisarEmpregado = ((System.Windows.Controls.Button)(target));
             return;
             }
