@@ -24,5 +24,25 @@ namespace Trabalho_BD_IHC
         {
             InitializeComponent();
         }
+
+        private void removerCliente_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void pesquisar_cliente_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void entregarEncomenda_Copy_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void registarEncomenda_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
