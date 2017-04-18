@@ -226,8 +226,68 @@
                     <TextBox x:Name="pesquisar_cliente_Copy3" Grid.Column="3" HorizontalAlignment="Left" Height="16" Margin="74,4,0,0" TextWrapping="Wrap" Text="Nome do empregado" VerticalAlignment="Top" Width="279" TextChanged="pesquisar_cliente_TextChanged" Grid.Row="1"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Estatísticas"  IsEnabled="False">
-                <Grid Background="#FFE5E5E5"/>
+            <TabItem Header="Estatísticas"  IsEnabled="True">
+                <Grid Background="White">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.1*"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="0.1*"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="0.1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.1*"/>
+                        <RowDefinition Height="1.3*"/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition Height="0.1*"/>
+                    </Grid.RowDefinitions>
+                    <GroupBox Header="Informações de Fábrica Filial" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="2">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="Nº de filial: " Grid.Row="0" Grid.Column="0"></Label>
+                            <Label Content="Telefone: " Grid.Row="1" Grid.Column="0"></Label>
+                            <Label Content="Fax: " Grid.Row="0" Grid.Column="1"></Label>
+                            <Label Content="E-mail: " Grid.Row="1" Grid.Column="1"></Label>
+                            <Label Content="Morada: " Grid.Row="2" Grid.Column="0"></Label>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Header="Estatística da Fábrica" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="3" Grid.RowSpan="3">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Label Content="Lucros Mensais: " Grid.Row="0"></Label>
+                            <Label Content="Receitas Mensais: " Grid.Row="1"></Label>
+                            <Label Content="Gastos Mensais: " Grid.Row="0" Grid.Column="1"></Label>
+                            <Label Content="Gastos mão-de-obra: " Grid.Row="1" Grid.Column="1"></Label>
+
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Header="Imagem de Perfil" Grid.Row="1" Grid.RowSpan="3" Grid.Column="4">
+                        <Image Source="login.png"></Image>
+                    </GroupBox>
+                    <Button Content="Alterar Foto" Grid.Column="4" Grid.Row="4" VerticalAlignment="Center"/>
+                    <Button Content="Alterar Informações Pessoais" Grid.Column="4" Grid.Row="5" VerticalAlignment="Top"/>
+                    <Button Content="Alterar PassWord" Grid.Column="4" Grid.Row="5" VerticalAlignment="Bottom"/>
+                </Grid>
             </TabItem>
             <TabItem Header="Definições"  IsEnabled="False">
                 <Grid Background="#FFE5E5E5"/>
