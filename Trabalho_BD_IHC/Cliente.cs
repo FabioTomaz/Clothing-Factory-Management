@@ -8,28 +8,55 @@ namespace Trabalho_BD_IHC
 {
     class Cliente
     {
-        private int NIF;
-        private String nome;
-        private int NIB;
-        private String email;
-        private String país;
-        private String localidade;
-        private String codigoPostal;
-        private String rua;
-        private int telefone;
-        private int telemovel;
+        private int _nif;
+        private String _nome;
+        private String _nib;
+        private String _email;
+        private String _codigoPostal;
+        private String _rua;
+        private int _nCasa;
+        private int _telemovel;
 
+        public void adicionarClienteBaseDados() {
+
+        }
+
+        public int Nif
+        {
+            get
+            {
+                return _nif;
+            }
+
+            set
+            {
+                _nif = value;
+            }
+        }
 
         public string Nome
         {
             get
             {
-                return nome;
+                return _nome;
             }
 
             set
             {
-                nome = value;
+                _nome = value;
+            }
+        }
+
+        public String Nib
+        {
+            get
+            {
+                return _nib;
+            }
+
+            set
+            {
+                _nib = value;
             }
         }
 
@@ -37,38 +64,12 @@ namespace Trabalho_BD_IHC
         {
             get
             {
-                return email;
+                return _email;
             }
 
             set
             {
-                email = value;
-            }
-        }
-
-        public string País
-        {
-            get
-            {
-                return país;
-            }
-
-            set
-            {
-                país = value;
-            }
-        }
-
-        public string Localidade
-        {
-            get
-            {
-                return localidade;
-            }
-
-            set
-            {
-                localidade = value;
+                _email = value;
             }
         }
 
@@ -76,12 +77,12 @@ namespace Trabalho_BD_IHC
         {
             get
             {
-                return codigoPostal;
+                return _codigoPostal;
             }
 
             set
             {
-                codigoPostal = value;
+                _codigoPostal = value;
             }
         }
 
@@ -89,25 +90,25 @@ namespace Trabalho_BD_IHC
         {
             get
             {
-                return rua;
+                return _rua;
             }
 
             set
             {
-                rua = value;
+                _rua = value;
             }
         }
 
-        public int Telefone
+        public int NCasa
         {
             get
             {
-                return telefone;
+                return _nCasa;
             }
 
             set
             {
-                telefone = value;
+                _nCasa = value;
             }
         }
 
@@ -115,39 +116,19 @@ namespace Trabalho_BD_IHC
         {
             get
             {
-                return telemovel;
+                return _telemovel;
             }
 
             set
             {
-                telemovel = value;
+                _telemovel = value;
             }
         }
 
-        public int NIF1
+        public override String ToString()
         {
-            get
-            {
-                return NIF;
-            }
-
-            set
-            {
-                NIF = value;
-            }
-        }
-
-        public int NIB1
-        {
-            get
-            {
-                return NIB;
-            }
-
-            set
-            {
-                NIB = value;
-            }
+            return Nif + "   " + Nome;
         }
     }
 }
+      

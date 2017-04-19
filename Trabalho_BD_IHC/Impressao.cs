@@ -13,6 +13,5 @@ namespace Trabalho_BD_IHC
         private double preco;
         private String localizacao;
         private String designacao;
-        private Imagem imagem;
     }
 }

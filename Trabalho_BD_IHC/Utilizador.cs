@@ -15,6 +15,5 @@ namespace Trabalho_BD_IHC
         private String horaEntrada;
         private String horaSaida;
         private filial filial;
-        private GestoRecursosHumanos supervisor;
     }
 }

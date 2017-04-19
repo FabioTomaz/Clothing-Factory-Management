@@ -55,12 +55,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DataHandler.cs" />
     <Compile Include="GestorProducao.cs" />
     <Compile Include="GestorRecursosHumanos.cs" />
     <Compile Include="GestorStocks.cs" />
     <Compile Include="GestorVendas.cs" />
+    <Compile Include="ListarClientes.xaml.cs">
+      <DependentUpon>ListarClientes.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Produto.cs" />
+    <Compile Include="RegistarCliente.xaml.cs">
+      <DependentUpon>RegistarCliente.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Utilizador.cs" />
+    <Page Include="ListarClientes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -95,6 +106,10 @@
       <DependentUpon>Main.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="RegistarCliente.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MaterialTextil.cs" />
