@@ -7,26 +7,50 @@
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
       Title="RegistarCliente">
-
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.2*"></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition Width="0.2*"></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition Width="0.2*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="0.1*"></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition Height="0.1*"></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition Height="0.1*"></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition Height="0.1*"></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition Height="0.1*"></RowDefinition>
-        </Grid.RowDefinitions>
-        <Label Content="Nome: " Grid.Row="1" Grid.Column="1"/>
-    </Grid>
+    <GroupBox Header="Registar Cliente">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.2*"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="0.2*"></ColumnDefinition>
+                <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                <ColumnDefinition Width="0.2*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.1*"></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="0.1*"></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="0.1*"></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="0.1*"></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="0.1*"></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="0.1*"></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="0.1*"></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="0.1*"></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="0.1*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Label Content="Nome: " Grid.Row="1" Grid.Column="1" VerticalAlignment="Center"/>
+            <TextBox Grid.Row="1" Grid.Column="3" Height="20" VerticalAlignment="Center"></TextBox>
+            <Label Content="NIB: " Grid.Row="3" Grid.Column="1"/>
+            <TextBox Grid.Row="3" Grid.Column="3" Height="20" VerticalAlignment="Center"></TextBox>
+            <Label Content="NIF: " Grid.Row="5" Grid.Column="1"/>
+            <TextBox Grid.Row="5" Grid.Column="3" Height="20" VerticalAlignment="Center"></TextBox>
+            <Label Content="E-Mail: " Grid.Row="7" Grid.Column="1"/>
+            <TextBox Grid.Row="7" Grid.Column="3" Height="20" VerticalAlignment="Center"></TextBox>
+            <Label Content="Telemóvel: " Grid.Row="9" Grid.Column="1"/>
+            <TextBox Grid.Row="9" Grid.Column="3" Height="20" VerticalAlignment="Center"></TextBox>
+            <Label Content="Código Postal: " Grid.Row="11" Grid.Column="1"/>
+            <TextBox Grid.Row="11" Grid.Column="3" Height="20" VerticalAlignment="Center"></TextBox>
+            <Label Content="Rua: " Grid.Row="13" Grid.Column="1"/>
+            <TextBox Grid.Row="13" Grid.Column="3" Height="20" VerticalAlignment="Center"></TextBox>
+            <Label Content="Numero de Porta: " Grid.Row="15" Grid.Column="1"/>
+            <TextBox Grid.Row="15" Grid.Column="3" Height="20" VerticalAlignment="Center"></TextBox>
+        </Grid>
+    </GroupBox>
 </Page>
