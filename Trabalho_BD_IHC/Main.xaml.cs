@@ -26,10 +26,12 @@ namespace Trabalho_BD_IHC
     /// 
     public partial class MainWindow : Window
     {
+        DataHandler dataHandler;
         public MainWindow()
         {
             InitializeComponent();
-            clientesFrame.Content = new ListarClientes();
+            dataHandler = new DataHandler();
+            clientesFrame.Content = new ListarClientes(dataHandler);
         }
 
         private void registarCliente_Click(object sender, RoutedEventArgs e)

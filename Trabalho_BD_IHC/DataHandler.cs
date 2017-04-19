@@ -8,7 +8,7 @@ using System.Data.SqlClient;
 
 namespace Trabalho_BD_IHC
 {
-    class DataHandler
+    public class DataHandler
     {
         private SqlConnection cn;
 
@@ -30,7 +30,7 @@ namespace Trabalho_BD_IHC
         }
         private SqlConnection getSGBDConnection()
         {
-            return new SqlConnection("data source=localhost;integrated security=true;initial catalog=GESTAO-FABRICA-VESTUARIO-LABORAL");
+            return new SqlConnection("data source=localhost;integrated security=true;initial catalog=GESTAO-FABscRICA-VESTUARIO-LABORAL");
         }
 
         public bool verifySGBDConnection()
@@ -39,7 +39,13 @@ namespace Trabalho_BD_IHC
                 Cn = getSGBDConnection();
 
             if (Cn.State != ConnectionState.Open)
-                Cn.Open();
+                try
+                {
+                    Cn.Open();
+                }
+                catch (System.Data.SqlClient.SqlException) {
+                    return false;
+                }
 
             return Cn.State == ConnectionState.Open;
         }
