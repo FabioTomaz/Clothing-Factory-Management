@@ -55,5 +55,11 @@ namespace Trabalho_BD_IHC
                 dataHandler.closeSGBDConnection();
             }
         }
+
+        private void registarCliente_Click(object sender, RoutedEventArgs e)
+        {
+            RegistarCliente page = new RegistarCliente(dataHandler);
+            NavigationService.Navigate(page);   
+        }
     }
 }

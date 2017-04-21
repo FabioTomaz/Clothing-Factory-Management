@@ -16,20 +16,15 @@ using System.Windows.Shapes;
 namespace Trabalho_BD_IHC
 {
     /// <summary>
-    /// Interaction logic for RegistarCliente.xaml
+    /// Interaction logic for ListarEncomendas.xaml
     /// </summary>
-    public partial class RegistarCliente : Page
+    public partial class ListarEncomendas : Page
     {
-        private DataHandler dataHandler;
-        public RegistarCliente(DataHandler dataHandler)
+        DataHandler dataHandler;
+        public ListarEncomendas(DataHandler dataHandler)
         {
             InitializeComponent();
             this.dataHandler = dataHandler;
-        }
-
-        private void cancelar_Click(object sender, RoutedEventArgs e)
-        {
-            this.NavigationService.GoBack();
         }
     }
 }

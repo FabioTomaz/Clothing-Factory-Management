@@ -32,11 +32,9 @@ namespace Trabalho_BD_IHC
             InitializeComponent();
             dataHandler = new DataHandler();
             clientesFrame.Content = new ListarClientes(dataHandler);
-        }
-
-        private void registarCliente_Click(object sender, RoutedEventArgs e)
-        {
-            clientesFrame.Content = new RegistarCliente();
+            encomendasFrame.Content = new ListarEncomendas(dataHandler);
+            produtosFrame.Content = new listarProdutos(dataHandler);
+            desenhosFrame.Content = new ListarDesenhos(dataHandler);
         }
 
         private void myFrame_ContentRendered(object sender, EventArgs e)

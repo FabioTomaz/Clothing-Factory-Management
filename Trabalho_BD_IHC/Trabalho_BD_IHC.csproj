@@ -63,12 +63,33 @@
     <Compile Include="ListarClientes.xaml.cs">
       <DependentUpon>ListarClientes.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ListarDesenhos.xaml.cs">
+      <DependentUpon>ListarDesenhos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ListarEncomendas.xaml.cs">
+      <DependentUpon>ListarEncomendas.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="listarProdutos.xaml.cs">
+      <DependentUpon>listarProdutos.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Produto.cs" />
     <Compile Include="RegistarCliente.xaml.cs">
       <DependentUpon>RegistarCliente.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utilizador.cs" />
     <Page Include="ListarClientes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ListarDesenhos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ListarEncomendas.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="listarProdutos.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

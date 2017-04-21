@@ -7,7 +7,40 @@
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
       Title="RegistarCliente">
-    <GroupBox Header="Registar Cliente">
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="24*"/>
+            <ColumnDefinition Width="142*"/>
+            <ColumnDefinition Width="16*"/>
+            <ColumnDefinition Width="473*"/>
+            <ColumnDefinition Width="23*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.05*"/>
+            <RowDefinition />
+            <RowDefinition Height="0.1*"/>
+        </Grid.RowDefinitions>
+        <GroupBox Header="Operações" Grid.Column="1" Grid.Row="1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.3*"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="0.3*"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="0.3*"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="0.3*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Button x:Name="confirmar" Content="Confirmar Registo"  Grid.Row="1" Grid.Column="1" IsEnabled="False"/>
+                <Button x:Name="cancelar" Content="Cancelar Registo" Grid.Row="3" Grid.Column="1" Click="cancelar_Click"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Registar Cliente" Grid.Row="1" Grid.Column="3">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.2*"></ColumnDefinition>
@@ -53,4 +86,5 @@
             <TextBox Grid.Row="15" Grid.Column="3" Height="20" VerticalAlignment="Center"></TextBox>
         </Grid>
     </GroupBox>
+    </Grid>
 </Page>

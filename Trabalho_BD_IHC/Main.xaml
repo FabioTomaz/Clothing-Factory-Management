@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Trabalho_BD_IHC"
         mc:Ignorable="d"
-        Title="Gestão de Produção, Stock e Venda" Height="400" MinHeight="300" Width="700" MinWidth="685">
+        Title="Gestão de Produção, Stock e Venda" Height="450" MinHeight="300" Width="750" MinWidth="685">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -78,99 +78,16 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Clientes"  IsEnabled="True">
-                <Grid Background="White">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="24*"/>
-                        <ColumnDefinition Width="142*"/>
-                        <ColumnDefinition Width="16*"/>
-                        <ColumnDefinition Width="473*"/>
-                        <ColumnDefinition Width="23*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="0.05*"/>
-                        <RowDefinition />
-                        <RowDefinition Height="0.1*"/>
-                    </Grid.RowDefinitions>
-                    <GroupBox Header="Operações" Grid.Column="1" Grid.Row="1">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="0.1*"></ColumnDefinition>
-                                <ColumnDefinition></ColumnDefinition>
-                                <ColumnDefinition Width="0.1*"></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="0.3*"></RowDefinition>
-                                <RowDefinition></RowDefinition>
-                                <RowDefinition Height="0.3*"></RowDefinition>
-                                <RowDefinition></RowDefinition>
-                                <RowDefinition Height="0.3*"></RowDefinition>
-                                <RowDefinition></RowDefinition>
-                                <RowDefinition Height="0.3*"></RowDefinition>
-                            </Grid.RowDefinitions>
-                            <Button x:Name="registarCliente" Content="Registar Cliente" Click="registarCliente_Click" Grid.Row="1" Grid.Column="1"/>
-                            <Button x:Name="editarCliente" Content="Editar Cliente" Grid.Row="3" Grid.Column="1"/>
-                            <Button x:Name="removerCliente" Content="Remover Cliente" Grid.Row="5" Grid.Column="1"/>
-                        </Grid>
-                    </GroupBox>
-                    <Grid Grid.Column="3" Grid.Row="1">
-                        <Frame Name="clientesFrame" ContentRendered="myFrame_ContentRendered"></Frame>
-                    </Grid>
-                </Grid>
+                <Frame Name="clientesFrame" ContentRendered="myFrame_ContentRendered"></Frame>
             </TabItem>
             <TabItem Header="Encomendas"  IsEnabled="True">
-                <Grid Background="WhiteSmoke">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.05*"/>
-                        <ColumnDefinition Width="0.3*"/>
-                        <ColumnDefinition Width="0.05*"/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition Width="0.05*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-                    <Label x:Name="operacoesLabel3" Content="Operações" Grid.Column="1" VerticalAlignment="Center"/>
-                    <Label x:Name="encomendasLabel" Content="Lista de Encomendas da Empresa" Grid.Column="3" Grid.Row="0" VerticalAlignment="Center"/>
-                    <Button x:Name="registarEncomenda" Content="Registar Nova Encomenda" Grid.Column="1" Grid.Row="1" Margin="0,2,0,36" Grid.RowSpan="2"/>
-                    <Button x:Name="editarEncomenda" Content="Editar Encomenda" Grid.Column="1" Grid.Row="3"/>
-                    <Button x:Name="entregarEncomenda" Content="Entregar Encomenda" Grid.Column="1" Grid.Row="5"/>
-                    <Button x:Name="entregarEncomenda_Copy" Content="Lista de Fornecedores" Grid.Column="1" Grid.Row="7"/>
-                </Grid>
+                <Frame Name="encomendasFrame" ContentRendered="myFrame_ContentRendered"></Frame>
             </TabItem>
-            <TabItem Header="Produtos"  IsEnabled="True">
-                <Grid Background="WhiteSmoke">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="24*"/>
-                        <ColumnDefinition Width="142*"/>
-                        <ColumnDefinition Width="10*"/>
-                        <ColumnDefinition Width="14*"/>
-                        <ColumnDefinition Width="135*"/>
-                        <ColumnDefinition Width="338*"/>
-                        <ColumnDefinition Width="23*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-                    <Label x:Name="operacoesLabel2" Content="Operações" Grid.Column="1" VerticalAlignment="Center" Margin="0,12,0,11"/>
-                    <Label x:Name="ProdutosLabel" Content="Lista de Produtos da Empresa" Grid.Column="4" Grid.Row="0" VerticalAlignment="Center" Margin="0,12,0,11" Grid.ColumnSpan="2"/>
-                    <ListBox x:Name="produtosListBox" Grid.Column="4" Grid.Row="1" Grid.RowSpan="5" Margin="0,25,0,0" Grid.ColumnSpan="2"/>
-                    <Button x:Name="produzirProdutos" Content="Produzir Produtos" Grid.Column="1" Grid.Row="2"/>
-                    <Button x:Name="registarDesenho" Content="Registar Desenho" Grid.Column="1" Grid.Row="4" Margin="0,0,0,1"/>
-                </Grid>
+            <TabItem Header="Produção"  IsEnabled="True">
+                <Frame Name="produtosFrame" ContentRendered="myFrame_ContentRendered"></Frame>
+            </TabItem>
+            <TabItem Header="Desenhos">
+                <Frame Name="desenhosFrame" ContentRendered="myFrame_ContentRendered"></Frame>
             </TabItem>
             <TabItem Header="Materiais"  IsEnabled="True">
                 <Grid Background="WhiteSmoke">

@@ -1,4 +1,4 @@
-﻿<Page x:Class="Trabalho_BD_IHC.ListarClientes"
+﻿<Page x:Class="Trabalho_BD_IHC.listarProdutos"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Trabalho_BD_IHC"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
-      Title="ListarClientes" Loaded="Page_Loaded">
+      Title="listarProdutos">
     <Grid Background="White">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="24*"/>
@@ -36,9 +36,15 @@
                     <RowDefinition></RowDefinition>
                     <RowDefinition Height="0.3*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Button x:Name="registarCliente" Content="Registar Cliente" Click="registarCliente_Click" Grid.Row="1" Grid.Column="1"/>
-                <Button x:Name="editarCliente" Content="Editar Cliente" Grid.Row="3" Grid.Column="1" IsEnabled="False"/>
-                <Button x:Name="removerCliente" Content="Remover Cliente" Grid.Row="5" Grid.Column="1" IsEnabled="False"/>
+                <Button x:Name="registarProduto" Grid.Row="1" Grid.Column="1">
+                    <TextBlock TextWrapping="Wrap">Registar Produto</TextBlock>
+                </Button>
+                <Button x:Name="produzirProduto" Grid.Row="3" Grid.Column="1" IsEnabled="False">
+                    <TextBlock TextWrapping="Wrap">Produzir Produto</TextBlock>
+                </Button>
+                <Button x:Name="removerProduto" Grid.Row="5" Grid.Column="1" IsEnabled="False">
+                    <TextBlock TextWrapping="Wrap">Remover Produto</TextBlock>
+                </Button>
             </Grid>
         </GroupBox>
         <Grid Grid.Column="3" Grid.Row="1">
@@ -46,14 +52,14 @@
                 <RowDefinition Height="0.1*"></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            <Label x:Name="clientesLabel" Content="Lista de Clientes Registados na Empresa" Grid.Row="0" VerticalAlignment="Top" />
-            <ListView Name="clientes" Grid.Row="1">
+            <Label x:Name="encomendasLabel" Content="Lista de Produtos da Empresa" Grid.Row="0" VerticalAlignment="Top" />
+            <ListView Name="encomendas" Grid.Row="1">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="NIF" DisplayMemberBinding="{Binding Nif}" />
-                        <GridViewColumn Header="Name"  DisplayMemberBinding="{Binding Nome}" />
-                        <GridViewColumn Header="Mail" DisplayMemberBinding="{Binding Email}" />
-                        <GridViewColumn Header="Telemovel" DisplayMemberBinding="{Binding Telemovel}" />
+                        <GridViewColumn Header="Referencia" DisplayMemberBinding="{Binding ref}" />
+                        <GridViewColumn Header="Cor"  DisplayMemberBinding="{Binding cor}" />
+                        <GridViewColumn Header="Tamanho" DisplayMemberBinding="{Binding tamanho}" />
+                        <GridViewColumn Header="Numero de Unidades em Stock" DisplayMemberBinding="{Binding nUnidades}" />
                     </GridView>
                 </ListView.View>
             </ListView>
