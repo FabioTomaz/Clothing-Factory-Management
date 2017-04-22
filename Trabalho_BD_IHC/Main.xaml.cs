@@ -14,7 +14,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.ComponentModel;
 using System.Data;
-using System.Windows.Navigation;
 using System.Drawing;
 using System.Data.SqlClient;
 

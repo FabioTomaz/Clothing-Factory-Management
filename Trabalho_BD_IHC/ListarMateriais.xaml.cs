@@ -30,12 +30,12 @@ namespace Trabalho_BD_IHC
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            if (!dataHandler.verifySGBDConnection()){
+            if (!dataHandler.verifySGBDConnection()) {
                 MessageBoxResult result = MessageBox.Show("A conexão à base de dados é instável ou inexistente. Por favor tente mais tarde", "Erro de Base de Dados", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }else{
+            } else {
                 SqlCommand cmd = new SqlCommand("SELECT * FROM MATERIAIS_TÊXTEIS", dataHandler.Cn);
                 SqlDataReader reader = cmd.ExecuteReader();
-                List<MaterialTextil> materiais = new List<MaterialTextil>();
+                List<MaterialTextil> materiaisTexteis = new List<MaterialTextil>();
                 while (reader.Read())
                 {
                     MaterialTextil Mt = new MaterialTextil();
@@ -44,15 +44,16 @@ namespace Trabalho_BD_IHC
                     Mt.Designacao = reader["DESIGNAÇÃO"].ToString();
                     Mt.Cor = reader["COR"].ToString();
                     Mt.NifFornecedor = Convert.ToInt32(reader["NIF_FORNECEDOR"].ToString());
-                    materiais.Add(Mt);
+                    materiaisTexteis.Add(Mt);
                 }
-
-                .ItemsSource = materiais;
+            
+                materiais.ItemsSource = materiaisTexteis;
 
                 dataHandler.closeSGBDConnection();
             }
-        }
+       }
+    }
 
         
-    }
 }
+

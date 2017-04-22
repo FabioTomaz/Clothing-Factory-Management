@@ -21,12 +21,12 @@ namespace Trabalho_BD_IHC
     /// </summary>
     public partial class RegistarCliente : Page
     {
+        private DataHandler dataHandler;
         public RegistarCliente(DataHandler dh)
         {
             InitializeComponent();
             this.dataHandler = dh;
-        }
-        private DataHandler dataHandler;           
+        }           
 
         private void EnviarCliente(Cliente cl)
         {
@@ -71,7 +71,6 @@ namespace Trabalho_BD_IHC
             Cliente cliente = new Cliente();
             try
             {
-                
                 cliente.Nome = txtNome.Text;
                 cliente.Nib = txtNIB.Text;
                 cliente.Nif = int.Parse(txtNIF.Text);
