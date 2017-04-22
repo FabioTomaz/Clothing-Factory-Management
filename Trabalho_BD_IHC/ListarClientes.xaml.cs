@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -41,7 +42,7 @@ namespace Trabalho_BD_IHC
             {
                 SqlCommand cmd = new SqlCommand("SELECT * FROM CLIENTE JOIN ZONA ON CLIENTE.COD_POSTAL=ZONA.COD_POSTAL", dataHandler.Cn);
                 SqlDataReader reader = cmd.ExecuteReader();
-                List<Cliente> items = new List<Cliente>();
+                ObservableCollection<Cliente> items = new ObservableCollection<Cliente>();
                 while (reader.Read())
                 {
                     Cliente C = new Cliente();
@@ -79,7 +80,7 @@ namespace Trabalho_BD_IHC
             }
             catch (Exception ex)
             {
-                throw new Exception("Failed to delete contact in database. \n ERROR MESSAGE: \n" + ex.Message);
+                throw new Exception("Falha ao eliminar cliente. \n ERROR MESSAGE: \n" + ex.Message);
             }
             finally
             {
@@ -95,21 +96,29 @@ namespace Trabalho_BD_IHC
 
         private void removerCliente_Click(object sender, RoutedEventArgs e)
         {
-                int listViewIndex = clientes.SelectedIndex;
-                try
-                {
-                    RemoveCliente((Cliente)clientes.SelectedItem);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                    return;
-                }
-                clientes.Items.RemoveAt(listViewIndex);
+            int listViewIndex = clientes.SelectedIndex;
+            try
+            {
+                RemoveCliente((Cliente)clientes.SelectedItem);
+            }
+            catch (Exception ex)
+            {
+               MessageBox.Show(ex.Message);
+               return;
+            }
+            try { 
+                
+                ((ObservableCollection<Cliente>)clientes.ItemsSource).RemoveAt(listViewIndex);
                 if (clientes.Items.Count != 0)
                 {
-                    clientes.SelectedItem = listViewIndex - 1;
+                    clientes.SelectedItem = listViewIndex - 1;                   
                 }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+               return;
+            }
         }
 
         private void editarCliente_Click(object sender, RoutedEventArgs e)
