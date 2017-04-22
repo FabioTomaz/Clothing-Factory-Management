@@ -88,7 +88,6 @@ namespace Trabalho_BD_IHC
         {
             try
             {
-                Cliente cliente = new Cliente();
                 cliente.Nif = labelNIF.Content.ToString();
                 cliente.Nome = labelNome.Content.ToString();
                 cliente.Nib = txtNIB.Text;

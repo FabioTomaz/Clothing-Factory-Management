@@ -107,12 +107,7 @@ namespace Trabalho_BD_IHC
                return;
             }
             try { 
-                
                 ((ObservableCollection<Cliente>)clientes.ItemsSource).RemoveAt(listViewIndex);
-                if (clientes.Items.Count != 0)
-                {
-                    clientes.SelectedItem = listViewIndex - 1;                   
-                }
             }
             catch(Exception ex)
             {
