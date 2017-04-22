@@ -47,7 +47,7 @@ namespace Trabalho_BD_IHC
                     materiais.Add(Mt);
                 }
 
-                .ItemsSource = materiais;
+                materiais.ItemsSource = materiais;
 
                 dataHandler.closeSGBDConnection();
             }

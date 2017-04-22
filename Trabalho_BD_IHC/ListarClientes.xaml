@@ -46,7 +46,6 @@
                 <RowDefinition Height="0.1*"></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            <Label x:Name="clientesLabel" Content="Lista de Clientes Registados na Empresa" Grid.Row="0" VerticalAlignment="Top" />
             <ListView Name="clientes" Grid.Row="1">
                 <ListView.View>
                     <GridView>

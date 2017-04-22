@@ -37,8 +37,8 @@
                     <RowDefinition Height="0.3*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Button x:Name="registarMaterial" Content="Encomendar Material" Grid.Row="1" Grid.Column="1"/>
-                <Button x:Name="editarCliente" Content="Registar Material Material" Grid.Row="3" Grid.Column="1" IsEnabled="False"/>
-                <Button x:Name="removerCliente" Content="Remover Material" Grid.Row="5" Grid.Column="1" IsEnabled="False"/>
+                <Button x:Name="editarMaterial" Content="Editar Material" Grid.Row="3" Grid.Column="1" IsEnabled="False"/>
+                <Button x:Name="removerMaterial" Content="Remover Material" Grid.Row="5" Grid.Column="1" IsEnabled="False"/>
             </Grid>
         </GroupBox>
         <Grid Grid.Column="3" Grid.Row="1">
@@ -47,7 +47,7 @@
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <Label x:Name="clientesLabel" Content="Lista de Materiais Têxteis em Stock na Empresa" Grid.Row="0" VerticalAlignment="Top" />
-            <ListView Name="clientes" Grid.Row="1">
+            <ListView Name="materiais" Grid.Row="1">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Referêcia Fábrica" DisplayMemberBinding="{Binding Referencia}" />
