@@ -14,7 +14,6 @@ namespace Trabalho_BD_IHC
         private int telefone;
         private String localidade;
         private String país;
-        private String codigoPostal;
         private String rua;
     }
 }

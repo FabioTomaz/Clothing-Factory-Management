@@ -98,32 +98,7 @@
                 <Frame Name="materiaisFrame" ContentRendered="myFrame_ContentRendered"></Frame>
             </TabItem>
             <TabItem Header="Recursos Humanos" >
-                <Grid Background="WhiteSmoke">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.05*"></ColumnDefinition>
-                        <ColumnDefinition Width="0.3*"></ColumnDefinition>
-                        <ColumnDefinition Width="0.05*"></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition Width="0.05*"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <Label x:Name="operacoesLabel" Content="Operações" Grid.Column="1" VerticalAlignment="Center"/>
-                    <Label x:Name="empregadosLabel" Content="Lista de Empregados da Filial" Grid.Column="3" Grid.Row="0" VerticalAlignment="Center"/>
-                    <ListBox x:Name="empregadosListBox" Grid.Row="1" Grid.RowSpan="7" Grid.Column="3" Margin="0,23,0,0"/>
-                    <Button x:Name="adicionarEmpregado" Content="Adicionar Empregado" Grid.Column="1" Grid.Row="2"/>
-                    <Button x:Name="removerEmpregado" Content="Remover Empregado" Grid.Column="1" Grid.Row="4"/>
-                    <Button x:Name="editarEmpregado" Content="Editar Empregado" Grid.Column="1" Grid.Row="6"/>
-                </Grid>
+                <Frame Name="empregadosFrame" ContentRendered="myFrame_ContentRendered"></Frame>
             </TabItem>
             <TabItem Header="Estatísticas"  IsEnabled="True">
                 <Grid Background="White">
@@ -228,7 +203,7 @@
                 <Grid Background="#FFE5E5E5"/>
             </TabItem>
             <TabItem Header="Ajuda" >
-                <Grid Background="White"/>
+                <Grid Background="Snow"/>
             </TabItem>
         </TabControl>
     </Grid>

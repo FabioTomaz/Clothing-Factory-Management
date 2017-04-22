@@ -15,5 +15,96 @@ namespace Trabalho_BD_IHC
         private String horaEntrada;
         private String horaSaida;
         private filial filial;
+
+        public int NFuncionario
+        {
+            get
+            {
+                return nFuncionario;
+            }
+
+            set
+            {
+                nFuncionario = value;
+            }
+        }
+
+        public string Password
+        {
+            get
+            {
+                return password;
+            }
+
+            set
+            {
+                password = value;
+            }
+        }
+
+        public string Nome
+        {
+            get
+            {
+                return nome;
+            }
+
+            set
+            {
+                nome = value;
+            }
+        }
+
+        public double Salario
+        {
+            get
+            {
+                return salario;
+            }
+
+            set
+            {
+                salario = value;
+            }
+        }
+
+        public string HoraEntrada
+        {
+            get
+            {
+                return horaEntrada;
+            }
+
+            set
+            {
+                horaEntrada = value;
+            }
+        }
+
+        public string HoraSaida
+        {
+            get
+            {
+                return horaSaida;
+            }
+
+            set
+            {
+                horaSaida = value;
+            }
+        }
+
+        internal filial Filial
+        {
+            get
+            {
+                return filial;
+            }
+
+            set
+            {
+                filial = value;
+            }
+        }
     }
 }

@@ -56,10 +56,15 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="DataHandler.cs" />
+    <Compile Include="EditarCliente.xaml.cs">
+      <DependentUpon>EditarCliente.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GestorProducao.cs" />
     <Compile Include="GestorRecursosHumanos.cs" />
-    <Compile Include="GestorStocks.cs" />
     <Compile Include="GestorVendas.cs" />
+    <Compile Include="ListarEmpregados.xaml.cs">
+      <DependentUpon>ListarEmpregados.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ListarMateriais.xaml.cs">
       <DependentUpon>ListarMateriais.xaml</DependentUpon>
     </Compile>
@@ -80,6 +85,14 @@
       <DependentUpon>RegistarCliente.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utilizador.cs" />
+    <Page Include="EditarCliente.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ListarEmpregados.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ListarMateriais.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

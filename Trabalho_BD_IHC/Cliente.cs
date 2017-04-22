@@ -6,22 +6,18 @@ using System.Threading.Tasks;
 
 namespace Trabalho_BD_IHC
 {
-    class Cliente
+    public class Cliente
     {
-        private int _nif;
+        private String _nif;
         private String _nome;
         private String _nib;
         private String _email;
         private String _codigoPostal;
         private String _rua;
         private int _nCasa;
-        private int _telemovel;
+        private String _telemovel;
 
-        public void adicionarClienteBaseDados() {
-
-        }
-
-        public int Nif
+        public string Nif
         {
             get
             {
@@ -47,7 +43,7 @@ namespace Trabalho_BD_IHC
             }
         }
 
-        public String Nib
+        public string Nib
         {
             get
             {
@@ -112,7 +108,7 @@ namespace Trabalho_BD_IHC
             }
         }
 
-        public int Telemovel
+        public string Telemovel
         {
             get
             {
@@ -123,11 +119,6 @@ namespace Trabalho_BD_IHC
             {
                 _telemovel = value;
             }
-        }
-
-        public override String ToString()
-        {
-            return Nif + "   " + Nome;
         }
     }
 }

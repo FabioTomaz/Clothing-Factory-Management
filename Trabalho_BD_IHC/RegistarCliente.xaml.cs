@@ -35,8 +35,8 @@ namespace Trabalho_BD_IHC
                 return;
             SqlCommand cmd = new SqlCommand();
 
-            cmd.CommandText = "INSERT INTO CLIENTE (NOME, NIB, NIF, E-MAIL, TELEMOVEL, COD_POSTAL, RUA, N_PORTA)" +
-                "VALUES (@NOME, @NIB, @NIF, @EMAIL, " + "@TELEMOVEL, @COD_POSTAL, @RUA, @N_PORTA) ";
+            cmd.CommandText = "INSERT INTO CLIENTE (NOME, NIB, NIF, EMAIL, TELEMOVEL, COD_POSTAL, RUA, N_PORTA) " +
+                "VALUES (@NOME, @NIB, @NIF, @EMAIL, @TELEMOVEL, @COD_POSTAL, @RUA, @N_PORTA);";
             cmd.Parameters.Clear();
             cmd.Parameters.AddWithValue("@NOME", cl.Nome);
             cmd.Parameters.AddWithValue("@NIB", cl.Nib);
@@ -57,7 +57,7 @@ namespace Trabalho_BD_IHC
             }
             finally
             {
-                dataHandler.Cn.Close();
+                dataHandler.closeSGBDConnection();
             }
         }
 
@@ -73,19 +73,27 @@ namespace Trabalho_BD_IHC
             {
                 cliente.Nome = txtNome.Text;
                 cliente.Nib = txtNIB.Text;
-                cliente.Nif = int.Parse(txtNIF.Text);
-                cliente.Telemovel = int.Parse(txtTelemovel.Text);
+                cliente.Nif = txtNIF.Text;
+                cliente.Telemovel = txtTelemovel.Text;
                 cliente.Email = txtEmail.Text;
                 cliente.CodigoPostal = txtcodigoPostal.Text;
                 cliente.Rua = txtRua.Text;
                 cliente.NCasa = int.Parse(txtNumeroPorta.Text);
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+                return;
             }
-            EnviarCliente(cliente);
+
+            try {
+                EnviarCliente(cliente);
+            }catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return;
+            }
+            this.NavigationService.GoBack();
         }
     }
 }

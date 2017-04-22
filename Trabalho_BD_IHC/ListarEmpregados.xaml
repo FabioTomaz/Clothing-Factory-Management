@@ -1,4 +1,4 @@
-﻿<Page x:Class="Trabalho_BD_IHC.ListarClientes"
+﻿<Page x:Class="Trabalho_BD_IHC.ListarEmpregados"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,7 +6,8 @@
       xmlns:local="clr-namespace:Trabalho_BD_IHC"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
-      Title="ListarClientes" Loaded="Page_Loaded">
+      Title="ListarEmpregados">
+
     <Grid Background="White">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="24*"/>
@@ -36,9 +37,9 @@
                     <RowDefinition></RowDefinition>
                     <RowDefinition Height="0.3*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Button x:Name="registarCliente" Content="Registar Cliente" Click="registarCliente_Click" Grid.Row="1" Grid.Column="1"/>
-                <Button x:Name="editarCliente" Content="Editar Cliente" Grid.Row="3" Grid.Column="1" IsEnabled="False" Click="editarCliente_Click"/>
-                <Button x:Name="removerCliente" Content="Remover Cliente" Grid.Row="5" Grid.Column="1" IsEnabled="False" Click="removerCliente_Click"/>
+                <Button x:Name="registarEmpregado" Content="Registar Empregado" Grid.Row="1" Grid.Column="1"/>
+                <Button x:Name="editarEmpregado" Content="Editar Empregado" Grid.Row="3" Grid.Column="1" IsEnabled="False"/>
+                <Button x:Name="removerEmpregado" Content="Remover Empregado" Grid.Row="5" Grid.Column="1" IsEnabled="False"/>
             </Grid>
         </GroupBox>
         <Grid Grid.Column="3" Grid.Row="1">
@@ -46,12 +47,12 @@
                 <RowDefinition Height="0.1*"></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            <ListView Name="clientes" Grid.Row="1" SelectionChanged="clientes_SelectionChanged">
+            <ListView Name="clientes" Grid.Row="1">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="NIF" DisplayMemberBinding="{Binding Nif}" />
-                        <GridViewColumn Header="Name"  DisplayMemberBinding="{Binding Nome}" />
-                        <GridViewColumn Header="Mail" DisplayMemberBinding="{Binding Email}" />
+                        <GridViewColumn Header="Numero de Empregado" DisplayMemberBinding="{Binding Nif}" />
+                        <GridViewColumn Header="Nome"  DisplayMemberBinding="{Binding Nome}" />
+                        <GridViewColumn Header="e-mail" DisplayMemberBinding="{Binding Email}" />
                         <GridViewColumn Header="Telemovel" DisplayMemberBinding="{Binding Telemovel}" />
                     </GridView>
                 </ListView.View>
