@@ -9,9 +9,71 @@ namespace Trabalho_BD_IHC
     class MaterialTextil
     {
         private int referencia;
-        private int referenciaForncecedor;
+        private int referenciaFornecedor;
         private String designacao;
         private String cor;
         private int nifFornecedor;
+
+        public int Referencia
+        {
+            get
+            {
+                return referencia;
+            }
+
+            set
+            {
+                referencia = value;
+            }
+        }
+        public int ReferenciaFornecedor
+        {
+            get
+            {
+                return referenciaFornecedor;
+            }
+
+            set
+            {
+                referenciaFornecedor = value;
+            }
+        }
+        public String Designacao
+        {
+            get
+            {
+                return designacao;
+            }
+
+            set
+            {
+                designacao = value;
+            }
+        }
+        public String Cor
+        {
+            get
+            {
+                return cor;
+            }
+
+            set
+            {
+                cor = value;
+            }
+        }
+        public int NifFornecedor
+        {
+            get
+            {
+                return nifFornecedor;
+            }
+
+            set
+            {
+                nifFornecedor = value;
+            }
+        }
+
     }
 }

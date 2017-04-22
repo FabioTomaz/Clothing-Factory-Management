@@ -33,40 +33,45 @@
                         <RowDefinition/>
                         <RowDefinition Height="0.1*"/>
                     </Grid.RowDefinitions>
-                    <GroupBox Header="Informações de Login" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="1">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition></RowDefinition>
-                                <RowDefinition></RowDefinition>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition></ColumnDefinition>
-                                <ColumnDefinition></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            <Label Content="Nº de Funcionário" Grid.Row="0" Grid.Column="0"></Label>
-                            <Label Content="PassWord" Grid.Row="1" Grid.Column="0"></Label>
-                        </Grid>
-                    </GroupBox>
-                    <GroupBox Header="Informações Pessoais" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2" Grid.RowSpan="4">
+                    
+                    <GroupBox Header="Informações Pessoais" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="3">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition></ColumnDefinition>
                                 <ColumnDefinition></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
-                                <RowDefinition></RowDefinition>
-                                <RowDefinition></RowDefinition>
                                 <RowDefinition></RowDefinition>
                                 <RowDefinition></RowDefinition>
                                 <RowDefinition></RowDefinition>
                                 <RowDefinition></RowDefinition>
                             </Grid.RowDefinitions>
                             <Label Content="Nome: " Grid.Row="0"></Label>
-                            <Label Content="E-Mail: " Grid.Row="1"></Label>
-                            <Label Content="Telefone: " Grid.Row="2"></Label>
-                            <Label Content="Salário: " Grid.Row="3"></Label>
-                            <Label Content="Hora de Entrada: " Grid.Row="4"></Label>
-                            <Label Content="Hora de Saída: " Grid.Row="5"></Label>
+                            <Label Content="E-Mail: " Grid.Column="1" Grid.Row="0"></Label>
+                            <Label Content="Telefone: " Grid.Column="1" Grid.Row="1"></Label>
+                            <Label Content="Salário: " Grid.Column="0" Grid.Row="1"></Label>
+                            <Label Content="Hora de Entrada: " Grid.Row="2"></Label>
+                            <Label Content="Hora de Saída: "  Grid.Column="1" Grid.Row="2"></Label>
+                            <Label Content="Nº de Funcionário: " Grid.Row="3" Grid.Column="0"></Label>
+                            <Label Content="Supervisor: " Grid.Row="3" Grid.Column="1"></Label>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Header="Informações de Fábrica Filial" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="4" Grid.RowSpan="2">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="Nº de filial: " Grid.Row="0" Grid.Column="0"></Label>
+                            <Label Content="Telefone: " Grid.Row="1" Grid.Column="0"></Label>
+                            <Label Content="Fax: " Grid.Row="0" Grid.Column="1"></Label>
+                            <Label Content="E-mail: " Grid.Row="1" Grid.Column="1"></Label>
+                            <Label Content="Morada: " Grid.Row="2" Grid.Column="0"></Label>
                         </Grid>
                     </GroupBox>
                     <GroupBox Header="Imagem de Perfil" Grid.Row="1" Grid.RowSpan="3" Grid.Column="4">
@@ -90,29 +95,7 @@
                 <Frame Name="desenhosFrame" ContentRendered="myFrame_ContentRendered"></Frame>
             </TabItem>
             <TabItem Header="Materiais"  IsEnabled="True">
-                <Grid Background="WhiteSmoke">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.05*"/>
-                        <ColumnDefinition Width="0.3*"/>
-                        <ColumnDefinition Width="0.05*"/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition Width="0.05*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-                    <Label x:Name="operacoesLabel1" Content="Operações" Grid.Column="1" VerticalAlignment="Center"/>
-                    <Label x:Name="materiaisTexteisLabel" Content="Lista de Materiais em Armazem" Grid.Column="3" Grid.Row="0" VerticalAlignment="Center"/>
-                    <ListBox x:Name="materiaisTexteisListBox" Grid.Column="3" Grid.Row="1" Grid.RowSpan="5" Margin="0,24,0,0"/>
-                    <Button x:Name="adicionarMateriaisTexteis" Content="Encomendar Materiais" Grid.Column="1" Grid.Row="2"/>
-                    <Button x:Name="removerMateriaisTexteis" Content="Remover Materiais" Grid.Column="1" Grid.Row="4" Margin="0,1,0,0"/>
-                </Grid>
+                <Frame Name="materiaisFrame" ContentRendered="myFrame_ContentRendered"></Frame>
             </TabItem>
             <TabItem Header="Recursos Humanos" >
                 <Grid Background="WhiteSmoke">
@@ -161,25 +144,7 @@
                         <RowDefinition/>
                         <RowDefinition Height="0.1*"/>
                     </Grid.RowDefinitions>
-                    <GroupBox Header="Informações de Fábrica Filial" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="2">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition></RowDefinition>
-                                <RowDefinition></RowDefinition>
-                                <RowDefinition></RowDefinition>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition></ColumnDefinition>
-                                <ColumnDefinition></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            <Label Content="Nº de filial: " Grid.Row="0" Grid.Column="0"></Label>
-                            <Label Content="Telefone: " Grid.Row="1" Grid.Column="0"></Label>
-                            <Label Content="Fax: " Grid.Row="0" Grid.Column="1"></Label>
-                            <Label Content="E-mail: " Grid.Row="1" Grid.Column="1"></Label>
-                            <Label Content="Morada: " Grid.Row="2" Grid.Column="0"></Label>
-                        </Grid>
-                    </GroupBox>
-                    <GroupBox Header="Estatística da Fábrica" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="3" Grid.RowSpan="3">
+                    <GroupBox Header="Estatísticas da Fábrica" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="1">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition></ColumnDefinition>
@@ -197,12 +162,66 @@
 
                         </Grid>
                     </GroupBox>
+                    
+                    <!--<GroupBox Header="Estatística da Gestão Armazém" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2" Grid.RowSpan="2">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Label Content="Produtividade: " Grid.Row="0"></Label>
+                            <Label Content="Salário: " Grid.Row="1"></Label>
+                            <Label Content="Nº Encomendas Pendentes: " Grid.Row="0" Grid.Column="1"></Label>
+
+                        </Grid>
+                    </GroupBox>-->
+                    <!--<GroupBox Header="Estatística de Gestão Produção" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2" Grid.RowSpan="2">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Label Content="Produtividade: " Grid.Row="0"></Label>
+                            <Label Content="Salário: " Grid.Row="1"></Label>
+                            <Label Content="Custo Mensal de produção(€): " Grid.Row="0" Grid.Column="1"></Label>
+                            <Label Content=" " Grid.Row="1" Grid.Column="1"></Label>
+
+                        </Grid>
+                    </GroupBox>-->
+                    <GroupBox Header="Estatística da Gestão Armazém" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2" Grid.RowSpan="2">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Label Content="Produtividade: " Grid.Row="0"></Label>
+                            <Label Content="Salário: " Grid.Row="1"></Label>
+                            <Label Content="Nº Encomendas Pendentes: " Grid.Row="0" Grid.Column="1"></Label>
+
+                        </Grid>
+                    </GroupBox>
+                   
+
+
                     <GroupBox Header="Imagem de Perfil" Grid.Row="1" Grid.RowSpan="3" Grid.Column="4">
                         <Image Source="login.png"></Image>
                     </GroupBox>
-                    <Button Content="Alterar Foto" Grid.Column="4" Grid.Row="4" VerticalAlignment="Center"/>
-                    <Button Content="Alterar Informações Pessoais" Grid.Column="4" Grid.Row="5" VerticalAlignment="Top"/>
-                    <Button Content="Alterar PassWord" Grid.Column="4" Grid.Row="5" VerticalAlignment="Bottom"/>
+                    
                 </Grid>
             </TabItem>
             <TabItem Header="Definições"  IsEnabled="False">

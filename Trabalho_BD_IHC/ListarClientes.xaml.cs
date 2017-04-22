@@ -31,7 +31,7 @@ namespace Trabalho_BD_IHC
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             if (!dataHandler.verifySGBDConnection()){
-                MessageBoxResult result = MessageBox.Show("A conexão á base de dados é instável ou inexistente. Por favor tente mais tarde", "Erro de Base de Dados", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBoxResult result = MessageBox.Show("A conexão à base de dados é instável ou inexistente. Por favor tente mais tarde", "Erro de Base de Dados", MessageBoxButton.OK, MessageBoxImage.Warning);
             }else{
                 SqlCommand cmd = new SqlCommand("SELECT * FROM CLIENTE", dataHandler.Cn);
                 SqlDataReader reader = cmd.ExecuteReader();

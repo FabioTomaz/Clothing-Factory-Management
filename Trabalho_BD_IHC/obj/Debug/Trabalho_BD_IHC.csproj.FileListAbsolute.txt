@@ -43,3 +43,27 @@ C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\listarProdutos.g.cs
 C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\listarProdutos.baml
 C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\ListarDesenhos.g.cs
 C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\ListarDesenhos.baml
+C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\bin\Debug\Trabalho_BD_IHC.exe
+C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\bin\Debug\Trabalho_BD_IHC.pdb
+C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\obj\Debug\Trabalho_BD_IHC.csprojResolveAssemblyReference.cache
+C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\obj\Debug\ListarClientes.g.cs
+C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\obj\Debug\ListarDesenhos.g.cs
+C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\obj\Debug\ListarEncomendas.g.cs
+C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\obj\Debug\listarProdutos.g.cs
+C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\obj\Debug\Login.g.cs
+C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\obj\Debug\Main.g.cs
+C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\obj\Debug\RegistarCliente.g.cs
+C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\obj\Debug\App.g.cs
+C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\obj\Debug\Trabalho_BD_IHC_MarkupCompile.cache
+C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\obj\Debug\Trabalho_BD_IHC_MarkupCompile.lref
+C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\obj\Debug\ListarClientes.baml
+C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\obj\Debug\ListarDesenhos.baml
+C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\obj\Debug\ListarEncomendas.baml
+C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\obj\Debug\listarProdutos.baml
+C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\obj\Debug\Login.baml
+C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\obj\Debug\Main.baml
+C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\obj\Debug\RegistarCliente.baml
+C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\obj\Debug\Trabalho_BD_IHC.g.resources
+C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\obj\Debug\Trabalho_BD_IHC.Properties.Resources.resources
+C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\obj\Debug\Trabalho_BD_IHC.csproj.GenerateResource.Cache
+C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\obj\Debug\ListarMateriais.g.cs

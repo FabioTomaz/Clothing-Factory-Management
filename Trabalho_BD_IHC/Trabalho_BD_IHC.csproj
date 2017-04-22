@@ -60,6 +60,9 @@
     <Compile Include="GestorRecursosHumanos.cs" />
     <Compile Include="GestorStocks.cs" />
     <Compile Include="GestorVendas.cs" />
+    <Compile Include="ListarMateriais.xaml.cs">
+      <DependentUpon>ListarMateriais.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ListarClientes.xaml.cs">
       <DependentUpon>ListarClientes.xaml</DependentUpon>
     </Compile>
@@ -77,6 +80,10 @@
       <DependentUpon>RegistarCliente.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utilizador.cs" />
+    <Page Include="ListarMateriais.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="ListarClientes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
