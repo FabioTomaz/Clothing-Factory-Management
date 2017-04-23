@@ -19,23 +19,23 @@ namespace Trabalho_BD_IHC
     /// <summary>
     /// Interaction logic for RegistarCliente.xaml
     /// </summary>
-    public partial class RegistarCliente : Page
+    public partial class CriarEncomenda : Page
     {
         private DataHandler dataHandler;
-        public RegistarCliente(DataHandler dh)
+        public CriarEncomenda(DataHandler dh)
         {
             InitializeComponent();
             this.dataHandler = dh;
         }           
 
-        private void EnviarCliente(Cliente cl)
+        private void EnviarEncomenda(Encomenda enc)
         {
 
             if (!dataHandler.verifySGBDConnection())
                 return;
             SqlCommand cmd = new SqlCommand();
 
-            cmd.CommandText = "INSERT INTO CLIENTE (NOME, NIB, NIF, EMAIL, TELEMOVEL, COD_POSTAL, RUA, N_PORTA) " +
+           /* cmd.CommandText = "INSERT INTO CLIENTE (NOME, NIB, NIF, EMAIL, TELEMOVEL, COD_POSTAL, RUA, N_PORTA) " +
                 "VALUES (@NOME, @NIB, @NIF, @EMAIL, @TELEMOVEL, @COD_POSTAL, @RUA, @N_PORTA);";
             cmd.Parameters.Clear();
             cmd.Parameters.AddWithValue("@NOME", cl.Nome);
@@ -53,12 +53,12 @@ namespace Trabalho_BD_IHC
             }
             catch (Exception ex)
             {
-                throw new Exception("Falha ao adicionar cliente na base de dados. \n ERROR MESSAGE: \n" + ex.Message);
+                throw new Exception("Falha ao criar encomenda na base de dados. \n ERROR MESSAGE: \n" + ex.Message);
             }
             finally
             {
                 dataHandler.closeSGBDConnection();
-            }
+            }*/
         }
 
         private void cancelar_Click(object sender, RoutedEventArgs e)
@@ -68,17 +68,17 @@ namespace Trabalho_BD_IHC
 
         private void confirmar_Click(object sender, RoutedEventArgs e)
         {
-            Cliente cliente = new Cliente();
+            Encomenda encomenda = new Encomenda();
             try
             {
-                cliente.Nome = txtNome.Text;
+               /* cliente.Nome = txtNome.Text;
                 cliente.Nib = txtNIB.Text;
                 cliente.Nif = txtNIF.Text;
                 cliente.Telemovel = txtTelemovel.Text;
                 cliente.Email = txtEmail.Text;
                 cliente.CodigoPostal = txtcodigoPostal.Text;
                 cliente.Rua = txtRua.Text;
-                cliente.NCasa = int.Parse(txtNumeroPorta.Text);
+                cliente.NCasa = int.Parse(txtNumeroPorta.Text);*/
             }
             catch (Exception ex)
             {
@@ -87,7 +87,7 @@ namespace Trabalho_BD_IHC
             }
 
             try {
-                EnviarCliente(cliente);
+                EnviarEncomenda(encomenda);
             }catch(Exception ex)
             {
                 MessageBox.Show(ex.Message);

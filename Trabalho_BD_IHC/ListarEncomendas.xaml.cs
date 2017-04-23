@@ -123,6 +123,12 @@ namespace Trabalho_BD_IHC
             }
         }
 
+        private void registarEncomenda_Click(object sender, RoutedEventArgs e)
+        {
+            CriarEncomenda page = new CriarEncomenda(dataHandler);
+            NavigationService.Navigate(page);
+        }
+
         private void encomendas_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (encomendas.SelectedItems.Count > 0)

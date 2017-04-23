@@ -38,7 +38,7 @@
                     <RowDefinition ></RowDefinition>
                     <RowDefinition ></RowDefinition>
                 </Grid.RowDefinitions>
-                <Button x:Name="registarEncomenda" Grid.Row="1" Grid.Column="1">
+                <Button x:Name="registarEncomenda" Grid.Row="1" Grid.Column="1" Click="registarEncomenda_Click">
                     <TextBlock TextWrapping="Wrap">Registar Encomenda</TextBlock>
                 </Button>
                 <Button x:Name="entregarEncomenda" Grid.Row="3" Grid.Column="1" IsEnabled="False">

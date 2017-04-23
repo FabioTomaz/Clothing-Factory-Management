@@ -40,7 +40,7 @@
                 <Button x:Name="cancelar" Content="Cancelar" Grid.Row="3" Grid.Column="1" Click="cancelar_Click"/>
             </Grid>
         </GroupBox>
-        <GroupBox Header="Registar Cliente" Grid.Row="1" Grid.Column="3">
+        <GroupBox Header="Criar Nova encomenda" Grid.Row="1" Grid.Column="3">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.2*"></ColumnDefinition>
@@ -68,12 +68,12 @@
             </Grid.RowDefinitions>
             <Label Content="NIF Cliente: " Grid.Row="1" Grid.Column="1" VerticalAlignment="Center"/>
                 <TextBox Name="txtClienteNif" Grid.Row="1" Grid.Column="3" Height="20" VerticalAlignment="Center"></TextBox>
-            <Label Content="NIB: " Grid.Row="3" Grid.Column="1"/>
-                <TextBox Name="txtNIB" Grid.Row="3" Grid.Column="3" Height="20" VerticalAlignment="Center"></TextBox>
+            <Label Content="Referência Produto: " Grid.Row="3" Grid.Column="1"/>
+                <TextBox Name="txtRefProd" Grid.Row="3" Grid.Column="3" Height="20" VerticalAlignment="Center"></TextBox>
             <Label Content="NIF: " Grid.Row="5" Grid.Column="1"/>
                 <TextBox Name="txtNIF" Grid.Row="5" Grid.Column="3" Height="20" VerticalAlignment="Center"></TextBox>
-            <Label Content="E-Mail: " Grid.Row="7" Grid.Column="1"/>
-                <TextBox Name="txtEmail" Grid.Row="7" Grid.Column="3" Height="20" VerticalAlignment="Center"></TextBox>
+            <Label Content="Gestor de vendas responsável: " Grid.Row="7" Grid.Column="1"/>
+                <TextBox Name="txtGestVendas" Grid.Row="7" Grid.Column="3" Height="20" VerticalAlignment="Center"></TextBox>
             </Grid>
     </GroupBox>
     </Grid>
