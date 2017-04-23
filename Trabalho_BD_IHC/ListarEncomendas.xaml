@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Trabalho_BD_IHC"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
-      Title="ListarEncomendas">
+      Title="ListarEncomendas"  Loaded="Page_Loaded">
     <Grid Background="White">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="24*"/>
@@ -28,13 +28,15 @@
                     <ColumnDefinition Width="0.1*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="0.3*"></RowDefinition>
                     <RowDefinition></RowDefinition>
-                    <RowDefinition Height="0.3*"></RowDefinition>
                     <RowDefinition></RowDefinition>
-                    <RowDefinition Height="0.3*"></RowDefinition>
+                    <RowDefinition ></RowDefinition>
                     <RowDefinition></RowDefinition>
-                    <RowDefinition Height="0.3*"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition ></RowDefinition>
+                    <RowDefinition ></RowDefinition>
+                    <RowDefinition ></RowDefinition>
                 </Grid.RowDefinitions>
                 <Button x:Name="registarEncomenda" Grid.Row="1" Grid.Column="1">
                     <TextBlock TextWrapping="Wrap">Registar Encomenda</TextBlock>
@@ -45,6 +47,9 @@
                 <Button x:Name="editarEncomenda" Grid.Row="5" Grid.Column="1" IsEnabled="False">
                     <TextBlock TextWrapping="Wrap">Editar Encomenda</TextBlock>
                 </Button>
+                <Button x:Name="cancelarEncomenda" Grid.Row="7" Grid.Column="1" IsEnabled="False" Click="cancelarEncomenda_Click">
+                    <TextBlock TextWrapping="Wrap">Cancelar Encomenda</TextBlock>
+                </Button>
             </Grid>
         </GroupBox>
         <Grid Grid.Column="3" Grid.Row="1">
@@ -53,13 +58,15 @@
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <Label x:Name="encomendasLabel" Content="Lista de Encomendas da Empresa" Grid.Row="0" VerticalAlignment="Top" />
-            <ListView Name="encomendas" Grid.Row="1">
+            <ListView Name="encomendas" Grid.Row="1" SelectionChanged="encomendas_SelectionChanged">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Numero de Encomenda" DisplayMemberBinding="{Binding Nif}" />
-                        <GridViewColumn Header="Cliente"  DisplayMemberBinding="{Binding Nome}" />
-                        <GridViewColumn Header="Estado" DisplayMemberBinding="{Binding Email}" />
-                        <GridViewColumn Header="Gestor Responsável pela Encomenda" DisplayMemberBinding="{Binding Telemovel}" />
+                        <GridViewColumn Header="Nº Encomenda" DisplayMemberBinding="{Binding NEncomenda}" />
+                        <GridViewColumn Header="NIF Cliente"  DisplayMemberBinding="{Binding Cliente.Nif}" />
+                        <GridViewColumn Header="Nome Cliente"  DisplayMemberBinding="{Binding Cliente.Nome}" />
+                        <GridViewColumn Header="Estado" DisplayMemberBinding="{Binding Estado}" />
+                        <GridViewColumn Header="Nº Gestor Responsável" DisplayMemberBinding="{Binding GestorVendas.NFuncionario_vendas.NFuncionario}" />
+                        <GridViewColumn Header="Nome Gestor Responsável" DisplayMemberBinding="{Binding GestorVendas.NFuncionario_vendas.Nome}" />
                     </GridView>
                 </ListView.View>
             </ListView>

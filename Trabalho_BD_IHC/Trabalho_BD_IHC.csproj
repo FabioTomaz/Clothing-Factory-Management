@@ -81,6 +81,9 @@
       <DependentUpon>listarProdutos.xaml</DependentUpon>
     </Compile>
     <Compile Include="Produto.cs" />
+    <Compile Include="CriarEncomenda.xaml.cs">
+      <DependentUpon>CriarEncomenda.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RegistarCliente.xaml.cs">
       <DependentUpon>RegistarCliente.xaml</DependentUpon>
     </Compile>
@@ -147,6 +150,10 @@
       <DependentUpon>Main.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="CriarEncomenda.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="RegistarCliente.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

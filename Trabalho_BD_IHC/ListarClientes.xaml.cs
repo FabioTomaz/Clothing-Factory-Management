@@ -78,9 +78,10 @@ namespace Trabalho_BD_IHC
             {
                 cmd.ExecuteNonQuery();
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
-                throw new Exception("Falha ao eliminar cliente. \n ERROR MESSAGE: \n" + ex.Message);
+                MessageBox.Show(ex.Message);
+                return;
             }
             finally
             {
@@ -97,22 +98,32 @@ namespace Trabalho_BD_IHC
         private void removerCliente_Click(object sender, RoutedEventArgs e)
         {
             int listViewIndex = clientes.SelectedIndex;
-            try
+
+            if (MessageBox.Show("Tem a certeza que pretende eliminar este cliente?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
             {
-                RemoveCliente((Cliente)clientes.SelectedItem);
+                return;
             }
-            catch (Exception ex)
+            else
             {
-               MessageBox.Show(ex.Message);
-               return;
-            }
-            try { 
-                ((ObservableCollection<Cliente>)clientes.ItemsSource).RemoveAt(listViewIndex);
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-               return;
+                try
+                {
+                    RemoveCliente((Cliente)clientes.SelectedItem);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    return;
+                }
+                try
+                {
+                    ((ObservableCollection<Cliente>)clientes.ItemsSource).RemoveAt(listViewIndex);
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    return;
+                }
             }
         }
 

@@ -9,5 +9,18 @@ namespace Trabalho_BD_IHC
     class Estampagem : Impressao
     {
         private String metodo;
+
+        public string Metodo
+        {
+            get
+            {
+                return metodo;
+            }
+
+            set
+            {
+                metodo = value;
+            }
+        }
     }
 }

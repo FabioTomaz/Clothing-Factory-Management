@@ -12,5 +12,57 @@ namespace Trabalho_BD_IHC
         private String paisFabrico;
         private String composicao;
         private String normas;
+
+        internal Desenho Desenho
+        {
+            get
+            {
+                return desenho;
+            }
+
+            set
+            {
+                desenho = value;
+            }
+        }
+
+        public string PaisFabrico
+        {
+            get
+            {
+                return paisFabrico;
+            }
+
+            set
+            {
+                paisFabrico = value;
+            }
+        }
+
+        public string Composicao
+        {
+            get
+            {
+                return composicao;
+            }
+
+            set
+            {
+                composicao = value;
+            }
+        }
+
+        public string Normas
+        {
+            get
+            {
+                return normas;
+            }
+
+            set
+            {
+                normas = value;
+            }
+        }
     }
 }

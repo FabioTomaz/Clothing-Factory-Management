@@ -10,5 +10,31 @@ namespace Trabalho_BD_IHC
     {
         private double largura;
         private double comprimento;
+
+        public double Largura
+        {
+            get
+            {
+                return largura;
+            }
+
+            set
+            {
+                largura = value;
+            }
+        }
+
+        public double Comprimento
+        {
+            get
+            {
+                return comprimento;
+            }
+
+            set
+            {
+                comprimento = value;
+            }
+        }
     }
 }
