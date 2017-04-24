@@ -61,12 +61,13 @@
             <ListView Name="encomendas" Grid.Row="1" SelectionChanged="encomendas_SelectionChanged">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Nº Encomenda" DisplayMemberBinding="{Binding NEncomenda}" />
-                        <GridViewColumn Header="NIF Cliente"  DisplayMemberBinding="{Binding Cliente.Nif}" />
-                        <GridViewColumn Header="Nome Cliente"  DisplayMemberBinding="{Binding Cliente.Nome}" />
-                        <GridViewColumn Header="Estado" DisplayMemberBinding="{Binding Estado}" />
-                        <GridViewColumn Header="Nº Gestor Responsável" DisplayMemberBinding="{Binding GestorVendas.NFuncionario_vendas.NFuncionario}" />
-                        <GridViewColumn Header="Nome Gestor Responsável" DisplayMemberBinding="{Binding GestorVendas.NFuncionario_vendas.Nome}" />
+                        <GridViewColumn Header="Nº Encomenda" DisplayMemberBinding="{Binding Encomenda.NEncomenda}" />
+                        <GridViewColumn Header="Referência Produto"  DisplayMemberBinding="{Binding ProdutoPersonalizado.ProdutoBase.Referencia}" />
+                        <GridViewColumn Header="Nome Produto"  DisplayMemberBinding="{Binding Cliente.ProdutoPersonalizado.ProdutoBase.Nome}" />
+                        <GridViewColumn Header="Tamanho" DisplayMemberBinding="{Binding ProdutoPersonalizado.Tamanho}" />
+                        <GridViewColumn Header="Cor" DisplayMemberBinding="{Binding ProdutoPersonalizado.Cor}" />
+                        <GridViewColumn Header="Quantidade" DisplayMemberBinding="{Binding Quantidade}" />
+                        <GridViewColumn Header="Cliente" DisplayMemberBinding="{Binding Encomenda.Cliente.Nome}" />
                     </GridView>
                 </ListView.View>
             </ListView>

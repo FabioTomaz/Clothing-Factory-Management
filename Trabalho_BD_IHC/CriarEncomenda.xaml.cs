@@ -71,14 +71,7 @@ namespace Trabalho_BD_IHC
             Encomenda encomenda = new Encomenda();
             try
             {
-               /* cliente.Nome = txtNome.Text;
-                cliente.Nib = txtNIB.Text;
-                cliente.Nif = txtNIF.Text;
-                cliente.Telemovel = txtTelemovel.Text;
-                cliente.Email = txtEmail.Text;
-                cliente.CodigoPostal = txtcodigoPostal.Text;
-                cliente.Rua = txtRua.Text;
-                cliente.NCasa = int.Parse(txtNumeroPorta.Text);*/
+               
             }
             catch (Exception ex)
             {

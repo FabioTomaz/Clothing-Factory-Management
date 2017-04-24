@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ConteudoEncomenda.cs" />
     <Compile Include="DataHandler.cs" />
     <Compile Include="EditarCliente.xaml.cs">
       <DependentUpon>EditarCliente.xaml</DependentUpon>
@@ -80,7 +81,8 @@
     <Compile Include="listarProdutos.xaml.cs">
       <DependentUpon>listarProdutos.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Produto.cs" />
+    <Compile Include="ProdutoBase.cs" />
+    <Compile Include="ProdutoPersonalizado.cs" />
     <Compile Include="CriarEncomenda.xaml.cs">
       <DependentUpon>CriarEncomenda.xaml</DependentUpon>
     </Compile>
