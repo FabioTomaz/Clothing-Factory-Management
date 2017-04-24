@@ -80,3 +80,21 @@ C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\obj
 C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\obj\Debug\ListarEmpregados.baml
 C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\obj\Debug\CriarEncomenda.g.cs
 C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\obj\Debug\CriarEncomenda.baml
+C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\bin\Debug\Xceed.Wpf.AvalonDock.dll
+C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\bin\Debug\Xceed.Wpf.AvalonDock.Themes.Aero.dll
+C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\bin\Debug\Xceed.Wpf.AvalonDock.Themes.Metro.dll
+C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\bin\Debug\Xceed.Wpf.AvalonDock.Themes.VS2010.dll
+C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\bin\Debug\Xceed.Wpf.DataGrid.dll
+C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\bin\Debug\Xceed.Wpf.Toolkit.dll
+C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\bin\Debug\de\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\bin\Debug\es\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\bin\Debug\fr\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\bin\Debug\hu\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\bin\Debug\it\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\bin\Debug\pt-BR\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\bin\Debug\ro\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\bin\Debug\ru\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\bin\Debug\sv\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\bin\Debug\zh-Hans\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\CriarEncomenda.g.cs
+C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\CriarEncomenda.baml
