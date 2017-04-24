@@ -103,8 +103,7 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="30"></RowDefinition>
                             <RowDefinition Height="5"></RowDefinition>
-                            <RowDefinition Height="30"></RowDefinition>
-                            <RowDefinition Height="5"></RowDefinition>
+                            <RowDefinition></RowDefinition>
                         </Grid.RowDefinitions>
                         <Button Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="0" VerticalAlignment="Center">
                             <StackPanel Orientation="Horizontal">
@@ -112,26 +111,42 @@
                                 <TextBlock Text="Adicionar Produto" Margin="4,0,0,0"/>
                             </StackPanel>
                         </Button>
-                        <wpfTool:WatermarkTextBox Name="txtProduto" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center">
-                            <wpfTool:WatermarkTextBox.Watermark>
-                                <StackPanel Orientation="Horizontal">
-                                    <Image Source="nCliente.png" Width="20" />
-                                    <TextBlock Text="Referencia" Margin="4,0,0,0" />
-                                </StackPanel>
-                            </wpfTool:WatermarkTextBox.Watermark>
-                        </wpfTool:WatermarkTextBox>
-                        <Button Grid.Column="2" Grid.Row="2" VerticalAlignment="Center">
-                            <StackPanel Orientation="Horizontal">
-                                <Image Source="searchCliente.png" Width="20" />
-                                <TextBlock Text="Pesquisar Produto" Margin="4,0,0,0" />
+                        <ScrollViewer  Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="2" Grid.RowSpan="4">
+              
+                            <StackPanel>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.05*"></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition Width="0.05*"></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition Width="0.05*"></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition Width="0.05*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <wpfTool:WatermarkTextBox Name="txtProduto" Grid.Column="1" VerticalAlignment="Center">
+                                        <wpfTool:WatermarkTextBox.Watermark>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Image Source="nCliente.png" Width="20" />
+                                                <TextBlock Text="Referencia" Margin="4,0,0,0" />
+                                            </StackPanel>
+                                        </wpfTool:WatermarkTextBox.Watermark>
+                                    </wpfTool:WatermarkTextBox>
+                                    <Button Grid.Column="3" VerticalAlignment="Center">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Image Source="searchCliente.png" Width="20" />
+                                            <TextBlock Text="Pesquisar Produto" Margin="4,0,0,0" />
+                                        </StackPanel>
+                                    </Button>
+                                    <Button Grid.Column="5" VerticalAlignment="Center">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Image Source="delete.png" Width="20" />
+                                            <TextBlock Text="Remover" Margin="4,0,0,0" />
+                                        </StackPanel>
+                                    </Button>
+                                </Grid>
                             </StackPanel>
-                        </Button>
-                        <Button Grid.Column="4" Grid.Row="2" VerticalAlignment="Center">
-                            <StackPanel Orientation="Horizontal">
-                                <Image Source="delete.png" Width="20" />
-                                <TextBlock Text="Remover" Margin="4,0,0,0" />
-                            </StackPanel>
-                        </Button>
+                        </ScrollViewer>
                     </Grid>
                 </GroupBox>
                 <Label Content="Descontos Aplicaveis: " Grid.Row="11" Grid.Column="1" VerticalAlignment="Center"/>
