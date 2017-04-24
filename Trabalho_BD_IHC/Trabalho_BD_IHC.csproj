@@ -107,11 +107,11 @@
     </Compile>
     <Compile Include="ProdutoBase.cs" />
     <Compile Include="ProdutoPersonalizado.cs" />
-    <Compile Include="CriarEncomenda.xaml.cs">
-      <DependentUpon>CriarEncomenda.xaml</DependentUpon>
-    </Compile>
     <Compile Include="RegistarCliente.xaml.cs">
       <DependentUpon>RegistarCliente.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RegistarEncomenda.xaml.cs">
+      <DependentUpon>RegistarEncomenda.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utilizador.cs" />
     <Page Include="EditarCliente.xaml">
@@ -176,11 +176,11 @@
       <DependentUpon>Main.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="CriarEncomenda.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="RegistarCliente.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RegistarEncomenda.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -222,6 +222,18 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="login %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="nCliente.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="searchCliente.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="add.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

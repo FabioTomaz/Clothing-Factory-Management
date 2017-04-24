@@ -131,7 +131,7 @@ namespace Trabalho_BD_IHC
 
         private void registarEncomenda_Click(object sender, RoutedEventArgs e)
         {
-            CriarEncomenda page = new CriarEncomenda(dataHandler);
+            RegistarEncomenda page = new RegistarEncomenda(dataHandler);
             NavigationService.Navigate(page);
         }
 

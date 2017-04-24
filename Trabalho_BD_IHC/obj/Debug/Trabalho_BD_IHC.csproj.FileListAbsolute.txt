@@ -96,5 +96,5 @@ C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\bin\Debug\ro\Xceed.Wpf.Avalon
 C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\bin\Debug\ru\Xceed.Wpf.AvalonDock.resources.dll
 C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\bin\Debug\sv\Xceed.Wpf.AvalonDock.resources.dll
 C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\bin\Debug\zh-Hans\Xceed.Wpf.AvalonDock.resources.dll
-C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\CriarEncomenda.g.cs
-C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\CriarEncomenda.baml
+C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\RegistarEncomenda.g.cs
+C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\RegistarEncomenda.baml
