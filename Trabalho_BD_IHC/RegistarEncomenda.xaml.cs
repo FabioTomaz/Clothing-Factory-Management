@@ -23,7 +23,7 @@ namespace Trabalho_BD_IHC
     public partial class RegistarEncomenda : Page
     {
         private DataHandler dataHandler;
-        private int currentRow=1;
+        private int currentRow = 1;
 
         public int CurrentRow
         {
@@ -112,24 +112,66 @@ namespace Trabalho_BD_IHC
             context.XmlnsDictionary.Add("", "http://schemas.microsoft.com/winfx/2006/xaml/presentation");
             context.XmlnsDictionary.Add("x", "http://schemas.microsoft.com/winfx/2006/xaml");
 
-            string referenciastr = String.Format("<WatermarkTextBox xmlns='clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit' Name='txtClienteNif'>\n <WatermarkTextBox.Watermark>\n <StackPanel xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation' Orientation='Horizontal'>\n < Image Source = 'nCliente.png' Width = '20' />\n < TextBlock Text = 'Numero do Cliente' Margin = '4,0,0,0' />\n </StackPanel></WatermarkTextBox.Watermark>\n </WatermarkTextBox>\n");
+            Grid produtoGrid = new Grid
+            {
+                Name = "produto" + currentRow,
+            };
+            ColumnDefinition gridCol1 = new ColumnDefinition();
+            ColumnDefinition gridCol2 = new ColumnDefinition
+            {
+                Width = new GridLength(0.05, GridUnitType.Star)
+            };
+            ColumnDefinition gridCol3 = new ColumnDefinition();
+            ColumnDefinition gridCol4 = new ColumnDefinition
+            {
+                Width = new GridLength(0.05, GridUnitType.Star)
+            };
+            ColumnDefinition gridCol5 = new ColumnDefinition();
+            produtoGrid.ColumnDefinitions.Add(gridCol1);
+            produtoGrid.ColumnDefinitions.Add(gridCol2);
+            produtoGrid.ColumnDefinitions.Add(gridCol3);
+            produtoGrid.ColumnDefinitions.Add(gridCol4);
+            produtoGrid.ColumnDefinitions.Add(gridCol5);
+
+            string referenciastr = String.Format("<WatermarkTextBox xmlns='clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit' Name='txtClienteNif'> <WatermarkTextBox.Watermark> Referencia </WatermarkTextBox.Watermark> </WatermarkTextBox>\n");
             string searchstr = String.Format(@"<Button VerticalAlignment='Center'> <StackPanel Orientation='Horizontal'><Image Source='searchCliente.png' Width='20' /><TextBlock Text='Pesquisar Produto' Margin='4, 0, 0, 0' /></StackPanel></Button>");
-            string removerstr = String.Format(@"<Button VerticalAlignment='Center'> <StackPanel Orientation='Horizontal'><Image Source='delete.png' Width='20' /><TextBlock Text='Remover' Margin='4, 0, 0, 0' /></StackPanel></Button>");
+            string removerstr = String.Format(@"<Button Tag='" + currentRow + "'  VerticalAlignment='Center'> <StackPanel Orientation='Horizontal'><Image Source='delete.png' Width='20' /><TextBlock Text='Remover' Margin='4, 0, 0, 0' /></StackPanel></Button>");
             UIElement referencia = (UIElement)XamlReader.Parse(referenciastr, context);
-            UIElement pesquisar = (UIElement)XamlReader.Parse(searchstr, context);
-            UIElement remover = (UIElement)XamlReader.Parse(removerstr, context);
-            Grid.SetRow(referencia, currentRow);
-            Grid.SetColumn(referencia, 1);
-            Grid.SetRow(pesquisar, currentRow);
-            Grid.SetColumn(pesquisar, 3);
-            Grid.SetRow(remover, currentRow);
-            Grid.SetColumn(remover, 5);
+            Button pesquisar = (Button)XamlReader.Parse(searchstr, context);
+            Button remover = (Button)XamlReader.Parse(removerstr, context);
+            remover.Click += new RoutedEventHandler(Remover_Click);
+
+            Grid.SetRow(produtoGrid, currentRow);
+            Grid.SetColumn(produtoGrid, 1);
+
+            Grid.SetColumn(referencia, 0);
+            Grid.SetColumn(pesquisar, 2);
+            Grid.SetColumn(remover, 4);
+
+            produtoGrid.Children.Add(referencia);
+            produtoGrid.Children.Add(pesquisar);
+            produtoGrid.Children.Add(remover);
 
             grid.RowDefinitions.Add(new RowDefinition());
-            grid.Children.Add(referencia);
-            grid.Children.Add(pesquisar);
-            grid.Children.Add(remover);
+            grid.Children.Add(produtoGrid);
+
             currentRow++;
+        }
+
+        private void Remover_Click(object sender, RoutedEventArgs e)
+        {
+            Button senderbtn = (Button)sender;
+            int row = Convert.ToInt32(senderbtn.Tag);
+            Console.WriteLine("Row: " + row);
+            Console.WriteLine("Current Row: " + currentRow);
+            for (int i = row + 1; i < currentRow; i++)
+            {
+                grid.Children.Cast<Grid>().ElementAt(i).Tag = (i - 1).ToString();
+                Grid.SetRow(grid.Children.Cast<Grid>().ElementAt(i), i - 1);
+            }
+            grid.RowDefinitions.RemoveAt(row);
+            currentRow--;
         }
     }
 }
+
