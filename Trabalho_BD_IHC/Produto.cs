@@ -1,31 +1,73 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Trabalho_BD_IHC
 {
-    class ProdutoPersonalizado
+    class Produto
     {
-        private ProdutoBase produtoBase;
+        private int referencia;
+        private String nome;
+        private double IVA;
+        private Desenho desenho;
         private String tamanho;
         private String cor;
         private int unidadesStock;
         private double preco;
         private Modelo modelo;
-        private Desenho desenho;
 
-        internal ProdutoBase ProdutoBase
+        public int Referencia
         {
             get
             {
-                return produtoBase;
+                return referencia;
             }
 
             set
             {
-                produtoBase = value;
+                referencia = value;
+            }
+        }
+
+        public string Nome
+        {
+            get
+            {
+                return nome;
+            }
+
+            set
+            {
+                nome = value;
+            }
+        }
+
+        public double IVA1
+        {
+            get
+            {
+                return IVA;
+            }
+
+            set
+            {
+                IVA = value;
+            }
+        }
+
+        internal Desenho Desenho
+        {
+            get
+            {
+                return desenho;
+            }
+
+            set
+            {
+                desenho = value;
             }
         }
 
@@ -91,19 +133,6 @@ namespace Trabalho_BD_IHC
             set
             {
                 modelo = value;
-            }
-        }
-
-        internal Desenho Desenho
-        {
-            get
-            {
-                return desenho;
-            }
-
-            set
-            {
-                desenho = value;
             }
         }
     }

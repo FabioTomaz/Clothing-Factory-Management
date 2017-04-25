@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Data.SqlClient;
 
 namespace Trabalho_BD_IHC
 {
@@ -25,6 +27,32 @@ namespace Trabalho_BD_IHC
         {
             InitializeComponent();
             this.dataHandler = dataHandler;
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (!dataHandler.verifySGBDConnection())
+            {
+                MessageBoxResult result = MessageBox.Show("A conexão à base de dados é instável ou inexistente. Por favor tente mais tarde", "Erro de Base de Dados", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            else
+            {
+                SqlCommand cmd = new SqlCommand("SELECT * FROM MATERIAIS_TÊXTEIS", dataHandler.Cn);
+                SqlDataReader reader = cmd.ExecuteReader();
+                List<Produto> produtos = new List<Produto>();
+                while (reader.Read())
+                {
+                    Produto prod = new Produto();
+                    prod.Referencia = Convert.ToInt32(reader["REFERENCIA_FABRICA"].ToString());
+                    prod.Nome = reader["Nome"].ToString();
+                    prod.Cor = reader["COR"].ToString();
+                    produtos.Add(prod);
+                }
+
+                produtosLista.ItemsSource = produtos;
+
+                dataHandler.closeSGBDConnection();
+            }
         }
     }
 }

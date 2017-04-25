@@ -3,6 +3,8 @@ GO
 -- RESET IDENTITY: DBCC CHECKIDENT ('UTILIZADOR', RESEED, 1);
 /*
 INSERT INTO ZONA (COD_POSTAL, DISTRITO, CONCELHO, LOCALIDADE) VALUES
+	('4558-547', 'Porto', 'Gaia', 'Gaia'),
+	('1254-585', 'Viseu', 'Ali', 'Acolá'),
 	('1248-452', 'Lisboa', 'Sintra', 'Sintra'),
 	('2288-227', 'Aveiro', 'Àgueda', 'Beco'),
 	('3865-229', 'Aveiro', 'Estarreja', 'Salreu')
@@ -49,4 +51,11 @@ INSERT INTO [PRODUTO-PERSONALIZADO] (REFERENCIA, TAMANHO, COR, PRECO, UNIDADES_A
 	
 INSERT INTO CONTEUDO_ENCOMENDA (N_ENCOMENDA, REFERENCIA_PRODUTO, TAMANHO_PRODUTO, COR_PRODUTO, QUANTIDADE) VALUES
 	(1, 1, 'XL', 'azul-escuro', 2);
+	
+
+INSERT INTO FORNECEDOR (NIF, EMAIL, NOME, FAX, TELEFONE, DESIGNAÇAO, COD_POSTAL, RUA, N_PORTA) VALUES
+	(666999555, 'for_textil@mail.pt','Textil suply', 223415478, 22485497, 'Fornecimento de panos e linho para produçao têxtil', '1254-585', 'Rua das produções', 23),
+	(478545217, 'forn_materiais@mail.pt', 'Textil material inc.', 222454485, 2135748, 'Fornecimento de materiais para produçao textil', '4558-547', 'Rua do trabalho', 20)
+INSERT INTO MATERIAIS_TÊXTEIS (REFERENCIA_FORN, NIF_FORNECEDOR, COR, DESIGNAÇÃO) VALUES
+	(300, 478545217, 'Azul', 'Pano de algodao e linho');
 	*/

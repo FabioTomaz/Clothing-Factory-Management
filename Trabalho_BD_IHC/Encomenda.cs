@@ -12,11 +12,14 @@ namespace Trabalho_BD_IHC
         private Cliente cliente;
         private int nEncomenda;
         private String estado;
-        private String dataConfirmacao;
-        private String dataEntrega;
+        private DateTime dataConfirmacao;
+        private DateTime dataEntrega;
+        private DateTime dataPrevistaEntrega;
         private double desconto;
         private String localEntrega;
         private GestorVendas gestorVendas;
+        private Produto produto;
+        private int quantidade;
 
         public Cliente Cliente
         {
@@ -57,7 +60,7 @@ namespace Trabalho_BD_IHC
             }
         }
 
-        public string DataConfirmacao
+        public DateTime DataConfirmacao
         {
             get
             {
@@ -70,7 +73,7 @@ namespace Trabalho_BD_IHC
             }
         }
 
-        public string DataEntrega
+        public DateTime DataEntrega
         {
             get
             {
@@ -80,6 +83,19 @@ namespace Trabalho_BD_IHC
             set
             {
                 dataEntrega = value;
+            }
+        }
+
+        public DateTime DataPrevistaEntrega
+        {
+            get
+            {
+                return dataPrevistaEntrega;
+            }
+
+            set
+            {
+                dataPrevistaEntrega = value;
             }
         }
 
@@ -122,5 +138,30 @@ namespace Trabalho_BD_IHC
             }
         }
 
+        public Produto Produto
+        {
+            get
+            {
+                return produto;
+            }
+
+            set
+            {
+                produto = value;
+            }
+        }
+
+        public int Quantidade
+        {
+            get
+            {
+                return quantidade;
+            }
+
+            set
+            {
+                quantidade = value;
+            }
+        }
     }
 }

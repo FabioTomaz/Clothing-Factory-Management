@@ -33,6 +33,7 @@ namespace Trabalho_BD_IHC
         {
             cancelarEncomenda.IsEnabled = false;
             editarEncomenda.IsEnabled = false;
+            entregarEncomenda.IsEnabled = false;
             encomendas.Focus();
             if (!dataHandler.verifySGBDConnection())
             {
@@ -41,26 +42,25 @@ namespace Trabalho_BD_IHC
             else
             {
                 SqlCommand cmd = new SqlCommand("SELECT ENCOMENDA.N_ENCOMENDA AS NENCOMENDA, REFERENCIA_PRODUTO, TAMANHO_PRODUTO, COR_PRODUTO,"
-                                +" QUANTIDADE, ESTADO, CLIENTE.NOME as CLIENTENAME, [PRODUTO-BASE].NOME as PRODUCT_NAME"
+                                +" QUANTIDADE, ESTADO, CLIENTE.NOME as CLIENTENAME, [PRODUTO-BASE].NOME as PRODUCT_NAME, DATA_ENTREGA_PREV"
                                 +" FROM((CONTEUDO_ENCOMENDA JOIN ENCOMENDA ON CONTEUDO_ENCOMENDA.N_ENCOMENDA = ENCOMENDA.N_ENCOMENDA)"
                                 +" JOIN CLIENTE ON CLIENTE.NCLIENTE = ENCOMENDA.CLIENTE)"
                                 +" JOIN[PRODUTO-BASE] ON CONTEUDO_ENCOMENDA.REFERENCIA_PRODUTO = [PRODUTO-BASE].REFERENCIA", dataHandler.Cn);
                 SqlDataReader reader = cmd.ExecuteReader();
-                ObservableCollection<ConteudoEncomenda> enc = new ObservableCollection<ConteudoEncomenda>();
+                ObservableCollection<Encomenda> enc = new ObservableCollection<Encomenda>();
                 while (reader.Read())
                 {
-                    ConteudoEncomenda Enc = new ConteudoEncomenda();
-                    Enc.Encomenda = new Encomenda();
-                    Enc.Encomenda.Cliente = new Cliente();
-                    Enc.ProdutoPersonalizado = new ProdutoPersonalizado();
-                    Enc.Encomenda.NEncomenda = Convert.ToInt32(reader["NENCOMENDA"].ToString());
-                    Enc.ProdutoPersonalizado.ProdutoBase = new ProdutoBase();
-                    Enc.ProdutoPersonalizado.ProdutoBase.Referencia = Convert.ToInt32(reader["REFERENCIA_PRODUTO"].ToString());
-                    Enc.ProdutoPersonalizado.ProdutoBase.Nome = reader["PRODUCT_NAME"].ToString();
-                    Enc.ProdutoPersonalizado.Tamanho = reader["TAMANHO_PRODUTO"].ToString();
-                    Enc.ProdutoPersonalizado.Cor = reader["COR_PRODUTO"].ToString();
+                    Encomenda Enc = new Encomenda();
+                    Enc.Cliente = new Cliente();
+                    Enc.Produto = new Produto();
+                    Enc.NEncomenda = Convert.ToInt32(reader["NENCOMENDA"].ToString());
+                    Enc.Produto.Referencia = Convert.ToInt32(reader["REFERENCIA_PRODUTO"].ToString());
+                    Enc.Produto.Nome = reader["PRODUCT_NAME"].ToString();
+                    Enc.Produto.Tamanho = reader["TAMANHO_PRODUTO"].ToString();
+                    Enc.Produto.Cor = reader["COR_PRODUTO"].ToString();
                     Enc.Quantidade = Convert.ToInt32(reader["QUANTIDADE"].ToString());
-                    Enc.Encomenda.Cliente.Nome = reader["CLIENTENAME"].ToString();
+                    Enc.DataPrevistaEntrega = Convert.ToDateTime(reader["DATA_ENTREGA_PREV"]);
+                    Enc.Cliente.Nome = reader["CLIENTENAME"].ToString();
                     enc.Add(Enc);
                 }
 

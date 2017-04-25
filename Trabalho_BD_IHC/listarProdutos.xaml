@@ -52,8 +52,8 @@
                 <RowDefinition Height="0.1*"></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            <Label x:Name="encomendasLabel" Content="Lista de Produtos da Empresa" Grid.Row="0" VerticalAlignment="Top" />
-            <ListView Name="encomendas" Grid.Row="1">
+            <Label x:Name="produtosLabel" Content="Lista de Produtos da Empresa" Grid.Row="0" VerticalAlignment="Top" />
+            <ListView Name="produtosLista" Grid.Row="1">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Referencia" DisplayMemberBinding="{Binding ref}" />

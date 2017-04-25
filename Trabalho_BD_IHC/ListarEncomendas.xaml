@@ -61,13 +61,15 @@
             <ListView Name="encomendas" Grid.Row="1" SelectionChanged="encomendas_SelectionChanged">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Nº Encomenda" DisplayMemberBinding="{Binding Encomenda.NEncomenda}" />
-                        <GridViewColumn Header="Referência Produto"  DisplayMemberBinding="{Binding ProdutoPersonalizado.ProdutoBase.Referencia}" />
-                        <GridViewColumn Header="Nome Produto"  DisplayMemberBinding="{Binding Cliente.ProdutoPersonalizado.ProdutoBase.Nome}" />
-                        <GridViewColumn Header="Tamanho" DisplayMemberBinding="{Binding ProdutoPersonalizado.Tamanho}" />
-                        <GridViewColumn Header="Cor" DisplayMemberBinding="{Binding ProdutoPersonalizado.Cor}" />
+                        <GridViewColumn Header="Nº Encomenda" DisplayMemberBinding="{Binding NEncomenda}" />
+                        <GridViewColumn Header="Referência Produto"  DisplayMemberBinding="{Binding Produto.Referencia}" />
+                        <GridViewColumn Header="Nome Produto"  DisplayMemberBinding="{Binding Produto.Nome}" />
+                        <GridViewColumn Header="Tamanho" DisplayMemberBinding="{Binding Produto.Tamanho}" />
+                        <GridViewColumn Header="Cor" DisplayMemberBinding="{Binding Produto.Cor}" />
                         <GridViewColumn Header="Quantidade" DisplayMemberBinding="{Binding Quantidade}" />
-                        <GridViewColumn Header="Cliente" DisplayMemberBinding="{Binding Encomenda.Cliente.Nome}" />
+                        <GridViewColumn Header="Cliente" DisplayMemberBinding="{Binding Cliente.Nome}" />
+                        <GridViewColumn Header="Data Prevista Entrega" DisplayMemberBinding="{Binding DataPrevistaEntrega, StringFormat=d}" />
+                        
                     </GridView>
                 </ListView.View>
             </ListView>

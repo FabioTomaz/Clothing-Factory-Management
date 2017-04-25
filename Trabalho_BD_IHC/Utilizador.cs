@@ -94,7 +94,7 @@ namespace Trabalho_BD_IHC
             }
         }
 
-        internal filial Filial
+        public filial Filial
         {
             get
             {
