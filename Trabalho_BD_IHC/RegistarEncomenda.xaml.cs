@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data.SqlClient;
+using System.Windows.Markup;
 
 namespace Trabalho_BD_IHC
 {
@@ -22,6 +23,21 @@ namespace Trabalho_BD_IHC
     public partial class RegistarEncomenda : Page
     {
         private DataHandler dataHandler;
+        private int currentRow=1;
+
+        public int CurrentRow
+        {
+            get
+            {
+                return currentRow;
+            }
+
+            set
+            {
+                currentRow = value;
+            }
+        }
+
         public RegistarEncomenda(DataHandler dataHandler)
         {
             InitializeComponent();
@@ -88,6 +104,32 @@ namespace Trabalho_BD_IHC
                 return;
             }
             this.NavigationService.GoBack();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            ParserContext context = new ParserContext();
+            context.XmlnsDictionary.Add("", "http://schemas.microsoft.com/winfx/2006/xaml/presentation");
+            context.XmlnsDictionary.Add("x", "http://schemas.microsoft.com/winfx/2006/xaml");
+
+            string referenciastr = String.Format("<WatermarkTextBox xmlns='clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit' Name='txtClienteNif'>\n <WatermarkTextBox.Watermark>\n <StackPanel xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation' Orientation='Horizontal'>\n < Image Source = 'nCliente.png' Width = '20' />\n < TextBlock Text = 'Numero do Cliente' Margin = '4,0,0,0' />\n </StackPanel></WatermarkTextBox.Watermark>\n </WatermarkTextBox>\n");
+            string searchstr = String.Format(@"<Button VerticalAlignment='Center'> <StackPanel Orientation='Horizontal'><Image Source='searchCliente.png' Width='20' /><TextBlock Text='Pesquisar Produto' Margin='4, 0, 0, 0' /></StackPanel></Button>");
+            string removerstr = String.Format(@"<Button VerticalAlignment='Center'> <StackPanel Orientation='Horizontal'><Image Source='delete.png' Width='20' /><TextBlock Text='Remover' Margin='4, 0, 0, 0' /></StackPanel></Button>");
+            UIElement referencia = (UIElement)XamlReader.Parse(referenciastr, context);
+            UIElement pesquisar = (UIElement)XamlReader.Parse(searchstr, context);
+            UIElement remover = (UIElement)XamlReader.Parse(removerstr, context);
+            Grid.SetRow(referencia, currentRow);
+            Grid.SetColumn(referencia, 1);
+            Grid.SetRow(pesquisar, currentRow);
+            Grid.SetColumn(pesquisar, 3);
+            Grid.SetRow(remover, currentRow);
+            Grid.SetColumn(remover, 5);
+
+            grid.RowDefinitions.Add(new RowDefinition());
+            grid.Children.Add(referencia);
+            grid.Children.Add(pesquisar);
+            grid.Children.Add(remover);
+            currentRow++;
         }
     }
 }

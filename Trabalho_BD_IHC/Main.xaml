@@ -203,7 +203,14 @@
                 <Grid Background="#FFE5E5E5"/>
             </TabItem>
             <TabItem Header="Ajuda" >
-                <Grid Background="Snow"/>
+                <WatermarkTextBox xmlns='clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit' Name='txtClienteNif'> 
+                    <WatermarkTextBox.Watermark>
+                        <StackPanel xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation' Orientation='Horizontal'>
+                            <Image Source = 'nCliente.png' Width = '20' />
+                            <TextBlock Text = 'Numero do Cliente' Margin = '4,0,0,0' />
+                        </StackPanel>
+                    </WatermarkTextBox.Watermark>
+                </WatermarkTextBox>
             </TabItem>
         </TabControl>
     </Grid>
