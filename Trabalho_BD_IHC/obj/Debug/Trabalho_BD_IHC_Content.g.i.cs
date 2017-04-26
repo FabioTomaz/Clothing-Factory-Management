@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("login.xaml")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("addphoto.png")]
 
 

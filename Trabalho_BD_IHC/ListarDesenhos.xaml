@@ -15,7 +15,7 @@
         <Grid.RowDefinitions>
         </Grid.RowDefinitions>
         <TabControl Grid.Column="1" Grid.Row="0" Grid.RowSpan="11">
-            <TabItem Header="Desenho Base" Grid.Column="1" Grid.Row="0" Loaded="getDesenhosBase">
+            <TabItem Name="desenhoBase" Header="Desenho Base" Grid.Column="1" Grid.Row="0" Loaded="Page_Load">
                 <Grid Background="White">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="24*"/>
@@ -79,7 +79,7 @@
                 </Grid>
 
             </TabItem>
-            <TabItem Header="Desenho Personalizado" Grid.Column="1" Grid.Row="0" Loaded="getDesenhosPers">
+            <TabItem Name ="desenhoPers" Header="Desenho Personalizado" Grid.Column="1" Grid.Row="0" Loaded="Page_Load">
                 <Grid Background="White">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="24*"/>
