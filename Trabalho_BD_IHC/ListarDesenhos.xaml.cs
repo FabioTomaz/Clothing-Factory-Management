@@ -40,24 +40,24 @@ namespace Trabalho_BD_IHC
             }
             else
             {
-               /* SqlCommand cmd = new SqlCommand("SELECT N_DESENHO, NOME_DESENHO, DATA_ALTERACAO, "
-                                +"INTRUÇÕES_PRODUÇÃO, N_GESTOR_PROD, UTILIZADOR.NOME FROM DESENHO JOIN UTILIZADOR ON N_GESTOR_PROD=N_FUNCIONARIO", dataHandler.Cn);
-                SqlDataReader reader = cmd.ExecuteReader();
-                ObservableCollection<Desenho> desenhoBase = new ObservableCollection<Desenho>();
-                while (reader.Read())
-                {
-                    Desenho Des = new Desenho();
-                    Des.NDesenho = Convert.ToInt32(reader["N_DESENHO"].ToString());
-                    Des.Nome = reader["NOME_DESENHO"].ToString();
-                    Des.InstrucoesProducao = reader["INTRUÇÕES_PRODUÇÃO"].ToString();
-                    Des.DataAlteraçao = Convert.ToDateTime(reader["DATA_ALTERACAO"]);
-                    Des.GestorProducao = new GestorProducao();
-                    Des.GestorProducao.NFuncionario = Convert.ToInt32(reader["N_GESTOR_PROD"].ToString());
-                    Des.GestorProducao.Nome = reader["NOME"].ToString();
-                    desenhoBase.Add(Des);
-                }
+                /* SqlCommand cmd = new SqlCommand("SELECT N_DESENHO, NOME_DESENHO, DATA_ALTERACAO, "
+                                 +"INTRUÇÕES_PRODUÇÃO, N_GESTOR_PROD, UTILIZADOR.NOME FROM DESENHO JOIN UTILIZADOR ON N_GESTOR_PROD=N_FUNCIONARIO", dataHandler.Cn);
+                 SqlDataReader reader = cmd.ExecuteReader();
+                 ObservableCollection<Desenho> desenhoBase = new ObservableCollection<Desenho>();
+                 while (reader.Read())
+                 {
+                     Desenho Des = new Desenho();
+                     Des.NDesenho = Convert.ToInt32(reader["N_DESENHO"].ToString());
+                     Des.Nome = reader["NOME_DESENHO"].ToString();
+                     Des.InstrucoesProducao = reader["INTRUÇÕES_PRODUÇÃO"].ToString();
+                     Des.DataAlteraçao = Convert.ToDateTime(reader["DATA_ALTERACAO"]);
+                     Des.GestorProducao = new GestorProducao();
+                     Des.GestorProducao.NFuncionario = Convert.ToInt32(reader["N_GESTOR_PROD"].ToString());
+                     Des.GestorProducao.Nome = reader["NOME"].ToString();
+                     desenhoBase.Add(Des);
+                 }
 
-                desenhosBaseLista.ItemsSource = desenhoBase;*/
+                 desenhosBaseLista.ItemsSource = desenhoBase;*/
 
                 dataHandler.closeSGBDConnection();
             }
@@ -96,6 +96,11 @@ namespace Trabalho_BD_IHC
                 dataHandler.closeSGBDConnection();
             }
         }
+        private void registarDesenhoBase_click(object sender, RoutedEventArgs e)
+        {
+            RegistarDesenhoBase page = new RegistarDesenhoBase(dataHandler);
+            NavigationService.Navigate(page);
+        }
 
         private void desenhos_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -104,7 +109,7 @@ namespace Trabalho_BD_IHC
                 editarDesenhoPersonalizado.IsEnabled = true;
                 removerDesenhoPersonalizado.IsEnabled = true;
             }
-            if(desenhosBaseLista.SelectedItems.Count > 0)
+            if (desenhosBaseLista.SelectedItems.Count > 0)
             {
                 editarDesenhoBase.IsEnabled = true;
                 removerDesenhoBase.IsEnabled = true;

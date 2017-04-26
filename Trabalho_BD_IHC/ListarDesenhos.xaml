@@ -45,7 +45,7 @@
                                 <RowDefinition></RowDefinition>
                                 <RowDefinition ></RowDefinition>
                             </Grid.RowDefinitions>
-                            <Button x:Name="registarDesenhoBase" Grid.Row="1" Grid.Column="1">
+                            <Button x:Name="registarDesenhoBase" Grid.Row="1" Grid.Column="1" Click="registarDesenhoBase_click">
                                 <TextBlock TextWrapping="Wrap">Registar Desenho Base</TextBlock>
                             </Button>
                             <Button x:Name="editarDesenhoBase" Grid.Row="3" Grid.Column="1" IsEnabled="False">

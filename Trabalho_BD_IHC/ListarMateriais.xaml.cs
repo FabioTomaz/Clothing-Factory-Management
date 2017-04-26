@@ -30,6 +30,10 @@ namespace Trabalho_BD_IHC
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            removerMaterial.IsEnabled = false;
+            editarMaterial.IsEnabled = false;
+            detalhesMaterial.IsEnabled = false;
+            materiais.Focus();
             if (!dataHandler.verifySGBDConnection()) {
                 MessageBoxResult result = MessageBox.Show("A conexão à base de dados é instável ou inexistente. Por favor tente mais tarde", "Erro de Base de Dados", MessageBoxButton.OK, MessageBoxImage.Warning);
             } else {
@@ -43,7 +47,8 @@ namespace Trabalho_BD_IHC
                     Mt.ReferenciaFornecedor = Convert.ToInt32(reader["REFERENCIA_FORN"].ToString());
                     Mt.Designacao = reader["DESIGNAÇÃO"].ToString();
                     Mt.Cor = reader["COR"].ToString();
-                    Mt.NifFornecedor = Convert.ToInt32(reader["NIF_FORNECEDOR"].ToString());
+                    Mt.Fornecedor = new Fornecedor();
+                    Mt.Fornecedor.NIF_Fornecedor = Convert.ToInt32(reader["NIF_FORNECEDOR"].ToString());
                     materiaisTexteis.Add(Mt);
                 }
             
@@ -52,6 +57,16 @@ namespace Trabalho_BD_IHC
                 dataHandler.closeSGBDConnection();
             }
        }
+
+        private void materiais_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (materiais.SelectedItems.Count > 0)
+            {
+                removerMaterial.IsEnabled = true;
+                editarMaterial.IsEnabled = true;
+                detalhesMaterial.IsEnabled = true;
+            }
+        }
     }
 
         

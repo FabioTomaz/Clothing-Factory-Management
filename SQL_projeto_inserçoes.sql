@@ -57,5 +57,12 @@ INSERT INTO FORNECEDOR (NIF, EMAIL, NOME, FAX, TELEFONE, DESIGNAÇAO, COD_POSTAL,
 	(666999555, 'for_textil@mail.pt','Textil suply', 223415478, 22485497, 'Fornecimento de panos e linho para produçao têxtil', '1254-585', 'Rua das produções', 23),
 	(478545217, 'forn_materiais@mail.pt', 'Textil material inc.', 222454485, 2135748, 'Fornecimento de materiais para produçao textil', '4558-547', 'Rua do trabalho', 20)
 INSERT INTO MATERIAIS_TÊXTEIS (REFERENCIA_FORN, NIF_FORNECEDOR, COR, DESIGNAÇÃO) VALUES
-	(300, 478545217, 'Azul', 'Pano de algodao e linho');
+	--(300, 478545217, 'Azul', 'Pano de algodao e linho'),
+	(302, 666999555, 'Preto', 'Botões'),
+	(303, 666999555, 'Castanho', 'Mola'),
+	(301, 478545217, 'Branco', 'Linha'),
+	(304, 666999555, 'Amarelo', 'Elastico')
+
+INSERT INTO MATERIAIS_TÊXTEIS (REFERENCIA_FABRICA, NIF_FORNECEDOR, COR, DESIGNAÇÃO) VALUES
+
 	*/

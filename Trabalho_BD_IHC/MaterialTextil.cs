@@ -12,7 +12,7 @@ namespace Trabalho_BD_IHC
         private int referenciaFornecedor;
         private String designacao;
         private String cor;
-        private int nifFornecedor;
+        private Fornecedor fornecedor;
 
         public int Referencia
         {
@@ -62,18 +62,19 @@ namespace Trabalho_BD_IHC
                 cor = value;
             }
         }
-        public int NifFornecedor
+        
+
+        public Fornecedor Fornecedor
         {
             get
             {
-                return nifFornecedor;
+                return fornecedor;
             }
 
             set
             {
-                nifFornecedor = value;
+                fornecedor = value;
             }
         }
-
     }
 }

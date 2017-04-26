@@ -9,5 +9,18 @@ namespace Trabalho_BD_IHC
     class Mola : AcessoriosCostura
     {
         private double diametro;
+
+        public double Diametro
+        {
+            get
+            {
+                return diametro;
+            }
+
+            set
+            {
+                diametro = value;
+            }
+        }
     }
 }

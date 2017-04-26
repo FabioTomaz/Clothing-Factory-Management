@@ -41,35 +41,37 @@ namespace Trabalho_BD_IHC
             }
             else
             {
-                SqlCommand cmd = new SqlCommand("SELECT ENCOMENDA.N_ENCOMENDA AS NENCOMENDA, REFERENCIA_PRODUTO, TAMANHO_PRODUTO, COR_PRODUTO,"
-                                +" QUANTIDADE, ESTADO, CLIENTE.NOME as CLIENTENAME, [PRODUTO-BASE].NOME as PRODUCT_NAME, DATA_ENTREGA_PREV"
-                                +" FROM((CONTEUDO_ENCOMENDA JOIN ENCOMENDA ON CONTEUDO_ENCOMENDA.N_ENCOMENDA = ENCOMENDA.N_ENCOMENDA)"
-                                +" JOIN CLIENTE ON CLIENTE.NCLIENTE = ENCOMENDA.CLIENTE)"
-                                +" JOIN[PRODUTO-BASE] ON CONTEUDO_ENCOMENDA.REFERENCIA_PRODUTO = [PRODUTO-BASE].REFERENCIA", dataHandler.Cn);
-                SqlDataReader reader = cmd.ExecuteReader();
-                ObservableCollection<Encomenda> enc = new ObservableCollection<Encomenda>();
-                while (reader.Read())
-                {
-                    Encomenda Enc = new Encomenda();
-                    Enc.Cliente = new Cliente();
-                    Enc.Produto = new Produto();
-                    Enc.NEncomenda = Convert.ToInt32(reader["NENCOMENDA"].ToString());
-                    Enc.Produto.Referencia = Convert.ToInt32(reader["REFERENCIA_PRODUTO"].ToString());
-                    Enc.Produto.Nome = reader["PRODUCT_NAME"].ToString();
-                    Enc.Produto.Tamanho = reader["TAMANHO_PRODUTO"].ToString();
-                    Enc.Produto.Cor = reader["COR_PRODUTO"].ToString();
-                    Enc.Quantidade = Convert.ToInt32(reader["QUANTIDADE"].ToString());
-                    Enc.DataPrevistaEntrega = Convert.ToDateTime(reader["DATA_ENTREGA_PREV"]);
-                    Enc.Cliente.Nome = reader["CLIENTENAME"].ToString();
-                    enc.Add(Enc);
-                }
-
-                encomendas.ItemsSource = enc;
-
+                getEncomendas();
                 dataHandler.closeSGBDConnection();
             }
         }
+        private void getEncomendas()
+        {
+            SqlCommand cmd = new SqlCommand("SELECT ENCOMENDA.N_ENCOMENDA AS NENCOMENDA, REFERENCIA_PRODUTO, TAMANHO_PRODUTO, COR_PRODUTO,"
+                                + " QUANTIDADE, ESTADO, CLIENTE.NOME as CLIENTENAME, [PRODUTO-BASE].NOME as PRODUCT_NAME, DATA_ENTREGA_PREV"
+                                + " FROM((CONTEUDO_ENCOMENDA JOIN ENCOMENDA ON CONTEUDO_ENCOMENDA.N_ENCOMENDA = ENCOMENDA.N_ENCOMENDA)"
+                                + " JOIN CLIENTE ON CLIENTE.NCLIENTE = ENCOMENDA.CLIENTE)"
+                                + " JOIN[PRODUTO-BASE] ON CONTEUDO_ENCOMENDA.REFERENCIA_PRODUTO = [PRODUTO-BASE].REFERENCIA", dataHandler.Cn);
+            SqlDataReader reader = cmd.ExecuteReader();
+            ObservableCollection<Encomenda> enc = new ObservableCollection<Encomenda>();
+            while (reader.Read())
+            {
+                Encomenda Enc = new Encomenda();
+                Enc.Cliente = new Cliente();
+                Enc.Produto = new Produto();
+                Enc.NEncomenda = Convert.ToInt32(reader["NENCOMENDA"].ToString());
+                Enc.Produto.Referencia = Convert.ToInt32(reader["REFERENCIA_PRODUTO"].ToString());
+                Enc.Produto.Nome = reader["PRODUCT_NAME"].ToString();
+                Enc.Produto.Tamanho = reader["TAMANHO_PRODUTO"].ToString();
+                Enc.Produto.Cor = reader["COR_PRODUTO"].ToString();
+                Enc.Quantidade = Convert.ToInt32(reader["QUANTIDADE"].ToString());
+                Enc.DataPrevistaEntrega = Convert.ToDateTime(reader["DATA_ENTREGA_PREV"]);
+                Enc.Cliente.Nome = reader["CLIENTENAME"].ToString();
+                enc.Add(Enc);
+            }
 
+            encomendas.ItemsSource = enc;
+        }
         private void CancelarEncomenda(Encomenda encomenda)
         {
             if (!dataHandler.verifySGBDConnection())
