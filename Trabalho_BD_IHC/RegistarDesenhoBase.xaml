@@ -74,7 +74,7 @@
                         <ColumnDefinition Width="0.05*"></ColumnDefinition>
 
                     </Grid.ColumnDefinitions>
-                    <wpfTool:WatermarkTextBox Name="txtNomeDesenhoBase" Grid.Column="0" VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="0,6,10,6">
+                    <wpfTool:WatermarkTextBox Name="txtNomeDesenhoBase" Grid.Column="0" VerticalAlignment="Center" Grid.ColumnSpan="5" Margin="0,6,10,6">
                         <wpfTool:WatermarkTextBox.Watermark>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="Nome do desenho" Margin="4,0,0,0" />
@@ -82,9 +82,7 @@
                         </wpfTool:WatermarkTextBox.Watermark>
                     </wpfTool:WatermarkTextBox>
                 </Grid>
-                <Label Content="IVA: " Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-                <wpfTool:IntegerUpDown Name="txtIVA"  VerticalAlignment="Center" Grid.Row="1" Grid.Column="3" Maximum="23" Minimum="6" Value="6"  Width="100" Watermark="IVA" HorizontalAlignment="Left"></wpfTool:IntegerUpDown>
-
+                
                 <Label Content="Instruções Produção" Grid.Row="3" Grid.RowSpan="2" Height="auto" Grid.Column="0" VerticalAlignment="Center"/>
                 <wpfTool:WatermarkTextBox  Name="txtInstruçoes" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Grid.ColumnSpan="3" Grid.RowSpan="3" Margin="0,7,10,0" Height="69">
                     <wpfTool:WatermarkTextBox.Watermark>
@@ -93,60 +91,8 @@
                         </StackPanel>
                     </wpfTool:WatermarkTextBox.Watermark>
                 </wpfTool:WatermarkTextBox>
-                <GroupBox Header="Materiais do Desenho" Grid.Row="6" Grid.RowSpan="5" Grid.Column="0" Grid.ColumnSpan="5">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition Width="0.05*"></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition Width="0.05*"></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="30"></RowDefinition>
-                            <RowDefinition Height="5"></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <Button Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="0" VerticalAlignment="Center" Click="Button_Click">
-                            <StackPanel Orientation="Horizontal">
-                                <Image Source="add.png" Width="20" />
-                                <TextBlock Text="Adicionar Material" Margin="4,0,0,0"/>
-                            </StackPanel>
-                        </Button>
-                        <ScrollViewer  Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="2" Grid.RowSpan="4">
-
-                            <StackPanel x:Name="stack">
-                                <Grid x:Name="grid">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="0.05*"></ColumnDefinition>
-                                        <ColumnDefinition></ColumnDefinition>
-                                        <ColumnDefinition Width="0.05*"></ColumnDefinition>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition></RowDefinition>
-                                    </Grid.RowDefinitions>
-                                    <Grid Grid.Column="1" Grid.Row="0" Name="produto0">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition></ColumnDefinition>
-                                            <ColumnDefinition Width="0.05*"></ColumnDefinition>
-                                            <ColumnDefinition></ColumnDefinition>
-                                            <ColumnDefinition Width="0.05*"></ColumnDefinition>
-                                            <ColumnDefinition></ColumnDefinition>
-                                        </Grid.ColumnDefinitions>
-
-                                        <Button Grid.Column="2" VerticalAlignment="Center" >
-                                            <StackPanel Orientation="Horizontal">
-                                                <Image Source="searchCliente.png" Width="20" />
-                                                <TextBlock Text="Pesquisar Produto" Margin="4,0,0,0" />
-                                            </StackPanel>
-                                        </Button>
-                                    </Grid>
-                                </Grid>
-                            </StackPanel>
-                        </ScrollViewer>
-                    </Grid>
-                </GroupBox>
-                <Button Grid.Column="3" Grid.Row="11" VerticalAlignment="Center">
+                
+                <Button Grid.Column="1" Grid.Row="11" VerticalAlignment="Center" Grid.ColumnSpan="2" HorizontalAlignment="Center">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="addPhoto.png" Width="20" />
                         <TextBlock Text="Adicionar Imagem" Margin="4,0,0,0"/>
