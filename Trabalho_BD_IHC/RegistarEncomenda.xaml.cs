@@ -23,7 +23,7 @@ namespace Trabalho_BD_IHC
     public partial class RegistarEncomenda : Page
     {
         private DataHandler dataHandler;
-        private int currentRow = 1;
+        private int currentRow = 0;
 
         public int CurrentRow
         {
@@ -112,48 +112,66 @@ namespace Trabalho_BD_IHC
             context.XmlnsDictionary.Add("", "http://schemas.microsoft.com/winfx/2006/xaml/presentation");
             context.XmlnsDictionary.Add("x", "http://schemas.microsoft.com/winfx/2006/xaml");
 
-            Grid produtoGrid = new Grid
-            {
-                Name = "produto" + currentRow,
+            StackPanel stackProduto = new StackPanel {
+                Orientation = Orientation.Horizontal,
+                Name="produto"+currentRow,
             };
-            ColumnDefinition gridCol1 = new ColumnDefinition();
-            ColumnDefinition gridCol2 = new ColumnDefinition
-            {
-                Width = new GridLength(0.05, GridUnitType.Star)
-            };
-            ColumnDefinition gridCol3 = new ColumnDefinition();
-            ColumnDefinition gridCol4 = new ColumnDefinition
-            {
-                Width = new GridLength(0.05, GridUnitType.Star)
-            };
-            ColumnDefinition gridCol5 = new ColumnDefinition();
-            produtoGrid.ColumnDefinitions.Add(gridCol1);
-            produtoGrid.ColumnDefinitions.Add(gridCol2);
-            produtoGrid.ColumnDefinitions.Add(gridCol3);
-            produtoGrid.ColumnDefinitions.Add(gridCol4);
-            produtoGrid.ColumnDefinitions.Add(gridCol5);
 
-            string referenciastr = String.Format("<WatermarkTextBox xmlns='clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit' Name='txtClienteNif'> <WatermarkTextBox.Watermark> Referencia </WatermarkTextBox.Watermark> </WatermarkTextBox>\n");
-            string searchstr = String.Format(@"<Button VerticalAlignment='Center'> <StackPanel Orientation='Horizontal'><Image Source='searchCliente.png' Width='20' /><TextBlock Text='Pesquisar Produto' Margin='4, 0, 0, 0' /></StackPanel></Button>");
-            string removerstr = String.Format(@"<Button Tag='" + currentRow + "'  VerticalAlignment='Center'> <StackPanel Orientation='Horizontal'><Image Source='delete.png' Width='20' /><TextBlock Text='Remover' Margin='4, 0, 0, 0' /></StackPanel></Button>");
-            UIElement referencia = (UIElement)XamlReader.Parse(referenciastr, context);
-            Button pesquisar = (Button)XamlReader.Parse(searchstr, context);
-            Button remover = (Button)XamlReader.Parse(removerstr, context);
+            StackPanel refPanel = new StackPanel { Orientation=Orientation.Horizontal};
+            refPanel.Children.Add(new Image {Source= new BitmapImage(new Uri("referencia.png", UriKind.Relative)), Width=20 });
+            refPanel.Children.Add(new TextBlock { Text = "Referencia", Margin = new Thickness(4,0,0,0) });
+            Xceed.Wpf.Toolkit.WatermarkTextBox referencia = new Xceed.Wpf.Toolkit.WatermarkTextBox {
+                Name = "txtRef"+currentRow,
+                Watermark = refPanel,
+                Width=100
+            };
+            StackPanel corPanel = new StackPanel { Orientation = Orientation.Horizontal };
+            corPanel.Children.Add(new Image { Source = new BitmapImage(new Uri("color.png", UriKind.Relative)), Width = 20 });
+            corPanel.Children.Add(new TextBlock { Text = "Cor", Margin = new Thickness(4, 0, 0, 0) });
+            Xceed.Wpf.Toolkit.WatermarkTextBox cor = new Xceed.Wpf.Toolkit.WatermarkTextBox
+            {
+                Name = "txtCor"+currentRow,
+                Watermark = corPanel,
+                Width = 100
+            };
+            StackPanel tamanhoPanel = new StackPanel { Orientation = Orientation.Horizontal };
+            tamanhoPanel.Children.Add(new Image { Source = new BitmapImage(new Uri("size.png", UriKind.Relative)), Width = 20 });
+            tamanhoPanel.Children.Add(new TextBlock { Text = "Tamanho", Margin = new Thickness(4, 0, 0, 0) });
+            Xceed.Wpf.Toolkit.WatermarkTextBox tamanho = new Xceed.Wpf.Toolkit.WatermarkTextBox
+            {
+                Name = "txtTamanho"+currentRow,
+                Watermark = tamanhoPanel,
+                Width = 100
+            };
+
+            StackPanel quantidadePanel = new StackPanel { Orientation = Orientation.Horizontal };
+            quantidadePanel.Children.Add(new Image { Source = new BitmapImage(new Uri("quantity.png", UriKind.Relative)), Width = 20 });
+            quantidadePanel.Children.Add(new TextBlock { Text = "Quantidade", Margin = new Thickness(4, 0, 0, 0) });
+            Xceed.Wpf.Toolkit.IntegerUpDown quantidade = new Xceed.Wpf.Toolkit.IntegerUpDown
+            {
+                Name = "txtQuantidade"+currentRow,
+                Minimum=1,
+                Watermark = quantidadePanel
+            };
+
+            StackPanel removerPanel = new StackPanel { Orientation = Orientation.Horizontal };
+            removerPanel.Children.Add(new Image { Source = new BitmapImage(new Uri("delete.png", UriKind.Relative)), Width = 20 });
+            removerPanel.Children.Add(new TextBlock { Text = "Remover Item", Margin = new Thickness(4, 0, 0, 0) });
+            Button remover = new Button {
+                Tag=currentRow,
+                Width=120,
+                Content=removerPanel
+            };
             remover.Click += new RoutedEventHandler(Remover_Click);
 
-            Grid.SetRow(produtoGrid, currentRow);
-            Grid.SetColumn(produtoGrid, 1);
+            
+            stackProduto.Children.Add(referencia);
+            stackProduto.Children.Add(cor);
+            stackProduto.Children.Add(tamanho);
+            stackProduto.Children.Add(quantidade);
+            stackProduto.Children.Add(remover);
 
-            Grid.SetColumn(referencia, 0);
-            Grid.SetColumn(pesquisar, 2);
-            Grid.SetColumn(remover, 4);
-
-            produtoGrid.Children.Add(referencia);
-            produtoGrid.Children.Add(pesquisar);
-            produtoGrid.Children.Add(remover);
-
-            grid.RowDefinitions.Add(new RowDefinition());
-            grid.Children.Add(produtoGrid);
+            stack.Children.Add(stackProduto);
 
             currentRow++;
         }
@@ -162,14 +180,13 @@ namespace Trabalho_BD_IHC
         {
             Button senderbtn = (Button)sender;
             int row = Convert.ToInt32(senderbtn.Tag);
-            Console.WriteLine("Row: " + row);
-            Console.WriteLine("Current Row: " + currentRow);
+            
             for (int i = row + 1; i < currentRow; i++)
             {
-                grid.Children.Cast<Grid>().ElementAt(i).Tag = (i - 1).ToString();
-                Grid.SetRow(grid.Children.Cast<Grid>().ElementAt(i), i - 1);
+                Button produtoBtn= (Button)((StackPanel)stack.Children[i]).Children[2];
+                produtoBtn.Tag = i - 1;
             }
-            grid.RowDefinitions.RemoveAt(row);
+            stack.Children.RemoveAt(row);
             currentRow--;
         }
     }
