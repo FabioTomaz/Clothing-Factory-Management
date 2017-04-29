@@ -67,6 +67,12 @@ namespace Trabalho_BD_IHC
                 detalhesMaterial.IsEnabled = true;
             }
         }
+
+        private void Encomenda_Click(object sender, RoutedEventArgs e)
+        {
+            RegistarMaterial page = new RegistarMaterial(dataHandler);
+            NavigationService.Navigate(page);
+        }
     }
 
         

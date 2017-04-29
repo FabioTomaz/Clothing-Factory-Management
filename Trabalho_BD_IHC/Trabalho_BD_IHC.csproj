@@ -83,6 +83,9 @@
     <Compile Include="EditarCliente.xaml.cs">
       <DependentUpon>EditarCliente.xaml</DependentUpon>
     </Compile>
+    <Compile Include="RegistarMaterial.xaml.cs">
+      <DependentUpon>RegistarMaterial.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GestorProducao.cs" />
     <Compile Include="GestorRecursosHumanos.cs" />
     <Compile Include="GestorVendas.cs" />
@@ -118,6 +121,10 @@
     <Page Include="EditarCliente.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RegistarMaterial.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="ListarEmpregados.xaml">
       <SubType>Designer</SubType>
@@ -265,6 +272,25 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="quantity.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Botoes.png" />
+    <Resource Include="elastico.png" />
+    <Resource Include="linha.png" />
+    <Resource Include="mola.png" />
+    <Resource Include="velcro.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Fecho.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="acessorios.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pano.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="fornecedor.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

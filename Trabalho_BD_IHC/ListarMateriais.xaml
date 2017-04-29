@@ -38,7 +38,7 @@
                     <RowDefinition></RowDefinition>
                     <RowDefinition Height="0.3*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Button x:Name="registarMaterial" Content="Encomendar Material" Grid.Row="1" Grid.Column="1"/>
+                <Button x:Name="registarMaterial" Content="Registar Material" Grid.Row="1" Grid.Column="1" Click="Encomenda_Click"/>
                 <Button x:Name="editarMaterial" Content="Registar Material" Grid.Row="3" Grid.Column="1" IsEnabled="False"/>
                 <Button x:Name="removerMaterial" Content="Remover Material" Grid.Row="5" Grid.Column="1" IsEnabled="False"/>
                 <Button x:Name="detalhesMaterial" Content="Ver mais detalhes" Grid.Row="7" Grid.Column="1" IsEnabled="False"/>

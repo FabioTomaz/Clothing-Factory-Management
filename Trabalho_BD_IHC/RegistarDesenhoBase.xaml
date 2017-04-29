@@ -44,10 +44,11 @@
         <GroupBox Header="Criar Novo Desenho Base" Grid.Row="1" Grid.Column="3">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.8*"></ColumnDefinition>
-                    <ColumnDefinition Width="1.9*"></ColumnDefinition>
+                    <ColumnDefinition Width="0.9*"></ColumnDefinition>
                     <ColumnDefinition Width="1*"></ColumnDefinition>
-                    <ColumnDefinition Width="1.6*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+
 
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
@@ -74,7 +75,7 @@
                         <ColumnDefinition Width="0.05*"></ColumnDefinition>
 
                     </Grid.ColumnDefinitions>
-                    <wpfTool:WatermarkTextBox Name="txtNomeDesenhoBase" Grid.Column="0" VerticalAlignment="Center" Grid.ColumnSpan="5" Margin="0,6,10,6">
+                    <wpfTool:WatermarkTextBox Name="txtNomeDesenhoBase" Grid.Column="0" VerticalAlignment="Center" Grid.ColumnSpan="3" Margin="0,6,-62,6">
                         <wpfTool:WatermarkTextBox.Watermark>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="Nome do desenho" Margin="4,0,0,0" />
@@ -82,7 +83,7 @@
                         </wpfTool:WatermarkTextBox.Watermark>
                     </wpfTool:WatermarkTextBox>
                 </Grid>
-                
+
                 <Label Content="Instruções Produção" Grid.Row="3" Grid.RowSpan="2" Height="auto" Grid.Column="0" VerticalAlignment="Center"/>
                 <wpfTool:WatermarkTextBox  Name="txtInstruçoes" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Grid.ColumnSpan="3" Grid.RowSpan="3" Margin="0,7,10,0" Height="69">
                     <wpfTool:WatermarkTextBox.Watermark>
@@ -91,8 +92,16 @@
                         </StackPanel>
                     </wpfTool:WatermarkTextBox.Watermark>
                 </wpfTool:WatermarkTextBox>
-                
-                <Button Grid.Column="1" Grid.Row="11" VerticalAlignment="Center" Grid.ColumnSpan="2" HorizontalAlignment="Center">
+
+                <Grid Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="2" Grid.RowSpan="4" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <Border Width="auto" Height="auto" BorderBrush="Gray" BorderThickness="1">
+                        <Image Width="auto" Height="auto" Name="imgPhoto" Stretch="Uniform" />
+                    </Border>
+                </Grid>
+
+
+
+                <Button Name ="adicionarFoto" Grid.Column="3" Grid.Row="7" Grid.RowSpan="4" VerticalAlignment="Center" Click="btnAdicionarImagem_Click" HorizontalAlignment="Right">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="addPhoto.png" Width="20" />
                         <TextBlock Text="Adicionar Imagem" Margin="4,0,0,0"/>

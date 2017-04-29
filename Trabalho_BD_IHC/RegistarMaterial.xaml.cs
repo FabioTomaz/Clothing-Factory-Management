@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,45 +15,30 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data.SqlClient;
 using System.Windows.Markup;
-using System.Windows.Media.Imaging;
-
 
 namespace Trabalho_BD_IHC
 {
     /// <summary>
     /// Interaction logic for RegistarEncomenda.xaml
     /// </summary>
-    public partial class RegistarDesenhoBase : Page
+    public partial class RegistarMaterial : Page
     {
         private DataHandler dataHandler;
-        private int currentRow = 1;
 
-        public int CurrentRow
-        {
-            get
-            {
-                return currentRow;
-            }
-
-            set
-            {
-                currentRow = value;
-            }
-        }
-
-        public RegistarDesenhoBase(DataHandler dataHandler)
+      
+        public RegistarMaterial(DataHandler dataHandler)
         {
             InitializeComponent();
             this.dataHandler = dataHandler;
         }
-        private void EnviarDesenhoBase(Desenho desenhoBase)
+        private void SubmeterRegistoMaterial(MaterialTextil mat)
         {
 
             if (!dataHandler.verifySGBDConnection())
                 return;
             SqlCommand cmd = new SqlCommand();
 
-            /* cmd.CommandText = "INSERT INTO DESENHO (NOME_DESENHO, DATA_ALTERAÇAO, INSTRUÇÕES_PRODUÇÃO, N_GESTOR_PROD, IMAGEM_DESENHO) " +
+            /* cmd.CommandText = "INSERT INTO CLIENTE (NOME, NIB, NIF, EMAIL, TELEMOVEL, COD_POSTAL, RUA, N_PORTA) " +
                  "VALUES (@NOME, @NIB, @NIF, @EMAIL, @TELEMOVEL, @COD_POSTAL, @RUA, @N_PORTA);";
              cmd.Parameters.Clear();
              cmd.Parameters.AddWithValue("@NOME", cl.Nome);
@@ -83,9 +69,27 @@ namespace Trabalho_BD_IHC
             this.NavigationService.GoBack();
         }
 
+        private void Selection_Changed(object sender, SelectionChangedEventArgs e)
+        {
+            /*if (tipoMaterial.SelectedIndex > 0)
+            {
+                
+                if (tipoMaterial.SelectedValue.ToString().Equals("Acessórios Costura", StringComparison.Ordinal))
+                {
+                    acessorios.Visibility = Visibility.Visible;
+
+                }
+                  else
+                  {
+                      acessorios.Visibility = Visibility.Hidden;
+                  }
+            }*/
+        }
+        
+
         private void confirmar_Click(object sender, RoutedEventArgs e)
         {
-            Desenho desenhoBase = new Desenho();
+            MaterialTextil material = new MaterialTextil();
             try
             {
 
@@ -98,7 +102,7 @@ namespace Trabalho_BD_IHC
 
             try
             {
-                EnviarDesenhoBase(desenhoBase);
+                SubmeterRegistoMaterial(material);
             }
             catch (Exception ex)
             {
@@ -108,17 +112,7 @@ namespace Trabalho_BD_IHC
             this.NavigationService.GoBack();
         }
 
-        private void btnAdicionarImagem_Click(object sender, RoutedEventArgs e)
-        {
-            Microsoft.Win32.OpenFileDialog op = new Microsoft.Win32.OpenFileDialog();
-            op.Title = "Select a picture";
-            op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
-              "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
-              "Portable Network Graphic (*.png)|*.png";
-            if (op.ShowDialog() == true)
-            {
-                imgPhoto.Source = new BitmapImage(new Uri(op.FileName));
-            }
-        }
+       
     }
 }
+
