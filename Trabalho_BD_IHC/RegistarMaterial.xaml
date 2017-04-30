@@ -48,7 +48,7 @@
                     <ColumnDefinition Width="2*"></ColumnDefinition>
                     <ColumnDefinition Width="1*"></ColumnDefinition>
                     <ColumnDefinition Width="2*"></ColumnDefinition>
-                    
+
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="0.1*"></RowDefinition>
@@ -93,13 +93,13 @@
                         </ComboBoxItem>
                     </ComboBox>
                 </Grid>
-                <Label  Content="Acessórios: " Grid.Row="1" Grid.Column="2" VerticalAlignment="Center"/>
+                <Label  x:Name="acessoriosLabel" Visibility="Hidden" Content="Acessórios: " Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                 <Grid Grid.Row="1" Grid.Column="3">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1.4*"></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <ComboBox Name="acessorios" Grid.Column="0"  Grid.ColumnSpan="2" VerticalAlignment="Center">
+                    <ComboBox Visibility="Hidden" Name="acessorios" Grid.Column="0"  Grid.ColumnSpan="2" VerticalAlignment="Center" SelectionChanged="Selection_Changed">
                         <ComboBoxItem IsSelected="True">
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="Fecho.png" Width="22" />
@@ -158,9 +158,147 @@
                         </StackPanel>
                     </wpfTool:WatermarkTextBox.Watermark>
                 </wpfTool:WatermarkTextBox>
-                <Label Grid.Column="2" Grid.Row="5" HorizontalAlignment="Right" VerticalAlignment="Center">Cor: </Label>
+                <Label Grid.Column="2" Grid.Row="5" HorizontalAlignment="Right" VerticalAlignment="Center">Cor:</Label>
                 <wpfTool:ColorPicker VerticalAlignment="Center" Grid.Row="5" Grid.Column="3"></wpfTool:ColorPicker>
-                
+                <Grid Name="pano" Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="4" Grid.RowSpan="4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                        <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                        <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.8*"></RowDefinition>
+                        <RowDefinition Height="1*"></RowDefinition>
+                        <RowDefinition Height="1*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Content="Características do Pano"  HorizontalAlignment="Center"  VerticalAlignment="Center"></Label>
+                    <Label Grid.Row="1" Grid.Column="0" Content="Tipo de Pano: "  HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
+                    <TextBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Width="150"></TextBox>
+                    <Label Grid.Row="1" Grid.Column="2" Content="Gramagem (g/m2): "  VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+                    <wpfTool:IntegerUpDown Name="txtGramagem" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="1" Grid.Column="3" Maximum="10000" Minimum="0" Value="0" FormatString="D"  Width="80"></wpfTool:IntegerUpDown>
+                    <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Content="Preço por m2" HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
+                    <wpfTool:IntegerUpDown Name="txtPreçoM2" VerticalAlignment="Center" Grid.Row="2" Grid.Column="2" Minimum="0" Value="0"  FormatString="F"  Width="80" HorizontalAlignment="Left"></wpfTool:IntegerUpDown>
+                    <Label Grid.Row="2" Grid.Column="3" Content="€/m2" HorizontalAlignment="Left" VerticalAlignment="Center"></Label>
+
+                </Grid>
+                <Grid Visibility="Hidden" Name="linha" Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="4" Grid.RowSpan="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                        <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                        <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.8*"></RowDefinition>
+                        <RowDefinition Height="1*"></RowDefinition>
+                        <RowDefinition Height="1*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Content="Características da Linha"  HorizontalAlignment="Center"  VerticalAlignment="Center"></Label>
+                    <Label Grid.Row="1" Grid.Column="0" Content="Grossura (cm): " Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Center"></Label>
+                    <wpfTool:IntegerUpDown Name="txtGrossura" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="2" Maximum="10000" Minimum="0" Value="0" FormatString="D"  Width="80"></wpfTool:IntegerUpDown>
+                    <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Content="Preço (€/100m2): " HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+                    <wpfTool:IntegerUpDown Name="txtPreço100M" VerticalAlignment="Center" Grid.Row="2" Grid.Column="2" Minimum="0" Value="0"  FormatString="F"  Width="80" HorizontalAlignment="Center"></wpfTool:IntegerUpDown>
+                </Grid>
+                <Grid Visibility="Hidden" Name="fecho" Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="4" Grid.RowSpan="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1.2*"></ColumnDefinition>
+                        <ColumnDefinition Width="1.4*"></ColumnDefinition>
+                        <ColumnDefinition Width="1.2*"></ColumnDefinition>
+                        <ColumnDefinition Width="1.4*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.8*"></RowDefinition>
+                        <RowDefinition Height="1*"></RowDefinition>
+                        <RowDefinition Height="1*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Content="Características do Fecho"  HorizontalAlignment="Center"  VerticalAlignment="Center"></Label>
+                    <Label Grid.Row="1" Grid.Column="0" Content="Comprimento (cm): " HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+                    <wpfTool:IntegerUpDown Name="txtComprimentoFecho" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" Maximum="1000" Minimum="0" Value="0" FormatString="F"  Width="100"></wpfTool:IntegerUpDown>
+                    <Label Grid.Row="1" Grid.Column="2" Content="Tamanho do Dente (cm): " Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+                    <wpfTool:IntegerUpDown Name="txtTamanhoDente" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="3" Maximum="1000" Minimum="0" Value="0" FormatString="F"  Width="100"></wpfTool:IntegerUpDown>
+
+                    <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Content="Preço/unidade (€): " HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+                    <wpfTool:IntegerUpDown Name="txtPrecoUnidadeFecho" VerticalAlignment="Center" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Width="100" Minimum="0" Value="0"  FormatString="F" HorizontalAlignment="Left"></wpfTool:IntegerUpDown>
+                </Grid>
+                <Grid Visibility="Hidden" Name="mola" Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="4" Grid.RowSpan="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1.2*"></ColumnDefinition>
+                        <ColumnDefinition Width="1.4*"></ColumnDefinition>
+                        <ColumnDefinition Width="1.2*"></ColumnDefinition>
+                        <ColumnDefinition Width="1.4*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.8*"></RowDefinition>
+                        <RowDefinition Height="1*"></RowDefinition>
+                        <RowDefinition Height="1*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Content="Características da Mola"  HorizontalAlignment="Center"  VerticalAlignment="Center"></Label>
+                    <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Content="Diâmetro (cm): " HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+                    <wpfTool:IntegerUpDown Name="txtDiametroMola" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="1" Grid.Column="2" Maximum="1000" Minimum="0" Value="0" FormatString="F"  Width="100"></wpfTool:IntegerUpDown>
+                    <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Content="Preço/unidade (€): " HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+                    <wpfTool:IntegerUpDown Name="txtPrecoUnidadeMola" VerticalAlignment="Center" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Width="100" Minimum="0" Value="0"  FormatString="F" HorizontalAlignment="Left"></wpfTool:IntegerUpDown>
+                </Grid>
+                <Grid Visibility="Hidden" Name="botao" Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="4" Grid.RowSpan="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1.2*"></ColumnDefinition>
+                        <ColumnDefinition Width="1.4*"></ColumnDefinition>
+                        <ColumnDefinition Width="1.2*"></ColumnDefinition>
+                        <ColumnDefinition Width="1.4*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.8*"></RowDefinition>
+                        <RowDefinition Height="1*"></RowDefinition>
+                        <RowDefinition Height="1*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Content="Características do Botão"  HorizontalAlignment="Center"  VerticalAlignment="Center"></Label>
+                    <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Content="Diâmetro (cm): " HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+                    <wpfTool:IntegerUpDown Name="txtDiametroBotão" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Maximum="1000" Minimum="0" Value="0" FormatString="F"  Width="100"></wpfTool:IntegerUpDown>
+                    <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Content="Preço/unidade (€): " HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+                    <wpfTool:IntegerUpDown Name="txtPrecoUnidadeBotao" VerticalAlignment="Center" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Width="100" Minimum="0" Value="0"  FormatString="F" HorizontalAlignment="Left"></wpfTool:IntegerUpDown>
+                </Grid>
+                <Grid Visibility="Hidden" Name="elastico" Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="4" Grid.RowSpan="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1.2*"></ColumnDefinition>
+                        <ColumnDefinition Width="1.4*"></ColumnDefinition>
+                        <ColumnDefinition Width="1.2*"></ColumnDefinition>
+                        <ColumnDefinition Width="1.4*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.8*"></RowDefinition>
+                        <RowDefinition Height="1*"></RowDefinition>
+                        <RowDefinition Height="1*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Content="Características do Elástico"  HorizontalAlignment="Center"  VerticalAlignment="Center"></Label>
+                    <Label Grid.Row="1" Grid.Column="0" Content="Comprimento (cm): " HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+                    <wpfTool:IntegerUpDown Name="txtComprimentoElastico" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" Maximum="1000" Minimum="0" Value="0" FormatString="F"  Width="100"></wpfTool:IntegerUpDown>
+                    <Label Grid.Row="1" Grid.Column="2" Content="Largura (cm): " Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+                    <wpfTool:IntegerUpDown Name="txtLarguraElastico" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="3" Maximum="1000" Minimum="0" Value="0" FormatString="F"  Width="100"></wpfTool:IntegerUpDown>
+
+                    <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Content="Preço/unidade (€): " HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+                    <wpfTool:IntegerUpDown Name="txtPrecoUnidadeElastico" VerticalAlignment="Center" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Width="100" Minimum="0" Value="0"  FormatString="F" HorizontalAlignment="Left"></wpfTool:IntegerUpDown>
+                </Grid>
+                <Grid Visibility="Hidden" Name="fitaVelcro" Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="4" Grid.RowSpan="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1.2*"></ColumnDefinition>
+                        <ColumnDefinition Width="1.4*"></ColumnDefinition>
+                        <ColumnDefinition Width="1.2*"></ColumnDefinition>
+                        <ColumnDefinition Width="1.4*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.8*"></RowDefinition>
+                        <RowDefinition Height="1*"></RowDefinition>
+                        <RowDefinition Height="1*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Content="Características da Fita de Velcro"  HorizontalAlignment="Center"  VerticalAlignment="Center"></Label>
+                    <Label Grid.Row="1" Grid.Column="0" Content="Comprimento (cm): " HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+                    <wpfTool:IntegerUpDown Name="txtComprimentoFita" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" Maximum="1000" Minimum="0" Value="0" FormatString="F"  Width="100"></wpfTool:IntegerUpDown>
+                    <Label Grid.Row="1" Grid.Column="2" Content="Largura (cm): " Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+                    <wpfTool:IntegerUpDown Name="txtLarguraFita" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="3" Maximum="1000" Minimum="0" Value="0" FormatString="F"  Width="100"></wpfTool:IntegerUpDown>
+
+                    <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Content="Preço/unidade (€): " HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+                    <wpfTool:IntegerUpDown Name="txtPrecoUnidadeFita" VerticalAlignment="Center" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Width="100" Minimum="0" Value="0"  FormatString="F" HorizontalAlignment="Left"></wpfTool:IntegerUpDown>
+                </Grid>
             </Grid>
         </GroupBox>
     </Grid>

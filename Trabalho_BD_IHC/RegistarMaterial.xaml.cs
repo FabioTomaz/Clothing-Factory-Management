@@ -25,7 +25,7 @@ namespace Trabalho_BD_IHC
     {
         private DataHandler dataHandler;
 
-      
+
         public RegistarMaterial(DataHandler dataHandler)
         {
             InitializeComponent();
@@ -64,28 +64,103 @@ namespace Trabalho_BD_IHC
              }*/
         }
 
-        private void cancelar_Click(object sender, RoutedEventArgs e)
-        {
-            this.NavigationService.GoBack();
-        }
+
 
         private void Selection_Changed(object sender, SelectionChangedEventArgs e)
         {
-            /*if (tipoMaterial.SelectedIndex > 0)
-            {
-                
-                if (tipoMaterial.SelectedValue.ToString().Equals("Acessórios Costura", StringComparison.Ordinal))
-                {
-                    acessorios.Visibility = Visibility.Visible;
 
+            if (IsLoaded)
+            {
+                ComboBox caller = (ComboBox)sender;
+                if (caller.Name.ToString().Equals("tipoMaterial", StringComparison.Ordinal))
+                {
+                    ComboBoxItem cbo = (ComboBoxItem)tipoMaterial.SelectedItem;
+                    StackPanel stack = (StackPanel)cbo.Content;
+                   
+                    if ((((TextBlock)stack.Children[1]).Text).Equals("Acessórios Costura", StringComparison.Ordinal))
+                    {
+                        acessoriosLabel.Visibility = Visibility.Visible;
+                        acessorios.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        acessoriosLabel.Visibility = Visibility.Hidden;
+                        acessorios.Visibility = Visibility.Hidden;
+                    }
+                    if ((((TextBlock)stack.Children[1]).Text).Equals("Pano", StringComparison.Ordinal))
+                    {
+                        pano.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        pano.Visibility = Visibility.Hidden;
+                    }
+                    if ((((TextBlock)stack.Children[1]).Text).Equals("Linha", StringComparison.Ordinal))
+                    {
+                        linha.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        linha.Visibility = Visibility.Hidden;
+                    }
+                    if ((((TextBlock)stack.Children[1]).Text).Equals("Acessórios Costura", StringComparison.Ordinal))
+                    {
+                        fecho.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        fecho.Visibility = Visibility.Hidden;
+                    }
                 }
-                  else
-                  {
-                      acessorios.Visibility = Visibility.Hidden;
-                  }
-            }*/
+                else if (caller.Name.ToString().Equals("acessorios", StringComparison.Ordinal))
+                {
+                    ComboBoxItem cboAc = (ComboBoxItem)acessorios.SelectedItem;
+                    StackPanel stackAc = (StackPanel)cboAc.Content;
+                    if ((((TextBlock)stackAc.Children[1]).Text).Equals("Fecho", StringComparison.Ordinal))
+                    {
+                        fecho.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        fecho.Visibility = Visibility.Hidden;
+                    }
+
+                    if ((((TextBlock)stackAc.Children[1]).Text).Equals("Mola", StringComparison.Ordinal))
+                    {
+                        mola.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        mola.Visibility = Visibility.Hidden;
+                    }
+                    if ((((TextBlock)stackAc.Children[1]).Text).Equals("Botão", StringComparison.Ordinal))
+                    {
+                        botao.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        botao.Visibility = Visibility.Hidden;
+                    }
+                    if ((((TextBlock)stackAc.Children[1]).Text).Equals("Elástico", StringComparison.Ordinal))
+                    {
+                        elastico.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        elastico.Visibility = Visibility.Hidden;
+                    }
+                    if ((((TextBlock)stackAc.Children[1]).Text).Equals("Fita de velcro", StringComparison.Ordinal))
+                    {
+                        fitaVelcro.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        fitaVelcro.Visibility = Visibility.Hidden;
+                    }
+                }
+            }
         }
-        
+
 
         private void confirmar_Click(object sender, RoutedEventArgs e)
         {
@@ -112,7 +187,11 @@ namespace Trabalho_BD_IHC
             this.NavigationService.GoBack();
         }
 
-       
+        private void cancelar_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.GoBack();
+        }
+
     }
 }
 
