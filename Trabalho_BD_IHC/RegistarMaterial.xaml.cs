@@ -71,51 +71,33 @@ namespace Trabalho_BD_IHC
 
             if (IsLoaded)
             {
-                ComboBox caller = (ComboBox)sender;
-                if (caller.Name.ToString().Equals("tipoMaterial", StringComparison.Ordinal))
+
+                ComboBoxItem cbo = (ComboBoxItem)tipoMaterial.SelectedItem;
+                StackPanel stack = (StackPanel)cbo.Content;
+                ComboBoxItem cboAc = (ComboBoxItem)acessorios.SelectedItem;
+                StackPanel stackAc = (StackPanel)cboAc.Content;
+
+                if ((((TextBlock)stack.Children[1]).Text).Equals("Pano", StringComparison.Ordinal))
                 {
-                    ComboBoxItem cbo = (ComboBoxItem)tipoMaterial.SelectedItem;
-                    StackPanel stack = (StackPanel)cbo.Content;
-                   
-                    if ((((TextBlock)stack.Children[1]).Text).Equals("Acessórios Costura", StringComparison.Ordinal))
-                    {
-                        acessoriosLabel.Visibility = Visibility.Visible;
-                        acessorios.Visibility = Visibility.Visible;
-                    }
-                    else
-                    {
-                        acessoriosLabel.Visibility = Visibility.Hidden;
-                        acessorios.Visibility = Visibility.Hidden;
-                    }
-                    if ((((TextBlock)stack.Children[1]).Text).Equals("Pano", StringComparison.Ordinal))
-                    {
-                        pano.Visibility = Visibility.Visible;
-                    }
-                    else
-                    {
-                        pano.Visibility = Visibility.Hidden;
-                    }
-                    if ((((TextBlock)stack.Children[1]).Text).Equals("Linha", StringComparison.Ordinal))
-                    {
-                        linha.Visibility = Visibility.Visible;
-                    }
-                    else
-                    {
-                        linha.Visibility = Visibility.Hidden;
-                    }
-                    if ((((TextBlock)stack.Children[1]).Text).Equals("Acessórios Costura", StringComparison.Ordinal))
-                    {
-                        fecho.Visibility = Visibility.Visible;
-                    }
-                    else
-                    {
-                        fecho.Visibility = Visibility.Hidden;
-                    }
+                    pano.Visibility = Visibility.Visible;
                 }
-                else if (caller.Name.ToString().Equals("acessorios", StringComparison.Ordinal))
+                else
                 {
-                    ComboBoxItem cboAc = (ComboBoxItem)acessorios.SelectedItem;
-                    StackPanel stackAc = (StackPanel)cboAc.Content;
+                    pano.Visibility = Visibility.Hidden;
+                }
+                if ((((TextBlock)stack.Children[1]).Text).Equals("Linha", StringComparison.Ordinal))
+                {
+                    linha.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    linha.Visibility = Visibility.Hidden;
+                }
+                if ((((TextBlock)stack.Children[1]).Text).Equals("Acessórios Costura", StringComparison.Ordinal))
+                {
+                    acessoriosLabel.Visibility = Visibility.Visible;
+                    acessorios.Visibility = Visibility.Visible;
+
                     if ((((TextBlock)stackAc.Children[1]).Text).Equals("Fecho", StringComparison.Ordinal))
                     {
                         fecho.Visibility = Visibility.Visible;
@@ -157,6 +139,16 @@ namespace Trabalho_BD_IHC
                     {
                         fitaVelcro.Visibility = Visibility.Hidden;
                     }
+                }
+                else
+                {
+                    acessoriosLabel.Visibility = Visibility.Hidden;
+                    acessorios.Visibility = Visibility.Hidden;
+                    fecho.Visibility = Visibility.Hidden;
+                    mola.Visibility = Visibility.Hidden;
+                    botao.Visibility = Visibility.Hidden;
+                    elastico.Visibility = Visibility.Hidden;
+                    fitaVelcro.Visibility = Visibility.Hidden;
                 }
             }
         }
