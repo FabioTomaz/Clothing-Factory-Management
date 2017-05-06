@@ -6,15 +6,22 @@ using System.Threading.Tasks;
 
 namespace Trabalho_BD_IHC
 {
+
     class Utilizador
     {
         private int nFuncionario;
         private String password;
         private String nome;
+        private String email;
+        private String telemovel;
+        private String codigoPostal;
+        private String rua;
+        private int nPorta;
         private double salario;
-        private String horaEntrada;
-        private String horaSaida;
+        private DateTime horaEntrada;
+        private DateTime horaSaida;
         private filial filial;
+        private String tipoUser;
 
         public int NFuncionario
         {
@@ -55,6 +62,71 @@ namespace Trabalho_BD_IHC
             }
         }
 
+        public string Email
+        {
+            get
+            {
+                return email;
+            }
+
+            set
+            {
+                email = value;
+            }
+        }
+
+        public string Telemovel
+        {
+            get
+            {
+                return telemovel;
+            }
+
+            set
+            {
+                telemovel = value;
+            }
+        }
+
+        public string CodigoPostal
+        {
+            get
+            {
+                return codigoPostal;
+            }
+
+            set
+            {
+                codigoPostal = value;
+            }
+        }
+
+        public string Rua
+        {
+            get
+            {
+                return rua;
+            }
+
+            set
+            {
+                rua = value;
+            }
+        }
+
+        public int NPorta
+        {
+            get
+            {
+                return nPorta;
+            }
+
+            set
+            {
+                nPorta = value;
+            }
+        }
+
         public double Salario
         {
             get
@@ -68,7 +140,7 @@ namespace Trabalho_BD_IHC
             }
         }
 
-        public string HoraEntrada
+        public DateTime HoraEntrada
         {
             get
             {
@@ -81,7 +153,7 @@ namespace Trabalho_BD_IHC
             }
         }
 
-        public string HoraSaida
+        public DateTime HoraSaida
         {
             get
             {
@@ -94,7 +166,7 @@ namespace Trabalho_BD_IHC
             }
         }
 
-        public filial Filial
+        internal filial Filial
         {
             get
             {
@@ -104,6 +176,19 @@ namespace Trabalho_BD_IHC
             set
             {
                 filial = value;
+            }
+        }
+
+        public String TipoUser
+        {
+            get
+            {
+                return tipoUser;
+            }
+
+            set
+            {
+                tipoUser = value;
             }
         }
     }

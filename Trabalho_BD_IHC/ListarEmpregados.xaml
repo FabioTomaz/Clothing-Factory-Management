@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Trabalho_BD_IHC"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
-      Title="ListarEmpregados">
+      Title="ListarEmpregados" Loaded="Page_Loaded">
 
     <Grid Background="White">
         <Grid.ColumnDefinitions>
@@ -37,9 +37,9 @@
                     <RowDefinition></RowDefinition>
                     <RowDefinition Height="0.3*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Button x:Name="registarEmpregado" Content="Registar Empregado" Grid.Row="1" Grid.Column="1"/>
+                <Button x:Name="registarEmpregado" Content="Registar Empregado" Grid.Row="1" Grid.Column="1" Click="registarEmpregado_Click"/>
                 <Button x:Name="editarEmpregado" Content="Editar Empregado" Grid.Row="3" Grid.Column="1" IsEnabled="False"/>
-                <Button x:Name="removerEmpregado" Content="Remover Empregado" Grid.Row="5" Grid.Column="1" IsEnabled="False"/>
+                <Button x:Name="removerEmpregado" Content="Remover Empregado" Grid.Row="5" Grid.Column="1" IsEnabled="False" Click="removerEmpregado_Click"/>
             </Grid>
         </GroupBox>
         <Grid Grid.Column="3" Grid.Row="1">
@@ -47,13 +47,14 @@
                 <RowDefinition Height="0.1*"></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            <ListView Name="clientes" Grid.Row="1">
+            <ListView Name="empregados" Grid.Row="1" SelectionChanged="empregados_SelectionChanged">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Numero de Empregado" DisplayMemberBinding="{Binding Nif}" />
-                        <GridViewColumn Header="Nome"  DisplayMemberBinding="{Binding Nome}" />
-                        <GridViewColumn Header="e-mail" DisplayMemberBinding="{Binding Email}" />
-                        <GridViewColumn Header="Telemovel" DisplayMemberBinding="{Binding Telemovel}" />
+                        <GridViewColumn Header="Função" DisplayMemberBinding="{Binding TipoUser}" />
+                        <GridViewColumn Header="Nº Empregado"  DisplayMemberBinding="{Binding NFuncionario}" />
+                        <GridViewColumn Header="Nome" DisplayMemberBinding="{Binding Nome}" />
+                        <GridViewColumn Header="E-mail" DisplayMemberBinding="{Binding Email}" />
+                        <GridViewColumn Header="Telefone" DisplayMemberBinding="{Binding Telemovel}" />
                     </GridView>
                 </ListView.View>
             </ListView>

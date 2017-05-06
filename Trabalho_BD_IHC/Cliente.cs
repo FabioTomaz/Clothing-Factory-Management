@@ -15,6 +15,7 @@ namespace Trabalho_BD_IHC
         private String _email;
         private String _codigoPostal;
         private String _rua;
+        private int _nPorta;
         private int _nCasa;
         private String _telemovel;
 
@@ -123,4 +124,3 @@ namespace Trabalho_BD_IHC
         }
     }
 }
-      
