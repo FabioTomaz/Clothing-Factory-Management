@@ -68,90 +68,31 @@ namespace Trabalho_BD_IHC
 
         private void Selection_Changed(object sender, SelectionChangedEventArgs e)
         {
+            if (!IsLoaded) return;
 
-            if (IsLoaded)
+            ComboBoxItem cbo = (ComboBoxItem)tipoMaterial.SelectedItem;
+
+            hideAll();
+            if (cbo.Name.Equals("Acessorios", StringComparison.Ordinal))
             {
-
-                ComboBoxItem cbo = (ComboBoxItem)tipoMaterial.SelectedItem;
-                StackPanel stack = (StackPanel)cbo.Content;
-                ComboBoxItem cboAc = (ComboBoxItem)acessorios.SelectedItem;
-                StackPanel stackAc = (StackPanel)cboAc.Content;
-
-                if ((((TextBlock)stack.Children[1]).Text).Equals("Pano", StringComparison.Ordinal))
+                acessorios.Visibility = Visibility.Visible;
+                acessoriosLabel.Visibility = Visibility.Visible;
+                fecho.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                acessorios.Visibility = Visibility.Hidden;
+                acessoriosLabel.Visibility = Visibility.Hidden;
+                if (cbo.Name.Equals("Pano", StringComparison.Ordinal))
                 {
                     pano.Visibility = Visibility.Visible;
                 }
-                else
-                {
-                    pano.Visibility = Visibility.Hidden;
-                }
-                if ((((TextBlock)stack.Children[1]).Text).Equals("Linha", StringComparison.Ordinal))
-                {
+                else if (cbo.Name.Equals("Linha", StringComparison.Ordinal)) {
                     linha.Visibility = Visibility.Visible;
-                }
-                else
-                {
-                    linha.Visibility = Visibility.Hidden;
-                }
-                if ((((TextBlock)stack.Children[1]).Text).Equals("Acessórios Costura", StringComparison.Ordinal))
-                {
-                    acessoriosLabel.Visibility = Visibility.Visible;
-                    acessorios.Visibility = Visibility.Visible;
-
-                    if ((((TextBlock)stackAc.Children[1]).Text).Equals("Fecho", StringComparison.Ordinal))
-                    {
-                        fecho.Visibility = Visibility.Visible;
-                    }
-                    else
-                    {
-                        fecho.Visibility = Visibility.Hidden;
-                    }
-
-                    if ((((TextBlock)stackAc.Children[1]).Text).Equals("Mola", StringComparison.Ordinal))
-                    {
-                        mola.Visibility = Visibility.Visible;
-                    }
-                    else
-                    {
-                        mola.Visibility = Visibility.Hidden;
-                    }
-                    if ((((TextBlock)stackAc.Children[1]).Text).Equals("Botão", StringComparison.Ordinal))
-                    {
-                        botao.Visibility = Visibility.Visible;
-                    }
-                    else
-                    {
-                        botao.Visibility = Visibility.Hidden;
-                    }
-                    if ((((TextBlock)stackAc.Children[1]).Text).Equals("Elástico", StringComparison.Ordinal))
-                    {
-                        elastico.Visibility = Visibility.Visible;
-                    }
-                    else
-                    {
-                        elastico.Visibility = Visibility.Hidden;
-                    }
-                    if ((((TextBlock)stackAc.Children[1]).Text).Equals("Fita de velcro", StringComparison.Ordinal))
-                    {
-                        fitaVelcro.Visibility = Visibility.Visible;
-                    }
-                    else
-                    {
-                        fitaVelcro.Visibility = Visibility.Hidden;
-                    }
-                }
-                else
-                {
-                    acessoriosLabel.Visibility = Visibility.Hidden;
-                    acessorios.Visibility = Visibility.Hidden;
-                    fecho.Visibility = Visibility.Hidden;
-                    mola.Visibility = Visibility.Hidden;
-                    botao.Visibility = Visibility.Hidden;
-                    elastico.Visibility = Visibility.Hidden;
-                    fitaVelcro.Visibility = Visibility.Hidden;
                 }
             }
         }
+    
 
 
         private void confirmar_Click(object sender, RoutedEventArgs e)
@@ -184,6 +125,45 @@ namespace Trabalho_BD_IHC
             this.NavigationService.GoBack();
         }
 
+        private void acessorios_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (!IsLoaded) return;
+
+            hideAll();
+
+            ComboBoxItem cbo = (ComboBoxItem)acessorios.SelectedItem;
+
+            if (cbo.Name.Equals("Fecho", StringComparison.Ordinal))
+            {
+                fecho.Visibility = Visibility.Visible;
+            }
+            else if (cbo.Name.Equals("Elastico", StringComparison.Ordinal))
+            {
+                elastico.Visibility = Visibility.Visible;
+            }
+            else if (cbo.Name.Equals("FitaVelcro", StringComparison.Ordinal))
+            {
+                fitaVelcro.Visibility = Visibility.Visible;
+            }
+            else if (cbo.Name.Equals("Mola", StringComparison.Ordinal))
+            {
+                mola.Visibility = Visibility.Visible;
+            }
+            else if (cbo.Name.Equals("Botao", StringComparison.Ordinal))
+            {
+                botao.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void hideAll() {
+            pano.Visibility = Visibility.Hidden;
+            linha.Visibility = Visibility.Hidden;
+            mola.Visibility = Visibility.Hidden;
+            fecho.Visibility = Visibility.Hidden;
+            botao.Visibility = Visibility.Hidden;
+            elastico.Visibility = Visibility.Hidden;
+            fitaVelcro.Visibility = Visibility.Hidden;
+        }
     }
 }
 

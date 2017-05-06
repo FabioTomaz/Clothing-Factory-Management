@@ -120,3 +120,5 @@ C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\RegistarDesenhoBase
 C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\RegistarDesenhoBase.baml
 C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\obj\Debug\RegistarMaterial.g.cs
 C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\obj\Debug\RegistarMaterial.baml
+C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\RegistarMaterial.g.cs
+C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\RegistarMaterial.baml

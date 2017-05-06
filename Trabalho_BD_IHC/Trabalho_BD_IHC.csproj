@@ -274,14 +274,9 @@
     <Resource Include="quantity.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Botoes.png" />
-    <Resource Include="elastico.png" />
     <Resource Include="linha.png" />
     <Resource Include="mola.png" />
     <Resource Include="velcro.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Fecho.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="acessorios.png" />
@@ -291,6 +286,18 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="fornecedor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="botao.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="elastico.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="outro.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="fecho.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
