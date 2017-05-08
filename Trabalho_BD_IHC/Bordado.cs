@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Trabalho_BD_IHC
 {
-    class Bordado
+    public class Bordado
     {
         private String qualidade;
     }

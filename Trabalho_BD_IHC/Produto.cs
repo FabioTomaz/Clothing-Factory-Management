@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Trabalho_BD_IHC
 {
-    class Produto
+    public class Produto
     {
         private int referencia;
         private String nome;

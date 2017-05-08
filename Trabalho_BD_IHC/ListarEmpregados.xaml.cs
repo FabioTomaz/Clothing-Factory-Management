@@ -136,5 +136,11 @@ namespace Trabalho_BD_IHC
             RegistarEmpregado page = new RegistarEmpregado(dataHandler);
             this.NavigationService.Navigate(page);
         }
+        private void empregado_DoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            Utilizador user = (Utilizador)empregados.SelectedItem;
+            InformaçãoEmpregado page = new InformaçãoEmpregado(dataHandler, user);
+            this.NavigationService.Navigate(page);
+        }
     }
 }

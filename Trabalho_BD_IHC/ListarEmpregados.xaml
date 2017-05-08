@@ -19,6 +19,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="0.05*"/>
             <RowDefinition />
+            <RowDefinition />
             <RowDefinition Height="0.1*"/>
         </Grid.RowDefinitions>
         <GroupBox Header="Operações" Grid.Column="1" Grid.Row="1">
@@ -42,12 +43,20 @@
                 <Button x:Name="removerEmpregado" Content="Remover Empregado" Grid.Row="5" Grid.Column="1" IsEnabled="False" Click="removerEmpregado_Click"/>
             </Grid>
         </GroupBox>
-        <Grid Grid.Column="3" Grid.Row="1">
+        <Grid Grid.Row="2" Grid.Column="1">
+            <Label Grid.Row="2" Grid.Column="1" Content="Clique duas vezes num funcionário para ver mais informações sobre ele." ></Label>
+        </Grid>
+        <Grid Grid.Column="3" Grid.Row="1" Grid.RowSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.1*"></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            <ListView Name="empregados" Grid.Row="1" SelectionChanged="empregados_SelectionChanged">
+            <Grid.Resources>
+                <Style x:Key="informationStyle" TargetType="{x:Type ListViewItem}">
+                    <EventSetter Event='MouseDoubleClick' Handler='empregado_DoubleClick'/>
+                </Style>
+            </Grid.Resources>
+            <ListView  Name="empregados" Grid.Row="1" SelectionChanged="empregados_SelectionChanged" ItemContainerStyle="{StaticResource informationStyle}">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Função" DisplayMemberBinding="{Binding TipoUser}" />

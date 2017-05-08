@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Trabalho_BD_IHC
 {
-    class Etiqueta
+    public class Etiqueta
     {
         private Desenho desenho;
         private String paisFabrico;

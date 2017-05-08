@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Trabalho_BD_IHC
 {
-    class filial
+    public class filial
     {
         private int nFilial;
         private int fax;

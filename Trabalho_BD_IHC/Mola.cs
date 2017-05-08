@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Trabalho_BD_IHC
 {
-    class Mola : AcessoriosCostura
+    public class Mola : AcessoriosCostura
     {
         private double diametro;
 

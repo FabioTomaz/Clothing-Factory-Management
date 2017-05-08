@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Trabalho_BD_IHC
 {
-    class AcessoriosCostura : MaterialTextil
+    public class AcessoriosCostura : MaterialTextil
     {
         private double precoUnidade;
         private int quantidadeArmazem;

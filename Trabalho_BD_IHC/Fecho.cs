@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Trabalho_BD_IHC
 {
-    class Fecho : AcessoriosCostura
+   public class Fecho : AcessoriosCostura
     {
         private double tamanhoDente;
         private double comprimento;

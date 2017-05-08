@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Trabalho_BD_IHC
 {
 
-    class Utilizador
+    public class Utilizador
     {
         private int nFuncionario;
         private String password;
@@ -166,7 +166,7 @@ namespace Trabalho_BD_IHC
             }
         }
 
-        internal filial Filial
+        public filial Filial
         {
             get
             {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Trabalho_BD_IHC
 {
-    class GestorVendas : Utilizador
+    public class GestorVendas : Utilizador
     {
         private Utilizador nFuncionario_vendas;
 

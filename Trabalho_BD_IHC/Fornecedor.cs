@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Trabalho_BD_IHC
 {
-    class Fornecedor
+    public class Fornecedor
     {
         private int NIF;
         private String nome;

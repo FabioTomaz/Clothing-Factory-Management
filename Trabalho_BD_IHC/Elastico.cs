@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Trabalho_BD_IHC
 {
-    class Elastico : AcessoriosCostura
+    public class Elastico : AcessoriosCostura
     {
         private double largura;
         private double comprimento;

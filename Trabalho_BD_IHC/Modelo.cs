@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Trabalho_BD_IHC
 {
-    class Modelo
+    public class Modelo
     {
         private int nModelo;
         private Desenho desenho;

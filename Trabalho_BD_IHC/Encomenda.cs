@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Trabalho_BD_IHC
 {
-    class Encomenda
+    public class Encomenda
     {
         private Cliente cliente;
         private int nEncomenda;

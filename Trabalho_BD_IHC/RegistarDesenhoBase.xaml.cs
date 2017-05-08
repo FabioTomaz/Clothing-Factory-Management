@@ -14,7 +14,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data.SqlClient;
 using System.Windows.Markup;
-using System.Windows.Media.Imaging;
 
 
 namespace Trabalho_BD_IHC
