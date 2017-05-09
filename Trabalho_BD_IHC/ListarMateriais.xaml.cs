@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data.SqlClient;
+using System.Collections.ObjectModel;
 
 namespace Trabalho_BD_IHC
 {
@@ -37,7 +38,7 @@ namespace Trabalho_BD_IHC
             if (!dataHandler.verifySGBDConnection()) {
                 MessageBoxResult result = MessageBox.Show("A conexão à base de dados é instável ou inexistente. Por favor tente mais tarde", "Erro de Base de Dados", MessageBoxButton.OK, MessageBoxImage.Warning);
             } else {
-                List<MaterialTextil> materiaisTexteis = new List<MaterialTextil>();
+                ObservableCollection<MaterialTextil> materiaisTexteis = new ObservableCollection<MaterialTextil>();
                 SqlCommand cmd = new SqlCommand("SELECT * FROM MATERIAIS_TÊXTEIS", dataHandler.Cn);
                 SqlDataReader reader = cmd.ExecuteReader();     
                 while (reader.Read())
@@ -74,7 +75,7 @@ namespace Trabalho_BD_IHC
             NavigationService.Navigate(page);
         }
 
-        private void setMaterialsTypes(List<MaterialTextil> materiaisTexteis)
+        private void setMaterialsTypes(ObservableCollection<MaterialTextil> materiaisTexteis)
         {
             dataHandler.verifySGBDConnection();
 
@@ -190,12 +191,43 @@ namespace Trabalho_BD_IHC
 
         private void removerMaterial_Click(object sender, RoutedEventArgs e)
         {
+            int listViewIndex = materiais.SelectedIndex;
+
+            if (MessageBox.Show("Tem a certeza que pretende eliminar este Material?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
+            {
+                return;
+            }
+            else
+            {
+                try
+                {
+                    RemoverMaterial((MaterialTextil)materiais.SelectedItem);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    return;
+                }
+                try
+                {
+                    ((ObservableCollection<MaterialTextil>)materiais.ItemsSource).RemoveAt(listViewIndex);
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    return;
+                }
+            }
+        }
+
+        private void RemoverMaterial(MaterialTextil material) {
             dataHandler.verifySGBDConnection();
             SqlCommand cmd = new SqlCommand();
 
-            cmd.CommandText = "DELETE MATERIAIS_TÊXTEIS WHERE REFERENCIA_FABRICA=@clienteNIF ";
+            cmd.CommandText = "DELETE MATERIAIS_TÊXTEIS WHERE REFERENCIA_FABRICA=@REFERENCIA ";
             cmd.Parameters.Clear();
-            cmd.Parameters.AddWithValue("@clienteNIF", cliente.Nif);
+            cmd.Parameters.AddWithValue("@REFERENCIA", material.Referencia);
             cmd.Connection = dataHandler.Cn;
 
             try
