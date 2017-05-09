@@ -28,7 +28,7 @@
                     <ColumnDefinition Width="0.1*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="0.3*"></RowDefinition>
+                    <RowDefinition Height="0.1*"></RowDefinition>
                     <RowDefinition></RowDefinition>
                     <RowDefinition Height="0.3*"></RowDefinition>
                     <RowDefinition></RowDefinition>
@@ -37,11 +37,15 @@
                     <RowDefinition Height="0.3*"></RowDefinition>
                     <RowDefinition></RowDefinition>
                     <RowDefinition Height="0.3*"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="0.1*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Button x:Name="registarMaterial" Content="Registar Material" Grid.Row="1" Grid.Column="1" Click="Encomenda_Click"/>
-                <Button x:Name="editarMaterial" Content="Registar Material" Grid.Row="3" Grid.Column="1" IsEnabled="False"/>
-                <Button x:Name="removerMaterial" Content="Remover Material" Grid.Row="5" Grid.Column="1" IsEnabled="False" Click="removerMaterial_Click" />
-                <Button x:Name="detalhesMaterial" Content="Ver mais detalhes" Grid.Row="7" Grid.Column="1" IsEnabled="False"/>
+
+                <Button x:Name="registarMaterial" Content="Registar Material" Style="{StaticResource registarButton}" Grid.Row="1" Grid.Column="1" Click="Encomenda_Click"/>
+                <Button x:Name="adicionarMaterial" Content="Adicionar Material" Style="{StaticResource adicionarButton}" Grid.Row="3" Grid.Column="1"/>
+                <Button x:Name="editarMaterial" Content="Editar Material" Style="{StaticResource editarButton}" Grid.Row="5" Grid.Column="1" IsEnabled="False"/>
+                <Button x:Name="removerMaterial" Content="Remover Material" Style="{StaticResource removerButton}" Grid.Row="7" Grid.Column="1" IsEnabled="False" Click="removerMaterial_Click" />
+                <Button x:Name="detalhesMaterial" Content="Ver mais detalhes" Style="{StaticResource detalhesButton}" Grid.Row="9" Grid.Column="1" IsEnabled="False"/>
             </Grid>
         </GroupBox>
         <Grid Grid.Column="3" Grid.Row="1">
@@ -51,14 +55,14 @@
             </Grid.RowDefinitions>
             <Label x:Name="materiaisLabel" Content="Lista de Materiais Têxteis em Stock na Empresa" Grid.Row="0" VerticalAlignment="Top" />
             <ListView Name="materiais" Grid.Row="1" SelectionChanged="materiais_SelectionChanged">
+            
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Referêcia Fábrica" DisplayMemberBinding="{Binding Referencia}" />
-                        <GridViewColumn Header="Tipo Material"  DisplayMemberBinding="{Binding TipoMaterial1}" />
+                        <GridViewColumn Header="Tipo de Material"  DisplayMemberBinding="{Binding TipoMaterial1}" />
                         <GridViewColumn Header="Fornecedor" DisplayMemberBinding="{Binding Fornecedor}" />
-                        <GridViewColumn Header="Ref. Fornecedor" DisplayMemberBinding="{Binding Referencia_Fornecedor}" />
-                        <GridViewColumn Header="Designação" DisplayMemberBinding="{Binding Designacao}" />
-                        <GridViewColumn Header="Cor" DisplayMemberBinding="{Binding Cor}" />
+                        <GridViewColumn Header="Referencia Fornecedor" DisplayMemberBinding="{Binding ReferenciaFornecedor}" />
+                        <GridViewColumn Header="Cor" DisplayMemberBinding="{Binding Cor}"/>
                     </GridView>
                 </ListView.View>
             </ListView>

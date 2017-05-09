@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Trabalho_BD_IHC"
         mc:Ignorable="d"
-        Title="Gestão de Produção, Stock e Venda" Height="450" MinHeight="300" Width="750" MinWidth="685">
+        Title="Gestão de Produção, Stock e Venda" Height="450" MinHeight="300" Width="900" MinWidth="750">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
