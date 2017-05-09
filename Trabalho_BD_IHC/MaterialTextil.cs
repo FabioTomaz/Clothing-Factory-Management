@@ -9,10 +9,10 @@ namespace Trabalho_BD_IHC
     public class MaterialTextil
     {
         private int referencia;
-        private int referenciaFornecedor;
+        private String referenciaFornecedor;
         private String designacao;
         private String cor;
-        private Fornecedor fornecedor;
+        private String fornecedor;
 
         public int Referencia
         {
@@ -26,7 +26,7 @@ namespace Trabalho_BD_IHC
                 referencia = value;
             }
         }
-        public int ReferenciaFornecedor
+        public String ReferenciaFornecedor
         {
             get
             {
@@ -64,7 +64,7 @@ namespace Trabalho_BD_IHC
         }
         
 
-        public Fornecedor Fornecedor
+        public String Fornecedor
         {
             get
             {

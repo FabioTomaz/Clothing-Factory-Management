@@ -9,7 +9,48 @@ namespace Trabalho_BD_IHC
     public class Linha : MaterialTextil
     {
         private double grossura;
-        private double comprimento;
-        private double precoMetroQuadrado;
+        private double comprimentoStock;
+        private double preco100Metros;
+
+        public double Grossura
+        {
+            get
+            {
+                return grossura;
+            }
+
+            set
+            {
+                grossura = value;
+            }
+        }
+
+
+
+        public double ComprimentoStock
+        {
+            get
+            {
+                return comprimentoStock;
+            }
+
+            set
+            {
+                comprimentoStock = value;
+            }
+        }
+
+        public double Preco100Metros
+        {
+            get
+            {
+                return preco100Metros;
+            }
+
+            set
+            {
+                preco100Metros = value;
+            }
+        }
     }
 }

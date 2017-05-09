@@ -10,8 +10,13 @@ namespace Trabalho_BD_IHC
     {
         private String tipo;
         private double areaArmazem;
-        private double gramagem;
+        private int gramagem;
         private double precoMetroQuadrado;
+
+        public Pano() : base()
+        {
+
+        }
 
         public string Tipo
         {
@@ -39,7 +44,7 @@ namespace Trabalho_BD_IHC
             }
         }
 
-        public double Gramagem
+        public int Gramagem
         {
             get
             {

@@ -44,15 +44,16 @@ namespace Trabalho_BD_IHC
                 {
                     MaterialTextil Mt = new MaterialTextil();
                     Mt.Referencia = Convert.ToInt32(reader["REFERENCIA_FABRICA"].ToString());
-                    Mt.ReferenciaFornecedor = Convert.ToInt32(reader["REFERENCIA_FORN"].ToString());
-                    Mt.Designacao = reader["DESIGNAÇÃO"].ToString();
+                    Mt.ReferenciaFornecedor = reader["REFERENCIA_FORN"].ToString();
+                    Mt.Designacao = reader["DESIGNACAO"].ToString();
                     Mt.Cor = reader["COR"].ToString();
-                    Mt.Fornecedor = new Fornecedor();
-                    Mt.Fornecedor.NIF_Fornecedor = Convert.ToInt32(reader["NIF_FORNECEDOR"].ToString());
+                    Mt.Fornecedor = reader["NIF_FORNECEDOR"].ToString();
                     materiaisTexteis.Add(Mt);
                 }
             
                 materiais.ItemsSource = materiaisTexteis;
+
+             
 
                 dataHandler.closeSGBDConnection();
             }

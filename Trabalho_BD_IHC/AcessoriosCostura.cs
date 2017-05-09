@@ -10,5 +10,31 @@ namespace Trabalho_BD_IHC
     {
         private double precoUnidade;
         private int quantidadeArmazem;
+
+        public double PrecoUnidade
+        {
+            get
+            {
+                return precoUnidade;
+            }
+
+            set
+            {
+                precoUnidade = value;
+            }
+        }
+
+        public int QuantidadeArmazem
+        {
+            get
+            {
+                return quantidadeArmazem;
+            }
+
+            set
+            {
+                quantidadeArmazem = value;
+            }
+        }
     }
 }
