@@ -28,17 +28,30 @@
                     <ColumnDefinition Width="0.1*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="0.3*"></RowDefinition>
+                    <RowDefinition Height="0.1*"></RowDefinition>
                     <RowDefinition></RowDefinition>
                     <RowDefinition Height="0.3*"></RowDefinition>
                     <RowDefinition></RowDefinition>
                     <RowDefinition Height="0.3*"></RowDefinition>
                     <RowDefinition></RowDefinition>
                     <RowDefinition Height="0.3*"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="0.3*"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="0.1*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Button x:Name="registarCliente" Content="Registar Cliente" Click="registarCliente_Click" Grid.Row="1" Grid.Column="1"/>
-                <Button x:Name="editarCliente" Content="Editar Cliente" Grid.Row="3" Grid.Column="1" IsEnabled="False" Click="editarCliente_Click"/>
-                <Button x:Name="removerCliente" Content="Remover Cliente" Grid.Row="5" Grid.Column="1" IsEnabled="False" Click="removerCliente_Click"/>
+                <Button x:Name="registarCliente" Style="{StaticResource registarButton}" Click="registarCliente_Click" Grid.Row="1" Grid.Column="1">
+                    <TextBlock TextWrapping="Wrap">Registar Cliente</TextBlock>
+                </Button>
+                <Button x:Name="editarCliente" Style="{StaticResource editarButton}" Grid.Row="3" Grid.Column="1" IsEnabled="False" Click="editarCliente_Click">
+                    <TextBlock TextWrapping="Wrap">Editar Cliente</TextBlock>
+                </Button>
+                <Button x:Name="removerCliente" Style="{StaticResource removerButton}" Grid.Row="5" Grid.Column="1" IsEnabled="False" Click="removerCliente_Click">
+                    <TextBlock TextWrapping="Wrap">Remover Cliente</TextBlock>
+                </Button>
+                <Button x:Name="detalhesCliente" Style="{StaticResource editarButton}" Grid.Row="7" Grid.Column="1" IsEnabled="False">
+                    <TextBlock TextWrapping="Wrap">Ver mais detalhes</TextBlock>
+                </Button>
             </Grid>
         </GroupBox>
         <Grid Grid.Column="3" Grid.Row="1">

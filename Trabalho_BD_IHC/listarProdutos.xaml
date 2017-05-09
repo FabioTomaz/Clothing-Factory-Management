@@ -28,22 +28,32 @@
                     <ColumnDefinition Width="0.1*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="0.3*"></RowDefinition>
+                    <RowDefinition Height="0.1*"></RowDefinition>
                     <RowDefinition></RowDefinition>
                     <RowDefinition Height="0.3*"></RowDefinition>
                     <RowDefinition></RowDefinition>
                     <RowDefinition Height="0.3*"></RowDefinition>
                     <RowDefinition></RowDefinition>
                     <RowDefinition Height="0.3*"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="0.3*"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="0.1*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Button x:Name="registarProduto" Grid.Row="1" Grid.Column="1">
+                <Button x:Name="registarProduto" Style="{StaticResource registarButton}" Grid.Row="1" Grid.Column="1">
                     <TextBlock TextWrapping="Wrap">Registar Produto</TextBlock>
                 </Button>
-                <Button x:Name="produzirProduto" Grid.Row="3" Grid.Column="1" IsEnabled="False">
+                <Button x:Name="produzirProduto" Style="{StaticResource adicionarButton}" Grid.Row="3" Grid.Column="1" IsEnabled="False">
                     <TextBlock TextWrapping="Wrap">Produzir Produto</TextBlock>
                 </Button>
-                <Button x:Name="removerProduto" Grid.Row="5" Grid.Column="1" IsEnabled="False">
+                <Button x:Name="editarProduto" Style="{StaticResource editarButton}" Grid.Row="5" Grid.Column="1" IsEnabled="False">
+                    <TextBlock TextWrapping="Wrap">Editar Produto</TextBlock>
+                </Button>
+                <Button x:Name="removerProduto" Style="{StaticResource removerButton}" Grid.Row="7" Grid.Column="1" IsEnabled="False">
                     <TextBlock TextWrapping="Wrap">Remover Produto</TextBlock>
+                </Button>
+                <Button x:Name="detalhesProduto" Style="{StaticResource detalhesButton}" Grid.Row="9" Grid.Column="1" IsEnabled="False">
+                    <TextBlock TextWrapping="Wrap">Ver mais detalhes</TextBlock>
                 </Button>
             </Grid>
         </GroupBox>

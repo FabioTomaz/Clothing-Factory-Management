@@ -41,11 +41,21 @@
                     <RowDefinition Height="0.1*"></RowDefinition>
                 </Grid.RowDefinitions>
 
-                <Button x:Name="registarMaterial" Content="Registar Material" Style="{StaticResource registarButton}" Grid.Row="1" Grid.Column="1" Click="Encomenda_Click"/>
-                <Button x:Name="adicionarMaterial" Content="Adicionar Material" Style="{StaticResource adicionarButton}" Grid.Row="3" Grid.Column="1"/>
-                <Button x:Name="editarMaterial" Content="Editar Material" Style="{StaticResource editarButton}" Grid.Row="5" Grid.Column="1" IsEnabled="False"/>
-                <Button x:Name="removerMaterial" Content="Remover Material" Style="{StaticResource removerButton}" Grid.Row="7" Grid.Column="1" IsEnabled="False" Click="removerMaterial_Click" />
-                <Button x:Name="detalhesMaterial" Content="Ver mais detalhes" Style="{StaticResource detalhesButton}" Grid.Row="9" Grid.Column="1" IsEnabled="False"/>
+                <Button x:Name="registarMaterial" Style="{StaticResource registarButton}" Grid.Row="1" Grid.Column="1" Click="Encomenda_Click">
+                    <TextBlock TextWrapping="Wrap">Registar Material</TextBlock>
+                </Button>
+                <Button x:Name="adicionarMaterial" Style="{StaticResource adicionarButton}" Grid.Row="3" Grid.Column="1" IsEnabled="False">
+                    <TextBlock TextWrapping="Wrap">Adicionar Material</TextBlock>
+                </Button>
+                <Button x:Name="editarMaterial" Style="{StaticResource editarButton}" Grid.Row="5" Grid.Column="1" IsEnabled="False">
+                    <TextBlock TextWrapping="Wrap">Editar Material</TextBlock>
+                </Button>
+                <Button x:Name="removerMaterial" Style="{StaticResource removerButton}" Grid.Row="7" Grid.Column="1" IsEnabled="False" Click="removerMaterial_Click">
+                    <TextBlock TextWrapping="Wrap">Remover Material</TextBlock>
+                </Button>
+                <Button x:Name="detalhesMaterial" Style="{StaticResource detalhesButton}" Grid.Row="9" Grid.Column="1" IsEnabled="False">
+                    <TextBlock TextWrapping="Wrap">Ver Mais detalhes</TextBlock>
+                </Button>
             </Grid>
         </GroupBox>
         <Grid Grid.Column="3" Grid.Row="1">

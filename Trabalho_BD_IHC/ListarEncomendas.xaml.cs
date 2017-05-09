@@ -31,6 +31,7 @@ namespace Trabalho_BD_IHC
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            detalhesEncomenda.IsEnabled = false;
             cancelarEncomenda.IsEnabled = false;
             editarEncomenda.IsEnabled = false;
             entregarEncomenda.IsEnabled = false;
@@ -141,6 +142,7 @@ namespace Trabalho_BD_IHC
         {
             if (encomendas.SelectedItems.Count > 0)
             {
+                detalhesEncomenda.IsEnabled = true;    
                 cancelarEncomenda.IsEnabled = true;
                 editarEncomenda.IsEnabled = true;
                 entregarEncomenda.IsEnabled = true;

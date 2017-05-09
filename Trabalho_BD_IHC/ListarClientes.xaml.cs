@@ -33,6 +33,7 @@ namespace Trabalho_BD_IHC
         {
             removerCliente.IsEnabled = false;
             editarCliente.IsEnabled = false;
+            detalhesCliente.IsEnabled = false;
             clientes.Focus();
             if (!dataHandler.verifySGBDConnection())
             {
@@ -139,6 +140,7 @@ namespace Trabalho_BD_IHC
             {
                 removerCliente.IsEnabled = true;
                 editarCliente.IsEnabled = true;
+                detalhesCliente.IsEnabled = true;
             }
         }
     }

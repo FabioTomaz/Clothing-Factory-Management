@@ -28,27 +28,32 @@
                     <ColumnDefinition Width="0.1*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="0.1*"></RowDefinition>
                     <RowDefinition></RowDefinition>
+                    <RowDefinition Height="0.3*"></RowDefinition>
                     <RowDefinition></RowDefinition>
-                    <RowDefinition ></RowDefinition>
+                    <RowDefinition Height="0.3*"></RowDefinition>
                     <RowDefinition></RowDefinition>
+                    <RowDefinition Height="0.3*"></RowDefinition>
                     <RowDefinition></RowDefinition>
+                    <RowDefinition Height="0.3*"></RowDefinition>
                     <RowDefinition></RowDefinition>
-                    <RowDefinition ></RowDefinition>
-                    <RowDefinition ></RowDefinition>
-                    <RowDefinition ></RowDefinition>
+                    <RowDefinition Height="0.1*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Button x:Name="registarEncomenda" Grid.Row="1" Grid.Column="1" Click="registarEncomenda_Click">
+                <Button x:Name="registarEncomenda" Style="{StaticResource registarButton}" Grid.Row="1" Grid.Column="1" Click="registarEncomenda_Click">
                     <TextBlock TextWrapping="Wrap">Registar Encomenda</TextBlock>
                 </Button>
-                <Button x:Name="entregarEncomenda" Grid.Row="3" Grid.Column="1" IsEnabled="False">
+                <Button x:Name="entregarEncomenda" Style="{StaticResource entregarButton}" Grid.Row="3" Grid.Column="1" IsEnabled="False">
                     <TextBlock TextWrapping="Wrap">Entregar Encomenda</TextBlock>
                 </Button>
-                <Button x:Name="editarEncomenda" Grid.Row="5" Grid.Column="1" IsEnabled="False">
+                <Button x:Name="editarEncomenda" Style="{StaticResource editarButton}" Grid.Row="5" Grid.Column="1" IsEnabled="False">
                     <TextBlock TextWrapping="Wrap">Editar Encomenda</TextBlock>
                 </Button>
-                <Button x:Name="cancelarEncomenda" Grid.Row="7" Grid.Column="1" IsEnabled="False" Click="cancelarEncomenda_Click">
+                <Button x:Name="cancelarEncomenda" Style="{StaticResource removerButton}" Grid.Row="7" Grid.Column="1" IsEnabled="False" Click="cancelarEncomenda_Click">
                     <TextBlock TextWrapping="Wrap">Cancelar Encomenda</TextBlock>
+                </Button>
+                <Button x:Name="detalhesEncomenda" Style="{StaticResource detalhesButton}" Grid.Row="9" Grid.Column="1" IsEnabled="False">
+                    <TextBlock TextWrapping="Wrap">Ver mais detalhes</TextBlock>
                 </Button>
             </Grid>
         </GroupBox>
