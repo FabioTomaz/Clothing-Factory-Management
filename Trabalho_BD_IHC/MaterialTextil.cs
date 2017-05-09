@@ -13,6 +13,7 @@ namespace Trabalho_BD_IHC
         private String designacao;
         private String cor;
         private String fornecedor;
+        private String TipoMaterial;
 
         public int Referencia
         {
@@ -68,12 +69,38 @@ namespace Trabalho_BD_IHC
         {
             get
             {
+                return Fornecedor1;
+            }
+
+            set
+            {
+                Fornecedor1 = value;
+            }
+        }
+
+        public string Fornecedor1
+        {
+            get
+            {
                 return fornecedor;
             }
 
             set
             {
                 fornecedor = value;
+            }
+        }
+
+        public string TipoMaterial1
+        {
+            get
+            {
+                return TipoMaterial;
+            }
+
+            set
+            {
+                TipoMaterial = value;
             }
         }
     }

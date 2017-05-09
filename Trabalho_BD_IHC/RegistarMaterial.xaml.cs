@@ -77,6 +77,7 @@ namespace Trabalho_BD_IHC
             while(reader.Read())
                 mat.Referencia = Convert.ToInt32(reader["REFERENCIA_FABRICA"].ToString());
             dataHandler.closeSGBDConnection();
+
             if (!dataHandler.verifySGBDConnection())
             {
                 MessageBoxResult result = MessageBox.Show("A conexão à base de dados é instável ou inexistente. Por favor tente mais tarde", "Erro de Base de Dados", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -105,6 +106,7 @@ namespace Trabalho_BD_IHC
                 }
             }
             else if (mat.GetType() == typeof(Linha)) {
+                Console.WriteLine("OLAAAAAAAAAAA");
                 Linha linha = (Linha)mat;
                 SqlCommand linhacmd = new SqlCommand();
                 linhacmd.Connection = dataHandler.Cn;
@@ -113,8 +115,8 @@ namespace Trabalho_BD_IHC
                 linhacmd.Parameters.AddWithValue("@GROSSURA", linha.Grossura);
                 linhacmd.Parameters.AddWithValue("@PRECO", linha.Preco100Metros);
                 linhacmd.Parameters.AddWithValue("@COMPRIMENTO", linha.ComprimentoStock);
-                linhacmd.CommandText = "INSERT INTO LINHA (, NIB, NIF, EMAIL, TELEMOVEL, COD_POSTAL, RUA, N_PORTA) " +
-"VALUES (@NOME, @NIB, @NIF, @EMAIL, @TELEMOVEL, @COD_POSTAL, @RUA, @N_PORTA);";
+                linhacmd.CommandText = "INSERT INTO LINHA (REFERENCIA_FABRICA, GROSSURA, PRECO_CEM_METROS, COMPRIMENTO_ARMAZEM) " +
+"VALUES (@REFERENCIA, @GROSSURA, @PRECO, @COMPRIMENTO);";
                 try
                 {
                     linhacmd.ExecuteNonQuery();
@@ -129,12 +131,14 @@ namespace Trabalho_BD_IHC
             {
                 AcessoriosCostura acessorio = (AcessoriosCostura)mat;
                 SqlCommand acessoriocmd = new SqlCommand();
+                Console.WriteLine(acessorio.PrecoUnidade);
+                Console.WriteLine(acessorio.Referencia);
                 acessoriocmd.Connection = dataHandler.Cn;
                 acessoriocmd.Parameters.Clear();
                 acessoriocmd.Parameters.AddWithValue("@REFERENCIA", acessorio.Referencia);
                 acessoriocmd.Parameters.AddWithValue("@PRECO_UNIDADE", acessorio.PrecoUnidade);
-                acessoriocmd.CommandText = "INSERT INTO ACESSORIOS_COSTURA (REFERENCIA_FABRICA, PRECO_UNIDADE) " +
-"VALUES (@REFERENCIA, @PRECO_UNIDADE);";
+                acessoriocmd.CommandText = "INSERT INTO ACESSORIO (REFERENCIA_FABRICA, QUANTIDADE_ARMAZEM, PRECO_UNIDADE) " +
+"VALUES (@REFERENCIA, 0, @PRECO_UNIDADE);";
                 try
                 {
                     acessoriocmd.ExecuteNonQuery();
@@ -306,41 +310,67 @@ namespace Trabalho_BD_IHC
             else if (((ComboBoxItem)tipoMaterial.SelectedItem).Name.Equals("Linha"))
             {
                 material = new Linha();
+                material.Cor = corMaterial.SelectedColor.ToString();
+                material.Designacao = "designacao";
+                material.Fornecedor = txtFornecedorNif.Text;
+                material.ReferenciaFornecedor = txtReferenciaFornecedor.Text;
                 ((Linha)material).Preco100Metros = Convert.ToDouble(txtPreço100M.Text);
                 ((Linha)material).Grossura = Convert.ToDouble(txtGrossura.Text);
             }
             else if (((ComboBoxItem)tipoMaterial.SelectedItem).Name.Equals("Acessorios"))
             {
-                if (((ComboBoxItem)acessorios.SelectedItem).Name.Equals("fecho"))
+                Console.WriteLine("OLAAAAAAAAA");
+                if (((ComboBoxItem)acessorios.SelectedItem).Name.Equals("Fecho"))
                 {
                     material = new Fecho();
+                    material.Cor = corMaterial.SelectedColor.ToString();
+                    material.Designacao = "designacao";
+                    material.Fornecedor = txtFornecedorNif.Text;
+                    material.ReferenciaFornecedor = txtReferenciaFornecedor.Text;
                     ((Fecho)material).TamanhoDente = Convert.ToDouble(txtTamanhoDente.Text);
                     ((Fecho)material).Largura = Convert.ToDouble(txtLarguraFecho.Text);
                     ((Fecho)material).Comprimento = Convert.ToDouble(txtComprimentoFecho.Text);
                     ((Fecho)material).PrecoUnidade = Convert.ToDouble(txtPrecoUnidadeFecho.Text);
+                    Console.WriteLine(((Fecho)material).PrecoUnidade);
                 }
-                else if (((ComboBoxItem)acessorios.SelectedItem).Name.Equals("mola"))
+                else if (((ComboBoxItem)acessorios.SelectedItem).Name.Equals("Mola"))
                 {
                     material = new Mola();
+                    material.Cor = corMaterial.SelectedColor.ToString();
+                    material.Designacao = "designacao";
+                    material.Fornecedor = txtFornecedorNif.Text;
+                    material.ReferenciaFornecedor = txtReferenciaFornecedor.Text;
                     ((Mola)material).Diametro = Convert.ToDouble(txtDiametroMola.Text);
                     ((Mola)material).PrecoUnidade = Convert.ToDouble(txtPrecoUnidadeMola.Text);
                 }
-                else if (((ComboBoxItem)acessorios.SelectedItem).Name.Equals("botao"))
+                else if (((ComboBoxItem)acessorios.SelectedItem).Name.Equals("Botao"))
                 {
                     material = new Botao();
+                    material.Cor = corMaterial.SelectedColor.ToString();
+                    material.Designacao = "designacao";
+                    material.Fornecedor = txtFornecedorNif.Text;
+                    material.ReferenciaFornecedor = txtReferenciaFornecedor.Text;
                     ((Botao)material).Diametro = Convert.ToDouble(txtDiametroBotao.Text);
                     ((Botao)material).PrecoUnidade = Convert.ToDouble(txtPrecoUnidadeBotao.Text);
                 }
-                else if (((ComboBoxItem)acessorios.SelectedItem).Name.Equals("fitaVelcro"))
+                else if (((ComboBoxItem)acessorios.SelectedItem).Name.Equals("FitaVelcro"))
                 {
                     material = new FitaVelcro();
+                    material.Cor = corMaterial.SelectedColor.ToString();
+                    material.Designacao = "designacao";
+                    material.Fornecedor = txtFornecedorNif.Text;
+                    material.ReferenciaFornecedor = txtReferenciaFornecedor.Text;
                     ((FitaVelcro)material).Largura = Convert.ToDouble(txtLarguraFita.Text);
                     ((FitaVelcro)material).Comprimento = Convert.ToDouble(txtComprimentoFita.Text);
                     ((FitaVelcro)material).PrecoUnidade = Convert.ToDouble(txtPrecoUnidadeFita.Text);
                 }
-                else if (((ComboBoxItem)acessorios.SelectedItem).Name.Equals("elastico"))
+                else if (((ComboBoxItem)acessorios.SelectedItem).Name.Equals("Elastico"))
                 {
-                    material = new FitaVelcro();
+                    material = new Elastico();
+                    material.Cor = corMaterial.SelectedColor.ToString();
+                    material.Designacao = "designacao";
+                    material.Fornecedor = txtFornecedorNif.Text;
+                    material.ReferenciaFornecedor = txtReferenciaFornecedor.Text;
                     ((Elastico)material).Largura = Convert.ToDouble(txtLarguraFita.Text);
                     ((Elastico)material).Comprimento = Convert.ToDouble(txtComprimentoFita.Text);
                     ((Elastico)material).PrecoUnidade = Convert.ToDouble(txtPrecoUnidadeElastico.Text);
