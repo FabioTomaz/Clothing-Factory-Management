@@ -76,7 +76,7 @@ namespace Trabalho_BD_IHC
                 cliente.Nif = txtNIF.Text;
                 cliente.Telemovel = txtTelemovel.Text;
                 cliente.Email = txtEmail.Text;
-                cliente.CodigoPostal = txtcodigoPostal.Text;
+                cliente.CodigoPostal = txtcodigoPostal1.Text + "-" + txtcodigoPostal2.Text;
                 cliente.Rua = txtRua.Text;
                 cliente.NCasa = int.Parse(txtNumeroPorta.Text);
             }
@@ -93,6 +93,7 @@ namespace Trabalho_BD_IHC
                 MessageBox.Show(ex.Message);
                 return;
             }
+            MessageBox.Show("Cliente Registado com sucesso!", "", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             this.NavigationService.GoBack();
         }
     }

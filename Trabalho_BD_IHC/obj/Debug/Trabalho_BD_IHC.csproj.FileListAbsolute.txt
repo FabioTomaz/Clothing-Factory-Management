@@ -131,3 +131,6 @@ C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\RegistarEmpregado.g
 C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\InformaçãoEmpregado.baml
 C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\RegistarEmpregado.baml
 C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\App.baml
+C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\obj\Debug\App.baml
+C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\obj\Debug\EditarDesenhoBase.g.cs
+C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\obj\Debug\EditarDesenhoBase.baml

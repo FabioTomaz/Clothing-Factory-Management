@@ -20,27 +20,7 @@
             <RowDefinition />
             <RowDefinition Height="0.1*"/>
         </Grid.RowDefinitions>
-        <GroupBox Header="Operações" Grid.Column="1" Grid.Row="1">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.1*"></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition Width="0.1*"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="0.3*"></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition Height="0.3*"></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition Height="0.3*"></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition Height="0.3*"></RowDefinition>
-                </Grid.RowDefinitions>
-                <Button x:Name="confirmar" Content="Confirmar Registo"  Grid.Row="1" Grid.Column="1" IsEnabled="True" Click="confirmar_Click"/>
-                <Button x:Name="cancelar" Content="Cancelar Registo" Grid.Row="3" Grid.Column="1" Click="cancelar_Click"/>
-            </Grid>
-        </GroupBox>
-        <GroupBox Header="Registar Cliente" Grid.Row="1" Grid.Column="3">
+        <GroupBox Header="Registar Cliente" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" >
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.2*"></ColumnDefinition>
@@ -67,7 +47,9 @@
                 <RowDefinition Height="0.1*"></RowDefinition>
                 <RowDefinition></RowDefinition>
                 <RowDefinition Height="0.1*"></RowDefinition>
-            </Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="0.1*"></RowDefinition>
+                </Grid.RowDefinitions>
             <Label Content="Nome: " Grid.Row="1" Grid.Column="1" VerticalAlignment="Center"/>
                 <TextBox Name="txtNome" Grid.Row="1" Grid.Column="3" Height="20" VerticalAlignment="Center"></TextBox>
             <Label Content="NIB: " Grid.Row="3" Grid.Column="1"/>
@@ -79,12 +61,31 @@
             <Label Content="Telemóvel: " Grid.Row="9" Grid.Column="1"/>
                 <TextBox Name="txtTelemovel" Grid.Row="9" Grid.Column="3" Height="20" VerticalAlignment="Center"></TextBox>
             <Label Content="Código Postal: " Grid.Row="11" Grid.Column="1"/>
-                <TextBox Name="txtcodigoPostal" Grid.Row="11" Grid.Column="3" Height="20" VerticalAlignment="Center"></TextBox>
-            <Label Content="Rua: " Grid.Row="13" Grid.Column="1"/>
+                <Grid Grid.Row="11" Grid.Column="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="0.5*"/>
+                        <ColumnDefinition Width="1.5*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox Grid.Column="0" Name="txtcodigoPostal1" HorizontalAlignment="Stretch" VerticalAlignment="Center"></TextBox>
+                    <TextBlock Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Text="-"></TextBlock>
+                    <TextBox Grid.Column="2" Name="txtcodigoPostal2" HorizontalAlignment="Stretch" VerticalAlignment="Center"></TextBox>
+                </Grid>
+                <Label Content="Rua: " Grid.Row="13" Grid.Column="1"/>
                 <TextBox Name="txtRua" Grid.Row="13" Grid.Column="3" Height="20" VerticalAlignment="Center"></TextBox>
             <Label Content="Numero de Porta: " Grid.Row="15" Grid.Column="1"/>
                 <TextBox Name="txtNumeroPorta" Grid.Row="15" Grid.Column="3" Height="20" VerticalAlignment="Center"></TextBox>
-        </Grid>
+                <Grid Grid.Row="17" Grid.Column="1" Grid.ColumnSpan="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                        <ColumnDefinition Width="0.7*"></ColumnDefinition>
+                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    
+                    <Button x:Name="confirmar" Content="Confirmar Registo" Grid.Column="2" HorizontalAlignment="Center" IsEnabled="True" Click="confirmar_Click"/>
+                    <Button x:Name="cancelar" Content="Cancelar Registo" Grid.Column="0" HorizontalAlignment="Center" Click="cancelar_Click"/>
+                </Grid>
+            </Grid>
     </GroupBox>
     </Grid>
 </Page>

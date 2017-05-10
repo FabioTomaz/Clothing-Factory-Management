@@ -80,6 +80,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="DataHandler.cs" />
+    <Compile Include="EditarDesenhoBase.xaml.cs">
+      <DependentUpon>EditarDesenhoBase.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EditarCliente.xaml.cs">
       <DependentUpon>EditarCliente.xaml</DependentUpon>
     </Compile>
@@ -124,6 +127,10 @@
       <DependentUpon>RegistarEncomenda.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utilizador.cs" />
+    <Page Include="EditarDesenhoBase.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="EditarCliente.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -180,7 +187,7 @@
     <Compile Include="Bordado.cs" />
     <Compile Include="Botao.cs" />
     <Compile Include="Cliente.cs" />
-    <Compile Include="Desenho.cs" />
+    <Compile Include="DesenhoBase.cs" />
     <Compile Include="Elastico.cs" />
     <Compile Include="Encomenda.cs" />
     <Compile Include="Estampagem.cs" />
@@ -213,7 +220,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MaterialTextil.cs" />
-    <Compile Include="Modelo.cs" />
+    <Compile Include="DesenhoPersonalizado.cs" />
     <Compile Include="Mola.cs" />
     <Compile Include="Pano.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">

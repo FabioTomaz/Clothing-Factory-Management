@@ -69,10 +69,11 @@
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Referêcia Fábrica" DisplayMemberBinding="{Binding Referencia}" />
-                        <GridViewColumn Header="Tipo de Material"  DisplayMemberBinding="{Binding TipoMaterial1}" />
+                        <GridViewColumn Header="Designação" DisplayMemberBinding="{Binding Designacao}"/>
                         <GridViewColumn Header="Fornecedor" DisplayMemberBinding="{Binding Fornecedor}" />
                         <GridViewColumn Header="Referencia Fornecedor" DisplayMemberBinding="{Binding ReferenciaFornecedor}" />
                         <GridViewColumn Header="Cor" DisplayMemberBinding="{Binding Cor}"/>
+                        
                     </GridView>
                 </ListView.View>
             </ListView>

@@ -8,23 +8,10 @@ namespace Trabalho_BD_IHC
 {
     public class Etiqueta
     {
-        private Desenho desenho;
         private String paisFabrico;
         private String composicao;
         private String normas;
-
-        internal Desenho Desenho
-        {
-            get
-            {
-                return desenho;
-            }
-
-            set
-            {
-                desenho = value;
-            }
-        }
+        private int numero;
 
         public string PaisFabrico
         {
@@ -62,6 +49,19 @@ namespace Trabalho_BD_IHC
             set
             {
                 normas = value;
+            }
+        }
+
+        public int Numero
+        {
+            get
+            {
+                return numero;
+            }
+
+            set
+            {
+                numero = value;
             }
         }
     }

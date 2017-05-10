@@ -88,6 +88,7 @@ namespace Trabalho_BD_IHC
             {
                 dataHandler.closeSGBDConnection();
             }
+            MessageBox.Show("Cliente Removido com sucesso!", "", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void registarCliente_Click(object sender, RoutedEventArgs e)

@@ -76,7 +76,7 @@ namespace Trabalho_BD_IHC
             finally
             {
                 if (rows == 1)
-                    MessageBox.Show("Atualização realizada com sucesso", "Confirmação", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+                    MessageBox.Show("Atualização realizada com sucesso", "", MessageBoxButton.OK, MessageBoxImage.Asterisk);
                 else
                    if (MessageBox.Show("Não foi possivel atualizar o perfil do cliente", "Erro", MessageBoxButton.OKCancel, MessageBoxImage.Exclamation) == MessageBoxResult.Cancel)
                     AtualizarCliente(C);

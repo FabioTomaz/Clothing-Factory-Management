@@ -12,12 +12,12 @@ namespace Trabalho_BD_IHC
         private int referencia;
         private String nome;
         private double IVA;
-        private Desenho desenho;
+        private DesenhoBase desenho;
         private String tamanho;
         private String cor;
         private int unidadesStock;
         private double preco;
-        private Modelo modelo;
+        private DesenhoPersonalizado modelo;
 
         public int Referencia
         {
@@ -58,7 +58,7 @@ namespace Trabalho_BD_IHC
             }
         }
 
-        internal Desenho Desenho
+        internal DesenhoBase Desenho
         {
             get
             {
@@ -123,7 +123,7 @@ namespace Trabalho_BD_IHC
             }
         }
 
-        internal Modelo Modelo
+        internal DesenhoPersonalizado Modelo
         {
             get
             {

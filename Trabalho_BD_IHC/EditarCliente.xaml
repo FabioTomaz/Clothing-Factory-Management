@@ -20,27 +20,8 @@
             <RowDefinition />
             <RowDefinition Height="0.1*"/>
         </Grid.RowDefinitions>
-        <GroupBox Header="Operações" Grid.Column="1" Grid.Row="1">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.1*"></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition Width="0.1*"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="0.3*"></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition Height="0.3*"></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition Height="0.3*"></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition Height="0.3*"></RowDefinition>
-                </Grid.RowDefinitions>
-                <Button x:Name="confirmar" Content="Atualizar Cliente"  Grid.Row="1" Grid.Column="1" IsEnabled="True" Click="confirmar_Click"/>
-                <Button x:Name="cancelar" Content="Cancelar" Grid.Row="3" Grid.Column="1" Click="cancelar_Click"/>
-            </Grid>
-        </GroupBox>
-        <GroupBox Header="Registar Cliente" Grid.Row="1" Grid.Column="3">
+       
+        <GroupBox Header="Editar Cliente" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.2*"></ColumnDefinition>
@@ -66,6 +47,8 @@
                     <RowDefinition></RowDefinition>
                     <RowDefinition Height="0.1*"></RowDefinition>
                     <RowDefinition></RowDefinition>
+                    <RowDefinition Height="0.3*"></RowDefinition>
+                    <RowDefinition></RowDefinition>
                     <RowDefinition Height="0.1*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Label Content="Nome: " Grid.Row="1" Grid.Column="1" VerticalAlignment="Center"/>
@@ -84,7 +67,17 @@
                 <TextBox Name="txtRua" Grid.Row="13" Grid.Column="3" Height="20" VerticalAlignment="Center"></TextBox>
                 <Label Content="Numero de Porta: " Grid.Row="15" Grid.Column="1"/>
                 <TextBox Name="txtNumeroPorta" Grid.Row="15" Grid.Column="3" Height="20" VerticalAlignment="Center"></TextBox>
+                
             </Grid>
         </GroupBox>
+        <Grid Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+                <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="confirmar" Content="Atualizar Cliente" Grid.Column="2" HorizontalAlignment="Center" IsEnabled="True" Click="confirmar_Click"/>
+            <Button x:Name="cancelar" Content="Cancelar" Grid.Column="0"  HorizontalAlignment="Center"  Click="cancelar_Click"/>
+        </Grid>
     </Grid>
 </Page>

@@ -44,7 +44,7 @@ namespace Trabalho_BD_IHC
             InitializeComponent();
             this.dataHandler = dataHandler;
         }
-        private void EnviarDesenhoBase(Desenho desenhoBase)
+        private void EnviarDesenhoBase(DesenhoBase desenhoBase)
         {
 
             if (!dataHandler.verifySGBDConnection())
@@ -84,7 +84,7 @@ namespace Trabalho_BD_IHC
 
         private void confirmar_Click(object sender, RoutedEventArgs e)
         {
-            Desenho desenhoBase = new Desenho();
+            DesenhoBase desenhoBase = new DesenhoBase();
             try
             {
 
