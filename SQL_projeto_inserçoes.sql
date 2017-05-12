@@ -46,13 +46,16 @@ INSERT INTO ENCOMENDA (DATA_CONFIRMACAO, DATA_ENTREGA_PREV, LOCALENTREGA, ESTADO
 	
 	
 INSERT INTO DESENHO (NOME_DESENHO, DATA_ALTERACAO, INSTRUCOES_PRODUCAO, N_GESTOR_PROD, IMAGEM_DESENHO) VALUES
-	('Bata azul', '20170424', 'Usar linha e tecido e pintar de azul', 2, 'image')
+	('Bata azul', '20170424', 'Usar linha e tecido e pintar de azul', 2, 'image'),
+	('Colete', '20170511', 'Usar pano e linha e elásticos', 2, 'image')
 
 INSERT INTO ETIQUETA (NORMAS, PAIS_FABRICO, COMPOSICAO) VALUES
+	('Mais exemplos de normas', 'Espanha', 'Pano, linha'),
 	('normas e tal', 'Portugal', 'algodão, linho')
 
 INSERT INTO MODELO (N_DESENHO, N_ETIQUETA) VALUES
-	(1,1)
+	(1,1),
+	(2,2)
 
 INSERT INTO [PRODUTO-BASE] (NOME, N_DESENHO) VALUES
 	('Bata azul', 1)

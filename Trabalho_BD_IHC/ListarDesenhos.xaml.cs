@@ -45,10 +45,10 @@ namespace Trabalho_BD_IHC
                 }
                 else
                 {
-                    getDesenhosBase();
+                    ObservableCollection<DesenhoBase> desenhoBase = getDesenhosBase();
+                    desenhosBaseLista.ItemsSource = desenhoBase;
+
                 }
-
-
             }
             else
             {//pagina desenhos personalizados
@@ -62,13 +62,14 @@ namespace Trabalho_BD_IHC
                 }
                 else
                 {
-                    getDesenhosPers();
-
+                    ObservableCollection<DesenhoPersonalizado> desenhoPers = getDesenhosPers();
+                    desenhosPersonalizadosLista.ItemsSource = desenhoPers;
+                    
                 }
             }
             dataHandler.closeSGBDConnection();
         }
-        private void getDesenhosBase()
+        public ObservableCollection<DesenhoBase> getDesenhosBase()
         {
             SqlCommand cmd = new SqlCommand("SELECT N_DESENHO, NOME_DESENHO, DATA_ALTERACAO, "
                             + "INSTRUCOES_PRODUCAO, N_GESTOR_PROD, UTILIZADOR.NOME FROM DESENHO JOIN UTILIZADOR ON N_GESTOR_PROD=N_FUNCIONARIO", dataHandler.Cn);
@@ -87,13 +88,12 @@ namespace Trabalho_BD_IHC
                 desenhoBase.Add(Des);
             }
 
-            desenhosBaseLista.ItemsSource = desenhoBase;
-
             dataHandler.closeSGBDConnection();
+            return desenhoBase;
         }
 
 
-        private void getDesenhosPers()
+        private ObservableCollection<DesenhoPersonalizado> getDesenhosPers()
         {
             SqlCommand cmd = new SqlCommand("SELECT N_MODELO, MODELO.N_DESENHO as Ndesenho, ETIQUETA.N_ETIQUETA as Netiqueta, NORMAS, PAIS_FABRICO, COMPOSICAO, "
                     +" NOME_DESENHO, DATA_ALTERACAO, INSTRUCOES_PRODUCAO, N_GESTOR_PROD, NOME FROM MODELO JOIN ETIQUETA ON ETIQUETA.N_ETIQUETA = MODELO.N_ETIQUETA "
@@ -118,8 +118,10 @@ namespace Trabalho_BD_IHC
                 Des.Desenho.GestorProducao.NFuncionario = Convert.ToInt32(reader["N_GESTOR_PROD"].ToString());
                 Des.Desenho.GestorProducao.Nome = reader["NOME"].ToString();
                 desenhoPers.Add(Des);
+                Console.WriteLine(Des.Etiqueta.Normas.ToString());
             }
-
+            dataHandler.closeSGBDConnection();
+            return desenhoPers;
         }
 
         private void registarDesenhoBase_click(object sender, RoutedEventArgs e)
@@ -133,6 +135,17 @@ namespace Trabalho_BD_IHC
             this.NavigationService.Navigate(page);
         }
 
+        private void registarDesenhoPers_click(object sender, RoutedEventArgs e)
+        {
+            RegistarDesenhoPersonalizado page = new RegistarDesenhoPersonalizado(dataHandler);
+            NavigationService.Navigate(page);
+        }
+
+        private void EditarDesenhoPers_click(object sender, RoutedEventArgs e)
+        {
+            EditarDesenhoPersonalizado page = new EditarDesenhoPersonalizado(dataHandler, (DesenhoPersonalizado)desenhosPersonalizadosLista.SelectedItem);
+            this.NavigationService.Navigate(page);
+        }
 
         private void desenhos_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

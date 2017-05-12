@@ -33,6 +33,7 @@ namespace Trabalho_BD_IHC
         {
             removerEmpregado.IsEnabled = false;
             editarEmpregado.IsEnabled = false;
+            detalhesEmpregado.IsEnabled = false;
             empregados.Focus();
             if (!dataHandler.verifySGBDConnection())
             {
@@ -69,6 +70,7 @@ namespace Trabalho_BD_IHC
             {
                 editarEmpregado.IsEnabled = true;
                 removerEmpregado.IsEnabled = true;
+                detalhesEmpregado.IsEnabled = true;
             }
         }
 
@@ -136,7 +138,7 @@ namespace Trabalho_BD_IHC
             RegistarEmpregado page = new RegistarEmpregado(dataHandler);
             this.NavigationService.Navigate(page);
         }
-        private void empregado_DoubleClick(object sender, MouseButtonEventArgs e)
+        private void verDetalhesEmpregado(object sender, RoutedEventArgs e)
         {
             Utilizador user = (Utilizador)empregados.SelectedItem;
             InformaçãoEmpregado page = new InformaçãoEmpregado(dataHandler, user);

@@ -51,17 +51,15 @@ namespace Trabalho_BD_IHC
                 return;
             SqlCommand cmd = new SqlCommand();
 
-            /* cmd.CommandText = "INSERT INTO DESENHO (NOME_DESENHO, DATA_ALTERAÇAO, INSTRUÇÕES_PRODUÇÃO, N_GESTOR_PROD, IMAGEM_DESENHO) " +
-                 "VALUES (@NOME, @NIB, @NIF, @EMAIL, @TELEMOVEL, @COD_POSTAL, @RUA, @N_PORTA);";
+            cmd.CommandText = "INSERT INTO DESENHO (NOME_DESENHO, DATA_ALTERACAO, INSTRUCOES_PRODUCAO, N_GESTOR_PROD, IMAGEM_DESENHO) "
+                +  "VALUES (@N_desenho, @nome_desenho, @Data_alteracao, @instr, @nGestor, @imagem);";
              cmd.Parameters.Clear();
-             cmd.Parameters.AddWithValue("@NOME", cl.Nome);
-             cmd.Parameters.AddWithValue("@NIB", cl.Nib);
-             cmd.Parameters.AddWithValue("@NIF", cl.Nif);
-             cmd.Parameters.AddWithValue("@EMAIL", cl.Email);
-             cmd.Parameters.AddWithValue("@TELEMOVEL", cl.Telemovel);
-             cmd.Parameters.AddWithValue("@COD_POSTAL", cl.CodigoPostal);
-             cmd.Parameters.AddWithValue("@RUA", cl.Rua);
-             cmd.Parameters.AddWithValue("@N_PORTA", cl.NCasa);
+             cmd.Parameters.AddWithValue("@N_desenho", desenhoBase.Nome);
+             cmd.Parameters.AddWithValue("@nome_desenho", desenhoBase.Nome);
+             cmd.Parameters.AddWithValue("@Data_alteracao", DateTime.Today);
+             cmd.Parameters.AddWithValue("@instr", desenhoBase.InstrucoesProducao);
+             cmd.Parameters.AddWithValue("@nGestor", desenhoBase.GestorProducao.NFuncionario);
+            // cmd.Parameters.AddWithValue("@imagem", desenhoBase);
              cmd.Connection = dataHandler.Cn;
              try
              {
@@ -69,12 +67,12 @@ namespace Trabalho_BD_IHC
              }
              catch (Exception ex)
              {
-                 throw new Exception("Falha ao criar encomenda na base de dados. \n ERROR MESSAGE: \n" + ex.Message);
+                 throw new Exception("Falha ao registar o Desenho Base na base de dados. \n ERROR MESSAGE: \n" + ex.Message);
              }
              finally
              {
                  dataHandler.closeSGBDConnection();
-             }*/
+             }
         }
 
         private void cancelar_Click(object sender, RoutedEventArgs e)
@@ -104,6 +102,7 @@ namespace Trabalho_BD_IHC
                 MessageBox.Show(ex.Message);
                 return;
             }
+            MessageBox.Show("Desenho Base registado com sucesso!", "", MessageBoxButton.OK, MessageBoxImage.Information);
             this.NavigationService.GoBack();
         }
 

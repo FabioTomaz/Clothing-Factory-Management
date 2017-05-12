@@ -27,7 +27,7 @@ namespace Trabalho_BD_IHC
             }
         }
 
-        internal DesenhoBase Desenho
+        public DesenhoBase Desenho
         {
             get
             {
@@ -40,7 +40,7 @@ namespace Trabalho_BD_IHC
             }
         }
 
-        internal Etiqueta Etiqueta
+        public Etiqueta Etiqueta
         {
             get
             {

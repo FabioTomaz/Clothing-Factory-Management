@@ -88,7 +88,7 @@
                 </Button>
             </Grid>
         </GroupBox>
-        <Button x:Name="confirmar" Content="Confirmar"  Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right" Click="confirmar_Click"/>
-        <Button x:Name="cancelar" Content="Cancelar" Grid.Row="2" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Left" Click="cancelar_Click"/>
+        <Button x:Name="confirmar" Content="Confirmar"  Grid.Row="2" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Left" Click="confirmar_Click"/>
+        <Button x:Name="cancelar" Content="Cancelar" Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right" Click="cancelar_Click"/>
     </Grid>
 </Page>

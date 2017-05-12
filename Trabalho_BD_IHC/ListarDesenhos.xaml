@@ -113,14 +113,14 @@
                                 <RowDefinition ></RowDefinition>
                                 
                             </Grid.RowDefinitions>
-                            <Button x:Name="registarDesenhoPersonalizado" Grid.Row="0" Grid.Column="1" Style="{StaticResource registarButton}" Click="registarDesenhoBase_click">
-                                <TextBlock TextWrapping="Wrap">Registar Desenho Base</TextBlock>
+                            <Button x:Name="registarDesenhoPersonalizado" Grid.Row="0" Grid.Column="1" Style="{StaticResource registarButton}" Click="registarDesenhoPers_click">
+                                <TextBlock TextWrapping="Wrap">Registar Desenho Personalizado</TextBlock>
                             </Button>
-                            <Button x:Name="editarDesenhoPersonalizado" Grid.Row="2" Grid.Column="1" Style="{StaticResource editarButton}" IsEnabled="False" Click="EditarDesenhoBase_click">
-                                <TextBlock TextWrapping="Wrap">Editar Desenho Base</TextBlock>
+                            <Button x:Name="editarDesenhoPersonalizado" Grid.Row="2" Grid.Column="1" Style="{StaticResource editarButton}" IsEnabled="False" Click="EditarDesenhoPers_click">
+                                <TextBlock TextWrapping="Wrap">Editar Desenho Personalizado</TextBlock>
                             </Button>
                             <Button x:Name="removerDesenhoPersonalizado" Grid.Row="4" Grid.Column="1" Style="{StaticResource removerButton}" IsEnabled="False">
-                                <TextBlock TextWrapping="Wrap">Remover Desenho Base</TextBlock>
+                                <TextBlock TextWrapping="Wrap">Remover Desenho Personalizado</TextBlock>
                             </Button>
                             <Button x:Name="detalhesDesenhoPersonalizado" Grid.Row="6" Grid.Column="1" Style="{StaticResource detalhesButton}" IsEnabled="False">
                                 <TextBlock TextWrapping="Wrap">Ver mais Informação</TextBlock>
@@ -141,7 +141,7 @@
                                     <GridViewColumn Header="Composição" DisplayMemberBinding="{Binding Etiqueta.Composicao}" />
                                     <GridViewColumn Header="Instruçoes produçao" DisplayMemberBinding="{Binding Desenho.InstrucoesProducao}"/>
                                     <GridViewColumn Header="Gestor Produção" DisplayMemberBinding="{Binding Desenho.GestorProducao.NFuncionario}"/>
-                                    <GridViewColumn Header="Total de Custos" DisplayMemberBinding="{Binding nUnidades}"/>
+                                    <GridViewColumn Header="Nome Gestor Produção" DisplayMemberBinding="{Binding Desenho.GestorProducao.Nome}"/>
                                 </GridView>
                             </ListView.View>
                         </ListView>

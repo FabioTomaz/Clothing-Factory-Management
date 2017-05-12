@@ -80,6 +80,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="DataHandler.cs" />
+    <Compile Include="EditarDesenhoPersonalizado.xaml.cs">
+      <DependentUpon>EditarDesenhoPersonalizado.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EditarDesenhoBase.xaml.cs">
       <DependentUpon>EditarDesenhoBase.xaml</DependentUpon>
     </Compile>
@@ -88,6 +91,9 @@
     </Compile>
     <Compile Include="InformaçãoEmpregado.xaml.cs">
       <DependentUpon>InformaçãoEmpregado.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RegistarDesenhoPersonalizado.xaml.cs">
+      <DependentUpon>RegistarDesenhoPersonalizado.xaml</DependentUpon>
     </Compile>
     <Compile Include="RegistarEmpregado.xaml.cs">
       <DependentUpon>RegistarEmpregado.xaml</DependentUpon>
@@ -127,6 +133,10 @@
       <DependentUpon>RegistarEncomenda.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utilizador.cs" />
+    <Page Include="EditarDesenhoPersonalizado.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="EditarDesenhoBase.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -138,6 +148,10 @@
     <Page Include="InformaçãoEmpregado.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RegistarDesenhoPersonalizado.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="RegistarEmpregado.xaml">
       <Generator>MSBuild:Compile</Generator>

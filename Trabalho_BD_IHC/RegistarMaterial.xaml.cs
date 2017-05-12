@@ -48,7 +48,7 @@ namespace Trabalho_BD_IHC
             cmd.Parameters.AddWithValue("@FORNECEDOR", mat.Fornecedor);
             cmd.Parameters.AddWithValue("@DESIGNACAO", mat.Designacao);
             cmd.CommandText = "INSERT INTO MATERIAIS_TÊXTEIS (REFERENCIA_FORN, NIF_FORNECEDOR, COR, DESIGNACAO) " +
-"VALUES (@FORNECEDORREF, @FORNECEDOR, @COR, @DESIGNACAO);";
+            "VALUES (@FORNECEDORREF, @FORNECEDOR, @COR, @DESIGNACAO);";
 
             try
             {
@@ -56,7 +56,7 @@ namespace Trabalho_BD_IHC
             }
             catch (Exception ex)
             {
-                throw new Exception("Falha ao criar encomenda na base de dados. \n ERROR MESSAGE: \n" + ex.Message);
+                throw new Exception("Falha ao registar o material na base de dados. \n ERROR MESSAGE: \n" + ex.Message);
             }
             finally
             {
@@ -106,7 +106,6 @@ namespace Trabalho_BD_IHC
                 }
             }
             else if (mat.GetType() == typeof(Linha)) {
-                Console.WriteLine("OLAAAAAAAAAAA");
                 Linha linha = (Linha)mat;
                 SqlCommand linhacmd = new SqlCommand();
                 linhacmd.Connection = dataHandler.Cn;
@@ -116,7 +115,7 @@ namespace Trabalho_BD_IHC
                 linhacmd.Parameters.AddWithValue("@PRECO", linha.Preco100Metros);
                 linhacmd.Parameters.AddWithValue("@COMPRIMENTO", linha.ComprimentoStock);
                 linhacmd.CommandText = "INSERT INTO LINHA (REFERENCIA_FABRICA, GROSSURA, PRECO_CEM_METROS, COMPRIMENTO_ARMAZEM) " +
-"VALUES (@REFERENCIA, @GROSSURA, @PRECO, @COMPRIMENTO);";
+                "VALUES (@REFERENCIA, @GROSSURA, @PRECO, @COMPRIMENTO);";
                 try
                 {
                     linhacmd.ExecuteNonQuery();

@@ -22,7 +22,7 @@
             <RowDefinition />
             <RowDefinition Height="0.1*"/>
         </Grid.RowDefinitions>
-        <GroupBox Header="Operações" Grid.Column="1" Grid.Row="1">
+        <GroupBox Header="Operações" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.1*"></ColumnDefinition>
@@ -30,22 +30,25 @@
                     <ColumnDefinition Width="0.1*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="0.3*"></RowDefinition>
+                    <RowDefinition Height="0.1*"></RowDefinition>
                     <RowDefinition></RowDefinition>
                     <RowDefinition Height="0.3*"></RowDefinition>
                     <RowDefinition></RowDefinition>
                     <RowDefinition Height="0.3*"></RowDefinition>
                     <RowDefinition></RowDefinition>
                     <RowDefinition Height="0.3*"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="0.3*"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="0.1*"></RowDefinition>
+                    <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
-                <Button x:Name="registarEmpregado" Content="Registar Empregado" Grid.Row="1" Grid.Column="1" Click="registarEmpregado_Click"/>
-                <Button x:Name="editarEmpregado" Content="Editar Empregado" Grid.Row="3" Grid.Column="1" IsEnabled="False"/>
-                <Button x:Name="removerEmpregado" Content="Remover Empregado" Grid.Row="5" Grid.Column="1" IsEnabled="False" Click="removerEmpregado_Click"/>
+                <Button x:Name="registarEmpregado" Content="Registar Empregado" Style="{StaticResource registarButton}" Grid.Row="1" Grid.Column="1" Click="registarEmpregado_Click"/>
+                <Button x:Name="editarEmpregado" Content="Editar Empregado" Style="{StaticResource editarButton}" Grid.Row="3" Grid.Column="1" IsEnabled="False"/>
+                <Button x:Name="removerEmpregado" Content="Remover Empregado" Style="{StaticResource removerButton}" Grid.Row="5" Grid.Column="1" IsEnabled="False" Click="removerEmpregado_Click"/>
+                <Button x:Name="detalhesEmpregado" Content="Ver mais detalhes Empregado" Style="{StaticResource detalhesButton}" Grid.Row="7" Grid.Column="1" IsEnabled="False" Click="verDetalhesEmpregado"/>
             </Grid>
         </GroupBox>
-        <Grid Grid.Row="2" Grid.Column="1">
-            <Label Grid.Row="2" Grid.Column="1" Content="Clique duas vezes num funcionário para ver mais informações sobre ele." ></Label>
-        </Grid>
         <Grid Grid.Column="3" Grid.Row="1" Grid.RowSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.1*"></RowDefinition>
@@ -53,7 +56,7 @@
             </Grid.RowDefinitions>
             <Grid.Resources>
                 <Style x:Key="informationStyle" TargetType="{x:Type ListViewItem}">
-                    <EventSetter Event='MouseDoubleClick' Handler='empregado_DoubleClick'/>
+                    <EventSetter Event='MouseDoubleClick' Handler='verDetalhesEmpregado'/>
                 </Style>
             </Grid.Resources>
             <ListView  Name="empregados" Grid.Row="1" SelectionChanged="empregados_SelectionChanged" ItemContainerStyle="{StaticResource informationStyle}">
