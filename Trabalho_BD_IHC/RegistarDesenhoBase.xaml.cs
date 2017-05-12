@@ -52,14 +52,13 @@ namespace Trabalho_BD_IHC
             SqlCommand cmd = new SqlCommand();
 
             cmd.CommandText = "INSERT INTO DESENHO (NOME_DESENHO, DATA_ALTERACAO, INSTRUCOES_PRODUCAO, N_GESTOR_PROD, IMAGEM_DESENHO) "
-                +  "VALUES (@N_desenho, @nome_desenho, @Data_alteracao, @instr, @nGestor, @imagem);";
+                +  "VALUES (@nome_desenho, @Data_alteracao, @instr, @nGestor, @imagem);";
              cmd.Parameters.Clear();
-             cmd.Parameters.AddWithValue("@N_desenho", desenhoBase.Nome);
              cmd.Parameters.AddWithValue("@nome_desenho", desenhoBase.Nome);
              cmd.Parameters.AddWithValue("@Data_alteracao", DateTime.Today);
              cmd.Parameters.AddWithValue("@instr", desenhoBase.InstrucoesProducao);
              cmd.Parameters.AddWithValue("@nGestor", desenhoBase.GestorProducao.NFuncionario);
-            // cmd.Parameters.AddWithValue("@imagem", desenhoBase);
+             //cmd.Parameters.AddWithValue("@imagem", 'i');
              cmd.Connection = dataHandler.Cn;
              try
              {
@@ -85,14 +84,17 @@ namespace Trabalho_BD_IHC
             DesenhoBase desenhoBase = new DesenhoBase();
             try
             {
-
+                desenhoBase.Nome = txtNomeDesenhoBase.Text;
+                desenhoBase.InstrucoesProducao = txtInstruçoes.Text;
+                desenhoBase.GestorProducao = new GestorProducao();
+                desenhoBase.GestorProducao.NFuncionario = 2; //---> suposto mais tarde colocar o nº do user
+                //falta a imagem
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
                 return;
             }
-
             try
             {
                 EnviarDesenhoBase(desenhoBase);

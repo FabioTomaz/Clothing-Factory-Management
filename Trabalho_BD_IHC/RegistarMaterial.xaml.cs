@@ -19,7 +19,7 @@ using System.Windows.Markup;
 namespace Trabalho_BD_IHC
 {
     /// <summary>
-    /// Interaction logic for RegistarEncomenda.xaml
+    /// Interaction logic for RegistarMaterial.xaml
     /// </summary>
     public partial class RegistarMaterial : Page
     {

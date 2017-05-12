@@ -11,7 +11,7 @@ namespace Trabalho_BD_IHC
         private int nDesenho;
         private String nome;
         private DateTime dataAlteraçao;
-        private GestorProducao gestorProducao;
+        private Utilizador gestorProducao;
         private String instrucoesProducao;
 
         public int NDesenho
@@ -40,18 +40,6 @@ namespace Trabalho_BD_IHC
             }
         }
 
-        public GestorProducao GestorProducao
-        {
-            get
-            {
-                return gestorProducao;
-            }
-
-            set
-            {
-                gestorProducao = value;
-            }
-        }
 
         public string InstrucoesProducao
         {
@@ -76,6 +64,19 @@ namespace Trabalho_BD_IHC
             set
             {
                 dataAlteraçao = value;
+            }
+        }
+
+        public Utilizador GestorProducao
+        {
+            get
+            {
+                return gestorProducao;
+            }
+
+            set
+            {
+                gestorProducao = value;
             }
         }
     }
