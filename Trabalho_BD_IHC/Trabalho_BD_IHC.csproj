@@ -80,6 +80,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="DataHandler.cs" />
+    <Compile Include="DetalhesEncomenda.xaml.cs">
+      <DependentUpon>DetalhesEncomenda.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EditarDesenhoPersonalizado.xaml.cs">
       <DependentUpon>EditarDesenhoPersonalizado.xaml</DependentUpon>
     </Compile>
@@ -88,6 +91,9 @@
     </Compile>
     <Compile Include="EditarCliente.xaml.cs">
       <DependentUpon>EditarCliente.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EditarEncomenda.xaml.cs">
+      <DependentUpon>EditarEncomenda.xaml</DependentUpon>
     </Compile>
     <Compile Include="InformaçãoEmpregado.xaml.cs">
       <DependentUpon>InformaçãoEmpregado.xaml</DependentUpon>
@@ -101,9 +107,6 @@
     <Compile Include="RegistarMaterial.xaml.cs">
       <DependentUpon>RegistarMaterial.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GestorProducao.cs" />
-    <Compile Include="GestorRecursosHumanos.cs" />
-    <Compile Include="GestorVendas.cs" />
     <Compile Include="ListarEmpregados.xaml.cs">
       <DependentUpon>ListarEmpregados.xaml</DependentUpon>
     </Compile>
@@ -133,6 +136,10 @@
       <DependentUpon>RegistarEncomenda.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utilizador.cs" />
+    <Page Include="DetalhesEncomenda.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="EditarDesenhoPersonalizado.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -142,6 +149,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="EditarCliente.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EditarEncomenda.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -366,6 +377,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="deliver.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="GPSV.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="person.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="password.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

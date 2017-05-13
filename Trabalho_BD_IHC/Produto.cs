@@ -18,6 +18,7 @@ namespace Trabalho_BD_IHC
         private int unidadesStock;
         private double preco;
         private DesenhoPersonalizado modelo;
+        private int quantidade;
 
         public int Referencia
         {
@@ -133,6 +134,19 @@ namespace Trabalho_BD_IHC
             set
             {
                 modelo = value;
+            }
+        }
+
+        public int Quantidade
+        {
+            get
+            {
+                return quantidade;
+            }
+
+            set
+            {
+                quantidade = value;
             }
         }
     }

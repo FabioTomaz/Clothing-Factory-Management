@@ -5,7 +5,7 @@ GO
 
  --reset IDENTITY: 
  --DBCC CHECKIDENT ('MATERIAIS_TÊXTEIS', RESEED, 0);
-/*
+
 INSERT INTO ZONA (COD_POSTAL, DISTRITO, CONCELHO, LOCALIDADE) VALUES
 	('4558-547', 'Porto', 'Gaia', 'Gaia'),
 	('1254-585', 'Viseu', 'Ali', 'Acolá'),
@@ -27,11 +27,11 @@ INSERT INTO [TIPO-UTILIZADOR] (TIPO) VALUES
 	('Gestor de Recursos Humanos');	--4
 	
 INSERT INTO UTILIZADOR (NOME, EMAIL, SALARIO, PASS, TELEFONE, N_FABRICA, 
-HORA_ENTRADA, HORA_SAIDA, COD_POSTAL, RUA, N_PORTA, TIPO) VALUES
-	('Carlos Costa', 'costa@mail.pt', 2000, 'costatoy', 91547855, 1, '09:00:00 AM', '18:00:00 PM', '2288-227', 'rua da Beira', 17, 1),
-	('António Cruz', 'acruz@mail.pt', 1000, 'cruz33', 925447557, 1, '09:30:00 AM', '18:00:00 PM', '3865-229', 'rua da Feira', 12, 2),
-	('Rui Jorge', 'rjorge@mail.pt', 1200, 'jorge33', 91475557, 1, '09:30:00 AM', '18:00:00 PM', '3865-229', 'rua da caridade', 12, 3),
-	('José Pacheco', 'jospach@mail.pt', 1500, 'pch45', 91511710, 1, '09:00:00 AM', '17:00:00 PM', '3865-229', 'rua Maria Breu', 20, 4);
+HORA_ENTRADA, HORA_SAIDA, COD_POSTAL, RUA, N_PORTA) VALUES
+	('Carlos Costa', 'costa@mail.pt', 2000, 'costatoy', 91547855, 1, '09:00:00 AM', '18:00:00 PM', '2288-227', 'rua da Beira', 17),
+	('António Cruz', 'acruz@mail.pt', 1000, 'cruz33', 925447557, 1, '09:30:00 AM', '18:00:00 PM', '3865-229', 'rua da Feira', 12),
+	('Rui Jorge', 'rjorge@mail.pt', 1200, 'jorge33', 91475557, 1, '09:30:00 AM', '18:00:00 PM', '3865-229', 'rua da caridade', 12),
+	('José Pacheco', 'jospach@mail.pt', 1500, 'pch45', 91511710, 1, '09:00:00 AM', '17:00:00 PM', '3865-229', 'rua Maria Breu', 20);
 
 INSERT INTO ESTADO (DESCRIÇAO) VALUES
 	('Em fila de espera'),
@@ -76,9 +76,4 @@ INSERT INTO MATERIAIS_TÊXTEIS (REFERENCIA_FORN, NIF_FORNECEDOR, COR, DESIGNACAO)
 	(302, 666999555, 'Preto', 'Botão casaco'),
 	(303, 666999555, 'Castanho', 'Mola'),
 	(301, 478545217, 'Branco', 'Linha'),
-	(304, 666999555, 'Amarelo', 'Elastico')
-	(305, 666999555
-
-INSERT INTO PANO
-
-	*/
+	(304, 666999555, 'Amarelo', 'Elastico');

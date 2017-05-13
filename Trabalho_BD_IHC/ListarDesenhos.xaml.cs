@@ -82,7 +82,7 @@ namespace Trabalho_BD_IHC
                 Des.Nome = reader["NOME_DESENHO"].ToString();
                 Des.InstrucoesProducao = reader["INSTRUCOES_PRODUCAO"].ToString();
                 Des.DataAlteraçao = Convert.ToDateTime(reader["DATA_ALTERACAO"]);
-                Des.GestorProducao = new GestorProducao();
+                Des.GestorProducao = new Utilizador();
                 Des.GestorProducao.NFuncionario = Convert.ToInt32(reader["N_GESTOR_PROD"].ToString());
                 Des.GestorProducao.Nome = reader["NOME"].ToString();
                 desenhoBase.Add(Des);
@@ -114,7 +114,7 @@ namespace Trabalho_BD_IHC
                 Des.Desenho.Nome = reader["NOME_DESENHO"].ToString();
                 Des.Desenho.InstrucoesProducao = reader["INSTRUCOES_PRODUCAO"].ToString();
                 Des.Desenho.DataAlteraçao = Convert.ToDateTime(reader["DATA_ALTERACAO"]);
-                Des.Desenho.GestorProducao = new GestorProducao();
+                Des.Desenho.GestorProducao = new Utilizador();
                 Des.Desenho.GestorProducao.NFuncionario = Convert.ToInt32(reader["N_GESTOR_PROD"].ToString());
                 Des.Desenho.GestorProducao.Nome = reader["NOME"].ToString();
                 desenhoPers.Add(Des);

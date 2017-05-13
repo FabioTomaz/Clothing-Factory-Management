@@ -74,7 +74,7 @@
                         <ColumnDefinition Width="0.05*"></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <wpfTool:WatermarkTextBox Name="txtClienteNif" Grid.Column="0" VerticalAlignment="Center">
+                    <wpfTool:WatermarkTextBox Name="txtCliente" Grid.Column="0" VerticalAlignment="Center">
                         <wpfTool:WatermarkTextBox.Watermark>
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="nCliente.png" Width="20" />
@@ -90,7 +90,7 @@
                     </Button>
                 </Grid>
                 <Label Content="Data Prevista para Entrega:" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center"/>
-                <DatePicker Grid.Row="3" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Center"></DatePicker>
+                <DatePicker Name="dataPrevista" Grid.Row="3" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Center"></DatePicker>
                 <GroupBox Header="Produtos da Encomenda" Grid.Row="5" Grid.RowSpan="5" Grid.Column="0" Grid.ColumnSpan="5">
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -118,7 +118,7 @@
                     </Grid>
                 </GroupBox>
                 <Label Content="Descontos Aplicaveis: " Grid.Row="11" Grid.Column="1" VerticalAlignment="Center"/>
-                <wpfTool:IntegerUpDown Name="txtGestVendas" VerticalAlignment="Center" Grid.Row="11" Grid.Column="3" Maximum="100" Minimum="0" Value="0" FormatString="P"  Width="100" Watermark="Percentagem" HorizontalAlignment="Left"></wpfTool:IntegerUpDown>
+                <wpfTool:IntegerUpDown Name="txtDesconto" VerticalAlignment="Center" Grid.Row="11" Grid.Column="3" Maximum="100" Minimum="0" Value="0" FormatString="P"  Width="100" Watermark="Percentagem" HorizontalAlignment="Left"></wpfTool:IntegerUpDown>
             </Grid>
         </GroupBox>
     </Grid>

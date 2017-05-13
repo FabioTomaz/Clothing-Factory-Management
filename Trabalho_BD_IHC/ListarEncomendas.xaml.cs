@@ -48,30 +48,35 @@ namespace Trabalho_BD_IHC
         }
         private void getEncomendas()
         {
-            SqlCommand cmd = new SqlCommand("SELECT ENCOMENDA.N_ENCOMENDA AS NENCOMENDA, REFERENCIA_PRODUTO, TAMANHO_PRODUTO, COR_PRODUTO,"
-                                + " QUANTIDADE, ESTADO, CLIENTE.NOME as CLIENTENAME, [PRODUTO-BASE].NOME as PRODUCT_NAME, DATA_ENTREGA_PREV"
-                                + " FROM((CONTEUDO_ENCOMENDA JOIN ENCOMENDA ON CONTEUDO_ENCOMENDA.N_ENCOMENDA = ENCOMENDA.N_ENCOMENDA)"
-                                + " JOIN CLIENTE ON CLIENTE.NCLIENTE = ENCOMENDA.CLIENTE)"
-                                + " JOIN[PRODUTO-BASE] ON CONTEUDO_ENCOMENDA.REFERENCIA_PRODUTO = [PRODUTO-BASE].REFERENCIA", dataHandler.Cn);
+            dataHandler.verifySGBDConnection();
+            SqlCommand cmd = new SqlCommand("SELECT ENCOMENDA.N_ENCOMENDA, DATA_CONFIRMACAO, DATA_ENTREGA_PREV, ESTADO.DESCRIÇAO, DESCONTO, CLIENTE.NCLIENTE, CLIENTE.NOME, N_GESTOR_VENDA, SUM([PRODUTO-PERSONALIZADO].PRECO*CONTEUDO_ENCOMENDA.QUANTIDADE) AS PRECOTOTAL "
+                                + " FROM ENCOMENDA JOIN CLIENTE ON CLIENTE.NCLIENTE = ENCOMENDA.CLIENTE"
+                                + " JOIN CONTEUDO_ENCOMENDA ON CONTEUDO_ENCOMENDA.N_ENCOMENDA=ENCOMENDA.N_ENCOMENDA"
+                                + " JOIN [PRODUTO-PERSONALIZADO] ON CONTEUDO_ENCOMENDA.REFERENCIA_PRODUTO=[PRODUTO-PERSONALIZADO].REFERENCIA"
+                                + " JOIN ESTADO ON ENCOMENDA.ESTADO=ESTADO.ID"
+                                + " GROUP BY ENCOMENDA.N_ENCOMENDA, DATA_CONFIRMACAO, DATA_ENTREGA_PREV, ESTADO.DESCRIÇAO, DESCONTO, CLIENTE.NCLIENTE, CLIENTE.NOME, N_GESTOR_VENDA;"
+                                , dataHandler.Cn);
             SqlDataReader reader = cmd.ExecuteReader();
             ObservableCollection<Encomenda> enc = new ObservableCollection<Encomenda>();
             while (reader.Read())
             {
                 Encomenda Enc = new Encomenda();
                 Enc.Cliente = new Cliente();
-                Enc.Produto = new Produto();
-                Enc.NEncomenda = Convert.ToInt32(reader["NENCOMENDA"].ToString());
-                Enc.Produto.Referencia = Convert.ToInt32(reader["REFERENCIA_PRODUTO"].ToString());
-                Enc.Produto.Nome = reader["PRODUCT_NAME"].ToString();
-                Enc.Produto.Tamanho = reader["TAMANHO_PRODUTO"].ToString();
-                Enc.Produto.Cor = reader["COR_PRODUTO"].ToString();
-                Enc.Quantidade = Convert.ToInt32(reader["QUANTIDADE"].ToString());
+                Enc.GestorVendas = new Utilizador();
+                Enc.NEncomenda = Convert.ToInt32(reader["N_ENCOMENDA"].ToString());
+                Enc.Estado = reader["DESCRIÇAO"].ToString();
                 Enc.DataPrevistaEntrega = Convert.ToDateTime(reader["DATA_ENTREGA_PREV"]);
-                Enc.Cliente.Nome = reader["CLIENTENAME"].ToString();
+                Enc.DataConfirmacao = Convert.ToDateTime(reader["DATA_CONFIRMACAO"]);
+                Enc.Desconto = Convert.ToInt32(reader["DESCONTO"]);
+                Enc.GestorVendas.NFuncionario = Convert.ToInt32(reader["N_GESTOR_VENDA"].ToString());
+                Enc.Cliente.Nome = reader["NOME"].ToString();
+                Enc.Cliente.NCliente = Convert.ToInt32(reader["NCLIENTE"].ToString());
+                Enc.Preco = Convert.ToDouble(reader["PRECOTOTAL"].ToString());
                 enc.Add(Enc);
             }
 
             encomendas.ItemsSource = enc;
+            dataHandler.closeSGBDConnection();
         }
         private void CancelarEncomenda(Encomenda encomenda)
         {
@@ -147,6 +152,18 @@ namespace Trabalho_BD_IHC
                 editarEncomenda.IsEnabled = true;
                 entregarEncomenda.IsEnabled = true;
             }
+        }
+
+        private void editarEncomenda_Click(object sender, RoutedEventArgs e)
+        {
+            EditarEncomenda page = new EditarEncomenda(dataHandler, (Encomenda)encomendas.SelectedItem);
+            NavigationService.Navigate(page);
+        }
+
+        private void detalhesEncomenda_Click(object sender, RoutedEventArgs e)
+        {
+            DetalhesEncomenda page = new DetalhesEncomenda(dataHandler, (Encomenda)encomendas.SelectedItem);
+            page.Show();
         }
     }
 }

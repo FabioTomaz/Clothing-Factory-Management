@@ -18,6 +18,7 @@ namespace Trabalho_BD_IHC
         private int _nPorta;
         private int _nCasa;
         private String _telemovel;
+        private int _NCliente;
 
         public string Nif
         {
@@ -120,6 +121,19 @@ namespace Trabalho_BD_IHC
             set
             {
                 _telemovel = value;
+            }
+        }
+
+        public int NCliente
+        {
+            get
+            {
+                return _NCliente;
+            }
+
+            set
+            {
+                _NCliente = value;
             }
         }
     }

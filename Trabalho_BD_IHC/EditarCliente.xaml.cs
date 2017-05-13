@@ -71,7 +71,7 @@ namespace Trabalho_BD_IHC
             }
             catch (Exception ex)
             {
-                throw new Exception("Failed to update contact in database. \n ERROR MESSAGE: \n" + ex.Message);
+                throw new Exception("Não foi possivel atualizar o contacto na base de dados\n" + ex.Message);
             }
             finally
             {

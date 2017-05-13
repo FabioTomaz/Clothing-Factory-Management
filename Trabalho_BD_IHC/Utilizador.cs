@@ -22,7 +22,7 @@ namespace Trabalho_BD_IHC
         private DateTime horaSaida;
         private filial filial;
         private String tipoUser;
-
+        public static Utilizador loggedUser;
         public int NFuncionario
         {
             get

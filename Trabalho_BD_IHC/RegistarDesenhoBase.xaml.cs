@@ -86,7 +86,7 @@ namespace Trabalho_BD_IHC
             {
                 desenhoBase.Nome = txtNomeDesenhoBase.Text;
                 desenhoBase.InstrucoesProducao = txtInstruçoes.Text;
-                desenhoBase.GestorProducao = new GestorProducao();
+                desenhoBase.GestorProducao = new Utilizador();
                 desenhoBase.GestorProducao.NFuncionario = 2; //---> suposto mais tarde colocar o nº do user
                 //falta a imagem
             }

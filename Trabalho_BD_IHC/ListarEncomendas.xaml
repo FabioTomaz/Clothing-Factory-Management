@@ -46,13 +46,13 @@
                 <Button x:Name="entregarEncomenda" Style="{StaticResource entregarButton}" Grid.Row="3" Grid.Column="1" IsEnabled="False">
                     <TextBlock TextWrapping="Wrap">Entregar Encomenda</TextBlock>
                 </Button>
-                <Button x:Name="editarEncomenda" Style="{StaticResource editarButton}" Grid.Row="5" Grid.Column="1" IsEnabled="False">
+                <Button x:Name="editarEncomenda" Style="{StaticResource editarButton}" Grid.Row="5" Grid.Column="1" IsEnabled="False" Click="editarEncomenda_Click">
                     <TextBlock TextWrapping="Wrap">Editar Encomenda</TextBlock>
                 </Button>
                 <Button x:Name="cancelarEncomenda" Style="{StaticResource removerButton}" Grid.Row="7" Grid.Column="1" IsEnabled="False" Click="cancelarEncomenda_Click">
                     <TextBlock TextWrapping="Wrap">Cancelar Encomenda</TextBlock>
                 </Button>
-                <Button x:Name="detalhesEncomenda" Style="{StaticResource detalhesButton}" Grid.Row="9" Grid.Column="1" IsEnabled="False">
+                <Button x:Name="detalhesEncomenda" Style="{StaticResource detalhesButton}" Grid.Row="9" Grid.Column="1" IsEnabled="False" Click="detalhesEncomenda_Click">
                     <TextBlock TextWrapping="Wrap">Ver mais detalhes</TextBlock>
                 </Button>
             </Grid>
@@ -67,14 +67,14 @@
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Nº Encomenda" DisplayMemberBinding="{Binding NEncomenda}" />
-                        <GridViewColumn Header="Referência Produto"  DisplayMemberBinding="{Binding Produto.Referencia}" />
-                        <GridViewColumn Header="Nome Produto"  DisplayMemberBinding="{Binding Produto.Nome}" />
-                        <GridViewColumn Header="Tamanho" DisplayMemberBinding="{Binding Produto.Tamanho}" />
-                        <GridViewColumn Header="Cor" DisplayMemberBinding="{Binding Produto.Cor}" />
-                        <GridViewColumn Header="Quantidade" DisplayMemberBinding="{Binding Quantidade}" />
-                        <GridViewColumn Header="Cliente" DisplayMemberBinding="{Binding Cliente.Nome}" />
-                        <GridViewColumn Header="Data Prevista Entrega" DisplayMemberBinding="{Binding DataPrevistaEntrega, StringFormat=d}" />
-                        
+                        <GridViewColumn Header="Nº Cliente"  DisplayMemberBinding="{Binding Cliente.NCliente}" />
+                        <GridViewColumn Header="Nome Cliente"  DisplayMemberBinding="{Binding Cliente.Nome}" />
+                        <GridViewColumn Header="Estado" DisplayMemberBinding="{Binding Estado}" />
+                        <GridViewColumn Header="Data de Confirmação" DisplayMemberBinding="{Binding DataConfirmacao}" />
+                        <GridViewColumn Header="Data de entrega prevista" DisplayMemberBinding="{Binding DataPrevistaEntrega}" />
+                        <GridViewColumn Header="Funcionário Responsável" DisplayMemberBinding="{Binding GestorVendas.NFuncionario}" />
+                        <GridViewColumn Header="Preço(€)" DisplayMemberBinding="{Binding Preco}" />
+                        <GridViewColumn Header="Desconto(%)" DisplayMemberBinding="{Binding Desconto}" />
                     </GridView>
                 </ListView.View>
             </ListView>

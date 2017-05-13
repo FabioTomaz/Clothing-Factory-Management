@@ -17,9 +17,9 @@ namespace Trabalho_BD_IHC
         private DateTime dataPrevistaEntrega;
         private double desconto;
         private String localEntrega;
-        private GestorVendas gestorVendas;
-        private Produto produto;
+        private Utilizador gestorVendas;
         private int quantidade;
+        private double preco;
 
         public Cliente Cliente
         {
@@ -125,31 +125,6 @@ namespace Trabalho_BD_IHC
             }
         }
 
-        public GestorVendas GestorVendas
-        {
-            get
-            {
-                return gestorVendas;
-            }
-
-            set
-            {
-                gestorVendas = value;
-            }
-        }
-
-        public Produto Produto
-        {
-            get
-            {
-                return produto;
-            }
-
-            set
-            {
-                produto = value;
-            }
-        }
 
         public int Quantidade
         {
@@ -161,6 +136,32 @@ namespace Trabalho_BD_IHC
             set
             {
                 quantidade = value;
+            }
+        }
+
+        public double Preco
+        {
+            get
+            {
+                return preco;
+            }
+
+            set
+            {
+                preco = value;
+            }
+        }
+
+        public Utilizador GestorVendas
+        {
+            get
+            {
+                return gestorVendas;
+            }
+
+            set
+            {
+                gestorVendas = value;
             }
         }
     }

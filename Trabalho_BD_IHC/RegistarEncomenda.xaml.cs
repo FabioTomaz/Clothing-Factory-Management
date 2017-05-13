@@ -43,37 +43,73 @@ namespace Trabalho_BD_IHC
             InitializeComponent();
             this.dataHandler = dataHandler;
         }
-        private void EnviarEncomenda(Encomenda enc)
+        private void EnviarEncomenda()
         {
-
+            
             if (!dataHandler.verifySGBDConnection())
                 return;
             SqlCommand cmd = new SqlCommand();
+            DateTime currentDate = DateTime.Now;
 
-            /* cmd.CommandText = "INSERT INTO CLIENTE (NOME, NIB, NIF, EMAIL, TELEMOVEL, COD_POSTAL, RUA, N_PORTA) " +
-                 "VALUES (@NOME, @NIB, @NIF, @EMAIL, @TELEMOVEL, @COD_POSTAL, @RUA, @N_PORTA);";
-             cmd.Parameters.Clear();
-             cmd.Parameters.AddWithValue("@NOME", cl.Nome);
-             cmd.Parameters.AddWithValue("@NIB", cl.Nib);
-             cmd.Parameters.AddWithValue("@NIF", cl.Nif);
-             cmd.Parameters.AddWithValue("@EMAIL", cl.Email);
-             cmd.Parameters.AddWithValue("@TELEMOVEL", cl.Telemovel);
-             cmd.Parameters.AddWithValue("@COD_POSTAL", cl.CodigoPostal);
-             cmd.Parameters.AddWithValue("@RUA", cl.Rua);
-             cmd.Parameters.AddWithValue("@N_PORTA", cl.NCasa);
-             cmd.Connection = dataHandler.Cn;
-             try
-             {
-                 cmd.ExecuteNonQuery();
-             }
-             catch (Exception ex)
-             {
-                 throw new Exception("Falha ao criar encomenda na base de dados. \n ERROR MESSAGE: \n" + ex.Message);
-             }
-             finally
-             {
-                 dataHandler.closeSGBDConnection();
-             }*/
+            cmd.Parameters.Clear();
+            cmd.CommandText = "Insert into ENCOMENDA(ESTADO, DESCONTO, DATA_CONFIRMACAO, DATA_ENTREGA_PREV ,N_GESTOR_VENDA, CLIENTE) values(1, @DESCONTO, @DATEC, @DATEP ,@GESTOR, @CLIENTE);";
+            cmd.Parameters.AddWithValue("@DATEC", currentDate.ToString("dd-MM-yyyy"));
+            cmd.Parameters.AddWithValue("@DESCONTO", txtDesconto.Value);
+            cmd.Parameters.AddWithValue("@GESTOR", 1);
+            cmd.Parameters.AddWithValue("@CLIENTE", txtCliente.Text);
+            cmd.Parameters.AddWithValue("@DATEP", dataPrevista.Text.ToString());
+            cmd.Connection = dataHandler.Cn;
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Falha ao criar encomenda na base de dados. \n ERROR MESSAGE: \n" + ex.Message);
+            }
+            finally
+            {
+                dataHandler.closeSGBDConnection();
+            }
+
+            dataHandler.verifySGBDConnection();
+            SqlCommand lastCMD = new SqlCommand();
+            lastCMD.CommandText = "Select max(N_ENCOMENDA) from ENCOMENDA;";
+            SqlDataReader reader = lastCMD.ExecuteReader();
+            reader.Read();
+            int encomenda = Convert.ToInt32(reader["N_ENCOMENDA"].ToString());
+            dataHandler.closeSGBDConnection();
+
+            for (int i = 0; i < currentRow; i++) {
+                dataHandler.verifySGBDConnection();
+                SqlCommand values = new SqlCommand();
+                StackPanel sck = (StackPanel)stack.Children[i];
+                String referencia = ((Xceed.Wpf.Toolkit.WatermarkTextBox)sck.Children[0]).Text;
+                String cor = ((Xceed.Wpf.Toolkit.WatermarkTextBox)sck.Children[1]).Text;
+                String tamanho = ((Xceed.Wpf.Toolkit.WatermarkTextBox)sck.Children[2]).Text;
+                int? quantidade = ((Xceed.Wpf.Toolkit.IntegerUpDown)sck.Children[3]).Value;
+                values.Parameters.Clear();
+                values.Parameters.AddWithValue("@ENCOMENDA", encomenda);
+                values.Parameters.AddWithValue("@REFERENCIA", referencia);
+                values.Parameters.AddWithValue("@TAMANHO", tamanho);
+                values.Parameters.AddWithValue("@COR", cor);
+                values.Parameters.AddWithValue("@QUANTIDADE", quantidade);
+                values.CommandText = "INSERT INTO [CONTEUDO-ENCOMENDA](N_ENCOMENDA, REFERENCIA_PRODUTO, TAMANHO_PRODUTO, COR_PRODUTO, QUANTIDADE) VALUES(@ENCOMENDA, @REFERENCIA, @TAMANHO, @COR, @QUANTIDADE)";
+                values.Connection = dataHandler.Cn;
+                try
+                {
+                    values.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Falha ao associar produtos á encomenda na base de dados. \n ERROR MESSAGE: \n" + ex.Message);
+                }
+                finally
+                {
+                    dataHandler.closeSGBDConnection();
+                }
+            }
+
         }
 
         private void cancelar_Click(object sender, RoutedEventArgs e)
@@ -83,20 +119,10 @@ namespace Trabalho_BD_IHC
 
         private void confirmar_Click(object sender, RoutedEventArgs e)
         {
-            Encomenda encomenda = new Encomenda();
+            
             try
             {
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                return;
-            }
-
-            try
-            {
-                EnviarEncomenda(encomenda);
+                EnviarEncomenda();
             }
             catch (Exception ex)
             {
