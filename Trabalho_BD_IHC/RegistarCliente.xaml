@@ -81,9 +81,9 @@
                         <ColumnDefinition Width="0.7*"></ColumnDefinition>
                         <ColumnDefinition Width="2*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    
-                    <Button x:Name="confirmar" Content="Confirmar Registo" Grid.Column="2" HorizontalAlignment="Center" IsEnabled="True" Click="confirmar_Click"/>
-                    <Button x:Name="cancelar" Content="Cancelar Registo" Grid.Column="0" HorizontalAlignment="Center" Click="cancelar_Click"/>
+
+                    <Button x:Name="confirmar" Style="{StaticResource confirmarButton}" Content="Confirmar Registo" Grid.Column="2" HorizontalAlignment="Center" IsEnabled="True" Click="confirmar_Click"/>
+                    <Button x:Name="cancelar" Style="{StaticResource cancelarButton}" Content="Cancelar Registo" Grid.Column="0" HorizontalAlignment="Center" Click="cancelar_Click"/>
                 </Grid>
             </Grid>
     </GroupBox>

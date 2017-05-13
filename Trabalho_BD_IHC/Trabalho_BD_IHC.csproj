@@ -83,6 +83,9 @@
     <Compile Include="DetalhesEncomenda.xaml.cs">
       <DependentUpon>DetalhesEncomenda.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DetalhesMaterial.xaml.cs">
+      <DependentUpon>DetalhesMaterial.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EditarDesenhoPersonalizado.xaml.cs">
       <DependentUpon>EditarDesenhoPersonalizado.xaml</DependentUpon>
     </Compile>
@@ -137,6 +140,10 @@
     </Compile>
     <Compile Include="Utilizador.cs" />
     <Page Include="DetalhesEncomenda.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DetalhesMaterial.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -386,6 +393,10 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="password.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="cancelar.png" />
+    <Resource Include="confirmar.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

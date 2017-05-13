@@ -21,7 +21,7 @@
             <RowDefinition />
             <RowDefinition Height="0.05*"/>
         </Grid.RowDefinitions>
-        <GroupBox Header="Operações" Grid.Column="1" Grid.Row="1">
+        <GroupBox Template="{StaticResource blackGroupBox}" Header="Operações" Grid.Column="1" Grid.Row="1">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.1*"></ColumnDefinition>
@@ -29,40 +29,44 @@
                     <ColumnDefinition Width="0.1*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="0.3*"></RowDefinition>
+                    <RowDefinition Height="0.1*"></RowDefinition>
                     <RowDefinition></RowDefinition>
                     <RowDefinition Height="0.3*"></RowDefinition>
                     <RowDefinition></RowDefinition>
                     <RowDefinition Height="0.3*"></RowDefinition>
                     <RowDefinition></RowDefinition>
                     <RowDefinition Height="0.3*"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="0.3*"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="0.1*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Button x:Name="confirmar" Content="Confirmar"  Grid.Row="1" Grid.Column="1" IsEnabled="True" Click="confirmar_Click"/>
-                <Button x:Name="cancelar" Content="Cancelar" Grid.Row="3" Grid.Column="1" Click="cancelar_Click"/>
+                <Button x:Name="confirmar" Style="{StaticResource confirmarButton}" Content="Confirmar"  Grid.Row="1" Grid.Column="1" IsEnabled="True" Click="confirmar_Click"/>
+                <Button x:Name="cancelar" Style="{StaticResource cancelarButton}" Content="Cancelar" Grid.Row="3" Grid.Column="1" Click="cancelar_Click"/>
             </Grid>
         </GroupBox>
-        <GroupBox Header="Registar Material" Grid.Row="1" Grid.Column="3">
+        <GroupBox Template="{StaticResource blueGroupBox}" Header="Registar Material" Grid.Row="1" Grid.Column="3">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1.2*"></ColumnDefinition>
-                    <ColumnDefinition Width="1.5*"></ColumnDefinition>
-                    <ColumnDefinition Width="1.5*"></ColumnDefinition>
-                    <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                    <ColumnDefinition Width="0.8*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="0.8*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
 
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="0.05*"></RowDefinition>
-                    <RowDefinition Height="30"></RowDefinition>
-                    <RowDefinition Height="0.1*"></RowDefinition>
                     <RowDefinition Height="25"></RowDefinition>
-                    <RowDefinition Height="0.1*"></RowDefinition>
+                    <RowDefinition Height="0.05*"></RowDefinition>
                     <RowDefinition Height="25"></RowDefinition>
-                    <RowDefinition Height="0.1*"></RowDefinition>
+                    <RowDefinition Height="0.05*"></RowDefinition>
                     <RowDefinition Height="25"></RowDefinition>
+                    <RowDefinition Height="0.05*"></RowDefinition>
+                    <RowDefinition Height="25"></RowDefinition>
+                    <RowDefinition Height="0.05*"></RowDefinition>
                     <RowDefinition Height="0.2*"></RowDefinition>
-                    <RowDefinition Height="25"></RowDefinition>
-                    <RowDefinition Height="0.2*"></RowDefinition>
-                    <RowDefinition Height="25"></RowDefinition>
+                    <RowDefinition Height="0.05*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
                     <RowDefinition Height="0.05*"></RowDefinition>
 
                 </Grid.RowDefinitions>
@@ -129,7 +133,7 @@
 
 
                 <Label Content="NIF Fornecedor:" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-                <wpfTool:WatermarkTextBox Name="txtFornecedorNif" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2">
+                <wpfTool:WatermarkTextBox Name="txtFornecedorNif" Grid.Row="3" Grid.Column="1" >
                     <wpfTool:WatermarkTextBox.Watermark>
                         <StackPanel Orientation="Horizontal">
                             <Image Source="fornecedor.png" />
@@ -137,7 +141,7 @@
                         </StackPanel>
                     </wpfTool:WatermarkTextBox.Watermark>
                 </wpfTool:WatermarkTextBox>
-                <Button Grid.Row="3" Grid.Column="3" HorizontalAlignment="Left">
+                <Button Grid.Row="3" Grid.Column="2" HorizontalAlignment="Left">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="searchCliente.png"/>
                         <TextBlock Text="Pesquisar Fornecedor" Margin="4,0,0,0" />
@@ -152,9 +156,24 @@
                         </StackPanel>
                     </wpfTool:WatermarkTextBox.Watermark>
                 </wpfTool:WatermarkTextBox>
-                <Label Grid.Column="2" Grid.Row="5" HorizontalAlignment="Right" VerticalAlignment="Center">Cor:</Label>
-                <wpfTool:ColorPicker Name="corMaterial"  Grid.Row="5" Grid.Column="3"></wpfTool:ColorPicker>
-                <Grid Name="pano" Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="4" Grid.RowSpan="5">
+                <Label Grid.Column="0" Grid.Row="7" HorizontalAlignment="Right" VerticalAlignment="Center">Cor:</Label>
+                <Grid Grid.Row="7" Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <wpfTool:ColorPicker Name="corMaterial"  Grid.Column="0"></wpfTool:ColorPicker>
+                </Grid>
+                <Label Content="Descrição: " HorizontalAlignment="Right" VerticalAlignment="Top" Grid.Row="9" Grid.Column="0"></Label>
+                <wpfTool:WatermarkTextBox Name="txtDescriçãoMaterial" Grid.Row="9" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="2">
+                    <wpfTool:WatermarkTextBox.Watermark>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="referencia.png" Width="20" />
+                            <TextBlock Text="Descrição do Material Textil a ser Registado" Margin="4,0,0,0" />
+                        </StackPanel>
+                    </wpfTool:WatermarkTextBox.Watermark>
+                </wpfTool:WatermarkTextBox>
+                <Grid Name="pano" Grid.Column="0" Grid.Row="11" Grid.ColumnSpan="4" Grid.RowSpan="5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.8*"></ColumnDefinition>
                         <ColumnDefinition Width="1*"></ColumnDefinition>
@@ -173,7 +192,7 @@
                     <Label Grid.Row="3" Grid.Column="0" Content="Preço por m2" HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
                     <wpfTool:DoubleUpDown Name="txtPreçoM2" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="3" Grid.Column="1" Maximum="10000" Minimum="0" Value="0.00" FormatString="F"  Width="80"></wpfTool:DoubleUpDown>
                 </Grid>
-                <Grid Name="linha" Visibility="Hidden" Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="4" Grid.RowSpan="5">
+                <Grid Name="linha" Visibility="Hidden" Grid.Column="0" Grid.Row="11" Grid.ColumnSpan="4" Grid.RowSpan="5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.8*"></ColumnDefinition>
                         <ColumnDefinition Width="1*"></ColumnDefinition>
@@ -190,7 +209,7 @@
                     <Label Grid.Row="2" Grid.Column="0" Content="Preço (€/100m2): " HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
                     <wpfTool:IntegerUpDown Name="txtPreço100M" VerticalAlignment="Center" Grid.Row="2" Grid.Column="2" Minimum="0" Value="0"  FormatString="F"  Width="80" HorizontalAlignment="Left"></wpfTool:IntegerUpDown>
                 </Grid>
-                <Grid Name="fecho" Visibility="Hidden" Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="4" Grid.RowSpan="5">
+                <Grid Name="fecho" Visibility="Hidden" Grid.Column="0" Grid.Row="11" Grid.ColumnSpan="4" Grid.RowSpan="5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.8*"></ColumnDefinition>
                         <ColumnDefinition Width="1*"></ColumnDefinition>
@@ -216,7 +235,7 @@
                     <Label Grid.Row="4" Grid.Column="0" Content="Preço/unidade (€): " HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
                     <wpfTool:IntegerUpDown Name="txtPrecoUnidadeFecho" VerticalAlignment="Center" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" Width="100" Minimum="0" Value="0"  FormatString="F" HorizontalAlignment="Left"></wpfTool:IntegerUpDown>
                 </Grid>
-                <Grid Name="mola" Visibility="Hidden" Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="4" Grid.RowSpan="5">
+                <Grid Name="mola" Visibility="Hidden" Grid.Column="0" Grid.Row="11" Grid.ColumnSpan="4" Grid.RowSpan="5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.8*"></ColumnDefinition>
                         <ColumnDefinition Width="1*"></ColumnDefinition>
@@ -235,7 +254,7 @@
                     <Label Grid.Row="2" Grid.Column="0" Content="Preço/unidade (€): " HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
                     <wpfTool:IntegerUpDown Name="txtPrecoUnidadeMola" VerticalAlignment="Center" Grid.Row="2" Grid.Column="2" Width="100" Minimum="0" Value="0"  FormatString="F" HorizontalAlignment="Left"></wpfTool:IntegerUpDown>
                 </Grid>
-                <Grid Name="botao" Visibility="Hidden" Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="4" Grid.RowSpan="5">
+                <Grid Name="botao" Visibility="Hidden" Grid.Column="0" Grid.Row="11" Grid.ColumnSpan="4" Grid.RowSpan="5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.8*"></ColumnDefinition>
                         <ColumnDefinition Width="1*"></ColumnDefinition>
@@ -254,7 +273,7 @@
                     <Label Grid.Row="2" Grid.Column="0" Content="Preço/unidade (€): " HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
                     <wpfTool:IntegerUpDown Name="txtPrecoUnidadeBotao" VerticalAlignment="Center" Grid.Row="2" Grid.Column="2" Width="100" Minimum="0" Value="0"  FormatString="F" HorizontalAlignment="Left"></wpfTool:IntegerUpDown>
                 </Grid>
-                <Grid Name="elastico" Visibility="Hidden" Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="4" Grid.RowSpan="5">
+                <Grid Name="elastico" Visibility="Hidden" Grid.Column="0" Grid.Row="11" Grid.ColumnSpan="4" Grid.RowSpan="5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.8*"></ColumnDefinition>
                         <ColumnDefinition Width="1*"></ColumnDefinition>
@@ -276,7 +295,7 @@
                     <Label Grid.Row="3" Grid.Column="0" Content="Preço/unidade (€): " HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
                     <wpfTool:IntegerUpDown Name="txtPrecoUnidadeElastico" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="3" Grid.Column="1" Width="100" Minimum="0" Value="0"  FormatString="F"></wpfTool:IntegerUpDown>
                 </Grid>
-                <Grid Name="fitaVelcro" Visibility="Hidden" Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="4" Grid.RowSpan="5">
+                <Grid Name="fitaVelcro" Visibility="Hidden" Grid.Column="0" Grid.Row="11" Grid.ColumnSpan="4" Grid.RowSpan="5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.8*"></ColumnDefinition>
                         <ColumnDefinition Width="1*"></ColumnDefinition>

@@ -37,8 +37,8 @@
                         <RowDefinition></RowDefinition>
                         <RowDefinition Height="0.3*"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <Button x:Name="confirmar" Content="Confirmar"  Grid.Row="1" Grid.Column="1" IsEnabled="True" Click="confirmar_Click"/>
-                    <Button x:Name="cancelar" Content="Cancelar" Grid.Row="3" Grid.Column="1" Click="cancelar_Click"/>
+                    <Button x:Name="confirmar" Style="{StaticResource confirmarButton}" Content="Confirmar"  Grid.Row="1" Grid.Column="1" IsEnabled="True" Click="confirmar_Click"/>
+                <Button x:Name="cancelar" Style="{StaticResource cancelarButton}" Content="Cancelar" Grid.Row="3" Grid.Column="1" Click="cancelar_Click"/>
                 </Grid>
             </GroupBox>
             <GroupBox Header="Editar Encomenda" Grid.Row="1" Grid.Column="3">

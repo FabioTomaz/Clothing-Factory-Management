@@ -148,3 +148,5 @@ C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\EditarEncomenda.g.c
 C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\EditarEncomenda.baml
 C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\DetalhesEncomenda.g.cs
 C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\DetalhesEncomenda.baml
+C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\DetalhesMaterial.g.cs
+C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\DetalhesMaterial.baml

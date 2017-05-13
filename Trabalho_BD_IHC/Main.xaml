@@ -85,22 +85,22 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Clientes"  IsEnabled="True">
-                <Frame Name="clientesFrame" ContentRendered="myFrame_ContentRendered"></Frame>
+                <Frame Name="clientesFrame" NavigationUIVisibility="Hidden"></Frame>
             </TabItem>
             <TabItem Header="Encomendas"  IsEnabled="True">
-                <Frame Name="encomendasFrame" ContentRendered="myFrame_ContentRendered"></Frame>
+                <Frame Name="encomendasFrame" NavigationUIVisibility="Hidden"></Frame>
             </TabItem>
             <TabItem Header="Produção"  IsEnabled="True">
-                <Frame Name="produtosFrame" ContentRendered="myFrame_ContentRendered"></Frame>
+                <Frame Name="produtosFrame" NavigationUIVisibility="Hidden"></Frame>
             </TabItem>
             <TabItem Header="Desenhos">
-                <Frame Name="desenhosFrame" ContentRendered="myFrame_ContentRendered"></Frame>
+                <Frame Name="desenhosFrame" NavigationUIVisibility="Hidden"></Frame>
             </TabItem>
             <TabItem Header="Materiais"  IsEnabled="True">
-                <Frame Name="materiaisFrame" ContentRendered="myFrame_ContentRendered"></Frame>
+                <Frame Name="materiaisFrame" NavigationUIVisibility="Hidden"></Frame>
             </TabItem>
             <TabItem Header="Recursos Humanos" >
-                <Frame Name="empregadosFrame" ContentRendered="myFrame_ContentRendered"></Frame>
+                <Frame Name="empregadosFrame" NavigationUIVisibility="Hidden"></Frame>
             </TabItem>
             <TabItem Header="Estatísticas"  IsEnabled="True">
                 <Grid Background="White">
@@ -192,12 +192,7 @@
 
                         </Grid>
                     </GroupBox>
-                   
-
-
-                    <GroupBox Header="Imagem de Perfil" Grid.Row="1" Grid.RowSpan="3" Grid.Column="4">
-                        <Image Source="login.png"></Image>
-                    </GroupBox>
+                  
                     
                 </Grid>
             </TabItem>
@@ -205,14 +200,7 @@
                 <Grid Background="#FFE5E5E5"/>
             </TabItem>
             <TabItem Header="Ajuda" >
-                <WatermarkTextBox xmlns='clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit' Name='txtClienteNif'> 
-                    <WatermarkTextBox.Watermark>
-                        <StackPanel xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation' Orientation='Horizontal'>
-                            <Image Source = 'nCliente.png' Width = '20' />
-                            <TextBlock Text = 'Numero do Cliente' Margin = '4,0,0,0' />
-                        </StackPanel>
-                    </WatermarkTextBox.Watermark>
-                </WatermarkTextBox>
+                
             </TabItem>
         </TabControl>
     </Grid>

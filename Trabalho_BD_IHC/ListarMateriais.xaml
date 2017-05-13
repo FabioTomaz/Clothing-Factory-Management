@@ -20,7 +20,7 @@
             <RowDefinition />
             <RowDefinition Height="0.1*"/>
         </Grid.RowDefinitions>
-        <GroupBox Header="Operações" Grid.Column="1" Grid.Row="1">
+        <GroupBox Template="{StaticResource blackGroupBox}" Header="Operações" Grid.Column="1" Grid.Row="1">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.1*"></ColumnDefinition>
@@ -53,7 +53,7 @@
                 <Button x:Name="removerMaterial" Style="{StaticResource removerButton}" Grid.Row="7" Grid.Column="1" IsEnabled="False" Click="removerMaterial_Click">
                     <TextBlock TextWrapping="Wrap">Remover Material</TextBlock>
                 </Button>
-                <Button x:Name="detalhesMaterial" Style="{StaticResource detalhesButton}" Grid.Row="9" Grid.Column="1" IsEnabled="False">
+                <Button x:Name="detalhesMaterial" Style="{StaticResource detalhesButton}" Grid.Row="9" Grid.Column="1" IsEnabled="False" Click="detalhesMaterial_Click">
                     <TextBlock TextWrapping="Wrap">Ver Mais detalhes</TextBlock>
                 </Button>
             </Grid>

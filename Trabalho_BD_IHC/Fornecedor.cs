@@ -8,7 +8,7 @@ namespace Trabalho_BD_IHC
 {
     public class Fornecedor
     {
-        private int NIF;
+        private String NIF;
         private String nome;
         private int fax;
         private String email;
@@ -19,7 +19,7 @@ namespace Trabalho_BD_IHC
         private String rua;
         private String designacao;
 
-        public int NIF_Fornecedor
+        public String NIF_Fornecedor
         {
             get
             {

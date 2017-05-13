@@ -300,7 +300,7 @@ namespace Trabalho_BD_IHC
                 material = new Pano();
                 material.Cor = corMaterial.SelectedColor.ToString();
                 material.Designacao = "designacao";
-                material.Fornecedor = txtFornecedorNif.Text;
+                material.Fornecedor.NIF_Fornecedor = txtFornecedorNif.Text;
                 material.ReferenciaFornecedor = txtReferenciaFornecedor.Text;
                 ((Pano)material).Gramagem = (int)txtGramagem.Value;
                 ((Pano)material).PrecoMetroQuadrado = (Double)txtPreçoM2.Value;
@@ -311,7 +311,7 @@ namespace Trabalho_BD_IHC
                 material = new Linha();
                 material.Cor = corMaterial.SelectedColor.ToString();
                 material.Designacao = "designacao";
-                material.Fornecedor = txtFornecedorNif.Text;
+                material.Fornecedor.NIF_Fornecedor = txtFornecedorNif.Text;
                 material.ReferenciaFornecedor = txtReferenciaFornecedor.Text;
                 ((Linha)material).Preco100Metros = Convert.ToDouble(txtPreço100M.Text);
                 ((Linha)material).Grossura = Convert.ToDouble(txtGrossura.Text);
@@ -324,7 +324,7 @@ namespace Trabalho_BD_IHC
                     material = new Fecho();
                     material.Cor = corMaterial.SelectedColor.ToString();
                     material.Designacao = "designacao";
-                    material.Fornecedor = txtFornecedorNif.Text;
+                    material.Fornecedor.NIF_Fornecedor = txtFornecedorNif.Text;
                     material.ReferenciaFornecedor = txtReferenciaFornecedor.Text;
                     ((Fecho)material).TamanhoDente = Convert.ToDouble(txtTamanhoDente.Text);
                     ((Fecho)material).Largura = Convert.ToDouble(txtLarguraFecho.Text);
@@ -337,7 +337,7 @@ namespace Trabalho_BD_IHC
                     material = new Mola();
                     material.Cor = corMaterial.SelectedColor.ToString();
                     material.Designacao = "designacao";
-                    material.Fornecedor = txtFornecedorNif.Text;
+                    material.Fornecedor.NIF_Fornecedor = txtFornecedorNif.Text;
                     material.ReferenciaFornecedor = txtReferenciaFornecedor.Text;
                     ((Mola)material).Diametro = Convert.ToDouble(txtDiametroMola.Text);
                     ((Mola)material).PrecoUnidade = Convert.ToDouble(txtPrecoUnidadeMola.Text);
@@ -347,7 +347,7 @@ namespace Trabalho_BD_IHC
                     material = new Botao();
                     material.Cor = corMaterial.SelectedColor.ToString();
                     material.Designacao = "designacao";
-                    material.Fornecedor = txtFornecedorNif.Text;
+                    material.Fornecedor.NIF_Fornecedor = txtFornecedorNif.Text;
                     material.ReferenciaFornecedor = txtReferenciaFornecedor.Text;
                     ((Botao)material).Diametro = Convert.ToDouble(txtDiametroBotao.Text);
                     ((Botao)material).PrecoUnidade = Convert.ToDouble(txtPrecoUnidadeBotao.Text);
@@ -357,7 +357,7 @@ namespace Trabalho_BD_IHC
                     material = new FitaVelcro();
                     material.Cor = corMaterial.SelectedColor.ToString();
                     material.Designacao = "designacao";
-                    material.Fornecedor = txtFornecedorNif.Text;
+                    material.Fornecedor.NIF_Fornecedor = txtFornecedorNif.Text;
                     material.ReferenciaFornecedor = txtReferenciaFornecedor.Text;
                     ((FitaVelcro)material).Largura = Convert.ToDouble(txtLarguraFita.Text);
                     ((FitaVelcro)material).Comprimento = Convert.ToDouble(txtComprimentoFita.Text);
@@ -368,7 +368,7 @@ namespace Trabalho_BD_IHC
                     material = new Elastico();
                     material.Cor = corMaterial.SelectedColor.ToString();
                     material.Designacao = "designacao";
-                    material.Fornecedor = txtFornecedorNif.Text;
+                    material.Fornecedor.NIF_Fornecedor = txtFornecedorNif.Text;
                     material.ReferenciaFornecedor = txtReferenciaFornecedor.Text;
                     ((Elastico)material).Largura = Convert.ToDouble(txtLarguraFita.Text);
                     ((Elastico)material).Comprimento = Convert.ToDouble(txtComprimentoFita.Text);
