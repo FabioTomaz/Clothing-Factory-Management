@@ -41,8 +41,6 @@ C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\ListarEncomendas.g.
 C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\ListarEncomendas.baml
 C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\listarProdutos.g.cs
 C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\listarProdutos.baml
-C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\ListarDesenhos.g.cs
-C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\ListarDesenhos.baml
 C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\bin\Debug\Trabalho_BD_IHC.exe
 C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\bin\Debug\Trabalho_BD_IHC.pdb
 C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\obj\Debug\Trabalho_BD_IHC.csprojResolveAssemblyReference.cache
@@ -135,10 +133,8 @@ C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\obj
 C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\obj\Debug\EditarDesenhoPersonalizado.baml
 C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\obj\Debug\RegistarDesenhoPersonalizado.baml
 C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\EditarDesenhoPersonalizado.g.cs
-C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\EditarDesenhoBase.g.cs
 C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\RegistarDesenhoPersonalizado.g.cs
 C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\EditarDesenhoPersonalizado.baml
-C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\EditarDesenhoBase.baml
 C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\RegistarDesenhoPersonalizado.baml
 C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\EditarEncomenda.g.cs
 C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\EditarEncomenda.baml
@@ -162,3 +158,13 @@ C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\obj
 C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\obj\Debug\EditarProdutoBase.baml
 C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\obj\Debug\RegistarProdutoPersonalizado.g.cs
 C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\obj\Debug\RegistarProdutoPersonalizado.baml
+C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\DetalhesCliente.g.cs
+C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\EditarProdutoBase.g.cs
+C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\RegistarProdutoPersonalizado.g.cs
+C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\RegistarProdutoBase.g.cs
+C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\listprodutos.g.cs
+C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\DetalhesCliente.baml
+C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\EditarProdutoBase.baml
+C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\RegistarProdutoPersonalizado.baml
+C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\RegistarProdutoBase.baml
+C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\listprodutos.baml

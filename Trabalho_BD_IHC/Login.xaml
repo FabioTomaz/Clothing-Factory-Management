@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Trabalho_BD_IHC"
         mc:Ignorable="d"
-        Title="Login" ResizeMode="CanMinimize" Height="220" Width="420" MaxHeight="200" MinHeight="200" MaxWidth="420" MinWidth="420" Background="White">
+        Title="Login" ResizeMode="CanMinimize" Height="220" Width="420" MaxHeight="200" MinHeight="200" MaxWidth="420" MinWidth="420" Background="White" Closing="Window_Closing" Icon="login.png"
+    WindowStartupLocation="CenterScreen">
    
     <Grid>
         
@@ -24,14 +25,14 @@
         </Grid.RowDefinitions>
         <Image Name="imageLogin" Stretch="Fill"  Grid.Column="1" Grid.Row="1" Source="login (1).png">
         </Image>
-        <GroupBox Name="loginGroupBox" Grid.Column="3" Grid.Row="1" Header="Login">
+        <GroupBox Name="loginGroupBox" Template="{StaticResource greenGroupBox}" Grid.Column="3" Grid.Row="1" Header="Login">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="0.5*"></RowDefinition>
-                    <RowDefinition/>
-                    <RowDefinition Height="0.5*"/>
-                    <RowDefinition/>
-                    <RowDefinition Height="0.5*"></RowDefinition>
+                    <RowDefinition Height="0.2*"></RowDefinition>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="0.3*"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="0.2*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.1*"></ColumnDefinition>
@@ -40,9 +41,9 @@
                     <ColumnDefinition Width="0.1*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Label Name="labelEmpregado" VerticalAlignment="Center" Content="Nº de Empregado: " Grid.Row="1" Grid.Column="1"/>
-                <TextBox Name="nEmpregado" Grid.Row="1" Grid.Column="2"/>
+                <TextBox Name="nEmpregado" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center"/>
                 <Label Name="labelPassword" VerticalAlignment="Center" Content="Password: " Grid.Row="3" Grid.Column="1"></Label>
-                <TextBox Name="password" Grid.Row="3" Grid.Column="2"/>
+                <PasswordBox Name="password" Grid.Row="3" Grid.Column="2" VerticalAlignment="Center"/>
             </Grid>
         </GroupBox>
         <Grid Grid.Row="2" Grid.Column="3">
@@ -56,11 +57,11 @@
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition Width="3*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Grid.Row="1" VerticalAlignment="Center">
+            <Button Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" Style="{StaticResource confirmarButton}" Click="Button_Click">
                 Login
             </Button>
-            <Button Grid.Column="2" Grid.Row="1" VerticalAlignment="Center">
-                Cancelar
+            <Button Grid.Column="2" Grid.Row="1" VerticalAlignment="Center" Style="{StaticResource cancelarButton}" Click="Button_Click_1">
+                Ajuda
             </Button>
         </Grid>
     </Grid>

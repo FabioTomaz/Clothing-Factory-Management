@@ -52,9 +52,9 @@ namespace Trabalho_BD_IHC
                     u.Nome = reader["NOME"].ToString();
                     u.Email = reader["EMAIL"].ToString();
                     u.Telemovel = reader["TELEFONE"].ToString();
-                    u.CodigoPostal = reader["COD_POSTAL"].ToString();
-                    u.Rua = reader["RUA"].ToString();
-                    u.NPorta = Convert.ToInt32(reader["N_PORTA"].ToString());
+                    u.Localizacao.CodigoPostal = reader["COD_POSTAL"].ToString();
+                    u.Localizacao.Rua1 = reader["RUA"].ToString();
+                    u.Localizacao.Porta = Convert.ToInt32(reader["N_PORTA"].ToString());
                     user.Add(u);
                 }
 

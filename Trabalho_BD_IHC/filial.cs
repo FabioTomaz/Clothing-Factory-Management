@@ -9,12 +9,10 @@ namespace Trabalho_BD_IHC
     public class filial
     {
         private int nFilial;
-        private int fax;
-        private String email;
-        private int telefone;
-        private String localidade;
-        private String país;
-        private String rua;
+        private string fax;
+        private string email;
+        private string telefone;
+        private Localizacao localizacao;
 
         public int NFilial
         {
@@ -29,7 +27,7 @@ namespace Trabalho_BD_IHC
             }
         }
 
-        public int Fax
+        public string Fax
         {
             get
             {
@@ -55,7 +53,7 @@ namespace Trabalho_BD_IHC
             }
         }
 
-        public int Telefone
+        public string Telefone
         {
             get
             {
@@ -68,42 +66,16 @@ namespace Trabalho_BD_IHC
             }
         }
 
-        public string Localidade
+        internal Localizacao Localizacao
         {
             get
             {
-                return localidade;
+                return localizacao;
             }
 
             set
             {
-                localidade = value;
-            }
-        }
-
-        public string País
-        {
-            get
-            {
-                return país;
-            }
-
-            set
-            {
-                país = value;
-            }
-        }
-
-        public string Rua
-        {
-            get
-            {
-                return rua;
-            }
-
-            set
-            {
-                rua = value;
+                localizacao = value;
             }
         }
     }

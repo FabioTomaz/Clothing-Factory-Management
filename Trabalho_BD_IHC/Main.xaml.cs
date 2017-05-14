@@ -26,20 +26,42 @@ namespace Trabalho_BD_IHC
     public partial class MainWindow : Window
     {
         DataHandler dataHandler;
-        public MainWindow()
+        public MainWindow(DataHandler dataHandler)
         {
             InitializeComponent();
-            dataHandler = new DataHandler();
+            this.dataHandler = dataHandler; 
             clientesFrame.Content = new ListarClientes(dataHandler);
             encomendasFrame.Content = new ListarEncomendas(dataHandler);
             produtosFrame.Content = new ListarProdutos(dataHandler);
             materiaisFrame.Content = new ListarMateriais(dataHandler);
             empregadosFrame.Content = new ListarEmpregados(dataHandler);
+            fillUserInfo();
         }
 
         private void myFrame_ContentRendered(object sender, EventArgs e)
         {
             clientesFrame.NavigationUIVisibility = System.Windows.Navigation.NavigationUIVisibility.Hidden;
+        }
+
+        private void login() {
+            Login loginWindow = new Login();
+            loginWindow.ShowDialog();
+            if (Utilizador.loggedUser == null)
+            {
+                Application.Current.Shutdown();
+            }
+        }
+
+        public void fillUserInfo() {
+            Console.WriteLine(Utilizador.loggedUser.NFuncionario);
+            nomeUtilizador.Content = Utilizador.loggedUser.Nome;
+            horaEntrada.Content = Utilizador.loggedUser.HoraEntrada.ToString();
+            horaSaida.Content = Utilizador.loggedUser.HoraSaida.ToString();
+            emailUtilizador.Content = Utilizador.loggedUser.Email;
+            telefoneUtilizador.Content = Utilizador.loggedUser.Telemovel;
+            salario.Content = Utilizador.loggedUser.Salario;
+            nFuncionario.Content = Utilizador.loggedUser.NFuncionario;
+            supervisor.Content =  String.Format("{0} (Nome: {1})", Utilizador.loggedUser.Supervisor.NFuncionario, Utilizador.loggedUser.Supervisor.Nome);
         }
     }
 }

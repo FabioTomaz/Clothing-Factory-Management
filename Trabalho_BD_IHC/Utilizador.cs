@@ -14,14 +14,13 @@ namespace Trabalho_BD_IHC
         private String nome;
         private String email;
         private String telemovel;
-        private String codigoPostal;
-        private String rua;
-        private int nPorta;
+        private Localizacao localizacao;
         private double salario;
-        private DateTime horaEntrada;
-        private DateTime horaSaida;
+        private TimeSpan horaEntrada;
+        private TimeSpan horaSaida;
         private filial filial;
         private String tipoUser;
+        private Utilizador supervisor;
         public static Utilizador loggedUser;
         public int NFuncionario
         {
@@ -88,45 +87,6 @@ namespace Trabalho_BD_IHC
             }
         }
 
-        public string CodigoPostal
-        {
-            get
-            {
-                return codigoPostal;
-            }
-
-            set
-            {
-                codigoPostal = value;
-            }
-        }
-
-        public string Rua
-        {
-            get
-            {
-                return rua;
-            }
-
-            set
-            {
-                rua = value;
-            }
-        }
-
-        public int NPorta
-        {
-            get
-            {
-                return nPorta;
-            }
-
-            set
-            {
-                nPorta = value;
-            }
-        }
-
         public double Salario
         {
             get
@@ -140,7 +100,7 @@ namespace Trabalho_BD_IHC
             }
         }
 
-        public DateTime HoraEntrada
+        public TimeSpan HoraEntrada
         {
             get
             {
@@ -153,7 +113,7 @@ namespace Trabalho_BD_IHC
             }
         }
 
-        public DateTime HoraSaida
+        public TimeSpan HoraSaida
         {
             get
             {
@@ -189,6 +149,32 @@ namespace Trabalho_BD_IHC
             set
             {
                 tipoUser = value;
+            }
+        }
+
+        internal Localizacao Localizacao
+        {
+            get
+            {
+                return localizacao;
+            }
+
+            set
+            {
+                localizacao = value;
+            }
+        }
+
+        public Utilizador Supervisor
+        {
+            get
+            {
+                return supervisor;
+            }
+
+            set
+            {
+                supervisor = value;
             }
         }
     }

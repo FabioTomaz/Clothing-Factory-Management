@@ -28,11 +28,17 @@ INSERT INTO [TIPO-UTILIZADOR] (TIPO) VALUES
 	('Gestor de Recursos Humanos');	--4
 	
 INSERT INTO UTILIZADOR (NOME, EMAIL, SALARIO, PASS, TELEFONE, N_FABRICA, 
-HORA_ENTRADA, HORA_SAIDA, COD_POSTAL, RUA, N_PORTA) VALUES
-	('Carlos Costa', 'costa@mail.pt', 2000, 'costatoy', 91547855, 1, '09:00:00 AM', '18:00:00 PM', '2288-227', 'rua da Beira', 17),
-	('António Cruz', 'acruz@mail.pt', 1000, 'cruz33', 925447557, 1, '09:30:00 AM', '18:00:00 PM', '3865-229', 'rua da Feira', 12),
-	('Rui Jorge', 'rjorge@mail.pt', 1200, 'jorge33', 91475557, 1, '09:30:00 AM', '18:00:00 PM', '3865-229', 'rua da caridade', 12),
-	('José Pacheco', 'jospach@mail.pt', 1500, 'pch45', 91511710, 1, '09:00:00 AM', '17:00:00 PM', '3865-229', 'rua Maria Breu', 20);
+HORA_ENTRADA, HORA_SAIDA, COD_POSTAL, RUA, N_PORTA, N_FUNCIONARIO_SUPER) VALUES
+	('Carlos Costa', 'costa@mail.pt', 2000, 'costatoy', 91547855, 1, '09:00:00 AM', '18:00:00 PM', '2288-227', 'rua da Beira', 17, 1),
+	('António Cruz', 'acruz@mail.pt', 1000, 'cruz33', 925447557, 1, '09:30:00 AM', '18:00:00 PM', '3865-229', 'rua da Feira', 12, 1),
+	('Rui Jorge', 'rjorge@mail.pt', 1200, 'jorge33', 91475557, 1, '09:30:00 AM', '18:00:00 PM', '3865-229', 'rua da caridade', 12, 1),
+	('José Pacheco', 'jospach@mail.pt', 1500, 'pch45', 91511710, 1, '09:00:00 AM', '17:00:00 PM', '3865-229', 'rua Maria Breu', 20, 1);
+
+INSERT INTO [UTILIZADOR-TIPOS](UTILIZADOR, ID_TIPO) VALUES
+	(1,4),
+	(2,2),
+	(3,3),
+	(4,1);
 
 
 INSERT INTO ENCOMENDA (DATA_CONFIRMACAO, DATA_ENTREGA_PREV, LOCALENTREGA, ESTADO, CLIENTE, N_GESTOR_VENDA) VALUES

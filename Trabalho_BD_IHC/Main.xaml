@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Trabalho_BD_IHC"
         mc:Ignorable="d"
-        Title="Gestão de Produção, Stock e Venda" Height="450" MinHeight="300" Width="900" MinWidth="750" Icon="GPSV.png">
+        Title="Gestão de Produção, Stock e Venda" Height="450" MinHeight="300" Width="900" MinWidth="750" Icon="GPSV.png" WindowStartupLocation="CenterScreen" >
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -48,14 +48,46 @@
                                 <RowDefinition></RowDefinition>
                                 <RowDefinition></RowDefinition>
                             </Grid.RowDefinitions>
-                            <Label Content="Nome: " Grid.Row="0"></Label>
-                            <Label Content="E-Mail: " Grid.Column="1" Grid.Row="0"></Label>
-                            <Label Content="Telefone: " Grid.Column="1" Grid.Row="1"></Label>
-                            <Label Content="Salário: " Grid.Column="0" Grid.Row="1"></Label>
-                            <Label Content="Hora de Entrada: " Grid.Row="2"></Label>
-                            <Label Content="Hora de Saída: "  Grid.Column="1" Grid.Row="2"></Label>
-                            <Label Content="Nº de Funcionário: " Grid.Row="3" Grid.Column="0"></Label>
-                            <Label Content="Supervisor: " Grid.Row="3" Grid.Column="1"></Label>
+                            <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
+                                <Label Content="Nome: "></Label>
+                                <Label Name="nomeUtilizador"></Label>
+                            </StackPanel>
+
+                            <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
+                                <Label Content="E-mail: "></Label>
+                                <Label Name="emailUtilizador" Content="E-Mail: " Grid.Column="1" Grid.Row="0"></Label>
+                            </StackPanel>
+
+                            <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
+                                <Label Content="Telefone/Telemovel: "></Label>
+                                <Label Name="telefoneUtilizador" Content="Telefone: " Grid.Column="1" Grid.Row="1"></Label>
+                            </StackPanel>
+
+                            <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+                                <Label Content="Salário Atual: "></Label>
+                                <Label Name="salario"></Label>
+                            </StackPanel>
+
+                            <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal">
+                                <Label Content="Hora de Entrada: "></Label>
+                                <Label Name="horaEntrada"></Label>
+                            </StackPanel>
+
+                            <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
+                                <Label Content="Hora de Saida: "></Label>
+                                <Label Name="horaSaida"></Label>
+                            </StackPanel>
+
+                            <StackPanel Grid.Row="3" Grid.Column="0" Orientation="Horizontal">
+                                <Label Content="Numero de Funcionário: "></Label>
+                                <Label Name="nFuncionario"></Label>
+                            </StackPanel>
+
+                            <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal">
+                                <Label Content="Nº do Supervisor: "></Label>
+                                <Label Name="supervisor"></Label>
+                            </StackPanel>
+                            
                         </Grid>
                     </GroupBox>
                     <GroupBox Header="Informações de Fábrica Filial" Template="{StaticResource greenGroupBox}" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="5" Grid.RowSpan="3">
@@ -69,11 +101,11 @@
                                 <ColumnDefinition></ColumnDefinition>
                                 <ColumnDefinition></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <Label Content="Nº de filial: " Grid.Row="0" Grid.Column="0"></Label>
-                            <Label Content="Telefone: " Grid.Row="1" Grid.Column="0"></Label>
-                            <Label Content="Fax: " Grid.Row="0" Grid.Column="1"></Label>
-                            <Label Content="E-mail: " Grid.Row="1" Grid.Column="1"></Label>
-                            <Label Content="Morada: " Grid.Row="2" Grid.Column="0"></Label>
+                            <Label Name="nFilial" Content="Nº de filial: " Grid.Row="0" Grid.Column="0"></Label>
+                            <Label Name="telefoneFilial" Content="Telefone: " Grid.Row="1" Grid.Column="0"></Label>
+                            <Label Name="faxFilial" Content="Fax: " Grid.Row="0" Grid.Column="1"></Label>
+                            <Label Name="emailFilial" Content="E-mail: " Grid.Row="1" Grid.Column="1"></Label>
+                            <Label Name="moradaFilial" Content="Morada: " Grid.Row="2" Grid.Column="0"></Label>
                         </Grid>
                     </GroupBox>
                     <GroupBox Header="Imagem de Perfil" Template="{StaticResource blackGroupBox}" Grid.Row="1" Grid.RowSpan="3" Grid.Column="4">
