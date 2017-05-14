@@ -41,9 +41,9 @@ namespace Trabalho_BD_IHC
             cmd.Parameters.AddWithValue("@NOME", user.Nome);
             cmd.Parameters.AddWithValue("@EMAIL", user.Email);
             cmd.Parameters.AddWithValue("@TELEMOVEL", user.Telemovel);
-            cmd.Parameters.AddWithValue("@COD_POSTAL", user.CodigoPostal);
-            cmd.Parameters.AddWithValue("@RUA", user.Rua);
-            cmd.Parameters.AddWithValue("@N_PORTA", user.NPorta);
+            cmd.Parameters.AddWithValue("@COD_POSTAL", user.Localizacao.CodigoPostal);
+            cmd.Parameters.AddWithValue("@RUA", user.Localizacao.Rua1);
+            cmd.Parameters.AddWithValue("@N_PORTA", user.Localizacao.Porta);
             cmd.Connection = dataHandler.Cn;
             try
             {
@@ -72,9 +72,9 @@ namespace Trabalho_BD_IHC
                 user.Nome = txtNome.Text;
                 user.Telemovel = txtTelemovel.Text;
                 user.Email = txtEmail.Text;
-                user.CodigoPostal = txtcodigoPostal.Text;
-                user.Rua = txtRua.Text;
-                user.NPorta = int.Parse(txtNumeroPorta.Text);
+                user.Localizacao.CodigoPostal = txtcodigoPostal.Text;
+                user.Localizacao.Rua1 = txtRua.Text;
+                user.Localizacao.Porta = int.Parse(txtNumeroPorta.Text);
             }
             catch (Exception ex)
             {

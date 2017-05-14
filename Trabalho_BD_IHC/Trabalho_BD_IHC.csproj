@@ -104,6 +104,7 @@
     <Compile Include="InformaçãoEmpregado.xaml.cs">
       <DependentUpon>InformaçãoEmpregado.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Localizacao.cs" />
     <Compile Include="ProdutoPersonalizado.cs" />
     <Compile Include="RegistarProdutoPersonalizado.xaml.cs">
       <DependentUpon>RegistarProdutoPersonalizado.xaml</DependentUpon>

@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\
+C:\Users\young\Source\Repos\ihc_bd2\Trabalho_BD_IHC\obj\Debug\
 Trabalho_BD_IHC
 none
 false
 DEBUG;TRACE
-C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\App.xaml
+C:\Users\young\Source\Repos\ihc_bd2\Trabalho_BD_IHC\App.xaml
 24-1819595453
 
-5558016825
-19-711755129
+56740754725
+19619975294
 DetalhesCliente.xaml;DetalhesEncomenda.xaml;DetalhesMaterial.xaml;EditarProdutoBase.xaml;EditarDesenhoPersonalizado.xaml;EditarCliente.xaml;EditarEncomenda.xaml;InformaçãoEmpregado.xaml;RegistarProdutoPersonalizado.xaml;RegistarProdutoBase.xaml;RegistarDesenhoPersonalizado.xaml;RegistarEmpregado.xaml;RegistarMaterial.xaml;ListarEmpregados.xaml;ListarMateriais.xaml;ListarClientes.xaml;ListarProdutos.xaml;ListarEncomendas.xaml;listprodutos.xaml;Login.xaml;Main.xaml;RegistarCliente.xaml;RegistarDesenhoBase.xaml;RegistarEncomenda.xaml;
 
 False
