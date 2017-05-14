@@ -4,21 +4,19 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace Trabalho_BD_IHC
 {
-    public class Produto
+    public class ProdutoBase
     {
         private int referencia;
         private String nome;
         private double IVA;
-        private DesenhoBase desenho;
-        private String tamanho;
-        private String cor;
-        private int unidadesStock;
-        private double preco;
-        private DesenhoPersonalizado modelo;
-        private int quantidade;
+        private DateTime dataAlteraçao;
+        private String instrProd;
+        private Utilizador gestorProducao;
+        private ImageSource pic;
 
         public int Referencia
         {
@@ -59,94 +57,55 @@ namespace Trabalho_BD_IHC
             }
         }
 
-        internal DesenhoBase Desenho
+        public DateTime DataAlteraçao
         {
             get
             {
-                return desenho;
+                return dataAlteraçao;
             }
 
             set
             {
-                desenho = value;
+                dataAlteraçao = value;
             }
         }
 
-        public string Tamanho
+        public string InstrProd
         {
             get
             {
-                return tamanho;
+                return instrProd;
             }
 
             set
             {
-                tamanho = value;
+                instrProd = value;
             }
         }
 
-        public string Cor
+        public Utilizador GestorProducao
         {
             get
             {
-                return cor;
+                return gestorProducao;
             }
 
             set
             {
-                cor = value;
+                gestorProducao = value;
             }
         }
 
-        public int UnidadesStock
+        public ImageSource Pic
         {
             get
             {
-                return unidadesStock;
+                return pic;
             }
 
             set
             {
-                unidadesStock = value;
-            }
-        }
-
-        public double Preco
-        {
-            get
-            {
-                return preco;
-            }
-
-            set
-            {
-                preco = value;
-            }
-        }
-
-        internal DesenhoPersonalizado Modelo
-        {
-            get
-            {
-                return modelo;
-            }
-
-            set
-            {
-                modelo = value;
-            }
-        }
-
-        public int Quantidade
-        {
-            get
-            {
-                return quantidade;
-            }
-
-            set
-            {
-                quantidade = value;
+                pic = value;
             }
         }
     }

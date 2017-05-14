@@ -54,7 +54,7 @@ namespace Trabalho_BD_IHC
         }
 
         public void Page_Loaded(object sender, RoutedEventArgs e)
-        {
+        {/*
             if (!dataHandler.verifySGBDConnection())
             {
                 MessageBoxResult result = MessageBox.Show("A conexão à base de dados é instável ou inexistente. Por favor tente mais tarde", "Erro de Base de Dados", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -69,7 +69,7 @@ namespace Trabalho_BD_IHC
                     DesenhoBase firstDes = desenhoBase.First();
                     cbDesenhos.SelectedItem = firstDes ;
                 }
-            }
+            }*/
         }
 
         public RegistarDesenhoPersonalizado(DataHandler dataHandler)

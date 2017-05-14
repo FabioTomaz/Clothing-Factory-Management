@@ -45,7 +45,7 @@ namespace Trabalho_BD_IHC
         private void getDetalhes() {
             dataHandler.verifySGBDConnection();
             SqlCommand cmd = new SqlCommand("SELECT N_ENCOMENDA, DATA_CONFIRMACAO, DATA_ENTREGA, "
-                    + "LOCALENTREGA, ESTADO, N_GESTOR_VENDA, UTILIZADOR.NOME FROM ENCOMENDA JOIN "
+                    + "LOCALENTREGA, ESTADO, N_GESTOR_VENDA, UTILIZADOR.NOME AS GESTOR_NOME FROM ENCOMENDA JOIN "
                     + "UTILIZADOR ON N_FUNCIONARIO = N_GESTOR_VENDA WHERE CLIENTE = @nCliente"
                                 , dataHandler.Cn);
             cmd.Parameters.Clear();
@@ -57,7 +57,11 @@ namespace Trabalho_BD_IHC
                 Encomenda enc = new Encomenda();
                 enc.NEncomenda = Convert.ToInt32(reader["N_ENCOMENDA"].ToString());
                 enc.DataConfirmacao = Convert.ToDateTime(reader["DATA_CONFIRMACAO"].ToString());
-                if (!reader["DATA_ENTREGA"].ToString().Equals(null, StringComparison.Ordinal))
+                if (reader["DATA_ENTREGA"].ToString() == null || reader["DATA_ENTREGA"].ToString().Equals("", StringComparison.Ordinal))
+                {
+                    enc.DataEntrega = null;
+                }
+                else
                 {
                     enc.DataEntrega = Convert.ToDateTime(reader["DATA_ENTREGA"].ToString());
                 }

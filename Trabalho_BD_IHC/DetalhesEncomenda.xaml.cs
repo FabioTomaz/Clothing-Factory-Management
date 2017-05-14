@@ -42,16 +42,17 @@ namespace Trabalho_BD_IHC
             cmd.Parameters.Clear();
             cmd.Parameters.AddWithValue("@ENCOMENDA", encomenda.NEncomenda);
             SqlDataReader reader = cmd.ExecuteReader();
-            ObservableCollection<Produto> list = new ObservableCollection<Produto>();
+            ObservableCollection<ProdutoBase> list = new ObservableCollection<ProdutoBase>();
             while (reader.Read())
             {
-                Produto Prod = new Produto();
+                ProdutoBase Prod = new ProdutoBase();
                 Prod.Nome = reader["NOME"].ToString();
+                /*
                 Prod.Quantidade = Convert.ToInt32(reader["quantidade"].ToString());
                 Prod.Referencia = Convert.ToInt32(reader["referencia_produto"].ToString());
                 Prod.Tamanho = reader["tamanho_produto"].ToString();
                 Prod.Cor = reader["cor_produto"].ToString();
-                Prod.Preco = Convert.ToDouble(reader["preco"].ToString());
+                Prod.Preco = Convert.ToDouble(reader["preco"].ToString());*/
                 list.Add(Prod);
             }
             produtos.ItemsSource = list;

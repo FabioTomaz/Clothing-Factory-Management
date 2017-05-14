@@ -32,8 +32,7 @@ namespace Trabalho_BD_IHC
             dataHandler = new DataHandler();
             clientesFrame.Content = new ListarClientes(dataHandler);
             encomendasFrame.Content = new ListarEncomendas(dataHandler);
-            produtosFrame.Content = new listarProdutos(dataHandler);
-            desenhosFrame.Content = new ListarDesenhos(dataHandler);
+            produtosFrame.Content = new ListarProdutos(dataHandler);
             materiaisFrame.Content = new ListarMateriais(dataHandler);
             empregadosFrame.Content = new ListarEmpregados(dataHandler);
         }

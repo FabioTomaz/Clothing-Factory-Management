@@ -70,7 +70,7 @@
                         <GridViewColumn Header="Nº Cliente"  DisplayMemberBinding="{Binding Cliente.NCliente}" />
                         <GridViewColumn Header="Nome Cliente"  DisplayMemberBinding="{Binding Cliente.Nome}" />
                         <GridViewColumn Header="Estado" DisplayMemberBinding="{Binding Estado}" />
-                        <GridViewColumn Header="Data de Entrega Prevista" DisplayMemberBinding="{Binding DataPrevistaEntrega}" />
+                        <GridViewColumn Header="Data de Entrega Prevista" DisplayMemberBinding="{Binding DataPrevistaEntrega, StringFormat=d}" />
                         <GridViewColumn Header="Preço(€)" DisplayMemberBinding="{Binding Preco}" />
                         <GridViewColumn Header="Desconto(%)" DisplayMemberBinding="{Binding Desconto}" />
                     </GridView>

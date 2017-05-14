@@ -93,9 +93,6 @@
             <TabItem Header="Produção"  IsEnabled="True">
                 <Frame Name="produtosFrame" NavigationUIVisibility="Hidden"></Frame>
             </TabItem>
-            <TabItem Header="Desenhos">
-                <Frame Name="desenhosFrame" NavigationUIVisibility="Hidden"></Frame>
-            </TabItem>
             <TabItem Header="Materiais"  IsEnabled="True">
                 <Frame Name="materiaisFrame" NavigationUIVisibility="Hidden"></Frame>
             </TabItem>

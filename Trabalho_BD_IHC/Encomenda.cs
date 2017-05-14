@@ -13,7 +13,7 @@ namespace Trabalho_BD_IHC
         private int nEncomenda;
         private String estado;
         private DateTime dataConfirmacao;
-        private DateTime dataEntrega;
+        private DateTime? dataEntrega;          //com '?' aceita valores null
         private DateTime dataPrevistaEntrega;
         private double desconto;
         private String localEntrega;
@@ -73,7 +73,7 @@ namespace Trabalho_BD_IHC
             }
         }
 
-        public DateTime DataEntrega
+        public DateTime? DataEntrega        //com '?' aceita valores null
         {
             get
             {

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Trabalho_BD_IHC"
         mc:Ignorable="d"
-        Title="Detalhes de Cliente" Height="350" MinHeight="300" MinWidth="550" Width="600" Loaded="Window_Loaded" Icon="details.png">
+        Title="Detalhes de Cliente" Height="350" MinHeight="300" MinWidth="550" Width="650" Loaded="Window_Loaded" Icon="details.png">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.05*"/>
@@ -73,8 +73,8 @@
                     <GridView>
                         <GridViewColumn Header="Nº encomenda" DisplayMemberBinding="{Binding NEncomenda}" />
                         <GridViewColumn Header="Estado"  DisplayMemberBinding="{Binding Estado}" />
-                        <GridViewColumn Header="Data Confirmação"  DisplayMemberBinding="{Binding DataConfirmacao}" />
-                        <GridViewColumn Header="Data Entrega"  DisplayMemberBinding="{Binding DataEntrega}" />
+                        <GridViewColumn Header="Data Confirmação"  DisplayMemberBinding="{Binding DataConfirmacao, StringFormat=d}" />
+                        <GridViewColumn Header="Data Entrega"  DisplayMemberBinding="{Binding DataEntrega, StringFormat=d}" />
                         <GridViewColumn Header="Local Entrega" DisplayMemberBinding="{Binding LocalEntrega}" />
                         <GridViewColumn Header="Nº Gestor de Venda" DisplayMemberBinding="{Binding GestorVendas.NFuncionario}" />
                         <GridViewColumn Header="Nome Gestor Venda:" DisplayMemberBinding="{Binding GestorVendas.Nome}" />

@@ -104,6 +104,7 @@
     <Compile Include="InformaçãoEmpregado.xaml.cs">
       <DependentUpon>InformaçãoEmpregado.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ProdutoPersonalizado.cs" />
     <Compile Include="RegistarDesenhoPersonalizado.xaml.cs">
       <DependentUpon>RegistarDesenhoPersonalizado.xaml</DependentUpon>
     </Compile>
@@ -122,16 +123,16 @@
     <Compile Include="ListarClientes.xaml.cs">
       <DependentUpon>ListarClientes.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ListarDesenhos.xaml.cs">
-      <DependentUpon>ListarDesenhos.xaml</DependentUpon>
+    <Compile Include="ListarProdutos.xaml.cs">
+      <DependentUpon>ListarProdutos.xaml</DependentUpon>
     </Compile>
     <Compile Include="ListarEncomendas.xaml.cs">
       <DependentUpon>ListarEncomendas.xaml</DependentUpon>
     </Compile>
-    <Compile Include="listarProdutos.xaml.cs">
-      <DependentUpon>listarProdutos.xaml</DependentUpon>
+    <Compile Include="listprodutos.xaml.cs">
+      <DependentUpon>listprodutos.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Produto.cs" />
+    <Compile Include="ProdutoBase.cs" />
     <Compile Include="RegistarCliente.xaml.cs">
       <DependentUpon>RegistarCliente.xaml</DependentUpon>
     </Compile>
@@ -198,7 +199,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ListarDesenhos.xaml">
+    <Page Include="ListarProdutos.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -206,7 +207,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="listarProdutos.xaml">
+    <Page Include="listprodutos.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
