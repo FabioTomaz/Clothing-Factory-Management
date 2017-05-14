@@ -150,3 +150,11 @@ C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\DetalhesEncomenda.g
 C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\DetalhesEncomenda.baml
 C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\DetalhesMaterial.g.cs
 C:\Users\young\Source\Repos\ihc_bd\Trabalho_BD_IHC\obj\Debug\DetalhesMaterial.baml
+C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\obj\Debug\DetalhesEncomenda.g.cs
+C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\obj\Debug\DetalhesMaterial.g.cs
+C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\obj\Debug\EditarEncomenda.g.cs
+C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\obj\Debug\DetalhesEncomenda.baml
+C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\obj\Debug\DetalhesMaterial.baml
+C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\obj\Debug\EditarEncomenda.baml
+C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\obj\Debug\DetalhesCliente.g.cs
+C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\obj\Debug\DetalhesCliente.baml

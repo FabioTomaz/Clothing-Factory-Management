@@ -25,7 +25,7 @@ namespace Trabalho_BD_IHC
     {
         private DataHandler dataHandler;
         private int currentRow = 1;
-
+        private ImageSource pic;
         public int CurrentRow
         {
             get
@@ -36,6 +36,19 @@ namespace Trabalho_BD_IHC
             set
             {
                 currentRow = value;
+            }
+        }
+
+        public ImageSource Pic
+        {
+            get
+            {
+                return pic;
+            }
+
+            set
+            {
+                pic = value;
             }
         }
 
@@ -52,13 +65,13 @@ namespace Trabalho_BD_IHC
             SqlCommand cmd = new SqlCommand();
 
             cmd.CommandText = "INSERT INTO DESENHO (NOME_DESENHO, DATA_ALTERACAO, INSTRUCOES_PRODUCAO, N_GESTOR_PROD, IMAGEM_DESENHO) "
-                +  "VALUES (@nome_desenho, @Data_alteracao, @instr, @nGestor, @imagem);";
+                +  "SELECT (@nome_desenho, @Data_alteracao, @instr, @nGestor, @imagem);";
              cmd.Parameters.Clear();
              cmd.Parameters.AddWithValue("@nome_desenho", desenhoBase.Nome);
              cmd.Parameters.AddWithValue("@Data_alteracao", DateTime.Today);
              cmd.Parameters.AddWithValue("@instr", desenhoBase.InstrucoesProducao);
              cmd.Parameters.AddWithValue("@nGestor", desenhoBase.GestorProducao.NFuncionario);
-             //cmd.Parameters.AddWithValue("@imagem", 'i');
+             cmd.Parameters.AddWithValue("@imagem", desenhoBase.Pic);
              cmd.Connection = dataHandler.Cn;
              try
              {
@@ -88,7 +101,7 @@ namespace Trabalho_BD_IHC
                 desenhoBase.InstrucoesProducao = txtInstruçoes.Text;
                 desenhoBase.GestorProducao = new Utilizador();
                 desenhoBase.GestorProducao.NFuncionario = 2; //---> suposto mais tarde colocar o nº do user
-                //falta a imagem
+                desenhoBase.Pic = Pic;
             }
             catch (Exception ex)
             {
@@ -120,5 +133,7 @@ namespace Trabalho_BD_IHC
                 imgPhoto.Source = new BitmapImage(new Uri(op.FileName));
             }
         }
+        
+
     }
 }

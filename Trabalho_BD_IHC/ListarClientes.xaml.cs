@@ -55,6 +55,10 @@ namespace Trabalho_BD_IHC
                     C.CodigoPostal = reader["COD_POSTAL"].ToString();
                     C.Rua = reader["RUA"].ToString();
                     C.NCasa = Convert.ToInt32(reader["N_PORTA"].ToString());
+                    C.NCliente = Convert.ToInt32(reader["NCLIENTE"].ToString());
+                    C.Distrito = reader["DISTRITO"].ToString();
+                    C.Concelho = reader["CONCELHO"].ToString();
+                    C.Localidade = reader["LOCALIDADE"].ToString();
                     items.Add(C);
                 }
 
@@ -133,6 +137,12 @@ namespace Trabalho_BD_IHC
         {
             EditarCliente page = new EditarCliente(dataHandler, (Cliente)clientes.SelectedItem);
             this.NavigationService.Navigate(page);
+        }
+
+        private void detalhesCliente_Click(object sender, RoutedEventArgs e)
+        {
+            DetalhesCliente window = new DetalhesCliente(dataHandler, (Cliente)clientes.SelectedItem);
+            window.Show();
         }
 
         private void clientes_SelectionChanged(object sender, SelectionChangedEventArgs e)

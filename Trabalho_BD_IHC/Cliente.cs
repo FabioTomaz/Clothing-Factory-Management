@@ -14,6 +14,9 @@ namespace Trabalho_BD_IHC
         private String _nib;
         private String _email;
         private String _codigoPostal;
+        private String _distrito;
+        private String _concelho;
+        private String _localidade;
         private String _rua;
         private int _nPorta;
         private int _nCasa;
@@ -134,6 +137,45 @@ namespace Trabalho_BD_IHC
             set
             {
                 _NCliente = value;
+            }
+        }
+
+        public string Distrito
+        {
+            get
+            {
+                return _distrito;
+            }
+
+            set
+            {
+                _distrito = value;
+            }
+        }
+
+        public string Concelho
+        {
+            get
+            {
+                return _concelho;
+            }
+
+            set
+            {
+                _concelho = value;
+            }
+        }
+
+        public string Localidade
+        {
+            get
+            {
+                return _localidade;
+            }
+
+            set
+            {
+                _localidade = value;
             }
         }
     }

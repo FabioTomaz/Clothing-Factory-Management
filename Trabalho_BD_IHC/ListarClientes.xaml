@@ -49,7 +49,7 @@
                 <Button x:Name="removerCliente" Style="{StaticResource removerButton}" Grid.Row="5" Grid.Column="1" IsEnabled="False" Click="removerCliente_Click">
                     <TextBlock TextWrapping="Wrap">Remover Cliente</TextBlock>
                 </Button>
-                <Button x:Name="detalhesCliente" Style="{StaticResource detalhesButton}" Grid.Row="7" Grid.Column="1" IsEnabled="False">
+                <Button x:Name="detalhesCliente" Style="{StaticResource detalhesButton}" Grid.Row="7" Grid.Column="1" IsEnabled="False" Click="detalhesCliente_Click">
                     <TextBlock TextWrapping="Wrap">Ver mais detalhes</TextBlock>
                 </Button>
             </Grid>
@@ -59,7 +59,7 @@
                 <RowDefinition Height="0.1*"></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            <ListView Name="clientes" Grid.Row="1" SelectionChanged="clientes_SelectionChanged">
+            <ListView Name="clientes" Grid.Row="1" SelectionChanged="clientes_SelectionChanged" MouseDoubleClick="detalhesCliente_Click">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="NIF" DisplayMemberBinding="{Binding Nif}" />

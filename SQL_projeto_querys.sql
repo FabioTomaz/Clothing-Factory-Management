@@ -24,5 +24,8 @@ SELECT * FROM ETIQUETA
 --obter uma etiquetas espcifica (para o registo de desenho pers, caso o user crie uma nova etiqueta
 SELECT N_ETIQUETA FROM ETIQUETA 
 WHERE (NORMAS = 'Mais exemplos de normas' AND PAIS_FABRICO = 'Espanha'AND COMPOSICAO = 'Pano, linha')
---querys de inserçao:
 
+--obter de um cliente
+SELECT N_ENCOMENDA, DATA_CONFIRMACAO, DATA_ENTREGA, LOCALENTREGA, ESTADO, N_GESTOR_VENDA, UTILIZADOR.NOME
+FROM ENCOMENDA JOIN UTILIZADOR ON N_FUNCIONARIO = N_GESTOR_VENDA
+WHERE CLIENTE = '1'

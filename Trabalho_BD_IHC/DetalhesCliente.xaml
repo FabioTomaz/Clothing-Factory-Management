@@ -5,17 +5,82 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Trabalho_BD_IHC"
         mc:Ignorable="d"
-        Title="DetalhesCliente" Height="300" Width="300">
+        Title="Detalhes de Cliente" Height="350" MinHeight="300" MinWidth="550" Width="600" Loaded="Window_Loaded" Icon="details.png">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width=""></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="0.05*"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="0.05*"/>
+            <ColumnDefinition Width="0.7*"/>
+            <ColumnDefinition Width="0.05*"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="0.05*"/>
+            <ColumnDefinition Width="0.7*"/>
+            <ColumnDefinition Width="0.05*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            
+            <RowDefinition Height="0.05*"/>
+            <RowDefinition Height="0.4*"/>
+            <RowDefinition Height="0.05*"/>
+            <RowDefinition Height="0.4*"/>
+            <RowDefinition Height="0.05*"/>
+            <RowDefinition Height="0.4*"/>
+            <RowDefinition Height="0.05*"/>
+            <RowDefinition Height="0.4*"/>
+            <RowDefinition Height="0.05*"/>
+            <RowDefinition Height="0.4*"/>
+            <RowDefinition Height="0.05*"/>
+            <RowDefinition Height="0.4*"/>
+            <RowDefinition Height="0.05*"/>
+
+            <RowDefinition />
+            <RowDefinition Height="0.05*"/>
+            <RowDefinition />
+            <RowDefinition Height="0.05*"/>
         </Grid.RowDefinitions>
+        <Label Content="Nome: " Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right"></Label>
+        <Label Name="nomeCliente" Grid.Row="1" Grid.Column="3" HorizontalAlignment="Left"></Label>
+        <Label Content="Número Cliente: " Grid.Row="1"  Grid.Column="5" HorizontalAlignment="Right"></Label>
+        <Label Name="nCliente" Grid.Row="1"   Grid.Column="7" HorizontalAlignment="Left"></Label>
+
+        <Label Content="NIF: " Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right"></Label>
+        <Label Name="nif" Grid.Row="3" Grid.Column="3" HorizontalAlignment="Left"></Label>
+        <Label Content="NIB: " Grid.Row="3"  Grid.Column="5" HorizontalAlignment="Right"></Label>
+        <Label Name="nib" Grid.Row="3"   Grid.Column="7" HorizontalAlignment="Left"></Label>
+
+        <Label Content="Email: "  Grid.Row="5" Grid.Column="1" HorizontalAlignment="Right"></Label>
+        <Label Name="email" Grid.Row="5"  Grid.Column="3" HorizontalAlignment="Left"></Label>
+        <Label Content="Telemóvel: " Grid.Row="5"  Grid.Column="5" HorizontalAlignment="Right"></Label>
+        <Label Name="telemovel" Grid.Row="5"   Grid.Column="7" HorizontalAlignment="Left"></Label>
+
+        <Label Content="Código-postal: "  Grid.Row="7" Grid.Column="1" HorizontalAlignment="Right"></Label>
+        <Label Name="cdgPostal" Grid.Row="7"  Grid.Column="3" HorizontalAlignment="Left"></Label>
+        <Label Content="Distrito " Grid.Row="7"  Grid.Column="5" HorizontalAlignment="Right"></Label>
+        <Label Name="distrito" Grid.Row="7"   Grid.Column="7" HorizontalAlignment="Left"></Label>
+
+        <Label Content="Concelho: "  Grid.Row="9" Grid.Column="1" HorizontalAlignment="Right"></Label>
+        <Label Name="concelho" Grid.Row="9"  Grid.Column="3" HorizontalAlignment="Left"></Label>
+        <Label Content="Localidade: " Grid.Row="9"  Grid.Column="5" HorizontalAlignment="Right"></Label>
+        <Label Name="localidade" Grid.Row="9"   Grid.Column="7" HorizontalAlignment="Left"></Label>
+
+        <Label Content="Rua: "  Grid.Row="11" Grid.Column="1" HorizontalAlignment="Right"></Label>
+        <Label Name="rua" Grid.Row="11"  Grid.Column="3" HorizontalAlignment="Left"></Label>
+        <Label Content="Nº Porta: " Grid.Row="11"  Grid.Column="5" HorizontalAlignment="Right"></Label>
+        <Label Name="nporta" Grid.Row="11"   Grid.Column="7" HorizontalAlignment="Left"></Label>
+        <GroupBox Header="Histórico de encomendas do Cliente" Grid.Column="1" Grid.ColumnSpan="7" Grid.Row="13" Grid.RowSpan="3">
+            <ListView Name="produtos" Grid.Column="1" Grid.ColumnSpan="7" Grid.Row="13" Grid.RowSpan="3">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Nº encomenda" DisplayMemberBinding="{Binding NEncomenda}" />
+                        <GridViewColumn Header="Estado"  DisplayMemberBinding="{Binding Estado}" />
+                        <GridViewColumn Header="Data Confirmação"  DisplayMemberBinding="{Binding DataConfirmacao}" />
+                        <GridViewColumn Header="Data Entrega"  DisplayMemberBinding="{Binding DataEntrega}" />
+                        <GridViewColumn Header="Local Entrega" DisplayMemberBinding="{Binding LocalEntrega}" />
+                        <GridViewColumn Header="Nº Gestor de Venda" DisplayMemberBinding="{Binding GestorVendas.NFuncionario}" />
+                        <GridViewColumn Header="Nome Gestor Venda:" DisplayMemberBinding="{Binding GestorVendas.Nome}" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </GroupBox>
     </Grid>
 </Window>

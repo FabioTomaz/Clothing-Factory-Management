@@ -1,5 +1,5 @@
 USE [GESTAO-FABRICA-VESTUARIO-LABORAL]
-GO
+GO;
 
 --DROP TABLE [FABRICA-FILIAL]
 
@@ -11,7 +11,8 @@ INSERT INTO ZONA (COD_POSTAL, DISTRITO, CONCELHO, LOCALIDADE) VALUES
 	('1254-585', 'Viseu', 'Ali', 'Acolá'),
 	('1248-452', 'Lisboa', 'Sintra', 'Sintra'),
 	('2288-227', 'Aveiro', 'Àgueda', 'Beco'),
-	('3865-229', 'Aveiro', 'Estarreja', 'Salreu')
+	('3865-229', 'Aveiro', 'Estarreja', 'Salreu');
+
 INSERT INTO CLIENTE (NOME, NIB, NIF, EMAIL, TELEMOVEL, COD_POSTAL, RUA, N_PORTA) VALUES
 	('Bruno Silva', 784526412578965412354, 222444489, 'bjpsilva@hotmail.com', 919225360, '3865-229', 'Maria de Lurdes Breu', 10),
 	('Bruno Pires', 784526412548965412354, 222544489, 'bjpsilva533@gmail.com', 919225361, '3865-229', 'Avenida da Liberdade', 25),
@@ -33,43 +34,30 @@ HORA_ENTRADA, HORA_SAIDA, COD_POSTAL, RUA, N_PORTA) VALUES
 	('Rui Jorge', 'rjorge@mail.pt', 1200, 'jorge33', 91475557, 1, '09:30:00 AM', '18:00:00 PM', '3865-229', 'rua da caridade', 12),
 	('José Pacheco', 'jospach@mail.pt', 1500, 'pch45', 91511710, 1, '09:00:00 AM', '17:00:00 PM', '3865-229', 'rua Maria Breu', 20);
 
-INSERT INTO ESTADO (DESCRIÇAO) VALUES
-	('Em fila de espera'),
-	('Em processo de fabrico'),
-	('Pronto para entrega'),
-	('Entregue'),
-	('Pendente');
 
 INSERT INTO ENCOMENDA (DATA_CONFIRMACAO, DATA_ENTREGA_PREV, LOCALENTREGA, ESTADO, CLIENTE, N_GESTOR_VENDA) VALUES
 	('20170520', '20170602', NULL, 1, 1, 3),
-	('20170515', '20170602', NULL, 2, 2, 3)
+	('20170515', '20170602', NULL, 2, 2, 3);
 	
 	
-INSERT INTO DESENHO (NOME_DESENHO, DATA_ALTERACAO, INSTRUCOES_PRODUCAO, N_GESTOR_PROD, IMAGEM_DESENHO) VALUES
-	('Bata azul', '20170424', 'Usar linha e tecido e pintar de azul', 2, 'image'),
-	('Colete', '20170511', 'Usar pano e linha e elásticos', 2, 'image')
+INSERT INTO [PRODUTO-BASE] (NOME, DATA_ALTERACAO, IVA ,INSTRUCOES_PRODUCAO, N_GESTOR_PROD, IMAGEM_DESENHO) VALUES
+	('Bata azul', '20170424', 23.0 ,'Usar linha e tecido e pintar de azul', 2, 'image'),
+	('Colete', '20170511', 23.0 ,'Usar pano e linha e elásticos', 2, 'image');
 
 INSERT INTO ETIQUETA (NORMAS, PAIS_FABRICO, COMPOSICAO) VALUES
 	('Mais exemplos de normas', 'Espanha', 'Pano, linha'),
-	('normas e tal', 'Portugal', 'algodão, linho')
-
-INSERT INTO MODELO (N_DESENHO, N_ETIQUETA) VALUES
-	(1,1),
-	(2,2)
-
-INSERT INTO [PRODUTO-BASE] (NOME, N_DESENHO) VALUES
-	('Bata azul', 1)
+	('normas e tal', 'Portugal', 'algodão, linho');
 	
-INSERT INTO [PRODUTO-PERSONALIZADO] (REFERENCIA, TAMANHO, COR, PRECO, UNIDADES_ARMAZEM, N_MODELO, N_DESENHO) VALUES
-	(1, 'XL', 'azul-escuro', 17.99, 1, 1, 1)
+INSERT INTO [PRODUTO-PERSONALIZADO] (REFERENCIA, TAMANHO, COR, PRECO, UNIDADES_ARMAZEM, N_ETIQUETA) VALUES
+	(1, 'XL', 'azul-escuro', 17.99, 1, 1);
 	
-INSERT INTO CONTEUDO_ENCOMENDA (N_ENCOMENDA, REFERENCIA_PRODUTO, TAMANHO_PRODUTO, COR_PRODUTO, QUANTIDADE) VALUES
-	(1, 1, 'XL', 'azul-escuro', 2);
+INSERT INTO CONTEUDO_ENCOMENDA (N_ENCOMENDA, REFERENCIA_PRODUTO, TAMANHO_PRODUTO, COR_PRODUTO, ID_PRODUTO ,QUANTIDADE) VALUES
+	(1, 1, 'XL', 'azul-escuro', 1, 2);
 	
 
 INSERT INTO FORNECEDOR (NIF, EMAIL, NOME, FAX, TELEFONE, DESIGNACAO, COD_POSTAL, RUA, N_PORTA) VALUES
 	(666999555, 'for_textil@mail.pt','Textil suply', 223415478, 22485497, 'Fornecimento de panos e linho para produçao têxtil', '1254-585', 'Rua das produções', 23),
-	(478545217, 'forn_materiais@mail.pt', 'Textil material inc.', 222454485, 2135748, 'Fornecimento de materiais para produçao textil', '4558-547', 'Rua do trabalho', 20)
+	(478545217, 'forn_materiais@mail.pt', 'Textil material inc.', 222454485, 2135748, 'Fornecimento de materiais para produçao textil', '4558-547', 'Rua do trabalho', 20);
 
 INSERT INTO MATERIAIS_TÊXTEIS (REFERENCIA_FORN, NIF_FORNECEDOR, COR, DESIGNACAO) VALUES
 	(300, 478545217, 'Azul', 'Pano linho'),

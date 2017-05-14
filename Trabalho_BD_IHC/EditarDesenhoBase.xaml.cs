@@ -32,7 +32,13 @@ namespace Trabalho_BD_IHC
             txtNomeDesenho.Text = desenhoBase.Nome;
             txtNGestProd.Text = desenhoBase.GestorProducao.NFuncionario.ToString();
             txtInstrProd.Text = desenhoBase.InstrucoesProducao;
+            imgPhoto.Source = desenhoBase.Pic;
             txtNomeDesenho.Focus();
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+
         }
 
         private void cancelar_Click(object sender, RoutedEventArgs e)
@@ -78,6 +84,8 @@ namespace Trabalho_BD_IHC
                 dataHandler.closeSGBDConnection();
             }
         }
+
+        
 
         private void confirmar_Click(object sender, RoutedEventArgs e)
         {
