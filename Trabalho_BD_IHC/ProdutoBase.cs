@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Media;
+
 
 namespace Trabalho_BD_IHC
 {
@@ -16,7 +16,7 @@ namespace Trabalho_BD_IHC
         private DateTime dataAlteraçao;
         private String instrProd;
         private Utilizador gestorProducao;
-        private ImageSource pic;
+        private byte[] pic;
 
         public int Referencia
         {
@@ -96,7 +96,7 @@ namespace Trabalho_BD_IHC
             }
         }
 
-        public ImageSource Pic
+        public byte[] Pic
         {
             get
             {

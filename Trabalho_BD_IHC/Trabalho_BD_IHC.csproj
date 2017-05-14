@@ -89,11 +89,11 @@
     <Compile Include="DetalhesMaterial.xaml.cs">
       <DependentUpon>DetalhesMaterial.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EditarProdutoBase.xaml.cs">
+      <DependentUpon>EditarProdutoBase.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EditarDesenhoPersonalizado.xaml.cs">
       <DependentUpon>EditarDesenhoPersonalizado.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="EditarDesenhoBase.xaml.cs">
-      <DependentUpon>EditarDesenhoBase.xaml</DependentUpon>
     </Compile>
     <Compile Include="EditarCliente.xaml.cs">
       <DependentUpon>EditarCliente.xaml</DependentUpon>
@@ -105,6 +105,12 @@
       <DependentUpon>InformaçãoEmpregado.xaml</DependentUpon>
     </Compile>
     <Compile Include="ProdutoPersonalizado.cs" />
+    <Compile Include="RegistarProdutoPersonalizado.xaml.cs">
+      <DependentUpon>RegistarProdutoPersonalizado.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RegistarProdutoBase.xaml.cs">
+      <DependentUpon>RegistarProdutoBase.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RegistarDesenhoPersonalizado.xaml.cs">
       <DependentUpon>RegistarDesenhoPersonalizado.xaml</DependentUpon>
     </Compile>
@@ -155,11 +161,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="EditarDesenhoPersonalizado.xaml">
+    <Page Include="EditarProdutoBase.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="EditarDesenhoBase.xaml">
+    <Page Include="EditarDesenhoPersonalizado.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -174,6 +180,14 @@
     <Page Include="InformaçãoEmpregado.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RegistarProdutoPersonalizado.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="RegistarProdutoBase.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="RegistarDesenhoPersonalizado.xaml">
       <Generator>MSBuild:Compile</Generator>

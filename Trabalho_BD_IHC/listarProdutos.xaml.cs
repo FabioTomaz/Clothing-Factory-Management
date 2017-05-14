@@ -134,18 +134,18 @@ namespace Trabalho_BD_IHC
 
         private void registarProdutoBase_click(object sender, RoutedEventArgs e)
         {
-            RegistarDesenhoBase page = new RegistarDesenhoBase(dataHandler);
+            RegistarProdutoBase page = new RegistarProdutoBase(dataHandler);
             NavigationService.Navigate(page);
         }
         private void EditarProdutoBase_click(object sender, RoutedEventArgs e)
         {
-            EditarDesenhoBase page = new EditarDesenhoBase(dataHandler, (DesenhoBase)produtosBaseLista.SelectedItem);
+            EditarProdutoBase page = new EditarProdutoBase(dataHandler, (ProdutoBase)produtosBaseLista.SelectedItem);
             this.NavigationService.Navigate(page);
         }
 
         private void registarProdutoPers_click(object sender, RoutedEventArgs e)
         {
-            RegistarDesenhoPersonalizado page = new RegistarDesenhoPersonalizado(dataHandler);
+            RegistarProdutoPersonalizado page = new RegistarProdutoPersonalizado(dataHandler);
             NavigationService.Navigate(page);
         }
 

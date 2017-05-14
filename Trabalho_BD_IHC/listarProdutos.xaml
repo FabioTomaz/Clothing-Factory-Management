@@ -143,7 +143,8 @@
                                     <GridViewColumn Header="Nº un. em armazém" DisplayMemberBinding="{Binding UnidadesStock}" />
                                     <GridViewColumn Header="Referência produto base" DisplayMemberBinding="{Binding ProdutoBase.Referencia}"/>
                                     <GridViewColumn Header="Nome Prod. Base" DisplayMemberBinding="{Binding ProdutoBase.Nome}"/>
-                                    <GridViewColumn Header="Nome Gestor Produção" DisplayMemberBinding="{Binding Desenho.GestorProducao.Nome}"/>
+                                    <GridViewColumn Header="Nº Etiqueta" DisplayMemberBinding="{Binding Etiqueta.Numero}"/> 
+                                    <GridViewColumn Header="Normas" DisplayMemberBinding="{Binding Etiqueta.Normas}"/>
                                 </GridView>
                             </ListView.View>
                         </ListView>
