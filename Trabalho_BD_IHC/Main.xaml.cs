@@ -53,7 +53,6 @@ namespace Trabalho_BD_IHC
         }
 
         public void fillUserInfo() {
-            Console.WriteLine(Utilizador.loggedUser.NFuncionario);
             nomeUtilizador.Content = Utilizador.loggedUser.Nome;
             horaEntrada.Content = Utilizador.loggedUser.HoraEntrada.ToString();
             horaSaida.Content = Utilizador.loggedUser.HoraSaida.ToString();
@@ -62,6 +61,11 @@ namespace Trabalho_BD_IHC
             salario.Content = Utilizador.loggedUser.Salario;
             nFuncionario.Content = Utilizador.loggedUser.NFuncionario;
             supervisor.Content =  String.Format("{0} (Nome: {1})", Utilizador.loggedUser.Supervisor.NFuncionario, Utilizador.loggedUser.Supervisor.Nome);
+            numFilial.Content = Utilizador.loggedUser.Filial.NFilial;
+            emailFilial.Content = Utilizador.loggedUser.Filial.Email;
+            faxFilial.Content = Utilizador.loggedUser.Filial.Fax;
+            telefoneFilial.Content = Utilizador.loggedUser.Filial.Telefone;
+            moradaFilial.Content = String.Format("Distrito de {0} , concelho de {1}, localidade de {2}, rua {3}, porta {4}", Utilizador.loggedUser.Localizacao.Distrito, Utilizador.loggedUser.Localizacao.Concelho, Utilizador.loggedUser.Localizacao.Localidade, Utilizador.loggedUser.Localizacao.Rua1, Utilizador.loggedUser.Localizacao.Porta);
         }
     }
 }

@@ -101,11 +101,26 @@
                                 <ColumnDefinition></ColumnDefinition>
                                 <ColumnDefinition></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <Label Name="nFilial" Content="Nº de filial: " Grid.Row="0" Grid.Column="0"></Label>
-                            <Label Name="telefoneFilial" Content="Telefone: " Grid.Row="1" Grid.Column="0"></Label>
-                            <Label Name="faxFilial" Content="Fax: " Grid.Row="0" Grid.Column="1"></Label>
-                            <Label Name="emailFilial" Content="E-mail: " Grid.Row="1" Grid.Column="1"></Label>
-                            <Label Name="moradaFilial" Content="Morada: " Grid.Row="2" Grid.Column="0"></Label>
+                            <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
+                                <Label Content="Nº da Filial: "></Label>
+                                <Label Name="numFilial"></Label>
+                            </StackPanel>
+                            <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
+                                <Label Content="Morada: "></Label>
+                                <Label Name="moradaFilial"></Label>
+                            </StackPanel>
+                            <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
+                                <Label Content="Telefone/Telemovel: "></Label>
+                                <Label Name="telefoneFilial"></Label>
+                            </StackPanel>
+                            <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+                                <Label Content="Fax: "></Label>
+                                <Label Name="faxFilial"></Label>
+                            </StackPanel>
+                            <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal">
+                                <Label Content="Email:"></Label>
+                                <Label Name="emailFilial"></Label>
+                            </StackPanel>
                         </Grid>
                     </GroupBox>
                     <GroupBox Header="Imagem de Perfil" Template="{StaticResource blackGroupBox}" Grid.Row="1" Grid.RowSpan="3" Grid.Column="4">
