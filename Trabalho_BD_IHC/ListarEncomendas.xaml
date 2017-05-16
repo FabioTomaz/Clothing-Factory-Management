@@ -20,7 +20,7 @@
             <RowDefinition />
             <RowDefinition Height="0.1*"/>
         </Grid.RowDefinitions>
-        <GroupBox Header="Operações" Grid.Column="1" Grid.Row="1">
+        <GroupBox Header="Operações" Grid.Column="1" Grid.Row="1" Template="{StaticResource blackGroupBox}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.1*"></ColumnDefinition>
@@ -57,12 +57,7 @@
                 </Button>
             </Grid>
         </GroupBox>
-        <Grid Grid.Column="3" Grid.Row="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="0.1*"></RowDefinition>
-                <RowDefinition></RowDefinition>
-            </Grid.RowDefinitions>
-            <Label x:Name="encomendasLabel" Content="Lista de Encomendas da Empresa" Grid.Row="0" VerticalAlignment="Top" />
+        <GroupBox Grid.Column="3" Grid.Row="1" Header="Listagem de Encomendas da Empresa">
             <ListView Name="encomendas" Grid.Row="1" SelectionChanged="encomendas_SelectionChanged">
                 <ListView.View>
                     <GridView>
@@ -76,6 +71,6 @@
                     </GridView>
                 </ListView.View>
             </ListView>
-        </Grid>
+        </GroupBox>
     </Grid>
 </Page>

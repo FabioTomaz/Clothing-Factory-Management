@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
+using System.Drawing;
 
 namespace Trabalho_BD_IHC
 {
@@ -21,6 +23,7 @@ namespace Trabalho_BD_IHC
         private filial filial;
         private String tipoUser;
         private Utilizador supervisor;
+        private Image imagem;
         public static Utilizador loggedUser;
         public int NFuncionario
         {
@@ -175,6 +178,19 @@ namespace Trabalho_BD_IHC
             set
             {
                 supervisor = value;
+            }
+        }
+
+        public Image Imagem
+        {
+            get
+            {
+                return imagem;
+            }
+
+            set
+            {
+                imagem = value;
             }
         }
     }

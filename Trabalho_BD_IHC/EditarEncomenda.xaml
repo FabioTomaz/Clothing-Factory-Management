@@ -21,7 +21,7 @@
                 <RowDefinition />
                 <RowDefinition Height="0.1*"/>
             </Grid.RowDefinitions>
-            <GroupBox Header="Operações" Grid.Column="1" Grid.Row="1">
+        <GroupBox Header="Operações" Grid.Column="1" Grid.Row="1" Template="{StaticResource blackGroupBox}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.1*"></ColumnDefinition>

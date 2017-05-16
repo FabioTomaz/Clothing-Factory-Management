@@ -43,6 +43,7 @@ namespace Trabalho_BD_IHC
                     if (checkLogin(nEmpregado.Text, password.Password)) {
                         Utilizador.loggedUser = dataHandler.getUtilizadorFromDB(Convert.ToInt32(nEmpregado.Text));
                         Utilizador.loggedUser.Supervisor = dataHandler.getUtilizadorFromDB(Utilizador.loggedUser.Supervisor.NFuncionario);
+                        Console.WriteLine(Utilizador.loggedUser.NFuncionario);
                         Xceed.Wpf.Toolkit.MessageBox.Show("O inicio de sessão foi realizado com sucesso!", "Inicio de Sessão Concluido", MessageBoxButton.OK, MessageBoxImage.Information);
                         this.Hide();
                         MainWindow main = new MainWindow(dataHandler);
@@ -96,5 +97,12 @@ namespace Trabalho_BD_IHC
 
         }
 
+        private void CheckBox_Click(object sender, RoutedEventArgs e)
+        {
+            if (((CheckBox)sender).IsChecked == true)
+                password.Visibility = Visibility.Visible;
+            else
+                password.Visibility = Visibility.Hidden;
+        }
     }
 }

@@ -20,7 +20,7 @@
             <RowDefinition />
             <RowDefinition Height="0.1*"/>
         </Grid.RowDefinitions>
-        <GroupBox Header="Operações" Grid.Column="1" Grid.Row="1">
+        <GroupBox Header="Operações" Grid.Column="1" Grid.Row="1" Template="{StaticResource blackGroupBox}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.1*"></ColumnDefinition>
@@ -54,21 +54,18 @@
                 </Button>
             </Grid>
         </GroupBox>
-        <Grid Grid.Column="3" Grid.Row="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="0.1*"></RowDefinition>
-                <RowDefinition></RowDefinition>
-            </Grid.RowDefinitions>
-            <ListView Name="clientes" Grid.Row="1" SelectionChanged="clientes_SelectionChanged" MouseDoubleClick="detalhesCliente_Click">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Header="NIF" DisplayMemberBinding="{Binding Nif}" />
-                        <GridViewColumn Header="Name"  DisplayMemberBinding="{Binding Nome}" />
-                        <GridViewColumn Header="Mail" DisplayMemberBinding="{Binding Email}" />
-                        <GridViewColumn Header="Telemovel" DisplayMemberBinding="{Binding Telemovel}" />
-                    </GridView>
-                </ListView.View>
-            </ListView>
-        </Grid>
+        <GroupBox Header="Listagem de Clientes" Grid.Row="1" Grid.Column="3">
+            <ListView Name="clientes" SelectionChanged="clientes_SelectionChanged" MouseDoubleClick="detalhesCliente_Click">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="NIF" DisplayMemberBinding="{Binding Nif}" />
+                            <GridViewColumn Header="Name"  DisplayMemberBinding="{Binding Nome}" />
+                            <GridViewColumn Header="Mail" DisplayMemberBinding="{Binding Email}" />
+                            <GridViewColumn Header="Telemovel" DisplayMemberBinding="{Binding Telemovel}" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>  
+        </GroupBox>
     </Grid>
+        
 </Page>
