@@ -19,10 +19,9 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="0.05*"/>
             <RowDefinition />
-            <RowDefinition />
             <RowDefinition Height="0.1*"/>
         </Grid.RowDefinitions>
-        <GroupBox Header="Operações" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2">
+        <GroupBox Header="Operações" Template="{StaticResource blackGroupBox}" Grid.Column="1" Grid.Row="1">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.1*"></ColumnDefinition>
@@ -49,7 +48,7 @@
                 <Button x:Name="detalhesEmpregado" Content="Ver mais detalhes Empregado" Style="{StaticResource detalhesButton}" Grid.Row="7" Grid.Column="1" IsEnabled="False" Click="verDetalhesEmpregado"/>
             </Grid>
         </GroupBox>
-        <Grid Grid.Column="3" Grid.Row="1" Grid.RowSpan="2">
+        <Grid Grid.Column="3" Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.1*"></RowDefinition>
                 <RowDefinition></RowDefinition>
@@ -59,17 +58,19 @@
                     <EventSetter Event='MouseDoubleClick' Handler='verDetalhesEmpregado'/>
                 </Style>
             </Grid.Resources>
-            <ListView  Name="empregados" Grid.Row="1" SelectionChanged="empregados_SelectionChanged" ItemContainerStyle="{StaticResource informationStyle}">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Header="Função" DisplayMemberBinding="{Binding TipoUser}" />
-                        <GridViewColumn Header="Nº Empregado"  DisplayMemberBinding="{Binding NFuncionario}" />
-                        <GridViewColumn Header="Nome" DisplayMemberBinding="{Binding Nome}" />
-                        <GridViewColumn Header="E-mail" DisplayMemberBinding="{Binding Email}" />
-                        <GridViewColumn Header="Telefone" DisplayMemberBinding="{Binding Telemovel}" />
-                    </GridView>
-                </ListView.View>
-            </ListView>
+            <GroupBox Grid.Column="3" Grid.Row="0" Grid.RowSpan="2" Header="Listagem de Encomendas da Empresa">
+                    <ListView  Name="empregados" SelectionChanged="empregados_SelectionChanged" >
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Função" DisplayMemberBinding="{Binding TipoUser}" />
+                            <GridViewColumn Header="Nº Empregado"  DisplayMemberBinding="{Binding NFuncionario}" />
+                            <GridViewColumn Header="Nome" DisplayMemberBinding="{Binding Nome}" />
+                            <GridViewColumn Header="E-mail" DisplayMemberBinding="{Binding Email}" />
+                            <GridViewColumn Header="Telefone" DisplayMemberBinding="{Binding Telemovel}" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </GroupBox>
         </Grid>
     </Grid>
 </Page>

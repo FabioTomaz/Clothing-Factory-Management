@@ -67,7 +67,7 @@ namespace Trabalho_BD_IHC
             emailFilial.Content = Utilizador.loggedUser.Filial.Email;
             faxFilial.Content = Utilizador.loggedUser.Filial.Fax;
             telefoneFilial.Content = Utilizador.loggedUser.Filial.Telefone;
-            moradaFilial.Content = String.Format("Distrito de {0} , concelho de {1}, localidade de {2}, rua {3}, porta {4}", Utilizador.loggedUser.Localizacao.Distrito, Utilizador.loggedUser.Localizacao.Concelho, Utilizador.loggedUser.Localizacao.Localidade, Utilizador.loggedUser.Localizacao.Rua1, Utilizador.loggedUser.Localizacao.Porta);
+            moradaFilial.Content = String.Format("{0} , {1}, {2}, {3}, porta nº {4}", Utilizador.loggedUser.Localizacao.Distrito, Utilizador.loggedUser.Localizacao.Concelho, Utilizador.loggedUser.Localizacao.Localidade, Utilizador.loggedUser.Localizacao.Rua1, Utilizador.loggedUser.Localizacao.Porta);
             if (Utilizador.loggedUser.Imagem != null) { 
                 var ms = new MemoryStream();
                 Utilizador.loggedUser.Imagem.Save(ms, ImageFormat.Png);
@@ -139,6 +139,15 @@ namespace Trabalho_BD_IHC
                     sendUserImageToDB(imgLoc);
                 dataHandler.closeSGBDConnection();
             }
+        }
+
+        private void tabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
+            empregadosFrame.NavigationService.Refresh();
+            materiaisFrame.NavigationService.Refresh();
+            produtosFrame.NavigationService.Refresh();
+
         }
     }
 }

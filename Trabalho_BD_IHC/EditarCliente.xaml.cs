@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data.SqlClient;
+using System.Text.RegularExpressions;
 
 namespace Trabalho_BD_IHC
 {
@@ -30,7 +31,9 @@ namespace Trabalho_BD_IHC
             this.cliente = cliente;
             labelNIF.Content = cliente.Nif;
             labelNome.Content = cliente.Nome;
-            txtcodigoPostal.Text = cliente.CodigoPostal;
+            String[] split = cliente.CodigoPostal.Split('-');
+            txtcodigoPostal1.Text = split[0];
+            txtcodigoPostal2.Text = split[1];
             txtEmail.Text = cliente.Email;
             txtNIB.Text = cliente.Nib;
             txtNumeroPorta.Text = cliente.NCasa.ToString();
@@ -42,6 +45,12 @@ namespace Trabalho_BD_IHC
         private void cancelar_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.GoBack();
+        }
+
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
         }
 
         private void AtualizarCliente(Cliente C)
@@ -76,9 +85,9 @@ namespace Trabalho_BD_IHC
             finally
             {
                 if (rows == 1)
-                    MessageBox.Show("Atualização realizada com sucesso", "", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+                    Xceed.Wpf.Toolkit.MessageBox.Show("A atualização do cliente foi submetida na base de dados com sucesso!", "Atualização Bem Sucedida", MessageBoxButton.OK, MessageBoxImage.Information);
                 else
-                   if (MessageBox.Show("Não foi possivel atualizar o perfil do cliente", "Erro", MessageBoxButton.OKCancel, MessageBoxImage.Exclamation) == MessageBoxResult.Cancel)
+                   if (Xceed.Wpf.Toolkit.MessageBox.Show("Não foi possivel atualizar o perfil do cliente na base de dados. Pretende tentar novamente?", "Erro", MessageBoxButton.YesNo, MessageBoxImage.Exclamation) == MessageBoxResult.Yes)
                     AtualizarCliente(C);
                 dataHandler.closeSGBDConnection();
             }
@@ -93,7 +102,7 @@ namespace Trabalho_BD_IHC
                 cliente.Nib = txtNIB.Text;
                 cliente.Telemovel = txtTelemovel.Text;
                 cliente.Email = txtEmail.Text;
-                cliente.CodigoPostal = txtcodigoPostal.Text;
+                cliente.CodigoPostal = txtcodigoPostal1.Text + "-" + txtcodigoPostal2.Text;
                 cliente.Rua = txtRua.Text;
                 cliente.NCasa = int.Parse(txtNumeroPorta.Text);
             }

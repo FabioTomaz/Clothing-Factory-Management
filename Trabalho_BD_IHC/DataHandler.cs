@@ -362,5 +362,72 @@ namespace Trabalho_BD_IHC
             }
         }
 
+        public void EnviarEncomenda(Encomenda encomenda, List<ProdutoPersonalizado> listaProdutos)
+        {
+            if (!this.verifySGBDConnection())
+                return;
+            SqlCommand cmd = new SqlCommand();
+
+            cmd.Parameters.Clear();
+            cmd.CommandText = "Insert into ENCOMENDA(ESTADO, DESCONTO, DATA_CONFIRMACAO, DATA_ENTREGA_PREV ,N_GESTOR_VENDA, CLIENTE) values(1, @DESCONTO, @DATEC, @DATEP ,@GESTOR, @CLIENTE);";
+            cmd.Parameters.AddWithValue("@DATEC", encomenda.DataConfirmacao.ToString("dd-MM-yyyy"));
+            cmd.Parameters.AddWithValue("@DESCONTO", encomenda.Desconto);
+            cmd.Parameters.AddWithValue("@GESTOR", encomenda.GestorVendas);
+            cmd.Parameters.AddWithValue("@CLIENTE", encomenda.Cliente);
+            cmd.Parameters.AddWithValue("@DATEP", encomenda.DataPrevistaEntrega.ToString("dd-MM-yyyy"));
+            cmd.Connection = this.Cn;
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Falha ao criar encomenda na base de dados. \n ERROR MESSAGE: \n" + ex.Message);
+            }
+            finally
+            {
+                this.closeSGBDConnection();
+            }
+
+            this.verifySGBDConnection();
+            SqlCommand lastCMD = new SqlCommand();
+            lastCMD.CommandText = "Select max(N_ENCOMENDA) from ENCOMENDA;";
+            SqlDataReader reader = lastCMD.ExecuteReader();
+            reader.Read();
+            int nencomenda = Convert.ToInt32(reader["N_ENCOMENDA"].ToString());
+            this.closeSGBDConnection();
+
+            for (int i = 0; i < listaProdutos.Count; i++)
+            {
+                this.verifySGBDConnection();
+                SqlCommand values = new SqlCommand();
+                int referencia = listaProdutos[i].ProdutoBase.Referencia;
+                String cor = listaProdutos[i].Cor;
+                String tamanho = listaProdutos[i].Tamanho;
+                int quantidade = listaProdutos[i].Quantidade;
+                values.Parameters.Clear();
+                values.Parameters.AddWithValue("@ENCOMENDA", encomenda);
+                values.Parameters.AddWithValue("@REFERENCIA", referencia);
+                values.Parameters.AddWithValue("@TAMANHO", tamanho);
+                values.Parameters.AddWithValue("@COR", cor);
+                values.Parameters.AddWithValue("@QUANTIDADE", quantidade);
+                values.CommandText = "INSERT INTO [CONTEUDO-ENCOMENDA](N_ENCOMENDA, REFERENCIA_PRODUTO, TAMANHO_PRODUTO, COR_PRODUTO, QUANTIDADE) VALUES(@ENCOMENDA, @REFERENCIA, @TAMANHO, @COR, @QUANTIDADE)";
+                values.Connection = this.Cn;
+                try
+                {
+                    values.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Falha ao associar produtos á encomenda na base de dados. \n ERROR MESSAGE: \n" + ex.Message);
+                }
+                finally
+                {
+                    this.closeSGBDConnection();
+                }
+            }
+
+        }
+
     }
 }

@@ -3,6 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:local="clr-namespace:Trabalho_BD_IHC"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
@@ -20,7 +21,7 @@
             <RowDefinition />
             <RowDefinition Height="0.1*"/>
         </Grid.RowDefinitions>
-        <GroupBox Header="Operações" Grid.Column="1" Grid.Row="1">
+        <GroupBox Header="Operações" Grid.Column="1" Grid.Row="1" Template="{StaticResource blackGroupBox}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.1*"></ColumnDefinition>
@@ -43,11 +44,11 @@
         <GroupBox Header="Registar Cliente" Grid.Row="1" Grid.Column="3">
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.2*"></ColumnDefinition>
+                <ColumnDefinition Width="0.1*"></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition Width="0.2*"></ColumnDefinition>
-                <ColumnDefinition Width="1.5*"></ColumnDefinition>
-                <ColumnDefinition Width="0.2*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="0.1*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.1*"></RowDefinition>
@@ -68,31 +69,50 @@
                     <RowDefinition></RowDefinition>
                     <RowDefinition Height="0.1*"></RowDefinition>
                 </Grid.RowDefinitions>
-            <Label Content="Nome: " Grid.Row="1" Grid.Column="1" VerticalAlignment="Center"/>
-                <TextBox Name="txtNome" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center"></TextBox>
-            <Label Content="NIB: " Grid.Row="3" Grid.Column="1"/>
-                <TextBox Name="txtNIB" Grid.Row="3" Grid.Column="3" VerticalAlignment="Center"></TextBox>
-            <Label Content="NIF: " Grid.Row="5" Grid.Column="1"/>
-                <TextBox Name="txtNIF" Grid.Row="5" Grid.Column="3" VerticalAlignment="Center"></TextBox>
-            <Label Content="E-Mail: " Grid.Row="7" Grid.Column="1"/>
-                <TextBox Name="txtEmail" Grid.Row="7" Grid.Column="3" VerticalAlignment="Center"></TextBox>
-            <Label Content="Telemóvel: " Grid.Row="9" Grid.Column="1"/>
-                <TextBox Name="txtTelemovel" Grid.Row="9" Grid.Column="3" VerticalAlignment="Center"></TextBox>
-            <Label Content="Código Postal: " Grid.Row="11" Grid.Column="1"/>
-                <Grid Grid.Row="11" Grid.Column="3">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="2*"/>
-                        <ColumnDefinition Width="0.5*"/>
-                        <ColumnDefinition Width="1.5*"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBox Grid.Column="0" Name="txtcodigoPostal1" HorizontalAlignment="Stretch" VerticalAlignment="Center"></TextBox>
+                <StackPanel Orientation="Horizontal"  Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Center">
+                    <materialDesign:PackIcon Kind="Account"></materialDesign:PackIcon>
+                    <TextBlock Text="Nome: "/>
+                </StackPanel>
+                <TextBox Name="txtNome" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" VerticalAlignment="Center"></TextBox>
+                <StackPanel Orientation="Horizontal"  Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Center">
+                    <materialDesign:PackIcon Kind="Bank"></materialDesign:PackIcon>
+                    <TextBlock Text="NIB: "/>
+                </StackPanel>
+                <TextBox Name="txtNIB" Grid.Row="3" Grid.Column="2" VerticalAlignment="Center"></TextBox>
+                <StackPanel Orientation="Horizontal"  Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Center">
+                    <materialDesign:PackIcon Kind="Numeric"></materialDesign:PackIcon>
+                    <TextBlock Text="NIF: "/>
+                </StackPanel>
+                <TextBox Name="txtNIF" Grid.Row="5" Grid.Column="2" VerticalAlignment="Center"></TextBox>
+                <StackPanel Orientation="Horizontal"  Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Center">
+                    <materialDesign:PackIcon Kind="Email"></materialDesign:PackIcon>
+                    <TextBlock Text="E-Mail: "/>
+                </StackPanel>
+                <TextBox Name="txtEmail" Grid.Row="7" Grid.Column="2" VerticalAlignment="Center"></TextBox>
+                <StackPanel Orientation="Horizontal"  Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Center">
+                    <materialDesign:PackIcon Kind="Phone"></materialDesign:PackIcon>
+                    <TextBlock Text="Telemovel: "/>
+                </StackPanel>                
+                <TextBox Name="txtTelemovel" Grid.Row="9" Grid.Column="2" VerticalAlignment="Center"></TextBox>
+                <StackPanel Orientation="Horizontal"  Grid.Row="11" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Center">
+                    <materialDesign:PackIcon Kind="ZipBox"></materialDesign:PackIcon>
+                    <TextBlock Text="Código Postal: "/>
+                </StackPanel>
+                <StackPanel Grid.Row="11" Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center"> 
+                    <TextBox MaxLength="4" Width="40" PreviewTextInput="NumberValidationTextBox" Name="txtcodigoPostal1" VerticalAlignment="Center"></TextBox>
                     <TextBlock Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Text="-"></TextBlock>
-                    <TextBox Grid.Column="2" Name="txtcodigoPostal2" HorizontalAlignment="Stretch" VerticalAlignment="Center"></TextBox>
-                </Grid>
-                <Label Content="Rua: " Grid.Row="13" Grid.Column="1"/>
-                <TextBox Name="txtRua" Grid.Row="13" Grid.Column="3" VerticalAlignment="Center"></TextBox>
-            <Label Content="Numero de Porta: " Grid.Row="15" Grid.Column="1"/>
-                <TextBox Name="txtNumeroPorta" Grid.Row="15" Grid.Column="3" VerticalAlignment="Center"></TextBox>
+                    <TextBox MaxLength="3" Width="30" PreviewTextInput="NumberValidationTextBox" Grid.Column="2" Name="txtcodigoPostal2" HorizontalAlignment="Stretch" VerticalAlignment="Center"></TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"  Grid.Row="13" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Center">
+                    <materialDesign:PackIcon Kind="Map"></materialDesign:PackIcon>
+                    <TextBlock Text="Rua: "/>
+                </StackPanel>
+                <TextBox Name="txtRua" Grid.Row="13" Grid.Column="2" Grid.ColumnSpan="2" VerticalAlignment="Center"></TextBox>
+                <StackPanel Orientation="Horizontal"  Grid.Row="15" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Center">
+                    <materialDesign:PackIcon Kind="Glassdoor"></materialDesign:PackIcon>
+                    <TextBlock Text="Porta: "/>
+                </StackPanel>
+                <TextBox Name="txtNumeroPorta" PreviewTextInput="NumberValidationTextBox" Grid.Row="15" Grid.Column="2" VerticalAlignment="Center"></TextBox>
                 <Grid Grid.Row="17" Grid.Column="1" Grid.ColumnSpan="3">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="2*"></ColumnDefinition>

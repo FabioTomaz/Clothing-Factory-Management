@@ -3,10 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:Trabalho_BD_IHC"
         xmlns:wpfTool="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
         mc:Ignorable="d"
-        Title="Gestão de Produção, Stock e Venda" Height="450" MinHeight="300" Width="900" MinWidth="750" Icon="GPSV.png" WindowStartupLocation="CenterScreen" >
+        Title="Gestão de Produção, Stock e Venda" Height="470" MinHeight="400" Width="900" MinWidth="750" Icon="GPSV.png" WindowStartupLocation="CenterScreen" >
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -14,8 +15,9 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TabControl x:Name="tabControl" Grid.Column="0" HorizontalAlignment="Stretch" Grid.Row="0" VerticalAlignment="Stretch">
-            <TabItem Header="Minha Conta" IsEnabled="True">
+        
+        <TabControl x:Name="tabControl" Grid.Column="0" HorizontalAlignment="Stretch" Grid.Row="0" VerticalAlignment="Stretch" SelectionChanged="tabControl_SelectionChanged">
+            <TabItem Name="conta" Header="Minha Conta" IsEnabled="True">
                 <Grid Background="White">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.1*"/>
@@ -27,12 +29,13 @@
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="0.1*"/>
+                        <RowDefinition Height="0.9*"/>
+                        <RowDefinition Height="0.9*"/>
+                        <RowDefinition Height="0.9*"/>
+                        <RowDefinition Height="0.05*"/>
                         <RowDefinition/>
                         <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition Height="0.1*"/>
-                        <RowDefinition/>
-                        <RowDefinition/>
+                        <RowDefinition Height="0.05*"/>
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition Height="0.1*"/>
@@ -92,7 +95,7 @@
                             
                         </Grid>
                     </GroupBox>
-                    <GroupBox Header="Informações de Fábrica Filial" Template="{StaticResource greenGroupBox}" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="5" Grid.RowSpan="4">
+                    <GroupBox Header="Informações de Fábrica Filial" Template="{StaticResource greenGroupBox}" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="5" Grid.RowSpan="2">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition></RowDefinition>
@@ -107,7 +110,7 @@
                                 <Label Content="Nº da Filial: "></Label>
                                 <Label Name="numFilial"></Label>
                             </StackPanel>
-                            <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
+                            <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" Grid.ColumnSpan="2">
                                 <Label Content="Morada: "></Label>
                                 <Label Name="moradaFilial"></Label>
                             </StackPanel>
@@ -119,7 +122,7 @@
                                 <Label Content="Fax: "></Label>
                                 <Label Name="faxFilial"></Label>
                             </StackPanel>
-                            <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal">
+                            <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
                                 <Label Content="Email:"></Label>
                                 <Label Name="emailFilial"></Label>
                             </StackPanel>
@@ -128,28 +131,34 @@
                     <GroupBox Header="Imagem de Perfil" Template="{StaticResource blackGroupBox}" Grid.Row="1" Grid.RowSpan="3" Grid.Column="4">
                         <Image Name="userImage" Source="person.png"></Image>
                     </GroupBox>
+                    <GroupBox Header="Notificações Importantes" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="8" Grid.RowSpan="2">
+                        <StackPanel>
+                            <materialDesign:Card>Existem x encomendas pendentes da filial atual neste momento</materialDesign:Card>
+                            <materialDesign:Card Margin="0,4,0,0">Artigos Vendidos este Mês:</materialDesign:Card>
+                        </StackPanel>
+                    </GroupBox>
                     <Button Content="Alterar Foto" Style="{StaticResource imageButton}" Grid.Column="4" Grid.Row="5" VerticalAlignment="Center" Click="Button_Click_1"/>
                     <Button Content="Alterar Informações Pessoais" Style="{StaticResource  editarButton}"  Grid.Column="4" Grid.Row="6" VerticalAlignment="Center"/>
-                    <Button Content="Alterar PassWord"  Style="{StaticResource  passwordButton}" Grid.Column="4" Grid.Row="7" VerticalAlignment="Center"/>
-                    <Button Content="Terminar Sessão"  Style="{StaticResource  loggoutButton}" Grid.Column="4" Grid.Row="8" VerticalAlignment="Center" Click="Button_Click"/>
+                    <Button Content="Alterar PassWord"  Style="{StaticResource  passwordButton}" Grid.Column="4" Grid.Row="8" VerticalAlignment="Center"/>
+                    <Button Content="Terminar Sessão"  Style="{StaticResource  loggoutButton}" Grid.Column="4" Grid.Row="9" VerticalAlignment="Center" Click="Button_Click"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Clientes"  IsEnabled="True">
+            <TabItem Name="clientes" Header="Clientes"  IsEnabled="True">
                 <Frame Name="clientesFrame" NavigationUIVisibility="Hidden"></Frame>
             </TabItem>
-            <TabItem Header="Encomendas"  IsEnabled="True">
+            <TabItem Name="encomendas" Header="Encomendas"  IsEnabled="True">
                 <Frame Name="encomendasFrame" NavigationUIVisibility="Hidden"></Frame>
             </TabItem>
-            <TabItem Header="Produção"  IsEnabled="True">
+            <TabItem Name="producao" Header="Produção"  IsEnabled="True">
                 <Frame Name="produtosFrame" NavigationUIVisibility="Hidden"></Frame>
             </TabItem>
-            <TabItem Header="Materiais"  IsEnabled="True">
+            <TabItem Name="materiais" Header="Materiais"  IsEnabled="True">
                 <Frame Name="materiaisFrame" NavigationUIVisibility="Hidden"></Frame>
             </TabItem>
-            <TabItem Header="Recursos Humanos" >
+            <TabItem Name="empregados" Header="Recursos Humanos" >
                 <Frame Name="empregadosFrame" NavigationUIVisibility="Hidden"></Frame>
             </TabItem>
-            <TabItem Header="Estatísticas"  IsEnabled="True">
+            <TabItem Name="estatisticas" Header="Estatísticas"  IsEnabled="True">
                 <Grid Background="White">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.1*"/>
@@ -208,10 +217,10 @@
                     
                 </Grid>
             </TabItem>
-            <TabItem Header="Empresa"  IsEnabled="False">
+            <TabItem Name="empresa" Header="Empresa"  IsEnabled="False">
                 <Grid Background="#FFE5E5E5"/>
             </TabItem>
-            <TabItem Header="Ajuda" >
+            <TabItem Name="ajuda" Header="Ajuda" >
                 
             </TabItem>
         </TabControl>

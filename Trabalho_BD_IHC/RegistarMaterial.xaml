@@ -317,6 +317,7 @@
                     <Label Grid.Row="3" Grid.Column="0" Content="Preço/unidade (€): " HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
                     <wpfTool:IntegerUpDown Name="txtPrecoUnidadeFita" VerticalAlignment="Center" Grid.Row="3" Grid.Column="1" Width="100" Minimum="0" Value="0"  FormatString="F" HorizontalAlignment="Left"></wpfTool:IntegerUpDown>
                 </Grid>
+                
                 <Grid Name="outroTipoAcessorio" Visibility="Hidden" Grid.Column="0" Grid.Row="11" Grid.ColumnSpan="4" Grid.RowSpan="5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.8*"></ColumnDefinition>

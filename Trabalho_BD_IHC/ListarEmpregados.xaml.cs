@@ -47,7 +47,7 @@ namespace Trabalho_BD_IHC
                 while (reader.Read())
                 {
                     Utilizador u = new Utilizador();
-                   
+                    u.Localizacao = new Localizacao();
                     u.NFuncionario = Convert.ToInt32(reader["N_FUNCIONARIO"].ToString());
                     u.Nome = reader["NOME"].ToString();
                     u.Email = reader["EMAIL"].ToString();

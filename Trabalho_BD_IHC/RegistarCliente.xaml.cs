@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data.SqlClient;
+using System.Text.RegularExpressions;
 
 namespace Trabalho_BD_IHC
 {
@@ -26,7 +27,13 @@ namespace Trabalho_BD_IHC
         {
             InitializeComponent();
             this.dataHandler = dh;
-        }           
+        }
+
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
 
         private void EnviarCliente(Cliente cl)
         {
@@ -71,6 +78,7 @@ namespace Trabalho_BD_IHC
             Cliente cliente = new Cliente();
             try
             {
+              
                 cliente.Nome = txtNome.Text;
                 cliente.Nib = txtNIB.Text;
                 cliente.Nif = txtNIF.Text;

@@ -92,30 +92,13 @@
             </Grid>
         </GroupBox>
         <GroupBox Header="Produtos da Encomenda" Grid.Column="3" Grid.Row="3" Template="{StaticResource greenGroupBox}">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition Width="0.05*"></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition Width="0.05*"></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="30"></RowDefinition>
-                    <RowDefinition Height="5"></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                </Grid.RowDefinitions>
-                <Button Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="0" VerticalAlignment="Center" Click="Button_Click" Style="{DynamicResource }">
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="add.png" Width="20" />
-                        <TextBlock Text="Adicionar Produto" Margin="4,0,0,0"/>
-                    </StackPanel>
-                </Button>
-                <ScrollViewer  Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="2" Grid.RowSpan="4">
-                    <StackPanel x:Name="stack">
-                    </StackPanel>
-                </ScrollViewer>
-            </Grid>
+            <DataGrid Name="produtosEncomenda" ItemsSource="{Binding Produto}" CanUserAddRows="True" AutoGenerateColumns="False">
+                <materialDesign:MaterialDataGridTextColumn Binding="{Binding Produto.Referencia}" Header="Referencia" ></materialDesign:MaterialDataGridTextColumn>
+                <materialDesign:MaterialDataGridTextColumn Binding="{Binding Produto.Tamanho}" Header="Tamanho" ></materialDesign:MaterialDataGridTextColumn>
+                <materialDesign:MaterialDataGridTextColumn Binding="{Binding Produto.Cor}" Header="Cor" ></materialDesign:MaterialDataGridTextColumn>
+                <materialDesign:MaterialDataGridTextColumn Binding="{Binding Produto.Modelo}" Header="Modelo" ></materialDesign:MaterialDataGridTextColumn>
+                <materialDesign:MaterialDataGridTextColumn Binding="{Binding Produto.Quantidade}" Header="Quantidade" ></materialDesign:MaterialDataGridTextColumn>
+            </DataGrid>    
         </GroupBox>
     </Grid>
 </Page>
