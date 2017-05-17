@@ -16,5 +16,5 @@ C:\Users\young\Source\Repos\ihc_bd2\Trabalho_BD_IHC\App.xaml
 22-1140935156
 DetalhesCliente.xaml;DetalhesEncomenda.xaml;DetalhesMaterial.xaml;EditarProdutoBase.xaml;EditarDesenhoPersonalizado.xaml;EditarCliente.xaml;EditarEncomenda.xaml;InformaçãoEmpregado.xaml;RegistarProdutoPersonalizado.xaml;RegistarProdutoBase.xaml;RegistarDesenhoPersonalizado.xaml;RegistarEmpregado.xaml;RegistarMaterial.xaml;ListarEmpregados.xaml;ListarMateriais.xaml;ListarClientes.xaml;ListarProdutos.xaml;ListarEncomendas.xaml;listprodutos.xaml;Login.xaml;Main.xaml;RegistarCliente.xaml;RegistarDesenhoBase.xaml;RegistarEncomenda.xaml;
 
-False
+True
 

@@ -126,7 +126,7 @@
                         </Grid>
                     </GroupBox>
                     <GroupBox Header="Imagem de Perfil" Template="{StaticResource blackGroupBox}" Grid.Row="1" Grid.RowSpan="3" Grid.Column="4">
-                        <Image Name="userImage"></Image>
+                        <Image Name="userImage" Source="person.png"></Image>
                     </GroupBox>
                     <Button Content="Alterar Foto" Style="{StaticResource imageButton}" Grid.Column="4" Grid.Row="5" VerticalAlignment="Center" Click="Button_Click_1"/>
                     <Button Content="Alterar Informações Pessoais" Style="{StaticResource  editarButton}"  Grid.Column="4" Grid.Row="6" VerticalAlignment="Center"/>

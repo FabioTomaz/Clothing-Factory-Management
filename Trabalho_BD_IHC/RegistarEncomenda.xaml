@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:wpfTool="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:local="clr-namespace:Trabalho_BD_IHC"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
@@ -19,9 +20,11 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="0.05*"/>
             <RowDefinition />
+            <RowDefinition Height="0.05*"/>
+            <RowDefinition />
             <RowDefinition Height="0.1*"/>
         </Grid.RowDefinitions>
-        <GroupBox Header="Operações" Grid.Column="1" Grid.Row="1">
+        <GroupBox Header="Operações" Grid.Column="1" Grid.Row="1" Grid.RowSpan="3" Template="{StaticResource blackGroupBox}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.1*"></ColumnDefinition>
@@ -58,13 +61,6 @@
                     <RowDefinition Height="0.1*"></RowDefinition>
                     <RowDefinition></RowDefinition>
                     <RowDefinition Height="0.1*"></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition Height="0.1*"></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition Height="0.1*"></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition Height="0.1*"></RowDefinition>
-
 
                 </Grid.RowDefinitions>
                 <Label Content="Numero do Cliente: " Grid.Row="1" Grid.Column="1" VerticalAlignment="Center"/>
@@ -91,34 +87,34 @@
                 </Grid>
                 <Label Content="Data Prevista para Entrega:" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center"/>
                 <DatePicker Name="dataPrevista" Grid.Row="3" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Center"></DatePicker>
-                <GroupBox Header="Produtos da Encomenda" Grid.Row="5" Grid.RowSpan="5" Grid.Column="0" Grid.ColumnSpan="5">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition Width="0.05*"></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition Width="0.05*"></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="30"></RowDefinition>
-                            <RowDefinition Height="5"></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <Button Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="0" VerticalAlignment="Center" Click="Button_Click">
-                            <StackPanel Orientation="Horizontal">
-                                <Image Source="add.png" Width="20" />
-                                <TextBlock Text="Adicionar Produto" Margin="4,0,0,0"/>
-                            </StackPanel>
-                        </Button>
-                        <ScrollViewer  Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="2" Grid.RowSpan="4">
-                            <StackPanel x:Name="stack">
-                            </StackPanel>
-                        </ScrollViewer>
-                    </Grid>
-                </GroupBox>
-                <Label Content="Descontos Aplicaveis: " Grid.Row="11" Grid.Column="1" VerticalAlignment="Center"/>
-                <wpfTool:IntegerUpDown Name="txtDesconto" VerticalAlignment="Center" Grid.Row="11" Grid.Column="3" Maximum="100" Minimum="0" Value="0" FormatString="P"  Width="100" Watermark="Percentagem" HorizontalAlignment="Left"></wpfTool:IntegerUpDown>
+                <Label Content="Descontos Aplicaveis: " Grid.Row="5" Grid.Column="1" VerticalAlignment="Center"/>
+                <wpfTool:DoubleUpDown Name="txtDesconto" VerticalAlignment="Center" Grid.Row="5" Grid.Column="3" Maximum="100" Minimum="0" Value="0" FormatString="P"  Width="100" Watermark="Percentagem" HorizontalAlignment="Left"></wpfTool:DoubleUpDown>
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Produtos da Encomenda" Grid.Column="3" Grid.Row="3" Template="{StaticResource greenGroupBox}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="0.05*"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="0.05*"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"></RowDefinition>
+                    <RowDefinition Height="5"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Button Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="0" VerticalAlignment="Center" Click="Button_Click" Style="{DynamicResource }">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="add.png" Width="20" />
+                        <TextBlock Text="Adicionar Produto" Margin="4,0,0,0"/>
+                    </StackPanel>
+                </Button>
+                <ScrollViewer  Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="2" Grid.RowSpan="4">
+                    <StackPanel x:Name="stack">
+                    </StackPanel>
+                </ScrollViewer>
             </Grid>
         </GroupBox>
     </Grid>
