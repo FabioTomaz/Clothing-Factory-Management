@@ -34,13 +34,22 @@ namespace Trabalho_BD_IHC
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            string pass = null;
+            if (mostrarPass.IsChecked == true)
+            {
+                pass = passwordText.Text;
+            }
+            else {
+                pass = password.Password;
+            }
+
             if (nEmpregado.Text=="" || password.Password=="") {
                 MessageBoxResult result = Xceed.Wpf.Toolkit.MessageBox.Show("Por favor preencha os campos de incio de sessão e tente novamente.", "Erro de Inicio de Sessão", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else {
                 if (checkUser(nEmpregado.Text))
                 {
-                    if (checkLogin(nEmpregado.Text, password.Password)) {
+                    if (checkLogin(nEmpregado.Text, pass)) {
                         Utilizador.loggedUser = dataHandler.getUtilizadorFromDB(Convert.ToInt32(nEmpregado.Text));
                         Utilizador.loggedUser.Supervisor = dataHandler.getUtilizadorFromDB(Utilizador.loggedUser.Supervisor.NFuncionario);
                         Console.WriteLine(Utilizador.loggedUser.NFuncionario);
@@ -99,10 +108,22 @@ namespace Trabalho_BD_IHC
 
         private void CheckBox_Click(object sender, RoutedEventArgs e)
         {
+        }
+
+        private void CheckBox_Click_1(object sender, RoutedEventArgs e)
+        {
             if (((CheckBox)sender).IsChecked == true)
-                password.Visibility = Visibility.Visible;
-            else
+            {
+                passwordText.Text = password.Password;
+                passwordText.Visibility = Visibility.Visible;
                 password.Visibility = Visibility.Hidden;
+            }
+            else {
+                password.Password = passwordText.Text;
+                passwordText.Visibility = Visibility.Hidden;
+                password.Visibility = Visibility.Visible;
+            }
+             
         }
     }
 }
