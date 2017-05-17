@@ -124,22 +124,6 @@ namespace Trabalho_BD_IHC
             return utilizador;
         }
 
-        public String getMaterialType(int referencia)
-        {
-            if (this.verifySGBDConnection())
-            {
-                SqlCommand cmd = new SqlCommand("SELECT dbo.getTipoMaterial(@referencia)", this.cn);
-                cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@referencia", referencia);
-                String s = (String)cmd.ExecuteScalar();
-
-                this.closeSGBDConnection();
-                return s;
-            }
-            this.closeSGBDConnection();
-            return "";
-        }
-
         public void inserirMaterial(MaterialTextil mat)
         {
 
@@ -427,6 +411,92 @@ namespace Trabalho_BD_IHC
                 }
             }
 
+        }
+
+
+        public String getMaterialType(int referencia)
+        {
+            if (this.verifySGBDConnection())
+            {
+                SqlCommand cmd = new SqlCommand("SELECT dbo.getTipoMaterial(@referencia)", this.cn);
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@referencia", referencia);
+                String s = (String)cmd.ExecuteScalar();
+
+                this.closeSGBDConnection();
+                return s;
+            }
+            this.closeSGBDConnection();
+            return "";
+        }
+
+        public Etiqueta getEtiqueta(int n)
+        {
+            Etiqueta et = new Etiqueta();
+            if (!this.verifySGBDConnection())
+                return et;
+            SqlCommand cmd = new SqlCommand("SELECT * FROM dbo.getEtiqueta(@nEtiqueta)", this.Cn);
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@nEtiqueta", n);
+            SqlDataReader reader = cmd.ExecuteReader();
+            reader.Read();
+            et.Numero = n;
+            et.Normas = reader["NORMAS"].ToString();
+            et.PaisFabrico = reader["PAIS_FABRICO"].ToString();
+            et.Composicao = reader["COMPOSICAO"].ToString();
+            reader.Close();
+            this.closeSGBDConnection();
+            return et;
+        }
+
+        public int getEtiqueta(String normas, String composiçao, String pais)
+        {
+
+            if (!this.verifySGBDConnection())
+                return 0;
+            SqlCommand cmd = new SqlCommand("SELECT dbo.getEtiquetaNumero(@normas, @comp, @pais)", this.Cn);
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@normas", normas);
+            cmd.Parameters.AddWithValue("@comp", composiçao);
+            cmd.Parameters.AddWithValue("@pais", pais);
+            int n = (int)cmd.ExecuteScalar();
+            this.closeSGBDConnection();
+            return n;
+        }
+
+        public void insertEtiqueta(String normas, String composiçao, String pais)
+        {
+            if (!this.verifySGBDConnection())
+                return;
+            SqlCommand cmd = new SqlCommand("INSERT INTO ETIQUETA (NORMAS, PAIS_FABRICO, COMPOSICAO) VALUES "
+                + "(@normas, @pais, @comp) ", this.Cn);
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@normas", normas);
+            cmd.Parameters.AddWithValue("@comp", composiçao);
+            cmd.Parameters.AddWithValue("@pais", pais);
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                this.closeSGBDConnection();
+                throw new Exception("Falha ao criar Etiqueta na base de dados. \n ERROR MESSAGE: \n" + ex.Message);
+            }
+            this.closeSGBDConnection();
+        }
+
+        public int getLastIdentity(String tableName)
+        {
+            if (!this.verifySGBDConnection())
+                return 0;
+            SqlCommand cmd = new SqlCommand("SELECT IDENT_CURRENT(@table) ", this.Cn);
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@table", tableName);
+            int id = Convert.ToInt32(cmd.ExecuteScalar().ToString());
+
+            this.closeSGBDConnection();
+            return id;
         }
 
     }
