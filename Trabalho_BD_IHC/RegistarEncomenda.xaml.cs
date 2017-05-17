@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data.SqlClient;
 using System.Windows.Markup;
+using System.Collections.ObjectModel;
 
 namespace Trabalho_BD_IHC
 {
@@ -28,6 +29,8 @@ namespace Trabalho_BD_IHC
         {
             InitializeComponent();
             this.dataHandler = dataHandler;
+            ObservableCollection<ProdutoPersonalizado> list = new ObservableCollection<ProdutoPersonalizado>();
+            produtosEncomenda.ItemsSource = list;
         }
 
         private void cancelar_Click(object sender, RoutedEventArgs e)

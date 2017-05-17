@@ -91,13 +91,15 @@
                 <wpfTool:DoubleUpDown Name="txtDesconto" VerticalAlignment="Center" Grid.Row="5" Grid.Column="3" Maximum="100" Minimum="0" Value="0" FormatString="P"  Width="100" Watermark="Percentagem" HorizontalAlignment="Left"></wpfTool:DoubleUpDown>
             </Grid>
         </GroupBox>
-        <GroupBox Header="Produtos da Encomenda" Grid.Column="3" Grid.Row="3" Template="{StaticResource greenGroupBox}">
-            <DataGrid Name="produtosEncomenda" ItemsSource="{Binding Produto}" CanUserAddRows="True" AutoGenerateColumns="False">
-                <materialDesign:MaterialDataGridTextColumn Binding="{Binding Produto.Referencia}" Header="Referencia" ></materialDesign:MaterialDataGridTextColumn>
-                <materialDesign:MaterialDataGridTextColumn Binding="{Binding Produto.Tamanho}" Header="Tamanho" ></materialDesign:MaterialDataGridTextColumn>
-                <materialDesign:MaterialDataGridTextColumn Binding="{Binding Produto.Cor}" Header="Cor" ></materialDesign:MaterialDataGridTextColumn>
-                <materialDesign:MaterialDataGridTextColumn Binding="{Binding Produto.Modelo}" Header="Modelo" ></materialDesign:MaterialDataGridTextColumn>
-                <materialDesign:MaterialDataGridTextColumn Binding="{Binding Produto.Quantidade}" Header="Quantidade" ></materialDesign:MaterialDataGridTextColumn>
+        <GroupBox Header="Produtos da Encomenda" Grid.Column="3" Grid.Row="3" >
+            <DataGrid Name="produtosEncomenda" ItemsSource="{Binding Encomenda}" AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <materialDesign:MaterialDataGridTextColumn Binding="{Binding ProdutoBase.Referencia}" Header="Referencia" ></materialDesign:MaterialDataGridTextColumn>
+                    <materialDesign:MaterialDataGridTextColumn Binding="{Binding Tamanho}" Header="Tamanho" ></materialDesign:MaterialDataGridTextColumn>
+                    <materialDesign:MaterialDataGridTextColumn Binding="{Binding Cor}" Header="Cor" ></materialDesign:MaterialDataGridTextColumn>
+                    <materialDesign:MaterialDataGridTextColumn Binding="{Binding ID}" Header="Modelo" ></materialDesign:MaterialDataGridTextColumn>
+                    <materialDesign:MaterialDataGridTextColumn Binding="{Binding Quantidade}" Header="Quantidade" ></materialDesign:MaterialDataGridTextColumn>
+                </DataGrid.Columns>
             </DataGrid>    
         </GroupBox>
     </Grid>

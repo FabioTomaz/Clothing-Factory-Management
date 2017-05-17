@@ -145,6 +145,7 @@ namespace Trabalho_BD_IHC
 
         private void encomendas_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            e.Handled = true;
             if (encomendas.SelectedItems.Count > 0)
             {
                 detalhesEncomenda.IsEnabled = true;    

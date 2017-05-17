@@ -47,18 +47,22 @@ INSERT INTO ENCOMENDA (DATA_CONFIRMACAO, DATA_ENTREGA_PREV, LOCALENTREGA, ESTADO
 	
 	
 INSERT INTO [PRODUTO-BASE] (NOME, DATA_ALTERACAO, IVA ,INSTRUCOES_PRODUCAO, N_GESTOR_PROD, IMAGEM_DESENHO) VALUES
-	('Bata azul', '20170424', 23.0 ,'Usar linha e tecido e pintar de azul', 2, 'image'),
-	('Colete', '20170511', 23.0 ,'Usar pano e linha e elásticos', 2, 'image');
-
+	('Bata azul', '20170424', 23.0 ,'Começar a trabalhar pelas mangas juntar os punhos...', 2, 'image'),
+	('Colete', '20170511', 23.0 ,'Comece por cozer as duas peças das costas adicione as mangas...', 2, 'image');
+	
 INSERT INTO ETIQUETA (NORMAS, PAIS_FABRICO, COMPOSICAO) VALUES
-	('Mais exemplos de normas', 'Espanha', 'Pano, linha'),
-	('normas e tal', 'Portugal', 'algodão, linho');
+	('Lavagem a seco', 'Portugal', '60% algodão 30% polyester'),
+	('Não Lavar com roupa branca', 'Portugal', '35% algodão 20% polyester');
 	
 INSERT INTO [PRODUTO-PERSONALIZADO] (REFERENCIA, TAMANHO, COR, PRECO, UNIDADES_ARMAZEM, N_ETIQUETA) VALUES
-	(1, 'XL', 'azul-escuro', 17.99, 1, 1);
+	(1, 'XL', 'azul escuro', 17.99, 1, 1),
+	(1, 'XL', 'verde lima', 16.99,3, 1),
+	(2, 'M', 'azul claro', 25.50, 0 ,2);
 	
 INSERT INTO CONTEUDO_ENCOMENDA (N_ENCOMENDA, REFERENCIA_PRODUTO, TAMANHO_PRODUTO, COR_PRODUTO, ID_PRODUTO ,QUANTIDADE) VALUES
-	(1, 1, 'XL', 'azul-escuro', 1, 2);
+	(1, 1, 'XL', 'azul escuro', 1, 5),
+	(1, 1, 'XL', 'verde lima', 2, 1),
+	(2, 2, 'M', 'azul claro', 3, 2);
 	
 
 INSERT INTO FORNECEDOR (NIF, EMAIL, NOME, FAX, TELEFONE, DESIGNACAO, COD_POSTAL, RUA, N_PORTA) VALUES
@@ -106,6 +110,7 @@ INSERT INTO [FITA-VELCRO] (REFERENCIA_FABRICA, LARGURA, COMPRIMENTO) VALUES
 
 INSERT INTO [MATERIAIS-PRODUTO] (REFERENCIA, TAMANHO, COR, ID, REFERENCIA_FABRICA, QUANTIDADE) VALUES
 	(1, 'XL', 'azul escuro', 1 , 1 , 50),
-	(1, 'XL', 'verde lima', 1 , 1 , 50),
-	(2, 'M', 'azul claro', 1 , 5 , 50);
+	(1, 'XL', 'verde lima', 2 , 1 , 50),
+	(2, 'M', 'azul claro', 3 , 5 , 50);
 
+SELECT * FROM [MATERIAIS-PRODUTO]

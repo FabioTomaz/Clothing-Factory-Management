@@ -37,7 +37,7 @@ namespace Trabalho_BD_IHC
             detalhesMaterial.IsEnabled = false;
             materiais.Focus();
             if (!dataHandler.verifySGBDConnection()) {
-                MessageBoxResult result = MessageBox.Show("A conexão à base de dados é instável ou inexistente. Por favor tente mais tarde", "Erro de Base de Dados", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
             } else {
                 ObservableCollection<MaterialTextil> materiaisTexteis = new ObservableCollection<MaterialTextil>();
                 SqlCommand cmd = new SqlCommand("SELECT * FROM MATERIAIS_TÊXTEIS", dataHandler.Cn);
@@ -63,6 +63,7 @@ namespace Trabalho_BD_IHC
 
         private void materiais_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            e.Handled = true;
             if (materiais.SelectedItems.Count > 0)
             {
                 adicionarMaterial.IsEnabled = true;

@@ -64,9 +64,9 @@
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{Binding Referencia}"></TextBlock>
+                                        <TextBlock Name="refProdBase" Text="{Binding Referencia}"></TextBlock>
                                         <TextBlock Text="-"></TextBlock>
-                                        <TextBlock Text="{Binding Nome}"></TextBlock>
+                                        <TextBlock Name="nomeProdBase" Text="{Binding Nome}"></TextBlock>
                                     </StackPanel>
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>
@@ -157,6 +157,8 @@
                                 <RowDefinition Height="1*"></RowDefinition>
                                 <RowDefinition Height="1*"></RowDefinition>
                                 <RowDefinition Height="1*"></RowDefinition>
+                                <RowDefinition Height="1*"></RowDefinition>
+                                <RowDefinition Height="1*"></RowDefinition>
                             </Grid.RowDefinitions>
                             <ListView Name="materiaisView" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" Grid.RowSpan="4" SelectionMode="Single" SelectionChanged="materiaisView_SelectionChanged">
                                 <ListView.View>
@@ -167,7 +169,8 @@
                                     </GridView>
                                 </ListView.View>
                             </ListView>
-                            <Grid Grid.Row="0" Grid.RowSpan="3" Grid.Column="4" Grid.ColumnSpan="3">
+                            <TextBlock Text="Informação do material selecionado" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="3" TextWrapping="Wrap" ></TextBlock>
+                            <Grid Grid.Row="1" Grid.RowSpan="2" Grid.Column="4" Grid.ColumnSpan="3">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="1*"></ColumnDefinition>
                                     <ColumnDefinition Width="1*"></ColumnDefinition>
@@ -183,16 +186,16 @@
                                 </Grid.RowDefinitions>
                                 <!--pano-->
                                 <TextBlock Visibility="Hidden" Name="panoTipo" Text="Tipo:" TextWrapping="Wrap" Grid.Row="0" Grid.Column="0"  HorizontalAlignment="Left"></TextBlock>
-                                <TextBlock Name="txt1" TextWrapping="Wrap" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center"></TextBlock>
+                                <TextBlock Name="txt1" TextWrapping="Wrap" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left"></TextBlock>
 
                                 <TextBlock Visibility="Hidden" Name="panoGramagem" Text="Gramagem:" TextWrapping="Wrap" Grid.Row="0" Grid.Column="3"  HorizontalAlignment="Left"></TextBlock>
-                                <TextBlock Name="txt2" TextWrapping="Wrap" Grid.Row="0" Grid.Column="4" HorizontalAlignment="Center"></TextBlock>
+                                <TextBlock Name="txt2" TextWrapping="Wrap" Grid.Row="0" Grid.Column="4" HorizontalAlignment="Left"></TextBlock>
 
                                 <TextBlock Visibility="Hidden" Name="panoArea" Text="Area Armazem:" TextWrapping="Wrap" Grid.Row="1" Grid.Column="0"  HorizontalAlignment="Left"></TextBlock>
-                                <TextBlock Name="txt3" TextWrapping="Wrap" Grid.Row="1" Grid.Column="1"  HorizontalAlignment="Center"></TextBlock>
+                                <TextBlock Name="txt3" TextWrapping="Wrap" Grid.Row="1" Grid.Column="1"  HorizontalAlignment="Left"></TextBlock>
 
                                 <TextBlock Visibility="Hidden" Name="panoPreço" Text="Preço(€)/m^2:" TextWrapping="Wrap" Grid.Row="1" Grid.Column="3"  HorizontalAlignment="Left"></TextBlock>
-                                <TextBlock Name="txt4" TextWrapping="Wrap" Grid.Row="1" Grid.Column="4"  HorizontalAlignment="Center"></TextBlock>
+                                <TextBlock Name="txt4" TextWrapping="Wrap" Grid.Row="1" Grid.Column="4"  HorizontalAlignment="Left"></TextBlock>
 
 
                                 <!--linha-->
@@ -207,7 +210,7 @@
                                 <TextBlock Visibility="Hidden" Name="fechoPreço" Text="Preço(€)/unidade:" TextWrapping="Wrap" Grid.Row="1" Grid.Column="3"  HorizontalAlignment="Left"></TextBlock>
 
                                 <!--Mola-->
-                                <TextBlock Visibility="Hidden" Name="molaDiametro" Text="Diâmetro(cm):" TextWrapping="Wrap" Grid.Row="0" Grid.Column="1"  HorizontalAlignment="Left"></TextBlock>
+                                <TextBlock Visibility="Hidden" Name="molaDiametro" Text="Diâmetro(cm):" TextWrapping="Wrap" Grid.Row="0" Grid.Column="0"  HorizontalAlignment="Left"></TextBlock>
                                 <TextBlock Visibility="Hidden" Name="molaQuantidade" Text="Quantidade Armazém" TextWrapping="Wrap" Grid.Row="0" Grid.Column="3"  HorizontalAlignment="Left"></TextBlock>
                                 <TextBlock Visibility="Hidden" Name="molaPreço" Text="Preço(€)/unidade:" TextWrapping="Wrap" Grid.Row="1" Grid.Column="0"  HorizontalAlignment="Left"></TextBlock>
 
@@ -228,17 +231,38 @@
                                 <TextBlock Visibility="Hidden" Name="velcroQuantidade" Text="Quantidade Armazém:" TextWrapping="Wrap" Grid.Row="1" Grid.Column="0"  HorizontalAlignment="Left"></TextBlock>
                                 <TextBlock Visibility="Hidden" Name="velcroPreço" Text="Preço(€)/unidade:" TextWrapping="Wrap" Grid.Row="1" Grid.Column="3"  HorizontalAlignment="Left"></TextBlock>
                             </Grid>
-                            <Button Name="addMaterial" Grid.Column="4" Grid.ColumnSpan="3" Grid.Row="3"
+                            <Button Name="addMaterial" Grid.Column="5" Grid.ColumnSpan="2" Grid.Row="3"
                                     HorizontalAlignment="Center" IsEnabled="False" Click="addMaterial_Click">
                                 <StackPanel Orientation="Horizontal">
                                     <Image Source="add.png" Width="20" />
                                     <TextBlock Text="Adicionar Material" Margin="4,0,0,0"/>
                                 </StackPanel>
                             </Button>
-                            <ScrollViewer Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="4" Grid.RowSpan="3">
-                                <StackPanel x:Name="stack">
+                            <wpfTool:DecimalUpDown Name="txtQuantidadeDec" Grid.Row="3" Grid.Column="4" Visibility="Hidden" VerticalAlignment="Center"
+                            Watermark="Quantidade do material necessária para o produto" Minimum="0.5" Increment="0.5" ></wpfTool:DecimalUpDown>
+
+                            <wpfTool:IntegerUpDown Name="txtQuantidadeInt" Grid.Row="3" Grid.Column="4" VerticalAlignment="Center" Visibility="Hidden"
+                            Watermark="Qtd do material necessária para o produto" Minimum="1" Increment="1" ></wpfTool:IntegerUpDown>
+
+                            <TextBlock Text="Materiais Selecionados"  Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="5"></TextBlock>
+                            <ListView Name="materiaisSelectedView" Grid.Row="5" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="5" SelectionChanged="materiaisSelectedView_SelectionChanged">
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn Header="Referêcia Fábrica" DisplayMemberBinding="{Binding Referencia}" />
+                                        <GridViewColumn Header="Designação" DisplayMemberBinding="{Binding Designacao}"/>
+                                        <GridViewColumn Header="Cor" DisplayMemberBinding="{Binding Cor}"/>
+                                        <GridViewColumn Header="Qtd necessária" DisplayMemberBinding="{Binding QuantidadeSelecionada}"/>
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                            <Button Name="removeMaterial" Grid.Column="5" Grid.ColumnSpan="2" Grid.Row="6"
+                                    HorizontalAlignment="Center" IsEnabled="False" Click="removeMaterial_Click">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="remove.png" Width="20" />
+                                    <TextBlock Text="Remover Material Selecionado" Margin="4,0,0,0"/>
                                 </StackPanel>
-                            </ScrollViewer>
+                            </Button>
+
                         </Grid>
 
                     </GroupBox>
@@ -255,5 +279,6 @@
             <Button x:Name="cancelar" Content="Cancelar" Grid.Column="0"  HorizontalAlignment="Right" Click="cancelar_Click"/>
         </Grid>
 
-    </Grid>
+        </Grid>
+
 </Page>

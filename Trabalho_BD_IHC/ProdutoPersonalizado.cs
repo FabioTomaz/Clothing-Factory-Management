@@ -16,6 +16,7 @@ namespace Trabalho_BD_IHC
         private double preco;
         private Etiqueta etiqueta;
         private int unidadesStock;
+        private int quantidade;
         private ObservableCollection<MaterialTextil> materiaisTexteis;
 
         public string Tamanho
@@ -119,6 +120,19 @@ namespace Trabalho_BD_IHC
             set
             {
                 materiaisTexteis = value;
+            }
+        }
+
+        public int Quantidade
+        {
+            get
+            {
+                return quantidade;
+            }
+
+            set
+            {
+                quantidade = value;
             }
         }
     }

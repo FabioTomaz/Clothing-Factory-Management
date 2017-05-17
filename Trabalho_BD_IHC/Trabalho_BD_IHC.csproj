@@ -116,6 +116,9 @@
     </Compile>
     <Compile Include="Localizacao.cs" />
     <Compile Include="ProdutoPersonalizado.cs" />
+    <Compile Include="ProduzirProduto.xaml.cs">
+      <DependentUpon>ProduzirProduto.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RegistarProdutoPersonalizado.xaml.cs">
       <DependentUpon>RegistarProdutoPersonalizado.xaml</DependentUpon>
     </Compile>
@@ -145,9 +148,6 @@
     </Compile>
     <Compile Include="ListarEncomendas.xaml.cs">
       <DependentUpon>ListarEncomendas.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="listprodutos.xaml.cs">
-      <DependentUpon>listprodutos.xaml</DependentUpon>
     </Compile>
     <Compile Include="ProdutoBase.cs" />
     <Compile Include="RegistarCliente.xaml.cs">
@@ -192,6 +192,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ProduzirProduto.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="RegistarProdutoPersonalizado.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -229,10 +233,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ListarEncomendas.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="listprodutos.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

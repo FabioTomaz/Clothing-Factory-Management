@@ -55,6 +55,7 @@ namespace Trabalho_BD_IHC
                 editarProdutoPersonalizado.IsEnabled = false;
                 removerProdutoPersonalizado.IsEnabled = false;
                 detalhesProdutoPersonalizado.IsEnabled = false;
+                produzirProduto.IsEnabled = false;
                 produtosPersonalizadosLista.Focus();
                 if (!dataHandler.verifySGBDConnection())
                 {
@@ -64,7 +65,7 @@ namespace Trabalho_BD_IHC
                 {
                     ObservableCollection<ProdutoPersonalizado> produtosPers = getProdutosPers();
                     produtosPersonalizadosLista.ItemsSource = produtosPers;
-                    
+
                 }
             }
             dataHandler.closeSGBDConnection();
@@ -155,13 +156,21 @@ namespace Trabalho_BD_IHC
             this.NavigationService.Navigate(page);
         }
 
+        private void ProduzirProdutoPers_click(object sender, RoutedEventArgs e)
+        {
+            ProduzirProduto page = new ProduzirProduto(dataHandler, (ProdutoPersonalizado)produtosPersonalizadosLista.SelectedItem);
+            this.NavigationService.Navigate(page);
+        }
+
         private void produtos_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            e.Handled = true;
             if (produtosPersonalizadosLista.SelectedItems.Count > 0)
             {
                 editarProdutoPersonalizado.IsEnabled = true;
                 removerProdutoPersonalizado.IsEnabled = true;
                 detalhesProdutoPersonalizado.IsEnabled = true;
+                produzirProduto.IsEnabled = true;
             }
             if (produtosBaseLista.SelectedItems.Count > 0)
             {

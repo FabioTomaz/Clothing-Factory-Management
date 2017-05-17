@@ -147,6 +147,7 @@ namespace Trabalho_BD_IHC
 
         private void clientes_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            e.Handled = true;
             if (clientes.SelectedItems.Count > 0)
             {
                 removerCliente.IsEnabled = true;

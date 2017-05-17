@@ -25,6 +25,7 @@ namespace Trabalho_BD_IHC
     {
         private DataHandler dataHandler;
         private int currentRow = 1;
+        private ObservableCollection<MaterialTextil> materiaisSelecionados;
         public int CurrentRow
         {
             get
@@ -42,25 +43,25 @@ namespace Trabalho_BD_IHC
         {
             InitializeComponent();
             this.dataHandler = dataHandler;
+            materiaisSelecionados = new ObservableCollection<MaterialTextil>();
         }
-        private void EnviarProdutoPersonalizado(ProdutoPersonalizado ProdutoPersonalizado)
+
+        private bool EnviarProdutoPersonalizado(ProdutoPersonalizado prod)
         {
 
             if (!dataHandler.verifySGBDConnection())
-                return;
+                return false;
             SqlCommand cmd = new SqlCommand();
-            /*
-            cmd.CommandText = "INSERT INTO Produto (NOME, IVA, DATA_ALTERACAO, INSTRUCOES_PRODUCAO, N_GESTOR_PROD, IMAGEM_DESENHO) "
-                + "SELECT @nome_Produto, @iva, @Data_alteracao, @instr, @nGestor, BulkColumn "
-                + "FROM Openrowset (Bulk @imagem, Single_Blob) as Image";
+
+            cmd.CommandText = "INSERT INTO [PRODUTO-PERSONALIZADO] (REFERENCIA, TAMANHO, COR, PRECO, N_ETIQUETA) "
+                + "VALUES (@refProdBase, @tamanho, @cor, @preco, @nEt);";
             cmd.Parameters.Clear();
-            cmd.Parameters.AddWithValue("@nome_Produto", ProdutoPersonalizado.Nome);
-            cmd.Parameters.AddWithValue("@iva", ProdutoPersonalizado.IVA1);
-             cmd.Parameters.AddWithValue("@Data_alteracao", DateTime.Today);
-            cmd.Parameters.AddWithValue("@instr", ProdutoPersonalizado.InstrProd);
-            cmd.Parameters.AddWithValue("@nGestor", ProdutoPersonalizado.GestorProducao.NFuncionario);
-            cmd.Parameters.AddWithValue("@imagem", ProdutoPersonalizado.Pic).SqlDbType = SqlDbType.Binary;
-            cmd.Connection = dataHandler.Cn;*/
+            cmd.Parameters.AddWithValue("@refProdBase", prod.ProdutoBase.Referencia);
+            cmd.Parameters.AddWithValue("@tamanho", prod.Tamanho);
+            cmd.Parameters.AddWithValue("@cor", prod.Cor);
+            cmd.Parameters.AddWithValue("@preco", prod.Preco);
+            cmd.Parameters.AddWithValue("@nEt", prod.Etiqueta.Numero);
+            cmd.Connection = dataHandler.Cn;
             try
             {
                 cmd.ExecuteNonQuery();
@@ -73,6 +74,36 @@ namespace Trabalho_BD_IHC
             {
                 dataHandler.closeSGBDConnection();
             }
+            int ID = dataHandler.getLastIdentity("[PRODUTO-PERSONALIZADO]");
+
+            for (int i = 0; i < materiaisSelecionados.Count; i++)
+            {
+                if (!dataHandler.verifySGBDConnection())
+                    return false;
+                Console.WriteLine("HEY");
+                cmd = new SqlCommand();
+                cmd.CommandText = "INSERT INTO [MATERIAIS-PRODUTO] (REFERENCIA, TAMANHO, COR, ID, REFERENCIA_FABRICA, QUANTIDADE) "
+                    + "VALUES (@refProdBase, @tamanho, @cor, @id, @refFabrica, @qtd);";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@refProdBase", prod.ProdutoBase.Referencia);
+                cmd.Parameters.AddWithValue("@tamanho", prod.Tamanho);
+                cmd.Parameters.AddWithValue("@cor", prod.Cor);
+                cmd.Parameters.AddWithValue("@id", ID);
+                cmd.Parameters.AddWithValue("@refFabrica", materiaisSelecionados.ElementAt(i).Referencia);
+                cmd.Parameters.AddWithValue("@qtd", materiaisSelecionados.ElementAt(i).QuantidadeSelecionada);
+                cmd.Connection = dataHandler.Cn;
+                cmd.Connection = dataHandler.Cn;
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Falha ao registar o Produto Personalizado na base de dados. \n ERROR MESSAGE: \n" + ex.Message);
+                }
+            }
+
+            return true;
         }
 
         private void cancelar_Click(object sender, RoutedEventArgs e)
@@ -82,21 +113,44 @@ namespace Trabalho_BD_IHC
 
         private void confirmar_Click(object sender, RoutedEventArgs e)
         {
+            //o utilizador ja tem q ter selecionado materiais para o produto
+            if (materiaisSelectedView.Items.Count <= 0)
+            {
+                MessageBox.Show("Por favor, selecione os materiais necessários para a " +
+                    "posterior produção deste produto", "", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
             ProdutoPersonalizado prodPers = new ProdutoPersonalizado();
             try
             {
-                prodPers.Tamanho = cbTamanho.SelectedItem.ToString();
+                ComboBoxItem cbi = (ComboBoxItem)cbTamanho.SelectedItem;
+                prodPers.Tamanho = cbi.Content.ToString();
+
                 prodPers.Cor = txtCor.SelectedColorText;
-                Console.WriteLine(txtCor.SelectedColorText);
+                Console.WriteLine(cbi.Content.ToString());
                 prodPers.Preco = Convert.ToDouble(txtPreço.Text);
                 prodPers.ProdutoBase = new ProdutoBase();
+                prodPers.ProdutoBase = (ProdutoBase)cbProdBase.SelectedItem;
+                prodPers.MateriaisTexteis = new ObservableCollection<MaterialTextil>();
+                for (int i = 0; i < materiaisSelectedView.Items.Count; i++)
+                {
+                    prodPers.MateriaisTexteis.Add((MaterialTextil)materiaisSelectedView.Items[0]);
 
-                StackPanel stck = (StackPanel)cbProdBase.SelectedItem;
-                TextBlock t = (TextBlock)stck.Children[0];
-                prodPers.ProdutoBase.Referencia = Convert.ToInt32(t.Text);
-                Console.WriteLine(t.Text);
-                /* ProdutoPersonalizado.GestorProducao.NFuncionario = 2; //---> suposto mais tarde colocar o nº do user
-                ProdutoPersonalizado.Pic = BitMapToByte((BitmapImage)imgPhoto.Source); */
+                }
+                prodPers.Etiqueta = new Etiqueta();
+                if (rdEtiquetaExis.IsChecked == true)
+                {
+                    prodPers.Etiqueta = (Etiqueta)cbEtiqueta.SelectedItem;
+
+                }
+                else if (rdEtiquetaNova.IsChecked == true)
+                {
+                    //inserir primeiro a nova etiqueta na base de dados
+                    dataHandler.insertEtiqueta(txtNormas.Text, txtComp.Text, txtPais.Text);
+                    //obter o numero da etiqueta adicionada, pois é necessario para o registo do produto
+                    prodPers.Etiqueta.Numero = dataHandler.getEtiqueta(txtNormas.Text, txtComp.Text, txtPais.Text);
+                }
             }
             catch (Exception ex)
             {
@@ -125,6 +179,7 @@ namespace Trabalho_BD_IHC
             }
             else
             {
+                
                 ListarProdutos lp = new ListarProdutos(dataHandler);
                 ObservableCollection<MaterialTextil> mt = getMateriais(dataHandler);
                 materiaisView.ItemsSource = mt;
@@ -135,6 +190,7 @@ namespace Trabalho_BD_IHC
                     ProdutoBase firstProd = prodBase.First();
                     cbProdBase.SelectedItem = firstProd;
                 }
+                Console.WriteLine("loading..");
                 dataHandler.closeSGBDConnection();
             }
 
@@ -145,23 +201,13 @@ namespace Trabalho_BD_IHC
             etiquetaNova.Visibility = Visibility.Hidden;
             etiquetaExisente.Visibility = Visibility.Visible;
             //fazer bind de todas as etiquetas existentas na base de dados para a combo box
-            if (!dataHandler.verifySGBDConnection())
+            ObservableCollection<Etiqueta> et = getEtiquetas();
+            cbEtiqueta.ItemsSource = et;
+            if (et.Count > 0)
             {
-                MessageBoxResult result = MessageBox.Show("A conexão à base de dados é instável ou inexistente. Por favor tente mais tarde", "Erro de Base de Dados", MessageBoxButton.OK, MessageBoxImage.Warning);
+                Etiqueta firstDes = et.First();
+                cbEtiqueta.SelectedItem = firstDes;
             }
-            else
-            {
-                ObservableCollection<Etiqueta> et = getEtiquetas();
-                cbEtiqueta.ItemsSource = et;
-                if (et.Count > 0)
-                {
-                    Etiqueta firstDes = et.First();
-                    cbEtiqueta.SelectedItem = firstDes;
-                }
-
-            }
-            dataHandler.closeSGBDConnection();
-
         }
 
         private void etiquetaNova_Checked(object sender, RoutedEventArgs e)
@@ -172,20 +218,25 @@ namespace Trabalho_BD_IHC
 
         public ObservableCollection<Etiqueta> getEtiquetas()
         {
-            SqlCommand cmd = new SqlCommand("SELECT * FROM ETIQUETA", dataHandler.Cn);
-            SqlDataReader reader = cmd.ExecuteReader();
-            ObservableCollection<Etiqueta> etiquetas = new ObservableCollection<Etiqueta>();
-            while (reader.Read())
+            if (dataHandler.verifySGBDConnection())
             {
-                Etiqueta et = new Etiqueta();
-                et.Numero = Convert.ToInt32(reader["N_ETIQUETA"].ToString());
-                et.Normas = reader["NORMAS"].ToString();
-                et.Composicao = reader["COMPOSICAO"].ToString();
-                et.PaisFabrico = reader["PAIS_FABRICO"].ToString();
-                etiquetas.Add(et);
+                SqlCommand cmd = new SqlCommand("SELECT * FROM ETIQUETA", dataHandler.Cn);
+                SqlDataReader reader = cmd.ExecuteReader();
+                ObservableCollection<Etiqueta> etiquetas = new ObservableCollection<Etiqueta>();
+                while (reader.Read())
+                {
+                    Etiqueta et = new Etiqueta();
+                    et.Numero = Convert.ToInt32(reader["N_ETIQUETA"].ToString());
+                    et.Normas = reader["NORMAS"].ToString();
+                    et.Composicao = reader["COMPOSICAO"].ToString();
+                    et.PaisFabrico = reader["PAIS_FABRICO"].ToString();
+                    etiquetas.Add(et);
+                }
+                reader.Close();
+                dataHandler.closeSGBDConnection();
+                return etiquetas;
             }
-            reader.Close();
-            return etiquetas;
+            return null;
         }
 
         private ObservableCollection<MaterialTextil> getMateriais(DataHandler dataHandler)
@@ -206,61 +257,8 @@ namespace Trabalho_BD_IHC
                 materiaisTexteis.Add(Mt);
             }
             reader.Close();
+            Console.Write("fds");
             return materiaisTexteis;
-        }
-        private void addMaterial_Click(object sender, RoutedEventArgs e)
-        {
-            MaterialTextil mt = (MaterialTextil)materiaisView.SelectedItem;
-            ParserContext context = new ParserContext();
-            context.XmlnsDictionary.Add("", "http://schemas.microsoft.com/winfx/2006/xaml/presentation");
-            context.XmlnsDictionary.Add("x", "http://schemas.microsoft.com/winfx/2006/xaml");
-
-            StackPanel stackMaterial = new StackPanel
-            {
-                Orientation = Orientation.Horizontal,
-                Name = "material" + currentRow,
-            };
-
-            TextBlock txtref = new TextBlock { Text = mt.Referencia.ToString() };
-
-            TextBlock txtcor = new TextBlock { Text = mt.Cor };
-
-            TextBlock txtDesig = new TextBlock { Text = mt.Designacao };
-
-            StackPanel removerPanel = new StackPanel { Orientation = Orientation.Horizontal };
-            removerPanel.Children.Add(new Image { Source = new BitmapImage(new Uri("delete.png", UriKind.Relative)), Width = 20 });
-            removerPanel.Children.Add(new TextBlock { Text = "Remover Material", Margin = new Thickness(4, 0, 0, 0) });
-            Button remover = new Button
-            {
-                Tag = currentRow,
-                Width = 120,
-                Content = removerPanel
-            };
-            remover.Click += new RoutedEventHandler(Remover_Click);
-
-
-            stackMaterial.Children.Add(txtref);
-            stackMaterial.Children.Add(txtcor);
-            stackMaterial.Children.Add(txtDesig);
-            stackMaterial.Children.Add(remover);
-
-            stack.Children.Add(stackMaterial);
-
-            currentRow++;
-        }
-
-        private void Remover_Click(object sender, RoutedEventArgs e)
-        {
-            Button senderbtn = (Button)sender;
-            int row = Convert.ToInt32(senderbtn.Tag);
-
-            for (int i = row + 1; i < currentRow; i++)
-            {
-                Button produtoBtn = (Button)((StackPanel)stack.Children[i]).Children[0];
-                produtoBtn.Tag = i - 1;
-            }
-            stack.Children.RemoveAt(row);
-            currentRow--;
         }
 
         private void hideAll()
@@ -305,6 +303,19 @@ namespace Trabalho_BD_IHC
                 mt = (MaterialTextil)materiaisView.SelectedItem;
 
                 tipoMaterial = dataHandler.getMaterialType(mt.Referencia);
+                //consoante o material selecionado, tornar visivel ou a caixa de seleçao de
+                //quantidade de material inteira ou a caixa de seleçao de quantidade de material decimal
+                if (tipoMaterial.Equals("Pano", StringComparison.Ordinal) || tipoMaterial.Equals("Linha", StringComparison.Ordinal))
+                {
+                    txtQuantidadeDec.Visibility = Visibility.Visible;
+                    txtQuantidadeInt.Visibility = Visibility.Hidden;
+                }
+                else
+                {
+                    txtQuantidadeInt.Visibility = Visibility.Visible;
+                    txtQuantidadeDec.Visibility = Visibility.Hidden;
+                }
+
                 if (dataHandler.verifySGBDConnection())
                 {
                     if (tipoMaterial.Equals("Pano", StringComparison.Ordinal))
@@ -397,7 +408,10 @@ namespace Trabalho_BD_IHC
         public Pano getPano(int referencia)
         {
             Pano pano = new Pano();
-            SqlCommand cmd = new SqlCommand("SELECT * FROM PANO WHERE REFERENCIA_FABRICA = @ref"
+            SqlCommand cmd = new SqlCommand("SELECT PANO.REFERENCIA_FABRICA AS refFabr, TIPO, GRAMAGEM, "
+                + "AREA_ARMAZEM, PRECO_POR_M2, REFERENCIA_FORN, NIF_FORNECEDOR, COR, DESIGNACAO FROM PANO "
+                + "JOIN MATERIAIS_TÊXTEIS ON MATERIAIS_TÊXTEIS.REFERENCIA_FABRICA = PANO.REFERENCIA_FABRICA "
+                + "WHERE PANO.REFERENCIA_FABRICA = @ref"
                 , dataHandler.Cn);
             cmd.Parameters.Clear();
             cmd.Parameters.AddWithValue("@ref", referencia);
@@ -406,14 +420,21 @@ namespace Trabalho_BD_IHC
             while (reader.Read())
             {
                 pano.Referencia = referencia;
+                pano.Cor = reader["COR"].ToString();
+                pano.Fornecedor = new Fornecedor();
+                pano.Fornecedor.NIF_Fornecedor = reader["NIF_FORNECEDOR"].ToString();
+                pano.ReferenciaFornecedor = reader["REFERENCIA_FORN"].ToString();
+                pano.Designacao = reader["DESIGNACAO"].ToString();
                 pano.Gramagem = Convert.ToInt32(reader["GRAMAGEM"].ToString());
                 pano.Tipo = reader["TIPO"].ToString();
                 pano.AreaArmazem = Convert.ToDouble(reader["AREA_ARMAZEM"].ToString());
                 pano.PrecoMetroQuadrado = Convert.ToDouble(reader["PRECO_POR_M2"].ToString());
+
             }
             reader.Close();
             return pano;
         }
+
 
         public Linha getLinha(int referencia)
         {
@@ -558,6 +579,53 @@ namespace Trabalho_BD_IHC
             return f;
         }
 
+        private void addMaterial_Click(object sender, RoutedEventArgs e)
+        {
+
+            MaterialTextil mt = (MaterialTextil)materiaisView.SelectedItem;
+            if (txtQuantidadeDec.Visibility == Visibility.Visible)
+            {
+                if (txtQuantidadeDec.Text == null)
+                {
+                    MessageBox.Show("Por favor, selecione primeiro a quantidade do material selecionado" +
+                        "necessária para produzir este produto", "", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                else
+                {
+                    mt.QuantidadeSelecionada = txtQuantidadeDec.Text.ToString();
+                }
+
+            }
+            else if (txtQuantidadeInt.Visibility == Visibility.Visible)
+            {
+                if (txtQuantidadeInt.Text == null)
+                {
+                    MessageBox.Show("Por favor, selecione primeiro a quantidade do material selecionado " +
+                        "necessária para produzir este produto!", "", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                else
+                {
+                    mt.QuantidadeSelecionada = txtQuantidadeInt.Text.ToString();
+                }
+            }
+            materiaisSelecionados.Add(mt);
+            materiaisSelectedView.ItemsSource = materiaisSelecionados;
+        }
+
+        public void removeMaterial_Click(object sender, RoutedEventArgs e)
+        {
+            MaterialTextil mt = (MaterialTextil)materiaisSelectedView.SelectedItem;
+            materiaisSelecionados.Remove(mt);
+        }
+
+        private void materiaisSelectedView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (materiaisSelectedView.SelectedItems.Count > 0)
+                removeMaterial.IsEnabled = true;
+
+        }
 
 
     }

@@ -190,7 +190,6 @@ C:\Users\young\Source\Repos\ihc_bd2\Trabalho_BD_IHC\obj\Debug\ListarMateriais.g.
 C:\Users\young\Source\Repos\ihc_bd2\Trabalho_BD_IHC\obj\Debug\ListarClientes.g.cs
 C:\Users\young\Source\Repos\ihc_bd2\Trabalho_BD_IHC\obj\Debug\ListarProdutos.g.cs
 C:\Users\young\Source\Repos\ihc_bd2\Trabalho_BD_IHC\obj\Debug\ListarEncomendas.g.cs
-C:\Users\young\Source\Repos\ihc_bd2\Trabalho_BD_IHC\obj\Debug\listprodutos.g.cs
 C:\Users\young\Source\Repos\ihc_bd2\Trabalho_BD_IHC\obj\Debug\Login.g.cs
 C:\Users\young\Source\Repos\ihc_bd2\Trabalho_BD_IHC\obj\Debug\Main.g.cs
 C:\Users\young\Source\Repos\ihc_bd2\Trabalho_BD_IHC\obj\Debug\RegistarCliente.g.cs
@@ -236,7 +235,6 @@ C:\Users\young\Source\Repos\ihc_bd2\Trabalho_BD_IHC\obj\Debug\ListarMateriais.ba
 C:\Users\young\Source\Repos\ihc_bd2\Trabalho_BD_IHC\obj\Debug\ListarClientes.baml
 C:\Users\young\Source\Repos\ihc_bd2\Trabalho_BD_IHC\obj\Debug\ListarProdutos.baml
 C:\Users\young\Source\Repos\ihc_bd2\Trabalho_BD_IHC\obj\Debug\ListarEncomendas.baml
-C:\Users\young\Source\Repos\ihc_bd2\Trabalho_BD_IHC\obj\Debug\listprodutos.baml
 C:\Users\young\Source\Repos\ihc_bd2\Trabalho_BD_IHC\obj\Debug\Login.baml
 C:\Users\young\Source\Repos\ihc_bd2\Trabalho_BD_IHC\obj\Debug\Main.baml
 C:\Users\young\Source\Repos\ihc_bd2\Trabalho_BD_IHC\obj\Debug\RegistarCliente.baml
@@ -253,3 +251,5 @@ C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\bin
 C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\bin\Debug\MaterialDesignThemes.Wpf.dll
 C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\bin\Debug\MaterialDesignThemes.Wpf.pdb
 C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\bin\Debug\MaterialDesignThemes.Wpf.xml
+C:\Users\young\Source\Repos\ihc_bd2\Trabalho_BD_IHC\obj\Debug\ProduzirProduto.g.cs
+C:\Users\young\Source\Repos\ihc_bd2\Trabalho_BD_IHC\obj\Debug\ProduzirProduto.baml

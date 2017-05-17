@@ -122,3 +122,16 @@ AS
 GO
 
 
+CREATE FUNCTION dbo.getEtiqueta (@n int) RETURNS TABLE
+AS
+	RETURN (SELECT * FROM ETIQUETA WHERE N_ETIQUETA = @n)
+GO
+
+CREATE FUNCTION dbo.getEtiquetaNumero (@norma varchar(100), @comp varchar(100), @pais varchar(20) ) RETURNS INT
+AS
+	BEGIN
+		DECLARE @nEtiqueta INT
+		SELECT @nEtiqueta = N_ETIQUETA FROM ETIQUETA WHERE NORMAS = @norma AND PAIS_FABRICO = @pais AND COMPOSICAO = @comp
+		return @nEtiqueta
+	END
+GO

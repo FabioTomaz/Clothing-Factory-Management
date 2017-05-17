@@ -14,6 +14,7 @@ namespace Trabalho_BD_IHC
         private String cor;
         private Fornecedor fornecedor;
         private String TipoMaterial;
+        private String quantidadeSelecionada;
 
         public int Referencia
         {
@@ -63,7 +64,7 @@ namespace Trabalho_BD_IHC
                 cor = value;
             }
         }
-        
+
 
 
         public Fornecedor Fornecedor
@@ -89,6 +90,19 @@ namespace Trabalho_BD_IHC
             set
             {
                 TipoMaterial = value;
+            }
+        }
+
+        public string QuantidadeSelecionada
+        {
+            get
+            {
+                return quantidadeSelecionada;
+            }
+
+            set
+            {
+                quantidadeSelecionada = value;
             }
         }
     }

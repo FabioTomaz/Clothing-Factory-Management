@@ -65,6 +65,7 @@ namespace Trabalho_BD_IHC
 
         private void empregados_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            e.Handled = true;
             if (empregados.SelectedItems.Count > 0)
             {
                 editarEmpregado.IsEnabled = true;
