@@ -122,6 +122,22 @@ namespace Trabalho_BD_IHC
             return utilizador;
         }
 
+        public String getMaterialType(int referencia)
+        {
+            if (this.verifySGBDConnection())
+            {
+                SqlCommand cmd = new SqlCommand("SELECT dbo.getTipoMaterial(@referencia)", this.cn);
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@referencia", referencia);
+                String s = (String)cmd.ExecuteScalar();
+
+                this.closeSGBDConnection();
+                return s;
+            }
+            this.closeSGBDConnection();
+            return "";
+        }
+
         public void inserirMaterial(MaterialTextil mat)
         {
 
@@ -166,6 +182,7 @@ namespace Trabalho_BD_IHC
 
             if (!this.verifySGBDConnection())
                 return;
+
 
 
             if (mat.GetType() == typeof(Pano))

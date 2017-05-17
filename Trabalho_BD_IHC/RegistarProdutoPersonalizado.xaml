@@ -8,7 +8,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
       Title="RegistarProdutoPersonalizado">
-    <Grid Background="White">
+    <Grid Background="White" Loaded="Page_Loaded">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.5*"/>
             <ColumnDefinition Width="2*"/>
@@ -25,48 +25,225 @@
         </Grid.RowDefinitions>
 
         <GroupBox Header="Criar Novo Produto Personalizado" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="5">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"></ColumnDefinition>
-                    <ColumnDefinition Width="1*"></ColumnDefinition>
-                    <ColumnDefinition Width="1*"></ColumnDefinition>
-                    <ColumnDefinition Width="1*"></ColumnDefinition>
-                    <ColumnDefinition Width="1*"></ColumnDefinition>
-                    <ColumnDefinition Width="1*"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="0.1*"></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition Height="0.1*"></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition Height="0.1*"></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition Height="0.1*"></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition Height="0.1*"></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition Height="0.1*"></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition Height="0.1*"></RowDefinition>
-                </Grid.RowDefinitions>
-                <Label Content="Tamanho: " Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"/>
+            <ScrollViewer HorizontalScrollBarVisibility="Disabled">
+                <StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.9*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.9*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0.5*"></RowDefinition>
+                            <RowDefinition Height="1*"></RowDefinition>
+                            <RowDefinition Height="0.5*"></RowDefinition>
+                            <RowDefinition Height="1*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Tamanho: " Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Bottom"/>
+                        <ComboBox Name="cbTamanho" Grid.Row="1" Grid.Column="0" IsEditable="True" IsReadOnly="True"
+                         Text="--Selecione um tamanho--"  VerticalAlignment="Center">
+                            <ComboBoxItem Content="XXS" ></ComboBoxItem>
+                            <ComboBoxItem Content="XS" ></ComboBoxItem>
+                            <ComboBoxItem Content="S" ></ComboBoxItem>
+                            <ComboBoxItem Content="M" ></ComboBoxItem>
+                            <ComboBoxItem Content="L" ></ComboBoxItem>
+                            <ComboBoxItem Content="XL" ></ComboBoxItem>
+                            <ComboBoxItem Content="XXL" ></ComboBoxItem>
+                        </ComboBox>
 
-                <ComboBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" IsEditable="True" IsReadOnly="True"
-                Text="--Selecione um tamanho--"  VerticalAlignment="Center">
-                    <ComboBoxItem Content="XXS" ></ComboBoxItem>
-                    <ComboBoxItem Content="XS" ></ComboBoxItem>
-                    <ComboBoxItem Content="S" ></ComboBoxItem>
-                    <ComboBoxItem Content="M" ></ComboBoxItem>
-                    <ComboBoxItem Content="L" ></ComboBoxItem>
-                    <ComboBoxItem Content="XL" ></ComboBoxItem>
-                    <ComboBoxItem Content="XXL" ></ComboBoxItem>
-                </ComboBox>
+                        <TextBlock Text="Cor:" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Bottom"/>
+                        <wpfTool:ColorPicker Name="txtCor"  Grid.Row="1" Grid.Column="2" VerticalAlignment="Center"></wpfTool:ColorPicker>
 
-                <Label Content="Cor:" Grid.Row="1" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <wpfTool:ColorPicker Name="txtCor" DisplayColorAndName="True"  Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2" VerticalAlignment="Center"></wpfTool:ColorPicker>
-                
-                
-            </Grid>
+                        <TextBlock Text="Preço (€):" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Bottom"/>
+                        <wpfTool:DecimalUpDown Name="txtPreço" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center"
+                    Watermark="Indique o preço a atribuir" Minimum="0.00" Increment="0.5" ></wpfTool:DecimalUpDown>
+
+                        <TextBlock Text="Produto Base a usar:"  Grid.Row="2"  Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" TextWrapping="Wrap"/>
+                        <ComboBox Name="cbProdBase"  Grid.Row="3"  Grid.Column="2" VerticalAlignment="Center" >
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Referencia}"></TextBlock>
+                                        <TextBlock Text="-"></TextBlock>
+                                        <TextBlock Text="{Binding Nome}"></TextBlock>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </Grid>
+
+                    <Grid Margin="0,10,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.25*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"></RowDefinition>
+                            <RowDefinition Height="1*"></RowDefinition>
+                            <RowDefinition Height="1*"></RowDefinition>
+                            <RowDefinition Height="1*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Indique se pretende associar ao produto personalizado uma etiqueta já existente, ou se prefere criar uma nova etiqueta para usar no produto." 
+                           HorizontalAlignment="Center" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2" TextWrapping="Wrap"></TextBlock>
+                        <RadioButton Name="rdEtiquetaExis" Grid.Column="1" Grid.Row="2" Content="Usar etiqueta existente" HorizontalAlignment="Left" VerticalAlignment="Center" Checked="etiquetaExistente_Checked"></RadioButton>
+                        <RadioButton Name="rdEtiquetaNova" Grid.Column="1" Grid.Row="3" Content="Criar nova etiqueta" HorizontalAlignment="Left" VerticalAlignment="Center" Checked="etiquetaNova_Checked"></RadioButton>
+                    </Grid>
+                    <Grid Visibility="Hidden" Name="etiquetaExisente" Margin="0,12,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                        <Label Content="Etiqueta a usar: " Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <ComboBox Name="cbEtiqueta" Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" VerticalAlignment="Center" >
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Numero}"></TextBlock>
+                                        <TextBlock Text=" - "></TextBlock>
+                                        <TextBlock Text="{Binding Composicao}"></TextBlock>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </Grid>
+                    <Grid Visibility="Hidden" Name="etiquetaNova" Margin="0,10,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="0.1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="0.2*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="0.2*"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Especifique as normas: " Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Bottom" HorizontalAlignment="Center" TextWrapping="Wrap"/>
+                        <TextBox Name="txtNormas" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2" TextWrapping="Wrap" VerticalAlignment="Center" Height="40"></TextBox>
+                        <TextBlock Text="Especifique a Composição: " Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="2" VerticalAlignment="Bottom" HorizontalAlignment="Center" TextWrapping="Wrap"/>
+                        <TextBox Name="txtComp" Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2" Grid.RowSpan="2" TextWrapping="Wrap" Height="40" VerticalAlignment="Center"></TextBox>
+                        <TextBlock Text="Indique o País de fabrico: " Grid.Row="5" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" TextWrapping="Wrap"/>
+                        <TextBox Name="txtPais" Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2" VerticalAlignment="Bottom"></TextBox>
+                    </Grid>
+                    <GroupBox Header="Materiais necessários para o produto" Margin="0,10,0,0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                                <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                                <ColumnDefinition Width="1*"></ColumnDefinition>
+
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"></RowDefinition>
+                                <RowDefinition Height="1*"></RowDefinition>
+                                <RowDefinition Height="1*"></RowDefinition>
+                                <RowDefinition Height="1*"></RowDefinition>
+                                <RowDefinition Height="1*"></RowDefinition>
+                                <RowDefinition Height="1*"></RowDefinition>
+                                <RowDefinition Height="1*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <ListView Name="materiaisView" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" Grid.RowSpan="4" SelectionMode="Single" SelectionChanged="materiaisView_SelectionChanged">
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn Header="Referêcia Fábrica" DisplayMemberBinding="{Binding Referencia}" />
+                                        <GridViewColumn Header="Designação" DisplayMemberBinding="{Binding Designacao}"/>
+                                        <GridViewColumn Header="Cor" DisplayMemberBinding="{Binding Cor}"/>
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                            <Grid Grid.Row="0" Grid.RowSpan="3" Grid.Column="4" Grid.ColumnSpan="3">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                                    <ColumnDefinition Width="0.05*"></ColumnDefinition>
+                                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="1*"></RowDefinition>
+                                    <RowDefinition Height="1*"></RowDefinition>
+                                    <RowDefinition Height="1*"></RowDefinition>
+                                    <RowDefinition Height="1*"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <!--pano-->
+                                <TextBlock Visibility="Hidden" Name="panoTipo" Text="Tipo:" TextWrapping="Wrap" Grid.Row="0" Grid.Column="0"  HorizontalAlignment="Left"></TextBlock>
+                                <TextBlock Name="txt1" TextWrapping="Wrap" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center"></TextBlock>
+
+                                <TextBlock Visibility="Hidden" Name="panoGramagem" Text="Gramagem:" TextWrapping="Wrap" Grid.Row="0" Grid.Column="3"  HorizontalAlignment="Left"></TextBlock>
+                                <TextBlock Name="txt2" TextWrapping="Wrap" Grid.Row="0" Grid.Column="4" HorizontalAlignment="Center"></TextBlock>
+
+                                <TextBlock Visibility="Hidden" Name="panoArea" Text="Area Armazem:" TextWrapping="Wrap" Grid.Row="1" Grid.Column="0"  HorizontalAlignment="Left"></TextBlock>
+                                <TextBlock Name="txt3" TextWrapping="Wrap" Grid.Row="1" Grid.Column="1"  HorizontalAlignment="Center"></TextBlock>
+
+                                <TextBlock Visibility="Hidden" Name="panoPreço" Text="Preço(€)/m^2:" TextWrapping="Wrap" Grid.Row="1" Grid.Column="3"  HorizontalAlignment="Left"></TextBlock>
+                                <TextBlock Name="txt4" TextWrapping="Wrap" Grid.Row="1" Grid.Column="4"  HorizontalAlignment="Center"></TextBlock>
+
+
+                                <!--linha-->
+                                <TextBlock Visibility="Hidden" Name="linhaGrossura" Text="Grossura(cm):" TextWrapping="Wrap" Grid.Row="0" Grid.Column="0"  HorizontalAlignment="Left"></TextBlock>
+                                <TextBlock Visibility="Hidden" Name="linhaPreço" Text="Preço(€)/100m:" TextWrapping="Wrap" Grid.Row="0" Grid.Column="3"  HorizontalAlignment="Left"></TextBlock>
+                                <TextBlock Visibility="Hidden" Name="linhaQuantidade" Text="Quantidade Armazém:" TextWrapping="Wrap" Grid.Row="1" Grid.Column="0"  HorizontalAlignment="Left"></TextBlock>
+
+                                <!--fecho-->
+                                <TextBlock Visibility="Hidden" Name="fechoComprimento" Text="Comprimento(cm):" TextWrapping="Wrap" Grid.Row="0" Grid.Column="0"  HorizontalAlignment="Left"></TextBlock>
+                                <TextBlock Visibility="Hidden" Name="fechoTamanhoDente" Text="Tamanho Dente(cm):" TextWrapping="Wrap" Grid.Row="0" Grid.Column="3"  HorizontalAlignment="Left"></TextBlock>
+                                <TextBlock Visibility="Hidden" Name="fechoQuantidade" Text="Quantidade Armazém:" TextWrapping="Wrap" Grid.Row="1" Grid.Column="0"  HorizontalAlignment="Left"></TextBlock>
+                                <TextBlock Visibility="Hidden" Name="fechoPreço" Text="Preço(€)/unidade:" TextWrapping="Wrap" Grid.Row="1" Grid.Column="3"  HorizontalAlignment="Left"></TextBlock>
+
+                                <!--Mola-->
+                                <TextBlock Visibility="Hidden" Name="molaDiametro" Text="Diâmetro(cm):" TextWrapping="Wrap" Grid.Row="0" Grid.Column="1"  HorizontalAlignment="Left"></TextBlock>
+                                <TextBlock Visibility="Hidden" Name="molaQuantidade" Text="Quantidade Armazém" TextWrapping="Wrap" Grid.Row="0" Grid.Column="3"  HorizontalAlignment="Left"></TextBlock>
+                                <TextBlock Visibility="Hidden" Name="molaPreço" Text="Preço(€)/unidade:" TextWrapping="Wrap" Grid.Row="1" Grid.Column="0"  HorizontalAlignment="Left"></TextBlock>
+
+                                <!--Botão-->
+                                <TextBlock Visibility="Hidden" Name="botaoDiametro" Text="Diâmetro(cm):" TextWrapping="Wrap" Grid.Row="0" Grid.Column="0"  HorizontalAlignment="Left"></TextBlock>
+                                <TextBlock Visibility="Hidden" Name="botaoQuantidade" Text="Quantidade Armazém" TextWrapping="Wrap" Grid.Row="0" Grid.Column="3"  HorizontalAlignment="Left"></TextBlock>
+                                <TextBlock Visibility="Hidden" Name="botaoPreço" Text="Preço(€)/unidade:" TextWrapping="Wrap" Grid.Row="1" Grid.Column="0"  HorizontalAlignment="Left"></TextBlock>
+
+                                <!--Elástico-->
+                                <TextBlock Visibility="Hidden" Name="elasticoComprimento" Text="Comprimento(cm):" TextWrapping="Wrap" Grid.Row="0" Grid.Column="0"  HorizontalAlignment="Left"></TextBlock>
+                                <TextBlock Visibility="Hidden" Name="elasticoLargura" Text="Largura(cm):" TextWrapping="Wrap" Grid.Row="0" Grid.Column="3"  HorizontalAlignment="Left"></TextBlock>
+                                <TextBlock Visibility="Hidden" Name="elasticoQuantidade" Text="Quantidade Armazém:" TextWrapping="Wrap" Grid.Row="1" Grid.Column="0"  HorizontalAlignment="Left"></TextBlock>
+                                <TextBlock Visibility="Hidden" Name="elasticoPreço" Text="Preço(€)/unidade:" TextWrapping="Wrap" Grid.Row="1" Grid.Column="3"  HorizontalAlignment="Left"></TextBlock>
+
+                                <!--Fita velcro-->
+                                <TextBlock Visibility="Hidden" Name="velcroComprimento" Text="Comprimento(cm):" TextWrapping="Wrap" Grid.Row="0" Grid.Column="0"  HorizontalAlignment="Left"></TextBlock>
+                                <TextBlock Visibility="Hidden" Name="velcroLargura" Text="Largura(cm):" TextWrapping="Wrap" Grid.Row="0" Grid.Column="3"  HorizontalAlignment="Left"></TextBlock>
+                                <TextBlock Visibility="Hidden" Name="velcroQuantidade" Text="Quantidade Armazém:" TextWrapping="Wrap" Grid.Row="1" Grid.Column="0"  HorizontalAlignment="Left"></TextBlock>
+                                <TextBlock Visibility="Hidden" Name="velcroPreço" Text="Preço(€)/unidade:" TextWrapping="Wrap" Grid.Row="1" Grid.Column="3"  HorizontalAlignment="Left"></TextBlock>
+                            </Grid>
+                            <Button Name="addMaterial" Grid.Column="4" Grid.ColumnSpan="3" Grid.Row="3"
+                                    HorizontalAlignment="Center" IsEnabled="False" Click="addMaterial_Click">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="add.png" Width="20" />
+                                    <TextBlock Text="Adicionar Material" Margin="4,0,0,0"/>
+                                </StackPanel>
+                            </Button>
+                            <ScrollViewer Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="4" Grid.RowSpan="3">
+                                <StackPanel x:Name="stack">
+                                </StackPanel>
+                            </ScrollViewer>
+                        </Grid>
+
+                    </GroupBox>
+                </StackPanel>
+            </ScrollViewer>
         </GroupBox>
         <Grid Grid.Column="0" Grid.ColumnSpan="7" Grid.Row="11">
             <Grid.ColumnDefinitions>
@@ -77,5 +254,6 @@
             <Button x:Name="confirmar" Content="Confirmar"  Grid.Column="2" HorizontalAlignment="Left" Click="confirmar_Click"/>
             <Button x:Name="cancelar" Content="Cancelar" Grid.Column="0"  HorizontalAlignment="Right" Click="cancelar_Click"/>
         </Grid>
+
     </Grid>
 </Page>
