@@ -107,13 +107,15 @@ namespace Trabalho_BD_IHC
             utilizador.Localizacao.Rua1 = reader["RUAUSER"].ToString();
             utilizador.Supervisor = new Utilizador();
             utilizador.Supervisor.NFuncionario = Convert.ToInt32(reader["N_FUNCIONARIO_SUPER"].ToString());
-            byte[] img = (byte[])reader["IMAGEM"];
-            if(img == null)
+            byte[] img=null;
+            try
             {
-                MemoryStream ms = new MemoryStream(img);
-                utilizador.Imagem = Image.FromStream(ms);
+                img = (byte[])reader["IMAGEM"];
             }
-            else
+            catch (InvalidCastException e) {
+
+            }
+            if (img != null)
             {
                 MemoryStream ms = new MemoryStream(img);
                 utilizador.Imagem = Image.FromStream(ms);

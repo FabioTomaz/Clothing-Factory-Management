@@ -68,14 +68,16 @@ namespace Trabalho_BD_IHC
             faxFilial.Content = Utilizador.loggedUser.Filial.Fax;
             telefoneFilial.Content = Utilizador.loggedUser.Filial.Telefone;
             moradaFilial.Content = String.Format("Distrito de {0} , concelho de {1}, localidade de {2}, rua {3}, porta {4}", Utilizador.loggedUser.Localizacao.Distrito, Utilizador.loggedUser.Localizacao.Concelho, Utilizador.loggedUser.Localizacao.Localidade, Utilizador.loggedUser.Localizacao.Rua1, Utilizador.loggedUser.Localizacao.Porta);
-            var ms = new MemoryStream();
-            Utilizador.loggedUser.Imagem.Save(ms, ImageFormat.Png);
-            var bi = new BitmapImage();
-            bi.BeginInit();
-            bi.CacheOption = BitmapCacheOption.OnLoad;
-            bi.StreamSource = ms;
-            bi.EndInit();
-            userImage.Source = bi;
+            if (Utilizador.loggedUser.Imagem != null) { 
+                var ms = new MemoryStream();
+                Utilizador.loggedUser.Imagem.Save(ms, ImageFormat.Png);
+                var bi = new BitmapImage();
+                bi.BeginInit();
+                bi.CacheOption = BitmapCacheOption.OnLoad;
+                bi.StreamSource = ms;
+                bi.EndInit();
+                userImage.Source = bi;
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
