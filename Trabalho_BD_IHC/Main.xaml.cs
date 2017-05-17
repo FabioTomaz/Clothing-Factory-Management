@@ -140,14 +140,5 @@ namespace Trabalho_BD_IHC
                 dataHandler.closeSGBDConnection();
             }
         }
-
-        private void tabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            
-            empregadosFrame.NavigationService.Refresh();
-            materiaisFrame.NavigationService.Refresh();
-            produtosFrame.NavigationService.Refresh();
-
-        }
     }
 }

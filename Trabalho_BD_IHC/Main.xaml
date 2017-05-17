@@ -16,7 +16,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         
-        <TabControl x:Name="tabControl" Grid.Column="0" HorizontalAlignment="Stretch" Grid.Row="0" VerticalAlignment="Stretch" SelectionChanged="tabControl_SelectionChanged">
+        <TabControl x:Name="tabControl" Grid.Column="0" HorizontalAlignment="Stretch" Grid.Row="0" VerticalAlignment="Stretch">
             <TabItem Name="conta" Header="Minha Conta" IsEnabled="True">
                 <Grid Background="White">
                     <Grid.ColumnDefinitions>

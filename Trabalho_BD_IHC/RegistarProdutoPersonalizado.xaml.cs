@@ -172,7 +172,7 @@ namespace Trabalho_BD_IHC
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-
+            e.Handled = true;
             if (!dataHandler.verifySGBDConnection())
             {
                 MessageBoxResult result = MessageBox.Show("A conexão à base de dados é instável ou inexistente. Por favor tente mais tarde", "Erro de Base de Dados", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -292,6 +292,7 @@ namespace Trabalho_BD_IHC
 
         private void materiaisView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            e.Handled = true;
             /*ver o tipo de material do item selecionado, meter na grid de detalhes a informçao
              * desse material, tornando a visibilidade ativa dos textblocks especificos*/
             String tipoMaterial = "";
@@ -622,6 +623,7 @@ namespace Trabalho_BD_IHC
 
         private void materiaisSelectedView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            e.Handled = true;
             if (materiaisSelectedView.SelectedItems.Count > 0)
                 removeMaterial.IsEnabled = true;
 
