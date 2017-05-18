@@ -35,6 +35,7 @@ namespace Trabalho_BD_IHC
 
         private void Selection_Changed(object sender, SelectionChangedEventArgs e)
         {
+
             if (!IsLoaded) return;
 
             ComboBoxItem cbo = (ComboBoxItem)tipoMaterial.SelectedItem;

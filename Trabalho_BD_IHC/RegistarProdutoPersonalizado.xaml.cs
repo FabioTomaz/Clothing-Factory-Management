@@ -120,6 +120,52 @@ namespace Trabalho_BD_IHC
                     "posterior produção deste produto", "", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
+            //verificar se um tamanho foi selecionado
+            if (cbTamanho.SelectedIndex <= -1)
+            {
+                MessageBox.Show("Por favor, selecione o tamanho a atribuir ao produto!", "", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            //verificar se uma cor foi selecionada
+            if (txtCor.SelectedColorText == "")
+            {
+                MessageBox.Show("Por favor, selecione uma cor a atribuir ao produto!", "", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (txtPreço.Text == "")
+            {
+                MessageBox.Show("Por favor, indique o preço a atribuir ao produto!", "", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (rdEtiquetaExis.IsChecked == false && rdEtiquetaNova.IsChecked == false)
+            {
+                MessageBox.Show("Por favor, adicione uma etiqueta existente ao produto, ou crie uma nova!", "", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            //validar os formularios de preenchimento de uma etiqueta nova
+            if (rdEtiquetaNova.IsChecked == true)
+            {
+                if (txtNormas.Text.Length == 0 || txtComp.Text.Length == 0 || txtPais.Text.Length == 0)
+                {
+                    MessageBox.Show("Por favor, preencha todos os campos relativos à criação de nova etiqueta!", "", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                else if (txtNormas.Text.Length > 100)
+                {
+                    MessageBox.Show("A especificação das normas é demasiado longa! Indique apenas o essencial.", "", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                else if (txtComp.Text.Length > 100)
+                {
+                    MessageBox.Show("A especificação da composição da etiqueta é demasiado longa! Indique apenas o essencial.", "", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                else if (txtComp.Text.Length > 20)
+                {
+                    MessageBox.Show("O nome do País especificado é demasiado longo! Use acrónimos ou abreviações.", "", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+            }
 
             ProdutoPersonalizado prodPers = new ProdutoPersonalizado();
             try
@@ -179,7 +225,7 @@ namespace Trabalho_BD_IHC
             }
             else
             {
-                
+
                 ListarProdutos lp = new ListarProdutos(dataHandler);
                 ObservableCollection<MaterialTextil> mt = getMateriais(dataHandler);
                 materiaisView.ItemsSource = mt;
@@ -628,6 +674,7 @@ namespace Trabalho_BD_IHC
                 removeMaterial.IsEnabled = true;
 
         }
+
 
 
     }

@@ -10,21 +10,38 @@
       Title="RegistarProdutoPersonalizado">
     <Grid Background="White" Loaded="Page_Loaded">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.5*"/>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="0.4*"/>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="24*"/>
+            <ColumnDefinition Width="142*"/>
+            <ColumnDefinition Width="16*"/>
+            <ColumnDefinition Width="473*"/>
+            <ColumnDefinition Width="23*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.05*"/>
             <RowDefinition />
             <RowDefinition Height="0.1*"/>
         </Grid.RowDefinitions>
-
-        <GroupBox Header="Criar Novo Produto Personalizado" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="5">
+        <GroupBox Header="Operações" Grid.Column="1" Grid.Row="1" Template="{StaticResource blackGroupBox}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.3*"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="0.3*"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="0.3*"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="0.3*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Button x:Name="confirmar" Style="{StaticResource confirmarButton}" Content="Confirmar"  Grid.Row="1" Grid.Column="1" IsEnabled="True" Click="confirmar_Click"/>
+                <Button x:Name="cancelar" Style="{StaticResource cancelarButton}" Content="Cancelar" Grid.Row="3" Grid.Column="1" Click="cancelar_Click"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Criar Novo Produto Personalizado" Grid.Row="1" Grid.Column="3" >
             <ScrollViewer HorizontalScrollBarVisibility="Disabled">
                 <StackPanel>
                     <Grid>
@@ -183,6 +200,11 @@
                                     <RowDefinition Height="1*"></RowDefinition>
                                     <RowDefinition Height="1*"></RowDefinition>
                                     <RowDefinition Height="1*"></RowDefinition>
+                                    <RowDefinition Height="0.1*"></RowDefinition>
+                                    <RowDefinition Height="1*"></RowDefinition>
+                                    <RowDefinition Height="1*"></RowDefinition>
+                                    <RowDefinition Height="1*"></RowDefinition>
+
                                 </Grid.RowDefinitions>
                                 <!--pano-->
                                 <TextBlock Visibility="Hidden" Name="panoTipo" Text="Tipo:" TextWrapping="Wrap" Grid.Row="0" Grid.Column="0"  HorizontalAlignment="Left"></TextBlock>
@@ -244,8 +266,8 @@
                             <wpfTool:IntegerUpDown Name="txtQuantidadeInt" Grid.Row="3" Grid.Column="4" VerticalAlignment="Center" Visibility="Hidden"
                             Watermark="Qtd do material necessária para o produto" Minimum="1" Increment="1" ></wpfTool:IntegerUpDown>
 
-                            <TextBlock Text="Materiais Selecionados"  Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="5"></TextBlock>
-                            <ListView Name="materiaisSelectedView" Grid.Row="5" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="5" SelectionChanged="materiaisSelectedView_SelectionChanged">
+                            <TextBlock FontWeight="Bold" Text="Materiais Selecionados"  Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="5"></TextBlock>
+                            <ListView Name="materiaisSelectedView" Grid.Row="6" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="5" SelectionChanged="materiaisSelectedView_SelectionChanged">
                                 <ListView.View>
                                     <GridView>
                                         <GridViewColumn Header="Referêcia Fábrica" DisplayMemberBinding="{Binding Referencia}" />
@@ -255,7 +277,7 @@
                                     </GridView>
                                 </ListView.View>
                             </ListView>
-                            <Button Name="removeMaterial" Grid.Column="5" Grid.ColumnSpan="2" Grid.Row="6"
+                            <Button Name="removeMaterial" Grid.Column="5" Grid.ColumnSpan="2" Grid.Row="7"
                                     HorizontalAlignment="Center" IsEnabled="False" Click="removeMaterial_Click">
                                 <StackPanel Orientation="Horizontal">
                                     <Image Source="remove.png" Width="20" />
@@ -269,16 +291,7 @@
                 </StackPanel>
             </ScrollViewer>
         </GroupBox>
-        <Grid Grid.Column="0" Grid.ColumnSpan="7" Grid.Row="11">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"></ColumnDefinition>
-                <ColumnDefinition Width="0.2*"></ColumnDefinition>
-                <ColumnDefinition Width="1*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <Button x:Name="confirmar" Content="Confirmar"  Grid.Column="2" HorizontalAlignment="Left" Click="confirmar_Click"/>
-            <Button x:Name="cancelar" Content="Cancelar" Grid.Column="0"  HorizontalAlignment="Right" Click="cancelar_Click"/>
-        </Grid>
 
-        </Grid>
+    </Grid>
 
 </Page>

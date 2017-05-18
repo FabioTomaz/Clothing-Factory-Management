@@ -4,10 +4,20 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:wpfTool="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:local="clr-namespace:Trabalho_BD_IHC"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
       Title="RegistarMaterial">
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+            <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ComboBox.xaml" />
+            <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Slider.xaml" />
+            <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.TextBox.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
     <Grid Background="White">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="24*"/>
@@ -48,131 +58,72 @@
         <GroupBox Template="{StaticResource blueGroupBox}" Header="Registar Material" Grid.Row="1" Grid.Column="3">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.8*"></ColumnDefinition>
+                    <ColumnDefinition Width="0.5*"></ColumnDefinition>
                     <ColumnDefinition Width="1*"></ColumnDefinition>
                     <ColumnDefinition Width="0.8*"></ColumnDefinition>
                     <ColumnDefinition Width="1*"></ColumnDefinition>
 
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="0.05*"></RowDefinition>
+                    <RowDefinition Height="0.02*"></RowDefinition>
                     <RowDefinition Height="25"></RowDefinition>
-                    <RowDefinition Height="0.05*"></RowDefinition>
+                    <RowDefinition Height="0.03*"></RowDefinition>
                     <RowDefinition Height="25"></RowDefinition>
-                    <RowDefinition Height="0.05*"></RowDefinition>
-                    <RowDefinition Height="25"></RowDefinition>
-                    <RowDefinition Height="0.05*"></RowDefinition>
-                    <RowDefinition Height="25"></RowDefinition>
-                    <RowDefinition Height="0.05*"></RowDefinition>
-                    <RowDefinition Height="0.2*"></RowDefinition>
-                    <RowDefinition Height="0.05*"></RowDefinition>
+                    <RowDefinition Height="0.03*"></RowDefinition>
+                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition Height="0.03*"></RowDefinition>
+                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition Height="0.03*"></RowDefinition>
+                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition Height="0.03*"></RowDefinition>
                     <RowDefinition Height="1*"></RowDefinition>
-                    <RowDefinition Height="0.05*"></RowDefinition>
+                    <RowDefinition Height="0.02*"></RowDefinition>
 
                 </Grid.RowDefinitions>
                 <Label Content="Material: " Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-                <ComboBox SelectedIndex="0" Name="tipoMaterial" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="1"  VerticalAlignment="Center" SelectionChanged="Selection_Changed">
+                <ComboBox SelectedIndex="0" materialDesign:HintAssist.Hint="Tipo de Material" Name="tipoMaterial" Grid.Column="1" Grid.Row="1"  VerticalAlignment="Center" SelectionChanged="Selection_Changed">
                     <ComboBoxItem Name="Pano">
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="pano.png" Width="22" />
-                            <TextBlock Text="Pano" Margin="15,0,0,0" />
-                        </StackPanel>
+                       Pano
                     </ComboBoxItem>
                     <ComboBoxItem Name="Linha">
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="linha.png" Width="22" />
-                            <TextBlock Text="Linha" Margin="15,0,0,0" />
-                        </StackPanel>
+                        Linha
                     </ComboBoxItem>
                     <ComboBoxItem Name="Acessorios">
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="acessorios.png" Width="22" />
-                            <TextBlock Text="Acessórios" Margin="15,0,0,0" />
-                        </StackPanel>
+                        Acessorios
                     </ComboBoxItem>
                 </ComboBox>
                 <Label  x:Name="acessoriosLabel" HorizontalAlignment="Right" Visibility="Hidden" Content="Tipo de Acessorio: " Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" Margin="4,0,0,0"/>
-                <ComboBox Visibility="Hidden" VerticalAlignment="Center" HorizontalAlignment="Left" SelectedIndex="0" Name="acessorios" Grid.Row="1" Grid.Column="3" SelectionChanged="acessorios_SelectionChanged" >
+                <ComboBox materialDesign:HintAssist.Hint="Tipo de Acessório" Visibility="Hidden" VerticalAlignment="Center" HorizontalAlignment="Left" SelectedIndex="0" Name="acessorios" Grid.Row="1" Grid.Column="3" SelectionChanged="acessorios_SelectionChanged" >
                     <ComboBoxItem Name="Fecho">
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="fecho.png" Width="22" />
-                            <TextBlock Text="Fecho" Margin="15,0,0,0" />
-                        </StackPanel>
+                        Fecho
                     </ComboBoxItem>
                     <ComboBoxItem Name="Mola">
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="mola.png" Width="22" />
-                            <TextBlock Text="Mola" Margin="15,0,0,0" />
-                        </StackPanel>
+                        Mola
                     </ComboBoxItem>
                     <ComboBoxItem Name="Botao">
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="botao.png" Width="22" />
-                            <TextBlock Text="Botão" Margin="15,0,0,0" />
-                        </StackPanel>
+                        Botão
                     </ComboBoxItem>
                     <ComboBoxItem Name="Elastico">
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="elastico.png" Width="22" />
-                            <TextBlock Text="Elástico" Margin="15,0,0,0" />
-                        </StackPanel>
+                        Elástico
                     </ComboBoxItem>
                     <ComboBoxItem Name="FitaVelcro">
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="velcro.png" Width="22" />
-                            <TextBlock Text="Fita de velcro" Margin="15,0,0,0" />
-                        </StackPanel>
+                        Fita de velcro
                     </ComboBoxItem>
                     <ComboBoxItem Name="Outro">
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="outro.png" Width="22" />
-                            <TextBlock Text="Outro" Margin="15,0,0,0" />
-                        </StackPanel>
+                        Outro
                     </ComboBoxItem>
                 </ComboBox>
+                <Image Source="fornecedor.png" Width="20" Grid.Row="7" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                <TextBox Name="txtFornecedorNif" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="NIF do Fornecedor" Grid.Row="7" Grid.Column="1" ></TextBox>
+                <Image Source="referencia.png" Width="20" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right"></Image>
+                <TextBox Name="txtReferenciaFornecedor" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Referencia" Grid.Row="5" Grid.Column="1">
+                </TextBox>
+                <Label Grid.Column="0" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Center">Cor:</Label>
 
+                    <wpfTool:ColorPicker Grid.Row="3" Grid.Column="1" Name="corMaterial" ></wpfTool:ColorPicker>
 
-                <Label Content="NIF Fornecedor:" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-                <wpfTool:WatermarkTextBox Name="txtFornecedorNif" Grid.Row="3" Grid.Column="1" >
-                    <wpfTool:WatermarkTextBox.Watermark>
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="fornecedor.png" />
-                            <TextBlock Text="NIF Fornecedor" Margin="4,0,0,0" />
-                        </StackPanel>
-                    </wpfTool:WatermarkTextBox.Watermark>
-                </wpfTool:WatermarkTextBox>
-                <Button Grid.Row="3" Grid.Column="2" HorizontalAlignment="Left">
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="searchCliente.png"/>
-                        <TextBlock Text="Pesquisar Fornecedor" Margin="4,0,0,0" />
-                    </StackPanel>
-                </Button>
-                <Label Content="Referencia:" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-                <wpfTool:WatermarkTextBox Name="txtReferenciaFornecedor" Grid.Row="5" Grid.Column="1">
-                    <wpfTool:WatermarkTextBox.Watermark>
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="referencia.png" Width="20" />
-                            <TextBlock Text="Referência Fornecedor" Margin="4,0,0,0" />
-                        </StackPanel>
-                    </wpfTool:WatermarkTextBox.Watermark>
-                </wpfTool:WatermarkTextBox>
-                <Label Grid.Column="0" Grid.Row="7" HorizontalAlignment="Right" VerticalAlignment="Center">Cor:</Label>
-                <Grid Grid.Row="7" Grid.Column="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <wpfTool:ColorPicker Name="corMaterial"  Grid.Column="0"></wpfTool:ColorPicker>
-                </Grid>
-                <Label Content="Descrição: " HorizontalAlignment="Right" VerticalAlignment="Top" Grid.Row="9" Grid.Column="0"></Label>
-                <wpfTool:WatermarkTextBox Name="txtDescriçãoMaterial" Grid.Row="9" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="2">
-                    <wpfTool:WatermarkTextBox.Watermark>
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="referencia.png" Width="20" />
-                            <TextBlock Text="Descrição do Material Textil a ser Registado" Margin="4,0,0,0" />
-                        </StackPanel>
-                    </wpfTool:WatermarkTextBox.Watermark>
-                </wpfTool:WatermarkTextBox>
+                <Image Source="outro.png" Width="20" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="9" Grid.Column="0"></Image>
+                <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Descrição Breve Opcional do Material a ser Registado" Name="txtDescriçãoMaterial" Grid.Row="9" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="3"></TextBox>
                 <Grid Name="pano" Grid.Column="0" Grid.Row="11" Grid.ColumnSpan="4" Grid.RowSpan="5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.8*"></ColumnDefinition>

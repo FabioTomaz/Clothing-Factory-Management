@@ -150,12 +150,6 @@ namespace Trabalho_BD_IHC
             NavigationService.Navigate(page);
         }
 
-        private void EditarProdutoPers_click(object sender, RoutedEventArgs e)
-        {
-            EditarDesenhoPersonalizado page = new EditarDesenhoPersonalizado(dataHandler, (DesenhoPersonalizado)produtosPersonalizadosLista.SelectedItem);
-            this.NavigationService.Navigate(page);
-        }
-
         private void ProduzirProdutoPers_click(object sender, RoutedEventArgs e)
         {
             ProduzirProduto page = new ProduzirProduto(dataHandler, (ProdutoPersonalizado)produtosPersonalizadosLista.SelectedItem);

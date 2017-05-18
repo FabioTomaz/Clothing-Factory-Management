@@ -120,7 +120,7 @@
                             <Button x:Name="produzirProduto" Style="{StaticResource adicionarButton}" Grid.Row="2" Grid.Column="1" Click="ProduzirProdutoPers_click" IsEnabled="False">
                                 <TextBlock TextWrapping="Wrap">Produzir Produto</TextBlock>
                             </Button>
-                            <Button x:Name="editarProdutoPersonalizado" Grid.Row="4" Grid.Column="1" Style="{StaticResource editarButton}" IsEnabled="False" Click="EditarProdutoPers_click">
+                            <Button x:Name="editarProdutoPersonalizado" Grid.Row="4" Grid.Column="1" Style="{StaticResource editarButton}" IsEnabled="False">
                                 <TextBlock TextWrapping="Wrap">Editar Produto Personalizado</TextBlock>
                             </Button>
                             <Button x:Name="removerProdutoPersonalizado" Grid.Row="6" Grid.Column="1" Style="{StaticResource removerButton}" IsEnabled="False">

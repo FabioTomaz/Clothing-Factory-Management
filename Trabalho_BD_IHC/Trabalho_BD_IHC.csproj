@@ -102,9 +102,6 @@
     <Compile Include="EditarProdutoBase.xaml.cs">
       <DependentUpon>EditarProdutoBase.xaml</DependentUpon>
     </Compile>
-    <Compile Include="EditarDesenhoPersonalizado.xaml.cs">
-      <DependentUpon>EditarDesenhoPersonalizado.xaml</DependentUpon>
-    </Compile>
     <Compile Include="EditarCliente.xaml.cs">
       <DependentUpon>EditarCliente.xaml</DependentUpon>
     </Compile>
@@ -124,9 +121,6 @@
     </Compile>
     <Compile Include="RegistarProdutoBase.xaml.cs">
       <DependentUpon>RegistarProdutoBase.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="RegistarDesenhoPersonalizado.xaml.cs">
-      <DependentUpon>RegistarDesenhoPersonalizado.xaml</DependentUpon>
     </Compile>
     <Compile Include="RegistarEmpregado.xaml.cs">
       <DependentUpon>RegistarEmpregado.xaml</DependentUpon>
@@ -153,9 +147,6 @@
     <Compile Include="RegistarCliente.xaml.cs">
       <DependentUpon>RegistarCliente.xaml</DependentUpon>
     </Compile>
-    <Compile Include="RegistarDesenhoBase.xaml.cs">
-      <DependentUpon>RegistarDesenhoBase.xaml</DependentUpon>
-    </Compile>
     <Compile Include="RegistarEncomenda.xaml.cs">
       <DependentUpon>RegistarEncomenda.xaml</DependentUpon>
     </Compile>
@@ -173,10 +164,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="EditarProdutoBase.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="EditarDesenhoPersonalizado.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -201,10 +188,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="RegistarProdutoBase.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="RegistarDesenhoPersonalizado.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -252,7 +235,6 @@
     <Compile Include="Bordado.cs" />
     <Compile Include="Botao.cs" />
     <Compile Include="Cliente.cs" />
-    <Compile Include="DesenhoBase.cs" />
     <Compile Include="Elastico.cs" />
     <Compile Include="Encomenda.cs" />
     <Compile Include="Estampagem.cs" />
@@ -274,10 +256,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="RegistarDesenhoBase.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="RegistarEncomenda.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -285,7 +263,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MaterialTextil.cs" />
-    <Compile Include="DesenhoPersonalizado.cs" />
     <Compile Include="Mola.cs" />
     <Compile Include="Pano.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">

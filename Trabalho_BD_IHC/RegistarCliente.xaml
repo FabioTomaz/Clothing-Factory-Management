@@ -83,7 +83,7 @@
                     <materialDesign:PackIcon Kind="Numeric"></materialDesign:PackIcon>
                     <TextBlock Text="NIF: "/>
                 </StackPanel>
-                <TextBox Name="txtNIF" Grid.Row="5" Grid.Column="2" VerticalAlignment="Center"></TextBox>
+                <TextBox Name="txtNIF" Grid.Row="5" Grid.Column="2" VerticalAlignment="Center" PreviewTextInput="NumberValidationTextBox"></TextBox>
                 <StackPanel Orientation="Horizontal"  Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Center">
                     <materialDesign:PackIcon Kind="Email"></materialDesign:PackIcon>
                     <TextBlock Text="E-Mail: "/>
