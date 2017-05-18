@@ -3,6 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:wpfTool="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
       xmlns:local="clr-namespace:Trabalho_BD_IHC"
       mc:Ignorable="d" 
@@ -254,11 +255,8 @@
                                 <TextBlock Visibility="Hidden" Name="velcroPreço" Text="Preço(€)/unidade:" TextWrapping="Wrap" Grid.Row="1" Grid.Column="3"  HorizontalAlignment="Left"></TextBlock>
                             </Grid>
                             <Button Name="addMaterial" Grid.Column="5" Grid.ColumnSpan="2" Grid.Row="3"
-                                    HorizontalAlignment="Center" IsEnabled="False" Click="addMaterial_Click">
-                                <StackPanel Orientation="Horizontal">
-                                    <Image Source="add.png" Width="20" />
-                                    <TextBlock Text="Adicionar Material" Margin="4,0,0,0"/>
-                                </StackPanel>
+                                    HorizontalAlignment="Center" Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" IsEnabled="False" Click="addMaterial_Click">
+                                <materialDesign:PackIcon Kind="Plus" Height="20" Width="20" />
                             </Button>
                             <wpfTool:DecimalUpDown Name="txtQuantidadeDec" Grid.Row="3" Grid.Column="4" Visibility="Hidden" VerticalAlignment="Center"
                             Watermark="Quantidade do material necessária para o produto" Minimum="0.5" Increment="0.5" ></wpfTool:DecimalUpDown>
