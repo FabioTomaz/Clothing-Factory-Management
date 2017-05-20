@@ -25,6 +25,7 @@ namespace Trabalho_BD_IHC
         {
             InitializeComponent();
             this.dataHandler = new DataHandler();
+            nEmpregado.Focus();
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -52,8 +53,6 @@ namespace Trabalho_BD_IHC
                     if (checkLogin(nEmpregado.Text, pass)) {
                         Utilizador.loggedUser = dataHandler.getUtilizadorFromDB(Convert.ToInt32(nEmpregado.Text));
                         Utilizador.loggedUser.Supervisor = dataHandler.getUtilizadorFromDB(Utilizador.loggedUser.Supervisor.NFuncionario);
-                        Console.WriteLine(Utilizador.loggedUser.NFuncionario);
-                        Xceed.Wpf.Toolkit.MessageBox.Show("O inicio de sessão foi realizado com sucesso!", "Inicio de Sessão Concluido", MessageBoxButton.OK, MessageBoxImage.Information);
                         this.Hide();
                         MainWindow main = new MainWindow(dataHandler);
                         main.ShowDialog();

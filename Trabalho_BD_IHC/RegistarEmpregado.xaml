@@ -10,13 +10,37 @@
     <Grid Background="White">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="24*"/>
+            <ColumnDefinition Width="142*"/>
+            <ColumnDefinition Width="16*"/>
+            <ColumnDefinition Width="473*"/>
+            <ColumnDefinition Width="23*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="0.3*"/>
+            <RowDefinition Height="0.05*"/>
+            <RowDefinition />
+            <RowDefinition Height="0.1*"/>
         </Grid.RowDefinitions>
-
-        <GroupBox Header="Registar Cliente" Grid.Row="0" Grid.Column="1">
+        <GroupBox Header="Operações" Grid.Column="1" Grid.Row="1" Template="{StaticResource blackGroupBox}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.3*"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="0.3*"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="0.3*"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="0.3*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Button x:Name="confirmar" Style="{StaticResource confirmarButton}" Content="Confirmar"  Grid.Row="1" Grid.Column="1" IsEnabled="True" Click="confirmar_Click"/>
+                <Button x:Name="cancelar" Style="{StaticResource cancelarButton}" Content="Cancelar" Grid.Row="3" Grid.Column="1" Click="cancelar_Click"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Registar Cliente" Grid.Row="1" Grid.Column="3">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.2*"></ColumnDefinition>
@@ -48,57 +72,31 @@
                 <Label Content="Tipo de Funcionário: " Grid.Row="3" Grid.Column="1" VerticalAlignment="Center"/>
                 <ComboBox SelectedIndex="0" Name="tipoEmpregado" Grid.Column="3" Grid.Row="3"  VerticalAlignment="Center">
                     <ComboBoxItem Name="GestorStock">
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="GestorStock.png" Width="22" />
-                            <TextBlock Text="Gestor de Stock" Margin="15,0,0,0" />
-                        </StackPanel>
+                        Gestor de Stock
                     </ComboBoxItem>
                     <ComboBoxItem Name="GestorVendas">
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="GestorVendas.png" Width="22" />
-                            <TextBlock Text="Gestor de Vendas" Margin="15,0,0,0" />
-                        </StackPanel>
+                        Gestor de Vendas
                     </ComboBoxItem>
                     <ComboBoxItem Name="GestorProduçao">
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="GestorProduçao.png" Width="22" />
-                            <TextBlock Text="Gestor de Produção" Margin="15,0,0,0" />
-                        </StackPanel>
+                        Gestor de Produção
                     </ComboBoxItem>
                     <ComboBoxItem Name="GestorRecursosHumanos">
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="GestorRecursosHumanos.png" Width="22" />
-                            <TextBlock Text="Gestor de Recursos Humanos" Margin="15,0,0,0" />
-                        </StackPanel>
+                        Gestor de Recursos Humanos
                     </ComboBoxItem>
                 </ComboBox>
                 <Label Content="Nome: " Grid.Row="5" Grid.Column="1" VerticalAlignment="Center"/>
-                    <TextBox Name="txtNome" Grid.Row="5" Grid.Column="3" Height="20" VerticalAlignment="Center"></TextBox>
+                <TextBox Name="txtNome" Grid.Row="5" Grid.Column="3" Height="20" VerticalAlignment="Center"></TextBox>
                 <Label Content="E-Mail: " Grid.Row="7" Grid.Column="1"/>
-                    <TextBox Name="txtEmail" Grid.Row="7" Grid.Column="3" Height="20" VerticalAlignment="Center"></TextBox>
+                <TextBox Name="txtEmail" Grid.Row="7" Grid.Column="3" Height="20" VerticalAlignment="Center"></TextBox>
                 <Label Content="Telemóvel: " Grid.Row="9" Grid.Column="1"/>
-                    <TextBox Name="txtTelemovel" Grid.Row="9" Grid.Column="3" Height="20" VerticalAlignment="Center"></TextBox>
+                <TextBox Name="txtTelemovel" Grid.Row="9" Grid.Column="3" Height="20" VerticalAlignment="Center"></TextBox>
                 <Label Content="Código Postal: " Grid.Row="11" Grid.Column="1"/>
-                    <TextBox Name="txtcodigoPostal" Grid.Row="11" Grid.Column="3" Height="20" VerticalAlignment="Center"></TextBox>
+                <TextBox Name="txtcodigoPostal" Grid.Row="11" Grid.Column="3" Height="20" VerticalAlignment="Center"></TextBox>
                 <Label Content="Rua: " Grid.Row="13" Grid.Column="1"/>
-                    <TextBox Name="txtRua" Grid.Row="13" Grid.Column="3" Height="20" VerticalAlignment="Center"></TextBox>
+                <TextBox Name="txtRua" Grid.Row="13" Grid.Column="3" Height="20" VerticalAlignment="Center"></TextBox>
                 <Label Content="Numero de Porta: " Grid.Row="15" Grid.Column="1"/>
-                    <TextBox Name="txtNumeroPorta" Grid.Row="15" Grid.Column="3" Height="20" VerticalAlignment="Center"></TextBox>
+                <TextBox Name="txtNumeroPorta" Grid.Row="15" Grid.Column="3" Height="20" VerticalAlignment="Center"></TextBox>
             </Grid>
         </GroupBox>
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.7*"></ColumnDefinition>
-                <ColumnDefinition Width="0.2*"></ColumnDefinition>
-                <ColumnDefinition Width="0.7*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="0.5*"></RowDefinition>
-                <RowDefinition Height="1*"></RowDefinition>
-                <RowDefinition Height="0.5*"></RowDefinition>
-            </Grid.RowDefinitions>
-            <Button x:Name="confirmar" Content="Confirmar Registo"  Grid.Column="2"  Grid.Row="1" HorizontalAlignment="Left" IsEnabled="True" Click="confirmar_Click"/>
-            <Button x:Name="cancelar" Content="Cancelar Registo" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right" Click="cancelar_Click"/>
-        </Grid>
     </Grid>
 </Page>

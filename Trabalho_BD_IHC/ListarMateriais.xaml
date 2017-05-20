@@ -2,6 +2,7 @@
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       
       xmlns:local="clr-namespace:Trabalho_BD_IHC"
@@ -60,18 +61,48 @@
             </Grid>
         </GroupBox>
         <GroupBox Grid.Column="3" Grid.Row="1" Header="Listagem de Matérias Primas da Empresa">
-            <ListView Name="materiais" Grid.Row="1" SelectionChanged="materiais_SelectionChanged">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Header="Referêcia Fábrica" DisplayMemberBinding="{Binding Referencia}" />
-                        <GridViewColumn Header="Designação" DisplayMemberBinding="{Binding Designacao}"/>
-                        <GridViewColumn Header="Fornecedor" DisplayMemberBinding="{Binding Fornecedor.NIF_Fornecedor }" />
-                        <GridViewColumn Header="Referencia Fornecedor" DisplayMemberBinding="{Binding ReferenciaFornecedor}" />
-                        <GridViewColumn Header="Cor" DisplayMemberBinding="{Binding Cor}"/>
-                        
-                    </GridView>
-                </ListView.View>
-            </ListView>
+            
+            <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60"></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                <materialDesign:ColorZone Mode="PrimaryMid" Grid.Row="0" Padding="10">
+                    <StackPanel Orientation="Horizontal" 
+                                materialDesign:RippleAssist.IsCentered="True">
+                    <materialDesign:ColorZone Mode="Standard" Padding="8 4 8 4" CornerRadius="2" Panel.ZIndex="1"
+                                       Margin="16 0 0 0"
+                                       materialDesign:ShadowAssist.ShadowDepth="Depth1">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Button Style="{DynamicResource MaterialDesignToolButton}">
+                                <materialDesign:PackIcon Kind="Magnify" Opacity=".56" />
+                            </Button>
+                            <TextBox Grid.Column="1" Margin="8 0 0 0" materialDesign:HintAssist.Hint="Pesquisa por Referencia" 
+                                         materialDesign:TextFieldAssist.DecorationVisibility="Hidden" BorderThickness="0"
+                                         MinWidth="200" VerticalAlignment="Center" />
+                        </Grid>
+                    </materialDesign:ColorZone>
+                    <Button Style="{DynamicResource MaterialDesignToolForegroundButton}" Margin="8 0 0 0" Panel.ZIndex="0">
+                        <materialDesign:PackIcon Kind="Send" />
+                    </Button>
+                </StackPanel>
+                </materialDesign:ColorZone>
+                <ListView Name="materiais" Grid.Row="1" SelectionChanged="materiais_SelectionChanged">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Referêcia Fábrica" DisplayMemberBinding="{Binding Referencia}" />
+                                <GridViewColumn Header="Tipo" DisplayMemberBinding="{Binding Designacao}"/>
+                                <GridViewColumn Header="Cor" DisplayMemberBinding="{Binding Cor}"/>
+                                <GridViewColumn Header="Quantidade" DisplayMemberBinding="{Binding Cor}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Grid>
+            
         </GroupBox>
     </Grid>
 </Page>

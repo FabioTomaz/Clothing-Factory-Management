@@ -35,6 +35,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Dragablz, Version=0.0.3.186, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dragablz.0.0.3.186\lib\net45\Dragablz.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="MaterialDesignColors, Version=1.1.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignColors.1.1.2\lib\net45\MaterialDesignColors.dll</HintPath>
       <Private>True</Private>
@@ -150,6 +154,9 @@
     <Compile Include="RegistarEncomenda.xaml.cs">
       <DependentUpon>RegistarEncomenda.xaml</DependentUpon>
     </Compile>
+    <Compile Include="teste.xaml.cs">
+      <DependentUpon>teste.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Utilizador.cs" />
     <Page Include="DetalhesCliente.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -257,6 +264,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="RegistarEncomenda.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="teste.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

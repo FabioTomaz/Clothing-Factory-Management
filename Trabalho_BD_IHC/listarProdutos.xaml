@@ -3,6 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
       xmlns:local="clr-namespace:Trabalho_BD_IHC"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
@@ -14,7 +15,7 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
         </Grid.RowDefinitions>
-        <TabControl Grid.Column="1" Grid.Row="0" Grid.RowSpan="11">
+        <dragablz:TabablzControl  Grid.Column="1" Grid.Row="0" Grid.RowSpan="11">
             <TabItem Name="produtoBase" Header="Produto Base" Grid.Column="1" Grid.Row="0" Loaded="Page_Load">
                 <Grid Background="White">
                     <Grid.ColumnDefinitions>
@@ -29,7 +30,7 @@
                         <RowDefinition />
                         <RowDefinition Height="0.1*"/>
                     </Grid.RowDefinitions>
-                    <GroupBox Header="Operações" Grid.Column="1" Grid.Row="1">
+                    <GroupBox Header="Operações" Grid.Column="1" Grid.Row="1" Template="{StaticResource blackGroupBox}">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="0.1*"></ColumnDefinition>
@@ -37,48 +38,44 @@
                                 <ColumnDefinition Width="0.1*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
+                                <RowDefinition Height="0.1*"></RowDefinition>
                                 <RowDefinition></RowDefinition>
+                                <RowDefinition Height="0.3*"></RowDefinition>
                                 <RowDefinition></RowDefinition>
-                                <RowDefinition ></RowDefinition>
+                                <RowDefinition Height="0.3*"></RowDefinition>
                                 <RowDefinition></RowDefinition>
+                                <RowDefinition Height="0.3*"></RowDefinition>
                                 <RowDefinition></RowDefinition>
+                                <RowDefinition Height="0.3*"></RowDefinition>
                                 <RowDefinition></RowDefinition>
-                                <RowDefinition ></RowDefinition>
+                                <RowDefinition Height="0.1*"></RowDefinition>
                             </Grid.RowDefinitions>
-                            <Button x:Name="registarProdutoBase" Grid.Row="0" Grid.Column="1" Style="{StaticResource registarButton}" Click="registarProdutoBase_click">
+                            <Button x:Name="registarProdutoBase" Grid.Row="1" Grid.Column="1" Style="{StaticResource registarButton}" Click="registarProdutoBase_click">
                                 <TextBlock TextWrapping="Wrap">Registar Produto Base</TextBlock>
                             </Button>
-                            <Button x:Name="editarProdutoBase" Grid.Row="2" Grid.Column="1" Style="{StaticResource editarButton}" IsEnabled="False" Click="EditarProdutoBase_click">
+                            <Button x:Name="editarProdutoBase" Grid.Row="3" Grid.Column="1" Style="{StaticResource editarButton}" IsEnabled="False" Click="EditarProdutoBase_click">
                                 <TextBlock TextWrapping="Wrap">Editar Produto Base</TextBlock>
                             </Button>
-                            <Button x:Name="removerProdutoBase" Grid.Row="4" Grid.Column="1" Style="{StaticResource removerButton}" IsEnabled="False">
+                            <Button x:Name="removerProdutoBase" Grid.Row="5" Grid.Column="1" Style="{StaticResource removerButton}" IsEnabled="False">
                                 <TextBlock TextWrapping="Wrap">Remover Produto Base</TextBlock>
                             </Button>
-                            <Button x:Name="detalhesProdutoBase" Grid.Row="6" Grid.Column="1" Style="{StaticResource detalhesButton}" IsEnabled="False">
-                                <TextBlock TextWrapping="Wrap">Ver mais Informação</TextBlock>
+                            <Button x:Name="detalhesProdutoBase" Grid.Row="7" Grid.Column="1" Style="{StaticResource detalhesButton}" IsEnabled="False">
+                                <TextBlock TextWrapping="Wrap">Ver Mais Detalhes</TextBlock>
                             </Button>
                         </Grid>
                     </GroupBox>
-                    <Grid Grid.Column="3" Grid.Row="1">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="0.1*"></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <Label x:Name="produtoBaseLabel" Content="Lista de Produtos Base Registados" Grid.Row="0" VerticalAlignment="Top" />
-                        <ListView Name="produtosBaseLista" Grid.Row="1" SelectionChanged="produtos_SelectionChanged">
+                    <GroupBox x:Name="produtoBaseGB" Header="Listagem de Produtos Base da Empresa" Grid.Row="1" Grid.Column="3">
+                        <ListView Name="produtosBaseLista" SelectionChanged="produtos_SelectionChanged">
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn Header="Referência" DisplayMemberBinding="{Binding Referencia}" />
                                     <GridViewColumn Header="Nome"  DisplayMemberBinding="{Binding Nome}" />
-                                    <GridViewColumn Header="Instruções de Produção" DisplayMemberBinding="{Binding InstrProd}" />
-                                    <GridViewColumn Header="Data Alteração" DisplayMemberBinding="{Binding DataAlteraçao, StringFormat=d}" />
-                                    <GridViewColumn Header="IVA(%)" DisplayMemberBinding="{Binding IVA1}" />
-                                    <GridViewColumn Header="Nome Gestor Produção" DisplayMemberBinding="{Binding GestorProducao.Nome}" />
-
+                                    <GridViewColumn Header="Autor" DisplayMemberBinding="{Binding GestorProducao.Nome}" />
+                                    <GridViewColumn Header="Ultima Modificação" DisplayMemberBinding="{Binding DataAlteraçao, StringFormat=d}" />
                                 </GridView>
                             </ListView.View>
                         </ListView>
-                    </Grid>
+                    </GroupBox>
                 </Grid>
 
             </TabItem>
@@ -96,7 +93,7 @@
                         <RowDefinition />
                         <RowDefinition Height="0.1*"/>
                     </Grid.RowDefinitions>
-                    <GroupBox Header="Operações" Grid.Column="1" Grid.Row="1">
+                    <GroupBox Header="Operações" Grid.Column="1" Grid.Row="1" Template="{StaticResource blackGroupBox}">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="0.1*"></ColumnDefinition>
@@ -104,59 +101,53 @@
                                 <ColumnDefinition Width="0.1*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
+                                <RowDefinition Height="0.1*"></RowDefinition>
                                 <RowDefinition></RowDefinition>
+                                <RowDefinition Height="0.3*"></RowDefinition>
                                 <RowDefinition></RowDefinition>
-                                <RowDefinition ></RowDefinition>
+                                <RowDefinition Height="0.3*"></RowDefinition>
                                 <RowDefinition></RowDefinition>
+                                <RowDefinition Height="0.3*"></RowDefinition>
                                 <RowDefinition></RowDefinition>
+                                <RowDefinition Height="0.3*"></RowDefinition>
                                 <RowDefinition></RowDefinition>
-                                <RowDefinition ></RowDefinition>
-                                <RowDefinition ></RowDefinition>
-                                <RowDefinition ></RowDefinition>
+                                <RowDefinition Height="0.1*"></RowDefinition>
                             </Grid.RowDefinitions>
-                            <Button x:Name="registarProdutoPersonalizado" Grid.Row="0" Grid.Column="1" Style="{StaticResource registarButton}" Click="registarProdutoPers_click">
+                            <Button x:Name="registarProdutoPersonalizado" Grid.Row="1" Grid.Column="1" Style="{StaticResource registarButton}" Click="registarProdutoPers_click">
                                 <TextBlock TextWrapping="Wrap">Registar Produto Personalizado</TextBlock>
                             </Button>
-                            <Button x:Name="produzirProduto" Style="{StaticResource adicionarButton}" Grid.Row="2" Grid.Column="1" Click="ProduzirProdutoPers_click" IsEnabled="False">
+                            <Button x:Name="produzirProduto" Style="{StaticResource adicionarButton}" Grid.Row="3" Grid.Column="1" Click="ProduzirProdutoPers_click" IsEnabled="False">
                                 <TextBlock TextWrapping="Wrap">Produzir Produto</TextBlock>
                             </Button>
-                            <Button x:Name="editarProdutoPersonalizado" Grid.Row="4" Grid.Column="1" Style="{StaticResource editarButton}" IsEnabled="False">
+                            <Button x:Name="editarProdutoPersonalizado" Grid.Row="5" Grid.Column="1" Style="{StaticResource editarButton}" IsEnabled="False">
                                 <TextBlock TextWrapping="Wrap">Editar Produto Personalizado</TextBlock>
                             </Button>
-                            <Button x:Name="removerProdutoPersonalizado" Grid.Row="6" Grid.Column="1" Style="{StaticResource removerButton}" IsEnabled="False">
+                            <Button x:Name="removerProdutoPersonalizado" Grid.Row="7" Grid.Column="1" Style="{StaticResource removerButton}" IsEnabled="False">
                                 <TextBlock TextWrapping="Wrap">Remover Produto Personalizado</TextBlock>
                             </Button>
-                            <Button x:Name="detalhesProdutoPersonalizado" Grid.Row="8" Grid.Column="1" Style="{StaticResource detalhesButton}" IsEnabled="False">
+                            <Button x:Name="detalhesProdutoPersonalizado" Grid.Row="9" Grid.Column="1" Style="{StaticResource detalhesButton}" IsEnabled="False">
                                 <TextBlock TextWrapping="Wrap">Ver mais Informação</TextBlock>
                             </Button>
                         </Grid>
                     </GroupBox>
-                    <Grid Grid.Column="3" Grid.Row="1">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="0.1*"></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <Label x:Name="produtosPersonalizadosLabel" Content="Lista de Desenhos Personalizados Registados" Grid.Row="0" VerticalAlignment="Top" />
+                    <GroupBox Header="Listagem de Produtos Personalizados da Empresa" Grid.Column="3" Grid.Row="1">
                         <ListView Name="produtosPersonalizadosLista" Grid.Row="1" SelectionChanged="produtos_SelectionChanged">
                             <ListView.View>
                                 <GridView>
-                                    <GridViewColumn Header="ID"  DisplayMemberBinding="{Binding ID}" />
+                                    <GridViewColumn Header="Referência" DisplayMemberBinding="{Binding ProdutoBase.Referencia}"/>
                                     <GridViewColumn Header="Cor" DisplayMemberBinding="{Binding Cor}" />
                                     <GridViewColumn Header="Tamanho" DisplayMemberBinding="{Binding Tamanho}" />
+                                    <GridViewColumn Header="ID"  DisplayMemberBinding="{Binding ID}" />
                                     <GridViewColumn Header="Preço(€)" DisplayMemberBinding="{Binding Preco}" />
-                                    <GridViewColumn Header="Nº un. em armazém" DisplayMemberBinding="{Binding UnidadesStock}" />
-                                    <GridViewColumn Header="Referência produto base" DisplayMemberBinding="{Binding ProdutoBase.Referencia}"/>
-                                    <GridViewColumn Header="Nome Prod. Base" DisplayMemberBinding="{Binding ProdutoBase.Nome}"/>
-                                    <GridViewColumn Header="Nº Etiqueta" DisplayMemberBinding="{Binding Etiqueta.Numero}"/>
-                                    <GridViewColumn Header="Normas" DisplayMemberBinding="{Binding Etiqueta.Normas}"/>
+                                    <GridViewColumn Header="Unidades" DisplayMemberBinding="{Binding UnidadesStock}" />
                                 </GridView>
                             </ListView.View>
                         </ListView>
-                    </Grid>
+                    </GroupBox>
                 </Grid>
 
             </TabItem>
 
-        </TabControl>
+        </dragablz:TabablzControl>
     </Grid>
 </Page>
