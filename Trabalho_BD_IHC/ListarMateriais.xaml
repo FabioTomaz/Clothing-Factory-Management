@@ -4,7 +4,6 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      
       xmlns:local="clr-namespace:Trabalho_BD_IHC"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
@@ -83,24 +82,22 @@
                             </Button>
                             <TextBox Grid.Column="1" Margin="8 0 0 0" materialDesign:HintAssist.Hint="Pesquisa por Referencia" 
                                          materialDesign:TextFieldAssist.DecorationVisibility="Hidden" BorderThickness="0"
-                                         MinWidth="200" VerticalAlignment="Center" />
+                                         MinWidth="200" VerticalAlignment="Center" KeyDown="TextBox_KeyDown"/>
                         </Grid>
                     </materialDesign:ColorZone>
-                    <Button Style="{DynamicResource MaterialDesignToolForegroundButton}" Margin="8 0 0 0" Panel.ZIndex="0">
+                    <Button Style="{DynamicResource MaterialDesignToolForegroundButton}" Margin="8 0 0 0" Panel.ZIndex="0" Click="Button_Click">
                         <materialDesign:PackIcon Kind="Send" />
                     </Button>
                 </StackPanel>
                 </materialDesign:ColorZone>
-                <ListView Name="materiais" Grid.Row="1" SelectionChanged="materiais_SelectionChanged">
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn Header="Referêcia Fábrica" DisplayMemberBinding="{Binding Referencia}" />
-                                <GridViewColumn Header="Tipo" DisplayMemberBinding="{Binding Designacao}"/>
-                                <GridViewColumn Header="Cor" DisplayMemberBinding="{Binding Cor}"/>
-                                <GridViewColumn Header="Quantidade" DisplayMemberBinding="{Binding Cor}"/>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
+                <DataGrid IsReadOnly="True" AutoGenerateColumns="False" Name="materiais" Grid.Row="1" SelectionChanged="materiais_SelectionChanged">
+                    <DataGrid.Columns>
+                        <materialDesign:MaterialDataGridTextColumn Header="Referêcia Fábrica" Binding="{Binding Referencia}" />
+                        <materialDesign:MaterialDataGridTextColumn Header="Tipo" Binding="{Binding Designacao}"/>
+                        <materialDesign:MaterialDataGridTextColumn Header="Cor" Binding="{Binding Cor}"/>
+                        <materialDesign:MaterialDataGridTextColumn Header="Quantidade" Binding="{Binding Cor}"/>
+                    </DataGrid.Columns>
+                    </DataGrid>
                 </Grid>
             
         </GroupBox>

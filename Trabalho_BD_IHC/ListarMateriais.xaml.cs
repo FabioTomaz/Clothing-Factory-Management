@@ -255,6 +255,18 @@ namespace Trabalho_BD_IHC
             DetalhesMaterial window = new DetalhesMaterial((MaterialTextil)materiais.SelectedItem , dataHandler);
             window.Show();
         }
+
+        private void TextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter) {
+                Button_Click(sender, e);
+            }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 
         

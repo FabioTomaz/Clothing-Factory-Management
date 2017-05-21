@@ -1,7 +1,8 @@
 ﻿<Page x:Class="Trabalho_BD_IHC.ListarProdutos"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
       xmlns:local="clr-namespace:Trabalho_BD_IHC"
@@ -65,16 +66,14 @@
                         </Grid>
                     </GroupBox>
                     <GroupBox x:Name="produtoBaseGB" Header="Listagem de Modelos da Empresa" Grid.Row="1" Grid.Column="3">
-                        <ListView Name="produtosBaseLista" SelectionChanged="produtos_SelectionChanged">
-                            <ListView.View>
-                                <GridView>
-                                    <GridViewColumn Header="Referência" DisplayMemberBinding="{Binding Referencia}" />
-                                    <GridViewColumn Header="Nome"  DisplayMemberBinding="{Binding Nome}" />
-                                    <GridViewColumn Header="Autor" DisplayMemberBinding="{Binding GestorProducao.Nome}" />
-                                    <GridViewColumn Header="Ultima Modificação" DisplayMemberBinding="{Binding DataAlteraçao, StringFormat=d}" />
-                                </GridView>
-                            </ListView.View>
-                        </ListView>
+                        <DataGrid IsReadOnly="True" AutoGenerateColumns="False" Name="produtosBaseLista" SelectionChanged="produtos_SelectionChanged">
+                            <DataGrid.Columns>
+                                <materialDesign:MaterialDataGridTextColumn Header="Referência" Binding="{Binding Referencia}" />
+                                <materialDesign:MaterialDataGridTextColumn Header="Nome"  Binding="{Binding Nome}" />
+                                <materialDesign:MaterialDataGridTextColumn Header="Autor" Binding="{Binding GestorProducao.Nome}" />
+                                <materialDesign:MaterialDataGridTextColumn Header="Ultima Modificação" Binding="{Binding DataAlteraçao, StringFormat=d}" />
+                            </DataGrid.Columns>
+                        </DataGrid>
                     </GroupBox>
                 </Grid>
 
@@ -131,18 +130,16 @@
                         </Grid>
                     </GroupBox>
                     <GroupBox Header="Listagem de Produtos da Empresa" Grid.Column="3" Grid.Row="1">
-                        <ListView Name="produtosPersonalizadosLista" Grid.Row="1" SelectionChanged="produtos_SelectionChanged">
-                            <ListView.View>
-                                <GridView>
-                                    <GridViewColumn Header="Referência" DisplayMemberBinding="{Binding ProdutoBase.Referencia}"/>
-                                    <GridViewColumn Header="Cor" DisplayMemberBinding="{Binding Cor}" />
-                                    <GridViewColumn Header="Tamanho" DisplayMemberBinding="{Binding Tamanho}" />
-                                    <GridViewColumn Header="ID"  DisplayMemberBinding="{Binding ID}" />
-                                    <GridViewColumn Header="Preço(€)" DisplayMemberBinding="{Binding Preco}" />
-                                    <GridViewColumn Header="Unidades" DisplayMemberBinding="{Binding UnidadesStock}" />
-                                </GridView>
-                            </ListView.View>
-                        </ListView>
+                        <DataGrid Name="produtosPersonalizadosLista" Grid.Row="1" SelectionChanged="produtos_SelectionChanged">
+                            <DataGrid.Columns>
+                                <materialDesign:MaterialDataGridTextColumn Header="Referência" Binding="{Binding ProdutoBase.Referencia}"/>
+                                <materialDesign:MaterialDataGridTextColumn Header="Cor" Binding="{Binding Cor}" />
+                                <materialDesign:MaterialDataGridTextColumn Header="Tamanho" Binding="{Binding Tamanho}" />
+                                <materialDesign:MaterialDataGridTextColumn Header="ID"  Binding="{Binding ID}" />
+                                <materialDesign:MaterialDataGridTextColumn Header="Preço(€)" Binding="{Binding Preco}" />
+                                <materialDesign:MaterialDataGridTextColumn Header="Unidades" Binding="{Binding UnidadesStock}" />
+                            </DataGrid.Columns>
+                        </DataGrid>
                     </GroupBox>
                 </Grid>
 

@@ -3,6 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:local="clr-namespace:Trabalho_BD_IHC"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
@@ -58,19 +59,15 @@
             </Grid>
         </GroupBox>
         <GroupBox Grid.Column="3" Grid.Row="1" Header="Listagem de Encomendas da Empresa">
-            <ListView Name="encomendas" Grid.Row="1" SelectionChanged="encomendas_SelectionChanged">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Header="Nº Encomenda" DisplayMemberBinding="{Binding NEncomenda}" />
-                        <GridViewColumn Header="Nº Cliente"  DisplayMemberBinding="{Binding Cliente.NCliente}" />
-                        <GridViewColumn Header="Nome Cliente"  DisplayMemberBinding="{Binding Cliente.Nome}" />
-                        <GridViewColumn Header="Estado" DisplayMemberBinding="{Binding Estado}" />
-                        <GridViewColumn Header="Data de Entrega Prevista" DisplayMemberBinding="{Binding DataPrevistaEntrega, StringFormat=d}" />
-                        <GridViewColumn Header="Preço(€)" DisplayMemberBinding="{Binding Preco}" />
-                        <GridViewColumn Header="Desconto(%)" DisplayMemberBinding="{Binding Desconto}" />
-                    </GridView>
-                </ListView.View>
-            </ListView>
+            <DataGrid IsReadOnly="True" AutoGenerateColumns="False" Name="encomendas" Grid.Row="1" SelectionChanged="encomendas_SelectionChanged">
+                <DataGrid.Columns>
+                    <materialDesign:MaterialDataGridTextColumn  Header="Nº Encomenda" Binding="{Binding NEncomenda}" />
+                    <materialDesign:MaterialDataGridTextColumn Header="Nº Cliente"  Binding="{Binding Cliente.NCliente}" />
+                    <materialDesign:MaterialDataGridTextColumn Header="Estado Encomenda" Binding="{Binding Estado}" />
+                    <materialDesign:MaterialDataGridTextColumn Header="Data de Entrega Prevista" Binding="{Binding DataPrevistaEntrega, StringFormat=d}" />
+                    <materialDesign:MaterialDataGridTextColumn Header="Preço(€)" Binding="{Binding Preco}" />
+                </DataGrid.Columns>
+            </DataGrid>
         </GroupBox>
     </Grid>
 </Page>
