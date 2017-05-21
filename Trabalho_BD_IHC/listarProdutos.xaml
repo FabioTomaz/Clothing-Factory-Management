@@ -16,7 +16,7 @@
         <Grid.RowDefinitions>
         </Grid.RowDefinitions>
         <dragablz:TabablzControl  Grid.Column="1" Grid.Row="0" Grid.RowSpan="11">
-            <TabItem Name="produtoBase" Header="Produto Base" Grid.Column="1" Grid.Row="0" Loaded="Page_Load">
+            <TabItem Name="produtoBase" Header="Modelo" Grid.Column="1" Grid.Row="0" Loaded="Page_Load">
                 <Grid Background="White">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="24*"/>
@@ -51,20 +51,20 @@
                                 <RowDefinition Height="0.1*"></RowDefinition>
                             </Grid.RowDefinitions>
                             <Button x:Name="registarProdutoBase" Grid.Row="1" Grid.Column="1" Style="{StaticResource registarButton}" Click="registarProdutoBase_click">
-                                <TextBlock TextWrapping="Wrap">Registar Produto Base</TextBlock>
+                                <TextBlock TextWrapping="Wrap">Registar um novo Modelo</TextBlock>
                             </Button>
                             <Button x:Name="editarProdutoBase" Grid.Row="3" Grid.Column="1" Style="{StaticResource editarButton}" IsEnabled="False" Click="EditarProdutoBase_click">
-                                <TextBlock TextWrapping="Wrap">Editar Produto Base</TextBlock>
+                                <TextBlock TextWrapping="Wrap">Editar Modelo</TextBlock>
                             </Button>
                             <Button x:Name="removerProdutoBase" Grid.Row="5" Grid.Column="1" Style="{StaticResource removerButton}" IsEnabled="False">
-                                <TextBlock TextWrapping="Wrap">Remover Produto Base</TextBlock>
+                                <TextBlock TextWrapping="Wrap">Remover Modelo</TextBlock>
                             </Button>
                             <Button x:Name="detalhesProdutoBase" Grid.Row="7" Grid.Column="1" Style="{StaticResource detalhesButton}" IsEnabled="False">
                                 <TextBlock TextWrapping="Wrap">Ver Mais Detalhes</TextBlock>
                             </Button>
                         </Grid>
                     </GroupBox>
-                    <GroupBox x:Name="produtoBaseGB" Header="Listagem de Produtos Base da Empresa" Grid.Row="1" Grid.Column="3">
+                    <GroupBox x:Name="produtoBaseGB" Header="Listagem de Modelos da Empresa" Grid.Row="1" Grid.Column="3">
                         <ListView Name="produtosBaseLista" SelectionChanged="produtos_SelectionChanged">
                             <ListView.View>
                                 <GridView>
@@ -79,7 +79,7 @@
                 </Grid>
 
             </TabItem>
-            <TabItem Name ="produtoPers" Header="Produto Personalizado" Grid.Column="1" Grid.Row="0" Loaded="Page_Load">
+            <TabItem Name ="produtoPers" Header="Produto" Grid.Column="1" Grid.Row="0" Loaded="Page_Load">
                 <Grid Background="White">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="24*"/>
@@ -114,23 +114,23 @@
                                 <RowDefinition Height="0.1*"></RowDefinition>
                             </Grid.RowDefinitions>
                             <Button x:Name="registarProdutoPersonalizado" Grid.Row="1" Grid.Column="1" Style="{StaticResource registarButton}" Click="registarProdutoPers_click">
-                                <TextBlock TextWrapping="Wrap">Registar Produto Personalizado</TextBlock>
+                                <TextBlock TextWrapping="Wrap">Registar novo Produto</TextBlock>
                             </Button>
                             <Button x:Name="produzirProduto" Style="{StaticResource adicionarButton}" Grid.Row="3" Grid.Column="1" Click="ProduzirProdutoPers_click" IsEnabled="False">
                                 <TextBlock TextWrapping="Wrap">Produzir Produto</TextBlock>
                             </Button>
                             <Button x:Name="editarProdutoPersonalizado" Grid.Row="5" Grid.Column="1" Style="{StaticResource editarButton}" IsEnabled="False">
-                                <TextBlock TextWrapping="Wrap">Editar Produto Personalizado</TextBlock>
+                                <TextBlock TextWrapping="Wrap">Editar Produto</TextBlock>
                             </Button>
                             <Button x:Name="removerProdutoPersonalizado" Grid.Row="7" Grid.Column="1" Style="{StaticResource removerButton}" IsEnabled="False">
-                                <TextBlock TextWrapping="Wrap">Remover Produto Personalizado</TextBlock>
+                                <TextBlock TextWrapping="Wrap">Remover Produto</TextBlock>
                             </Button>
                             <Button x:Name="detalhesProdutoPersonalizado" Grid.Row="9" Grid.Column="1" Style="{StaticResource detalhesButton}" IsEnabled="False">
                                 <TextBlock TextWrapping="Wrap">Ver mais Informação</TextBlock>
                             </Button>
                         </Grid>
                     </GroupBox>
-                    <GroupBox Header="Listagem de Produtos Personalizados da Empresa" Grid.Column="3" Grid.Row="1">
+                    <GroupBox Header="Listagem de Produtos da Empresa" Grid.Column="3" Grid.Row="1">
                         <ListView Name="produtosPersonalizadosLista" Grid.Row="1" SelectionChanged="produtos_SelectionChanged">
                             <ListView.View>
                                 <GridView>

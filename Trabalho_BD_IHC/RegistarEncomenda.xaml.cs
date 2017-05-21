@@ -35,7 +35,12 @@ namespace Trabalho_BD_IHC
 
         private void cancelar_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.GoBack();
+            if (MessageBox.Show("Tem a certeza que deseja cancelar o registo da encomenda? Perderá todos os dados que tenha introduzido.",
+                 "", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            {//sim
+                ListarProdutos page = new ListarProdutos(dataHandler);
+                this.NavigationService.Navigate(page);
+            }
         }
 
         private void confirmar_Click(object sender, RoutedEventArgs e)

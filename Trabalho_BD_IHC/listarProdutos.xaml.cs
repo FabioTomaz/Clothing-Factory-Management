@@ -146,7 +146,7 @@ namespace Trabalho_BD_IHC
 
         private void registarProdutoPers_click(object sender, RoutedEventArgs e)
         {
-            RegistarProdutoPersonalizado page = new RegistarProdutoPersonalizado(dataHandler);
+            RegistarProduto page = new RegistarProduto(dataHandler);
             NavigationService.Navigate(page);
         }
 

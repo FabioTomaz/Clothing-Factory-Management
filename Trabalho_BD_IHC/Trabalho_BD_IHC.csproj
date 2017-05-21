@@ -120,8 +120,11 @@
     <Compile Include="ProduzirProduto.xaml.cs">
       <DependentUpon>ProduzirProduto.xaml</DependentUpon>
     </Compile>
-    <Compile Include="RegistarProdutoPersonalizado.xaml.cs">
-      <DependentUpon>RegistarProdutoPersonalizado.xaml</DependentUpon>
+    <Compile Include="RegistarProdutoMateriais.xaml.cs">
+      <DependentUpon>RegistarProdutoMateriais.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RegistarProduto.xaml.cs">
+      <DependentUpon>RegistarProduto.xaml</DependentUpon>
     </Compile>
     <Compile Include="RegistarProdutoBase.xaml.cs">
       <DependentUpon>RegistarProdutoBase.xaml</DependentUpon>
@@ -190,7 +193,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="RegistarProdutoPersonalizado.xaml">
+    <Page Include="RegistarProdutoMateriais.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="RegistarProduto.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -421,6 +428,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="logout.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="arrow-left.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="voltar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ajuda.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

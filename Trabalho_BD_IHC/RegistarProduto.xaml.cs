@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,87 +14,215 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data.SqlClient;
+using System.Windows.Markup;
 
 namespace Trabalho_BD_IHC
 {
     /// <summary>
-    /// Interaction logic for RegistarCliente.xaml
+    /// Interaction logic for RegistarProduto.xaml
     /// </summary>
     public partial class RegistarProduto : Page
     {
         private DataHandler dataHandler;
-        public RegistarProduto(DataHandler dh)
+        private int currentRow = 1;
+        private ObservableCollection<MaterialTextil> materiaisSelecionados;
+        public int CurrentRow
+        {
+            get
+            {
+                return currentRow;
+            }
+            set
+            {
+                currentRow = value;
+            }
+        }
+
+        public RegistarProduto(DataHandler dataHandler)
         {
             InitializeComponent();
-            this.dataHandler = dh;
-        }           
-
-       /* private void EnviarCliente(Cliente cl)
-        {
-
-            if (!dataHandler.verifySGBDConnection())
-                return;
-            SqlCommand cmd = new SqlCommand();
-
-            cmd.CommandText = "INSERT INTO CLIENTE (NOME, NIB, NIF, EMAIL, TELEMOVEL, COD_POSTAL, RUA, N_PORTA) " +
-                "VALUES (@NOME, @NIB, @NIF, @EMAIL, @TELEMOVEL, @COD_POSTAL, @RUA, @N_PORTA);";
-            cmd.Parameters.Clear();
-            cmd.Parameters.AddWithValue("@NOME", cl.Nome);
-            cmd.Parameters.AddWithValue("@NIB", cl.Nib);
-            cmd.Parameters.AddWithValue("@NIF", cl.Nif);
-            cmd.Parameters.AddWithValue("@EMAIL", cl.Email);
-            cmd.Parameters.AddWithValue("@TELEMOVEL", cl.Telemovel);
-            cmd.Parameters.AddWithValue("@COD_POSTAL", cl.CodigoPostal);
-            cmd.Parameters.AddWithValue("@RUA", cl.Rua);
-            cmd.Parameters.AddWithValue("@N_PORTA", cl.NCasa);
-            cmd.Connection = dataHandler.Cn;
-            try
-            {
-                cmd.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Falha ao adicionar cliente na base de dados. \n ERROR MESSAGE: \n" + ex.Message);
-            }
-            finally
-            {
-                dataHandler.closeSGBDConnection();
-            }
+            this.dataHandler = dataHandler;
+            materiaisSelecionados = new ObservableCollection<MaterialTextil>();
         }
 
         private void cancelar_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.GoBack();
+            if (MessageBox.Show("Tem a certeza que deseja cancelar o registo do produto? Perderá todos os dados que tenha introduzido",
+                "", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            {//sim
+                this.NavigationService.GoBack();
+            }
         }
 
         private void confirmar_Click(object sender, RoutedEventArgs e)
         {
-            Cliente cliente = new Cliente();
+            //verificar se um tamanho foi selecionado
+            if (cbTamanho.SelectedIndex <= -1)
+            {
+                MessageBox.Show("Por favor, selecione o tamanho a atribuir ao produto!", "", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            //verificar se uma cor foi selecionada
+            if (txtCor.SelectedColorText == "")
+            {
+                MessageBox.Show("Por favor, selecione uma cor a atribuir ao produto!", "", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (txtPreço.Text == "")
+            {
+                MessageBox.Show("Por favor, indique o preço a atribuir ao produto!", "", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (rdEtiquetaExis.IsChecked == false && rdEtiquetaNova.IsChecked == false)
+            {
+                MessageBox.Show("Por favor, adicione uma etiqueta existente ao produto, ou crie uma nova!", "", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            //validar os formularios de preenchimento de uma etiqueta nova
+            if (rdEtiquetaNova.IsChecked == true)
+            {
+                if (txtNormas.Text.Length == 0 || txtComp.Text.Length == 0 || txtPais.Text.Length == 0)
+                {
+                    MessageBox.Show("Por favor, preencha todos os campos relativos à criação de nova etiqueta!", "", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                else if (txtNormas.Text.Length > 100)
+                {
+                    MessageBox.Show("A especificação das normas é demasiado longa! Indique apenas o essencial.", "", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                else if (txtComp.Text.Length > 100)
+                {
+                    MessageBox.Show("A especificação da composição da etiqueta é demasiado longa! Indique apenas o essencial.", "", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                else if (txtComp.Text.Length > 20)
+                {
+                    MessageBox.Show("O nome do País especificado é demasiado longo! Use acrónimos ou abreviações.", "", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+            }
+
+            ProdutoPersonalizado prodPers = new ProdutoPersonalizado();
             try
             {
-                cliente.Nome = txtNome.Text;
-                cliente.Nib = txtNIB.Text;
-                cliente.Nif = txtNIF.Text;
-                cliente.Telemovel = txtTelemovel.Text;
-                cliente.Email = txtEmail.Text;
-                cliente.CodigoPostal = txtcodigoPostal.Text;
-                cliente.Rua = txtRua.Text;
-                cliente.NCasa = int.Parse(txtNumeroPorta.Text);
+                ComboBoxItem cbi = (ComboBoxItem)cbTamanho.SelectedItem;
+                prodPers.Tamanho = cbi.Content.ToString();
+
+                prodPers.Cor = txtCor.SelectedColorText;
+                Console.WriteLine(cbi.Content.ToString());
+                prodPers.Preco = Convert.ToDouble(txtPreço.Text);
+                prodPers.ProdutoBase = new ProdutoBase();
+                prodPers.ProdutoBase = (ProdutoBase)cbProdBase.SelectedItem;
+                prodPers.MateriaisTexteis = new ObservableCollection<MaterialTextil>();
+
+                prodPers.Etiqueta = new Etiqueta();
+                if (rdEtiquetaExis.IsChecked == true)
+                {
+                    prodPers.Etiqueta = (Etiqueta)cbEtiqueta.SelectedItem;
+
+                }
+                else if (rdEtiquetaNova.IsChecked == true)
+                {
+                    //inserir primeiro a nova etiqueta na base de dados
+                    dataHandler.insertEtiqueta(txtNormas.Text, txtComp.Text, txtPais.Text);
+                    //obter o numero da etiqueta adicionada, pois é necessario para o registo do produto
+                    prodPers.Etiqueta.Numero = dataHandler.getEtiqueta(txtNormas.Text, txtComp.Text, txtPais.Text);
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
                 return;
             }
+            RegistarProdutoMateriais page = new RegistarProdutoMateriais(dataHandler, prodPers);
+            this.NavigationService.Navigate(page);
+        }
 
-            try {
-                EnviarCliente(cliente);
-            }catch(Exception ex)
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            e.Handled = true;
+            if (!dataHandler.verifySGBDConnection())
             {
-                MessageBox.Show(ex.Message);
-                return;
+                MessageBoxResult result = MessageBox.Show("A conexão à base de dados é instável ou inexistente. Por favor tente mais tarde", "Erro de Base de Dados", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
-            this.NavigationService.GoBack();
-        }*/
+            else
+            {
+                ListarProdutos lp = new ListarProdutos(dataHandler);
+                ObservableCollection<ProdutoBase> prodBase = lp.getProdutosBase();
+                cbProdBase.ItemsSource = prodBase;
+                if (prodBase.Count > 0)
+                {
+                    ProdutoBase firstProd = prodBase.First();
+                    cbProdBase.SelectedItem = firstProd;
+                }
+                dataHandler.closeSGBDConnection();
+            }
+
+        }
+
+        private void etiquetaExistente_Checked(object sender, RoutedEventArgs e)
+        {
+            etiquetaNova.Visibility = Visibility.Hidden;
+            etiquetaExisente.Visibility = Visibility.Visible;
+            //fazer bind de todas as etiquetas existentas na base de dados para a combo box
+            ObservableCollection<Etiqueta> et = getEtiquetas();
+            cbEtiqueta.ItemsSource = et;
+            if (et.Count > 0)
+            {
+                Etiqueta firstDes = et.First();
+                cbEtiqueta.SelectedItem = firstDes;
+            }
+        }
+
+        private void etiquetaNova_Checked(object sender, RoutedEventArgs e)
+        {
+            etiquetaNova.Visibility = Visibility.Visible;
+            etiquetaExisente.Visibility = Visibility.Hidden;
+        }
+
+        public ObservableCollection<Etiqueta> getEtiquetas()
+        {
+            if (dataHandler.verifySGBDConnection())
+            {
+                SqlCommand cmd = new SqlCommand("SELECT * FROM ETIQUETA", dataHandler.Cn);
+                SqlDataReader reader = cmd.ExecuteReader();
+                ObservableCollection<Etiqueta> etiquetas = new ObservableCollection<Etiqueta>();
+                while (reader.Read())
+                {
+                    Etiqueta et = new Etiqueta();
+                    et.Numero = Convert.ToInt32(reader["N_ETIQUETA"].ToString());
+                    et.Normas = reader["NORMAS"].ToString();
+                    et.Composicao = reader["COMPOSICAO"].ToString();
+                    et.PaisFabrico = reader["PAIS_FABRICO"].ToString();
+                    etiquetas.Add(et);
+                }
+                reader.Close();
+                dataHandler.closeSGBDConnection();
+                return etiquetas;
+            }
+            return null;
+        }
+
+        private ObservableCollection<MaterialTextil> getMateriais(DataHandler dataHandler)
+        {
+            ObservableCollection<MaterialTextil> materiaisTexteis = new ObservableCollection<MaterialTextil>();
+
+            SqlCommand cmd = new SqlCommand("SELECT * FROM MATERIAIS_TÊXTEIS", dataHandler.Cn);
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                MaterialTextil Mt = new MaterialTextil();
+                Mt.Fornecedor = new Fornecedor();
+                Mt.Referencia = Convert.ToInt32(reader["REFERENCIA_FABRICA"].ToString());
+                Mt.ReferenciaFornecedor = reader["REFERENCIA_FORN"].ToString();
+                Mt.Designacao = reader["DESIGNACAO"].ToString();
+                Mt.Cor = reader["COR"].ToString();
+                Mt.Fornecedor.NIF_Fornecedor = reader["NIF_FORNECEDOR"].ToString();
+                materiaisTexteis.Add(Mt);
+            }
+            reader.Close();
+            return materiaisTexteis;
+        }
     }
 }
