@@ -3,6 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:wpfTool="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
       xmlns:local="clr-namespace:Trabalho_BD_IHC"
       mc:Ignorable="d" 
@@ -13,7 +14,7 @@
             <ColumnDefinition Width="0.5*"/>
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="0.4*"/>
+            
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="0.5*"/>
@@ -23,8 +24,27 @@
             <RowDefinition />
             <RowDefinition Height="0.1*"/>
         </Grid.RowDefinitions>
-
-        <GroupBox Header="Criar Novo Produto Base" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="5">
+        <GroupBox Header="Operações" Grid.Column="1" Grid.Row="1" Template="{StaticResource blackGroupBox}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.3*"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="0.3*"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="0.3*"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="0.3*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Button x:Name="confirmar" Style="{StaticResource confirmarButton}" Content="Produzir"  Grid.Row="1" Grid.Column="1" IsEnabled="True" Click="confirmar_Click"/>
+                <Button x:Name="cancelar" Style="{StaticResource cancelarButton}" Content="Cancelar" Grid.Row="3" Grid.Column="1" Click="cancelar_Click"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Criar novo Modelo" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="3">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"></ColumnDefinition>
@@ -49,36 +69,27 @@
                     <RowDefinition></RowDefinition>
                     <RowDefinition Height="0.1*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Label Content="Nome: " Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"/>
 
-                <wpfTool:WatermarkTextBox Name="txtNomeProdutoBase"  Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Center">
-                    <wpfTool:WatermarkTextBox.Watermark>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Nome do Produto" Margin="4,0,0,0" />
-                        </StackPanel>
-                    </wpfTool:WatermarkTextBox.Watermark>
-                </wpfTool:WatermarkTextBox>
+
+                <TextBox Name="txtNomeModelo" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Stretch"
+                           materialDesign:HintAssist.Hint="Indique o nome do Modelo a criar"  />
 
                 <Label Content="IVA:" Grid.Row="1" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <wpfTool:DoubleUpDown Name="txtIva" VerticalAlignment="Center" Grid.Row="1" Grid.Column="5" Maximum="100.0" Minimum="0.00" Value="0" FormatString="P" Watermark="IVA" HorizontalAlignment="Stretch"></wpfTool:DoubleUpDown>
 
-                <Label Content="Instruções Produção" Grid.Row="3" Height="auto" Grid.Column="0" VerticalAlignment="Center" HorizontalContentAlignment="Left"/>
-                <wpfTool:WatermarkTextBox TextWrapping="Wrap" Name="txtInstruçoes" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Grid.ColumnSpan="5" Grid.RowSpan="3" Margin="0,7,10,0" Height="69">
-                    <wpfTool:WatermarkTextBox.Watermark>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock  Text="Descreva aqui os passos necessários para a produção do produto retratado neste Produto. Seja claro e breve." Margin="4,0,0,0" Height="28" Width="auto" />
-                        </StackPanel>
-                    </wpfTool:WatermarkTextBox.Watermark>
-                </wpfTool:WatermarkTextBox>
+                <TextBox TextWrapping="Wrap" Name="txtInstruçoes" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="6"
+                         VerticalAlignment="Center"  Grid.RowSpan="5" Height="50"
+                            materialDesign:HintAssist.Hint="Descreva aqui os passos necessários para a produção deste produto.">
+                </TextBox>
 
-                <TextBlock Text="Selecione uma imagem no seu computador para associar ao Produto base do produto"
-                 Grid.Row="7" Grid.RowSpan="4" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center"></TextBlock>
+                <TextBlock Text="Selecione uma imagem no seu computador para associar a este modelo"
+                 Grid.Row="7" TextWrapping="Wrap" Grid.RowSpan="4" Grid.Column="0" Grid.ColumnSpan="3" VerticalAlignment="Center"></TextBlock>
 
 
-                <GroupBox Header="Imagem do Produto" Grid.Column="2" Grid.Row="7" Grid.ColumnSpan="4" Grid.RowSpan="4" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <GroupBox Header="Imagem do Modelo" Grid.Column="3" Grid.Row="7" Grid.ColumnSpan="3" Grid.RowSpan="4" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                     <Image Width="auto" Height="auto" Name="imgPhoto" Stretch="Uniform" />
                 </GroupBox>
-                <Button Name ="adicionarFoto" Grid.Column="0" Grid.Row="11" Grid.RowSpan="2" Grid.ColumnSpan="6" HorizontalAlignment="Center" VerticalAlignment="Center" Click="btnAdicionarImagem_Click">
+                <Button Name ="adicionarFoto" Grid.Column="3" Grid.Row="11" Grid.RowSpan="2" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center" Click="btnAdicionarImagem_Click">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="addPhoto.png" Width="20" />
                         <TextBlock Text="Adicionar Imagem" Margin="4,0,0,0"/>
@@ -86,7 +97,5 @@
                 </Button>
             </Grid>
         </GroupBox>
-        <Button x:Name="confirmar" Content="Confirmar"  Grid.Row="2" Grid.Column="4" HorizontalAlignment="Left" Click="confirmar_Click"/>
-        <Button x:Name="cancelar" Content="Cancelar" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right" Click="cancelar_Click"/>
     </Grid>
 </Page>

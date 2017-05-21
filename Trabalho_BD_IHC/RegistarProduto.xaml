@@ -43,8 +43,23 @@
             </Grid>
         </GroupBox>
         <GroupBox Header="Criar Novo Produto" Grid.Row="1" Grid.Column="3" >
-            <StackPanel>
-                <Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="0.1*"></RowDefinition>
+                    <RowDefinition Height="1.5*"></RowDefinition>
+                    <RowDefinition Height="0.1*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="4">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.9*"></ColumnDefinition>
                         <ColumnDefinition Width="0.1*"></ColumnDefinition>
@@ -89,37 +104,36 @@
                         </ComboBox.ItemTemplate>
                     </ComboBox>
                 </Grid>
-
-                <Grid Margin="0,10,0,0">
+                <Grid Grid.Row="3" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="4">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.25*"></ColumnDefinition>
+                        <ColumnDefinition Width="0.3*"></ColumnDefinition>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
                         <ColumnDefinition Width="1*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="1*"></RowDefinition>
                         <RowDefinition Height="1*"></RowDefinition>
-                        <RowDefinition Height="1*"></RowDefinition>
-                        <RowDefinition Height="1*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <TextBlock Text="Indique se pretende associar ao produto uma etiqueta já existente, ou se prefere criar uma nova etiqueta para usar no produto." 
-                           HorizontalAlignment="Center" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2" TextWrapping="Wrap"></TextBlock>
-                    <RadioButton Name="rdEtiquetaExis" Grid.Column="1" Grid.Row="2" Content="Usar etiqueta existente" HorizontalAlignment="Left" VerticalAlignment="Center" Checked="etiquetaExistente_Checked"></RadioButton>
-                    <RadioButton Name="rdEtiquetaNova" Grid.Column="1" Grid.Row="3" Content="Criar nova etiqueta" HorizontalAlignment="Left" VerticalAlignment="Center" Checked="etiquetaNova_Checked"></RadioButton>
+                           HorizontalAlignment="Center" Grid.Row="0" Grid.ColumnSpan="3" TextWrapping="Wrap"></TextBlock>
+                    <RadioButton Name="rdEtiquetaExis" Grid.Column="1" Grid.Row="1" Content="Usar etiqueta existente" HorizontalAlignment="Left" VerticalAlignment="Center" Checked="etiquetaExistente_Checked"></RadioButton>
+                    <RadioButton Name="rdEtiquetaNova" Grid.Column="2" Grid.Row="1" Content="Criar nova etiqueta" HorizontalAlignment="Left" VerticalAlignment="Center" Checked="etiquetaNova_Checked"></RadioButton>
                 </Grid>
-                <Grid Visibility="Hidden" Name="etiquetaExisente" Margin="0,12,0,0">
+
+                <Grid Visibility="Hidden" Name="etiquetaExisente" Grid.Row="5" Grid.RowSpan="2" Grid.ColumnSpan="4">
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.4*"/>
                         <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="0.4*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="1*"/>
                         <RowDefinition Height="1*"/>
                         <RowDefinition Height="1*"/>
                     </Grid.RowDefinitions>
-                    <Label Content="Etiqueta a usar: " Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <ComboBox Name="cbEtiqueta" Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" VerticalAlignment="Center" >
+                    <Label Content="Etiqueta a usar: " Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <ComboBox Name="cbEtiqueta" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" >
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
@@ -131,30 +145,31 @@
                         </ComboBox.ItemTemplate>
                     </ComboBox>
                 </Grid>
-                <Grid Visibility="Hidden" Name="etiquetaNova" Margin="0,10,0,0">
+                <Grid Visibility="Visible" Name="etiquetaNova" Grid.Row="4" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="4">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="0.5*"/>
                         <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="0.1*"/>
                         <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="0.5*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="1*"/>
-                        <RowDefinition Height="0.2*"/>
-                        <RowDefinition Height="1*"/>
-                        <RowDefinition Height="1*"/>
-                        <RowDefinition Height="0.2*"/>
-                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1.5*"/>
+                        <RowDefinition Height="0.1*"/>
+                        <RowDefinition Height="0.8*"/>
                     </Grid.RowDefinitions>
-                    <TextBlock Text="Especifique as normas: " Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Bottom" HorizontalAlignment="Center" TextWrapping="Wrap"/>
-                    <TextBox Name="txtNormas" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2" TextWrapping="Wrap" VerticalAlignment="Center" Height="40"></TextBox>
-                    <TextBlock Text="Especifique a Composição: " Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="2" VerticalAlignment="Bottom" HorizontalAlignment="Center" TextWrapping="Wrap"/>
-                    <TextBox Name="txtComp" Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2" Grid.RowSpan="2" TextWrapping="Wrap" Height="40" VerticalAlignment="Center"></TextBox>
-                    <TextBlock Text="Indique o País de fabrico: " Grid.Row="5" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" TextWrapping="Wrap"/>
-                    <TextBox Name="txtPais" Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2" VerticalAlignment="Bottom"></TextBox>
+                    <TextBox Name="txtNormas" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" TextWrapping="Wrap" VerticalAlignment="Stretch"
+                       materialDesign:HintAssist.Hint="Indique aqui as normas da etiqueta" HorizontalScrollBarVisibility="Auto"
+                             MinWidth="100"  Height="40" HorizontalAlignment="Stretch"></TextBox>
+                    <TextBox Name="txtComp" Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="2" TextWrapping="Wrap" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="100" 
+                            materialDesign:HintAssist.Hint="Descreva aqui a composição da etiqueta"  HorizontalScrollBarVisibility="Auto"
+                             SpellCheck.IsEnabled="True" Height="40"></TextBox>
+                    <TextBox Name="txtPais" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" TextWrapping="Wrap" 
+                             MinWidth="100" MaxWidth="400" materialDesign:HintAssist.Hint="Indique o país de Fabrico"
+                             VerticalAlignment="Stretch"></TextBox>
                 </Grid>
-            </StackPanel>
+
+            </Grid>
         </GroupBox>
 
     </Grid>
