@@ -40,5 +40,9 @@ namespace Trabalho_BD_IHC
 
         }
 
+        private void DGproduçao_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }
