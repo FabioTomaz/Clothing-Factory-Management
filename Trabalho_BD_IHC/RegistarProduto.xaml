@@ -145,7 +145,7 @@
                         </ComboBox.ItemTemplate>
                     </ComboBox>
                 </Grid>
-                <Grid Visibility="Visible" Name="etiquetaNova" Grid.Row="4" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="4">
+                <Grid Visibility="Hidden" Name="etiquetaNova" Grid.Row="4" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="4">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.5*"/>
                         <ColumnDefinition Width="1*"/>

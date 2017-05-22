@@ -95,7 +95,7 @@
                         <materialDesign:MaterialDataGridTextColumn Header="Referêcia Fábrica" Binding="{Binding Referencia}" />
                         <materialDesign:MaterialDataGridTextColumn Header="Tipo" Binding="{Binding Designacao}"/>
                         <materialDesign:MaterialDataGridTextColumn Header="Cor" Binding="{Binding Cor}"/>
-                        <materialDesign:MaterialDataGridTextColumn Header="Quantidade" Binding="{Binding Cor}"/>
+                        <materialDesign:MaterialDataGridTextColumn Header="Quantidade em stock" Binding="{Binding Cor}"/>
                     </DataGrid.Columns>
                     </DataGrid>
                 </Grid>

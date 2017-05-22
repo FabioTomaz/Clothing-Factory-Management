@@ -30,6 +30,11 @@ namespace Trabalho_BD_IHC
             nomeProduto.Text = prodPers.ProdutoBase.Nome.ToString();
         }
 
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            DGproduçao.ItemsSource = prodPers.MateriaisTexteis;
+        }
+
         private void cancelar_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.GoBack();

@@ -124,10 +124,9 @@ namespace Trabalho_BD_IHC
                 }
                 else if (rdEtiquetaNova.IsChecked == true)
                 {
-                    //inserir primeiro a nova etiqueta na base de dados
-                    dataHandler.insertEtiqueta(txtNormas.Text, txtComp.Text, txtPais.Text);
-                    //obter o numero da etiqueta adicionada, pois é necessario para o registo do produto
-                    prodPers.Etiqueta.Numero = dataHandler.getEtiqueta(txtNormas.Text, txtComp.Text, txtPais.Text);
+                    prodPers.Etiqueta.Normas = txtNormas.Text;
+                    prodPers.Etiqueta.Composicao = txtComp.Text;
+                    prodPers.Etiqueta.PaisFabrico = txtPais.Text;
                 }
             }
             catch (Exception ex)
