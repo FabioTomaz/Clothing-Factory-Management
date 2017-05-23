@@ -3,10 +3,11 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:wpfTool="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:local="clr-namespace:Trabalho_BD_IHC"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
+      d:DesignHeight="600" d:DesignWidth="900"
       Title="ListarEmpregados" Loaded="Page_Loaded">
 
     <Grid Background="White">
@@ -46,7 +47,7 @@
                 <Button x:Name="registarEmpregado" Content="Registar Empregado" Style="{StaticResource registarButton}" Grid.Row="1" Grid.Column="1" Click="registarEmpregado_Click"/>
                 <Button x:Name="editarEmpregado" Content="Editar Empregado" Style="{StaticResource editarButton}" Grid.Row="3" Grid.Column="1" IsEnabled="False"/>
                 <Button x:Name="removerEmpregado" Content="Remover Empregado" Style="{StaticResource removerButton}" Grid.Row="5" Grid.Column="1" IsEnabled="False" Click="removerEmpregado_Click"/>
-                <Button x:Name="detalhesEmpregado" Content="Ver mais detalhes Empregado" Style="{StaticResource detalhesButton}" Grid.Row="7" Grid.Column="1" IsEnabled="False" Click="verDetalhesEmpregado"/>
+                <Button x:Name="detalhesEmpregado" Content="Ver mais Detalhes" Style="{StaticResource detalhesButton}" Grid.Row="7" Grid.Column="1" IsEnabled="False" Click="verDetalhesEmpregado"/>
             </Grid>
         </GroupBox>
         <Grid Grid.Column="3" Grid.Row="1">
@@ -60,15 +61,86 @@
                 </Style>
             </Grid.Resources>
             <GroupBox Grid.Column="3" Grid.Row="0" Grid.RowSpan="2" Header="Listagem de Encomendas da Empresa">
-                    <DataGrid  Name="empregados" SelectionChanged="empregados_SelectionChanged" IsReadOnly="True" AutoGenerateColumns="False">
-                    <DataGrid.Columns>
-                        <materialDesign:MaterialDataGridTextColumn Header="Função" Binding="{Binding TipoUser}" />
-                        <materialDesign:MaterialDataGridTextColumn Header="Nº Empregado" Binding="{Binding NFuncionario}" />
-                        <materialDesign:MaterialDataGridTextColumn Header="Nome" Binding="{Binding Nome}" />
-                        <materialDesign:MaterialDataGridTextColumn Header="E-mail" Binding="{Binding Email}" />
-                        <materialDesign:MaterialDataGridTextColumn Header="Telefone" Binding="{Binding Telemovel}" />
-                    </DataGrid.Columns>
-                </DataGrid>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition ></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <materialDesign:ColorZone Mode="PrimaryMid" Grid.Row="0" Padding="10">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition Height="10"></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <materialDesign:ColorZone Mode="Standard" Padding="8 4 8 4" CornerRadius="2" Panel.ZIndex="1"
+                                       materialDesign:ShadowAssist.ShadowDepth="Depth1" Grid.Column="0" Grid.ColumnSpan="2">
+                                <Grid >
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Button Style="{DynamicResource MaterialDesignToolButton}">
+                                        <materialDesign:PackIcon Kind="Magnify" Opacity=".56" />
+                                    </Button>
+                                    <TextBox Grid.Column="1" Margin="8 0 0 0" materialDesign:HintAssist.Hint="Pesquisa por Nome" 
+                                         materialDesign:TextFieldAssist.DecorationVisibility="Hidden" BorderThickness="0"
+                                         MinWidth="200" VerticalAlignment="Center"/>
+                                    <Button  Grid.Column="2" Style="{DynamicResource MaterialDesignToolForegroundButton}" Margin="8 0 0 0" Panel.ZIndex="0">
+                                        <materialDesign:PackIcon Kind="Send" />
+                                    </Button>
+                                </Grid>
+                            </materialDesign:ColorZone>
+                            <Expander HorizontalAlignment="Stretch" Header="Pesquisa Avançada" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Foreground="Black">
+                                <Grid TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition></RowDefinition>
+                                        <RowDefinition></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Label Content="Numero de Filial:  " HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0"></Label>
+                                    <ComboBox VerticalAlignment="Center" Text="Your Content" Grid.Column="1" materialDesign:HintAssist.Hint="Tipo de Material">
+                                        <ComboBoxItem>Pano</ComboBoxItem>
+                                        <ComboBoxItem>Linha</ComboBoxItem>
+                                        <ComboBoxItem>Botão</ComboBoxItem>
+                                        <ComboBoxItem>Mola</ComboBoxItem>
+                                        <ComboBoxItem>Elástico</ComboBoxItem>
+                                        <ComboBoxItem>Fita de Velcro</ComboBoxItem>
+                                        <ComboBoxItem>Outro</ComboBoxItem>
+                                    </ComboBox>
+                                    <Label Content="Nº do Supervisor:  " HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="2" Grid.Row="0"></Label>
+                                    <TextBox Grid.Column="3" Grid.Row="0" VerticalAlignment="Center"></TextBox>
+                                    <Label HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Grid.Row="1" Content="Hora de Entrada:  "></Label>
+                                    <materialDesign:TimePicker Grid.Row="1" Grid.Column="1"  VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTimePicker}"
+                                   materialDesign:HintAssist.Hint="Escolha uma Hora" />
+                                    <Label HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="2" Grid.Row="1" Content="Hora de Saáda:  "></Label>
+                                    <materialDesign:TimePicker Grid.Row="1" Grid.Column="3"  VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTimePicker}"
+                                   materialDesign:HintAssist.Hint="Escolha uma Hora" />
+
+                                </Grid>
+                            </Expander>
+                        </Grid>
+                    </materialDesign:ColorZone>
+                    <DataGrid Grid.Row="1"  Name="empregados" SelectionChanged="empregados_SelectionChanged" IsReadOnly="True" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <materialDesign:MaterialDataGridTextColumn Header="Função" Binding="{Binding TipoUser}" />
+                            <materialDesign:MaterialDataGridTextColumn Header="Nº Empregado" Binding="{Binding NFuncionario}" />
+                            <materialDesign:MaterialDataGridTextColumn Header="Nome" Binding="{Binding Nome}" />
+                            <materialDesign:MaterialDataGridTextColumn Header="E-mail" Binding="{Binding Email}" />
+                            <materialDesign:MaterialDataGridTextColumn Header="Telefone" Binding="{Binding Telemovel}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
             </GroupBox>
         </Grid>
     </Grid>

@@ -8,7 +8,7 @@
         xmlns:local="clr-namespace:Trabalho_BD_IHC"
         xmlns:wpfTool="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
         mc:Ignorable="d"
-        Title="Gestão de Produção, Stock e Venda" Height="500" MinHeight="450" Width="900" MinWidth="750" Icon="GPSV.png" WindowStartupLocation="CenterScreen" >
+        Title="Gestão de Produção, Stock e Venda" Height="600" MinHeight="500" Width="900" MinWidth="750" Icon="GPSV.png" WindowStartupLocation="CenterScreen" >
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -156,14 +156,14 @@
             <TabItem Name="materiais" Header="Matérias Primas"  IsEnabled="True">
                 <Frame Name="materiaisFrame" NavigationUIVisibility="Hidden"></Frame>
             </TabItem>
-            <TabItem Name="empregados" Header="Recursos Humanos" >
-                <Frame Name="empregadosFrame" NavigationUIVisibility="Hidden"></Frame>
+            <TabItem Name="Fornecedores" Header="Fornecedores" >
+                <Grid Background="#FFE5E5E5"/>
             </TabItem>
             <TabItem Name="empresa" Header="Empresa"  IsEnabled="False">
                 <Grid Background="#FFE5E5E5"/>
             </TabItem>
-            <TabItem Name="ajuda" Header="Ajuda" >
-                
+            <TabItem Name="empregados" Header="Recursos Humanos" >
+                <Frame Name="empregadosFrame" NavigationUIVisibility="Hidden"></Frame>
             </TabItem>
         </dragablz:TabablzControl>
     </Grid>
