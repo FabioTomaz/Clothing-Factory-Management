@@ -90,7 +90,7 @@ namespace Trabalho_BD_IHC
                 prod.GestorProducao.Nome = reader["userName"].ToString();
                 produtosBase.Add(prod);
             }
-
+            reader.Close();
             dataHandler.closeSGBDConnection();
             return produtosBase;
         }

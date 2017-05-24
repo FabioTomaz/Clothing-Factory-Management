@@ -499,5 +499,210 @@ namespace Trabalho_BD_IHC
             return id;
         }
 
+        public Pano getPano(int referencia)
+        {
+            Pano pano = new Pano();
+            SqlCommand cmd = new SqlCommand("SELECT PANO.REFERENCIA_FABRICA AS refFabr, TIPO, GRAMAGEM, "
+                + "AREA_ARMAZEM, PRECO_POR_M2, REFERENCIA_FORN, NIF_FORNECEDOR, COR, DESIGNACAO FROM PANO "
+                + "JOIN MATERIAIS_TÊXTEIS ON MATERIAIS_TÊXTEIS.REFERENCIA_FABRICA = PANO.REFERENCIA_FABRICA "
+                + "WHERE PANO.REFERENCIA_FABRICA = @ref"
+                , this.Cn);
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@ref", referencia);
+            SqlDataReader reader = cmd.ExecuteReader();
+            Pano p = new Pano();
+            while (reader.Read())
+            {
+                pano.Referencia = referencia;
+                pano.Cor = reader["COR"].ToString();
+                pano.Fornecedor = new Fornecedor();
+                pano.Fornecedor.NIF_Fornecedor = reader["NIF_FORNECEDOR"].ToString();
+                pano.ReferenciaFornecedor = reader["REFERENCIA_FORN"].ToString();
+                pano.Designacao = reader["DESIGNACAO"].ToString();
+                pano.Gramagem = Convert.ToInt32(reader["GRAMAGEM"].ToString());
+                pano.Tipo = reader["TIPO"].ToString();
+                pano.AreaArmazem = Convert.ToDouble(reader["AREA_ARMAZEM"].ToString());
+                pano.PrecoMetroQuadrado = Convert.ToDouble(reader["PRECO_POR_M2"].ToString());
+
+            }
+            reader.Close();
+            return pano;
+        }
+
+
+        public Linha getLinha(int referencia)
+        {
+
+            SqlCommand cmd = new SqlCommand("SELECT LINHA.REFERENCIA_FABRICA, GROSSURA, COMPRIMENTO_ARMAZEM, "
+                + "PRECO_CEM_METROS, REFERENCIA_FORNECEDOR, NIF_FORNECEDOR, COR, DESIGNACAO FROM LINHA "
+                + "JOIN MATERIAIS_TÊXTEIS ON MATERIAIS_TÊXTEIS.REFERENCIA_FABRICA = LINHA.REFERENCIA_FABRICA WHERE REFERENCIA_FABRICA = @ref", this.Cn);
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@ref", referencia);
+            SqlDataReader reader = cmd.ExecuteReader();
+            Linha l = new Linha();
+            while (reader.Read())
+            {
+                l.Referencia = referencia;
+                l.Grossura = Convert.ToDouble(reader["GROSSURA"].ToString());
+                l.ComprimentoStock = Convert.ToDouble(reader["COMPRIMENTO_ARMAZEM"].ToString());
+                l.Preco100Metros = Convert.ToDouble(reader["PRECO_CEM_METROS"].ToString());
+                l.ReferenciaFornecedor = reader["REFERENCIA_FORNECEDOR"].ToString();
+                l.Cor = reader["COR"].ToString();
+                l.Designacao = reader["DESIGNACAO"].ToString();
+                l.Fornecedor = new Fornecedor();
+                l.Fornecedor.NIF_Fornecedor = reader["NIF_FORNECEDOR"].ToString();
+            }
+            reader.Close();
+            return l;
+        }
+
+        public Fecho getFecho(int referencia)
+        {
+
+            SqlCommand cmd = new SqlCommand("SELECT FECHO.REFERENCIA_FABRICA, QUANTIDADE_ARMAZEM, PRECO_UNIDADE, "
+                + "COMPRIMENTO, TAMANHO_DENTE REFERENCIA_FORN, NIF_FORNECEDOR, COR, DESIGNACAO FROM FECHO "
+                + "JOIN ACESSORIO ON FECHO.REFERENCIA_FABRICA = ACESSORIO.REFERENCIA_FABRICA"
+                + "JOIN MATERIAIS_TÊXTEIS ON MATERIAIS_TÊXTEIS.REFERENCIA_FABRICA = ACESSORIO.REFERENCIA_FABRICA "
+                + " WHERE FECHO.REFERENCIA_FABRICA = @ref", this.Cn);
+
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@ref", referencia);
+            Fecho f = new Fecho();
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                f.Referencia = referencia;
+                f.Cor = reader["COR"].ToString();
+                f.Designacao = reader["DESIGNACAO"].ToString();
+                f.ReferenciaFornecedor = reader["REFERENCIA_FORN"].ToString();
+                f.Fornecedor = new Fornecedor();
+                f.Fornecedor.NIF_Fornecedor = reader["NIF_FORNECEDOR"].ToString();
+                f.PrecoUnidade = Convert.ToDouble(reader["PRECO_UNIDADE"].ToString());
+                f.QuantidadeArmazem = Convert.ToInt32(reader["QUANTIDADE_ARMAZEM"].ToString());
+                f.Comprimento = Convert.ToDouble(reader["COMPRIMENTO"].ToString());
+                f.TamanhoDente = Convert.ToDouble(reader["TAMANHO_DENTE"].ToString());
+
+            }
+            reader.Close();
+            return f;
+        }
+
+        public Mola getMola(int referencia)
+        {
+
+            SqlCommand cmd = new SqlCommand("SELECT MOLA.REFERENCIA_FABRICA, QUANTIDADE_ARMAZEM, PRECO_UNIDADE, DIAMETRO, "
+                    + "REFERENCIA_FORN, NIF_FORNECEDOR, COR, DESIGNACAO FROM MOLA "
+                    + "JOIN ACESSORIO ON MOLA.REFERENCIA_FABRICA = ACESSORIO.REFERENCIA_FABRICA "
+                    + "JOIN MATERIAIS_TÊXTEIS ON MATERIAIS_TÊXTEIS.REFERENCIA_FABRICA = ACESSORIO.REFERENCIA_FABRICA  "
+                    + "WHERE MOLA.REFERENCIA_FABRICA = @ref", this.Cn);
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@ref", referencia);
+            SqlDataReader reader = cmd.ExecuteReader();
+            Mola m = new Mola();
+            while (reader.Read())
+            {
+                m.Referencia = referencia;
+                m.Cor = reader["COR"].ToString();
+                m.Designacao = reader["DESIGNACAO"].ToString();
+                m.ReferenciaFornecedor = reader["REFERENCIA_FORN"].ToString();
+                m.Fornecedor = new Fornecedor();
+                m.Fornecedor.NIF_Fornecedor = reader["NIF_FORNECEDOR"].ToString();
+                m.Diametro = Convert.ToDouble(reader["DIAMETRO"].ToString());
+                m.QuantidadeArmazem = Convert.ToInt32(reader["QUANTIDADE_ARMAZEM"].ToString());
+                m.PrecoUnidade = Convert.ToDouble(reader["PRECO_UNIDADE"].ToString());
+            }
+            reader.Close();
+            return m;
+        }
+
+        public Botao getBotao(int referencia)
+        {
+
+            SqlCommand cmd = new SqlCommand("SELECT BOTAO.REFERENCIA_FABRICA, QUANTIDADE_ARMAZEM, PRECO_UNIDADE, DIAMETRO, "
+                + "REFERENCIA_FORN, NIF_FORNECEDOR, COR, DESIGNACAO FROM BOTAO JOIN ACESSORIO "
+                + "ON BOTAO.REFERENCIA_FABRICA = ACESSORIO.REFERENCIA_FABRICA "
+                + "JOIN MATERIAIS_TÊXTEIS ON MATERIAIS_TÊXTEIS.REFERENCIA_FABRICA = ACESSORIO.REFERENCIA_FABRICA"
+                    + "WHERE BOTAO.REFERENCIA_FABRICA = @ref", this.Cn);
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@ref", referencia);
+            SqlDataReader reader = cmd.ExecuteReader();
+            Botao b = new Botao();
+            while (reader.Read())
+            {
+                b.Referencia = referencia;
+                b.Cor = reader["COR"].ToString();
+                b.Designacao = reader["DESIGNACAO"].ToString();
+                b.ReferenciaFornecedor = reader["REFERENCIA_FORN"].ToString();
+                b.Fornecedor = new Fornecedor();
+                b.Fornecedor.NIF_Fornecedor = reader["NIF_FORNECEDOR"].ToString();
+                b.Diametro = Convert.ToDouble(reader["DIAMETRO"].ToString());
+                b.QuantidadeArmazem = Convert.ToInt32(reader["QUANTIDADE_ARMAZEM"].ToString());
+                b.PrecoUnidade = Convert.ToDouble(reader["PRECO_UNIDADE"].ToString());
+
+            }
+            reader.Close();
+            return b;
+        }
+
+
+        public Elastico getElastico(int referencia)
+        {
+
+            SqlCommand cmd = new SqlCommand("SELECT ELASTICO.REFERENCIA_FABRICA as ref, QUANTIDADE_ARMAZEM, "
+                + "COR, PRECO_UNIDADE, LARGURA, REFERENCIA_FORN, COR, DESIGNACAO, COMPRIMENTO, NIF_FORNECEDOR FROM ELASTICO "
+                + "JOIN ACESSORIO ON ELASTICO.REFERENCIA_FABRICA = ACESSORIO.REFERENCIA_FABRICA "
+                + "JOIN MATERIAIS_TÊXTEIS ON MATERIAIS_TÊXTEIS.REFERENCIA_FABRICA = ACESSORIO.REFERENCIA_FABRICA "
+                + "WHERE ELASTICO.REFERENCIA_FABRICA = @ref", this.Cn);
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@ref", referencia);
+            SqlDataReader reader = cmd.ExecuteReader();
+            Elastico el = new Elastico();
+            while (reader.Read())
+            {
+                el.Referencia = referencia;
+                el.Cor = reader["COR"].ToString();
+                el.Designacao = reader["DESIGNACAO"].ToString();
+                el.ReferenciaFornecedor = reader["REFERENCIA_FORN"].ToString();
+                el.Fornecedor = new Fornecedor();
+                el.Fornecedor.NIF_Fornecedor = reader["NIF_FORNECEDOR"].ToString();
+                el.Largura = Convert.ToDouble(reader["LARGURA"].ToString());
+                el.Comprimento = Convert.ToDouble(reader["COMPRIMENTO"].ToString());
+                el.QuantidadeArmazem = Convert.ToInt32(reader["QUANTIDADE_ARMAZEM"].ToString());
+                el.PrecoUnidade = Convert.ToDouble(reader["PRECO_UNIDADE"].ToString());
+            }
+            reader.Close();
+            return el;
+        }
+
+        public FitaVelcro getFitaVelcro(int referencia)
+        {
+            SqlCommand cmd = new SqlCommand("SELECT [FITA-VELCRO].REFERENCIA_FABRICA, QUANTIDADE_ARMAZEM, PRECO_UNIDADE, "
+                + "LARGURA, COMPRIMENTO, REFERENCIA_FORN, NIF_FORNECEDOR, COR, DESIGNACAO FROM[FITA-VELCRO] "
+                + "JOIN ACESSORIO ON[FITA-VELCRO].REFERENCIA_FABRICA = ACESSORIO.REFERENCIA_FABRICA "
+                + "JOIN MATERIAIS_TÊXTEIS ON MATERIAIS_TÊXTEIS.REFERENCIA_FABRICA = ACESSORIO.REFERENCIA_FABRICA  "
+                    + "WHERE [FITA-VELCRO].REFERENCIA_FABRICA = @ref", this.Cn);
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@ref", referencia);
+            SqlDataReader reader = cmd.ExecuteReader();
+            FitaVelcro f = new FitaVelcro();
+            while (reader.Read())
+            {
+                f.Referencia = referencia;
+                f.Referencia = referencia;
+                f.Cor = reader["COR"].ToString();
+                f.Designacao = reader["DESIGNACAO"].ToString();
+                f.ReferenciaFornecedor = reader["REFERENCIA_FORN"].ToString();
+                f.Fornecedor = new Fornecedor();
+                f.Fornecedor.NIF_Fornecedor = reader["NIF_FORNECEDOR"].ToString();
+                f.Largura = Convert.ToDouble(reader["LARGURA"].ToString());
+                f.Comprimento = Convert.ToDouble(reader["COMPRIMENTO"].ToString());
+                f.QuantidadeArmazem = Convert.ToInt32(reader["QUANTIDADE_ARMAZEM"].ToString());
+                f.PrecoUnidade = Convert.ToDouble(reader["PRECO_UNIDADE"].ToString());
+
+            }
+            reader.Close();
+            return f;
+        }
+
     }
 }

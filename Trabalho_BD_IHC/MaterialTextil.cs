@@ -14,7 +14,7 @@ namespace Trabalho_BD_IHC
         private String cor;
         private Fornecedor fornecedor;
         private String TipoMaterial;
-        private String quantidadeSelecionada;
+        private double quantidadeSelecionada;
 
 
         public int Referencia
@@ -94,7 +94,7 @@ namespace Trabalho_BD_IHC
             }
         }
 
-        public string QuantidadeSelecionada
+        public double QuantidadeSelecionada
         {
             get
             {

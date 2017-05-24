@@ -12,6 +12,7 @@ namespace Trabalho_BD_IHC
         private double areaArmazem;
         private int gramagem;
         private double precoMetroQuadrado;
+        private double quantidadeNecessaria;
 
         public Pano() : base()
         {
@@ -67,6 +68,19 @@ namespace Trabalho_BD_IHC
             set
             {
                 precoMetroQuadrado = value;
+            }
+        }
+
+        public double QuantidadeNecessaria
+        {
+            get
+            {
+                return quantidadeNecessaria;
+            }
+
+            set
+            {
+                quantidadeNecessaria = value;
             }
         }
     }

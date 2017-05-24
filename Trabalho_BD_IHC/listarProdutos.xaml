@@ -130,14 +130,15 @@
                         </Grid>
                     </GroupBox>
                     <GroupBox Header="Listagem de Produtos da Empresa" Grid.Column="3" Grid.Row="1">
-                        <DataGrid Name="produtosPersonalizadosLista" AutoGenerateColumns="False" Grid.Row="1" SelectionChanged="produtos_SelectionChanged">
+                        <DataGrid Name="produtosPersonalizadosLista" AutoGenerateColumns="False" Grid.Row="1" IsReadOnly="True" SelectionChanged="produtos_SelectionChanged">
                             <DataGrid.Columns>
                                 <materialDesign:MaterialDataGridTextColumn Header="Referência" Binding="{Binding ProdutoBase.Referencia}"/>
+                                <materialDesign:MaterialDataGridTextColumn Header="Nome" Binding="{Binding ProdutoBase.Nome}" />
                                 <materialDesign:MaterialDataGridTextColumn Header="Cor" Binding="{Binding Cor}" />
                                 <materialDesign:MaterialDataGridTextColumn Header="Tamanho" Binding="{Binding Tamanho}" />
-                                <materialDesign:MaterialDataGridTextColumn Header="ID"  Binding="{Binding ID}" />
                                 <materialDesign:MaterialDataGridTextColumn Header="Preço(€)" Binding="{Binding Preco}" />
                                 <materialDesign:MaterialDataGridTextColumn Header="Unidades" Binding="{Binding UnidadesStock}" />
+                                <materialDesign:MaterialDataGridTextColumn Header="ID Produto"  Binding="{Binding ID}" />
                             </DataGrid.Columns>
                         </DataGrid>
                     </GroupBox>

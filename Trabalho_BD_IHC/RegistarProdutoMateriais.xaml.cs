@@ -133,8 +133,8 @@ namespace Trabalho_BD_IHC
 
         private void cancelar_Click(object sender, RoutedEventArgs e)
         {
-           if( MessageBox.Show("Tem a certeza que deseja cancelar o registo do produto? Perderá todos os dados que tenha introduzido",
-                "", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            if (MessageBox.Show("Tem a certeza que deseja cancelar o registo do produto? Perderá todos os dados que tenha introduzido",
+                 "", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {//sim
                 ListarProdutos page = new ListarProdutos(dataHandler);
                 this.NavigationService.Navigate(page);
@@ -160,9 +160,9 @@ namespace Trabalho_BD_IHC
                 prod.MateriaisTexteis = new ObservableCollection<MaterialTextil>();
                 for (int i = 0; i < materiaisSelectedView.Items.Count; i++)
                 {
-                    prod.MateriaisTexteis.Add((MaterialTextil)materiaisSelectedView.Items[0]);
+                    prod.MateriaisTexteis.Add((MaterialTextil)materiaisSelectedView.Items[i]);
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -264,11 +264,11 @@ namespace Trabalho_BD_IHC
                 {
                     if (tipoMaterial.Equals("Pano", StringComparison.Ordinal))
                     {
-                        Pano pano = getPano(mt.Referencia);
+                        Pano pano = dataHandler.getPano(mt.Referencia);
                         txt1.Text = pano.Tipo;
-                        txt2.Text = pano.Gramagem.ToString();
-                        txt3.Text = pano.AreaArmazem.ToString();
-                        txt4.Text = pano.PrecoMetroQuadrado.ToString();
+                        txt2.Text = pano.Gramagem.ToString() + " g/m^2";
+                        txt3.Text = pano.AreaArmazem.ToString() + "m^2";
+                        txt4.Text = pano.PrecoMetroQuadrado.ToString() + " €/m^2";
                         panoArea.Visibility = Visibility.Visible;
                         panoGramagem.Visibility = Visibility.Visible;
                         panoPreço.Visibility = Visibility.Visible;
@@ -276,10 +276,10 @@ namespace Trabalho_BD_IHC
                     }
                     else if (tipoMaterial.Equals("Linha", StringComparison.Ordinal))
                     {
-                        Linha linha = getLinha(mt.Referencia);
-                        txt1.Text = linha.Grossura.ToString();
-                        txt2.Text = linha.Preco100Metros.ToString();
-                        txt3.Text = linha.ComprimentoStock.ToString();
+                        Linha linha = dataHandler.getLinha(mt.Referencia);
+                        txt1.Text = linha.Grossura.ToString() + " cm";
+                        txt2.Text = linha.Preco100Metros.ToString() + " €/100m";
+                        txt3.Text = linha.ComprimentoStock.ToString() + " cm";
                         txt4.Text = "";
                         linhaGrossura.Visibility = Visibility.Visible;
                         linhaPreço.Visibility = Visibility.Visible;
@@ -287,11 +287,11 @@ namespace Trabalho_BD_IHC
                     }
                     else if (tipoMaterial.Equals("Fecho", StringComparison.Ordinal))
                     {
-                        Fecho fecho = getFecho(mt.Referencia);
-                        txt1.Text = fecho.Comprimento.ToString();
-                        txt2.Text = fecho.TamanhoDente.ToString();
-                        txt3.Text = fecho.QuantidadeArmazem.ToString();
-                        txt4.Text = fecho.PrecoUnidade.ToString();
+                        Fecho fecho = dataHandler.getFecho(mt.Referencia);
+                        txt1.Text = fecho.Comprimento.ToString() + " cm";
+                        txt2.Text = fecho.TamanhoDente.ToString() + " cm";
+                        txt3.Text = fecho.QuantidadeArmazem.ToString() + " un.";
+                        txt4.Text = fecho.PrecoUnidade.ToString() + " €/un.";
                         fechoComprimento.Visibility = Visibility.Visible;
                         fechoTamanhoDente.Visibility = Visibility.Visible;
                         fechoPreço.Visibility = Visibility.Visible;
@@ -300,10 +300,10 @@ namespace Trabalho_BD_IHC
                     }
                     else if (tipoMaterial.Equals("Mola", StringComparison.Ordinal))
                     {
-                        Mola mola = getMola(mt.Referencia);
-                        txt1.Text = mola.Diametro.ToString();
-                        txt2.Text = mola.QuantidadeArmazem.ToString();
-                        txt3.Text = mola.PrecoUnidade.ToString();
+                        Mola mola = dataHandler.getMola(mt.Referencia);
+                        txt1.Text = mola.Diametro.ToString() + " cm";
+                        txt2.Text = mola.QuantidadeArmazem.ToString() + " un.";
+                        txt3.Text = mola.PrecoUnidade.ToString() + " €/un.";
                         txt4.Text = "";
                         molaDiametro.Visibility = Visibility.Visible;
                         molaPreço.Visibility = Visibility.Visible;
@@ -311,10 +311,10 @@ namespace Trabalho_BD_IHC
                     }
                     else if (tipoMaterial.Equals("Botão", StringComparison.Ordinal))
                     {
-                        Botao botao = getBotao(mt.Referencia);
-                        txt1.Text = botao.Diametro.ToString();
-                        txt2.Text = botao.QuantidadeArmazem.ToString();
-                        txt3.Text = botao.PrecoUnidade.ToString();
+                        Botao botao = dataHandler.getBotao(mt.Referencia);
+                        txt1.Text = botao.Diametro.ToString() + " cm";
+                        txt2.Text = botao.QuantidadeArmazem.ToString() + " un.";
+                        txt3.Text = botao.PrecoUnidade.ToString() + " €/un.";
                         txt4.Text = "";
                         botaoDiametro.Visibility = Visibility.Visible;
                         botaoPreço.Visibility = Visibility.Visible;
@@ -322,11 +322,11 @@ namespace Trabalho_BD_IHC
                     }
                     else if (tipoMaterial.Equals("Elástico", StringComparison.Ordinal))
                     {
-                        Elastico el = getElastico(mt.Referencia);
-                        txt1.Text = el.Comprimento.ToString();
-                        txt2.Text = el.Largura.ToString();
-                        txt3.Text = el.QuantidadeArmazem.ToString();
-                        txt4.Text = el.PrecoUnidade.ToString();
+                        Elastico el = dataHandler.getElastico(mt.Referencia);
+                        txt1.Text = el.Comprimento.ToString() + " cm";
+                        txt2.Text = el.Largura.ToString() + " cm";
+                        txt3.Text = el.QuantidadeArmazem.ToString() + " un.";
+                        txt4.Text = el.PrecoUnidade.ToString() + " €/un.";
                         elasticoComprimento.Visibility = Visibility.Visible;
                         elasticoLargura.Visibility = Visibility.Visible;
                         elasticoPreço.Visibility = Visibility.Visible;
@@ -334,11 +334,11 @@ namespace Trabalho_BD_IHC
                     }
                     else if (tipoMaterial.Equals("Fita de Velcro", StringComparison.Ordinal))
                     {
-                        FitaVelcro f = getFitaVelcro(mt.Referencia);
-                        txt1.Text = f.Comprimento.ToString();
-                        txt2.Text = f.Largura.ToString();
-                        txt3.Text = f.QuantidadeArmazem.ToString();
-                        txt4.Text = f.PrecoUnidade.ToString();
+                        FitaVelcro f = dataHandler.getFitaVelcro(mt.Referencia);
+                        txt1.Text = f.Comprimento.ToString() + " cm";
+                        txt2.Text = f.Largura.ToString() + " cm";
+                        txt3.Text = f.QuantidadeArmazem.ToString() + " un.";
+                        txt4.Text = f.PrecoUnidade.ToString() + " €/un.";
                         velcroComprimento.Visibility = Visibility.Visible;
                         velcroLargura.Visibility = Visibility.Visible;
                         velcroPreço.Visibility = Visibility.Visible;
@@ -349,179 +349,7 @@ namespace Trabalho_BD_IHC
             }
         }
 
-        public Pano getPano(int referencia)
-        {
-            Pano pano = new Pano();
-            SqlCommand cmd = new SqlCommand("SELECT PANO.REFERENCIA_FABRICA AS refFabr, TIPO, GRAMAGEM, "
-                + "AREA_ARMAZEM, PRECO_POR_M2, REFERENCIA_FORN, NIF_FORNECEDOR, COR, DESIGNACAO FROM PANO "
-                + "JOIN MATERIAIS_TÊXTEIS ON MATERIAIS_TÊXTEIS.REFERENCIA_FABRICA = PANO.REFERENCIA_FABRICA "
-                + "WHERE PANO.REFERENCIA_FABRICA = @ref"
-                , dataHandler.Cn);
-            cmd.Parameters.Clear();
-            cmd.Parameters.AddWithValue("@ref", referencia);
-            SqlDataReader reader = cmd.ExecuteReader();
-            Pano p = new Pano();
-            while (reader.Read())
-            {
-                pano.Referencia = referencia;
-                pano.Cor = reader["COR"].ToString();
-                pano.Fornecedor = new Fornecedor();
-                pano.Fornecedor.NIF_Fornecedor = reader["NIF_FORNECEDOR"].ToString();
-                pano.ReferenciaFornecedor = reader["REFERENCIA_FORN"].ToString();
-                pano.Designacao = reader["DESIGNACAO"].ToString();
-                pano.Gramagem = Convert.ToInt32(reader["GRAMAGEM"].ToString());
-                pano.Tipo = reader["TIPO"].ToString();
-                pano.AreaArmazem = Convert.ToDouble(reader["AREA_ARMAZEM"].ToString());
-                pano.PrecoMetroQuadrado = Convert.ToDouble(reader["PRECO_POR_M2"].ToString());
 
-            }
-            reader.Close();
-            return pano;
-        }
-
-
-        public Linha getLinha(int referencia)
-        {
-
-            SqlCommand cmd = new SqlCommand("SELECT * FROM LINHA WHERE REFERENCIA_FABRICA = @ref", dataHandler.Cn);
-            cmd.Parameters.Clear();
-            cmd.Parameters.AddWithValue("@ref", referencia);
-            SqlDataReader reader = cmd.ExecuteReader();
-            Linha l = new Linha();
-            while (reader.Read())
-            {
-                l.Referencia = referencia;
-                l.Grossura = Convert.ToDouble(reader["GROSSURA"].ToString());
-                l.ComprimentoStock = Convert.ToDouble(reader["COMPRIMENTO_ARMAZEM"].ToString());
-                l.Preco100Metros = Convert.ToDouble(reader["PRECO_CEM_METROS"].ToString());
-
-            }
-            reader.Close();
-            return l;
-        }
-
-        public Fecho getFecho(int referencia)
-        {
-
-            SqlCommand cmd = new SqlCommand("SELECT FECHO.REFERENCIA_FABRICA, COMPRIMENTO, "
-                + "TAMANHO_DENTE, QUANTIDADE_ARMAZEM, PRECO_UNIDADE FROM FECHO JOIN "
-                + "ACESSORIO ON FECHO.REFERENCIA_FABRICA = ACESSORIO.REFERENCIA_FABRICA "
-                + " WHERE FECHO.REFERENCIA_FABRICA = @ref", dataHandler.Cn);
-
-            cmd.Parameters.Clear();
-            cmd.Parameters.AddWithValue("@ref", referencia);
-            Fecho f = new Fecho();
-            SqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
-            {
-                f.Referencia = referencia;
-                f.PrecoUnidade = Convert.ToDouble(reader["PRECO_UNIDADE"].ToString());
-                f.QuantidadeArmazem = Convert.ToInt32(reader["QUANTIDADE_ARMAZEM"].ToString());
-                f.Comprimento = Convert.ToDouble(reader["COMPRIMENTO"].ToString());
-                f.TamanhoDente = Convert.ToDouble(reader["TAMANHO_DENTE"].ToString());
-
-            }
-            reader.Close();
-            return f;
-        }
-
-        public Mola getMola(int referencia)
-        {
-
-            SqlCommand cmd = new SqlCommand("SELECT MOLA.REFERENCIA_FABRICA, DIAMETRO, QUANTIDADE_ARMAZEM, "
-                + "PRECO_UNIDADE  FROM MOLA JOIN ACESSORIO ON "
-                    + "MOLA.REFERENCIA_FABRICA = ACESSORIO.REFERENCIA_FABRICA "
-                    + "WHERE MOLA.REFERENCIA_FABRICA = @ref", dataHandler.Cn);
-            cmd.Parameters.Clear();
-            cmd.Parameters.AddWithValue("@ref", referencia);
-            SqlDataReader reader = cmd.ExecuteReader();
-            Mola m = new Mola();
-            while (reader.Read())
-            {
-                m.Referencia = referencia;
-                m.Diametro = Convert.ToDouble(reader["DIAMETRO"].ToString());
-                m.QuantidadeArmazem = Convert.ToInt32(reader["QUANTIDADE_ARMAZEM"].ToString());
-                m.PrecoUnidade = Convert.ToDouble(reader["PRECO_UNIDADE"].ToString());
-            }
-            reader.Close();
-            return m;
-        }
-
-        public Botao getBotao(int referencia)
-        {
-
-            SqlCommand cmd = new SqlCommand("SELECT BOTAO.REFERENCIA_FABRICA, QUANTIDADE_ARMAZEM, "
-                    + "PRECO_UNIDADE, DIAMETRO FROM BOTAO JOIN ACESSORIO ON "
-                    + "BOTAO.REFERENCIA_FABRICA = ACESSORIO.REFERENCIA_FABRICA "
-                    + "WHERE BOTAO.REFERENCIA_FABRICA = @ref", dataHandler.Cn);
-            cmd.Parameters.Clear();
-            cmd.Parameters.AddWithValue("@ref", referencia);
-            SqlDataReader reader = cmd.ExecuteReader();
-            Botao b = new Botao();
-            while (reader.Read())
-            {
-                b.Referencia = referencia;
-                b.Diametro = Convert.ToDouble(reader["DIAMETRO"].ToString());
-                b.QuantidadeArmazem = Convert.ToInt32(reader["QUANTIDADE_ARMAZEM"].ToString());
-                b.PrecoUnidade = Convert.ToDouble(reader["PRECO_UNIDADE"].ToString());
-
-            }
-            reader.Close();
-            return b;
-        }
-
-
-        public Elastico getElastico(int referencia)
-        {
-
-            SqlCommand cmd = new SqlCommand("SELECT ELASTICO.REFERENCIA_FABRICA as ref, QUANTIDADE_ARMAZEM, "
-                + "COR, PRECO_UNIDADE, LARGURA, REFERENCIA_FORN, COR, DESIGNACAO, COMPRIMENTO, NIF_FORNECEDOR FROM ELASTICO "
-                + "JOIN ACESSORIO ON ELASTICO.REFERENCIA_FABRICA = ACESSORIO.REFERENCIA_FABRICA "
-                + "JOIN MATERIAIS_TÊXTEIS ON MATERIAIS_TÊXTEIS.REFERENCIA_FABRICA = ACESSORIO.REFERENCIA_FABRICA "
-                + "WHERE ELASTICO.REFERENCIA_FABRICA = @ref", dataHandler.Cn);
-            cmd.Parameters.Clear();
-            cmd.Parameters.AddWithValue("@ref", referencia);
-            SqlDataReader reader = cmd.ExecuteReader();
-            Elastico el = new Elastico();
-            while (reader.Read())
-            {
-                el.Referencia = referencia;
-                el.Cor = reader["COR"].ToString();
-                el.Designacao = reader["DESIGNACAO"].ToString();
-                el.ReferenciaFornecedor = reader["REFERENCIA_FORN"].ToString();
-                el.Fornecedor = new Fornecedor();
-                el.Fornecedor.NIF_Fornecedor = reader["NIF_FORNECEDOR"].ToString();
-                el.Largura = Convert.ToDouble(reader["LARGURA"].ToString());
-                el.Comprimento = Convert.ToDouble(reader["COMPRIMENTO"].ToString());
-                el.QuantidadeArmazem = Convert.ToInt32(reader["QUANTIDADE_ARMAZEM"].ToString());
-                el.PrecoUnidade = Convert.ToDouble(reader["PRECO_UNIDADE"].ToString());
-            }
-            reader.Close();
-            return el;
-        }
-
-        public FitaVelcro getFitaVelcro(int referencia)
-        {
-            SqlCommand cmd = new SqlCommand("SELECT [FITA-VELCRO].REFERENCIA_FABRICA, "
-                    + "QUANTIDADE_ARMAZEM, PRECO_UNIDADE, LARGURA, COMPRIMENTO FROM [FITA-VELCRO] "
-                    + "JOIN ACESSORIO ON[FITA-VELCRO].REFERENCIA_FABRICA = ACESSORIO.REFERENCIA_FABRICA "
-                    + "WHERE [FITA-VELCRO].REFERENCIA_FABRICA = @ref", dataHandler.Cn);
-            cmd.Parameters.Clear();
-            cmd.Parameters.AddWithValue("@ref", referencia);
-            SqlDataReader reader = cmd.ExecuteReader();
-            FitaVelcro f = new FitaVelcro();
-            while (reader.Read())
-            {
-                f.Referencia = referencia;
-                f.Largura = Convert.ToDouble(reader["LARGURA"].ToString());
-                f.Comprimento = Convert.ToDouble(reader["COMPRIMENTO"].ToString());
-                f.QuantidadeArmazem = Convert.ToInt32(reader["QUANTIDADE_ARMAZEM"].ToString());
-                f.PrecoUnidade = Convert.ToDouble(reader["PRECO_UNIDADE"].ToString());
-
-            }
-            reader.Close();
-            return f;
-        }
 
         private void addMaterial_Click(object sender, RoutedEventArgs e)
         {
@@ -537,7 +365,7 @@ namespace Trabalho_BD_IHC
                 }
                 else
                 {
-                    mt.QuantidadeSelecionada = txtQuantidadeDec.Text.ToString();
+                    mt.QuantidadeSelecionada = Convert.ToDouble(txtQuantidadeDec.Text.ToString());
                 }
 
             }
@@ -551,7 +379,7 @@ namespace Trabalho_BD_IHC
                 }
                 else
                 {
-                    mt.QuantidadeSelecionada = txtQuantidadeInt.Text.ToString();
+                    mt.QuantidadeSelecionada = Convert.ToDouble(txtQuantidadeInt.Text.ToString());
                 }
             }
             materiaisSelecionados.Add(mt);

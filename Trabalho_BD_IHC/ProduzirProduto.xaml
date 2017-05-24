@@ -7,7 +7,7 @@
       xmlns:local="clr-namespace:Trabalho_BD_IHC"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
-      Title="ProduzirProduto" Loaded="Page_Loaded">
+      Title="ProduzirProduto">
 
     <Grid Background="White">
         <Grid.ColumnDefinitions>
@@ -63,12 +63,11 @@
                 <DataGrid Name="DGproduçao" SelectionChanged="DGproduçao_SelectionChanged" Grid.Row="1" Grid.ColumnSpan="4"
                       Grid.RowSpan="3" IsReadOnly="True" AutoGenerateColumns="False">
                     <DataGrid.Columns  >
-                        <materialDesign:MaterialDataGridTextColumn  Header="Referência" Binding="{Binding  prodPers.MateriaisTexteis.Referencia}" />
-                        <materialDesign:MaterialDataGridTextColumn Header="Designação"  Binding="{Binding prodPers.MateriaisTexteis.Designacao}" />
-                        <materialDesign:MaterialDataGridTextColumn Header="Tipo Material"  Binding="{Binding prodPers.MateriaisTexteis.TipoMaterial1}" />
-                        <materialDesign:MaterialDataGridTextColumn Header="Cor" Binding="{Binding prodPers.MateriaisTexteis.Cor}" />
-                        <materialDesign:MaterialDataGridTextColumn Header="Quantidade Necessária" Binding="{Binding prodPers.MateriaisTexteis.QuantidadeSelecionada}" />
-                        <materialDesign:MaterialDataGridTextColumn Header="Quantidade em stock" Binding="{Binding Telemovel}" />
+                        <materialDesign:MaterialDataGridTextColumn  Header="Referência" Binding="{Binding  Referencia}" />
+                        <materialDesign:MaterialDataGridTextColumn Header="Designação"  Binding="{Binding Designacao}" />
+                        <materialDesign:MaterialDataGridTextColumn Header="Cor" Binding="{Binding Cor}" />
+                        <materialDesign:MaterialDataGridTextColumn Header="Quantidade Necessária" Binding="{Binding QuantidadeSelecionada}" />
+
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>

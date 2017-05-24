@@ -11,6 +11,7 @@ namespace Trabalho_BD_IHC
         private double grossura;
         private double comprimentoStock;
         private double preco100Metros;
+        private double quantidadeNecessaria;
 
         public double Grossura
         {
@@ -50,6 +51,19 @@ namespace Trabalho_BD_IHC
             set
             {
                 preco100Metros = value;
+            }
+        }
+
+        public double QuantidadeNecessaria
+        {
+            get
+            {
+                return quantidadeNecessaria;
+            }
+
+            set
+            {
+                quantidadeNecessaria = value;
             }
         }
     }
