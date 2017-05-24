@@ -501,6 +501,8 @@ namespace Trabalho_BD_IHC
 
         public Pano getPano(int referencia)
         {
+            if (!this.verifySGBDConnection())
+                return null;
             Pano pano = new Pano();
             SqlCommand cmd = new SqlCommand("SELECT PANO.REFERENCIA_FABRICA AS refFabr, TIPO, GRAMAGEM, "
                 + "AREA_ARMAZEM, PRECO_POR_M2, REFERENCIA_FORN, NIF_FORNECEDOR, COR, DESIGNACAO FROM PANO "
@@ -526,13 +528,15 @@ namespace Trabalho_BD_IHC
 
             }
             reader.Close();
+            this.closeSGBDConnection();
             return pano;
         }
 
 
         public Linha getLinha(int referencia)
         {
-
+            if (!this.verifySGBDConnection())
+                return null;
             SqlCommand cmd = new SqlCommand("SELECT LINHA.REFERENCIA_FABRICA, GROSSURA, COMPRIMENTO_ARMAZEM, "
                 + "PRECO_CEM_METROS, REFERENCIA_FORNECEDOR, NIF_FORNECEDOR, COR, DESIGNACAO FROM LINHA "
                 + "JOIN MATERIAIS_TÊXTEIS ON MATERIAIS_TÊXTEIS.REFERENCIA_FABRICA = LINHA.REFERENCIA_FABRICA WHERE REFERENCIA_FABRICA = @ref", this.Cn);
@@ -553,12 +557,14 @@ namespace Trabalho_BD_IHC
                 l.Fornecedor.NIF_Fornecedor = reader["NIF_FORNECEDOR"].ToString();
             }
             reader.Close();
+            this.closeSGBDConnection();
             return l;
         }
 
         public Fecho getFecho(int referencia)
         {
-
+            if (!this.verifySGBDConnection())
+                return null;
             SqlCommand cmd = new SqlCommand("SELECT FECHO.REFERENCIA_FABRICA, QUANTIDADE_ARMAZEM, PRECO_UNIDADE, "
                 + "COMPRIMENTO, TAMANHO_DENTE REFERENCIA_FORN, NIF_FORNECEDOR, COR, DESIGNACAO FROM FECHO "
                 + "JOIN ACESSORIO ON FECHO.REFERENCIA_FABRICA = ACESSORIO.REFERENCIA_FABRICA"
@@ -584,12 +590,14 @@ namespace Trabalho_BD_IHC
 
             }
             reader.Close();
+            this.closeSGBDConnection();
             return f;
         }
 
         public Mola getMola(int referencia)
         {
-
+            if (!this.verifySGBDConnection())
+                return null;
             SqlCommand cmd = new SqlCommand("SELECT MOLA.REFERENCIA_FABRICA, QUANTIDADE_ARMAZEM, PRECO_UNIDADE, DIAMETRO, "
                     + "REFERENCIA_FORN, NIF_FORNECEDOR, COR, DESIGNACAO FROM MOLA "
                     + "JOIN ACESSORIO ON MOLA.REFERENCIA_FABRICA = ACESSORIO.REFERENCIA_FABRICA "
@@ -612,12 +620,14 @@ namespace Trabalho_BD_IHC
                 m.PrecoUnidade = Convert.ToDouble(reader["PRECO_UNIDADE"].ToString());
             }
             reader.Close();
+            this.closeSGBDConnection();
             return m;
         }
 
         public Botao getBotao(int referencia)
         {
-
+            if (!this.verifySGBDConnection())
+                return null;
             SqlCommand cmd = new SqlCommand("SELECT BOTAO.REFERENCIA_FABRICA, QUANTIDADE_ARMAZEM, PRECO_UNIDADE, DIAMETRO, "
                 + "REFERENCIA_FORN, NIF_FORNECEDOR, COR, DESIGNACAO FROM BOTAO JOIN ACESSORIO "
                 + "ON BOTAO.REFERENCIA_FABRICA = ACESSORIO.REFERENCIA_FABRICA "
@@ -641,13 +651,15 @@ namespace Trabalho_BD_IHC
 
             }
             reader.Close();
+            this.closeSGBDConnection();
             return b;
         }
 
 
         public Elastico getElastico(int referencia)
         {
-
+            if (!this.verifySGBDConnection())
+                return null;
             SqlCommand cmd = new SqlCommand("SELECT ELASTICO.REFERENCIA_FABRICA as ref, QUANTIDADE_ARMAZEM, "
                 + "COR, PRECO_UNIDADE, LARGURA, REFERENCIA_FORN, COR, DESIGNACAO, COMPRIMENTO, NIF_FORNECEDOR FROM ELASTICO "
                 + "JOIN ACESSORIO ON ELASTICO.REFERENCIA_FABRICA = ACESSORIO.REFERENCIA_FABRICA "
@@ -671,11 +683,14 @@ namespace Trabalho_BD_IHC
                 el.PrecoUnidade = Convert.ToDouble(reader["PRECO_UNIDADE"].ToString());
             }
             reader.Close();
+            this.closeSGBDConnection();
             return el;
         }
 
         public FitaVelcro getFitaVelcro(int referencia)
         {
+            if (!this.verifySGBDConnection())
+                return null;
             SqlCommand cmd = new SqlCommand("SELECT [FITA-VELCRO].REFERENCIA_FABRICA, QUANTIDADE_ARMAZEM, PRECO_UNIDADE, "
                 + "LARGURA, COMPRIMENTO, REFERENCIA_FORN, NIF_FORNECEDOR, COR, DESIGNACAO FROM[FITA-VELCRO] "
                 + "JOIN ACESSORIO ON[FITA-VELCRO].REFERENCIA_FABRICA = ACESSORIO.REFERENCIA_FABRICA "
@@ -701,6 +716,7 @@ namespace Trabalho_BD_IHC
 
             }
             reader.Close();
+            this.closeSGBDConnection();
             return f;
         }
 
