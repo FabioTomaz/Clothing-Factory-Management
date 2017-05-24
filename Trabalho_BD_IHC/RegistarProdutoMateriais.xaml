@@ -57,7 +57,6 @@
                             <ColumnDefinition Width="1*"></ColumnDefinition>
                             <ColumnDefinition Width="1*"></ColumnDefinition>
                             <ColumnDefinition Width="1*"></ColumnDefinition>
-
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="1*"></RowDefinition>
@@ -70,15 +69,17 @@
                             <RowDefinition Height="1*"></RowDefinition>
                             <RowDefinition Height="1*"></RowDefinition>
                         </Grid.RowDefinitions>
-                        <ListView Name="materiaisView" Grid.Column="0" Grid.ColumnSpan="3" Height="270" Grid.Row="0" Grid.RowSpan="4" SelectionMode="Single" SelectionChanged="materiaisView_SelectionChanged">
-                            <ListView.View>
-                                <GridView>
-                                    <GridViewColumn Header="Referêcia Fábrica" DisplayMemberBinding="{Binding Referencia}" />
-                                    <GridViewColumn Header="Designação" DisplayMemberBinding="{Binding Designacao}"/>
-                                    <GridViewColumn Header="Cor" DisplayMemberBinding="{Binding Cor}"/>
-                                </GridView>
-                            </ListView.View>
-                        </ListView>
+                        <DataGrid Name="materiaisView" Grid.Column="0" Grid.ColumnSpan="3" Height="270" Grid.Row="0" Grid.RowSpan="4" 
+                                 AutoGenerateColumns="False" SelectionMode="Single" SelectionChanged="materiaisView_SelectionChanged">
+                            <DataGrid.Columns>
+
+                                <materialDesign:MaterialDataGridTextColumn Header="Referêcia Fábrica" Binding="{Binding Referencia}" />
+                                <materialDesign:MaterialDataGridTextColumn Header="Designação" Binding="{Binding Designacao}"/>
+                                <materialDesign:MaterialDataGridTextColumn Header="Cor" Binding="{Binding Cor}"/>
+                                <materialDesign:MaterialDataGridTextColumn Header="Cor" Binding="{Binding Cor}"/>
+
+                            </DataGrid.Columns>
+                        </DataGrid>
                         <TextBlock Text="Informação do material selecionado" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="3" TextWrapping="Wrap" ></TextBlock>
                         <Grid Grid.Row="1" Grid.RowSpan="2" Grid.Column="4" Grid.ColumnSpan="3">
                             <Grid.ColumnDefinitions>

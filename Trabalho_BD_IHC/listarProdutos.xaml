@@ -8,7 +8,7 @@
       xmlns:local="clr-namespace:Trabalho_BD_IHC"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
-      Title="ListarDesenhos">
+      Title="ListarProdutos">
     <Grid Background="White">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="24*"/>
@@ -130,7 +130,7 @@
                         </Grid>
                     </GroupBox>
                     <GroupBox Header="Listagem de Produtos da Empresa" Grid.Column="3" Grid.Row="1">
-                        <DataGrid Name="produtosPersonalizadosLista" Grid.Row="1" SelectionChanged="produtos_SelectionChanged">
+                        <DataGrid Name="produtosPersonalizadosLista" AutoGenerateColumns="False" Grid.Row="1" SelectionChanged="produtos_SelectionChanged">
                             <DataGrid.Columns>
                                 <materialDesign:MaterialDataGridTextColumn Header="Referência" Binding="{Binding ProdutoBase.Referencia}"/>
                                 <materialDesign:MaterialDataGridTextColumn Header="Cor" Binding="{Binding Cor}" />

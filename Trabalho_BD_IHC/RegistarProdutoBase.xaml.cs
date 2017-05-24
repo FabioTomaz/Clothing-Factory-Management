@@ -87,7 +87,7 @@ namespace Trabalho_BD_IHC
             ProdutoBase ProdutoBase = new ProdutoBase();
             try
             {
-                ProdutoBase.Nome = txtNomeProdutoBase.Text;
+                ProdutoBase.Nome = txtNomeModelo.Text;
                 ProdutoBase.InstrProd = txtInstruçoes.Text;
                 ProdutoBase.IVA1 = Convert.ToDouble(txtIva.Text);
                 ProdutoBase.GestorProducao = new Utilizador();

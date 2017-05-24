@@ -67,6 +67,12 @@ namespace Trabalho_BD_IHC
 
         private bool EnviarProduto(ProdutoPersonalizado prod)
         {
+            //registar etiqueta na base de dados primerio
+            //inserir primeiro a nova etiqueta na base de dados
+            dataHandler.insertEtiqueta(prod.Etiqueta.Normas, prod.Etiqueta.Composicao, prod.Etiqueta.PaisFabrico);
+            //obter o numero da etiqueta adicionada, pois é necessario para o registo do produto
+            prod.Etiqueta.Numero = dataHandler.getEtiqueta(prod.Etiqueta.Normas, prod.Etiqueta.Composicao, prod.Etiqueta.PaisFabrico);
+
             //produto
             if (!dataHandler.verifySGBDConnection())
                 return false;
@@ -155,7 +161,6 @@ namespace Trabalho_BD_IHC
                 for (int i = 0; i < materiaisSelectedView.Items.Count; i++)
                 {
                     prod.MateriaisTexteis.Add((MaterialTextil)materiaisSelectedView.Items[0]);
-
                 }
                 
             }

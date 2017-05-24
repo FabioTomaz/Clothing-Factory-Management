@@ -16,6 +16,7 @@ namespace Trabalho_BD_IHC
         private String TipoMaterial;
         private String quantidadeSelecionada;
 
+
         public int Referencia
         {
             get
@@ -105,5 +106,6 @@ namespace Trabalho_BD_IHC
                 quantidadeSelecionada = value;
             }
         }
+
     }
 }

@@ -2,11 +2,12 @@
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Trabalho_BD_IHC"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
-      Title="ProduzirProduto">
+      Title="ProduzirProduto" Loaded="Page_Loaded">
 
     <Grid Background="White">
         <Grid.ColumnDefinitions>
@@ -21,7 +22,7 @@
             <RowDefinition />
             <RowDefinition Height="0.1*"/>
         </Grid.RowDefinitions>
-        <GroupBox Header="Operações" Grid.Column="1" Grid.Row="1">
+        <GroupBox Header="Operações" Grid.Column="1" Grid.Row="1" Template="{StaticResource blackGroupBox}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.1*"></ColumnDefinition>
@@ -37,29 +38,41 @@
                     <RowDefinition></RowDefinition>
                     <RowDefinition Height="0.3*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Button x:Name="confirmar" Style="{StaticResource confirmarButton}" Content="Confirmar"  Grid.Row="1" Grid.Column="1" IsEnabled="True" Click="confirmar_Click"/>
+                <Button x:Name="confirmar" Style="{StaticResource confirmarButton}" Content="Produzir"  Grid.Row="1" Grid.Column="1" IsEnabled="True" Click="confirmar_Click"/>
                 <Button x:Name="cancelar" Style="{StaticResource cancelarButton}" Content="Cancelar" Grid.Row="3" Grid.Column="1" Click="cancelar_Click"/>
             </Grid>
         </GroupBox>
-        <Grid Grid.Column="3" Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"></ColumnDefinition>
-                <ColumnDefinition Width="1*"></ColumnDefinition>
-                <ColumnDefinition Width="1*"></ColumnDefinition>
-                <ColumnDefinition Width="1*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="1*"></RowDefinition>
-                <RowDefinition Height="1*"></RowDefinition>
-                <RowDefinition Height="1*"></RowDefinition>
-                <RowDefinition Height="1*"></RowDefinition>
-                <RowDefinition Height="1*"></RowDefinition>
-                <RowDefinition Height="1*"></RowDefinition>
-            </Grid.RowDefinitions>
-            <TextBlock Text="Produto Selecionado" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" TextWrapping="Wrap"></TextBlock>
-            <TextBlock Name="nomeProduto"  Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" TextWrapping="Wrap" HorizontalAlignment="Left"></TextBlock>
-
-        </Grid>
+        <GroupBox Header="Produzir Produto" Grid.Column="3" Grid.Row="1">
+            <Grid Grid.Column="3" Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Produto Selecionado:" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" TextWrapping="Wrap"></TextBlock>
+                <TextBlock Name="nomeProduto"  Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" TextWrapping="Wrap" HorizontalAlignment="Left"></TextBlock>
+                <DataGrid Name="DGproduçao" SelectionChanged="DGproduçao_SelectionChanged" Grid.Row="1" Grid.ColumnSpan="4"
+                      Grid.RowSpan="3" IsReadOnly="True" AutoGenerateColumns="False">
+                    <DataGrid.Columns  >
+                        <materialDesign:MaterialDataGridTextColumn  Header="Referência" Binding="{Binding  prodPers.MateriaisTexteis.Referencia}" />
+                        <materialDesign:MaterialDataGridTextColumn Header="Designação"  Binding="{Binding prodPers.MateriaisTexteis.Designacao}" />
+                        <materialDesign:MaterialDataGridTextColumn Header="Tipo Material"  Binding="{Binding prodPers.MateriaisTexteis.TipoMaterial1}" />
+                        <materialDesign:MaterialDataGridTextColumn Header="Cor" Binding="{Binding prodPers.MateriaisTexteis.Cor}" />
+                        <materialDesign:MaterialDataGridTextColumn Header="Quantidade Necessária" Binding="{Binding prodPers.MateriaisTexteis.QuantidadeSelecionada}" />
+                        <materialDesign:MaterialDataGridTextColumn Header="Quantidade em stock" Binding="{Binding Telemovel}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </GroupBox>
 
     </Grid>
 </Page>
