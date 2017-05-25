@@ -140,5 +140,16 @@ namespace Trabalho_BD_IHC
                 dataHandler.closeSGBDConnection();
             }
         }
+
+        private void tabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(e.Source is TabControl) { 
+                clientesFrame.Content = new ListarClientes(dataHandler);
+                encomendasFrame.Content = new ListarEncomendas(dataHandler);
+                produtosFrame.Content = new ListarProdutos(dataHandler);
+                materiaisFrame.Content = new ListarMateriais(dataHandler);
+                empregadosFrame.Content = new ListarEmpregados(dataHandler);
+            }
+        }
     }
 }

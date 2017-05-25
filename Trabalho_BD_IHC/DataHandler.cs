@@ -532,11 +532,12 @@ namespace Trabalho_BD_IHC
             SqlCommand cmd = new SqlCommand();
 
             cmd.Parameters.Clear();
-            cmd.CommandText = "Insert into ENCOMENDA(ESTADO, DESCONTO, DATA_CONFIRMACAO, DATA_ENTREGA_PREV ,N_GESTOR_VENDA, CLIENTE) values(1, @DESCONTO, @DATEC, @DATEP ,@GESTOR, @CLIENTE);";
+            cmd.CommandText = "Insert into ENCOMENDA(ESTADO, DESCONTO, DATA_CONFIRMACAO, DATA_ENTREGA_PREV ,N_GESTOR_VENDA, CLIENTE, LOCALENTREGA) values(1, @DESCONTO, @DATEC, @DATEP ,@GESTOR, @CLIENTE, @LOCAL);";
             cmd.Parameters.AddWithValue("@DATEC", encomenda.DataConfirmacao.ToString("dd-MM-yyyy"));
             cmd.Parameters.AddWithValue("@DESCONTO", encomenda.Desconto);
             cmd.Parameters.AddWithValue("@GESTOR", encomenda.GestorVendas);
-            cmd.Parameters.AddWithValue("@CLIENTE", encomenda.Cliente);
+            cmd.Parameters.AddWithValue("@CLIENTE", encomenda.Cliente.NCliente);
+            cmd.Parameters.AddWithValue("@LOCAL", encomenda.LocalEntrega);
             cmd.Parameters.AddWithValue("@DATEP", encomenda.DataPrevistaEntrega.ToString("dd-MM-yyyy"));
             cmd.Connection = this.Cn;
             try
@@ -567,14 +568,16 @@ namespace Trabalho_BD_IHC
                 int referencia = listaProdutos[i].ProdutoBase.Referencia;
                 String cor = listaProdutos[i].Cor;
                 String tamanho = listaProdutos[i].Tamanho;
+                int id = listaProdutos[i].ID;
                 int quantidade = listaProdutos[i].Quantidade;
                 values.Parameters.Clear();
                 values.Parameters.AddWithValue("@ENCOMENDA", encomenda);
                 values.Parameters.AddWithValue("@REFERENCIA", referencia);
                 values.Parameters.AddWithValue("@TAMANHO", tamanho);
                 values.Parameters.AddWithValue("@COR", cor);
+                values.Parameters.AddWithValue("@ID", id);
                 values.Parameters.AddWithValue("@QUANTIDADE", quantidade);
-                values.CommandText = "INSERT INTO [CONTEUDO-ENCOMENDA](N_ENCOMENDA, REFERENCIA_PRODUTO, TAMANHO_PRODUTO, COR_PRODUTO, QUANTIDADE) VALUES(@ENCOMENDA, @REFERENCIA, @TAMANHO, @COR, @QUANTIDADE)";
+                values.CommandText = "INSERT INTO [CONTEUDO-ENCOMENDA](N_ENCOMENDA, REFERENCIA_PRODUTO, TAMANHO_PRODUTO, COR_PRODUTO, ID_PRODUTO,QUANTIDADE) VALUES(@ENCOMENDA, @REFERENCIA, @TAMANHO, @COR, @ID,@QUANTIDADE)";
                 values.Connection = this.Cn;
                 try
                 {
