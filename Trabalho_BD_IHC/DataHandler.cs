@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using System.IO;
 using System.Drawing;
 using System.Windows.Media.Imaging;
+using System.Collections.ObjectModel;
 
 namespace Trabalho_BD_IHC
 {
@@ -61,14 +62,192 @@ namespace Trabalho_BD_IHC
             return Cn.State == ConnectionState.Closed;
         }
 
+        public ObservableCollection<Cliente> getClientesFromDB() {
+            this.verifySGBDConnection();
+            SqlCommand cmd = new SqlCommand("SELECT * FROM CLIENTE JOIN ZONA ON CLIENTE.CODPOSTAL1=ZONA.CODPOSTAL1 AND CLIENTE.CODPOSTAL2=ZONA.CODPOSTAL2", cn);
+            SqlDataReader reader = cmd.ExecuteReader();
+            ObservableCollection<Cliente> items = new ObservableCollection<Cliente>();
+            while (reader.Read())
+            {
+                Cliente C = new Cliente();
+                C.Nome = reader["NOME"].ToString();
+                C.Nif = reader["NIF"].ToString();
+                C.Nib = reader["NIB"].ToString();
+                C.Email = reader["EMAIL"].ToString();
+                C.Telemovel = reader["TELEMOVEL"].ToString();
+                C.CodigoPostal = reader["CODPOSTAL1"].ToString()+"-"+ reader["CODPOSTAL2"].ToString();
+                C.Rua = reader["RUA"].ToString();
+                C.NCasa = Convert.ToInt32(reader["N_PORTA"].ToString());
+                C.NCliente = Convert.ToInt32(reader["NCLIENTE"].ToString());
+                C.Distrito = reader["DISTRITO"].ToString();
+                C.Localidade = reader["LOCALIDADE"].ToString();
+                items.Add(C);
+            }
+            closeSGBDConnection();
+            return items;
+        }
+
+
+        public Cliente getClienteFromDB(int nCliente)
+        {
+            this.verifySGBDConnection();
+            SqlCommand cmd = new SqlCommand("SELECT * FROM CLIENTE JOIN ZONA ON CLIENTE.CODPOSTAL1=ZONA.CODPOSTAL1 AND CLIENTE.CODPOSTAL2=ZONA.CODPOSTAL2 WHERE NCLIENTE=@cliente", cn);
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@cliente", nCliente);
+            SqlDataReader reader = cmd.ExecuteReader();
+            Cliente C = new Cliente();
+            reader.Read();
+            C.Nome = reader["NOME"].ToString();
+            C.Nif = reader["NIF"].ToString();
+            C.Nib = reader["NIB"].ToString();
+            C.Email = reader["EMAIL"].ToString();
+            C.Telemovel = reader["TELEMOVEL"].ToString();
+            C.CodigoPostal = reader["CODPOSTAL1"].ToString() + "-" + reader["CODPOSTAL2"].ToString();
+            C.Rua = reader["RUA"].ToString();
+            C.NCasa = Convert.ToInt32(reader["N_PORTA"].ToString());
+            C.NCliente = Convert.ToInt32(reader["NCLIENTE"].ToString());
+            C.Distrito = reader["DISTRITO"].ToString();
+            C.Localidade = reader["LOCALIDADE"].ToString();     
+            closeSGBDConnection();
+            return C;
+        }
+
+        public ObservableCollection<Encomenda> getEncomendasFromCliente(int nCliente)
+        {
+            verifySGBDConnection();
+            SqlCommand cmd = new SqlCommand("SELECT N_ENCOMENDA, DATA_CONFIRMACAO, DATA_ENTREGA, "
+                    + "LOCALENTREGA, ESTADO, N_GESTOR_VENDA, UTILIZADOR.NOME AS GESTOR_NOME FROM ENCOMENDA JOIN "
+                    + "UTILIZADOR ON N_FUNCIONARIO = N_GESTOR_VENDA WHERE CLIENTE = @nCliente"
+                    , Cn);
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@nCliente", nCliente);
+            SqlDataReader reader = cmd.ExecuteReader();
+            ObservableCollection<Encomenda> list = new ObservableCollection<Encomenda>();
+            while (reader.Read())
+            {
+                Encomenda enc = new Encomenda();
+                enc.NEncomenda = Convert.ToInt32(reader["N_ENCOMENDA"].ToString());
+                enc.DataConfirmacao = Convert.ToDateTime(reader["DATA_CONFIRMACAO"].ToString());
+                if (reader["DATA_ENTREGA"].ToString() == null || reader["DATA_ENTREGA"].ToString().Equals("", StringComparison.Ordinal))
+                {
+                    enc.DataEntrega = null;
+                }
+                else
+                {
+                    enc.DataEntrega = Convert.ToDateTime(reader["DATA_ENTREGA"].ToString());
+                }
+                enc.LocalEntrega = reader["LOCALENTREGA"].ToString();
+                enc.Estado = reader["ESTADO"].ToString();
+                enc.GestorVendas = new Utilizador();
+                enc.GestorVendas.NFuncionario = Convert.ToInt32(reader["N_GESTOR_VENDA"].ToString());
+                enc.GestorVendas.Nome = reader["GESTOR_NOME"].ToString();
+                list.Add(enc);
+            }
+            closeSGBDConnection();
+            return list;
+        }
+
+        public ObservableCollection<Encomenda> getEncomendasFromDB()
+        {
+            verifySGBDConnection();
+            SqlCommand cmd = new SqlCommand("SELECT ENCOMENDA.N_ENCOMENDA, DATA_CONFIRMACAO, DATA_ENTREGA_PREV, ESTADO.DESCRIÇAO, DESCONTO, CLIENTE.NCLIENTE, CLIENTE.NOME, N_GESTOR_VENDA, SUM([PRODUTO-PERSONALIZADO].PRECO*CONTEUDO_ENCOMENDA.QUANTIDADE) AS PRECOTOTAL "
+                                + " FROM ENCOMENDA JOIN CLIENTE ON CLIENTE.NCLIENTE = ENCOMENDA.CLIENTE"
+                                + " JOIN CONTEUDO_ENCOMENDA ON CONTEUDO_ENCOMENDA.N_ENCOMENDA=ENCOMENDA.N_ENCOMENDA"
+                                + " JOIN [PRODUTO-PERSONALIZADO] ON CONTEUDO_ENCOMENDA.REFERENCIA_PRODUTO=[PRODUTO-PERSONALIZADO].REFERENCIA"
+                                + " JOIN ESTADO ON ENCOMENDA.ESTADO=ESTADO.ID"
+                                + " GROUP BY ENCOMENDA.N_ENCOMENDA, DATA_CONFIRMACAO, DATA_ENTREGA_PREV, ESTADO.DESCRIÇAO, DESCONTO, CLIENTE.NCLIENTE, CLIENTE.NOME, N_GESTOR_VENDA;"
+                                , cn);
+            SqlDataReader reader = cmd.ExecuteReader();
+            ObservableCollection<Encomenda> enc = new ObservableCollection<Encomenda>();
+            while (reader.Read())
+            {
+                Encomenda Enc = new Encomenda();
+                Enc.Cliente = new Cliente();
+                Enc.GestorVendas = new Utilizador();
+                Enc.NEncomenda = Convert.ToInt32(reader["N_ENCOMENDA"].ToString());
+                Enc.Estado = reader["DESCRIÇAO"].ToString();
+                Enc.DataPrevistaEntrega = Convert.ToDateTime(reader["DATA_ENTREGA_PREV"]);
+                Enc.DataConfirmacao = Convert.ToDateTime(reader["DATA_CONFIRMACAO"]);
+                Enc.Desconto = Convert.ToInt32(reader["DESCONTO"]);
+                Enc.GestorVendas.NFuncionario = Convert.ToInt32(reader["N_GESTOR_VENDA"].ToString());
+                Enc.Cliente.Nome = reader["NOME"].ToString();
+                Enc.Cliente.NCliente = Convert.ToInt32(reader["NCLIENTE"].ToString());
+                Enc.Preco = Convert.ToDouble(reader["PRECOTOTAL"].ToString());
+                enc.Add(Enc);
+            }
+            closeSGBDConnection();
+            return enc;
+        }
+
+        public Encomenda getEncomendaFromDB(int nEncomenda)
+        {
+            verifySGBDConnection();
+            SqlCommand cmd = new SqlCommand("SELECT ENCOMENDA.N_ENCOMENDA, DATA_CONFIRMACAO, DATA_ENTREGA_PREV, ESTADO.DESCRIÇAO, DESCONTO, CLIENTE.NCLIENTE, CLIENTE.NOME AS CNOME, N_GESTOR_VENDA, SUM([PRODUTO-PERSONALIZADO].PRECO*CONTEUDO_ENCOMENDA.QUANTIDADE) AS PRECOTOTAL "
+                                + " FROM ENCOMENDA JOIN CLIENTE ON CLIENTE.NCLIENTE = ENCOMENDA.CLIENTE"
+                                + " JOIN CONTEUDO_ENCOMENDA ON CONTEUDO_ENCOMENDA.N_ENCOMENDA=ENCOMENDA.N_ENCOMENDA"
+                                + " JOIN [PRODUTO-PERSONALIZADO] ON CONTEUDO_ENCOMENDA.REFERENCIA_PRODUTO=[PRODUTO-PERSONALIZADO].REFERENCIA"
+                                + " JOIN ESTADO ON ENCOMENDA.ESTADO=ESTADO.ID"
+                                + " JOIN UTILIZADOR ON UTILIZADOR.N_FUNCIONARIO=N_GESTOR_VENDA"
+                                + " WHERE ENCOMENDA.N_ENCOMENDA=@encomenda"
+                                + " GROUP BY ENCOMENDA.N_ENCOMENDA, DATA_CONFIRMACAO, DATA_ENTREGA_PREV, ESTADO.DESCRIÇAO, DESCONTO, CLIENTE.NCLIENTE, CLIENTE.NOME, N_GESTOR_VENDA;"
+                                , cn);
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@encomenda", nEncomenda);
+            SqlDataReader reader = cmd.ExecuteReader();
+            Encomenda Enc = new Encomenda();
+            reader.Read();
+            Enc.Cliente = new Cliente();
+            Enc.GestorVendas = new Utilizador();
+            Enc.NEncomenda = Convert.ToInt32(reader["N_ENCOMENDA"].ToString());
+            Enc.Estado = reader["DESCRIÇAO"].ToString();
+            Enc.DataPrevistaEntrega = Convert.ToDateTime(reader["DATA_ENTREGA_PREV"]);
+            Enc.DataConfirmacao = Convert.ToDateTime(reader["DATA_CONFIRMACAO"]);
+            Enc.Desconto = Convert.ToInt32(reader["DESCONTO"]);
+            Enc.GestorVendas.NFuncionario = Convert.ToInt32(reader["N_GESTOR_VENDA"].ToString());
+            Enc.Cliente.Nome = reader["CNOME"].ToString();
+            Enc.Cliente.NCliente = Convert.ToInt32(reader["NCLIENTE"].ToString());
+            Enc.Preco = Convert.ToDouble(reader["PRECOTOTAL"].ToString());
+            closeSGBDConnection();
+            return Enc;
+        }
+
+        public ObservableCollection<ProdutoPersonalizado> getProdutosFromEncomendaDB(int nEncomenda)
+        {
+            verifySGBDConnection();
+            SqlCommand cmd = new SqlCommand("SELECT [PRODUTO-PERSONALIZADO].REFERENCIA as REF, [PRODUTO-PERSONALIZADO].TAMANHO AS TAM, [PRODUTO-PERSONALIZADO].COR AS COLOR, [PRODUTO-PERSONALIZADO].ID AS IDENT, [PRODUTO-PERSONALIZADO].PRECO AS PRICE, [PRODUTO-PERSONALIZADO].UNIDADES_ARMAZEM AS UA, CONTEUDO_ENCOMENDA.QUANTIDADE AS QT"
+                                + " FROM ENCOMENDA"
+                                + " JOIN CONTEUDO_ENCOMENDA ON CONTEUDO_ENCOMENDA.N_ENCOMENDA=ENCOMENDA.N_ENCOMENDA"
+                                + " JOIN [PRODUTO-PERSONALIZADO] ON CONTEUDO_ENCOMENDA.REFERENCIA_PRODUTO=[PRODUTO-PERSONALIZADO].REFERENCIA"
+                                + " WHERE ENCOMENDA.N_ENCOMENDA=@encomenda"
+                                , cn);
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@encomenda", nEncomenda);
+            SqlDataReader reader = cmd.ExecuteReader();
+            ObservableCollection<ProdutoPersonalizado> prodList = new ObservableCollection<ProdutoPersonalizado>();
+            while (reader.Read())
+            {
+                ProdutoPersonalizado prod = new ProdutoPersonalizado();
+                prod.ProdutoBase = new ProdutoBase();
+                prod.ProdutoBase.Referencia = Convert.ToInt32(reader["REF"].ToString());
+                prod.Tamanho= reader["TAM"].ToString();
+                prod.Cor = reader["COLOR"].ToString();
+                prod.ID = Convert.ToInt32(reader["IDENT"].ToString());
+                prod.UnidadesStock = Convert.ToInt32(reader["UA"].ToString());
+                prod.Quantidade = Convert.ToInt32(reader["QT"].ToString());
+                prodList.Add(prod);
+            }
+            closeSGBDConnection();
+            return prodList;
+        }
+
         public Utilizador getUtilizadorFromDB(int user)
         {
             this.verifySGBDConnection();
             Utilizador utilizador = new Utilizador();
-            SqlCommand cmd = new SqlCommand("SELECT N_FUNCIONARIO, IMAGEM, UTILIZADOR.EMAIL AS EMAILUSER, SALARIO, NOME, TIPO, PASS, UTILIZADOR.TELEFONE AS TELEFONEUSER, HORA_ENTRADA, HORA_SAIDA, IMAGEM, N_FUNCIONARIO_SUPER, ZONAUSER.COD_POSTAL AS CODUSER, ZONAUSER.DISTRITO AS DISTRITOUSER, ZONAUSER.CONCELHO AS CONCELHOUSER, ZONAUSER.LOCALIDADE AS LOCALIDADEUSER, UTILIZADOR.RUA AS RUAUSER, UTILIZADOR.N_PORTA AS PORTAUSER, ZONAFABRICA.COD_POSTAL AS CODFABRICA, ZONAFABRICA.DISTRITO AS DISTRITOFABRICA, ZONAFABRICA.CONCELHO AS CONCELHOFABRICA, ZONAFABRICA.LOCALIDADE AS LOCALIDADEFABRICA, [FABRICA-FILIAL].RUA AS RUAFABRICA, [FABRICA-FILIAL].N_PORTA AS PORTAFABRICA, [FABRICA-FILIAL].EMAIL AS EMAILFABRICA, [FABRICA-FILIAL].TELEFONE AS TELEFONEFABRICA, [FABRICA-FILIAL].FAX AS FAXFABRICA, N_FILIAL  FROM UTILIZADOR"
-                                            + " JOIN ZONA AS ZONAUSER ON UTILIZADOR.COD_POSTAL = ZONAUSER.COD_POSTAL"
+            SqlCommand cmd = new SqlCommand("SELECT N_FUNCIONARIO, IMAGEM, UTILIZADOR.EMAIL AS EMAILUSER, SALARIO, NOME, TIPO, PASS, UTILIZADOR.TELEFONE AS TELEFONEUSER, HORA_ENTRADA, HORA_SAIDA, IMAGEM, N_FUNCIONARIO_SUPER, ZONAUSER.CODPOSTAL1 AS CODUSER1, ZONAUSER.CODPOSTAL2 AS CODUSER2 ,ZONAUSER.DISTRITO AS DISTRITOUSER, ZONAUSER.LOCALIDADE AS LOCALIDADEUSER, UTILIZADOR.RUA AS RUAUSER, UTILIZADOR.N_PORTA AS PORTAUSER, ZONAFABRICA.CODPOSTAL1 AS CODFABRICA1, ZONAFABRICA.CODPOSTAL2 AS CODFABRICA2, ZONAFABRICA.DISTRITO AS DISTRITOFABRICA, ZONAFABRICA.LOCALIDADE AS LOCALIDADEFABRICA, [FABRICA-FILIAL].RUA AS RUAFABRICA, [FABRICA-FILIAL].N_PORTA AS PORTAFABRICA, [FABRICA-FILIAL].EMAIL AS EMAILFABRICA, [FABRICA-FILIAL].TELEFONE AS TELEFONEFABRICA, [FABRICA-FILIAL].FAX AS FAXFABRICA, N_FILIAL  FROM UTILIZADOR"
+                                            + " JOIN ZONA AS ZONAUSER ON UTILIZADOR.CODPOSTAL1 = ZONAUSER.CODPOSTAL1 AND UTILIZADOR.CODPOSTAL2 = ZONAUSER.CODPOSTAL2"
                                             + " JOIN[FABRICA-FILIAL] ON[FABRICA-FILIAL].N_FILIAL = UTILIZADOR.N_FABRICA"
-                                            + " JOIN ZONA AS ZONAFABRICA ON[FABRICA-FILIAL].COD_POSTAL = ZONAFABRICA.COD_POSTAL"
+                                            + " JOIN ZONA AS ZONAFABRICA ON [FABRICA-FILIAL].CODPOSTAL1 = ZONAFABRICA.CODPOSTAL1 AND [FABRICA-FILIAL].CODPOSTAL2 = ZONAFABRICA.CODPOSTAL2"
                                             + " JOIN[UTILIZADOR-TIPOS] ON[UTILIZADOR-TIPOS].UTILIZADOR = UTILIZADOR.N_FUNCIONARIO"
                                             + " JOIN[TIPO-UTILIZADOR] ON[TIPO-UTILIZADOR].ID =[UTILIZADOR-TIPOS].ID_TIPO"
                                             + " WHERE N_FUNCIONARIO = @USER;"
@@ -83,9 +262,8 @@ namespace Trabalho_BD_IHC
             utilizador.Filial.Fax = reader["FAXFABRICA"].ToString();
             utilizador.Filial.Telefone = reader["TELEFONEFABRICA"].ToString();
             utilizador.Filial.Localizacao = new Localizacao();
-            utilizador.Filial.Localizacao.CodigoPostal = reader["CODFABRICA"].ToString();
+            utilizador.Filial.Localizacao.CodigoPostal = reader["CODFABRICA1"].ToString()+"-"+ reader["CODFABRICA2"].ToString();
             utilizador.Filial.Localizacao.Distrito = reader["DISTRITOFABRICA"].ToString();
-            utilizador.Filial.Localizacao.Concelho = reader["CONCELHOFABRICA"].ToString();
             utilizador.Filial.Localizacao.Localidade = reader["LOCALIDADEFABRICA"].ToString();
             utilizador.Filial.Localizacao.Rua1 = reader["RUAFABRICA"].ToString();
             utilizador.Filial.Localizacao.Porta = Convert.ToInt32(reader["PORTAFABRICA"].ToString());
@@ -99,14 +277,15 @@ namespace Trabalho_BD_IHC
             utilizador.Telemovel = reader["TELEFONEUSER"].ToString();
             utilizador.TipoUser = reader["TIPO"].ToString();
             utilizador.Localizacao = new Localizacao();
-            utilizador.Localizacao.CodigoPostal = reader["CODUSER"].ToString();
+            utilizador.Localizacao.CodigoPostal = reader["CODUSER1"].ToString()+ "-"+ reader["CODUSER2"].ToString();
             utilizador.Localizacao.Distrito = reader["DISTRITOUSER"].ToString();
-            utilizador.Localizacao.Concelho = reader["CONCELHOUSER"].ToString();
             utilizador.Localizacao.Localidade = reader["LOCALIDADEUSER"].ToString();
             utilizador.Localizacao.Porta = Convert.ToInt32(reader["PORTAUSER"].ToString());
             utilizador.Localizacao.Rua1 = reader["RUAUSER"].ToString();
             utilizador.Supervisor = new Utilizador();
             utilizador.Supervisor.NFuncionario = Convert.ToInt32(reader["N_FUNCIONARIO_SUPER"].ToString());
+            Console.WriteLine(utilizador.Localizacao.CodigoPostal);
+            Console.WriteLine(utilizador.Password);
             byte[] img=null;
             try
             {

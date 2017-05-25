@@ -256,3 +256,4 @@ C:\Users\young\Source\Repos\ihc_bd2\Trabalho_BD_IHC\obj\Debug\RegistarProduto.g.
 C:\Users\young\Source\Repos\ihc_bd2\Trabalho_BD_IHC\obj\Debug\RegistarProdutoMateriais.baml
 C:\Users\young\Source\Repos\ihc_bd2\Trabalho_BD_IHC\obj\Debug\RegistarProduto.baml
 C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\bin\Debug\MaterialDesignColors.pdb
+C:\Users\young\Source\Repos\ihc_bd2\Trabalho_BD_IHC\bin\Debug\MaterialDesignColors.pdb

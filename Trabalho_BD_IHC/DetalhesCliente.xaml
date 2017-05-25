@@ -7,7 +7,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:Trabalho_BD_IHC"
         mc:Ignorable="d"
-        Title="Detalhes de Cliente" Height="450" MinHeight="400" MinWidth="550" Width="650" Loaded="Window_Loaded" Icon="details.png">
+        Title="Detalhes de Cliente" Height="600" MinHeight="400" MinWidth="650" Width="700" Loaded="Window_Loaded" Icon="details.png">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.1*"/>
@@ -21,64 +21,87 @@
             <ColumnDefinition Width="0.1*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.1*"/>
-            <RowDefinition Height="25"/>
-            <RowDefinition Height="0.05*"/>
-            <RowDefinition Height="25"/>
-            <RowDefinition Height="0.05*"/>
-            <RowDefinition Height="25"/>
-            <RowDefinition Height="0.05*"/>
-            <RowDefinition Height="25"/>
-            <RowDefinition Height="0.05*"/>
-            <RowDefinition Height="25"/>
-            <RowDefinition Height="0.05*"/>
-            <RowDefinition Height="25"/>
-            <RowDefinition Height="0.1*"/>
+            <RowDefinition Height="0.07*"/>
             <RowDefinition />
             <RowDefinition Height="0.05*"/>
             <RowDefinition />
-            <RowDefinition Height="0.1*"/>
+            <RowDefinition Height="0.05*"/>
+            <RowDefinition Height="1.35*"/>
+            <RowDefinition Height="0.07*"/>
         </Grid.RowDefinitions>
-        <materialDesign:ColorZone Grid.Column="3" Grid.ColumnSpan="3" Grid.Row="3"></materialDesign:ColorZone>
-        <Label Content="Nome: " Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right"></Label>
-        <Label Name="nomeCliente" Grid.Row="1" Grid.Column="3" HorizontalAlignment="Left"></Label>
-        <Label Content="Número Cliente: " Grid.Row="1"  Grid.Column="5" HorizontalAlignment="Right"></Label>
-        <Label Name="nCliente" Grid.Row="1"   Grid.Column="7" HorizontalAlignment="Left"></Label>
+        <GroupBox materialDesign:ColorZoneAssist.Mode="Accent" Header="Informações Pessoais do Cliente" Grid.Column="1" Grid.ColumnSpan="7" Grid.Row="1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.1*"/>
+                    <ColumnDefinition Width="0.7*"/>
+                    <ColumnDefinition Width="0.05*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="0.05*"/>
+                    <ColumnDefinition Width="0.7*"/>
+                    <ColumnDefinition Width="0.05*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="0.1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Label Content="Nome: " Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right"></Label>
+                <Label Name="nomeCliente" Grid.Row="0" Grid.Column="3" HorizontalAlignment="Left"></Label>
+                <Label Content="Número Cliente: " Grid.Row="0"  Grid.Column="5" HorizontalAlignment="Right"></Label>
+                <Label Name="nCliente" Grid.Row="0"   Grid.Column="7" HorizontalAlignment="Left"></Label>
 
-        <Label Content="NIF: " Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right"></Label>
-        <Label Name="nif" Grid.Row="3" Grid.Column="3" HorizontalAlignment="Left"></Label>
-        <Label Content="NIB: " Grid.Row="3"  Grid.Column="5" HorizontalAlignment="Right"></Label>
-        <Label Name="nib" Grid.Row="3"   Grid.Column="7" HorizontalAlignment="Left"></Label>
+                <Label Content="NIF: " Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right"></Label>
+                <Label Name="nif" Grid.Row="1" Grid.Column="3" HorizontalAlignment="Left"></Label>
+                <Label Content="NIB: " Grid.Row="1"  Grid.Column="5" HorizontalAlignment="Right"></Label>
+                <Label Name="nib" Grid.Row="1"   Grid.Column="7" HorizontalAlignment="Left"></Label>
 
-        <Label Content="Email: "  Grid.Row="5" Grid.Column="1" HorizontalAlignment="Right"></Label>
-        <Label Name="email" Grid.Row="5"  Grid.Column="3" HorizontalAlignment="Left"></Label>
-        <Label Content="Telemóvel: " Grid.Row="5"  Grid.Column="5" HorizontalAlignment="Right"></Label>
-        <Label Name="telemovel" Grid.Row="5"   Grid.Column="7" HorizontalAlignment="Left"></Label>
+                <Label Content="Email: "  Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right"></Label>
+                <Label Name="email" Grid.Row="2"  Grid.Column="3" HorizontalAlignment="Left"></Label>
+                <Label Content="Telemóvel: " Grid.Row="2"  Grid.Column="5" HorizontalAlignment="Right"></Label>
+                <Label Name="telemovel" Grid.Row="2"   Grid.Column="7" HorizontalAlignment="Left"></Label>
+            </Grid>
+        </GroupBox>
+        <GroupBox materialDesign:ColorZoneAssist.Mode="Dark"  Header="Informações de Localização do Cliente" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="7">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.1*"/>
+                    <ColumnDefinition Width="0.7*"/>
+                    <ColumnDefinition Width="0.05*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="0.05*"/>
+                    <ColumnDefinition Width="0.7*"/>
+                    <ColumnDefinition Width="0.05*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="0.1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Label Content="Código-postal: "  Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right"></Label>
+                <Label Name="cdgPostal" Grid.Row="0"  Grid.Column="3" HorizontalAlignment="Left"></Label>
+                <Label Content="Distrito " Grid.Row="0"  Grid.Column="5" HorizontalAlignment="Right"></Label>
+                <Label Name="distrito" Grid.Row="0"   Grid.Column="7" HorizontalAlignment="Left"></Label>
 
-        <Label Content="Código-postal: "  Grid.Row="7" Grid.Column="1" HorizontalAlignment="Right"></Label>
-        <Label Name="cdgPostal" Grid.Row="7"  Grid.Column="3" HorizontalAlignment="Left"></Label>
-        <Label Content="Distrito " Grid.Row="7"  Grid.Column="5" HorizontalAlignment="Right"></Label>
-        <Label Name="distrito" Grid.Row="7"   Grid.Column="7" HorizontalAlignment="Left"></Label>
+                <Label Content="Localidade: " Grid.Row="1"  Grid.Column="1" HorizontalAlignment="Right"></Label>
+                <Label Name="localidade" Grid.Row="1"   Grid.Column="3" HorizontalAlignment="Left"></Label>
 
-        <Label Content="Concelho: "  Grid.Row="9" Grid.Column="1" HorizontalAlignment="Right"></Label>
-        <Label Name="concelho" Grid.Row="9"  Grid.Column="3" HorizontalAlignment="Left"></Label>
-        <Label Content="Localidade: " Grid.Row="9"  Grid.Column="5" HorizontalAlignment="Right"></Label>
-        <Label Name="localidade" Grid.Row="9"   Grid.Column="7" HorizontalAlignment="Left"></Label>
-
-        <Label Content="Rua: "  Grid.Row="11" Grid.Column="1" HorizontalAlignment="Right"></Label>
-        <Label Name="rua" Grid.Row="11"  Grid.Column="3" HorizontalAlignment="Left"></Label>
-        <Label Content="Nº Porta: " Grid.Row="11"  Grid.Column="5" HorizontalAlignment="Right"></Label>
-        <Label Name="nporta" Grid.Row="11"   Grid.Column="7" HorizontalAlignment="Left"></Label>
-        <GroupBox Header="Histórico de encomendas do Cliente" Grid.Column="1" Grid.ColumnSpan="7" Grid.Row="13" Grid.RowSpan="3">
-            <DataGrid Name="produtos" ItemsSource="{Binding Encomenda}" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True" AutoGenerateColumns="False">
+                <Label Content="Rua: "  Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right"></Label>
+                <Label Name="rua" Grid.Row="2"  Grid.Column="3" HorizontalAlignment="Left"></Label>
+                <Label Content="Nº Porta: " Grid.Row="2"  Grid.Column="5" HorizontalAlignment="Right"></Label>
+                <Label Name="nporta" Grid.Row="2"   Grid.Column="7" HorizontalAlignment="Left"></Label>
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Encomendas do Cliente" Grid.Column="1" Grid.ColumnSpan="7" Grid.Row="5">
+            <DataGrid Name="encomendas" ItemsSource="{Binding Encomenda}" IsReadOnly="True" MouseDoubleClick="produtos_MouseDoubleClick" AutoGenerateColumns="False">
                 <DataGrid.Columns>
-                    <materialDesign:MaterialDataGridTextColumn Binding="{Binding NEncomenda}" Header="Nº encomenda" ></materialDesign:MaterialDataGridTextColumn>
+                    <materialDesign:MaterialDataGridTextColumn Binding="{Binding NEncomenda}" Header="Nº da encomenda" ></materialDesign:MaterialDataGridTextColumn>
                     <materialDesign:MaterialDataGridTextColumn Binding="{Binding Estado}" Header="Estado da Encomenda" ></materialDesign:MaterialDataGridTextColumn>
                     <materialDesign:MaterialDataGridTextColumn Binding="{Binding DataConfirmacao, StringFormat=d}" Header="Data de Confirmação" ></materialDesign:MaterialDataGridTextColumn>
-                    <materialDesign:MaterialDataGridTextColumn Binding="{Binding LocalEntrega}" Header="Local de Entrega" ></materialDesign:MaterialDataGridTextColumn>
-                    <materialDesign:MaterialDataGridTextColumn Binding="{Binding Binding DataEntrega, StringFormat=d}" Header="Data de Entrega" ></materialDesign:MaterialDataGridTextColumn>
-                    <materialDesign:MaterialDataGridTextColumn Binding="{Binding GestorVendas.NFuncionario}" Header="Nº Gestor de Venda Responsável" ></materialDesign:MaterialDataGridTextColumn>
-                    <materialDesign:MaterialDataGridTextColumn Binding="{Binding GestorVendas.Nome}" Header="Nome do Gestor de Venda Responsável" ></materialDesign:MaterialDataGridTextColumn>
+                    <materialDesign:MaterialDataGridTextColumn Binding="{Binding GestorVendas.Nome}" Header="Gestor de Vendas Responsável" ></materialDesign:MaterialDataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>
