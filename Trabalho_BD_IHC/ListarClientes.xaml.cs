@@ -35,37 +35,9 @@ namespace Trabalho_BD_IHC
             editarCliente.IsEnabled = false;
             detalhesCliente.IsEnabled = false;
             clientes.Focus();
-            if (!dataHandler.verifySGBDConnection())
-            {
-                MessageBoxResult result = MessageBox.Show("A conexão à base de dados é instável ou inexistente. Por favor tente mais tarde", "Erro de Base de Dados", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
-            else
-            {
-                SqlCommand cmd = new SqlCommand("SELECT * FROM CLIENTE JOIN ZONA ON CLIENTE.COD_POSTAL=ZONA.COD_POSTAL", dataHandler.Cn);
-                SqlDataReader reader = cmd.ExecuteReader();
-                ObservableCollection<Cliente> items = new ObservableCollection<Cliente>();
-                while (reader.Read())
-                {
-                    Cliente C = new Cliente();
-                    C.Nome = reader["NOME"].ToString();
-                    C.Nif = reader["NIF"].ToString();
-                    C.Nib = reader["NIB"].ToString();
-                    C.Email = reader["EMAIL"].ToString();
-                    C.Telemovel = reader["TELEMOVEL"].ToString();
-                    C.CodigoPostal = reader["COD_POSTAL"].ToString();
-                    C.Rua = reader["RUA"].ToString();
-                    C.NCasa = Convert.ToInt32(reader["N_PORTA"].ToString());
-                    C.NCliente = Convert.ToInt32(reader["NCLIENTE"].ToString());
-                    C.Distrito = reader["DISTRITO"].ToString();
-                    C.Concelho = reader["CONCELHO"].ToString();
-                    C.Localidade = reader["LOCALIDADE"].ToString();
-                    items.Add(C);
-                }
-
+            ObservableCollection<Cliente> items = dataHandler.getClientesFromDB();
+            if(items!=null)
                 clientes.ItemsSource = items;
-
-                dataHandler.closeSGBDConnection();
-            }
         }
 
         private void RemoveCliente(Cliente cliente)

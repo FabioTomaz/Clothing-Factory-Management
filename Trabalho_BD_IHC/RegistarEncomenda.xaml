@@ -7,7 +7,7 @@
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:local="clr-namespace:Trabalho_BD_IHC"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
+      d:DesignHeight="500" d:DesignWidth="600"
       Title="RegistarEncomenda">
     <Grid Background="White">
         <Grid.ColumnDefinitions>
@@ -21,7 +21,7 @@
             <RowDefinition Height="0.05*"/>
             <RowDefinition />
             <RowDefinition Height="0.05*"/>
-            <RowDefinition />
+            <RowDefinition Height="1.4*" />
             <RowDefinition Height="0.1*"/>
         </Grid.RowDefinitions>
         <GroupBox Header="Operações" Grid.Column="1" Grid.Row="1" Grid.RowSpan="3" Template="{StaticResource blackGroupBox}">
@@ -48,47 +48,39 @@
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.05*"></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="0.5*"></ColumnDefinition>
                     <ColumnDefinition Width="0.05*"></ColumnDefinition>
-                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="0.05*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
                     <ColumnDefinition Width="0.05*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="0.1*"></RowDefinition>
+                    <RowDefinition Height="0.05*"></RowDefinition>
                     <RowDefinition></RowDefinition>
-                    <RowDefinition Height="0.1*"></RowDefinition>
+                    <RowDefinition Height="0.01*"></RowDefinition>
                     <RowDefinition></RowDefinition>
-                    <RowDefinition Height="0.1*"></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition Height="0.1*"></RowDefinition>
+                    <RowDefinition Height="0.01*"></RowDefinition>
+                    <RowDefinition Height="1.2*"></RowDefinition>
+                    <RowDefinition Height="0.05*"></RowDefinition>
 
                 </Grid.RowDefinitions>
-                <Label Content="Numero do Cliente: " Grid.Row="1" Grid.Column="1" VerticalAlignment="Center"/>
-                <Grid Grid.Row="1" Grid.Column="3">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1.4*"></ColumnDefinition>
-                        <ColumnDefinition Width="0.05*"></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <wpfTool:WatermarkTextBox Name="txtCliente" Grid.Column="0" VerticalAlignment="Center">
-                        <wpfTool:WatermarkTextBox.Watermark>
-                            <StackPanel Orientation="Horizontal">
-                                <Image Source="nCliente.png" Width="20" />
-                                <TextBlock Text="Numero do Cliente" Margin="4,0,0,0" />
-                            </StackPanel>
-                        </wpfTool:WatermarkTextBox.Watermark>
-                    </wpfTool:WatermarkTextBox>
-                    <Button Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left">
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="searchCliente.png" Width="20" />
-                            <TextBlock Text="Pesquisar Cliente" Margin="4,0,0,0" />
-                        </StackPanel>
-                    </Button>
-                </Grid>
-                <Label Content="Data Prevista para Entrega:" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center"/>
-                <DatePicker Name="dataPrevista" Grid.Row="3" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Center"></DatePicker>
-                <Label Content="Descontos Aplicaveis: " Grid.Row="5" Grid.Column="1" VerticalAlignment="Center"/>
-                <wpfTool:DoubleUpDown Name="txtDesconto" VerticalAlignment="Center" Grid.Row="5" Grid.Column="3" Maximum="100" Minimum="0" Value="0" FormatString="P"  Width="100" Watermark="Percentagem" HorizontalAlignment="Left"></wpfTool:DoubleUpDown>
+                <materialDesign:PackIcon Kind="Account" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+
+                <TextBox Name="txtCliente" materialDesign:HintAssist.Hint="Numero de Cliente" materialDesign:HintAssist.IsFloating="True" Grid.Column="3" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left">
+                </TextBox>
+                <materialDesign:PackIcon Kind="Calendar" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" materialDesign:HintAssist.IsFloating="True" HorizontalAlignment="Right"/>
+                <DatePicker Name="dataPrevista" materialDesign:HintAssist.Hint="Data Prevista para Entrega" materialDesign:HintAssist.IsFloating="True" Grid.Row="3" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Bottom"></DatePicker>
+                <ComboBox materialDesign:HintAssist.Hint="Local da Entrega" materialDesign:HintAssist.IsFloating="True" Name="localEntrega" Grid.Row="3" Grid.Column="5" VerticalAlignment="Bottom">
+                    <ComboBoxItem Content="Entrega ao Domicilio"></ComboBoxItem>
+                    <ComboBoxItem Content="Entrega na Fábrica"></ComboBoxItem>
+                </ComboBox>
+                <Label Content="Desconto: " Grid.Row="5" Grid.Column="1"  VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+                <StackPanel Name="ParentPanel" Orientation="Horizontal" HorizontalAlignment="Stretch"  Grid.Row="5" Grid.Column="3" Grid.ColumnSpan="3">
+                    <Slider Style="{StaticResource MaterialDesignDiscreteSlider}"  Name="txtDesconto" Maximum="100" Minimum="0" Value="0" HorizontalAlignment="Left" Width="200"></Slider>
+                    <TextBox x:Name="myTextBox" Margin="3" Text="{Binding ElementName=txtDesconto,Path=Value}"/>
+                    <Label VerticalAlignment="Bottom">%</Label>
+                </StackPanel>
             </Grid>
         </GroupBox>
         <GroupBox Header="Produtos da Encomenda" Grid.Column="3" Grid.Row="3" >

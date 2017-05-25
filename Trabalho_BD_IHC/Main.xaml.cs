@@ -67,7 +67,7 @@ namespace Trabalho_BD_IHC
             emailFilial.Content = Utilizador.loggedUser.Filial.Email;
             faxFilial.Content = Utilizador.loggedUser.Filial.Fax;
             telefoneFilial.Content = Utilizador.loggedUser.Filial.Telefone;
-            moradaFilial.Content = String.Format("{0} , {1}, {2}, {3}, porta nº {4}", Utilizador.loggedUser.Localizacao.Distrito, Utilizador.loggedUser.Localizacao.Concelho, Utilizador.loggedUser.Localizacao.Localidade, Utilizador.loggedUser.Localizacao.Rua1, Utilizador.loggedUser.Localizacao.Porta);
+            moradaFilial.Content = String.Format("{0} , {1}, {2}, porta nº{3}", Utilizador.loggedUser.Localizacao.Distrito, Utilizador.loggedUser.Localizacao.Localidade, Utilizador.loggedUser.Localizacao.Rua1, Utilizador.loggedUser.Localizacao.Porta);
             if (Utilizador.loggedUser.Imagem != null) { 
                 var ms = new MemoryStream();
                 Utilizador.loggedUser.Imagem.Save(ms, ImageFormat.Png);
@@ -138,6 +138,17 @@ namespace Trabalho_BD_IHC
                    if (MessageBox.Show("Não foi possivel atualizar o perfil do cliente. Deseja Tentar Novamente?", "Erro", MessageBoxButton.YesNo, MessageBoxImage.Exclamation) == MessageBoxResult.Yes)
                     sendUserImageToDB(imgLoc);
                 dataHandler.closeSGBDConnection();
+            }
+        }
+
+        private void tabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(e.Source is TabControl) { 
+                clientesFrame.Content = new ListarClientes(dataHandler);
+                encomendasFrame.Content = new ListarEncomendas(dataHandler);
+                produtosFrame.Content = new ListarProdutos(dataHandler);
+                materiaisFrame.Content = new ListarMateriais(dataHandler);
+                empregadosFrame.Content = new ListarEmpregados(dataHandler);
             }
         }
     }

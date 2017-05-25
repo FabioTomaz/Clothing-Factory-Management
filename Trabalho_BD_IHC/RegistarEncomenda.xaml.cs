@@ -29,17 +29,14 @@ namespace Trabalho_BD_IHC
         {
             InitializeComponent();
             this.dataHandler = dataHandler;
-            ObservableCollection<ProdutoPersonalizado> list = new ObservableCollection<ProdutoPersonalizado>();
-            produtosEncomenda.ItemsSource = list;
         }
 
         private void cancelar_Click(object sender, RoutedEventArgs e)
         {
-            if (MessageBox.Show("Tem a certeza que deseja cancelar o registo da encomenda? Perderá todos os dados que tenha introduzido.",
+            if (Xceed.Wpf.Toolkit.MessageBox.Show("Tem a certeza que deseja cancelar o registo da encomenda? Perderá todos os dados que tenha introduzido.",
                  "", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {//sim
-                ListarProdutos page = new ListarProdutos(dataHandler);
-                this.NavigationService.Navigate(page);
+                this.NavigationService.GoBack();
             }
         }
 
@@ -51,21 +48,23 @@ namespace Trabalho_BD_IHC
             DateTime currentDate = DateTime.Now;
             encomenda.Cliente.NCliente = Convert.ToInt32(txtCliente.Text);
             encomenda.DataConfirmacao = currentDate;
-            encomenda.Desconto =  Convert.ToDouble(txtDesconto.Value);
-            encomenda.GestorVendas.NFuncionario= 1;
+            encomenda.Desconto =  Convert.ToInt32(txtDesconto.Value);
+            encomenda.GestorVendas.NFuncionario= Utilizador.loggedUser.NFuncionario;
+            encomenda.LocalEntrega = localEntrega.SelectedItem.ToString();
             encomenda.DataPrevistaEntrega = dataPrevista.SelectedDate.Value;
             
             try
             {
                 dataHandler.EnviarEncomenda(encomenda, produtosEncomenda.Items.Cast<ProdutoPersonalizado>().ToList<ProdutoPersonalizado>());
                 Xceed.Wpf.Toolkit.MessageBox.Show("Encomenda Registada Com Sucesso!", "Envio de Encomenda", MessageBoxButton.OK, MessageBoxImage.Information);
+                this.NavigationService.GoBack();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                Xceed.Wpf.Toolkit.MessageBox.Show(ex.Message, "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            this.NavigationService.GoBack();
+           
         }
     }
 }
