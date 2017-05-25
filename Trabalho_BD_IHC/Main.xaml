@@ -160,7 +160,7 @@
                 <Frame Name="fornecedoresFrame" NavigationUIVisibility="Hidden"></Frame>
             </TabItem>
             <TabItem Name="empresa" Header="Empresa"  IsEnabled="False">
-                <Grid Background="#FFE5E5E5"/>
+                <Frame Name="filiaisFrame" NavigationUIVisibility="Hidden"></Frame>
             </TabItem>
             <TabItem Name="empregados" Header="Recursos Humanos" >
                 <Frame Name="empregadosFrame" NavigationUIVisibility="Hidden"></Frame>

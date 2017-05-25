@@ -121,6 +121,9 @@
     <Compile Include="ListarFornecedores.xaml.cs">
       <DependentUpon>ListarFornecedores.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ListarFiliais.xaml.cs">
+      <DependentUpon>ListarFiliais.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Localizacao.cs" />
     <Compile Include="ProdutoPersonalizado.cs" />
     <Compile Include="ProduzirProduto.xaml.cs">
@@ -203,6 +206,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ListarFornecedores.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ListarFiliais.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
