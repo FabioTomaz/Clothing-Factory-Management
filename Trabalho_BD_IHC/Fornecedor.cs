@@ -19,6 +19,7 @@ namespace Trabalho_BD_IHC
         private String rua;
         private String designacao;
         private int nPorta;
+        private int nFilial;
 
         public String NIF_Fornecedor
         {
@@ -160,6 +161,19 @@ namespace Trabalho_BD_IHC
             set
             {
                 nPorta = value;
+            }
+        }
+
+        public int NFilial
+        {
+            get
+            {
+                return nFilial;
+            }
+
+            set
+            {
+                nFilial = value;
             }
         }
     }
