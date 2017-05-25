@@ -157,7 +157,7 @@
                 <Frame Name="materiaisFrame" NavigationUIVisibility="Hidden"></Frame>
             </TabItem>
             <TabItem Name="Fornecedores" Header="Fornecedores" >
-                <Grid Background="#FFE5E5E5"/>
+                <Frame Name="fornecedoresFrame" NavigationUIVisibility="Hidden"></Frame>
             </TabItem>
             <TabItem Name="empresa" Header="Empresa"  IsEnabled="False">
                 <Grid Background="#FFE5E5E5"/>

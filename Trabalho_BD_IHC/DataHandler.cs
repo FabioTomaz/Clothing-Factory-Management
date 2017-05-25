@@ -707,6 +707,7 @@ namespace Trabalho_BD_IHC
                 pano.Tipo = reader["TIPO"].ToString();
                 pano.AreaArmazem = Convert.ToDouble(reader["AREA_ARMAZEM"].ToString());
                 pano.PrecoMetroQuadrado = Convert.ToDouble(reader["PRECO_POR_M2"].ToString());
+                //quantidade selecionado
 
             }
             reader.Close();
@@ -720,8 +721,8 @@ namespace Trabalho_BD_IHC
             if (!this.verifySGBDConnection())
                 return null;
             SqlCommand cmd = new SqlCommand("SELECT LINHA.REFERENCIA_FABRICA, GROSSURA, COMPRIMENTO_ARMAZEM, "
-                + "PRECO_CEM_METROS, REFERENCIA_FORNECEDOR, NIF_FORNECEDOR, COR, DESIGNACAO FROM LINHA "
-                + "JOIN MATERIAIS_TÊXTEIS ON MATERIAIS_TÊXTEIS.REFERENCIA_FABRICA = LINHA.REFERENCIA_FABRICA WHERE REFERENCIA_FABRICA = @ref", this.Cn);
+                + "PRECO_CEM_METROS, REFERENCIA_FORN, NIF_FORNECEDOR, COR, DESIGNACAO FROM LINHA "
+                + "JOIN MATERIAIS_TÊXTEIS ON MATERIAIS_TÊXTEIS.REFERENCIA_FABRICA = LINHA.REFERENCIA_FABRICA WHERE LINHA.REFERENCIA_FABRICA = @ref", this.Cn);
             cmd.Parameters.Clear();
             cmd.Parameters.AddWithValue("@ref", referencia);
             SqlDataReader reader = cmd.ExecuteReader();
@@ -732,7 +733,7 @@ namespace Trabalho_BD_IHC
                 l.Grossura = Convert.ToDouble(reader["GROSSURA"].ToString());
                 l.ComprimentoStock = Convert.ToDouble(reader["COMPRIMENTO_ARMAZEM"].ToString());
                 l.Preco100Metros = Convert.ToDouble(reader["PRECO_CEM_METROS"].ToString());
-                l.ReferenciaFornecedor = reader["REFERENCIA_FORNECEDOR"].ToString();
+                l.ReferenciaFornecedor = reader["REFERENCIA_FORN"].ToString();
                 l.Cor = reader["COR"].ToString();
                 l.Designacao = reader["DESIGNACAO"].ToString();
                 l.Fornecedor = new Fornecedor();
@@ -748,8 +749,8 @@ namespace Trabalho_BD_IHC
             if (!this.verifySGBDConnection())
                 return null;
             SqlCommand cmd = new SqlCommand("SELECT FECHO.REFERENCIA_FABRICA, QUANTIDADE_ARMAZEM, PRECO_UNIDADE, "
-                + "COMPRIMENTO, TAMANHO_DENTE REFERENCIA_FORN, NIF_FORNECEDOR, COR, DESIGNACAO FROM FECHO "
-                + "JOIN ACESSORIO ON FECHO.REFERENCIA_FABRICA = ACESSORIO.REFERENCIA_FABRICA"
+                + "COMPRIMENTO, TAMANHO_DENTE, REFERENCIA_FORN, NIF_FORNECEDOR, COR, DESIGNACAO FROM FECHO "
+                + "JOIN ACESSORIO ON FECHO.REFERENCIA_FABRICA = ACESSORIO.REFERENCIA_FABRICA "
                 + "JOIN MATERIAIS_TÊXTEIS ON MATERIAIS_TÊXTEIS.REFERENCIA_FABRICA = ACESSORIO.REFERENCIA_FABRICA "
                 + " WHERE FECHO.REFERENCIA_FABRICA = @ref", this.Cn);
 
@@ -813,7 +814,7 @@ namespace Trabalho_BD_IHC
             SqlCommand cmd = new SqlCommand("SELECT BOTAO.REFERENCIA_FABRICA, QUANTIDADE_ARMAZEM, PRECO_UNIDADE, DIAMETRO, "
                 + "REFERENCIA_FORN, NIF_FORNECEDOR, COR, DESIGNACAO FROM BOTAO JOIN ACESSORIO "
                 + "ON BOTAO.REFERENCIA_FABRICA = ACESSORIO.REFERENCIA_FABRICA "
-                + "JOIN MATERIAIS_TÊXTEIS ON MATERIAIS_TÊXTEIS.REFERENCIA_FABRICA = ACESSORIO.REFERENCIA_FABRICA"
+                + "JOIN MATERIAIS_TÊXTEIS ON MATERIAIS_TÊXTEIS.REFERENCIA_FABRICA = ACESSORIO.REFERENCIA_FABRICA "
                     + "WHERE BOTAO.REFERENCIA_FABRICA = @ref", this.Cn);
             cmd.Parameters.Clear();
             cmd.Parameters.AddWithValue("@ref", referencia);
@@ -901,6 +902,7 @@ namespace Trabalho_BD_IHC
             this.closeSGBDConnection();
             return f;
         }
+
 
     }
 }

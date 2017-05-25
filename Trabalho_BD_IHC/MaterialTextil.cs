@@ -14,7 +14,10 @@ namespace Trabalho_BD_IHC
         private String cor;
         private Fornecedor fornecedor;
         private String TipoMaterial;
-        private double quantidadeSelecionada;
+        private String quantidadeSelecionada;
+        private String quantidadeStock;
+        private double quantidadeSelecionadaD;
+        private double quantidadeStockD;
 
 
         public int Referencia
@@ -94,7 +97,47 @@ namespace Trabalho_BD_IHC
             }
         }
 
-        public double QuantidadeSelecionada
+
+        public string QuantidadeStock
+        {
+            get
+            {
+                return quantidadeStock;
+            }
+
+            set
+            {
+                quantidadeStock = value;
+            }
+        }
+
+        public double QuantidadeSelecionadaD
+        {
+            get
+            {
+                return quantidadeSelecionadaD;
+            }
+
+            set
+            {
+                quantidadeSelecionadaD = value;
+            }
+        }
+
+        public double QuantidadeStockD
+        {
+            get
+            {
+                return quantidadeStockD;
+            }
+
+            set
+            {
+                quantidadeStockD = value;
+            }
+        }
+
+        public string QuantidadeSelecionada
         {
             get
             {
@@ -106,6 +149,5 @@ namespace Trabalho_BD_IHC
                 quantidadeSelecionada = value;
             }
         }
-
     }
 }

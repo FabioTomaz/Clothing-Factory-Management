@@ -115,10 +115,16 @@
     <Compile Include="InformaçãoEmpregado.xaml.cs">
       <DependentUpon>InformaçãoEmpregado.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ListarFornecedores.xaml.cs">
+      <DependentUpon>ListarFornecedores.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Localizacao.cs" />
     <Compile Include="ProdutoPersonalizado.cs" />
     <Compile Include="ProduzirProduto.xaml.cs">
       <DependentUpon>ProduzirProduto.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RegistarFornecedor.xaml.cs">
+      <DependentUpon>RegistarFornecedor.xaml</DependentUpon>
     </Compile>
     <Compile Include="RegistarProdutoMateriais.xaml.cs">
       <DependentUpon>RegistarProdutoMateriais.xaml</DependentUpon>
@@ -189,9 +195,17 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ListarFornecedores.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="ProduzirProduto.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RegistarFornecedor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="RegistarProdutoMateriais.xaml">
       <Generator>MSBuild:Compile</Generator>

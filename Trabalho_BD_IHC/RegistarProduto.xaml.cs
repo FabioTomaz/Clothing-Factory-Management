@@ -73,6 +73,11 @@ namespace Trabalho_BD_IHC
                 MessageBox.Show("Por favor, indique o preço a atribuir ao produto!", "", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
+            if (Convert.ToDouble(txtPreço.Text) <= 0)
+            {
+                MessageBox.Show("O preço do produto deve ser maior que 0!", "", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             if (rdEtiquetaExis.IsChecked == false && rdEtiquetaNova.IsChecked == false)
             {
                 MessageBox.Show("Por favor, adicione uma etiqueta existente ao produto, ou crie uma nova!", "", MessageBoxButton.OK, MessageBoxImage.Error);

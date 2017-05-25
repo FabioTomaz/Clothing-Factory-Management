@@ -7,7 +7,7 @@
       xmlns:local="clr-namespace:Trabalho_BD_IHC"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
-      Title="ProduzirProduto">
+      Title="ProduzirProduto" Loaded="Page_Loaded">
 
     <Grid Background="White">
         <Grid.ColumnDefinitions>
@@ -38,7 +38,7 @@
                     <RowDefinition></RowDefinition>
                     <RowDefinition Height="0.3*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Button x:Name="confirmar" Style="{StaticResource confirmarButton}" Content="Produzir"  Grid.Row="1" Grid.Column="1" IsEnabled="True" Click="confirmar_Click"/>
+                <Button x:Name="produzir" Style="{StaticResource confirmarButton}" Content="Produzir"  Grid.Row="1" Grid.Column="1" IsEnabled="True" Click="confirmar_Click"/>
                 <Button x:Name="cancelar" Style="{StaticResource cancelarButton}" Content="Cancelar" Grid.Row="3" Grid.Column="1" Click="cancelar_Click"/>
             </Grid>
         </GroupBox>
@@ -61,16 +61,44 @@
                 <TextBlock Text="Produto Selecionado:" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" TextWrapping="Wrap"></TextBlock>
                 <TextBlock Name="nomeProduto"  Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" TextWrapping="Wrap" HorizontalAlignment="Left"></TextBlock>
                 <DataGrid Name="DGproduçao" SelectionChanged="DGproduçao_SelectionChanged" Grid.Row="1" Grid.ColumnSpan="4"
-                      Grid.RowSpan="3" IsReadOnly="True" AutoGenerateColumns="False">
+                      Grid.RowSpan="3" IsReadOnly="True" AutoGenerateColumns="False" Loaded="DGproduçao_Loaded" >
                     <DataGrid.Columns  >
                         <materialDesign:MaterialDataGridTextColumn  Header="Referência" Binding="{Binding  Referencia}" />
                         <materialDesign:MaterialDataGridTextColumn Header="Designação"  Binding="{Binding Designacao}" />
                         <materialDesign:MaterialDataGridTextColumn Header="Cor" Binding="{Binding Cor}" />
                         <materialDesign:MaterialDataGridTextColumn Header="Quantidade Necessária" Binding="{Binding QuantidadeSelecionada}" />
+                        <materialDesign:MaterialDataGridTextColumn Header="Quantidade Stock" Binding="{Binding QuantidadeStock}" />
 
                     </DataGrid.Columns>
                 </DataGrid>
+                <Grid Name="failed" Grid.Row="4" Grid.RowSpan="3" Grid.ColumnSpan="4" Visibility="Hidden">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <materialDesign:PackIcon Kind="Alert" Height="30" Width="30" HorizontalAlignment="Center" ></materialDesign:PackIcon>
+                    <TextBlock Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" TextWrapping="Wrap"
+                     Text="Não é possível produzir este produto pois não existe uma quantidade suficiente em stock do seguinte material:"></TextBlock>
+                    <TextBlock Name="materiaisNecessarios" Grid.ColumnSpan="4" Grid.Row="1" TextWrapping="Wrap"></TextBlock>
+                    <TextBlock Grid.Row="2" Grid.ColumnSpan="4" TextWrapping="Wrap" Text="Pode encomendar mais materiais indo para a página de materiais, selecionando o material em falta e clicando em 'Adicionar Material'."></TextBlock>
+                </Grid>
+                <Grid Name="success" Grid.Row="4" Grid.RowSpan="3" Grid.ColumnSpan="4" Visibility="Hidden">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <materialDesign:PackIcon Grid.Column="0" Kind="ThumbUp" Height="25" Width="25" ></materialDesign:PackIcon>
+                    <TextBlock Grid.Column="1" Text="É agora possível produzir este produto! Carregue em 'Produzir' para efetuar a produção!" TextWrapping="Wrap"></TextBlock>
+                </Grid>
             </Grid>
+            
         </GroupBox>
 
     </Grid>
