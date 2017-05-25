@@ -100,6 +100,9 @@
     <Compile Include="DetalhesEncomenda.xaml.cs">
       <DependentUpon>DetalhesEncomenda.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DetalhesFornecedor.xaml.cs">
+      <DependentUpon>DetalhesFornecedor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DetalhesMaterial.xaml.cs">
       <DependentUpon>DetalhesMaterial.xaml</DependentUpon>
     </Compile>
@@ -172,6 +175,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="DetalhesEncomenda.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DetalhesFornecedor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

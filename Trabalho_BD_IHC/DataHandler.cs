@@ -55,7 +55,6 @@ namespace Trabalho_BD_IHC
         }
 
         public bool closeSGBDConnection() {
-
             if (Cn.State != ConnectionState.Closed)
                 Cn.Close();
 
@@ -63,7 +62,8 @@ namespace Trabalho_BD_IHC
         }
 
         public ObservableCollection<Cliente> getClientesFromDB() {
-            this.verifySGBDConnection();
+            if (!this.verifySGBDConnection())
+                return null;
             SqlCommand cmd = new SqlCommand("SELECT * FROM CLIENTE JOIN ZONA ON CLIENTE.CODPOSTAL1=ZONA.CODPOSTAL1 AND CLIENTE.CODPOSTAL2=ZONA.CODPOSTAL2", cn);
             SqlDataReader reader = cmd.ExecuteReader();
             ObservableCollection<Cliente> items = new ObservableCollection<Cliente>();
@@ -90,7 +90,8 @@ namespace Trabalho_BD_IHC
 
         public Cliente getClienteFromDB(int nCliente)
         {
-            this.verifySGBDConnection();
+            if (!this.verifySGBDConnection())
+                return null;
             SqlCommand cmd = new SqlCommand("SELECT * FROM CLIENTE JOIN ZONA ON CLIENTE.CODPOSTAL1=ZONA.CODPOSTAL1 AND CLIENTE.CODPOSTAL2=ZONA.CODPOSTAL2 WHERE NCLIENTE=@cliente", cn);
             cmd.Parameters.Clear();
             cmd.Parameters.AddWithValue("@cliente", nCliente);
@@ -114,7 +115,8 @@ namespace Trabalho_BD_IHC
 
         public ObservableCollection<Encomenda> getEncomendasFromCliente(int nCliente)
         {
-            verifySGBDConnection();
+            if (!this.verifySGBDConnection())
+                return null;
             SqlCommand cmd = new SqlCommand("SELECT N_ENCOMENDA, DATA_CONFIRMACAO, DATA_ENTREGA, "
                     + "LOCALENTREGA, ESTADO, N_GESTOR_VENDA, UTILIZADOR.NOME AS GESTOR_NOME FROM ENCOMENDA JOIN "
                     + "UTILIZADOR ON N_FUNCIONARIO = N_GESTOR_VENDA WHERE CLIENTE = @nCliente"
@@ -149,7 +151,8 @@ namespace Trabalho_BD_IHC
 
         public ObservableCollection<Encomenda> getEncomendasFromDB()
         {
-            verifySGBDConnection();
+            if (!this.verifySGBDConnection())
+                return null;
             SqlCommand cmd = new SqlCommand("SELECT ENCOMENDA.N_ENCOMENDA, DATA_CONFIRMACAO, DATA_ENTREGA_PREV, ESTADO.DESCRIÇAO, DESCONTO, CLIENTE.NCLIENTE, CLIENTE.NOME, N_GESTOR_VENDA, SUM([PRODUTO-PERSONALIZADO].PRECO*CONTEUDO_ENCOMENDA.QUANTIDADE) AS PRECOTOTAL "
                                 + " FROM ENCOMENDA JOIN CLIENTE ON CLIENTE.NCLIENTE = ENCOMENDA.CLIENTE"
                                 + " JOIN CONTEUDO_ENCOMENDA ON CONTEUDO_ENCOMENDA.N_ENCOMENDA=ENCOMENDA.N_ENCOMENDA"
@@ -181,7 +184,8 @@ namespace Trabalho_BD_IHC
 
         public Encomenda getEncomendaFromDB(int nEncomenda)
         {
-            verifySGBDConnection();
+            if (!this.verifySGBDConnection())
+                return null;
             SqlCommand cmd = new SqlCommand("SELECT ENCOMENDA.N_ENCOMENDA, DATA_CONFIRMACAO, DATA_ENTREGA_PREV, ESTADO.DESCRIÇAO, DESCONTO, CLIENTE.NCLIENTE, CLIENTE.NOME AS CNOME, N_GESTOR_VENDA, SUM([PRODUTO-PERSONALIZADO].PRECO*CONTEUDO_ENCOMENDA.QUANTIDADE) AS PRECOTOTAL "
                                 + " FROM ENCOMENDA JOIN CLIENTE ON CLIENTE.NCLIENTE = ENCOMENDA.CLIENTE"
                                 + " JOIN CONTEUDO_ENCOMENDA ON CONTEUDO_ENCOMENDA.N_ENCOMENDA=ENCOMENDA.N_ENCOMENDA"
@@ -213,7 +217,8 @@ namespace Trabalho_BD_IHC
 
         public ObservableCollection<ProdutoPersonalizado> getProdutosFromEncomendaDB(int nEncomenda)
         {
-            verifySGBDConnection();
+            if (!this.verifySGBDConnection())
+                return null;
             SqlCommand cmd = new SqlCommand("SELECT [PRODUTO-PERSONALIZADO].REFERENCIA as REF, [PRODUTO-PERSONALIZADO].TAMANHO AS TAM, [PRODUTO-PERSONALIZADO].COR AS COLOR, [PRODUTO-PERSONALIZADO].ID AS IDENT, [PRODUTO-PERSONALIZADO].PRECO AS PRICE, [PRODUTO-PERSONALIZADO].UNIDADES_ARMAZEM AS UA, CONTEUDO_ENCOMENDA.QUANTIDADE AS QT"
                                 + " FROM ENCOMENDA"
                                 + " JOIN CONTEUDO_ENCOMENDA ON CONTEUDO_ENCOMENDA.N_ENCOMENDA=ENCOMENDA.N_ENCOMENDA"
@@ -242,7 +247,8 @@ namespace Trabalho_BD_IHC
 
         public Utilizador getUtilizadorFromDB(int user)
         {
-            this.verifySGBDConnection();
+            if (!this.verifySGBDConnection())
+                return null;
             Utilizador utilizador = new Utilizador();
             SqlCommand cmd = new SqlCommand("SELECT N_FUNCIONARIO, IMAGEM, UTILIZADOR.EMAIL AS EMAILUSER, SALARIO, NOME, TIPO, PASS, UTILIZADOR.TELEFONE AS TELEFONEUSER, HORA_ENTRADA, HORA_SAIDA, IMAGEM, N_FUNCIONARIO_SUPER, ZONAUSER.CODPOSTAL1 AS CODUSER1, ZONAUSER.CODPOSTAL2 AS CODUSER2 ,ZONAUSER.DISTRITO AS DISTRITOUSER, ZONAUSER.LOCALIDADE AS LOCALIDADEUSER, UTILIZADOR.RUA AS RUAUSER, UTILIZADOR.N_PORTA AS PORTAUSER, ZONAFABRICA.CODPOSTAL1 AS CODFABRICA1, ZONAFABRICA.CODPOSTAL2 AS CODFABRICA2, ZONAFABRICA.DISTRITO AS DISTRITOFABRICA, ZONAFABRICA.LOCALIDADE AS LOCALIDADEFABRICA, [FABRICA-FILIAL].RUA AS RUAFABRICA, [FABRICA-FILIAL].N_PORTA AS PORTAFABRICA, [FABRICA-FILIAL].EMAIL AS EMAILFABRICA, [FABRICA-FILIAL].TELEFONE AS TELEFONEFABRICA, [FABRICA-FILIAL].FAX AS FAXFABRICA, N_FILIAL  FROM UTILIZADOR"
                                             + " JOIN ZONA AS ZONAUSER ON UTILIZADOR.CODPOSTAL1 = ZONAUSER.CODPOSTAL1 AND UTILIZADOR.CODPOSTAL2 = ZONAUSER.CODPOSTAL2"
@@ -301,6 +307,30 @@ namespace Trabalho_BD_IHC
             }
             this.closeSGBDConnection();
             return utilizador;
+        }
+
+        public ObservableCollection<Fornecedor> getFornecedoresFromDB() {
+            if (!this.verifySGBDConnection())
+                return null;
+            SqlCommand cmd = new SqlCommand("SELECT * FROM FORNECEDOR", Cn);
+            SqlDataReader reader = cmd.ExecuteReader();
+            ObservableCollection<Fornecedor> fornecedores = new ObservableCollection<Fornecedor>();
+            while (reader.Read())
+            {
+                Fornecedor f = new Fornecedor();
+                f.NIF_Fornecedor = reader["NIF"].ToString();
+                f.Email = reader["EMAIL"].ToString();
+                f.Nome = reader["NOME"].ToString();
+                f.Fax = reader["FAX"].ToString();
+                f.Telefone = reader["TELEFONE"].ToString();
+                f.Designacao = reader["DESIGNACAO"].ToString();
+                f.CodigoPostal = reader["CODPOSTAL1"].ToString() + "-" + reader["CODPOSTAL2"].ToString();
+                f.Rua = reader["RUA"].ToString();
+                f.NPorta = Convert.ToInt32(reader["N_PORTA"].ToString());
+                fornecedores.Add(f);
+            }
+            closeSGBDConnection();
+            return fornecedores;
         }
 
         public void inserirMaterial(MaterialTextil mat)

@@ -33,6 +33,7 @@ namespace Trabalho_BD_IHC
         ListarMateriais listarMateriais;
         ListarProdutos listarProdutos;
         ListarEmpregados listarEmpregados;
+        ListarFornecedores listarFornecedores;
        
         public MainWindow(DataHandler dataHandler)
         {
@@ -44,12 +45,14 @@ namespace Trabalho_BD_IHC
             listarProdutos = new ListarProdutos(dataHandler);
             listarMateriais = new ListarMateriais(dataHandler);
             listarEmpregados = new ListarEmpregados(dataHandler);
+            listarFornecedores = new ListarFornecedores(dataHandler);
 
             clientesFrame.Content = listarClientes;
             encomendasFrame.Content = listarEncomendas;
             produtosFrame.Content = listarProdutos;
             materiaisFrame.Content = listarMateriais;
             empregadosFrame.Content = listarEmpregados;
+            fornecedoresFrame.Content = listarFornecedores;
 
             fillUserInfo();
         }
@@ -163,6 +166,7 @@ namespace Trabalho_BD_IHC
                 produtosFrame.Content = new ListarProdutos(dataHandler);
                 materiaisFrame.Content = new ListarMateriais(dataHandler);
                 empregadosFrame.Content = new ListarEmpregados(dataHandler);
+                listarFornecedore
             }
         }
     }

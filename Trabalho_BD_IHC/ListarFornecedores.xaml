@@ -46,8 +46,7 @@
                 </Grid.RowDefinitions>
                 <Button x:Name="registarFornecedor" Content="Registar Fornecedor" Style="{StaticResource registarButton}" Grid.Row="1" Grid.Column="1" Click="registarFornecedor_Click"/>
                 <Button x:Name="editarFornecedor" Content="Editar Fornecedor" Style="{StaticResource editarButton}" Grid.Row="3" Grid.Column="1" IsEnabled="False"/>
-                <Button x:Name="removerFornecedor" Content="Remover Fornecedor" Style="{StaticResource removerButton}" Grid.Row="5" Grid.Column="1" IsEnabled="False" Click="removerFornecedor_Click"/>
-                <Button x:Name="detalhesFornecedor" Content="Ver mais Detalhes" Style="{StaticResource detalhesButton}" Grid.Row="7" Grid.Column="1" IsEnabled="False" Click="verDetalhesFornecedor"/>
+                <Button x:Name="detalhesFornecedor" Content="Ver mais Detalhes" Style="{StaticResource detalhesButton}" Grid.Row="5" Grid.Column="1" IsEnabled="False" Click="verDetalhesFornecedor"/>
             </Grid>
         </GroupBox>
         <Grid Grid.Column="3" Grid.Row="1">
