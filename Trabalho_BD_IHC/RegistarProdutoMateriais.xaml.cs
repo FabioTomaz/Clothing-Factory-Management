@@ -116,7 +116,7 @@ namespace Trabalho_BD_IHC
                 cmd.Parameters.AddWithValue("@cor", prod.Cor);
                 cmd.Parameters.AddWithValue("@id", ID);
                 cmd.Parameters.AddWithValue("@refFabrica", materiaisSelecionados.ElementAt(i).Referencia);
-                cmd.Parameters.AddWithValue("@qtd", materiaisSelecionados.ElementAt(i).QuantidadeSelecionada);
+                cmd.Parameters.AddWithValue("@qtd", Convert.ToDouble(materiaisSelecionados.ElementAt(i).QuantidadeSelecionada));
                 cmd.Connection = dataHandler.Cn;
                 cmd.Connection = dataHandler.Cn;
                 try
@@ -260,92 +260,88 @@ namespace Trabalho_BD_IHC
                     txtQuantidadeDec.Visibility = Visibility.Hidden;
                 }
 
-                if (dataHandler.verifySGBDConnection())
+                if (tipoMaterial.Equals("Pano", StringComparison.Ordinal))
                 {
-                    if (tipoMaterial.Equals("Pano", StringComparison.Ordinal))
-                    {
-                        Pano pano = dataHandler.getPano(mt.Referencia);
-                        txt1.Text = pano.Tipo;
-                        txt2.Text = pano.Gramagem.ToString() + " g/m^2";
-                        txt3.Text = pano.AreaArmazem.ToString() + "m^2";
-                        txt4.Text = pano.PrecoMetroQuadrado.ToString() + " €/m^2";
-                        panoArea.Visibility = Visibility.Visible;
-                        panoGramagem.Visibility = Visibility.Visible;
-                        panoPreço.Visibility = Visibility.Visible;
-                        panoTipo.Visibility = Visibility.Visible;
-                    }
-                    else if (tipoMaterial.Equals("Linha", StringComparison.Ordinal))
-                    {
-                        Linha linha = dataHandler.getLinha(mt.Referencia);
-                        txt1.Text = linha.Grossura.ToString() + " cm";
-                        txt2.Text = linha.Preco100Metros.ToString() + " €/100m";
-                        txt3.Text = linha.ComprimentoStock.ToString() + " cm";
-                        txt4.Text = "";
-                        linhaGrossura.Visibility = Visibility.Visible;
-                        linhaPreço.Visibility = Visibility.Visible;
-                        linhaQuantidade.Visibility = Visibility.Visible;
-                    }
-                    else if (tipoMaterial.Equals("Fecho", StringComparison.Ordinal))
-                    {
-                        Fecho fecho = dataHandler.getFecho(mt.Referencia);
-                        txt1.Text = fecho.Comprimento.ToString() + " cm";
-                        txt2.Text = fecho.TamanhoDente.ToString() + " cm";
-                        txt3.Text = fecho.QuantidadeArmazem.ToString() + " un.";
-                        txt4.Text = fecho.PrecoUnidade.ToString() + " €/un.";
-                        fechoComprimento.Visibility = Visibility.Visible;
-                        fechoTamanhoDente.Visibility = Visibility.Visible;
-                        fechoPreço.Visibility = Visibility.Visible;
-                        fechoQuantidade.Visibility = Visibility.Visible;
-
-                    }
-                    else if (tipoMaterial.Equals("Mola", StringComparison.Ordinal))
-                    {
-                        Mola mola = dataHandler.getMola(mt.Referencia);
-                        txt1.Text = mola.Diametro.ToString() + " cm";
-                        txt2.Text = mola.QuantidadeArmazem.ToString() + " un.";
-                        txt3.Text = mola.PrecoUnidade.ToString() + " €/un.";
-                        txt4.Text = "";
-                        molaDiametro.Visibility = Visibility.Visible;
-                        molaPreço.Visibility = Visibility.Visible;
-                        molaQuantidade.Visibility = Visibility.Visible;
-                    }
-                    else if (tipoMaterial.Equals("Botão", StringComparison.Ordinal))
-                    {
-                        Botao botao = dataHandler.getBotao(mt.Referencia);
-                        txt1.Text = botao.Diametro.ToString() + " cm";
-                        txt2.Text = botao.QuantidadeArmazem.ToString() + " un.";
-                        txt3.Text = botao.PrecoUnidade.ToString() + " €/un.";
-                        txt4.Text = "";
-                        botaoDiametro.Visibility = Visibility.Visible;
-                        botaoPreço.Visibility = Visibility.Visible;
-                        botaoQuantidade.Visibility = Visibility.Visible;
-                    }
-                    else if (tipoMaterial.Equals("Elástico", StringComparison.Ordinal))
-                    {
-                        Elastico el = dataHandler.getElastico(mt.Referencia);
-                        txt1.Text = el.Comprimento.ToString() + " cm";
-                        txt2.Text = el.Largura.ToString() + " cm";
-                        txt3.Text = el.QuantidadeArmazem.ToString() + " un.";
-                        txt4.Text = el.PrecoUnidade.ToString() + " €/un.";
-                        elasticoComprimento.Visibility = Visibility.Visible;
-                        elasticoLargura.Visibility = Visibility.Visible;
-                        elasticoPreço.Visibility = Visibility.Visible;
-                        elasticoQuantidade.Visibility = Visibility.Visible;
-                    }
-                    else if (tipoMaterial.Equals("Fita de Velcro", StringComparison.Ordinal))
-                    {
-                        FitaVelcro f = dataHandler.getFitaVelcro(mt.Referencia);
-                        txt1.Text = f.Comprimento.ToString() + " cm";
-                        txt2.Text = f.Largura.ToString() + " cm";
-                        txt3.Text = f.QuantidadeArmazem.ToString() + " un.";
-                        txt4.Text = f.PrecoUnidade.ToString() + " €/un.";
-                        velcroComprimento.Visibility = Visibility.Visible;
-                        velcroLargura.Visibility = Visibility.Visible;
-                        velcroPreço.Visibility = Visibility.Visible;
-                        velcroQuantidade.Visibility = Visibility.Visible;
-                    }
+                    Pano pano = dataHandler.getPano(mt.Referencia);
+                    txt1.Text = pano.Tipo;
+                    txt2.Text = pano.Gramagem.ToString() + " g/m^2";
+                    txt3.Text = pano.AreaArmazem.ToString() + "m^2";
+                    txt4.Text = pano.PrecoMetroQuadrado.ToString() + " €/m^2";
+                    panoArea.Visibility = Visibility.Visible;
+                    panoGramagem.Visibility = Visibility.Visible;
+                    panoPreço.Visibility = Visibility.Visible;
+                    panoTipo.Visibility = Visibility.Visible;
                 }
-                dataHandler.closeSGBDConnection();
+                else if (tipoMaterial.Equals("Linha", StringComparison.Ordinal))
+                {
+                    Linha linha = dataHandler.getLinha(mt.Referencia);
+                    txt1.Text = linha.Grossura.ToString() + " cm";
+                    txt2.Text = linha.Preco100Metros.ToString() + " €/100m";
+                    txt3.Text = linha.ComprimentoStock.ToString() + " cm";
+                    txt4.Text = "";
+                    linhaGrossura.Visibility = Visibility.Visible;
+                    linhaPreço.Visibility = Visibility.Visible;
+                    linhaQuantidade.Visibility = Visibility.Visible;
+                }
+                else if (tipoMaterial.Equals("Fecho", StringComparison.Ordinal))
+                {
+                    Fecho fecho = dataHandler.getFecho(mt.Referencia);
+                    txt1.Text = fecho.Comprimento.ToString() + " cm";
+                    txt2.Text = fecho.TamanhoDente.ToString() + " cm";
+                    txt3.Text = fecho.QuantidadeArmazem.ToString() + " un.";
+                    txt4.Text = fecho.PrecoUnidade.ToString() + " €/un.";
+                    fechoComprimento.Visibility = Visibility.Visible;
+                    fechoTamanhoDente.Visibility = Visibility.Visible;
+                    fechoPreço.Visibility = Visibility.Visible;
+                    fechoQuantidade.Visibility = Visibility.Visible;
+
+                }
+                else if (tipoMaterial.Equals("Mola", StringComparison.Ordinal))
+                {
+                    Mola mola = dataHandler.getMola(mt.Referencia);
+                    txt1.Text = mola.Diametro.ToString() + " cm";
+                    txt2.Text = mola.QuantidadeArmazem.ToString() + " un.";
+                    txt3.Text = mola.PrecoUnidade.ToString() + " €/un.";
+                    txt4.Text = "";
+                    molaDiametro.Visibility = Visibility.Visible;
+                    molaPreço.Visibility = Visibility.Visible;
+                    molaQuantidade.Visibility = Visibility.Visible;
+                }
+                else if (tipoMaterial.Equals("Botão", StringComparison.Ordinal))
+                {
+                    Botao botao = dataHandler.getBotao(mt.Referencia);
+                    txt1.Text = botao.Diametro.ToString() + " cm";
+                    txt2.Text = botao.QuantidadeArmazem.ToString() + " un.";
+                    txt3.Text = botao.PrecoUnidade.ToString() + " €/un.";
+                    txt4.Text = "";
+                    botaoDiametro.Visibility = Visibility.Visible;
+                    botaoPreço.Visibility = Visibility.Visible;
+                    botaoQuantidade.Visibility = Visibility.Visible;
+                }
+                else if (tipoMaterial.Equals("Elástico", StringComparison.Ordinal))
+                {
+                    Elastico el = dataHandler.getElastico(mt.Referencia);
+                    txt1.Text = el.Comprimento.ToString() + " cm";
+                    txt2.Text = el.Largura.ToString() + " cm";
+                    txt3.Text = el.QuantidadeArmazem.ToString() + " un.";
+                    txt4.Text = el.PrecoUnidade.ToString() + " €/un.";
+                    elasticoComprimento.Visibility = Visibility.Visible;
+                    elasticoLargura.Visibility = Visibility.Visible;
+                    elasticoPreço.Visibility = Visibility.Visible;
+                    elasticoQuantidade.Visibility = Visibility.Visible;
+                }
+                else if (tipoMaterial.Equals("Fita de Velcro", StringComparison.Ordinal))
+                {
+                    FitaVelcro f = dataHandler.getFitaVelcro(mt.Referencia);
+                    txt1.Text = f.Comprimento.ToString() + " cm";
+                    txt2.Text = f.Largura.ToString() + " cm";
+                    txt3.Text = f.QuantidadeArmazem.ToString() + " un.";
+                    txt4.Text = f.PrecoUnidade.ToString() + " €/un.";
+                    velcroComprimento.Visibility = Visibility.Visible;
+                    velcroLargura.Visibility = Visibility.Visible;
+                    velcroPreço.Visibility = Visibility.Visible;
+                    velcroQuantidade.Visibility = Visibility.Visible;
+                }
             }
         }
 
@@ -365,7 +361,7 @@ namespace Trabalho_BD_IHC
                 }
                 else
                 {
-                    mt.QuantidadeSelecionada = Convert.ToDouble(txtQuantidadeDec.Text.ToString());
+                    mt.QuantidadeSelecionada = txtQuantidadeDec.Text.ToString();
                 }
 
             }
@@ -379,7 +375,7 @@ namespace Trabalho_BD_IHC
                 }
                 else
                 {
-                    mt.QuantidadeSelecionada = Convert.ToDouble(txtQuantidadeInt.Text.ToString());
+                    mt.QuantidadeSelecionada = txtQuantidadeInt.Text.ToString();
                 }
             }
             materiaisSelecionados.Add(mt);

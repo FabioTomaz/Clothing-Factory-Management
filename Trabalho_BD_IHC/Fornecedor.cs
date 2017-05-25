@@ -10,14 +10,15 @@ namespace Trabalho_BD_IHC
     {
         private String NIF;
         private String nome;
-        private int fax;
+        private String fax;
         private String email;
-        private int telefone;
+        private String telefone;
         private String país;
         private String localidade;
         private String codigoPostal;
         private String rua;
         private String designacao;
+        private int nPorta;
 
         public String NIF_Fornecedor
         {
@@ -45,7 +46,7 @@ namespace Trabalho_BD_IHC
             }
         }
 
-        public int Fax
+        public String Fax
         {
             get
             {
@@ -71,7 +72,7 @@ namespace Trabalho_BD_IHC
             }
         }
 
-        public int Telefone
+        public String Telefone
         {
             get
             {
@@ -146,6 +147,19 @@ namespace Trabalho_BD_IHC
             set
             {
                 designacao = value;
+            }
+        }
+
+        public int NPorta
+        {
+            get
+            {
+                return nPorta;
+            }
+
+            set
+            {
+                nPorta = value;
             }
         }
     }
