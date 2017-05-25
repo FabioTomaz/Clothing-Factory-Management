@@ -37,6 +37,7 @@ namespace Trabalho_BD_IHC
             produtosFrame.Content = new ListarProdutos(dataHandler);
             materiaisFrame.Content = new ListarMateriais(dataHandler);
             empregadosFrame.Content = new ListarEmpregados(dataHandler);
+            fornecedoresFrame.Content = new ListarFornecedores(dataHandler);
             fillUserInfo();
         }
 
@@ -149,6 +150,7 @@ namespace Trabalho_BD_IHC
                 produtosFrame.Content = new ListarProdutos(dataHandler);
                 materiaisFrame.Content = new ListarMateriais(dataHandler);
                 empregadosFrame.Content = new ListarEmpregados(dataHandler);
+                fornecedoresFrame.Content = new ListarFornecedores(dataHandler);
             }
         }
     }

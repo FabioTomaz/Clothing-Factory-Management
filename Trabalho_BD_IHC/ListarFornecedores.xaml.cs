@@ -51,7 +51,7 @@ namespace Trabalho_BD_IHC
                     f.Fax = reader["FAX"].ToString();
                     f.Telefone = reader["TELEFONE"].ToString();
                     f.Designacao = reader["DESIGNACAO"].ToString();
-                    f.CodigoPostal = reader["COD_POSTAL"].ToString();
+                    f.CodigoPostal = reader["CODPOSTAL1"].ToString()+"-"+ reader["CODPOSTAL2"].ToString();
                     f.Rua = reader["RUA"].ToString();
                     f.NPorta  = Convert.ToInt32(reader["N_PORTA"].ToString());
                     fornecedores.Add(f);
