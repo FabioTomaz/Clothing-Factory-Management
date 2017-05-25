@@ -144,5 +144,9 @@ namespace Trabalho_BD_IHC
             InformaçãoEmpregado page = new InformaçãoEmpregado(dataHandler, user);
             this.NavigationService.Navigate(page);
         }
+
+        public void refresh() {
+
+        }
     }
 }

@@ -28,15 +28,29 @@ namespace Trabalho_BD_IHC
     public partial class MainWindow : Window
     {
         DataHandler dataHandler;
+        ListarClientes listarClientes;
+        ListarEncomendas listarEncomendas;
+        ListarMateriais listarMateriais;
+        ListarProdutos listarProdutos;
+        ListarEmpregados listarEmpregados;
+       
         public MainWindow(DataHandler dataHandler)
         {
             InitializeComponent();
-            this.dataHandler = dataHandler; 
-            clientesFrame.Content = new ListarClientes(dataHandler);
-            encomendasFrame.Content = new ListarEncomendas(dataHandler);
-            produtosFrame.Content = new ListarProdutos(dataHandler);
-            materiaisFrame.Content = new ListarMateriais(dataHandler);
-            empregadosFrame.Content = new ListarEmpregados(dataHandler);
+            this.dataHandler = dataHandler;
+
+            listarClientes = new ListarClientes(dataHandler);
+            listarEncomendas = new ListarEncomendas(dataHandler);
+            listarProdutos = new ListarProdutos(dataHandler);
+            listarMateriais = new ListarMateriais(dataHandler);
+            listarEmpregados = new ListarEmpregados(dataHandler);
+
+            clientesFrame.Content = listarClientes;
+            encomendasFrame.Content = listarEncomendas;
+            produtosFrame.Content = listarProdutos;
+            materiaisFrame.Content = listarMateriais;
+            empregadosFrame.Content = listarEmpregados;
+
             fillUserInfo();
         }
 
@@ -143,8 +157,8 @@ namespace Trabalho_BD_IHC
 
         private void tabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(e.Source is TabControl) { 
-                clientesFrame.Content = new ListarClientes(dataHandler);
+            if(e.Source is TabControl) {
+                listarClientes.refresh();
                 encomendasFrame.Content = new ListarEncomendas(dataHandler);
                 produtosFrame.Content = new ListarProdutos(dataHandler);
                 materiaisFrame.Content = new ListarMateriais(dataHandler);

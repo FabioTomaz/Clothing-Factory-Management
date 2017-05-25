@@ -29,6 +29,7 @@ namespace Trabalho_BD_IHC
         {
             InitializeComponent();
             this.dataHandler = dataHandler;
+            produtosEncomenda.ItemsSource = new ObservableCollection<ProdutoPersonalizado>();
         }
 
         private void cancelar_Click(object sender, RoutedEventArgs e)

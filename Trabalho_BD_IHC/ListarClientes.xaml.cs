@@ -127,5 +127,12 @@ namespace Trabalho_BD_IHC
                 detalhesCliente.IsEnabled = true;
             }
         }
+
+        public void refresh() {
+            clientes.Focus();
+            ObservableCollection<Cliente> items = dataHandler.getClientesFromDB();
+            if (items != null)
+                clientes.ItemsSource = items;
+        }
     }
 }

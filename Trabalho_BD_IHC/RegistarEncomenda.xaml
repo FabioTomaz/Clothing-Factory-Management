@@ -84,9 +84,9 @@
             </Grid>
         </GroupBox>
         <GroupBox Header="Produtos da Encomenda" Grid.Column="3" Grid.Row="3" >
-            <DataGrid Name="produtosEncomenda" ItemsSource="{Binding Encomenda}" AutoGenerateColumns="False">
+            <DataGrid Name="produtosEncomenda" ItemsSource="{Binding ProdutoPersonalizado}" AutoGenerateColumns="False">
                 <DataGrid.Columns>
-                    <materialDesign:MaterialDataGridTextColumn Binding="{Binding ProdutoBase.Referencia}" Header="Referencia" ></materialDesign:MaterialDataGridTextColumn>
+                    <!--<materialDesign:MaterialDataGridTextColumn Binding="{Binding ProdutoBase.Referencia}" Header="Referencia" ></materialDesign:MaterialDataGridTextColumn>-->
                     <materialDesign:MaterialDataGridTextColumn Binding="{Binding Tamanho}" Header="Tamanho" ></materialDesign:MaterialDataGridTextColumn>
                     <materialDesign:MaterialDataGridTextColumn Binding="{Binding Cor}" Header="Cor" ></materialDesign:MaterialDataGridTextColumn>
                     <materialDesign:MaterialDataGridTextColumn Binding="{Binding ID}" Header="Modelo" ></materialDesign:MaterialDataGridTextColumn>
