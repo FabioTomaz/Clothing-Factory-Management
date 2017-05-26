@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Trabalho_BD_IHC
 {
-    class Localizacao
+    public class Localizacao
     {
         private String codigoPostal;
         private String distrito;
@@ -14,6 +14,8 @@ namespace Trabalho_BD_IHC
         private String localidade;
         private String Rua;
         private int porta;
+        private int codigoPostal1;
+        private int codigoPostal2;
 
         public string CodigoPostal
         {
@@ -90,6 +92,32 @@ namespace Trabalho_BD_IHC
             set
             {
                 porta = value;
+            }
+        }
+
+        public int CodigoPostal1
+        {
+            get
+            {
+                return codigoPostal1;
+            }
+
+            set
+            {
+                codigoPostal1 = value;
+            }
+        }
+
+        public int CodigoPostal2
+        {
+            get
+            {
+                return codigoPostal2;
+            }
+
+            set
+            {
+                codigoPostal2 = value;
             }
         }
     }

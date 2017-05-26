@@ -13,6 +13,8 @@ namespace Trabalho_BD_IHC
         private string email;
         private string telefone;
         private Localizacao localizacao;
+        private Utilizador chefe;
+
 
         public int NFilial
         {
@@ -66,7 +68,7 @@ namespace Trabalho_BD_IHC
             }
         }
 
-        internal Localizacao Localizacao
+        public Localizacao Localizacao
         {
             get
             {
@@ -76,6 +78,19 @@ namespace Trabalho_BD_IHC
             set
             {
                 localizacao = value;
+            }
+        }
+
+        public Utilizador Chefe
+        {
+            get
+            {
+                return chefe;
+            }
+
+            set
+            {
+                chefe = value;
             }
         }
     }

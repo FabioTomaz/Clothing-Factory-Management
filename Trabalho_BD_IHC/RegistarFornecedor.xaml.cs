@@ -37,40 +37,6 @@ namespace Trabalho_BD_IHC
             e.Handled = regex.IsMatch(e.Text);
         }
 
-        private void EnviarFornecedor(Fornecedor f)
-        {
-
-            if (!dataHandler.verifySGBDConnection())
-                return;
-            SqlCommand cmd = new SqlCommand();
-
-            cmd.CommandText = "INSERT INTO Fornecedor (NIF, EMAIL, NOME, FAX, TELEFONE, DESIGNACAO, COD_POSTAL, RUA, N_PORTA)" +
-                "VALUES (@NIF, @Email, @Nome, @Fax, @Telefone, @design, @codPostal, @rua, @N_PORTA);";
-            cmd.Parameters.Clear();
-            cmd.Parameters.AddWithValue("@NIF", f.NIF_Fornecedor);
-            cmd.Parameters.AddWithValue("@Email", f.Email);
-            cmd.Parameters.AddWithValue("@Nome", f.Nome);
-            cmd.Parameters.AddWithValue("@Fax", f.Fax);
-            cmd.Parameters.AddWithValue("@Telefone", f.Telefone);
-            cmd.Parameters.AddWithValue("@design", f.Designacao);
-            cmd.Parameters.AddWithValue("@codPostal", f.CodigoPostal);
-            cmd.Parameters.AddWithValue("@rua", f.Rua);
-            cmd.Parameters.AddWithValue("@N_PORTA", f.NPorta);
-            cmd.Connection = dataHandler.Cn;
-            try
-            {
-                cmd.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Falha ao adicionar Fornecedor na base de dados. \n ERROR MESSAGE: \n" + ex.Message);
-            }
-            finally
-            {
-                dataHandler.closeSGBDConnection();
-            }
-        }
-
         private void cancelar_Click(object sender, RoutedEventArgs e)
         {
             if (Xceed.Wpf.Toolkit.MessageBox.Show("Tem a certeza que deseja cancelar o registo de Fornecedor? Perderá todos os dados que tenha introduzido.",
@@ -97,13 +63,22 @@ namespace Trabalho_BD_IHC
             Fornecedor.Designacao = txtDesi.Text;
             Fornecedor.NIF_Fornecedor = txtNIF.Text;
             Fornecedor.Telefone = txtTelemovel.Text;
-            Fornecedor.Fax = txtFax.Text;
+            if(txtFax.Text.Length > 0)
+            {
+                Fornecedor.Fax = txtFax.Text;
+            }
+            else
+            {
+                Fornecedor.Fax = null;
+            }
             Fornecedor.Email = txtEmail.Text;
-            Fornecedor.CodigoPostal = txtcodigoPostal1.Text + "-" + txtcodigoPostal2.Text;
-            Fornecedor.Rua = txtRua.Text;
-            Fornecedor.NPorta = int.Parse(txtNumeroPorta.Text);
+            Fornecedor.Localizacao = new Localizacao();
+            Fornecedor.Localizacao.CodigoPostal1 = Convert.ToInt32(txtcodigoPostal1.Text);
+            Fornecedor.Localizacao.CodigoPostal2 = Convert.ToInt32(txtcodigoPostal2.Text);
+            Fornecedor.Localizacao.Rua1 = txtRua.Text;
+            Fornecedor.Localizacao.Porta = Convert.ToInt32(txtNumeroPorta.Text);
             try {
-                EnviarFornecedor(Fornecedor);
+                dataHandler.EnviarFornecedor(Fornecedor);
             }catch(Exception ex)
             {
                 MessageBox.Show(ex.Message);
@@ -127,12 +102,12 @@ namespace Trabalho_BD_IHC
                 throw new Exception("Por favor, introduza um email válido.");
             if (txtTelemovel.Text.Trim()[0] == '+')
             {
-                if (txtTelemovel.Text.Trim().Length > 22)
+                if (txtTelemovel.Text.Trim().Length > 13)
                     throw new Exception("O número de telemóvel introduzido tem mais de 13 carateres.");
             }
             else if (Regex.IsMatch(txtTelemovel.Text.Trim()[0].ToString(), @"^\d+$"))
             {
-                if (txtTelemovel.Text.Trim().Length > 22)
+                if (txtTelemovel.Text.Trim().Length > 9)
                     throw new Exception("O número de telemóvel introduzido tem mais de 9 carateres.");
             }
             if (txtFax.Text.Trim().Length > 22)
@@ -145,7 +120,7 @@ namespace Trabalho_BD_IHC
                 throw new Exception("Por favor introduza o número de porta do Fornecedor");
         }
 
-        bool IsValidEmail(string email)
+        public bool IsValidEmail(string email)
         {
             try
             {

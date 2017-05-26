@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\App.xaml
-271192864629
+30670528924
 
-58-972071112
+61-13298260
 231124871485
-DetalhesCliente.xaml;DetalhesEncomenda.xaml;DetalhesFornecedor.xaml;DetalhesMaterial.xaml;EditarProdutoBase.xaml;EditarCliente.xaml;EditarEncomenda.xaml;InformaçãoEmpregado.xaml;ListarFornecedores.xaml;ListarFiliais.xaml;ProduzirProduto.xaml;RegistarFornecedor.xaml;RegistarProdutoMateriais.xaml;RegistarProduto.xaml;RegistarProdutoBase.xaml;RegistarEmpregado.xaml;RegistarMaterial.xaml;ListarEmpregados.xaml;ListarMateriais.xaml;ListarClientes.xaml;ListarProdutos.xaml;ListarEncomendas.xaml;Login.xaml;Main.xaml;RegistarCliente.xaml;RegistarEncomenda.xaml;teste.xaml;
+DetalhesFilial.xaml;DetalhesCliente.xaml;DetalhesEncomenda.xaml;DetalhesFornecedor.xaml;DetalhesMaterial.xaml;EditarFilial.xaml;EditarProdutoBase.xaml;EditarCliente.xaml;EditarEncomenda.xaml;InformaçãoEmpregado.xaml;ListarFornecedores.xaml;ListarFiliais.xaml;ProduzirProduto.xaml;RegistarFilial.xaml;RegistarFornecedor.xaml;RegistarProdutoMateriais.xaml;RegistarProduto.xaml;RegistarProdutoBase.xaml;RegistarEmpregado.xaml;RegistarMaterial.xaml;ListarEmpregados.xaml;ListarMateriais.xaml;ListarClientes.xaml;ListarProdutos.xaml;ListarEncomendas.xaml;Login.xaml;Main.xaml;RegistarCliente.xaml;RegistarEncomenda.xaml;teste.xaml;
 
 True
 

@@ -94,6 +94,9 @@
     </ApplicationDefinition>
     <Compile Include="ByteArrayToImageConverter.cs" />
     <Compile Include="DataHandler.cs" />
+    <Compile Include="DetalhesFilial.xaml.cs">
+      <DependentUpon>DetalhesFilial.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DetalhesCliente.xaml.cs">
       <DependentUpon>DetalhesCliente.xaml</DependentUpon>
     </Compile>
@@ -105,6 +108,9 @@
     </Compile>
     <Compile Include="DetalhesMaterial.xaml.cs">
       <DependentUpon>DetalhesMaterial.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EditarFilial.xaml.cs">
+      <DependentUpon>EditarFilial.xaml</DependentUpon>
     </Compile>
     <Compile Include="EditarProdutoBase.xaml.cs">
       <DependentUpon>EditarProdutoBase.xaml</DependentUpon>
@@ -128,6 +134,9 @@
     <Compile Include="ProdutoPersonalizado.cs" />
     <Compile Include="ProduzirProduto.xaml.cs">
       <DependentUpon>ProduzirProduto.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RegistarFilial.xaml.cs">
+      <DependentUpon>RegistarFilial.xaml</DependentUpon>
     </Compile>
     <Compile Include="RegistarFornecedor.xaml.cs">
       <DependentUpon>RegistarFornecedor.xaml</DependentUpon>
@@ -173,6 +182,10 @@
       <DependentUpon>teste.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utilizador.cs" />
+    <Page Include="DetalhesFilial.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="DetalhesCliente.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -188,6 +201,10 @@
     <Page Include="DetalhesMaterial.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EditarFilial.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="EditarProdutoBase.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -216,6 +233,10 @@
     <Page Include="ProduzirProduto.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RegistarFilial.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="RegistarFornecedor.xaml">
       <Generator>MSBuild:Compile</Generator>

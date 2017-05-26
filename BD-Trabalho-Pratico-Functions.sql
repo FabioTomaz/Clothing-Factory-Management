@@ -34,7 +34,7 @@ RETURN @tipo
 END
 GO
 
-
+/*
 CREATE Trigger produzirProduto  ON dbo.[PRODUTO-PERSONALIZADO]
 AFTER UPDATE
 AS
@@ -153,7 +153,7 @@ AS
 GO
 
 --drop trigger produzirProduto
-
+*/
 GO
 CREATE FUNCTION dbo.getEtiqueta (@n int) RETURNS TABLE
 AS
@@ -188,6 +188,18 @@ AS
 		return @nUnidades
 	END
 GO
+
+CREATE FUNCTION dbo.nFilial (@email varchar(50), @telefone varchar(22) ) RETURNS INT
+AS
+	BEGIN
+		DECLARE @n INT
+		SELECT @n = [FABRICA-FILIAL].N_FILIAL FROM [FABRICA-FILIAL] 
+		WHERE EMAIL = @email AND TELEFONE = @telefone
+		return @n
+	END
+GO
+
+
 
 /*
 SELECT dbo.nUnidadesProd(1, 'XL', 'azul escuro', 1);

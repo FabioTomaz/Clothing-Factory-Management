@@ -14,12 +14,9 @@ namespace Trabalho_BD_IHC
         private String email;
         private String telefone;
         private String país;
-        private String localidade;
-        private String codigoPostal;
-        private String rua;
         private String designacao;
-        private int nPorta;
         private int nFilial;
+        private Localizacao localizacao;
 
         public String NIF_Fornecedor
         {
@@ -99,44 +96,6 @@ namespace Trabalho_BD_IHC
             }
         }
 
-        public string Localidade
-        {
-            get
-            {
-                return localidade;
-            }
-
-            set
-            {
-                localidade = value;
-            }
-        }
-
-        public string CodigoPostal
-        {
-            get
-            {
-                return codigoPostal;
-            }
-
-            set
-            {
-                codigoPostal = value;
-            }
-        }
-
-        public string Rua
-        {
-            get
-            {
-                return rua;
-            }
-
-            set
-            {
-                rua = value;
-            }
-        }
 
         public string Designacao
         {
@@ -151,19 +110,7 @@ namespace Trabalho_BD_IHC
             }
         }
 
-        public int NPorta
-        {
-            get
-            {
-                return nPorta;
-            }
-
-            set
-            {
-                nPorta = value;
-            }
-        }
-
+  
         public int NFilial
         {
             get
@@ -174,6 +121,19 @@ namespace Trabalho_BD_IHC
             set
             {
                 nFilial = value;
+            }
+        }
+
+        public Localizacao Localizacao
+        {
+            get
+            {
+                return localizacao;
+            }
+
+            set
+            {
+                localizacao = value;
             }
         }
     }
