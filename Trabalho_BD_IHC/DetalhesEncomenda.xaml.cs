@@ -37,8 +37,14 @@ namespace Trabalho_BD_IHC
             preco.Content =encomenda.Preco;
             dataConfirmaçao.Content =encomenda.DataConfirmacao;
             dataPrevistaEntrega.Content =encomenda.DataPrevistaEntrega;
-            dataEntrega.Content =encomenda.DataEntrega;
-            localEntrega.Content =encomenda.LocalEntrega;
+            Console.WriteLine(encomenda.DataEntrega.ToString());
+            if (encomenda.DataEntrega.ToString().Equals("")) { 
+                dataEntrega.Content = "Ainda não entregue..";
+                localEntrega.Content = "Ainda não entregue..";
+            } else { 
+                dataEntrega.Content =encomenda.DataEntrega;
+                localEntrega.Content =encomenda.LocalEntrega;
+            }
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

@@ -3,156 +3,139 @@ GO
 
 CREATE FUNCTION dbo.getTipoMaterial (@ref int) RETURNS varchar(20)
 AS
+	BEGIN
+		DECLARE @tipo varchar(20);
+		SET @tipo = 'Material Textil';
+		SELECT @tipo='Pano' 
+		FROM PANO
+		WHERE PANO.REFERENCIA_FABRICA=@ref
+		SELECT @tipo='Linha' 
+		FROM LINHA
+		WHERE LINHA.REFERENCIA_FABRICA=@ref
+		SELECT @tipo='Acessório' 
+		FROM ACESSORIO
+		WHERE ACESSORIO.REFERENCIA_FABRICA=@ref
+		SELECT @tipo='Fecho' 
+		FROM FECHO
+		WHERE FECHO.REFERENCIA_FABRICA=@ref
+		SELECT @tipo='Mola' 
+		FROM MOLA
+		WHERE MOLA.REFERENCIA_FABRICA=@ref
+		SELECT @tipo='Botão' 
+		FROM BOTAO
+		WHERE BOTAO.REFERENCIA_FABRICA=@ref
+		SELECT @tipo='Elástico'
+		FROM ELASTICO
+		WHERE ELASTICO.REFERENCIA_FABRICA=@ref
+		SELECT @tipo='Fita de Velcro'
+		FROM [FITA-VELCRO]
+		WHERE [FITA-VELCRO].REFERENCIA_FABRICA=@ref
+		RETURN @tipo
+	END
+GO
+
+CREATE FUNCTION getQuantidadeMaterial(@referenciaMaterial INT) RETURNS DECIMAL(10,2)
+AS 
 BEGIN
-DECLARE @tipo varchar(20);
-SET @tipo = 'Material Textil';
-SELECT @tipo='Pano' 
-FROM PANO
-WHERE PANO.REFERENCIA_FABRICA=@ref
-SELECT @tipo='Linha' 
-FROM LINHA
-WHERE LINHA.REFERENCIA_FABRICA=@ref
-SELECT @tipo='Acessório' 
-FROM ACESSORIO
-WHERE ACESSORIO.REFERENCIA_FABRICA=@ref
-SELECT @tipo='Fecho' 
-FROM FECHO
-WHERE FECHO.REFERENCIA_FABRICA=@ref
-SELECT @tipo='Mola' 
-FROM MOLA
-WHERE MOLA.REFERENCIA_FABRICA=@ref
-SELECT @tipo='Botão' 
-FROM BOTAO
-WHERE BOTAO.REFERENCIA_FABRICA=@ref
-SELECT @tipo='Elástico'
-FROM ELASTICO
-WHERE ELASTICO.REFERENCIA_FABRICA=@ref
-SELECT @tipo='Fita de Velcro'
-FROM [FITA-VELCRO]
-WHERE [FITA-VELCRO].REFERENCIA_FABRICA=@ref
-RETURN @tipo
+	DECLARE @qtdExistente decimal(10,2);
+	IF dbo.getTipoMaterial(@referenciaMaterial) = 'Pano'
+		SELECT @qtdExistente = PANO.AREA_ARMAZEM FROM PANO WHERE REFERENCIA_FABRICA=@referenciaMaterial;
+
+	ELSE IF dbo.getTipoMaterial(@referenciaMaterial) = 'Linha'
+		SELECT @qtdExistente = LINHA.COMPRIMENTO_ARMAZEM FROM LINHA WHERE REFERENCIA_FABRICA=@referenciaMaterial;
+						
+	ELSE
+		SELECT @qtdExistente = ACESSORIO.QUANTIDADE_ARMAZEM FROM ACESSORIO WHERE REFERENCIA_FABRICA=@referenciaMaterial;
+	return @qtdExistente;
 END
 GO
 
+CREATE PROC dbo.usarMaterial(@referenciaMaterial INT, @qtdPrecisa DECIMAL(10,2))
+AS
+BEGIN
+	DECLARE @qtdExistente DECIMAL(10,2);
+	SET @qtdExistente= dbo.getQuantidadeMaterial(@referenciaMaterial);
+	print @qtdExistente;
+	print @qtdPrecisa;
+	IF dbo.getTipoMaterial(@referenciaMaterial) = 'Pano'
+		BEGIN
+			UPDATE PANO
+			SET AREA_ARMAZEM=@qtdExistente-@qtdPrecisa
+			WHERE REFERENCIA_FABRICA=@referenciaMaterial
+		END		
+	ELSE IF dbo.getTipoMaterial(@referenciaMaterial) = 'Linha'
+		BEGIN
+			UPDATE LINHA
+			SET COMPRIMENTO_ARMAZEM=@qtdExistente-@qtdPrecisa
+			WHERE REFERENCIA_FABRICA=@referenciaMaterial;
+		END					
+	ELSE 
+		BEGIN
+			UPDATE ACESSORIO
+			SET QUANTIDADE_ARMAZEM=@qtdExistente-@qtdPrecisa
+			WHERE REFERENCIA_FABRICA=@referenciaMaterial;
+		END
+END
+GO
 
-CREATE Trigger produzirProduto  ON dbo.[PRODUTO-PERSONALIZADO]
-AFTER UPDATE
+CREATE PROC dbo.produzirProduto  (@REFERENCIA INT, @TAMANHO VARCHAR(5), @COR VARCHAR(15), @ID INT, @qtdProdutoPrecisa INT, @OUT VARCHAR(70) OUTPUT)
 AS
 	BEGIN
-		DECLARE @qtdProdutoPrecisa as int;
+		DECLARE @validation bit;
+		SET @validation = 1;
 		DECLARE @qtdProdutoExistente as int;
-		DECLARE @validation as bit;
-		set @validation = 0;
-		SELECT @qtdProdutoPrecisa = inserted.UNIDADES_ARMAZEM FROM inserted;
-		SELECT @qtdProdutoExistente = UNIDADES_ARMAZEM from [PRODUTO-PERSONALIZADO] where  REFERENCIA=(SELECT REFERENCIA FROM inserted) AND COR=(SELECT COR FROM inserted) AND TAMANHO=(SELECT TAMANHO FROM inserted) AND ID=(SELECT ID FROM inserted);
+		SELECT @qtdProdutoExistente = UNIDADES_ARMAZEM from [PRODUTO-PERSONALIZADO] 
+		where  REFERENCIA=@REFERENCIA AND COR=@COR AND TAMANHO=@TAMANHO AND ID=@ID;
 		IF (@qtdProdutoExistente-@qtdProdutoExistente) >= 0
 			BEGIN
-			DECLARE @referenciaMaterial as int;
-			DECLARE @qtdPrecisa as decimal(10,2);
-			DECLARE @qtdExistente as decimal(10,2);
-			DECLARE cursorMaterial CURSOR LOCAL FOR 
-			SELECT REFERENCIA_FABRICA FROM [PRODUTO-PERSONALIZADO] 
-			JOIN [MATERIAIS-PRODUTO] ON [PRODUTO-PERSONALIZADO].REFERENCIA=[MATERIAIS-PRODUTO].REFERENCIA;
-			OPEN cursorMaterial;
-			FETCH cursorMaterial INTO @referenciaMaterial;
-			WHILE @@FETCH_STATUS= 0
+				DECLARE @referenciaMaterial as int;
+				DECLARE @qtdPrecisa as decimal(10,2);
+				DECLARE @qtdExistente as decimal(10,2);
+				DECLARE cursorMaterial CURSOR FOR 
+				SELECT REFERENCIA_FABRICA, [MATERIAIS-PRODUTO].QUANTIDADE FROM [PRODUTO-PERSONALIZADO] 
+				JOIN [MATERIAIS-PRODUTO] ON [PRODUTO-PERSONALIZADO].REFERENCIA=[MATERIAIS-PRODUTO].REFERENCIA
+				WHERE [PRODUTO-PERSONALIZADO].REFERENCIA=@REFERENCIA 
+				AND [PRODUTO-PERSONALIZADO].COR=@COR 
+				AND [PRODUTO-PERSONALIZADO].TAMANHO=@TAMANHO
+				AND [PRODUTO-PERSONALIZADO].ID = @ID;
+				OPEN cursorMaterial;
+				FETCH cursorMaterial INTO @referenciaMaterial, @qtdPrecisa;
+				WHILE @@FETCH_STATUS= 0
 				BEGIN
-					select @qtdPrecisa = [MATERIAIS-PRODUTO].QUANTIDADE FROM [MATERIAIS-PRODUTO] 
-					JOIN [PRODUTO-PERSONALIZADO] ON [MATERIAIS-PRODUTO].REFERENCIA= [PRODUTO-PERSONALIZADO].REFERENCIA 
-					AND [MATERIAIS-PRODUTO].COR=[PRODUTO-PERSONALIZADO].COR 
-					AND [MATERIAIS-PRODUTO].TAMANHO=[PRODUTO-PERSONALIZADO].TAMANHO 
-					AND [MATERIAIS-PRODUTO].ID=[PRODUTO-PERSONALIZADO].ID
-					WHERE [MATERIAIS-PRODUTO].REFERENCIA_FABRICA=@referenciaMaterial;
-						BEGIN
-						select @qtdPrecisa*=(@qtdProdutoPrecisa-@qtdProdutoExistente) FROM inserted;
-						--validar primeiro se temos o numero necessario de materiais em stock
-						IF dbo.getTipoMaterial(@referenciaMaterial) = 'Pano'
-							BEGIN
-								SELECT @qtdExistente = PANO.AREA_ARMAZEM FROM PANO WHERE REFERENCIA_FABRICA=@referenciaMaterial
-								IF(@qtdExistente < @qtdPrecisa)
-									BEGIN
-										--RAISERROR ('Não existe pano suficiente para satisfazer as necessidades de produção do produto selecionado', 10, 1);
-										SET @validation = 1;
-									END
-							END
-
-						ELSE IF dbo.getTipoMaterial(@referenciaMaterial) = 'Linha'
-							BEGIN
-								SELECT @qtdExistente = LINHA.COMPRIMENTO_ARMAZEM FROM LINHA WHERE REFERENCIA_FABRICA=@referenciaMaterial
-								IF(@qtdExistente-@qtdPrecisa<0)
-									BEGIN
-										--RAISERROR ('Não existe linha suficiente para satisfazer as necessidades de produção do produto selecionado', 10, 1);
-										SET @validation = 1;
-									END
-							END
-						
-						ELSE IF dbo.getTipoMaterial(@referenciaMaterial) = 'Acessório'
-							BEGIN
-							SELECT @qtdExistente = ACESSORIO.QUANTIDADE_ARMAZEM FROM ACESSORIO WHERE REFERENCIA_FABRICA=@referenciaMaterial
-							IF(@qtdExistente-@qtdPrecisa<0)
-								BEGIN
-									--RAISERROR ('Não existem acessórios suficientes para satisfazer as necessidades de produção do produto selecionado', 10, 1);
-									SET @validation = 1;
-								END
-							END		
-					FETCH cursorMaterial INTO @referenciaMaterial;
-					END
+					set @qtdPrecisa = @qtdPrecisa*@qtdProdutoPrecisa;
+					IF((dbo.getQuantidadeMaterial(@referenciaMaterial)-@qtdPrecisa)<0)
+						SET @validation = 0;
+					FETCH cursorMaterial INTO @referenciaMaterial , @qtdPrecisa;
+				END
+				
 				CLOSE cursorMaterial;
 
-				OPEN cursorMaterial;
-				FETCH cursorMaterial INTO @referenciaMaterial;
-				----se tivermos todos os materiais necessários, remover a quantidade necessária de material
-				--IF (@validation = 0)
-				--BEGIN
-				--	WHILE @@FETCH_STATUS = 0
-				--		BEGIN
-				--			select @qtdPrecisa = [MATERIAIS-PRODUTO].QUANTIDADE FROM [MATERIAIS-PRODUTO] 
-				--			JOIN [PRODUTO-PERSONALIZADO] ON [MATERIAIS-PRODUTO].REFERENCIA= [PRODUTO-PERSONALIZADO].REFERENCIA 
-				--			AND [MATERIAIS-PRODUTO].COR=[PRODUTO-PERSONALIZADO].COR 
-				--			AND [MATERIAIS-PRODUTO].TAMANHO=[PRODUTO-PERSONALIZADO].TAMANHO 
-				--			AND [MATERIAIS-PRODUTO].ID=[PRODUTO-PERSONALIZADO].ID
-				--			WHERE [MATERIAIS-PRODUTO].REFERENCIA_FABRICA=@referenciaMaterial;
-				--			select @qtdPrecisa*=(@qtdProdutoPrecisa-@qtdProdutoExistente) FROM inserted;
-							
-				--			IF dbo.getTipoMaterial(@referenciaMaterial) = 'Pano'
-				--				BEGIN
-				--					UPDATE [PRODUTO-PERSONALIZADO]
-				--					SET UNIDADES_ARMAZEM=inserted.UNIDADES_ARMAZEM, PRECO=inserted.PRECO, N_ETIQUETA=inserted.N_ETIQUETA
-				--					FROM inserted;
-				--					UPDATE PANO
-				--					SET AREA_ARMAZEM=@qtdExistente-@qtdPrecisa
-				--					WHERE REFERENCIA_FABRICA=@referenciaMaterial
-				--				END		
-				--				ELSE IF dbo.getTipoMaterial(@referenciaMaterial) = 'Linha'
-				--						BEGIN
-				--							UPDATE [PRODUTO-PERSONALIZADO]
-				--							SET UNIDADES_ARMAZEM=inserted.UNIDADES_ARMAZEM, PRECO=inserted.PRECO, N_ETIQUETA=inserted.N_ETIQUETA
-				--							FROM inserted;
-				--							UPDATE LINHA
-				--							SET COMPRIMENTO_ARMAZEM=@qtdExistente-@qtdPrecisa
-				--							WHERE REFERENCIA_FABRICA=@referenciaMaterial;
-				--						END
-							
-				--				ELSE IF dbo.getTipoMaterial(@referenciaMaterial) = 'Acessório'
-				--					BEGIN
-				--						UPDATE [PRODUTO-PERSONALIZADO]
-				--						SET UNIDADES_ARMAZEM=inserted.UNIDADES_ARMAZEM, PRECO=inserted.PRECO, N_ETIQUETA=inserted.N_ETIQUETA
-				--						FROM inserted;
-				--						UPDATE ACESSORIO
-				--						SET QUANTIDADE_ARMAZEM=@qtdExistente-@qtdPrecisa
-				--						WHERE REFERENCIA_FABRICA=@referenciaMaterial;
-				--						END
-				--					END
-				--			FETCH cursorMaterial INTO @referenciaMaterial;
-				--		END;
-				--	CLOSE cursorMaterial;
+				IF (@validation = 1)
+				BEGIN
+					OPEN cursorMaterial;
+					FETCH cursorMaterial INTO @referenciaMaterial, @qtdPrecisa;
+					WHILE @@FETCH_STATUS = 0
+						BEGIN
+							SET @qtdPrecisa=@qtdPrecisa*@qtdProdutoPrecisa;
+							exec dbo.usarMaterial @referenciaMaterial, @qtdPrecisa;
+							FETCH cursorMaterial INTO @referenciaMaterial , @qtdPrecisa;
+						END
+					CLOSE cursorMaterial;
+					UPDATE [PRODUTO-PERSONALIZADO]
+					SET UNIDADES_ARMAZEM=@qtdProdutoExistente+@qtdProdutoPrecisa
+					WHERE [PRODUTO-PERSONALIZADO].REFERENCIA=@REFERENCIA 
+					AND [PRODUTO-PERSONALIZADO].TAMANHO=@TAMANHO 
+					AND [PRODUTO-PERSONALIZADO].COR=@COR 
+					AND [PRODUTO-PERSONALIZADO].ID=@ID; 
 				END
 				DEALLOCATE cursorMaterial;
 	END
 	END
 GO
 
---drop trigger produzirProduto
+DECLARE @OUT VARCHAR(100);
+EXEC dbo.produzirProduto 1, 'XL', 'azul escuro', 1, 1 , @OUT
+drop proc dbo.produzirProduto
 
 GO
 CREATE FUNCTION dbo.getEtiqueta (@n int) RETURNS TABLE
@@ -188,12 +171,3 @@ AS
 		return @nUnidades
 	END
 GO
-
-/*
-SELECT dbo.nUnidadesProd(1, 'XL', 'azul escuro', 1);
-SELECT * FROM PANO
-
-UPDATE [PRODUTO-PERSONALIZADO]
-SET UNIDADES_ARMAZEM = 2
-WHERE REFERENCIA = 1 AND TAMANHO = 'XL' AND COR = 'azul escuro' AND ID = 1;
-*/

@@ -54,6 +54,39 @@ namespace Trabalho_BD_IHC
             return Cn.State == ConnectionState.Open;
         }
 
+        public int getEncomendasDesteMes()
+        {
+            verifySGBDConnection();
+            int result=0;
+            SqlCommand cmd = new SqlCommand("select dbo.getEncomendasMes()", cn);
+            result = Convert.ToInt32(cmd.ExecuteScalar().ToString());
+            closeSGBDConnection();
+            return result;
+        }
+
+        public int getDinheiroDesteMes()
+        {
+            verifySGBDConnection();
+            int result = 0;
+            SqlCommand cmd = new SqlCommand("select dbo.getLucrosMes()", cn);
+            String strResult = cmd.ExecuteScalar().ToString();
+            if(!strResult.Equals(""))
+                result = Convert.ToInt32(strResult);
+            closeSGBDConnection();
+            return result;
+        }
+
+        public int getNProdutosVendidosAteHoje() {
+            verifySGBDConnection();
+            int result = 0;
+            SqlCommand cmd = new SqlCommand("select dbo.getTotalProdutosVendidos()", cn);
+            String strResult = cmd.ExecuteScalar().ToString();
+            if (!strResult.Equals(""))
+                result = Convert.ToInt32(strResult);
+            closeSGBDConnection();
+            return result;
+        }
+
         public bool closeSGBDConnection() {
             if (Cn.State != ConnectionState.Closed)
                 Cn.Close();
@@ -219,10 +252,11 @@ namespace Trabalho_BD_IHC
         {
             if (!this.verifySGBDConnection())
                 return null;
-            SqlCommand cmd = new SqlCommand("SELECT [PRODUTO-PERSONALIZADO].REFERENCIA as REF, [PRODUTO-PERSONALIZADO].TAMANHO AS TAM, [PRODUTO-PERSONALIZADO].COR AS COLOR, [PRODUTO-PERSONALIZADO].ID AS IDENT, [PRODUTO-PERSONALIZADO].PRECO AS PRICE, [PRODUTO-PERSONALIZADO].UNIDADES_ARMAZEM AS UA, CONTEUDO_ENCOMENDA.QUANTIDADE AS QT"
+            SqlCommand cmd = new SqlCommand("SELECT [PRODUTO-PERSONALIZADO].REFERENCIA as REF, [PRODUTO-BASE].NOME , [PRODUTO-PERSONALIZADO].TAMANHO AS TAM, [PRODUTO-PERSONALIZADO].COR AS COLOR, [PRODUTO-PERSONALIZADO].ID AS IDENT, [PRODUTO-PERSONALIZADO].PRECO AS PRICE, [PRODUTO-PERSONALIZADO].UNIDADES_ARMAZEM AS UA, CONTEUDO_ENCOMENDA.QUANTIDADE AS QT"
                                 + " FROM ENCOMENDA"
                                 + " JOIN CONTEUDO_ENCOMENDA ON CONTEUDO_ENCOMENDA.N_ENCOMENDA=ENCOMENDA.N_ENCOMENDA"
                                 + " JOIN [PRODUTO-PERSONALIZADO] ON CONTEUDO_ENCOMENDA.REFERENCIA_PRODUTO=[PRODUTO-PERSONALIZADO].REFERENCIA"
+                                + " JOIN [PRODUTO-BASE] ON [PRODUTO-BASE].REFERENCIA=[PRODUTO-PERSONALIZADO].REFERENCIA"
                                 + " WHERE ENCOMENDA.N_ENCOMENDA=@encomenda"
                                 , cn);
             cmd.Parameters.Clear();
@@ -234,6 +268,8 @@ namespace Trabalho_BD_IHC
                 ProdutoPersonalizado prod = new ProdutoPersonalizado();
                 prod.ProdutoBase = new ProdutoBase();
                 prod.ProdutoBase.Referencia = Convert.ToInt32(reader["REF"].ToString());
+                prod.ProdutoBase.Nome = reader["NOME"].ToString();
+                prod.Preco = Convert.ToDouble(reader["PRICE"].ToString());
                 prod.Tamanho= reader["TAM"].ToString();
                 prod.Cor = reader["COLOR"].ToString();
                 prod.ID = Convert.ToInt32(reader["IDENT"].ToString());
@@ -290,8 +326,6 @@ namespace Trabalho_BD_IHC
             utilizador.Localizacao.Rua1 = reader["RUAUSER"].ToString();
             utilizador.Supervisor = new Utilizador();
             utilizador.Supervisor.NFuncionario = Convert.ToInt32(reader["N_FUNCIONARIO_SUPER"].ToString());
-            Console.WriteLine(utilizador.Localizacao.CodigoPostal);
-            Console.WriteLine(utilizador.Password);
             byte[] img=null;
             try
             {
@@ -331,6 +365,27 @@ namespace Trabalho_BD_IHC
             }
             closeSGBDConnection();
             return fornecedores;
+        }
+
+        public String entregarEncomenda(int nEncomenda)
+        {
+            verifySGBDConnection();
+            SqlCommand cmd = new SqlCommand("dbo.entregarEncomenda", cn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            // set up the parameters
+            cmd.Parameters.Add("@nEncomenda", SqlDbType.Int);
+            cmd.Parameters.Add("@out", SqlDbType.VarChar, 70).Direction = ParameterDirection.Output;
+
+            // set parameter values
+            cmd.Parameters["@nEncomenda"].Value = nEncomenda;
+
+            // execute stored procedure
+            cmd.ExecuteNonQuery();
+
+            // read output value from @NewId
+            String strResult = cmd.Parameters["@out"].Value.ToString();
+            return strResult;
         }
 
         public void inserirMaterial(MaterialTextil mat)

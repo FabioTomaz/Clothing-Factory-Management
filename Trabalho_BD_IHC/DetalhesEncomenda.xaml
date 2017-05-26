@@ -6,6 +6,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:Trabalho_BD_IHC"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterOwner"
         Title="Detalhes de Encomenda" Height="600" MinHeight="400" MinWidth="650" Width="700" Loaded="Window_Loaded" Icon="details.png">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -77,13 +78,13 @@
         <GroupBox Header="Encomendas do Cliente" Grid.Column="1" Grid.ColumnSpan="7" Grid.Row="3" Grid.RowSpan="3">
             <DataGrid Name="produtos" Grid.Column="1" Grid.ColumnSpan="7" Grid.Row="11" Grid.RowSpan="3" IsReadOnly="True" AutoGenerateColumns="False">
                 <DataGrid.Columns>
-                    <materialDesign:MaterialDataGridTextColumn Header="Referencia" Binding="{Binding ProdutoBase.Referencia}" />
                     <materialDesign:MaterialDataGridTextColumn Header="Nome"  Binding="{Binding ProdutoBase.Nome}" />
+                    <materialDesign:MaterialDataGridTextColumn Header="Referencia" Binding="{Binding ProdutoBase.Referencia}" />
                     <materialDesign:MaterialDataGridTextColumn Header="Cor"  Binding="{Binding Cor}" />
                     <materialDesign:MaterialDataGridTextColumn Header="Tamanho" Binding="{Binding Tamanho}" />
-                    <materialDesign:MaterialDataGridTextColumn Header="Unidades em Stock" Binding="{Binding Preco}" />
+                    <materialDesign:MaterialDataGridTextColumn Header="Modelo" Binding="{Binding ID}" />
+                    <materialDesign:MaterialDataGridTextColumn Header="Preço Unidade" Binding="{Binding Preco}" />
                     <materialDesign:MaterialDataGridTextColumn Header="Quantidade" Binding="{Binding Quantidade}" />
-                    <materialDesign:MaterialDataGridTextColumn Header="Preço" Binding="{Binding Preco}" />
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>

@@ -133,9 +133,7 @@
                         <Image Name="userImage" Source="person.png"></Image>
                     </GroupBox>
                     <GroupBox Header="Notificações Importantes" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="8" Grid.RowSpan="2">
-                        <StackPanel>
-                            <materialDesign:Card>Existem x encomendas pendentes da filial atual neste momento</materialDesign:Card>
-                            <materialDesign:Card Margin="0,4,0,0">Artigos Vendidos este Mês:</materialDesign:Card>
+                        <StackPanel Name="notificationStack">
                         </StackPanel>
                     </GroupBox>
                     <Button Content="Alterar Foto" Style="{StaticResource imageButton}" Grid.Column="4" Grid.Row="5" VerticalAlignment="Center" Click="Button_Click_1"/>
