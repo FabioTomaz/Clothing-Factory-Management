@@ -279,7 +279,7 @@ INSERT INTO [LOCAIS-ENTREGA-ENCOMENDA](DESCRICAO) VALUES ('Entrega na Fábrica');
 TIPOS DE UTILIZADOR DO SISTEMA
 */
 INSERT INTO [TIPO-UTILIZADOR] (TIPO) VALUES
-	('Gestor de Stock'),	--1
+	('Gestor da Empresa'),  --1
 	('Gestor de Produção'),	--2
-	('Gestor de Vendas'),		--3
+	('Gestor de Vendas'),   --3
 	('Gestor de Recursos Humanos');	--4

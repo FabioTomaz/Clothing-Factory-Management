@@ -44,7 +44,7 @@
                 <Button x:Name="registarEncomenda" Style="{StaticResource registarButton}" Grid.Row="1" Grid.Column="1" Click="registarEncomenda_Click">
                     <TextBlock TextWrapping="Wrap">Registar Encomenda</TextBlock>
                 </Button>
-                <Button x:Name="entregarEncomenda" Style="{StaticResource entregarButton}" Grid.Row="3" Grid.Column="1" IsEnabled="False">
+                <Button x:Name="entregarEncomenda" Click="entregarEncomenda_Click" Style="{StaticResource entregarButton}" Grid.Row="3" Grid.Column="1" IsEnabled="False">
                     <TextBlock TextWrapping="Wrap">Entregar Encomenda</TextBlock>
                 </Button>
                 <Button x:Name="editarEncomenda" Style="{StaticResource editarButton}" Grid.Row="5" Grid.Column="1" IsEnabled="False" Click="editarEncomenda_Click">

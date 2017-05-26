@@ -58,6 +58,7 @@ namespace Trabalho_BD_IHC
             filiaisFrame.Content = listarFiliais;
 
             fillUserInfo();
+            fillNotifications();
         }
 
         private void myFrame_ContentRendered(object sender, EventArgs e)
@@ -98,6 +99,32 @@ namespace Trabalho_BD_IHC
                 bi.EndInit();
                 userImage.Source = bi;
             }
+        }
+
+        public void fillNotifications()
+        {
+            int encomendasMes = dataHandler.getEncomendasDesteMes();
+            MaterialDesignThemes.Wpf.Card chip1 = new MaterialDesignThemes.Wpf.Card
+            {
+                Content = "Existem " + encomendasMes +" encomendas para serem entregues este mês."
+            };
+            notificationStack.Children.Add(chip1);
+
+            int dinheiroMes = dataHandler.getDinheiroDesteMes();
+            MaterialDesignThemes.Wpf.Card chip2 = new MaterialDesignThemes.Wpf.Card
+            {
+                Content = "Neste mês foram vendidos até ao momento " + dinheiroMes + " euros em produtos.",
+                Margin = new Thickness(0, 4, 0, 0)
+            };
+            notificationStack.Children.Add(chip2);
+
+            int nProdutos = dataHandler.getNProdutosVendidosAteHoje();
+            MaterialDesignThemes.Wpf.Card chip3 = new MaterialDesignThemes.Wpf.Card
+            {
+                Content = "Até ao momento foram vendidos "+ nProdutos + " produtos",
+                Margin = new Thickness(0, 4, 0, 0)
+            };
+            notificationStack.Children.Add(chip3);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

@@ -127,5 +127,11 @@ namespace Trabalho_BD_IHC
             DetalhesEncomenda page = new DetalhesEncomenda(dataHandler, (Encomenda)encomendas.SelectedItem);
             page.Show();
         }
+
+        private void entregarEncomenda_Click(object sender, RoutedEventArgs e)
+        {
+            String resultado = dataHandler.entregarEncomenda(((Encomenda)encomendas.SelectedItem).NEncomenda);
+            Xceed.Wpf.Toolkit.MessageBox.Show(resultado, "Resultado" ,MessageBoxButton.OK, MessageBoxImage.Information);
+        }
     }
 }
