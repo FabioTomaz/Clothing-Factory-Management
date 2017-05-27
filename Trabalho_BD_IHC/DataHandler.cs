@@ -64,6 +64,69 @@ namespace Trabalho_BD_IHC
             return Cn.State == ConnectionState.Closed;
         }
 
+        public void registarCliente(Cliente cl) {
+            verifySGBDConnection();
+            SqlCommand cmd = new SqlCommand();
+
+            cmd.CommandText = "INSERT INTO CLIENTE (NOME, NIB, NIF, EMAIL, TELEMOVEL, CODPOSTAL1, CODPOSTAL2, RUA, N_PORTA) " +
+                "VALUES (@NOME, @NIB, @NIF, @EMAIL, @TELEMOVEL, @CODPOSTAL1, @CODPOSTAL2, @RUA, @N_PORTA);";
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@NOME", cl.Nome);
+            cmd.Parameters.AddWithValue("@NIB", cl.Nib);
+            cmd.Parameters.AddWithValue("@NIF", cl.Nif);
+            cmd.Parameters.AddWithValue("@EMAIL", cl.Email);
+            cmd.Parameters.AddWithValue("@TELEMOVEL", cl.Telemovel);
+            cmd.Parameters.AddWithValue("@CODPOSTAL1", Convert.ToInt32(cl.CodigoPostal.Split('-')[0]));
+            cmd.Parameters.AddWithValue("@CODPOSTAL2", Convert.ToInt32(cl.CodigoPostal.Split('-')[1]));
+            cmd.Parameters.AddWithValue("@RUA", cl.Rua);
+            cmd.Parameters.AddWithValue("@N_PORTA", cl.NCasa);
+            cmd.Connection = Cn;
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Falha ao adicionar cliente na base de dados. \n ERROR MESSAGE: \n" + ex.Message);
+            }
+            finally
+            {
+                closeSGBDConnection();
+            }
+        }
+
+        public void editarCliente(Cliente cl)
+        {
+            verifySGBDConnection();
+            SqlCommand cmd = new SqlCommand();
+
+            cmd.CommandText = "UPDATE CLIENTE SET NIB=@NIB, EMAIL=@EMAIL, TELEMOVEL=@TELEMOVEL, CODPOSTAL1=@CODPOSTAL1, CODPOSTAL2=@CODPOSTAL2, RUA=@RUA, N_PORTA=@N_PORTA " +
+                "WHERE CLIENTE.NCLIENTE=@NCLIENTE;";
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@NIB", cl.Nib);
+            cmd.Parameters.AddWithValue("@EMAIL", cl.Email);
+            cmd.Parameters.AddWithValue("@TELEMOVEL", cl.Telemovel);
+            cmd.Parameters.AddWithValue("@CODPOSTAL1", Convert.ToInt32(cl.CodigoPostal.Split('-')[0]));
+            cmd.Parameters.AddWithValue("@CODPOSTAL2", Convert.ToInt32(cl.CodigoPostal.Split('-')[1]));
+            cmd.Parameters.AddWithValue("@RUA", cl.Rua);
+            cmd.Parameters.AddWithValue("@N_PORTA", cl.NCasa);
+            cmd.Parameters.AddWithValue("@NCLIENTE", cl.NCliente);
+            cmd.Connection = Cn;
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Falha ao atualizar o cliente na base de dados.\nMensagem de Erro: " + ex.Message);
+            }
+            finally
+            {
+                closeSGBDConnection();
+            }
+        }
+
+
         public int getEncomendasDesteMes()
         {
             verifySGBDConnection();
@@ -84,6 +147,27 @@ namespace Trabalho_BD_IHC
                 result = Convert.ToDouble(strResult);
             closeSGBDConnection();
             return result;
+        }
+
+        public String cancelarEncomenda(int nEncomenda)
+        {
+            verifySGBDConnection();
+            SqlCommand cmd = new SqlCommand("dbo.cancelarEncomenda", cn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            // set up the parameters
+            cmd.Parameters.Add("@nEncomenda", SqlDbType.Int);
+            cmd.Parameters.Add("@out", SqlDbType.VarChar, 70).Direction = ParameterDirection.Output;
+
+            // set parameter values
+            cmd.Parameters["@nEncomenda"].Value = nEncomenda;
+
+            // execute stored procedure
+            cmd.ExecuteNonQuery();
+
+            // read output value from @NewId
+            String strResult = cmd.Parameters["@out"].Value.ToString();
+            return strResult;
         }
 
         public Double getDinheiroGastoMes()

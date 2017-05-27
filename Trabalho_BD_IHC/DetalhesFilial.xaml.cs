@@ -28,7 +28,7 @@ namespace Trabalho_BD_IHC
             this.filial = filial;
             this.dataHandler = dataHandler;
             InitializeComponent();
-            nFil.Text = (dataHandler.getNfilialFromDB(filial.Email, filial.Telefone)).ToString();
+ 
             email.Text = filial.Email;
             fax.Text = filial.Fax;
             telefone.Text = filial.Telefone;
@@ -36,7 +36,7 @@ namespace Trabalho_BD_IHC
             localidade.Text = filial.Localizacao.Localidade;
             cdgPostal.Text = filial.Localizacao.CodigoPostal;
             rua.Text = filial.Localizacao.Rua1+ ", nº "+ filial.Localizacao.Porta.ToString();
-            Utilizador user = dataHandler.getChefeFilialFromDB(filial.Chefe.NFuncionario);
+            Utilizador user = null; 
             nome.Content = user.Nome;
             nFuncionario.Content = user.NFuncionario;
             funTelefone.Content = user.Telemovel;

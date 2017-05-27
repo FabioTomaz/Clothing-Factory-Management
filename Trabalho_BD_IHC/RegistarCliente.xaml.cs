@@ -29,6 +29,7 @@ namespace Trabalho_BD_IHC
         {
             InitializeComponent();
             this.dataHandler = dh;
+            txtNumeroCliente.Text = (dataHandler.getLastIdentity("CLIENTE")+1).ToString();
         }
 
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
@@ -37,46 +38,12 @@ namespace Trabalho_BD_IHC
             e.Handled = regex.IsMatch(e.Text);
         }
 
-        private void EnviarCliente(Cliente cl)
-        {
-
-            if (!dataHandler.verifySGBDConnection())
-                return;
-            SqlCommand cmd = new SqlCommand();
-
-            cmd.CommandText = "INSERT INTO CLIENTE (NOME, NIB, NIF, EMAIL, TELEMOVEL, COD_POSTAL, RUA, N_PORTA) " +
-                "VALUES (@NOME, @NIB, @NIF, @EMAIL, @TELEMOVEL, @COD_POSTAL, @RUA, @N_PORTA);";
-            cmd.Parameters.Clear();
-            cmd.Parameters.AddWithValue("@NOME", cl.Nome);
-            cmd.Parameters.AddWithValue("@NIB", cl.Nib);
-            cmd.Parameters.AddWithValue("@NIF", cl.Nif);
-            cmd.Parameters.AddWithValue("@EMAIL", cl.Email);
-            cmd.Parameters.AddWithValue("@TELEMOVEL", cl.Telemovel);
-            cmd.Parameters.AddWithValue("@COD_POSTAL", cl.CodigoPostal);
-            cmd.Parameters.AddWithValue("@RUA", cl.Rua);
-            cmd.Parameters.AddWithValue("@N_PORTA", cl.NCasa);
-            cmd.Connection = dataHandler.Cn;
-            try
-            {
-                cmd.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Falha ao adicionar cliente na base de dados. \n ERROR MESSAGE: \n" + ex.Message);
-            }
-            finally
-            {
-                dataHandler.closeSGBDConnection();
-            }
-        }
-
         private void cancelar_Click(object sender, RoutedEventArgs e)
         {
-            if (MessageBox.Show("Tem a certeza que deseja cancelar o registo de cliente? Perderá todos os dados que tenha introduzido.",
-                 "", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            if (Xceed.Wpf.Toolkit.MessageBox.Show("Tem a certeza que deseja cancelar o registo de cliente? Perderá todos os dados que tenha introduzido.",
+                 "Cancelar Registo de Cliente", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {//sim
-                ListarProdutos page = new ListarProdutos(dataHandler);
-                this.NavigationService.Navigate(page);
+                this.NavigationService.GoBack();
             }
         }
 
@@ -89,7 +56,7 @@ namespace Trabalho_BD_IHC
             }
             catch (Exception ex)
             {
-                Xceed.Wpf.Toolkit.MessageBox.Show(ex.Message, "Erro", MessageBoxButton.OKCancel, MessageBoxImage.Exclamation);
+                Xceed.Wpf.Toolkit.MessageBox.Show(ex.Message, "Erro", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 return;
             }
 
@@ -102,13 +69,13 @@ namespace Trabalho_BD_IHC
             cliente.Rua = txtRua.Text;
             cliente.NCasa = int.Parse(txtNumeroPorta.Text);
             try {
-                EnviarCliente(cliente);
+                dataHandler.registarCliente(cliente);
             }catch(Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                Xceed.Wpf.Toolkit.MessageBox.Show(ex.Message, "Erro", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
-            MessageBox.Show("Cliente Registado com sucesso!", "", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            Xceed.Wpf.Toolkit.MessageBox.Show("Cliente Registado com sucesso!", "Sucesso", MessageBoxButton.OK, MessageBoxImage.Information);
             this.NavigationService.GoBack();
         }
 
