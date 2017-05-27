@@ -36,6 +36,14 @@ namespace Trabalho_BD_IHC
             localidade.Text = filial.Localizacao.Localidade;
             cdgPostal.Text = filial.Localizacao.CodigoPostal;
             rua.Text = filial.Localizacao.Rua1+ ", nº "+ filial.Localizacao.Porta.ToString();
+            Utilizador user = dataHandler.getChefeFilialFromDB(filial.Chefe.NFuncionario);
+            nome.Content = user.Nome;
+            nFuncionario.Content = user.NFuncionario;
+            funTelefone.Content = user.Telemovel;
+            funEmail.Content = user.Email;
+            funRua.Content = user.Localizacao.Rua1+", nº " + user.Localizacao.Porta;
+            funDistrito.Content = user.Localizacao.Distrito;
+
 
         }
 
