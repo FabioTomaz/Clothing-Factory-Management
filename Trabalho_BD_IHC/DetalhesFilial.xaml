@@ -60,13 +60,12 @@
 
                 <TextBlock Text="Código-Postal: " Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" TextWrapping="Wrap"></TextBlock>
                 <TextBlock Name="cdgPostal" Grid.Row="2" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap"></TextBlock>
-                <TextBlock Text="Distrito: " Grid.Row="2"  Grid.Column="5" HorizontalAlignment="Right" VerticalAlignment="Center" TextWrapping="Wrap"></TextBlock>
                 <TextBlock Name="distrito" Grid.Row="2"   Grid.Column="7" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap"></TextBlock>
 
-                <TextBlock Text="Localidade:" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" TextWrapping="Wrap"></TextBlock>
-                <TextBlock Name="localidade" Grid.Row="3" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap"></TextBlock>
-                <TextBlock Text="Rua:" Grid.Row="3" Grid.Column="5" HorizontalAlignment="Right" VerticalAlignment="Center" TextWrapping="Wrap"></TextBlock>
-                <TextBlock Name="rua" Grid.Row="3" Grid.Column="7" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap"></TextBlock>
+                <TextBlock Text="Localidade:" Grid.Row="2" Grid.Column="5" HorizontalAlignment="Right" VerticalAlignment="Center" TextWrapping="Wrap"></TextBlock>
+                <TextBlock Name="localidade" Grid.Row="2" Grid.Column="7" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap"></TextBlock>
+                <TextBlock Text="Morada:" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" TextWrapping="Wrap"></TextBlock>
+                <TextBlock Name="rua" Grid.Row="3" Grid.Column="3" HorizontalAlignment="Left" Grid.ColumnSpan="3" VerticalAlignment="Center" TextWrapping="Wrap"></TextBlock>
 
             </Grid>
         </GroupBox>
@@ -98,8 +97,8 @@
                 <Label Content="E-mail:" Grid.Row="1"  Grid.Column="5" HorizontalAlignment="Right"></Label>
                 <Label Name="funEmail" Grid.Row="1"   Grid.Column="7" HorizontalAlignment="Left"></Label>
 
-                <Label Content="Distrito: "  Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right"></Label>
-                <Label Name="funDistrito" Grid.Row="2"  Grid.Column="3" HorizontalAlignment="Left"></Label>
+                <Label Content="Localidade: "  Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right"></Label>
+                <Label Name="funLocalidade" Grid.Row="2"  Grid.Column="3" HorizontalAlignment="Left"></Label>
                 <Label Content="Morada: " Grid.Row="2"  Grid.Column="5" HorizontalAlignment="Right"></Label>
                 <Label Name="funRua" Grid.Row="2"   Grid.Column="7" HorizontalAlignment="Left"></Label>
             </Grid>

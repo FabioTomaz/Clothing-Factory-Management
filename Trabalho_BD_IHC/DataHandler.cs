@@ -1044,7 +1044,8 @@ namespace Trabalho_BD_IHC
 
             ObservableCollection<filial> FiliaisTexteis = new ObservableCollection<filial>();
             SqlCommand cmd = new SqlCommand("SELECT * FROM [FABRICA-FILIAL] JOIN ZONA ON "
-                + "([FABRICA-FILIAL].CODPOSTAL1 = ZONA.CODPOSTAL1 AND [FABRICA-FILIAL].CODPOSTAL2 = ZONA.CODPOSTAL2)", this.Cn);
+                + "([FABRICA-FILIAL].CODPOSTAL1 = ZONA.CODPOSTAL1 AND [FABRICA-FILIAL].CODPOSTAL2 = ZONA.CODPOSTAL2) "
+                + "JOIN UTILIZADOR ON CHEFE = N_FUNCIONARIO", this.Cn);
             SqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
@@ -1060,7 +1061,8 @@ namespace Trabalho_BD_IHC
                 f.Localizacao.Localidade = reader["LOCALIDADE"].ToString();
                 f.Localizacao.Distrito = reader["DISTRITO"].ToString();
                 f.Chefe = new Utilizador();
-                //nfunc
+                f.Chefe.NFuncionario = Convert.ToInt32(reader["CHEFE"].ToString());
+                f.Chefe.Nome = reader["NOME"].ToString();
                 FiliaisTexteis.Add(f);
             }
             reader.Close();
@@ -1074,8 +1076,8 @@ namespace Trabalho_BD_IHC
                 return;
             SqlCommand cmd = new SqlCommand();
 
-            cmd.CommandText = "INSERT INTO [FABRICA-FILIAL] (EMAIL, TELEFONE, FAX, CODPOSTAL1, CODPOSTAL2, RUA, N_PORTA) VALUES "
-                + "(@Email, @TELEFONE, @Fax, @COD_POSTAL1, @COD_POSTAL2, @RUA, @N_PORTA)";
+            cmd.CommandText = "INSERT INTO [FABRICA-FILIAL] (EMAIL, TELEFONE, FAX, CODPOSTAL1, CODPOSTAL2, RUA, N_PORTA, CHEFE) VALUES "
+                + "(@Email, @TELEFONE, @Fax, @COD_POSTAL1, @COD_POSTAL2, @RUA, @N_PORTA, @chefe)";
             cmd.Parameters.Clear();
 
             if (string.IsNullOrEmpty(f.Fax))
@@ -1092,6 +1094,7 @@ namespace Trabalho_BD_IHC
                 cmd.Parameters.AddWithValue("@COD_POSTAL2", f.Localizacao.CodigoPostal2);
                 cmd.Parameters.AddWithValue("@RUA", f.Localizacao.Rua1);
                 cmd.Parameters.AddWithValue("@N_PORTA", f.Localizacao.Porta);
+                cmd.Parameters.AddWithValue("@chefe", f.Chefe.NFuncionario);
                 cmd.Connection = this.Cn;
                 try
                 {
@@ -1132,7 +1135,8 @@ namespace Trabalho_BD_IHC
 
             cmd.CommandText = "UPDATE [FABRICA-FILIAL] " + "SET EMAIL = @EMAIL, "
                 + " TELEFONE = @TELEFONE, " + " CODPOSTAL1 = @CODPOSTAL1, " + " CODPOSTAL2 = @CODPOSTAL2, " +
-                " TELEFONE = @TELEFONE, " + "  RUA = @RUA, " + " N_PORTA = @N_PORTA " + "WHERE N_FILIAL = @N_FILIAL";
+                " TELEFONE = @TELEFONE, " + "  RUA = @RUA, " + " N_PORTA = @N_PORTA "
+                + "CHEFE = @chefe" + "WHERE N_FILIAL = @N_FILIAL";
             cmd.Parameters.Clear();
             cmd.Parameters.AddWithValue("@N_FILIAL", f.NFilial);
             cmd.Parameters.AddWithValue("@EMAIL", f.Email);
@@ -1141,6 +1145,7 @@ namespace Trabalho_BD_IHC
             cmd.Parameters.AddWithValue("@CODPOSTAL2", f.Localizacao.CodigoPostal2);
             cmd.Parameters.AddWithValue("@RUA", f.Localizacao.Rua1);
             cmd.Parameters.AddWithValue("@N_PORTA", f.Localizacao.Porta);
+            cmd.Parameters.AddWithValue("@chefe", f.Chefe.NFuncionario);
             cmd.Connection = this.Cn;
 
             try
@@ -1166,7 +1171,8 @@ namespace Trabalho_BD_IHC
         {
             if (!this.verifySGBDConnection())
                 return null;
-            SqlCommand cmd = new SqlCommand("SELECT * FROM UTILIZADOR WHERE N_FABRICA = @nFilial", this.Cn);
+            SqlCommand cmd = new SqlCommand("SELECT * FROM UTILIZADOR JOIN ZONA ON (ZONA.CODPOSTAL1 = UTILIZADOR.CODPOSTAL1 AND ZONA.CODPOSTAL2 = UTILIZADOR.CODPOSTAL2) "
+                +" WHERE N_FABRICA = @nFilial", this.Cn);
             ObservableCollection<Utilizador> users = new ObservableCollection<Utilizador>();
             cmd.Parameters.Clear();
             cmd.Parameters.AddWithValue("@nFilial", nFilial);
@@ -1183,7 +1189,6 @@ namespace Trabalho_BD_IHC
                 u.HoraSaida = TimeSpan.Parse(reader["HORA_SAIDA"].ToString());
                 u.Localizacao.CodigoPostal = reader["CODPOSTAL1"].ToString() + "-" + reader["CODPOSTAL2"].ToString();
                 u.Localizacao.Rua1 = reader["RUA"].ToString();
-                u.Localizacao.Distrito = reader["DISTRITO"].ToString();
                 u.Localizacao.Localidade = reader["LOCALIDADE"].ToString();
                 u.Localizacao.Porta = Convert.ToInt32(reader["N_PORTA"].ToString());
                 users.Add(u);
@@ -1191,6 +1196,38 @@ namespace Trabalho_BD_IHC
             reader.Close();
             this.closeSGBDConnection();
             return users;
+        }
+
+        public Utilizador getChefeFilialFromDB(int nChefe)
+        {
+            if (!this.verifySGBDConnection())
+                return null;
+            SqlCommand cmd = new SqlCommand("SELECT N_FUNCIONARIO, UTILIZADOR.EMAIL as userMail, SALARIO, NOME, UTILIZADOR.TELEFONE as userPhone, "
+                +" HORA_ENTRADA, HORA_SAIDA, UTILIZADOR.CODPOSTAL1 as codP1, UTILIZADOR.CODPOSTAL2 as codP2, UTILIZADOR.RUA as userRua, UTILIZADOR.N_PORTA as userPorta, "
+                +" ZONA.LOCALIDADE as loc, N_FUNCIONARIO_SUPER FROM UTILIZADOR JOIN[FABRICA-FILIAL]  ON CHEFE = N_FUNCIONARIO "
+                +" JOIN ZONA ON(ZONA.CODPOSTAL1 = UTILIZADOR.CODPOSTAL1 AND ZONA.CODPOSTAL2 = UTILIZADOR.CODPOSTAL2) "
+                +" WHERE CHEFE = 1", this.Cn);
+            Utilizador u = new Utilizador();
+            u.Localizacao = new Localizacao();
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@chefe", nChefe);
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                u.NFuncionario = Convert.ToInt32(reader["N_FUNCIONARIO"].ToString());
+                u.Nome = reader["NOME"].ToString();
+                u.Email = reader["userMail"].ToString();
+                u.Telemovel = reader["userPhone"].ToString();
+                u.HoraEntrada = TimeSpan.Parse(reader["HORA_ENTRADA"].ToString());
+                u.HoraSaida = TimeSpan.Parse(reader["HORA_SAIDA"].ToString());
+                u.Localizacao.CodigoPostal = reader["codP1"].ToString() + "-" + reader["codP2"].ToString();
+                u.Localizacao.Rua1 = reader["userRua"].ToString();
+                u.Localizacao.Localidade = reader["loc"].ToString();
+                u.Localizacao.Porta = Convert.ToInt32(reader["userPorta"].ToString());
+            }
+            reader.Close();
+            this.closeSGBDConnection();
+            return u;
         }
         //-------------------Fornecedor-------------
         public void EnviarFornecedor(Fornecedor f)
@@ -1232,6 +1269,7 @@ namespace Trabalho_BD_IHC
                 this.closeSGBDConnection();
             }
         }
+
 
     }
 }
