@@ -78,7 +78,7 @@ BEGIN
 END
 GO
 
-CREATE PROC dbo.produzirProduto  (@REFERENCIA INT, @TAMANHO VARCHAR(5), @COR VARCHAR(15), @ID INT, @qtdProdutoPrecisa INT, @OUT VARCHAR(70) OUTPUT)
+CREATE PROC dbo.produzirProduto (@REFERENCIA INT, @TAMANHO VARCHAR(5), @COR VARCHAR(15), @ID INT, @qtdProdutoPrecisa INT, @OUT VARCHAR(70) OUTPUT)
 AS
 	BEGIN
 		DECLARE @validation bit;
@@ -129,13 +129,17 @@ AS
 					AND [PRODUTO-PERSONALIZADO].ID=@ID; 
 				END
 				DEALLOCATE cursorMaterial;
-	END
+		END
 	END
 GO
 
 DECLARE @OUT VARCHAR(100);
-EXEC dbo.produzirProduto 1, 'XL', 'azul escuro', 1, 1 , @OUT
-drop proc dbo.produzirProduto
+EXEC dbo.produzirProduto 2, 'M', 'azul claro', 3 , 1 , @OUT
+
+--drop proc dbo.produzirProduto
+
+--SELECT * FROM ELASTICO JOIN ACESSORIO ON ACESSORIO.REFERENCIA_FABRICA = ELASTICO.REFERENCIA_FABRICA
+--SELECT * FROM [PRODUTO-PERSONALIZADO]
 
 GO
 CREATE FUNCTION dbo.getEtiqueta (@n int) RETURNS TABLE
@@ -169,5 +173,15 @@ AS
 		SELECT @nUnidades = UNIDADES_ARMAZEM FROM [PRODUTO-PERSONALIZADO] 
 		WHERE REFERENCIA = @referencia AND TAMANHO = @tamanho AND COR = @cor AND ID = @id
 		return @nUnidades
+	END
+GO
+
+CREATE FUNCTION dbo.nFilial (@email varchar(50), @telefone varchar(22) ) RETURNS INT
+AS
+	BEGIN
+		DECLARE @nFilial INT
+		SELECT @nFilial = N_FILIAL FROM [FABRICA-FILIAL] 
+		WHERE EMAIL = @email AND TELEFONE = @telefone
+		return @nFilial
 	END
 GO

@@ -9,6 +9,7 @@ using System.IO;
 using System.Drawing;
 using System.Windows.Media.Imaging;
 using System.Collections.ObjectModel;
+using System.Windows;
 
 namespace Trabalho_BD_IHC
 {
@@ -288,7 +289,7 @@ namespace Trabalho_BD_IHC
             Utilizador utilizador = new Utilizador();
             SqlCommand cmd = new SqlCommand("SELECT N_FUNCIONARIO, IMAGEM, UTILIZADOR.EMAIL AS EMAILUSER, SALARIO, NOME, TIPO, PASS, UTILIZADOR.TELEFONE AS TELEFONEUSER, HORA_ENTRADA, HORA_SAIDA, IMAGEM, N_FUNCIONARIO_SUPER, ZONAUSER.CODPOSTAL1 AS CODUSER1, ZONAUSER.CODPOSTAL2 AS CODUSER2 ,ZONAUSER.DISTRITO AS DISTRITOUSER, ZONAUSER.LOCALIDADE AS LOCALIDADEUSER, UTILIZADOR.RUA AS RUAUSER, UTILIZADOR.N_PORTA AS PORTAUSER, ZONAFABRICA.CODPOSTAL1 AS CODFABRICA1, ZONAFABRICA.CODPOSTAL2 AS CODFABRICA2, ZONAFABRICA.DISTRITO AS DISTRITOFABRICA, ZONAFABRICA.LOCALIDADE AS LOCALIDADEFABRICA, [FABRICA-FILIAL].RUA AS RUAFABRICA, [FABRICA-FILIAL].N_PORTA AS PORTAFABRICA, [FABRICA-FILIAL].EMAIL AS EMAILFABRICA, [FABRICA-FILIAL].TELEFONE AS TELEFONEFABRICA, [FABRICA-FILIAL].FAX AS FAXFABRICA, N_FILIAL  FROM UTILIZADOR"
                                             + " JOIN ZONA AS ZONAUSER ON UTILIZADOR.CODPOSTAL1 = ZONAUSER.CODPOSTAL1 AND UTILIZADOR.CODPOSTAL2 = ZONAUSER.CODPOSTAL2"
-                                            + " JOIN[FABRICA-FILIAL] ON[FABRICA-FILIAL].N_FILIAL = UTILIZADOR.N_FABRICA"
+                                            + " JOIN[FABRICA-FILIAL] ON [FABRICA-FILIAL].N_FILIAL = UTILIZADOR.N_FABRICA"
                                             + " JOIN ZONA AS ZONAFABRICA ON [FABRICA-FILIAL].CODPOSTAL1 = ZONAFABRICA.CODPOSTAL1 AND [FABRICA-FILIAL].CODPOSTAL2 = ZONAFABRICA.CODPOSTAL2"
                                             + " JOIN[UTILIZADOR-TIPOS] ON[UTILIZADOR-TIPOS].UTILIZADOR = UTILIZADOR.N_FUNCIONARIO"
                                             + " JOIN[TIPO-UTILIZADOR] ON[TIPO-UTILIZADOR].ID =[UTILIZADOR-TIPOS].ID_TIPO"
@@ -297,48 +298,55 @@ namespace Trabalho_BD_IHC
             cmd.Parameters.Clear();
             cmd.Parameters.AddWithValue("@USER", user);
             SqlDataReader reader = cmd.ExecuteReader();
-            reader.Read();
-            utilizador.Filial = new filial();
-            utilizador.Filial.NFilial = Convert.ToInt32(reader["N_FILIAL"].ToString());
-            utilizador.Filial.Email = reader["EMAILFABRICA"].ToString();
-            utilizador.Filial.Fax = reader["FAXFABRICA"].ToString();
-            utilizador.Filial.Telefone = reader["TELEFONEFABRICA"].ToString();
-            utilizador.Filial.Localizacao = new Localizacao();
-            utilizador.Filial.Localizacao.CodigoPostal = reader["CODFABRICA1"].ToString()+"-"+ reader["CODFABRICA2"].ToString();
-            utilizador.Filial.Localizacao.Distrito = reader["DISTRITOFABRICA"].ToString();
-            utilizador.Filial.Localizacao.Localidade = reader["LOCALIDADEFABRICA"].ToString();
-            utilizador.Filial.Localizacao.Rua1 = reader["RUAFABRICA"].ToString();
-            utilizador.Filial.Localizacao.Porta = Convert.ToInt32(reader["PORTAFABRICA"].ToString());
-            utilizador.NFuncionario = Convert.ToInt32(reader["N_FUNCIONARIO"].ToString());
-            utilizador.Email = reader["EMAILUSER"].ToString();
-            utilizador.HoraEntrada = TimeSpan.Parse(reader["HORA_ENTRADA"].ToString());
-            utilizador.HoraSaida = TimeSpan.Parse(reader["HORA_SAIDA"].ToString());
-            utilizador.Nome = reader["NOME"].ToString();
-            utilizador.Password = reader["PASS"].ToString();
-            utilizador.Salario = Convert.ToDouble(reader["SALARIO"].ToString());
-            utilizador.Telemovel = reader["TELEFONEUSER"].ToString();
-            utilizador.TipoUser = reader["TIPO"].ToString();
-            utilizador.Localizacao = new Localizacao();
-            utilizador.Localizacao.CodigoPostal = reader["CODUSER1"].ToString()+ "-"+ reader["CODUSER2"].ToString();
-            utilizador.Localizacao.Distrito = reader["DISTRITOUSER"].ToString();
-            utilizador.Localizacao.Localidade = reader["LOCALIDADEUSER"].ToString();
-            utilizador.Localizacao.Porta = Convert.ToInt32(reader["PORTAUSER"].ToString());
-            utilizador.Localizacao.Rua1 = reader["RUAUSER"].ToString();
-            utilizador.Supervisor = new Utilizador();
-            utilizador.Supervisor.NFuncionario = Convert.ToInt32(reader["N_FUNCIONARIO_SUPER"].ToString());
-            byte[] img=null;
-            try
+            while (reader.Read())
             {
-                img = (byte[])reader["IMAGEM"];
-            }
-            catch (InvalidCastException e) {
+                utilizador.Filial = new filial();
+                utilizador.Filial.NFilial = Convert.ToInt32(reader["N_FILIAL"].ToString());
+                utilizador.Filial.Email = reader["EMAILFABRICA"].ToString();
+                utilizador.Filial.Fax = reader["FAXFABRICA"].ToString();
+                utilizador.Filial.Telefone = reader["TELEFONEFABRICA"].ToString();
+                utilizador.Filial.Localizacao = new Localizacao();
+                utilizador.Filial.Localizacao.CodigoPostal = reader["CODFABRICA1"].ToString() + "-" + reader["CODFABRICA2"].ToString();
+                utilizador.Filial.Localizacao.Distrito = reader["DISTRITOFABRICA"].ToString();
+                utilizador.Filial.Localizacao.Localidade = reader["LOCALIDADEFABRICA"].ToString();
+                utilizador.Filial.Localizacao.Rua1 = reader["RUAFABRICA"].ToString();
+                utilizador.Filial.Localizacao.Porta = Convert.ToInt32(reader["PORTAFABRICA"].ToString());
+                utilizador.NFuncionario = Convert.ToInt32(reader["N_FUNCIONARIO"].ToString());
+                utilizador.Email = reader["EMAILUSER"].ToString();
+                utilizador.HoraEntrada = TimeSpan.Parse(reader["HORA_ENTRADA"].ToString());
+                utilizador.HoraSaida = TimeSpan.Parse(reader["HORA_SAIDA"].ToString());
+                utilizador.Nome = reader["NOME"].ToString();
+                utilizador.Password = reader["PASS"].ToString();
+                utilizador.Salario = Convert.ToDouble(reader["SALARIO"].ToString());
+                utilizador.Telemovel = reader["TELEFONEUSER"].ToString();
+                utilizador.TipoUser = reader["TIPO"].ToString();
+                utilizador.Localizacao = new Localizacao();
+                utilizador.Localizacao.CodigoPostal = reader["CODUSER1"].ToString() + "-" + reader["CODUSER2"].ToString();
+                utilizador.Localizacao.Distrito = reader["DISTRITOUSER"].ToString();
+                utilizador.Localizacao.Localidade = reader["LOCALIDADEUSER"].ToString();
+                utilizador.Localizacao.Porta = Convert.ToInt32(reader["PORTAUSER"].ToString());
+                utilizador.Localizacao.Rua1 = reader["RUAUSER"].ToString();
+                utilizador.Supervisor = new Utilizador();
+                if (!string.IsNullOrEmpty(reader["N_FUNCIONARIO_SUPER"].ToString()))
+                {
+                    utilizador.Supervisor.NFuncionario = Convert.ToInt32(reader["N_FUNCIONARIO_SUPER"].ToString());
+                }
+                byte[] img = null;
+                try
+                {
+                    img = (byte[])reader["IMAGEM"];
+                }
+                catch (InvalidCastException e)
+                {
 
+                }
+                if (img != null)
+                {
+                    MemoryStream ms = new MemoryStream(img);
+                    utilizador.Imagem = Image.FromStream(ms);
+                }
             }
-            if (img != null)
-            {
-                MemoryStream ms = new MemoryStream(img);
-                utilizador.Imagem = Image.FromStream(ms);
-            }
+            reader.Close();
             this.closeSGBDConnection();
             return utilizador;
         }
@@ -358,9 +366,10 @@ namespace Trabalho_BD_IHC
                 f.Fax = reader["FAX"].ToString();
                 f.Telefone = reader["TELEFONE"].ToString();
                 f.Designacao = reader["DESIGNACAO"].ToString();
-                f.CodigoPostal = reader["CODPOSTAL1"].ToString() + "-" + reader["CODPOSTAL2"].ToString();
-                f.Rua = reader["RUA"].ToString();
-                f.NPorta = Convert.ToInt32(reader["N_PORTA"].ToString());
+                f.Localizacao = new Localizacao();
+                f.Localizacao.CodigoPostal = reader["CODPOSTAL1"].ToString() + "-" + reader["CODPOSTAL2"].ToString();
+                f.Localizacao.Rua1 = reader["RUA"].ToString();
+                f.Localizacao.Porta = Convert.ToInt32(reader["N_PORTA"].ToString());
                 fornecedores.Add(f);
             }
             closeSGBDConnection();
@@ -988,6 +997,203 @@ namespace Trabalho_BD_IHC
             return f;
         }
 
+        // ----------------Fabrica filial----------
+
+        public ObservableCollection<filial> getFiliaisFromDB()
+        {
+            if (!this.verifySGBDConnection())
+                return null;
+
+            ObservableCollection<filial> FiliaisTexteis = new ObservableCollection<filial>();
+            SqlCommand cmd = new SqlCommand("SELECT * FROM [FABRICA-FILIAL] JOIN ZONA ON "
+                + "([FABRICA-FILIAL].CODPOSTAL1 = ZONA.CODPOSTAL1 AND [FABRICA-FILIAL].CODPOSTAL2 = ZONA.CODPOSTAL2)", this.Cn);
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                filial f = new filial();
+                f.NFilial = Convert.ToInt32(reader["N_FILIAL"].ToString());
+                f.Email = reader["EMAIL"].ToString();
+                f.Telefone = reader["TELEFONE"].ToString();
+                f.Fax = reader["FAX"].ToString();
+                f.Localizacao = new Localizacao();
+                f.Localizacao.CodigoPostal = reader["CODPOSTAL1"].ToString() + "-" + reader["CODPOSTAL2"].ToString();
+                f.Localizacao.Rua1 = reader["RUA"].ToString();
+                f.Localizacao.Porta = Convert.ToInt32(reader["N_PORTA"].ToString());
+                f.Localizacao.Localidade = reader["LOCALIDADE"].ToString();
+                f.Localizacao.Distrito = reader["DISTRITO"].ToString();
+                f.Chefe = new Utilizador();
+                //nfunc
+                FiliaisTexteis.Add(f);
+            }
+            reader.Close();
+            this.closeSGBDConnection();
+            return FiliaisTexteis;
+        }
+        public void EnviarFilial(filial f)
+        {
+
+            if (!this.verifySGBDConnection())
+                return;
+            SqlCommand cmd = new SqlCommand();
+
+            cmd.CommandText = "INSERT INTO [FABRICA-FILIAL] (EMAIL, TELEFONE, FAX, CODPOSTAL1, CODPOSTAL2, RUA, N_PORTA) VALUES "
+                + "(@Email, @TELEFONE, @Fax, @COD_POSTAL1, @COD_POSTAL2, @RUA, @N_PORTA)";
+            cmd.Parameters.Clear();
+
+            if (string.IsNullOrEmpty(f.Fax))
+            {
+                cmd.Parameters.AddWithValue("@Fax", DBNull.Value);
+            }
+            else
+            {
+                cmd.Parameters.AddWithValue("@Fax", f.Fax);
+
+                cmd.Parameters.AddWithValue("@Email", f.Email);
+                cmd.Parameters.AddWithValue("@TELEFONE", f.Telefone);
+                cmd.Parameters.AddWithValue("@COD_POSTAL1", f.Localizacao.CodigoPostal1);
+                cmd.Parameters.AddWithValue("@COD_POSTAL2", f.Localizacao.CodigoPostal2);
+                cmd.Parameters.AddWithValue("@RUA", f.Localizacao.Rua1);
+                cmd.Parameters.AddWithValue("@N_PORTA", f.Localizacao.Porta);
+                cmd.Connection = this.Cn;
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Falha ao adicionar Fábrica Filial na base de dados. \n ERROR MESSAGE: \n" + ex.Message);
+                }
+                finally
+                {
+
+                    this.closeSGBDConnection();
+                }
+            }
+        }
+
+        public int getNfilialFromDB(string email, string telefone)
+        {
+            if (!this.verifySGBDConnection())
+                return 0;
+            SqlCommand cmd = new SqlCommand("SELECT dbo.nFilial(@Email, @TELEFONE)", this.Cn);
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@Email", email);
+            cmd.Parameters.AddWithValue("@TELEFONE", telefone);
+            int n = Convert.ToInt32(cmd.ExecuteScalar());
+            this.closeSGBDConnection();
+            return n;
+        }
+
+        public void AtualizarFilial(filial f)
+        {
+            int rows = 0;
+            if (!this.verifySGBDConnection())
+                return;
+
+            SqlCommand cmd = new SqlCommand();
+
+            cmd.CommandText = "UPDATE [FABRICA-FILIAL] " + "SET EMAIL = @EMAIL, "
+                + " TELEFONE = @TELEFONE, " + " CODPOSTAL1 = @CODPOSTAL1, " + " CODPOSTAL2 = @CODPOSTAL2, " +
+                " TELEFONE = @TELEFONE, " + "  RUA = @RUA, " + " N_PORTA = @N_PORTA " + "WHERE N_FILIAL = @N_FILIAL";
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@N_FILIAL", f.NFilial);
+            cmd.Parameters.AddWithValue("@EMAIL", f.Email);
+            cmd.Parameters.AddWithValue("@TELEFONE", f.Telefone);
+            cmd.Parameters.AddWithValue("@CODPOSTAL1", f.Localizacao.CodigoPostal1);
+            cmd.Parameters.AddWithValue("@CODPOSTAL2", f.Localizacao.CodigoPostal2);
+            cmd.Parameters.AddWithValue("@RUA", f.Localizacao.Rua1);
+            cmd.Parameters.AddWithValue("@N_PORTA", f.Localizacao.Porta);
+            cmd.Connection = this.Cn;
+
+            try
+            {
+                rows = cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Não foi possivel atualizar a Filial na base de dados\n" + ex.Message);
+            }
+            finally
+            {
+                if (rows == 1)
+                    Xceed.Wpf.Toolkit.MessageBox.Show("A atualização da Fábrica Filial foi submetida com sucesso!", "Atualização Bem Sucedida", MessageBoxButton.OK, MessageBoxImage.Information);
+                else
+                   if (Xceed.Wpf.Toolkit.MessageBox.Show("Não foi possivel atualizar a informação da Fábrica Filial. Pretende tentar novamente?", "Erro", MessageBoxButton.YesNo, MessageBoxImage.Exclamation) == MessageBoxResult.Yes)
+                    this.AtualizarFilial(f);
+                this.closeSGBDConnection();
+            }
+        }
+
+        public ObservableCollection<Utilizador> getUtilizadoresFromFilial(int nFilial)
+        {
+            if (!this.verifySGBDConnection())
+                return null;
+            SqlCommand cmd = new SqlCommand("SELECT * FROM UTILIZADOR WHERE N_FABRICA = @nFilial", this.Cn);
+            ObservableCollection<Utilizador> users = new ObservableCollection<Utilizador>();
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@nFilial", nFilial);
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                Utilizador u = new Utilizador();
+                u.Localizacao = new Localizacao();
+                u.NFuncionario = Convert.ToInt32(reader["N_FUNCIONARIO"].ToString());
+                u.Nome = reader["NOME"].ToString();
+                u.Email = reader["EMAIL"].ToString();
+                u.Telemovel = reader["TELEFONE"].ToString();
+                u.HoraEntrada = TimeSpan.Parse(reader["HORA_ENTRADA"].ToString());
+                u.HoraSaida = TimeSpan.Parse(reader["HORA_SAIDA"].ToString());
+                u.Localizacao.CodigoPostal = reader["CODPOSTAL1"].ToString() + "-" + reader["CODPOSTAL2"].ToString();
+                u.Localizacao.Rua1 = reader["RUA"].ToString();
+                u.Localizacao.Distrito = reader["DISTRITO"].ToString();
+                u.Localizacao.Localidade = reader["LOCALIDADE"].ToString();
+                u.Localizacao.Porta = Convert.ToInt32(reader["N_PORTA"].ToString());
+                users.Add(u);
+            }
+            reader.Close();
+            this.closeSGBDConnection();
+            return users;
+        }
+        //-------------------Fornecedor-------------
+        public void EnviarFornecedor(Fornecedor f)
+        {
+
+            if (!this.verifySGBDConnection())
+                return;
+            SqlCommand cmd = new SqlCommand();
+
+            cmd.CommandText = "INSERT INTO Fornecedor (NIF, EMAIL, NOME, FAX, TELEFONE, DESIGNACAO, CODPOSTAL1, CODPOSTAL2, RUA, N_PORTA)" +
+                "VALUES (@NIF, @Email, @Nome, @Fax, @Telefone, @design, @codPostal1, @codPostal2, @rua, @N_PORTA);";
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@NIF", f.NIF_Fornecedor);
+            cmd.Parameters.AddWithValue("@Email", f.Email);
+            cmd.Parameters.AddWithValue("@Nome", f.Nome);
+            if (string.IsNullOrEmpty(f.Fax))
+                cmd.Parameters.AddWithValue("@Fax", DBNull.Value);
+
+            else
+                cmd.Parameters.AddWithValue("@Fax", f.Fax);
+
+            cmd.Parameters.AddWithValue("@Telefone", f.Telefone);
+            cmd.Parameters.AddWithValue("@design", f.Designacao);
+            cmd.Parameters.AddWithValue("@codPostal1", f.Localizacao.CodigoPostal1);
+            cmd.Parameters.AddWithValue("@codPostal2", f.Localizacao.CodigoPostal2);
+            cmd.Parameters.AddWithValue("@rua", f.Localizacao.Rua1);
+            cmd.Parameters.AddWithValue("@N_PORTA", f.Localizacao.Porta);
+            cmd.Connection = this.Cn;
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Falha ao adicionar Fornecedor na base de dados. \n ERROR MESSAGE: \n" + ex.Message);
+            }
+            finally
+            {
+                this.closeSGBDConnection();
+            }
+        }
 
     }
 }
