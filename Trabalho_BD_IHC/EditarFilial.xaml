@@ -64,6 +64,8 @@
                     <RowDefinition Height="0.1*"></RowDefinition>
                     <RowDefinition></RowDefinition>
                     <RowDefinition Height="0.1*"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="0.1*"></RowDefinition>
                 </Grid.RowDefinitions>
 
 
@@ -104,6 +106,12 @@
                     <TextBlock Text="Nº Porta: "/>
                 </StackPanel>
                 <TextBox Name="txtNumeroPorta" PreviewTextInput="NumberValidationTextBox" Grid.Row="11" Grid.Column="2" VerticalAlignment="Center"></TextBox>
+
+                <StackPanel Orientation="Horizontal"  Grid.Row="13" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Center">
+                    <materialDesign:PackIcon Kind="NaturePeople"></materialDesign:PackIcon>
+                    <TextBlock Text="Nº Chefe Filial: "/>
+                </StackPanel>
+                <TextBox Name="txtNChefe" PreviewTextInput="NumberValidationTextBox" Grid.Row="13" Grid.Column="2" VerticalAlignment="Center"></TextBox>
             </Grid>
         </GroupBox>
 

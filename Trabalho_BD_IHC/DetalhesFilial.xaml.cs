@@ -36,6 +36,7 @@ namespace Trabalho_BD_IHC
             localidade.Text = filial.Localizacao.Localidade;
             cdgPostal.Text = filial.Localizacao.CodigoPostal;
             rua.Text = filial.Localizacao.Rua1+ ", nº "+ filial.Localizacao.Porta.ToString();
+
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

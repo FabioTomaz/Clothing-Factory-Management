@@ -84,10 +84,10 @@ namespace Trabalho_BD_IHC
             this.NavigationService.GoBack();
         }
 
-        private void validarInput()
+        public void validarInput()
         {
             Regex regex = new Regex("[^a-bA-B]+");
-
+           
             if (txtFax.Text.Trim().Length > 22)
                 throw new Exception("O fax introduzido tem demasiados carateres.");
             if (!IsValidEmail(txtEmail.Text.Trim()))
@@ -112,6 +112,8 @@ namespace Trabalho_BD_IHC
                 throw new Exception("Por favor introduza a rua da Fábrica Filial.");
             if (txtNumeroPorta.Text.Trim().Length == 0)
                 throw new Exception("Por favor introduza o número de porta da Fábrica filial.");
+            if (txtNChefe.Text.Trim().Length == 0)
+                throw new Exception("Por favor, introduza um número válido do chefe da filial a registar.");
         }
         public bool IsValidEmail(string email)
         {

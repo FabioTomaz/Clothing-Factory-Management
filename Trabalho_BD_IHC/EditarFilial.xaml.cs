@@ -37,6 +37,7 @@ namespace Trabalho_BD_IHC
             txtcodigoPostal2.Text = split[1];
             txtNumeroPorta.Text = filial.Localizacao.Porta.ToString();
             txtRua.Text = filial.Localizacao.Rua1;
+            txtNChefe.Text = filial.Chefe.NFuncionario.ToString();
             txtEmail.Focus();
         }
 
@@ -63,6 +64,9 @@ namespace Trabalho_BD_IHC
                 filial.Localizacao.Rua1 = txtRua.Text;
                 filial.Localizacao.Porta = int.Parse(txtNumeroPorta.Text);
                 filial.NFilial = dataHandler.getNfilialFromDB(filial.Email, filial.Telefone);
+                filial.Chefe.NFuncionario = Convert.ToInt32(txtNChefe.Text);
+                RegistarFilial r = new RegistarFilial(dataHandler);
+                r.validarInput();
             }
             catch (Exception ex)
             {

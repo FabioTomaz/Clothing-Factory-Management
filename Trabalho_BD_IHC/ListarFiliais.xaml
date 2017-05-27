@@ -147,6 +147,7 @@
                                 <materialDesign:MaterialDataGridTextColumn Header="Distrito" Binding="{Binding Localizacao.Distrito}"/>
                                 <materialDesign:MaterialDataGridTextColumn Header="Localidade" Binding="{Binding Localizacao.Localidade}"/>
                                 <materialDesign:MaterialDataGridTextColumn Header="Rua" Binding="{Binding Localizacao.Rua1}"/>
+                                <materialDesign:MaterialDataGridTextColumn Header="Chefe" Binding="{Binding Chefe.Nome}"/>
                             </DataGrid.Columns>
                         </DataGrid>
                     </Grid>
