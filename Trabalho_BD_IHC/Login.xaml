@@ -47,12 +47,8 @@
                 <PasswordBox Name="password" Grid.Row="3" Grid.Column="2" VerticalAlignment="Center"/>
                 <TextBox Name="passwordText" Grid.Row="3" Grid.Column="2" VerticalAlignment="Center" Visibility="Hidden"></TextBox>
                 <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal">
-                    <Label>Mostrar Password </Label>
+                    <Label>Mostrar Password</Label>
                     <CheckBox Name="mostrarPass" Click="CheckBox_Click_1"></CheckBox>
-                </StackPanel>
-                <StackPanel Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2" Orientation="Horizontal">
-                    <Label>Manter-me Loggado</Label>
-                    <CheckBox Name="matermeConectado" Click="CheckBox_Click"></CheckBox>
                 </StackPanel>
             </Grid>
         </GroupBox>

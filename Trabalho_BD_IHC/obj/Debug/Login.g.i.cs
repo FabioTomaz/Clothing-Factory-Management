@@ -106,14 +106,6 @@ namespace Trabalho_BD_IHC {
         #line default
         #line hidden
         
-        
-        #line 55 "..\..\Login.xaml"
-        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.CheckBox matermeConectado;
-        
-        #line default
-        #line hidden
-        
         private bool _contentLoaded;
         
         /// <summary>
@@ -183,25 +175,16 @@ namespace Trabalho_BD_IHC {
             #line hidden
             return;
             case 10:
-            this.matermeConectado = ((System.Windows.Controls.CheckBox)(target));
             
             #line 55 "..\..\Login.xaml"
-            this.matermeConectado.Click += new System.Windows.RoutedEventHandler(this.CheckBox_Click);
+            ((System.Windows.Controls.Button)(target)).Click += new System.Windows.RoutedEventHandler(this.Button_Click);
             
             #line default
             #line hidden
             return;
             case 11:
             
-            #line 59 "..\..\Login.xaml"
-            ((System.Windows.Controls.Button)(target)).Click += new System.Windows.RoutedEventHandler(this.Button_Click);
-            
-            #line default
-            #line hidden
-            return;
-            case 12:
-            
-            #line 62 "..\..\Login.xaml"
+            #line 58 "..\..\Login.xaml"
             ((System.Windows.Controls.Button)(target)).Click += new System.Windows.RoutedEventHandler(this.Button_Click_1);
             
             #line default

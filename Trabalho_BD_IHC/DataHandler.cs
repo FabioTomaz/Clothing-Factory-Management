@@ -55,6 +55,15 @@ namespace Trabalho_BD_IHC
             return Cn.State == ConnectionState.Open;
         }
 
+
+        public bool closeSGBDConnection()
+        {
+            if (Cn.State != ConnectionState.Closed)
+                Cn.Close();
+
+            return Cn.State == ConnectionState.Closed;
+        }
+
         public int getEncomendasDesteMes()
         {
             verifySGBDConnection();
@@ -65,14 +74,38 @@ namespace Trabalho_BD_IHC
             return result;
         }
 
-        public int getDinheiroDesteMes()
+        public Double getSaldoDesteMes()
         {
             verifySGBDConnection();
-            int result = 0;
-            SqlCommand cmd = new SqlCommand("select dbo.getLucrosMes()", cn);
+            Double result = 0;
+            SqlCommand cmd = new SqlCommand("select dbo.getLucroGeradoMes()", cn);
             String strResult = cmd.ExecuteScalar().ToString();
             if(!strResult.Equals(""))
-                result = Convert.ToInt32(strResult);
+                result = Convert.ToDouble(strResult);
+            closeSGBDConnection();
+            return result;
+        }
+
+        public Double getDinheiroGastoMes()
+        {
+            verifySGBDConnection();
+            Double result = 0;
+            SqlCommand cmd = new SqlCommand("select dbo.getDinheiroGastoMes()", cn);
+            String strResult = cmd.ExecuteScalar().ToString();
+            if (!strResult.Equals(""))
+                result = Convert.ToDouble(strResult);
+            closeSGBDConnection();
+            return result;
+        }
+
+        public Double getDinheiroGeradoMes()
+        {
+            verifySGBDConnection();
+            Double result = 0;
+            SqlCommand cmd = new SqlCommand("select dbo.getDinheiroGeradoMes()", cn);
+            String strResult = cmd.ExecuteScalar().ToString();
+            if (!strResult.Equals(""))
+                result = Convert.ToDouble(strResult);
             closeSGBDConnection();
             return result;
         }
@@ -88,11 +121,16 @@ namespace Trabalho_BD_IHC
             return result;
         }
 
-        public bool closeSGBDConnection() {
-            if (Cn.State != ConnectionState.Closed)
-                Cn.Close();
-
-            return Cn.State == ConnectionState.Closed;
+        public int getNProdutosVendidosMes()
+        {
+            verifySGBDConnection();
+            int result = 0;
+            SqlCommand cmd = new SqlCommand("select dbo.getTotalProdutosVendidosMes()", cn);
+            String strResult = cmd.ExecuteScalar().ToString();
+            if (!strResult.Equals(""))
+                result = Convert.ToInt32(strResult);
+            closeSGBDConnection();
+            return result;
         }
 
         public ObservableCollection<Cliente> getClientesFromDB() {

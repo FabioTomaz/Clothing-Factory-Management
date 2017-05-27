@@ -382,7 +382,6 @@
     <Resource Include="draw.png" />
     <Resource Include="encomenda.png" />
     <Resource Include="help.png" />
-    <Resource Include="people.png" />
     <Resource Include="product.png" />
     <Resource Include="profile.png" />
     <Resource Include="settings.png" />
@@ -405,8 +404,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="linha.png" />
-    <Resource Include="mola.png" />
-    <Resource Include="velcro.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="acessorios.png" />
@@ -480,9 +477,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="arrow-left.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="voltar.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="ajuda.png" />
