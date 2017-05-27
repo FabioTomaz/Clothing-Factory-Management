@@ -133,8 +133,8 @@ AS
 	END
 GO
 
-DECLARE @OUT VARCHAR(100);
-EXEC dbo.produzirProduto 2, 'M', 'azul claro', 3 , 1 , @OUT
+--DECLARE @OUT VARCHAR(100);
+--EXEC dbo.produzirProduto 2, 'M', 'azul claro', 3 , 1 , @OUT
 
 --drop proc dbo.produzirProduto
 
