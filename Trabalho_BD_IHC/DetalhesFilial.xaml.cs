@@ -32,7 +32,6 @@ namespace Trabalho_BD_IHC
             email.Text = filial.Email;
             fax.Text = filial.Fax;
             telefone.Text = filial.Telefone;
-            distrito.Text = filial.Localizacao.Distrito;
             localidade.Text = filial.Localizacao.Localidade;
             cdgPostal.Text = filial.Localizacao.CodigoPostal;
             rua.Text = filial.Localizacao.Rua1+ ", nº "+ filial.Localizacao.Porta.ToString();
@@ -42,7 +41,7 @@ namespace Trabalho_BD_IHC
             funTelefone.Content = user.Telemovel;
             funEmail.Content = user.Email;
             funRua.Content = user.Localizacao.Rua1+", nº " + user.Localizacao.Porta;
-            funDistrito.Content = user.Localizacao.Distrito;
+            funLocalidade.Content = user.Localizacao.Localidade;
 
 
         }
