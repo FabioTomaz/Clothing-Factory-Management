@@ -19,6 +19,13 @@ namespace Trabalho_BD_IHC
         private int quantidade;
         private ObservableCollection<MaterialTextil> materiaisTexteis;
 
+        public ProdutoPersonalizado()
+        {
+            this.ProdutoBase = new ProdutoBase();
+            this.etiqueta = new Etiqueta();
+            this.materiaisTexteis = new ObservableCollection<MaterialTextil>();
+        }
+
         public string Tamanho
         {
             get

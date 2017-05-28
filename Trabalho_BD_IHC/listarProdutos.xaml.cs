@@ -36,24 +36,13 @@ namespace Trabalho_BD_IHC
             if (tabItem.Name.Equals("produtoBase", StringComparison.Ordinal))
             {//pagina desenhos base
                 editarProdutoBase.IsEnabled = false;
-                removerProdutoBase.IsEnabled = false;
                 detalhesProdutoBase.IsEnabled = false;
                 produtosBaseLista.Focus();
-                if (!dataHandler.verifySGBDConnection())
-                {
-                    MessageBoxResult result = MessageBox.Show("A conexão à base de dados é instável ou inexistente. Por favor tente mais tarde", "Erro de Base de Dados", MessageBoxButton.OK, MessageBoxImage.Warning);
-                }
-                else
-                {
-                    ObservableCollection<ProdutoBase> produtoBase = getProdutosBase();
-                    produtosBaseLista.ItemsSource = produtoBase;
-
-                }
+                ObservableCollection<ProdutoBase> produtoBase = dataHandler.getProdutosBaseFromDB();
+                produtosBaseLista.ItemsSource = produtoBase;
             }
             else
             {//pagina desenhos personalizados
-                editarProdutoPersonalizado.IsEnabled = false;
-                removerProdutoPersonalizado.IsEnabled = false;
                 detalhesProdutoPersonalizado.IsEnabled = false;
                 produzirProduto.IsEnabled = false;
                 produtosPersonalizadosLista.Focus();
@@ -70,31 +59,6 @@ namespace Trabalho_BD_IHC
             }
             dataHandler.closeSGBDConnection();
         }
-        public ObservableCollection<ProdutoBase> getProdutosBase()
-        {
-            SqlCommand cmd = new SqlCommand("SELECT REFERENCIA, [PRODUTO-BASE].NOME as nomeProduto, INSTRUCOES_PRODUCAO, "
-                + "DATA_ALTERACAO, IVA, N_FUNCIONARIO, UTILIZADOR.NOME as userName FROM [PRODUTO-BASE] "
-                + "JOIN UTILIZADOR ON N_GESTOR_PROD=N_FUNCIONARIO", dataHandler.Cn);
-            SqlDataReader reader = cmd.ExecuteReader();
-            ObservableCollection<ProdutoBase> produtosBase = new ObservableCollection<ProdutoBase>();
-            while (reader.Read())
-            {
-                ProdutoBase prod = new ProdutoBase();
-                prod.Referencia = Convert.ToInt32(reader["REFERENCIA"].ToString());
-                prod.Nome = reader["nomeProduto"].ToString();
-                prod.InstrProd = reader["INSTRUCOES_PRODUCAO"].ToString();
-                prod.DataAlteraçao = Convert.ToDateTime(reader["DATA_ALTERACAO"]);
-                prod.IVA1 = Convert.ToDouble(reader["IVA"].ToString());
-                prod.GestorProducao = new Utilizador();
-                prod.GestorProducao.NFuncionario = Convert.ToInt32(reader["N_FUNCIONARIO"].ToString());
-                prod.GestorProducao.Nome = reader["userName"].ToString();
-                produtosBase.Add(prod);
-            }
-            reader.Close();
-            dataHandler.closeSGBDConnection();
-            return produtosBase;
-        }
-
 
         private ObservableCollection<ProdutoPersonalizado> getProdutosPers()
         {
@@ -161,16 +125,32 @@ namespace Trabalho_BD_IHC
             e.Handled = true;
             if (produtosPersonalizadosLista.SelectedItems.Count > 0)
             {
-                editarProdutoPersonalizado.IsEnabled = true;
-                removerProdutoPersonalizado.IsEnabled = true;
                 detalhesProdutoPersonalizado.IsEnabled = true;
                 produzirProduto.IsEnabled = true;
             }
             if (produtosBaseLista.SelectedItems.Count > 0)
             {
                 editarProdutoBase.IsEnabled = true;
-                removerProdutoBase.IsEnabled = true;
                 detalhesProdutoBase.IsEnabled = true;
+            }
+        }
+
+        private void detalhesProdutoBase_Click(object sender, RoutedEventArgs e)
+        {
+            if (produtosBaseLista.SelectedItems.Count == 1) {
+                Console.WriteLine(((ProdutoBase)produtosBaseLista.SelectedItem).Referencia);
+                DetalhesProdutoBase detalhes = new DetalhesProdutoBase(dataHandler, ((ProdutoBase)produtosBaseLista.SelectedItem).Referencia);
+                detalhes.Show();
+            }
+        }
+
+        private void detalhesProdutoPersonalizado_Click(object sender, RoutedEventArgs e)
+        {
+            if (produtosPersonalizadosLista.SelectedItems.Count == 1)
+            {
+                ProdutoPersonalizado prod = (ProdutoPersonalizado)produtosPersonalizadosLista.SelectedItem;
+                DetalhesProdutoPersonalizado detalhes = new DetalhesProdutoPersonalizado(dataHandler, prod.ProdutoBase.Referencia, prod.Tamanho, prod.Cor, prod.ID);
+                detalhes.Show();
             }
         }
     }

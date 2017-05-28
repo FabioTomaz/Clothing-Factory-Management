@@ -44,37 +44,15 @@ namespace Trabalho_BD_IHC
         {
             InitializeComponent();
             this.dataHandler = dataHandler;
+            refProduto.Content = dataHandler.getLastIdentity("[PRODUTO-BASE]") + 1;
         }
-        private void EnviarProdutoBase(ProdutoBase ProdutoBase)
+
+        private void validar()
         {
-
-            if (!dataHandler.verifySGBDConnection())
-                return;
-            SqlCommand cmd = new SqlCommand();
-
-            cmd.CommandText = "INSERT INTO Produto (NOME, IVA, DATA_ALTERACAO, INSTRUCOES_PRODUCAO, N_GESTOR_PROD, IMAGEM_DESENHO) "
-                + "SELECT @nome_Produto, @iva, @Data_alteracao, @instr, @nGestor, BulkColumn "
-                + "FROM Openrowset (Bulk @imagem, Single_Blob) as Image";
-            cmd.Parameters.Clear();
-            cmd.Parameters.AddWithValue("@nome_Produto", ProdutoBase.Nome);
-            cmd.Parameters.AddWithValue("@iva", ProdutoBase.IVA1);
-             cmd.Parameters.AddWithValue("@Data_alteracao", DateTime.Today);
-            cmd.Parameters.AddWithValue("@instr", ProdutoBase.InstrProd);
-            cmd.Parameters.AddWithValue("@nGestor", ProdutoBase.GestorProducao.NFuncionario);
-            cmd.Parameters.AddWithValue("@imagem", ProdutoBase.Pic).SqlDbType = SqlDbType.Binary;
-            cmd.Connection = dataHandler.Cn;
-            try
-            {
-                cmd.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Falha ao registar o Produto Base na base de dados. \n ERROR MESSAGE: \n" + ex.Message);
-            }
-            finally
-            {
-                dataHandler.closeSGBDConnection();
-            }
+            if (txtNomeModelo.Text.Equals(""))
+                throw new Exception("Não foi escolhido um nome para o produto!");
+            else if (txtInstruçoes.Text.Equals(""))
+                throw new Exception("Não foram especificadas as instruções de produção deste produto!");
         }
 
         private void cancelar_Click(object sender, RoutedEventArgs e)
@@ -84,31 +62,31 @@ namespace Trabalho_BD_IHC
 
         private void confirmar_Click(object sender, RoutedEventArgs e)
         {
-            ProdutoBase ProdutoBase = new ProdutoBase();
-            try
+            try { 
+                validar();
+            }catch(Exception ex)
             {
+                Xceed.Wpf.Toolkit.MessageBox.Show(ex.Message, "ERRO", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            ProdutoBase ProdutoBase = new ProdutoBase();
                 ProdutoBase.Nome = txtNomeModelo.Text;
                 ProdutoBase.InstrProd = txtInstruçoes.Text;
-                ProdutoBase.IVA1 = Convert.ToDouble(txtIva.Text);
+                ProdutoBase.IVA1 = txtIva.Value;
                 ProdutoBase.GestorProducao = new Utilizador();
                 ProdutoBase.GestorProducao.NFuncionario = 2; //---> suposto mais tarde colocar o nº do user
-                ProdutoBase.Pic = BitMapToByte((BitmapImage)imgPhoto.Source);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                return;
-            }
+                if(imgPhoto.Source!=null)
+                    ProdutoBase.Pic = BitMapToByte((BitmapImage)imgPhoto.Source);
             try
             {
-                EnviarProdutoBase(ProdutoBase);
+                dataHandler.registarProdutoBase(ProdutoBase);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                Xceed.Wpf.Toolkit.MessageBox.Show(ex.Message, "ERRO", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
-            MessageBox.Show("Produto Base registado com sucesso!", "", MessageBoxButton.OK, MessageBoxImage.Information);
+            Xceed.Wpf.Toolkit.MessageBox.Show("A informação do produto foi registada com sucesso!", "SUCESSO", MessageBoxButton.OK, MessageBoxImage.Information);
             this.NavigationService.GoBack();
         }
 
@@ -122,7 +100,7 @@ namespace Trabalho_BD_IHC
             if (op.ShowDialog() == true)
             {
                 imgPhoto.Source = new BitmapImage(new Uri(op.FileName));
-      
+
             }
         }
 

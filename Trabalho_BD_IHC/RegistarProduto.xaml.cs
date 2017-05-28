@@ -153,7 +153,7 @@ namespace Trabalho_BD_IHC
             else
             {
                 ListarProdutos lp = new ListarProdutos(dataHandler);
-                ObservableCollection<ProdutoBase> prodBase = lp.getProdutosBase();
+                ObservableCollection<ProdutoBase> prodBase = dataHandler.getProdutosBaseFromDB();
                 cbProdBase.ItemsSource = prodBase;
                 if (prodBase.Count > 0)
                 {

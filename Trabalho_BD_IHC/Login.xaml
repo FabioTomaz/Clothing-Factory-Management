@@ -55,7 +55,7 @@
         <Button Grid.Column="3" Grid.Row="2" IsDefault="True" VerticalAlignment="Center" Style="{StaticResource confirmarButton}" Click="Button_Click">
                 Login
             </Button>
-            <Button Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" Click="Button_Click_1">
+        <Button Grid.Column="1" Grid.Row="2" Style="{StaticResource MaterialDesignRaisedDarkButton}" ToolTip="Obtenha Ajuda Sobre o Inicio de Sessão no Sistema" VerticalAlignment="Center" Click="Button_Click_1">
                 Ajuda
             </Button>
         

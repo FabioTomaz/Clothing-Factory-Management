@@ -29,7 +29,7 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="0.07*"/>
         </Grid.RowDefinitions>
-        <GroupBox materialDesign:ColorZoneAssist.Mode="Accent" Header="Informações Pessoais do Cliente" Grid.Column="1" Grid.ColumnSpan="7" Grid.Row="1" Grid.RowSpan="1">
+        <GroupBox materialDesign:ColorZoneAssist.Mode="Accent" Header="Informações sobre a encomenda" Grid.Column="1" Grid.ColumnSpan="7" Grid.Row="1" Grid.RowSpan="1">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.1*"/>
@@ -75,7 +75,7 @@
                 <Label Name="localEntrega" Grid.Row="9"   Grid.Column="4" HorizontalAlignment="Left"></Label>
             </Grid>
         </GroupBox>
-        <GroupBox Header="Encomendas do Cliente" Grid.Column="1" Grid.ColumnSpan="7" Grid.Row="3" Grid.RowSpan="3">
+        <GroupBox Header="Produtos Incluidos na Encomenda" Grid.Column="1" Grid.ColumnSpan="7" Grid.Row="3" Grid.RowSpan="3" MouseDoubleClick="GroupBox_MouseDoubleClick">
             <DataGrid Name="produtos" Grid.Column="1" Grid.ColumnSpan="7" Grid.Row="11" Grid.RowSpan="3" IsReadOnly="True" AutoGenerateColumns="False">
                 <DataGrid.Columns>
                     <materialDesign:MaterialDataGridTextColumn Header="Nome"  Binding="{Binding ProdutoBase.Nome}" />

@@ -68,11 +68,13 @@
                     <RowDefinition Height="0.1*"></RowDefinition>
                     <RowDefinition></RowDefinition>
                     <RowDefinition Height="0.1*"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="0.1*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <StackPanel Orientation="Horizontal"  Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Center">
                     <materialDesign:PackIcon Kind="Account"></materialDesign:PackIcon>
                     <TextBlock Text="Nome: "/>
-                </StackPanel>                
+                </StackPanel>
                 <Label Name="labelNome" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" VerticalAlignment="Center"></Label>
                 <StackPanel Orientation="Horizontal"  Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Center">
                     <materialDesign:PackIcon Kind="Bank"></materialDesign:PackIcon>
@@ -113,15 +115,12 @@
                     <TextBlock Text="Porta: "/>
                 </StackPanel>
                 <TextBox Name="txtNumeroPorta" PreviewTextInput="NumberValidationTextBox" Grid.Row="15" Grid.Column="2" VerticalAlignment="Center"></TextBox>
+                <StackPanel Orientation="Horizontal"  Grid.Row="17" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Center">
+                    <materialDesign:PackIcon Kind="Numeric"></materialDesign:PackIcon>
+                    <TextBlock Text="Nº do Cliente: "/>
+                </StackPanel>
+                <TextBlock Name="txtNumeroCliente" Grid.Row="17" Grid.Column="2" VerticalAlignment="Center"></TextBlock>
             </Grid>
         </GroupBox>
-        <Grid Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"></ColumnDefinition>
-                <ColumnDefinition Width="0.1*"></ColumnDefinition>
-                <ColumnDefinition Width="2*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-
-        </Grid>
     </Grid>
 </Page>

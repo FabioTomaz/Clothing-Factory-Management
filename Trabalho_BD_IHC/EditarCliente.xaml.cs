@@ -39,58 +39,23 @@ namespace Trabalho_BD_IHC
             txtNumeroPorta.Text = cliente.NCasa.ToString();
             txtRua.Text = cliente.Rua;
             txtTelemovel.Text = cliente.Telemovel;
+            txtNumeroCliente.Text = cliente.NCliente.ToString();
             txtNIB.Focus();
         }
 
         private void cancelar_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.GoBack();
+            if (Xceed.Wpf.Toolkit.MessageBox.Show("Tem a certeza que deseja cancelar o registo a edição do cliente? Perderá todos os dados que tenha atualizado.",
+     "Cancelar Registo de Cliente", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            {//sim
+                this.NavigationService.GoBack();
+            }
         }
 
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
-        }
-
-        private void AtualizarCliente(Cliente C)
-        {
-            int rows = 0;
-
-            if (!dataHandler.verifySGBDConnection())
-                return;
-
-            SqlCommand cmd = new SqlCommand();
-
-            cmd.CommandText = "UPDATE Cliente " + "SET NIF = @NIF, " + "    NOME = @NOME, " + "    NIB = @NIB, " + "    EMAIL = @EMAIL, " + "    TELEMOVEL = @TELEMOVEL, " + "    COD_POSTAL = @COD_POSTAL, " + "    RUA = @RUA, " + " N_PORTA = @N_PORTA " + "WHERE NIF = @NIF";
-            cmd.Parameters.Clear();
-            cmd.Parameters.AddWithValue("@NIF", C.Nif);
-            cmd.Parameters.AddWithValue("@NOME", C.Nome);
-            cmd.Parameters.AddWithValue("@NIB", C.Nib);
-            cmd.Parameters.AddWithValue("@EMAIL", C.Email);
-            cmd.Parameters.AddWithValue("@TELEMOVEL", C.Telemovel);
-            cmd.Parameters.AddWithValue("@COD_POSTAL", C.CodigoPostal);
-            cmd.Parameters.AddWithValue("@RUA", C.Rua);
-            cmd.Parameters.AddWithValue("@N_PORTA", C.NCasa);
-            cmd.Connection = dataHandler.Cn;
-
-            try
-            {
-                rows = cmd.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Não foi possivel atualizar o contacto na base de dados\n" + ex.Message);
-            }
-            finally
-            {
-                if (rows == 1)
-                    Xceed.Wpf.Toolkit.MessageBox.Show("A atualização do cliente foi submetida na base de dados com sucesso!", "Atualização Bem Sucedida", MessageBoxButton.OK, MessageBoxImage.Information);
-                else
-                   if (Xceed.Wpf.Toolkit.MessageBox.Show("Não foi possivel atualizar o perfil do cliente na base de dados. Pretende tentar novamente?", "Erro", MessageBoxButton.YesNo, MessageBoxImage.Exclamation) == MessageBoxResult.Yes)
-                    AtualizarCliente(C);
-                dataHandler.closeSGBDConnection();
-            }
         }
 
         private void confirmar_Click(object sender, RoutedEventArgs e)
@@ -106,20 +71,21 @@ namespace Trabalho_BD_IHC
                 cliente.Rua = txtRua.Text;
                 cliente.NCasa = int.Parse(txtNumeroPorta.Text);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show(ex.Message);
+                Xceed.Wpf.Toolkit.MessageBox.Show("Os dados introduzidos não são validos.", "Erro", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
             try
             {
-                AtualizarCliente(cliente);
+                dataHandler.editarCliente(cliente);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                Xceed.Wpf.Toolkit.MessageBox.Show(ex.Message, "Erro", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
+            Xceed.Wpf.Toolkit.MessageBox.Show("Cliente Atualizado com sucesso!", "Sucesso", MessageBoxButton.OK, MessageBoxImage.Information);
             this.NavigationService.GoBack();
         }
     }

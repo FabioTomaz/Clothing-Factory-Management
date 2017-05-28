@@ -40,61 +40,21 @@ namespace Trabalho_BD_IHC
             if (items != null)
                 encomendas.ItemsSource = items; 
         }
-
-        private void CancelarEncomenda(Encomenda encomenda)
-        {
-            if (!dataHandler.verifySGBDConnection())
-                return;
-            SqlCommand cmd = new SqlCommand();
-
-            cmd.CommandText = "UPDATE Encomenda SET ESTADO = 5 WHERE N_ENCOMENDA=@EncomendaN ";
-            cmd.Parameters.Clear();
-            cmd.Parameters.AddWithValue("@EncomendaN", encomenda.NEncomenda);
-            cmd.Connection = dataHandler.Cn;
-
-            try
-            {
-                cmd.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                Xceed.Wpf.Toolkit.MessageBox.Show("Erro","Falha ao cancelar a encomenda na base de dados.", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            finally
-            {
-                dataHandler.closeSGBDConnection();
-            }
-        }
         
 
         private void cancelarEncomenda_Click(object sender, RoutedEventArgs e)
         {
             int listViewIndex = encomendas.SelectedIndex;
 
-            if (MessageBox.Show("Tem a certeza que pretende cancelar esta encomenda?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
+            if (Xceed.Wpf.Toolkit.MessageBox.Show("Tem a certeza que pretende cancelar esta encomenda?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
             {
                 return;
             }
             else
             {
-                try
-                {
-                    CancelarEncomenda((Encomenda)encomendas.SelectedItem);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                    return;
-                }
-                try
-                {
-                    ((ObservableCollection<Encomenda>)encomendas.ItemsSource).ElementAt(listViewIndex).Estado = "Cancelada";
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                    return;
-                }
+                String resultado = dataHandler.cancelarEncomenda(((Encomenda)encomendas.SelectedItem).NEncomenda);
+                Xceed.Wpf.Toolkit.MessageBox.Show(resultado, "Resultado", MessageBoxButton.OK, MessageBoxImage.Information);
+                this.refresh();
             }
         }
 
@@ -124,7 +84,7 @@ namespace Trabalho_BD_IHC
 
         private void detalhesEncomenda_Click(object sender, RoutedEventArgs e)
         {
-            DetalhesEncomenda page = new DetalhesEncomenda(dataHandler, (Encomenda)encomendas.SelectedItem);
+            DetalhesEncomenda page = new DetalhesEncomenda(dataHandler, ((Encomenda)encomendas.SelectedItem).NEncomenda);
             page.Show();
         }
 
@@ -132,6 +92,15 @@ namespace Trabalho_BD_IHC
         {
             String resultado = dataHandler.entregarEncomenda(((Encomenda)encomendas.SelectedItem).NEncomenda);
             Xceed.Wpf.Toolkit.MessageBox.Show(resultado, "Resultado" ,MessageBoxButton.OK, MessageBoxImage.Information);
+            this.refresh();
+        }
+
+        public void refresh()
+        {
+            encomendas.Focus();
+            ObservableCollection<Encomenda> items = dataHandler.getEncomendasFromDB();
+            if (items != null)
+                encomendas.ItemsSource = items;
         }
     }
 }

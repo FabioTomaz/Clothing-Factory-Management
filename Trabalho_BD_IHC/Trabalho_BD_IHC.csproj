@@ -112,6 +112,12 @@
     <Compile Include="DetalhesMaterial.xaml.cs">
       <DependentUpon>DetalhesMaterial.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DetalhesProdutoBase.xaml.cs">
+      <DependentUpon>DetalhesProdutoBase.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DetalhesProdutoPersonalizado.xaml.cs">
+      <DependentUpon>DetalhesProdutoPersonalizado.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EditarFilial.xaml.cs">
       <DependentUpon>EditarFilial.xaml</DependentUpon>
     </Compile>
@@ -209,6 +215,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DetalhesMaterial.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DetalhesProdutoBase.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DetalhesProdutoPersonalizado.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
