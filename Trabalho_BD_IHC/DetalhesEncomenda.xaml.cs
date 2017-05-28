@@ -23,10 +23,10 @@ namespace Trabalho_BD_IHC
     {
         Encomenda encomenda;
         DataHandler dataHandler;
-        public DetalhesEncomenda(DataHandler dataHandler, Encomenda encomenda)
+        public DetalhesEncomenda(DataHandler dataHandler, int numEncomenda)
         {
             this.dataHandler = dataHandler;
-            this.encomenda = dataHandler.getEncomendaFromDB(encomenda.NEncomenda);
+            this.encomenda = dataHandler.getEncomendaFromDB(numEncomenda);
             InitializeComponent();
             nomeCliente.Content = encomenda.Cliente.NCliente;
             nEncomenda.Content =encomenda.NEncomenda;
@@ -37,14 +37,8 @@ namespace Trabalho_BD_IHC
             preco.Content =encomenda.Preco;
             dataConfirmaçao.Content =encomenda.DataConfirmacao;
             dataPrevistaEntrega.Content =encomenda.DataPrevistaEntrega;
-            Console.WriteLine(encomenda.DataEntrega.ToString());
-            if (encomenda.DataEntrega.ToString().Equals("")) { 
-                dataEntrega.Content = "Ainda não entregue..";
-                localEntrega.Content = "Ainda não entregue..";
-            } else { 
-                dataEntrega.Content =encomenda.DataEntrega;
-                localEntrega.Content =encomenda.LocalEntrega;
-            }
+            localEntrega.Content = encomenda.LocalEntrega;
+            dataEntrega.Content =encomenda.DataEntrega;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -55,6 +49,17 @@ namespace Trabalho_BD_IHC
                 produtos.ItemsSource = items;
             }
 
+        }
+
+        private void GroupBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            /*
+            if (produtos.SelectedItems.Count == 1)
+            {
+                DetalhesProdutoPersonalizado window = new DetalhesProdutoPersonalizado(dataHandler, (ProdutoPersonalizado)produtos.SelectedItem);
+                window.Show();
+            }
+            */
         }
     }
 }

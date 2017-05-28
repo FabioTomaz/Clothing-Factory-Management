@@ -24,12 +24,15 @@ namespace Trabalho_BD_IHC
     public partial class RegistarEncomenda : Page
     {
         private DataHandler dataHandler;
+        private ObservableCollection<ProdutoPersonalizado> lista;
 
         public RegistarEncomenda(DataHandler dataHandler)
         {
             InitializeComponent();
             this.dataHandler = dataHandler;
-            produtosEncomenda.ItemsSource = new ObservableCollection<ProdutoPersonalizado>();
+            lista = new ObservableCollection<ProdutoPersonalizado>();
+            produtosEncomenda.ItemsSource = lista;
+            nEncomenda.Text = dataHandler.getLastIdentity("ENCOMENDA").ToString();
         }
 
         private void cancelar_Click(object sender, RoutedEventArgs e)
@@ -41,11 +44,25 @@ namespace Trabalho_BD_IHC
             }
         }
 
+        private void validarDados() {
+            if(txtCliente.Text.Equals("") || localEntrega.SelectedIndex==-1 || dataPrevista.SelectedDate == null)
+            {
+                throw new Exception("Por favor preencha todos os campos relativos á encomenda antes de avançar.");
+            }
+        }
+
         private void confirmar_Click(object sender, RoutedEventArgs e)
         {
+            try { 
+                validarDados();
+            }catch(Exception ex)
+            {
+                Xceed.Wpf.Toolkit.MessageBox.Show(ex.Message, "ERRO", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
             Encomenda encomenda = new Encomenda();
             encomenda.Cliente = new Cliente();
             encomenda.GestorVendas = new Utilizador();
+            encomenda.GestorVendas.NFuncionario = Utilizador.loggedUser.NFuncionario;
             DateTime currentDate = DateTime.Now;
             encomenda.Cliente.NCliente = Convert.ToInt32(txtCliente.Text);
             encomenda.DataConfirmacao = currentDate;
@@ -53,10 +70,12 @@ namespace Trabalho_BD_IHC
             encomenda.GestorVendas.NFuncionario= Utilizador.loggedUser.NFuncionario;
             encomenda.LocalEntrega = localEntrega.SelectedItem.ToString();
             encomenda.DataPrevistaEntrega = dataPrevista.SelectedDate.Value;
-            
+            List<ProdutoPersonalizado> lista = ((IEnumerable<ProdutoPersonalizado>)this.produtosEncomenda.ItemsSource).ToList();
+
+
             try
             {
-                dataHandler.EnviarEncomenda(encomenda, produtosEncomenda.Items.Cast<ProdutoPersonalizado>().ToList<ProdutoPersonalizado>());
+                dataHandler.EnviarEncomenda(encomenda, lista);
                 Xceed.Wpf.Toolkit.MessageBox.Show("Encomenda Registada Com Sucesso!", "Envio de Encomenda", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.NavigationService.GoBack();
             }
@@ -66,6 +85,34 @@ namespace Trabalho_BD_IHC
                 return;
             }
            
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            ProdutoPersonalizado prod = new ProdutoPersonalizado();
+            prod.Quantidade = 1;
+            List<ProdutoPersonalizado> someVar = ((IEnumerable<ProdutoPersonalizado>)this.produtosEncomenda.ItemsSource).ToList();
+            someVar.Add(prod);
+            produtosEncomenda.ItemsSource = someVar;
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            List<ProdutoPersonalizado> someVar = ((IEnumerable<ProdutoPersonalizado>)this.produtosEncomenda.ItemsSource).ToList();
+            if (someVar.Count == 0)
+            {
+                Xceed.Wpf.Toolkit.MessageBox.Show("Não existe mais nenhum produto a remover", "Erro", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            else { 
+                someVar.RemoveAt(produtosEncomenda.SelectedIndex);
+                produtosEncomenda.ItemsSource = someVar;
+            }
+        }
+
+        private void produtosEncomenda_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (produtosEncomenda.SelectedItems.Count > 0)
+                remover.IsEnabled = true;
         }
     }
 }

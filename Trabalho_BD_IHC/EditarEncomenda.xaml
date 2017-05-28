@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:wpfTool="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:local="clr-namespace:Trabalho_BD_IHC"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
@@ -41,59 +42,49 @@
                 <Button x:Name="cancelar" Style="{StaticResource cancelarButton}" Content="Cancelar" Grid.Row="3" Grid.Column="1" Click="cancelar_Click"/>
                 </Grid>
             </GroupBox>
-            <GroupBox Header="Editar Encomenda" Grid.Row="1" Grid.Column="3">
-                <Grid>
-                 <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.05*"></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition Width="0.05*"></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition Width="0.05*"></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
+        <GroupBox Header="Criar Nova encomenda" Grid.Row="1" Grid.Column="3">
+            <Grid>
+                <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.05*"></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="30"></ColumnDefinition>
+                    <ColumnDefinition Width="0.05*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="30"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
                     <ColumnDefinition Width="0.05*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="0.1*"></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition Height="0.1*"></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition Height="0.1*"></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition Height="0.1*"></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition Height="0.1*"></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition Height="0.1*"></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition Height="0.1*"></RowDefinition>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.05*"></RowDefinition>
+                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition Height="0.01*"></RowDefinition>
+                    <RowDefinition Height="40"></RowDefinition>
+                    <RowDefinition Height="0.01*"></RowDefinition>
+                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition Height="0.01*"></RowDefinition>
+                    <RowDefinition Height="1.7*"></RowDefinition>
+                    <RowDefinition Height="0.05*"></RowDefinition>
 
-
-                    </Grid.RowDefinitions>
-                <Label Content="Numero do Cliente: " Grid.Row="1" Grid.Column="1" VerticalAlignment="Center"/>
-                <Label Name="txtCliente" Grid.Column="3" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                <Label Content="Numero da Encomenda: " Grid.Row="1" Grid.Column="5" VerticalAlignment="Center"/>
-                <Label Name="txtNEncomenda" Grid.Column="7" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                <Label Content="Data Prevista para Entrega:" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center"/>
-                    <DatePicker Name="dataPrevista" Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="4" HorizontalAlignment="Left" VerticalAlignment="Center"></DatePicker>
-                    <GroupBox Header="Produtos da Encomenda" Grid.Row="5" Grid.RowSpan="6" Grid.Column="0" Grid.ColumnSpan="9">
-                    <ListView Name="produtos">
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn Header="Referencia" DisplayMemberBinding="{Binding Referencia}" />
-                                <GridViewColumn Header="Nome"  DisplayMemberBinding="{Binding Nome}" />
-                                <GridViewColumn Header="Cor"  DisplayMemberBinding="{Binding Cor}" />
-                                <GridViewColumn Header="Tamanho" DisplayMemberBinding="{Binding Tamanho}" />
-                                <GridViewColumn Header="Quantidade" DisplayMemberBinding="{Binding Quantidade}" />
-                                <GridViewColumn Header="Preço" DisplayMemberBinding="{Binding Preco}" />
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
-                </GroupBox>
-                    <Label Content="Descontos Aplicaveis: " Grid.Row="11" Grid.Column="1" VerticalAlignment="Center"/>
-                    <wpfTool:IntegerUpDown Name="txtDesconto" VerticalAlignment="Center" Grid.Row="11" Grid.Column="3" Maximum="100" Minimum="0" Value="0" FormatString="P"  Width="100" Watermark="Percentagem" HorizontalAlignment="Left"></wpfTool:IntegerUpDown>
-                </Grid>
-            </GroupBox>
-        </Grid>
+                </Grid.RowDefinitions>
+                <materialDesign:PackIcon Kind="Account" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                <TextBlock Name="txtCliente" Grid.Column="3" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left"></TextBlock>
+                <materialDesign:PackIcon Kind="Calendar" Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" materialDesign:HintAssist.IsFloating="True" HorizontalAlignment="Right"/>
+                <DatePicker Name="dataPrevista" materialDesign:HintAssist.Hint="Data Prevista para Entrega" materialDesign:HintAssist.IsFloating="True" Grid.Row="5" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Bottom"></DatePicker>
+                <materialDesign:PackIcon Kind="HomeMapMarker" Grid.Row="5" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Right"></materialDesign:PackIcon>
+                <ComboBox materialDesign:HintAssist.Hint="Local da Entrega" materialDesign:HintAssist.IsFloating="True" Name="localEntrega" Grid.Row="5" Grid.Column="5" VerticalAlignment="Bottom">
+                    <ComboBoxItem Content="Entrega ao Domicilio"></ComboBoxItem>
+                    <ComboBoxItem Content="Entrega na Fábrica"></ComboBoxItem>
+                </ComboBox>
+                <materialDesign:PackIcon Kind= "Margin" Grid.Row="7" Grid.Column="1"  VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                <StackPanel Name="ParentPanel" Orientation="Horizontal" HorizontalAlignment="Stretch"  Grid.Row="7" Grid.Column="3" Grid.ColumnSpan="3">
+                    <Slider IsSnapToTickEnabled="True" TickFrequency="1" materialDesign:HintAssist.Hint="Desconto Aplicavel Da Encomenda" VerticalAlignment="Center"  Name="txtDesconto" Maximum="100" Minimum="0" Value="0" HorizontalAlignment="Left" Width="200"></Slider>
+                    <TextBox x:Name="myTextBox" Margin="5,0,0,0" Text="{Binding ElementName=txtDesconto,Path=Value}" VerticalAlignment="Center"/>
+                    <Label VerticalAlignment="Center">% Desconto</Label>
+                </StackPanel>
+                <StackPanel Margin="15,0,0,0" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="5" Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock >Numero da Encomenda:</TextBlock>
+                    <TextBlock Margin="5,0,0,0" Name="nEncomenda"></TextBlock>
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+    </Grid>
 </Page>

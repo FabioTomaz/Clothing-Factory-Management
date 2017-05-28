@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
 using System.IO;
 using System.Drawing;
-using System.Windows.Media.Imaging;
 using System.Collections.ObjectModel;
 using System.Windows;
+using System.Collections.Generic;
 
 namespace Trabalho_BD_IHC
 {
@@ -309,12 +306,13 @@ namespace Trabalho_BD_IHC
         {
             if (!this.verifySGBDConnection())
                 return null;
-            SqlCommand cmd = new SqlCommand("SELECT ENCOMENDA.N_ENCOMENDA, DATA_CONFIRMACAO, DATA_ENTREGA_PREV, ESTADO.DESCRIÇAO, DESCONTO, CLIENTE.NCLIENTE, CLIENTE.NOME, N_GESTOR_VENDA, SUM([PRODUTO-PERSONALIZADO].PRECO*CONTEUDO_ENCOMENDA.QUANTIDADE) AS PRECOTOTAL "
+            SqlCommand cmd = new SqlCommand("SELECT ENCOMENDA.N_ENCOMENDA,[LOCAIS-ENTREGA-ENCOMENDA].DESCRICAO AS LOCALENTREGA ,DATA_CONFIRMACAO, DATA_ENTREGA_PREV, ESTADO.DESCRIÇAO, DESCONTO, CLIENTE.NCLIENTE, CLIENTE.NOME, N_GESTOR_VENDA, SUM([PRODUTO-PERSONALIZADO].PRECO*CONTEUDO_ENCOMENDA.QUANTIDADE) AS PRECOTOTAL "
                                 + " FROM ENCOMENDA JOIN CLIENTE ON CLIENTE.NCLIENTE = ENCOMENDA.CLIENTE"
                                 + " JOIN CONTEUDO_ENCOMENDA ON CONTEUDO_ENCOMENDA.N_ENCOMENDA=ENCOMENDA.N_ENCOMENDA"
                                 + " JOIN [PRODUTO-PERSONALIZADO] ON CONTEUDO_ENCOMENDA.REFERENCIA_PRODUTO=[PRODUTO-PERSONALIZADO].REFERENCIA"
                                 + " JOIN ESTADO ON ENCOMENDA.ESTADO=ESTADO.ID"
-                                + " GROUP BY ENCOMENDA.N_ENCOMENDA, DATA_CONFIRMACAO, DATA_ENTREGA_PREV, ESTADO.DESCRIÇAO, DESCONTO, CLIENTE.NCLIENTE, CLIENTE.NOME, N_GESTOR_VENDA;"
+                                + " JOIN [LOCAIS-ENTREGA-ENCOMENDA] ON ENCOMENDA.LOCALENTREGA=[LOCAIS-ENTREGA-ENCOMENDA].ID"
+                                + " GROUP BY [LOCAIS-ENTREGA-ENCOMENDA].DESCRICAO, ENCOMENDA.N_ENCOMENDA, DATA_CONFIRMACAO, DATA_ENTREGA_PREV, ESTADO.DESCRIÇAO, DESCONTO, CLIENTE.NCLIENTE, CLIENTE.NOME, N_GESTOR_VENDA;"
                                 , cn);
             SqlDataReader reader = cmd.ExecuteReader();
             ObservableCollection<Encomenda> enc = new ObservableCollection<Encomenda>();
@@ -331,6 +329,7 @@ namespace Trabalho_BD_IHC
                 Enc.GestorVendas.NFuncionario = Convert.ToInt32(reader["N_GESTOR_VENDA"].ToString());
                 Enc.Cliente.Nome = reader["NOME"].ToString();
                 Enc.Cliente.NCliente = Convert.ToInt32(reader["NCLIENTE"].ToString());
+                Enc.LocalEntrega = reader["LOCALENTREGA"].ToString();
                 Enc.Preco = Convert.ToDouble(reader["PRECOTOTAL"].ToString());
                 enc.Add(Enc);
             }
@@ -402,6 +401,73 @@ namespace Trabalho_BD_IHC
             }
             closeSGBDConnection();
             return prodList;
+        }
+
+        public ObservableCollection<ProdutoBase> getProdutosBaseFromDB()
+        {
+            if (!this.verifySGBDConnection())
+                return null;
+            SqlCommand cmd = new SqlCommand("SELECT REFERENCIA, IMAGEM_DESENHO,[PRODUTO-BASE].NOME as nomeProduto, INSTRUCOES_PRODUCAO, "
+                            + "DATA_ALTERACAO, IVA, N_FUNCIONARIO, UTILIZADOR.NOME as userName FROM [PRODUTO-BASE] "
+                            + "JOIN UTILIZADOR ON N_GESTOR_PROD=N_FUNCIONARIO", cn);
+            SqlDataReader reader = cmd.ExecuteReader();
+            ObservableCollection<ProdutoBase> produtosBase = new ObservableCollection<ProdutoBase>();
+            while (reader.Read())
+            {
+                ProdutoBase prod = new ProdutoBase();
+                prod.Referencia = Convert.ToInt32(reader["REFERENCIA"].ToString());
+                prod.Nome = reader["nomeProduto"].ToString();
+                prod.InstrProd = reader["INSTRUCOES_PRODUCAO"].ToString();
+                prod.DataAlteraçao = Convert.ToDateTime(reader["DATA_ALTERACAO"]);
+                prod.IVA1 = Convert.ToDouble(reader["IVA"].ToString());
+                prod.GestorProducao = new Utilizador();
+                prod.GestorProducao.NFuncionario = Convert.ToInt32(reader["N_FUNCIONARIO"].ToString());
+                prod.GestorProducao.Nome = reader["userName"].ToString();
+                try
+                {
+                    prod.Pic = (byte[])reader["IMAGEM_DESENHO"];
+                }
+                catch (InvalidCastException e)
+                {
+                    throw new InvalidCastException("Não foi possivel obter a imagem do desenho do produto base da base de dados.");
+                }
+                produtosBase.Add(prod);
+            }
+            reader.Close();
+            closeSGBDConnection();
+            return produtosBase;
+        }
+
+        public ProdutoBase getProdutoBaseFromDB(int referencia)
+        {
+            if (!this.verifySGBDConnection())
+                return null;
+            SqlCommand cmd = new SqlCommand("SELECT REFERENCIA, IMAGEM_DESENHO, [PRODUTO-BASE].NOME as nomeProduto, INSTRUCOES_PRODUCAO, "
+                            + "DATA_ALTERACAO, IVA, N_FUNCIONARIO, UTILIZADOR.NOME as userName FROM [PRODUTO-BASE] "
+                            + "JOIN UTILIZADOR ON N_GESTOR_PROD=N_FUNCIONARIO WHERE REFERENCIA=@REFERENCIA", cn);
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@REFERENCIA", referencia);
+            SqlDataReader reader = cmd.ExecuteReader();
+            ProdutoBase prod = new ProdutoBase();
+            prod.Referencia = Convert.ToInt32(reader["REFERENCIA"].ToString());
+            prod.Nome = reader["nomeProduto"].ToString();
+            prod.InstrProd = reader["INSTRUCOES_PRODUCAO"].ToString();
+            prod.DataAlteraçao = Convert.ToDateTime(reader["DATA_ALTERACAO"]);
+            prod.IVA1 = Convert.ToDouble(reader["IVA"].ToString());
+            prod.GestorProducao = new Utilizador();
+            prod.GestorProducao.NFuncionario = Convert.ToInt32(reader["N_FUNCIONARIO"].ToString());
+            prod.GestorProducao.Nome = reader["userName"].ToString();
+            try
+            {
+                prod.Pic = (byte[])reader["IMAGEM_DESENHO"];
+            }
+            catch (InvalidCastException e)
+            {
+                throw new InvalidCastException("Não foi possivel obter a imagem do desenho do produto base da base de dados.");
+            }
+            reader.Close();
+            closeSGBDConnection();
+            return prod;
         }
 
         public Utilizador getUtilizadorFromDB(int user)
@@ -517,6 +583,38 @@ namespace Trabalho_BD_IHC
             // read output value from @NewId
             String strResult = cmd.Parameters["@out"].Value.ToString();
             return strResult;
+        }
+
+        public void registarProdutoBase(ProdutoBase produtoBase)
+        {
+
+            if (!verifySGBDConnection())
+                return;
+
+            SqlCommand cmd = new SqlCommand();
+
+            cmd.CommandText = "INSERT INTO Produto (NOME, IVA, DATA_ALTERACAO, INSTRUCOES_PRODUCAO, N_GESTOR_PROD, IMAGEM_DESENHO) "
+                + "values (@nome_Produto, @iva, @Data_alteracao, @instr, @nGestor,@imagem ) ";
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@nome_Produto", produtoBase.Nome);
+            cmd.Parameters.AddWithValue("@iva", produtoBase.IVA1);
+            cmd.Parameters.AddWithValue("@Data_alteracao", DateTime.Today);
+            cmd.Parameters.AddWithValue("@instr", produtoBase.InstrProd);
+            cmd.Parameters.AddWithValue("@nGestor", produtoBase.GestorProducao.NFuncionario);
+            cmd.Parameters.AddWithValue("@imagem", produtoBase.Pic);
+            cmd.Connection = Cn;
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Falha ao registar o Produto Base na base de dados. \n MENSAGEM DE ERRO: \n" + ex.Message);
+            }
+            finally
+            {
+                closeSGBDConnection();
+            }
         }
 
         public void inserirMaterial(MaterialTextil mat)
@@ -749,12 +847,12 @@ namespace Trabalho_BD_IHC
 
             cmd.Parameters.Clear();
             cmd.CommandText = "Insert into ENCOMENDA(ESTADO, DESCONTO, DATA_CONFIRMACAO, DATA_ENTREGA_PREV ,N_GESTOR_VENDA, CLIENTE, LOCALENTREGA) values(1, @DESCONTO, @DATEC, @DATEP ,@GESTOR, @CLIENTE, @LOCAL);";
-            cmd.Parameters.AddWithValue("@DATEC", encomenda.DataConfirmacao.ToString("dd-MM-yyyy"));
+            cmd.Parameters.AddWithValue("@DATEC", encomenda.DataConfirmacao);
             cmd.Parameters.AddWithValue("@DESCONTO", encomenda.Desconto);
-            cmd.Parameters.AddWithValue("@GESTOR", encomenda.GestorVendas);
+            cmd.Parameters.AddWithValue("@GESTOR", encomenda.GestorVendas.NFuncionario);
             cmd.Parameters.AddWithValue("@CLIENTE", encomenda.Cliente.NCliente);
-            cmd.Parameters.AddWithValue("@LOCAL", encomenda.LocalEntrega);
-            cmd.Parameters.AddWithValue("@DATEP", encomenda.DataPrevistaEntrega.ToString("dd-MM-yyyy"));
+            cmd.Parameters.AddWithValue("@LOCAL", 1);
+            cmd.Parameters.AddWithValue("@DATEP", encomenda.DataPrevistaEntrega);
             cmd.Connection = this.Cn;
             try
             {
@@ -769,31 +867,26 @@ namespace Trabalho_BD_IHC
                 this.closeSGBDConnection();
             }
 
-            this.verifySGBDConnection();
-            SqlCommand lastCMD = new SqlCommand();
-            lastCMD.CommandText = "Select max(N_ENCOMENDA) from ENCOMENDA;";
-            SqlDataReader reader = lastCMD.ExecuteReader();
-            reader.Read();
-            int nencomenda = Convert.ToInt32(reader["N_ENCOMENDA"].ToString());
-            this.closeSGBDConnection();
+
+            int nencomenda = this.getLastIdentity("ENCOMENDA");
 
             for (int i = 0; i < listaProdutos.Count; i++)
             {
                 this.verifySGBDConnection();
                 SqlCommand values = new SqlCommand();
-                int referencia = listaProdutos[i].ProdutoBase.Referencia;
-                String cor = listaProdutos[i].Cor;
-                String tamanho = listaProdutos[i].Tamanho;
-                int id = listaProdutos[i].ID;
-                int quantidade = listaProdutos[i].Quantidade;
+                int referencia = (listaProdutos.ElementAt(i)).ProdutoBase.Referencia;
+                String cor = (listaProdutos.ElementAt(i)).Cor;
+                String tamanho = (listaProdutos.ElementAt(i)).Tamanho;
+                int id = (listaProdutos.ElementAt(i)).ID;
+                int quantidade = (listaProdutos.ElementAt(i)).Quantidade;
                 values.Parameters.Clear();
-                values.Parameters.AddWithValue("@ENCOMENDA", encomenda);
+                values.Parameters.AddWithValue("@ENCOMENDA", nencomenda);
                 values.Parameters.AddWithValue("@REFERENCIA", referencia);
                 values.Parameters.AddWithValue("@TAMANHO", tamanho);
                 values.Parameters.AddWithValue("@COR", cor);
                 values.Parameters.AddWithValue("@ID", id);
                 values.Parameters.AddWithValue("@QUANTIDADE", quantidade);
-                values.CommandText = "INSERT INTO [CONTEUDO-ENCOMENDA](N_ENCOMENDA, REFERENCIA_PRODUTO, TAMANHO_PRODUTO, COR_PRODUTO, ID_PRODUTO,QUANTIDADE) VALUES(@ENCOMENDA, @REFERENCIA, @TAMANHO, @COR, @ID,@QUANTIDADE)";
+                values.CommandText = "INSERT INTO [CONTEUDO_ENCOMENDA](N_ENCOMENDA, REFERENCIA_PRODUTO, TAMANHO_PRODUTO, COR_PRODUTO, ID_PRODUTO,QUANTIDADE) VALUES(@ENCOMENDA, @REFERENCIA, @TAMANHO, @COR, @ID,@QUANTIDADE)";
                 values.Connection = this.Cn;
                 try
                 {

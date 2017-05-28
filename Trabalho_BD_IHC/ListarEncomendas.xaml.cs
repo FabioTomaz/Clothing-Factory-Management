@@ -54,6 +54,7 @@ namespace Trabalho_BD_IHC
             {
                 String resultado = dataHandler.cancelarEncomenda(((Encomenda)encomendas.SelectedItem).NEncomenda);
                 Xceed.Wpf.Toolkit.MessageBox.Show(resultado, "Resultado", MessageBoxButton.OK, MessageBoxImage.Information);
+                this.refresh();
             }
         }
 
@@ -83,7 +84,7 @@ namespace Trabalho_BD_IHC
 
         private void detalhesEncomenda_Click(object sender, RoutedEventArgs e)
         {
-            DetalhesEncomenda page = new DetalhesEncomenda(dataHandler, (Encomenda)encomendas.SelectedItem);
+            DetalhesEncomenda page = new DetalhesEncomenda(dataHandler, ((Encomenda)encomendas.SelectedItem).NEncomenda);
             page.Show();
         }
 
@@ -91,6 +92,7 @@ namespace Trabalho_BD_IHC
         {
             String resultado = dataHandler.entregarEncomenda(((Encomenda)encomendas.SelectedItem).NEncomenda);
             Xceed.Wpf.Toolkit.MessageBox.Show(resultado, "Resultado" ,MessageBoxButton.OK, MessageBoxImage.Information);
+            this.refresh();
         }
 
         public void refresh()

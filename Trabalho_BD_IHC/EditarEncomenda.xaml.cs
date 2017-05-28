@@ -29,39 +29,14 @@ namespace Trabalho_BD_IHC
             InitializeComponent();
             this.dataHandler = dataHandler;
             this.Encomenda = Encomenda;
-            txtNEncomenda.Content = Encomenda.NEncomenda;
-            txtDesconto.Value = ((int?)Encomenda.Desconto);
-            txtCliente.Content = ((Cliente)Encomenda.Cliente).NCliente;
+            nEncomenda.Text = Encomenda.NEncomenda.ToString();
+            txtDesconto.Value = Convert.ToInt32(Encomenda.Desconto);
+            txtCliente.Text = ((Cliente)Encomenda.Cliente).NCliente.ToString();
+            if (Encomenda.LocalEntrega.Equals("Entrega ao Domicilio"))
+                localEntrega.SelectedIndex = 0;
+            else
+                localEntrega.SelectedIndex = 1;
             dataPrevista.SelectedDate = Encomenda.DataPrevistaEntrega;
-            getProdutosFromEncomenda();
-        }
-
-        private void getProdutosFromEncomenda()
-        {
-            dataHandler.verifySGBDConnection();
-            SqlCommand cmd = new SqlCommand("SELECT NOME, CONTEUDO_ENCOMENDA.REFERENCIA_PRODUTO, TAMANHO_PRODUTO, quantidade ,COR_PRODUTO, PRECO "
-                                + " FROM ENCOMENDA JOIN CONTEUDO_Encomenda ON CONTEUDO_ENCOMENDA.N_ENCOMENDA=Encomenda.N_Encomenda"
-                                + " JOIN [PRODUTO-PERSONALIZADO] ON CONTEUDO_Encomenda.REFERENCIA_PRODUTO=[PRODUTO-PERSONALIZADO].REFERENCIA"
-                                + " JOIN [PRODUTO-BASE] ON [PRODUTO-PERSONALIZADO].REFERENCIA = [PRODUTO-BASE].REFERENCIA"
-                                + " WHERE ENCOMENDA.N_ENCOMENDA=@ENCOMENDA;"
-                                , dataHandler.Cn);
-            cmd.Parameters.Clear();
-            cmd.Parameters.AddWithValue("@ENCOMENDA", Encomenda.NEncomenda);
-            SqlDataReader reader = cmd.ExecuteReader();
-            ObservableCollection<ProdutoBase> list = new ObservableCollection<ProdutoBase>();
-            while (reader.Read())
-            {
-                ProdutoBase Prod = new ProdutoBase();
-                Prod.Nome = reader["NOME"].ToString();
-                /*Prod.Quantidade= Convert.ToInt32(reader["quantidade"].ToString());
-                Prod.Referencia = Convert.ToInt32(reader["referencia_produto"].ToString());
-                Prod.Tamanho = reader["tamanho_produto"].ToString();
-                Prod.Cor = reader["cor_produto"].ToString();
-                Prod.Preco = Convert.ToDouble(reader["preco"].ToString());*/
-                list.Add(Prod);
-            }
-            produtos.ItemsSource = list;
-            dataHandler.closeSGBDConnection();
         }
 
         private void updateEncomenda() {

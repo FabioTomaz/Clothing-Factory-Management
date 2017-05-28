@@ -51,7 +51,7 @@ namespace Trabalho_BD_IHC
         private void produtos_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (encomendas.SelectedItems.Count == 1) { 
-                DetalhesEncomenda window = new DetalhesEncomenda(dataHandler, (Encomenda)encomendas.SelectedItem);
+                DetalhesEncomenda window = new DetalhesEncomenda(dataHandler, ((Encomenda)encomendas.SelectedItem).NEncomenda);
                 window.Show();
             }
         }

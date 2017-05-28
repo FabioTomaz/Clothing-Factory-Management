@@ -48,51 +48,74 @@
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.05*"></ColumnDefinition>
-                    <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                    <ColumnDefinition Width="30"></ColumnDefinition>
                     <ColumnDefinition Width="0.05*"></ColumnDefinition>
                     <ColumnDefinition Width="1*"></ColumnDefinition>
-                    <ColumnDefinition Width="0.05*"></ColumnDefinition>
+                    <ColumnDefinition Width="30"></ColumnDefinition>
                     <ColumnDefinition Width="1*"></ColumnDefinition>
                     <ColumnDefinition Width="0.05*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="0.05*"></RowDefinition>
-                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="35"></RowDefinition>
                     <RowDefinition Height="0.01*"></RowDefinition>
-                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="40"></RowDefinition>
                     <RowDefinition Height="0.01*"></RowDefinition>
-                    <RowDefinition Height="1.2*"></RowDefinition>
+                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition Height="0.01*"></RowDefinition>
+                    <RowDefinition Height="1.7*"></RowDefinition>
                     <RowDefinition Height="0.05*"></RowDefinition>
 
                 </Grid.RowDefinitions>
                 <materialDesign:PackIcon Kind="Account" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-
-                <TextBox Name="txtCliente" materialDesign:HintAssist.Hint="Numero de Cliente" materialDesign:HintAssist.IsFloating="True" Grid.Column="3" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left">
-                </TextBox>
+                <TextBox Name="txtCliente" materialDesign:HintAssist.Hint="Numero de Cliente" materialDesign:HintAssist.IsFloating="True" Grid.Column="3" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left"></TextBox>
                 <materialDesign:PackIcon Kind="Calendar" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" materialDesign:HintAssist.IsFloating="True" HorizontalAlignment="Right"/>
                 <DatePicker Name="dataPrevista" materialDesign:HintAssist.Hint="Data Prevista para Entrega" materialDesign:HintAssist.IsFloating="True" Grid.Row="3" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Bottom"></DatePicker>
+                <materialDesign:PackIcon Kind="HomeMapMarker" Grid.Row="3" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Right"></materialDesign:PackIcon>
                 <ComboBox materialDesign:HintAssist.Hint="Local da Entrega" materialDesign:HintAssist.IsFloating="True" Name="localEntrega" Grid.Row="3" Grid.Column="5" VerticalAlignment="Bottom">
                     <ComboBoxItem Content="Entrega ao Domicilio"></ComboBoxItem>
                     <ComboBoxItem Content="Entrega na Fábrica"></ComboBoxItem>
                 </ComboBox>
-                <Label Content="Desconto: " Grid.Row="5" Grid.Column="1"  VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+                <materialDesign:PackIcon Kind= "Margin" Grid.Row="5" Grid.Column="1"  VerticalAlignment="Center" HorizontalAlignment="Right"/>
                 <StackPanel Name="ParentPanel" Orientation="Horizontal" HorizontalAlignment="Stretch"  Grid.Row="5" Grid.Column="3" Grid.ColumnSpan="3">
-                    <Slider Style="{StaticResource MaterialDesignDiscreteSlider}"  Name="txtDesconto" Maximum="100" Minimum="0" Value="0" HorizontalAlignment="Left" Width="200"></Slider>
-                    <TextBox x:Name="myTextBox" Margin="3" Text="{Binding ElementName=txtDesconto,Path=Value}"/>
-                    <Label VerticalAlignment="Bottom">%</Label>
+                    <Slider IsSnapToTickEnabled="True" TickFrequency="1" materialDesign:HintAssist.Hint="Desconto Aplicavel Da Encomenda" VerticalAlignment="Center"  Name="txtDesconto" Maximum="100" Minimum="0" Value="0" HorizontalAlignment="Left" Width="200"></Slider>
+                    <TextBox x:Name="myTextBox" Margin="5,0,0,0" Text="{Binding ElementName=txtDesconto,Path=Value}" VerticalAlignment="Center"/>
+                    <Label VerticalAlignment="Center">% Desconto</Label>
+                </StackPanel>
+                <materialDesign:PackIcon Kind= "Margin" Grid.Row="5" Grid.Column="1"  VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                <StackPanel Margin="15,0,0,0" Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="5" Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock >Numero da Encomenda:</TextBlock>
+                    <TextBlock Margin="5,0,0,0" Name="nEncomenda"></TextBlock>
                 </StackPanel>
             </Grid>
         </GroupBox>
-        <GroupBox Header="Produtos da Encomenda" Grid.Column="3" Grid.Row="3" >
-            <DataGrid Name="produtosEncomenda" ItemsSource="{Binding ProdutoPersonalizado}" AutoGenerateColumns="False">
-                <DataGrid.Columns>
-                    <!--<materialDesign:MaterialDataGridTextColumn Binding="{Binding ProdutoBase.Referencia}" Header="Referencia" ></materialDesign:MaterialDataGridTextColumn>-->
-                    <materialDesign:MaterialDataGridTextColumn Binding="{Binding Tamanho}" Header="Tamanho" ></materialDesign:MaterialDataGridTextColumn>
-                    <materialDesign:MaterialDataGridTextColumn Binding="{Binding Cor}" Header="Cor" ></materialDesign:MaterialDataGridTextColumn>
-                    <materialDesign:MaterialDataGridTextColumn Binding="{Binding ID}" Header="Modelo" ></materialDesign:MaterialDataGridTextColumn>
-                    <materialDesign:MaterialDataGridTextColumn Binding="{Binding Quantidade}" Header="Quantidade" ></materialDesign:MaterialDataGridTextColumn>
-                </DataGrid.Columns>
-            </DataGrid>    
+        <GroupBox materialDesign:ColorZoneAssist.Mode="Accent" Header="Produtos da Encomenda" Grid.Column="3" Grid.Row="3" >
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="5"></RowDefinition>
+                    <RowDefinition Height="40"></RowDefinition>
+                    <RowDefinition Height="10"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button Name="adicionar" Grid.Row="1" Grid.Column="1" Style="{StaticResource adicionarButton}" Click="Button_Click">Adicionar Produto</Button>
+                <Button Name="remover" IsEnabled="False" Grid.Row="1" Grid.Column="3" Style="{StaticResource removerButton}" Click="Button_Click_1">RemoverProduto</Button>
+                <DataGrid Name="produtosEncomenda" CanUserAddRows="False" Grid.Row="3" Grid.ColumnSpan="5" ItemsSource="{Binding ProdutoPersonalizado}" AutoGenerateColumns="False" SelectionChanged="produtosEncomenda_SelectionChanged">
+                    <DataGrid.Columns>
+                        <materialDesign:MaterialDataGridComboBoxColumn SelectedItemBinding="{Binding ProdutoBase.Referencia}" Header="Referencia" ></materialDesign:MaterialDataGridComboBoxColumn>
+                        <materialDesign:MaterialDataGridComboBoxColumn SelectedItemBinding="{Binding Tamanho}" Header="Tamanho" ></materialDesign:MaterialDataGridComboBoxColumn>
+                        <materialDesign:MaterialDataGridComboBoxColumn SelectedItemBinding="{Binding Cor}" Header="Cor" ></materialDesign:MaterialDataGridComboBoxColumn>
+                        <materialDesign:MaterialDataGridComboBoxColumn SelectedItemBinding="{Binding ID}" Header="Modelo" ></materialDesign:MaterialDataGridComboBoxColumn>
+                        <materialDesign:MaterialDataGridTextColumn Binding="{Binding Quantidade}" Header="Quantidade" ></materialDesign:MaterialDataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
         </GroupBox>
     </Grid>
 </Page>

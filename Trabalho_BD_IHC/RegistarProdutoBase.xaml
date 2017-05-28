@@ -7,17 +7,15 @@
       xmlns:wpfTool="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
       xmlns:local="clr-namespace:Trabalho_BD_IHC"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
+      d:DesignHeight="600" d:DesignWidth="600"
       Title="RegistarProdutoBase">
     <Grid Background="White">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.5*"/>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="2*"/>
-            
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="24*"/>
+            <ColumnDefinition Width="142*"/>
+            <ColumnDefinition Width="16*"/>
+            <ColumnDefinition Width="473*"/>
+            <ColumnDefinition Width="23*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.05*"/>
@@ -44,7 +42,7 @@
                 <Button x:Name="cancelar" Style="{StaticResource cancelarButton}" Content="Cancelar" Grid.Row="3" Grid.Column="1" Click="cancelar_Click"/>
             </Grid>
         </GroupBox>
-        <GroupBox Header="Criar novo Modelo" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="3">
+        <GroupBox Header="Criar novo Modelo" Grid.Row="1" Grid.Column="3">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"></ColumnDefinition>
@@ -55,45 +53,43 @@
                     <ColumnDefinition Width="1*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="0.1*"></RowDefinition>
+                    <RowDefinition Height="0.05*"></RowDefinition>
+                    <RowDefinition Height="45"></RowDefinition>
+                    <RowDefinition Height="0.05*"></RowDefinition>
+                    <RowDefinition Height="45"></RowDefinition>
+                    <RowDefinition Height="0.05*"></RowDefinition>
+                    <RowDefinition Height="45"></RowDefinition>
+                    <RowDefinition Height="0.05*"></RowDefinition>
                     <RowDefinition></RowDefinition>
-                    <RowDefinition Height="0.1*"></RowDefinition>
+                    <RowDefinition Height="0.05*"></RowDefinition>
                     <RowDefinition></RowDefinition>
-                    <RowDefinition Height="0.1*"></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition Height="0.1*"></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition Height="0.1*"></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition Height="0.1*"></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition Height="0.1*"></RowDefinition>
+                    <RowDefinition Height="0.05*"></RowDefinition>
+                    <RowDefinition Height="2*"></RowDefinition>
+                    <RowDefinition Height="0.05*"></RowDefinition>
+                    <RowDefinition Height="2*"></RowDefinition>
+                    <RowDefinition Height="0.05*"></RowDefinition>
                 </Grid.RowDefinitions>
+                <Label Content="Referencia do Produto: " VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="1" Grid.Column="1"></Label>
+                <Label Name="refProduto" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="2"></Label>
+                <Label Content="Nome do Produto:" Grid.Row="3" Grid.ColumnSpan="2" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                <TextBox Name="txtNomeModelo" VerticalAlignment="Center" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="7" HorizontalAlignment="Left"
+                           materialDesign:HintAssist.Hint="Indique o Nome do Produto que Pretende Registar" materialDesign:HintAssist.IsFloating="True"  />
 
-
-                <TextBox Name="txtNomeModelo" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Stretch"
-                           materialDesign:HintAssist.Hint="Indique o nome do Modelo a criar"  />
-
-                <Label Content="IVA:" Grid.Row="1" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <wpfTool:DoubleUpDown Name="txtIva" VerticalAlignment="Center" Grid.Row="1" Grid.Column="5" Maximum="100.0" Minimum="0.00" Value="0" FormatString="P" Watermark="IVA" HorizontalAlignment="Stretch"></wpfTool:DoubleUpDown>
-
-                <TextBox TextWrapping="Wrap" Name="txtInstruçoes" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="6"
-                         VerticalAlignment="Center"  Grid.RowSpan="5" Height="50"
-                            materialDesign:HintAssist.Hint="Descreva aqui os passos necessários para a produção deste produto.">
+                <Label Content="IVA Aplicavel ao Produto: " Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                <Slider Name="txtIva" VerticalAlignment="Center" Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="3" Maximum="100.0" Minimum="0.00" Value="0.0" ></Slider>
+                <Label Grid.Column="5" Grid.Row="5" VerticalAlignment="Center">%</Label>
+                <GroupBox materialDesign:ShadowAssist.ShadowDepth="Depth3" materialDesign:ColorZoneAssist.Mode="Accent" BorderThickness="0" Grid.RowSpan="3" Header="Instruções de Produção: " Grid.Row="7" Grid.ColumnSpan="6" VerticalAlignment="Top">
+                <TextBox AcceptsTab="True" AcceptsReturn="True" TextWrapping="Wrap" Name="txtInstruçoes" 
+                         VerticalAlignment="Bottom"  
+                            materialDesign:HintAssist.Hint="Descreva os passos necessários para a produção deste produto.">
                 </TextBox>
+                </GroupBox>
 
-                <TextBlock Text="Selecione uma imagem no seu computador para associar a este modelo"
-                 Grid.Row="7" TextWrapping="Wrap" Grid.RowSpan="4" Grid.Column="0" Grid.ColumnSpan="3" VerticalAlignment="Center"></TextBlock>
-
-
-                <GroupBox Header="Imagem do Modelo" Grid.Column="3" Grid.Row="7" Grid.ColumnSpan="3" Grid.RowSpan="4" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <GroupBox Header="Imagem do Modelo" materialDesign:ColorZoneAssist.Mode="Dark" Grid.Column="0" Grid.Row="11" Grid.ColumnSpan="3" Grid.RowSpan="4" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                     <Image Width="auto" Height="auto" Name="imgPhoto" Stretch="Uniform" />
                 </GroupBox>
-                <Button Name ="adicionarFoto" Grid.Column="3" Grid.Row="11" Grid.RowSpan="2" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center" Click="btnAdicionarImagem_Click">
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="addPhoto.png" Width="20" />
-                        <TextBlock Text="Adicionar Imagem" Margin="4,0,0,0"/>
-                    </StackPanel>
+                <Button Name ="adicionarFoto" Grid.Column="3" Style="{StaticResource adicionarButton}" Grid.Row="11" Grid.ColumnSpan="3" Margin="10,0,10,0" VerticalAlignment="Center" Click="btnAdicionarImagem_Click">
+                    <TextBlock TextWrapping="Wrap" Text="Adicionar Imagem" Margin="4,0,0,0"/>
                 </Button>
             </Grid>
         </GroupBox>
