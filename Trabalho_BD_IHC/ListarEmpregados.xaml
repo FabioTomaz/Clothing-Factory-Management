@@ -45,7 +45,7 @@
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
                 <Button x:Name="registarEmpregado" Content="Registar Empregado" Style="{StaticResource registarButton}" Grid.Row="1" Grid.Column="1" Click="registarEmpregado_Click"/>
-                <Button x:Name="editarEmpregado" Content="Editar Empregado" Style="{StaticResource editarButton}" Grid.Row="3" Grid.Column="1" IsEnabled="False"/>
+                <Button x:Name="editarEmpregado" Content="Editar Empregado" Style="{StaticResource editarButton}" Grid.Row="3" Grid.Column="1" IsEnabled="False" Click="editarEmpregado_Click"/>
                 <Button x:Name="removerEmpregado" Content="Remover Empregado" Style="{StaticResource removerButton}" Grid.Row="5" Grid.Column="1" IsEnabled="False" Click="removerEmpregado_Click"/>
                 <Button x:Name="detalhesEmpregado" Content="Ver mais Detalhes" Style="{StaticResource detalhesButton}" Grid.Row="7" Grid.Column="1" IsEnabled="False" Click="verDetalhesEmpregado"/>
             </Grid>
@@ -133,7 +133,6 @@
                     </materialDesign:ColorZone>
                     <DataGrid Grid.Row="1"  Name="empregados" SelectionChanged="empregados_SelectionChanged" IsReadOnly="True" AutoGenerateColumns="False">
                         <DataGrid.Columns>
-                            <materialDesign:MaterialDataGridTextColumn Header="Função" Binding="{Binding TipoUser}" />
                             <materialDesign:MaterialDataGridTextColumn Header="Nº Empregado" Binding="{Binding NFuncionario}" />
                             <materialDesign:MaterialDataGridTextColumn Header="Nome" Binding="{Binding Nome}" />
                             <materialDesign:MaterialDataGridTextColumn Header="E-mail" Binding="{Binding Email}" />

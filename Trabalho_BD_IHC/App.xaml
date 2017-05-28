@@ -347,7 +347,7 @@
                                         <ColumnDefinition Width="0.3*"></ColumnDefinition>
                                         <ColumnDefinition></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
-                                    <Image x:Name="PathIcon" Grid.Column="0" Width="25" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" Source="voltar.png"></Image>
+                                    <Image x:Name="PathIcon" Grid.Column="0" Width="25" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center"></Image>
                                     <ContentPresenter x:Name="MyContentPresenter" Grid.Column="1" Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" />
                                 </Grid>
                             </Border>

@@ -106,7 +106,6 @@ namespace Trabalho_BD_IHC
             {
                 if (!dataHandler.verifySGBDConnection())
                     return false;
-                Console.WriteLine("HEY");
                 cmd = new SqlCommand();
                 cmd.CommandText = "INSERT INTO [MATERIAIS-PRODUTO] (REFERENCIA, TAMANHO, COR, ID, REFERENCIA_FABRICA, QUANTIDADE) "
                     + "VALUES (@refProdBase, @tamanho, @cor, @id, @refFabrica, @qtd);";

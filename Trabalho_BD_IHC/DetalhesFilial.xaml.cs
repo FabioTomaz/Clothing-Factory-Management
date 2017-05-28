@@ -32,6 +32,7 @@ namespace Trabalho_BD_IHC
             email.Text = filial.Email;
             fax.Text = filial.Fax;
             telefone.Text = filial.Telefone;
+            distrito.Text = filial.Localizacao.Distrito;
             localidade.Text = filial.Localizacao.Localidade;
             cdgPostal.Text = filial.Localizacao.CodigoPostal;
             rua.Text = filial.Localizacao.Rua1+ ", nº "+ filial.Localizacao.Porta.ToString();

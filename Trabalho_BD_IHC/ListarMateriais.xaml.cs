@@ -36,30 +36,8 @@ namespace Trabalho_BD_IHC
             editarMaterial.IsEnabled = false;
             detalhesMaterial.IsEnabled = false;
             materiais.Focus();
-            if (!dataHandler.verifySGBDConnection()) {
-                return;
-            } else {
-                ObservableCollection<MaterialTextil> materiaisTexteis = new ObservableCollection<MaterialTextil>();
-                SqlCommand cmd = new SqlCommand("SELECT * FROM MATERIAIS_TÊXTEIS", dataHandler.Cn);
-                SqlDataReader reader = cmd.ExecuteReader();     
-                while (reader.Read())
-                {
-                    MaterialTextil Mt = new MaterialTextil();
-                    Mt.Fornecedor = new Fornecedor();
-                    Mt.Referencia = Convert.ToInt32(reader["REFERENCIA_FABRICA"].ToString());
-                    Mt.ReferenciaFornecedor = reader["REFERENCIA_FORN"].ToString();
-                    Mt.Designacao = reader["DESIGNACAO"].ToString();
-                    Mt.Cor = reader["COR"].ToString();
-                    Mt.Fornecedor.NIF_Fornecedor = reader["NIF_FORNECEDOR"].ToString();
-                    materiaisTexteis.Add(Mt);
-                }
-                dataHandler.closeSGBDConnection();
-
-                setMaterialsTypes(materiaisTexteis);
-               
-                materiais.ItemsSource = materiaisTexteis;
-            }
-       }
+            materiais.ItemsSource = dataHandler.getMateriaisFromDB();
+        }
 
         private void materiais_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -77,120 +55,6 @@ namespace Trabalho_BD_IHC
         {
             RegistarMaterial page = new RegistarMaterial(dataHandler);
             NavigationService.Navigate(page);
-        }
-
-        private void setMaterialsTypes(ObservableCollection<MaterialTextil> materiaisTexteis)
-        {
-            dataHandler.verifySGBDConnection();
-
-            List<int> panos = new List<int>();
-            SqlCommand panoscmd = new SqlCommand("SELECT * FROM MATERIAIS_TÊXTEIS JOIN PANO ON PANO.REFERENCIA_FABRICA= MATERIAIS_TÊXTEIS.REFERENCIA_FABRICA", dataHandler.Cn);
-            SqlDataReader panoReader = panoscmd.ExecuteReader();
-            while (panoReader.Read())
-            {
-                panos.Add(Convert.ToInt32(panoReader["REFERENCIA_FABRICA"].ToString()));
-            }
-
-            dataHandler.closeSGBDConnection();
-            dataHandler.verifySGBDConnection();
-
-            List<int> linhas = new List<int>();
-            SqlCommand linhascmd = new SqlCommand("SELECT * FROM MATERIAIS_TÊXTEIS JOIN LINHA ON LINHA.REFERENCIA_FABRICA= MATERIAIS_TÊXTEIS.REFERENCIA_FABRICA", dataHandler.Cn);
-            SqlDataReader linhasReader = linhascmd.ExecuteReader();
-            while (linhasReader.Read())
-            {
-                linhas.Add(Convert.ToInt32(linhasReader["REFERENCIA_FABRICA"].ToString()));
-            }
-
-            dataHandler.closeSGBDConnection();
-            dataHandler.verifySGBDConnection();
-
-            List<int> acessorios = new List<int>();
-            SqlCommand acessorioscmd = new SqlCommand("SELECT * FROM MATERIAIS_TÊXTEIS JOIN ACESSORIO ON ACESSORIO.REFERENCIA_FABRICA= MATERIAIS_TÊXTEIS.REFERENCIA_FABRICA", dataHandler.Cn);
-            SqlDataReader acessoriosReader = acessorioscmd.ExecuteReader();
-            while (acessoriosReader.Read())
-            {
-                acessorios.Add(Convert.ToInt32(acessoriosReader["REFERENCIA_FABRICA"].ToString()));
-            }
-
-            dataHandler.closeSGBDConnection();
-            dataHandler.verifySGBDConnection();
-
-            List<int> fechos = new List<int>();
-            SqlCommand fechoscmd = new SqlCommand("SELECT * FROM MATERIAIS_TÊXTEIS JOIN FECHO ON FECHO.REFERENCIA_FABRICA= MATERIAIS_TÊXTEIS.REFERENCIA_FABRICA", dataHandler.Cn);
-            SqlDataReader fechosReader = fechoscmd.ExecuteReader();
-            while (fechosReader.Read())
-            {
-                fechos.Add(Convert.ToInt32(fechosReader["REFERENCIA_FABRICA"].ToString()));
-            }
-
-            dataHandler.closeSGBDConnection();
-            dataHandler.verifySGBDConnection();
-
-            List<int> botoes = new List<int>();
-            SqlCommand botoescmd = new SqlCommand("SELECT * FROM MATERIAIS_TÊXTEIS JOIN BOTAO ON BOTAO.REFERENCIA_FABRICA= MATERIAIS_TÊXTEIS.REFERENCIA_FABRICA", dataHandler.Cn);
-            SqlDataReader botoesReader = botoescmd.ExecuteReader();
-            while (botoesReader.Read())
-            {
-                botoes.Add(Convert.ToInt32(botoesReader["REFERENCIA_FABRICA"].ToString()));
-            }
-
-            dataHandler.closeSGBDConnection();
-            dataHandler.verifySGBDConnection();
-
-            List<int> molas = new List<int>();
-            SqlCommand molascmd = new SqlCommand("SELECT * FROM MATERIAIS_TÊXTEIS JOIN MOLA ON MOLA.REFERENCIA_FABRICA= MATERIAIS_TÊXTEIS.REFERENCIA_FABRICA", dataHandler.Cn);
-            SqlDataReader molasReader = molascmd.ExecuteReader();
-            while (molasReader.Read())
-            {
-                molas.Add(Convert.ToInt32(molasReader["REFERENCIA_FABRICA"].ToString()));
-            }
-
-            dataHandler.closeSGBDConnection();
-            dataHandler.verifySGBDConnection();
-
-            List<int> elasticos = new List<int>();
-            SqlCommand elasticoscmd = new SqlCommand("SELECT * FROM MATERIAIS_TÊXTEIS JOIN ELASTICO ON ELASTICO.REFERENCIA_FABRICA= MATERIAIS_TÊXTEIS.REFERENCIA_FABRICA", dataHandler.Cn);
-            SqlDataReader elasticosReader = elasticoscmd.ExecuteReader();
-            while (elasticosReader.Read())
-            {
-                elasticos.Add(Convert.ToInt32(elasticosReader["REFERENCIA_FABRICA"].ToString()));
-            }
-
-            dataHandler.closeSGBDConnection();
-            dataHandler.verifySGBDConnection();
-
-            List<int> fitas = new List<int>();
-            SqlCommand fitascmd = new SqlCommand("SELECT * FROM MATERIAIS_TÊXTEIS JOIN [FITA-VELCRO] ON [FITA-VELCRO].REFERENCIA_FABRICA= MATERIAIS_TÊXTEIS.REFERENCIA_FABRICA", dataHandler.Cn);
-            SqlDataReader fitasReader = fitascmd.ExecuteReader();
-            while (fitasReader.Read())
-            {
-                fitas.Add(Convert.ToInt32(fitasReader["REFERENCIA_FABRICA"].ToString()));
-            }
-
-            dataHandler.closeSGBDConnection();
-
-            for (int i = 0; i < materiaisTexteis.Count; i++)
-            {
-                if (panos.Contains(materiaisTexteis.ElementAt(i).Referencia))
-                    materiaisTexteis.ElementAt(i).TipoMaterial1 = "Pano";
-                else if (linhas.Contains(materiaisTexteis.ElementAt(i).Referencia))
-                    materiaisTexteis.ElementAt(i).TipoMaterial1 = "Linha";
-                else if (acessorios.Contains(materiaisTexteis.ElementAt(i).Referencia))
-                {
-                    materiaisTexteis.ElementAt(i).TipoMaterial1 = "Acessorio";
-                    if (fechos.Contains(materiaisTexteis.ElementAt(i).Referencia))
-                        materiaisTexteis.ElementAt(i).TipoMaterial1 = "Acessorio - Fecho";
-                    else if (botoes.Contains(materiaisTexteis.ElementAt(i).Referencia))
-                        materiaisTexteis.ElementAt(i).TipoMaterial1 = "Acessorio - Botao";
-                    else if (molas.Contains(materiaisTexteis.ElementAt(i).Referencia))
-                        materiaisTexteis.ElementAt(i).TipoMaterial1 = "Acessorio - Mola";
-                    else if (elasticos.Contains(materiaisTexteis.ElementAt(i).Referencia))
-                        materiaisTexteis.ElementAt(i).TipoMaterial1 = "Acessorio - Elastico";
-                    else if (fitas.Contains(materiaisTexteis.ElementAt(i).Referencia))
-                        materiaisTexteis.ElementAt(i).TipoMaterial1 = "Acessorio - Fita de Velcro";
-                }
-            }
         }
 
         private void removerMaterial_Click(object sender, RoutedEventArgs e)
@@ -225,7 +89,8 @@ namespace Trabalho_BD_IHC
             }
         }
 
-        private void RemoverMaterial(MaterialTextil material) {
+        private void RemoverMaterial(MaterialTextil material)
+        {
             dataHandler.verifySGBDConnection();
             SqlCommand cmd = new SqlCommand();
 
@@ -252,13 +117,14 @@ namespace Trabalho_BD_IHC
 
         private void detalhesMaterial_Click(object sender, RoutedEventArgs e)
         {
-            DetalhesMaterial window = new DetalhesMaterial((MaterialTextil)materiais.SelectedItem , dataHandler);
+            DetalhesMaterial window = new DetalhesMaterial(dataHandler, (MaterialTextil)materiais.SelectedItem);
             window.Show();
         }
 
         private void TextBox_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Enter) {
+            if (e.Key == Key.Enter)
+            {
                 Button_Click(sender, e);
             }
         }
@@ -269,6 +135,6 @@ namespace Trabalho_BD_IHC
         }
     }
 
-        
+
 }
 

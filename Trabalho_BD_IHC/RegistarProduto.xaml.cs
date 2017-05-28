@@ -208,7 +208,7 @@ namespace Trabalho_BD_IHC
             return null;
         }
 
-        private ObservableCollection<MaterialTextil> getMateriais(DataHandler dataHandler)
+        private ObservableCollection<MaterialTextil> getMateriais()
         {
             ObservableCollection<MaterialTextil> materiaisTexteis = new ObservableCollection<MaterialTextil>();
 

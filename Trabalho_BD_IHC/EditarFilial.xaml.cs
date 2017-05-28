@@ -65,8 +65,7 @@ namespace Trabalho_BD_IHC
                 filial.Localizacao.Porta = int.Parse(txtNumeroPorta.Text);
                 filial.NFilial = dataHandler.getNfilialFromDB(filial.Email, filial.Telefone);
                 filial.Chefe.NFuncionario = Convert.ToInt32(txtNChefe.Text);
-                RegistarFilial r = new RegistarFilial(dataHandler);
-                r.validarInput();
+                validarInput();
             }
             catch (Exception ex)
             {
@@ -83,6 +82,49 @@ namespace Trabalho_BD_IHC
                 return;
             }
             this.NavigationService.GoBack();
+        }
+        public void validarInput()
+        {
+            Regex regex = new Regex("[^a-bA-B]+");
+
+            if (txtFax.Text.Trim().Length > 22)
+                throw new Exception("O fax introduzido tem demasiados carateres.");
+            if (!IsValidEmail(txtEmail.Text.Trim()))
+                throw new Exception("O Email introduzido está escrito de forma incorreta.");
+            if (txtEmail.Text.Trim().Length == 0 || txtEmail.Text.Trim().Length > 50)
+                throw new Exception("Por favor, introduza um email válido.");
+            if (txtTelemovel.Text.Trim()[0] == '+')
+            {
+                if (txtTelemovel.Text.Trim().Length > 13)
+                    throw new Exception("O número de telemóvel introduzido tem mais de 13 carateres.");
+            }
+            else if (Regex.IsMatch(txtTelemovel.Text.Trim()[0].ToString(), @"^\d+$"))
+            {
+                if (txtTelemovel.Text.Trim().Length > 22)
+                    throw new Exception("O número de telemóvel introduzido tem mais de 9 carateres.");
+            }
+            if (txtFax.Text.Trim().Length > 22)
+                throw new Exception("O Fax introduzido tem demasiados carateres.");
+            if (txtcodigoPostal1.Text.Length != 4 || txtcodigoPostal2.Text.Length != 3)
+                throw new Exception("O Código Postal introduzido está incorreto.");
+            if (txtRua.Text.Trim().Length == 0)
+                throw new Exception("Por favor introduza a rua da Fábrica Filial.");
+            if (txtNumeroPorta.Text.Trim().Length == 0)
+                throw new Exception("Por favor introduza o número de porta da Fábrica filial.");
+            if (txtNChefe.Text.Trim().Length == 0)
+                throw new Exception("Por favor, introduza um número válido do chefe da filial a registar.");
+        }
+        public bool IsValidEmail(string email)
+        {
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == email;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

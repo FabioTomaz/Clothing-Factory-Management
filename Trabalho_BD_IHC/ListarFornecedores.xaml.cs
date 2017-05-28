@@ -66,5 +66,10 @@ namespace Trabalho_BD_IHC
             if (items != null)
                 Fornecedores.ItemsSource = items;
         }
+
+        private void editarFornecedor_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new EditarFornecedor(dataHandler, (Fornecedor)Fornecedores.SelectedItem));
+        }
     }
 }

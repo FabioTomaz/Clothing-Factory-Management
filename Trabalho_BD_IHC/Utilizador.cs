@@ -21,7 +21,8 @@ namespace Trabalho_BD_IHC
         private TimeSpan horaEntrada;
         private TimeSpan horaSaida;
         private filial filial;
-        private String tipoUser;
+        private List<String> tiposUser;
+        private string tipoUser;
         private Utilizador supervisor;
         private Image imagem;
         public static Utilizador loggedUser;
@@ -142,18 +143,7 @@ namespace Trabalho_BD_IHC
             }
         }
 
-        public String TipoUser
-        {
-            get
-            {
-                return tipoUser;
-            }
-
-            set
-            {
-                tipoUser = value;
-            }
-        }
+       
 
         internal Localizacao Localizacao
         {
@@ -191,6 +181,31 @@ namespace Trabalho_BD_IHC
             set
             {
                 imagem = value;
+            }
+        }
+        public List<string> TiposUser
+        {
+            get
+            {
+                return tiposUser;
+            }
+
+            set
+            {
+                tiposUser = value;
+            }
+        }
+
+        public string TipoUser
+        {
+            get
+            {
+                return tipoUser;
+            }
+
+            set
+            {
+                tipoUser = value;
             }
         }
     }

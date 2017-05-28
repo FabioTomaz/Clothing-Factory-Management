@@ -18,22 +18,55 @@ using System.Text.RegularExpressions;
 namespace Trabalho_BD_IHC
 {
     /// <summary>
-    /// Interaction logic for RegistarEmpregado.xaml
+    /// Interaction logic for EditarEmpregado.xaml
     /// </summary>
-    public partial class RegistarEmpregado : Page
+    public partial class EditarEmpregado : Page
     {
         private DataHandler dataHandler;
-        public RegistarEmpregado(DataHandler dh)
+        Utilizador u;
+        public EditarEmpregado(DataHandler dh, Utilizador u)
         {
             InitializeComponent();
             this.dataHandler = dh;
+            this.u = u;
+            txtNome.Text = u.Nome;
+            txtEmail.Text = u.Email;
+            txtSalario.Text = u.Salario.ToString();
+            txtnFilial.Text = u.Filial.NFilial.ToString();
+            String[] split = u.Localizacao.CodigoPostal.Split('-');
+            txtcodigoPostal1.Text = split[0];
+            txtcodigoPostal2.Text = split[1];
+            txtRua.Text = u.Localizacao.Rua1;
+            txtNumeroPorta.Text = u.Localizacao.Porta.ToString();
+            txtSuper.Text = u.Supervisor.NFuncionario.ToString();
+            txtSaida.Value = DateTime.Parse(u.HoraSaida.ToString());
+            txtEntrada.Value = DateTime.Parse(u.HoraEntrada.ToString());
+            txtTelemovel.Text = u.Telemovel;
         }
 
-
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            if(u.TiposUser.Contains("Gestor da Empresa"))
+            {
+                ckEmpr.IsChecked = true;
+            }
+            if (u.TiposUser.Contains("Gestor de Produção"))
+            {
+                ckProd.IsChecked = true;
+            }
+            if (u.TiposUser.Contains("Gestor de Vendas"))
+            {
+                ckVend.IsChecked = true;
+            }
+            if (u.TiposUser.Contains("Gestor de Recursos Humanos"))
+            {
+                ckRH.IsChecked = true;
+            }
+        }
 
         private void cancelar_Click(object sender, RoutedEventArgs e)
         {
-            if (MessageBox.Show("Tem a certeza que deseja cancelar o registo de empregado? Perderá todos os dados que tenha introduzido.",
+            if (MessageBox.Show("Tem a certeza que deseja cancelar a edição dos dados do empregado? Perderá todos as alterações que tenha feito.",
                 "", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {//sim
                 this.NavigationService.GoBack();
@@ -42,7 +75,6 @@ namespace Trabalho_BD_IHC
 
         private void confirmar_Click(object sender, RoutedEventArgs e)
         {
-            Utilizador user = new Utilizador();
             try
             {
                 validarInput();
@@ -53,13 +85,12 @@ namespace Trabalho_BD_IHC
                 return;
             }
 
-            user.Nome = txtNome.Text;
-            user.Password = txtPass.Text;
-            user.Salario = Convert.ToDouble(txtSalario.Text);
-            user.Telemovel = txtTelemovel.Text;
-            user.Filial = new filial();
+            u.Nome = txtNome.Text;
+            u.Salario = Convert.ToDouble(txtSalario.Text);
+            u.Telemovel = txtTelemovel.Text;
+            u.Filial = new filial();
 
-            user.Filial.NFilial = Convert.ToInt32(txtnFilial.Text);
+            u.Filial.NFilial = Convert.ToInt32(txtnFilial.Text);
             List<string> tiposUser = new List<string>();
             if (ckEmpr.IsChecked == true)
                 tiposUser.Add(ckEmpr.Content.ToString());
@@ -69,29 +100,29 @@ namespace Trabalho_BD_IHC
                 tiposUser.Add(ckVend.Content.ToString());
             if (ckRH.IsChecked == true)
                 tiposUser.Add(ckRH.Content.ToString());
-            user.TiposUser = tiposUser;
-            user.Email = txtEmail.Text;
-            user.Localizacao = new Localizacao();
-            user.Localizacao.CodigoPostal1 = Convert.ToInt32(txtcodigoPostal1.Text);
-            user.Localizacao.CodigoPostal2 = Convert.ToInt32(txtcodigoPostal2.Text);
-            user.Localizacao.Rua1 = txtRua.Text;
-            user.Localizacao.Porta = int.Parse(txtNumeroPorta.Text);
-            user.HoraEntrada = TimeSpan.Parse(txtEntrada.Text);
-            user.HoraSaida = TimeSpan.Parse(txtSaida.Text);
+            u.TiposUser = tiposUser;
+            u.Email = txtEmail.Text;
+            u.Localizacao = new Localizacao();
+            u.Localizacao.CodigoPostal1 = Convert.ToInt32(txtcodigoPostal1.Text);
+            u.Localizacao.CodigoPostal2 = Convert.ToInt32(txtcodigoPostal2.Text);
+            u.Localizacao.Rua1 = txtRua.Text;
+            u.Localizacao.Porta = int.Parse(txtNumeroPorta.Text);
+            u.HoraEntrada = TimeSpan.Parse(txtEntrada.Text);
+            u.HoraSaida = TimeSpan.Parse(txtSaida.Text);
 
-            user.Supervisor = new Utilizador();
-            user.Supervisor.NFuncionario = Convert.ToInt32(txtSuper.Text);
+            u.Supervisor = new Utilizador();
+            u.Supervisor.NFuncionario = Convert.ToInt32(txtSuper.Text);
 
             try
             {
-                dataHandler.EnviarEmpregado(user);
+                dataHandler.atualizarEmpregado(u);
             }
             catch (Exception ex)
             {
                 Xceed.Wpf.Toolkit.MessageBox.Show(ex.Message);
                 return;
             }
-            Xceed.Wpf.Toolkit.MessageBox.Show("Empregado Registado com sucesso!", "", MessageBoxButton.OK, MessageBoxImage.Information);
+            Xceed.Wpf.Toolkit.MessageBox.Show("Empregado Editado com sucesso!", "", MessageBoxButton.OK, MessageBoxImage.Information);
             this.NavigationService.GoBack();
         }
 
@@ -104,8 +135,6 @@ namespace Trabalho_BD_IHC
                 throw new Exception("O nome introduzido está incorreto. Deverá ter no minimo 5 caracteres e no maximo 50.");
             if (string.IsNullOrEmpty(txtSalario.Text))
                 throw new Exception("Por favor, indique o salário deste empregado.");
-            if (txtPass.Text.Trim().Length < 3 && txtPass.Text.Trim().Length > 30)
-                throw new Exception("A pass deverá ter entre 3 a 30 carateres.");
             if (!IsValidEmail(txtEmail.Text.Trim()))
                 throw new Exception("O Email introduzido está escrito de forma incorreta.");
             if (txtEmail.Text.Trim().Length == 0)
@@ -118,8 +147,10 @@ namespace Trabalho_BD_IHC
                 throw new Exception("Por favor, introduza a rua do cliente");
             if (txtNumeroPorta.Text.Trim().Length == 0)
                 throw new Exception("Por favor, introduza o nº porta do Empregado");
+            if(TimeSpan.Parse(txtSaida.Text) <= TimeSpan.Parse(txtEntrada.Text))
+                throw new Exception("A hora de saída não pode ser menor ou igual do que a hora de entreda!");
             if (txtnFilial.Text.Trim().Length == 0)
-                throw new Exception("Por favor, introduza o nº da filial onde pretende registar o empregado.");
+                throw new Exception("Por favor, introduza o nº da filial onde pretende Editar o empregado.");
             if (txtSuper.Text.Trim().Length == 0)
                 throw new Exception("Por favor, introduza o nº funcionário que será responsável por ser o supervisor deste novo empregado.");
         }
@@ -156,5 +187,7 @@ namespace Trabalho_BD_IHC
                 return false;
             }
         }
+
+        
     }
 }

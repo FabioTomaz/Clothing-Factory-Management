@@ -89,7 +89,7 @@ namespace Trabalho_BD_IHC
             }
             catch (Exception ex)
             {
-                Xceed.Wpf.Toolkit.MessageBox.Show(ex.Message, "Erro", MessageBoxButton.OKCancel, MessageBoxImage.Exclamation);
+                Xceed.Wpf.Toolkit.MessageBox.Show(ex.Message, "Erro", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 return;
             }
 

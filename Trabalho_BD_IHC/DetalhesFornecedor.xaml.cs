@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,6 +28,20 @@ namespace Trabalho_BD_IHC
             InitializeComponent();
             this.dataHandler = dataHandler;
             this.fornecedor = fornecedor;
+            nif.Content = fornecedor.NIF_Fornecedor;
+            nome.Content = fornecedor.Nome;
+            email.Content = fornecedor.Email;
+            telemovel.Content = fornecedor.Telefone;
+            designacao.Text = fornecedor.Designacao;
+            cdgPostal.Content = fornecedor.Localizacao.CodigoPostal;
+            distrito.Content = fornecedor.Localizacao.Distrito;
+            localidade.Content = fornecedor.Localizacao.Localidade;
+            morada.Content = fornecedor.Localizacao.Rua1 + ", nº " + fornecedor.Localizacao.Porta;
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            materiais.ItemsSource = dataHandler.getMateriaisFornecedorFromDB(Convert.ToInt32(fornecedor.NIF_Fornecedor));
         }
     }
 }

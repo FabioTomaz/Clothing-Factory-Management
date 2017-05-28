@@ -20,16 +20,29 @@ using System.Globalization;
 namespace Trabalho_BD_IHC
 {
     /// <summary>
-    /// Interaction logic for RegistarFilial.xaml
+    /// Interaction logic for EditarFornecedor.xaml
     /// </summary>
-    public partial class RegistarFilial : Page
+    public partial class EditarFornecedor : Page
     {
-        private DataHandler dataHandler;
-        public RegistarFilial(DataHandler dh)
+        DataHandler dataHandler;
+        Fornecedor fornecedor;
+        public EditarFornecedor(DataHandler dh, Fornecedor fornecedor)
         {
             InitializeComponent();
             this.dataHandler = dh;
-            txtEmail.Focus();
+            this.fornecedor = fornecedor;
+            txtNome.Text = fornecedor.Nome;
+            txtDesi.Text = fornecedor.Designacao;
+            txtFax.Text = fornecedor.Fax;
+            txtTelemovel.Text = fornecedor.Telefone;
+            txtEmail.Text = fornecedor.Email;
+            txtNIF.Text = fornecedor.NIF_Fornecedor;
+            String[] split = fornecedor.Localizacao.CodigoPostal.Split('-');
+            txtcodigoPostal1.Text = split[0];
+            txtcodigoPostal2.Text = split[1];
+            txtRua.Text = fornecedor.Localizacao.Rua1;
+            txtNumeroPorta.Text = fornecedor.Localizacao.Porta.ToString();
+
         }
 
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
@@ -38,11 +51,9 @@ namespace Trabalho_BD_IHC
             e.Handled = regex.IsMatch(e.Text);
         }
 
-
-
         private void cancelar_Click(object sender, RoutedEventArgs e)
         {
-            if (MessageBox.Show("Tem a certeza que deseja cancelar o registo de Filial? Perderá todos os dados que tenha introduzido.",
+            if (Xceed.Wpf.Toolkit.MessageBox.Show("Tem a certeza que deseja cancelar a edição dos dados de Fornecedor? Perderá todos os dados que tenha modificado.",
                  "", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {//sim
                 this.NavigationService.GoBack();
@@ -51,10 +62,10 @@ namespace Trabalho_BD_IHC
 
         private void confirmar_Click(object sender, RoutedEventArgs e)
         {
-            filial fl = new filial();
+            Fornecedor Fornecedor = new Fornecedor();
             try
             {
-                validarInput();
+                validarInput();   
             }
             catch (Exception ex)
             {
@@ -62,38 +73,45 @@ namespace Trabalho_BD_IHC
                 return;
             }
 
-            fl.Fax = txtFax.Text;
-            fl.Telefone = txtTelemovel.Text;
-            fl.Email = txtEmail.Text;
-            fl.Chefe = new Utilizador();
-            fl.Localizacao = new Localizacao();
-            fl.Localizacao.CodigoPostal1 = Convert.ToInt32(txtcodigoPostal1.Text);
-            fl.Localizacao.CodigoPostal2 = Convert.ToInt32(txtcodigoPostal2.Text);
-            fl.Localizacao.Rua1 = txtRua.Text;
-            fl.Localizacao.Porta = int.Parse(txtNumeroPorta.Text);
-            fl.Chefe.NFuncionario = int.Parse(txtNChefe.Text);
-            try
+            Fornecedor.Nome = txtNome.Text;
+            Fornecedor.Designacao = txtDesi.Text;
+            Fornecedor.NIF_Fornecedor = txtNIF.Text;
+            Fornecedor.Telefone = txtTelemovel.Text;
+            if(txtFax.Text.Length > 0)
             {
-                dataHandler.EnviarFilial(fl);
+                Fornecedor.Fax = txtFax.Text;
             }
-            catch (Exception ex)
+            else
+            {
+                Fornecedor.Fax = null;
+            }
+            Fornecedor.Email = txtEmail.Text;
+            Fornecedor.Localizacao = new Localizacao();
+            Fornecedor.Localizacao.CodigoPostal1 = Convert.ToInt32(txtcodigoPostal1.Text);
+            Fornecedor.Localizacao.CodigoPostal2 = Convert.ToInt32(txtcodigoPostal2.Text);
+            Fornecedor.Localizacao.Rua1 = txtRua.Text;
+            Fornecedor.Localizacao.Porta = Convert.ToInt32(txtNumeroPorta.Text);
+            try {
+                dataHandler.AtualizarFornecedor(Fornecedor);
+            }catch(Exception ex)
             {
                 MessageBox.Show(ex.Message);
                 return;
             }
-            Xceed.Wpf.Toolkit.MessageBox.Show("Fábrica Filial registada com sucesso!", "", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             this.NavigationService.GoBack();
         }
 
-        public void validarInput()
-        {
+        private void validarInput() {
             Regex regex = new Regex("[^a-bA-B]+");
-           
-            if (txtFax.Text.Trim().Length > 22)
-                throw new Exception("O fax introduzido tem demasiados carateres.");
+            if (txtNome.Text.Trim().Length>50 || txtNome.Text.Trim().Length < 5)
+                throw new Exception("O nome introduzido deverá ter no minimo 5 caracteres e no máximo 50.");
+            if (txtDesi.Text.Trim().Length > 100)
+                throw new Exception("A designação do fornecedor tem mais de 100 carateres! Seja mais breve ao preencher este campo.");
+            if (txtNIF.Text.Trim().Length != 9)
+                throw new Exception("O NIF não tem 9 carateres.");
             if (!IsValidEmail(txtEmail.Text.Trim()))
                 throw new Exception("O Email introduzido está escrito de forma incorreta.");
-            if (txtEmail.Text.Trim().Length == 0 || txtEmail.Text.Trim().Length > 50)
+            if (txtEmail.Text.Trim().Length == 0)
                 throw new Exception("Por favor, introduza um email válido.");
             if (txtTelemovel.Text.Trim()[0] == '+')
             {
@@ -102,20 +120,19 @@ namespace Trabalho_BD_IHC
             }
             else if (Regex.IsMatch(txtTelemovel.Text.Trim()[0].ToString(), @"^\d+$"))
             {
-                if (txtTelemovel.Text.Trim().Length > 22)
+                if (txtTelemovel.Text.Trim().Length > 9)
                     throw new Exception("O número de telemóvel introduzido tem mais de 9 carateres.");
             }
             if (txtFax.Text.Trim().Length > 22)
                 throw new Exception("O Fax introduzido tem demasiados carateres.");
-            if (txtcodigoPostal1.Text.Length != 4 || txtcodigoPostal2.Text.Length != 3)
+            if (txtcodigoPostal1.Text.Length!=4 || txtcodigoPostal2.Text.Length != 3)
                 throw new Exception("O Código Postal introduzido está incorreto.");
             if (txtRua.Text.Trim().Length == 0)
-                throw new Exception("Por favor introduza a rua da Fábrica Filial.");
+                throw new Exception("Por favor introduza a rua do Fornecedor");
             if (txtNumeroPorta.Text.Trim().Length == 0)
-                throw new Exception("Por favor introduza o número de porta da Fábrica filial.");
-            if (txtNChefe.Text.Trim().Length == 0)
-                throw new Exception("Por favor, introduza um número válido do chefe da filial a registar.");
+                throw new Exception("Por favor introduza o número de porta do Fornecedor");
         }
+
         public bool IsValidEmail(string email)
         {
             try
@@ -128,5 +145,6 @@ namespace Trabalho_BD_IHC
                 return false;
             }
         }
+
     }
 }

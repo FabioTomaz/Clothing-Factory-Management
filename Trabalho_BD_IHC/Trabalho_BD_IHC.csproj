@@ -94,6 +94,9 @@
     </ApplicationDefinition>
     <Compile Include="ByteArrayToImageConverter.cs" />
     <Compile Include="DataHandler.cs" />
+    <Compile Include="DetalhesEmpregado.xaml.cs">
+      <DependentUpon>DetalhesEmpregado.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DetalhesFilial.xaml.cs">
       <DependentUpon>DetalhesFilial.xaml</DependentUpon>
     </Compile>
@@ -121,9 +124,6 @@
     <Compile Include="EditarEncomenda.xaml.cs">
       <DependentUpon>EditarEncomenda.xaml</DependentUpon>
     </Compile>
-    <Compile Include="InformaçãoEmpregado.xaml.cs">
-      <DependentUpon>InformaçãoEmpregado.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ListarFornecedores.xaml.cs">
       <DependentUpon>ListarFornecedores.xaml</DependentUpon>
     </Compile>
@@ -135,8 +135,14 @@
     <Compile Include="ProduzirProduto.xaml.cs">
       <DependentUpon>ProduzirProduto.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EditarEmpregado.xaml.cs">
+      <DependentUpon>EditarEmpregado.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RegistarFilial.xaml.cs">
       <DependentUpon>RegistarFilial.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EditarFornecedor.xaml.cs">
+      <DependentUpon>EditarFornecedor.xaml</DependentUpon>
     </Compile>
     <Compile Include="RegistarFornecedor.xaml.cs">
       <DependentUpon>RegistarFornecedor.xaml</DependentUpon>
@@ -182,6 +188,10 @@
       <DependentUpon>teste.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utilizador.cs" />
+    <Page Include="DetalhesEmpregado.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="DetalhesFilial.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -218,10 +228,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="InformaçãoEmpregado.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="ListarFornecedores.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -234,7 +240,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="EditarEmpregado.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="RegistarFilial.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="EditarFornecedor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

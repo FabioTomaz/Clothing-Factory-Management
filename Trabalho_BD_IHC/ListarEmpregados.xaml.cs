@@ -35,32 +35,7 @@ namespace Trabalho_BD_IHC
             editarEmpregado.IsEnabled = false;
             detalhesEmpregado.IsEnabled = false;
             empregados.Focus();
-            if (!dataHandler.verifySGBDConnection())
-            {
-                MessageBoxResult result = MessageBox.Show("A conexão à base de dados é instável ou inexistente. Por favor tente mais tarde", "Erro de Base de Dados", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
-            else
-            {
-                SqlCommand cmd = new SqlCommand("SELECT * FROM UTILIZADOR", dataHandler.Cn);
-                SqlDataReader reader = cmd.ExecuteReader();
-                ObservableCollection<Utilizador> user = new ObservableCollection<Utilizador>();
-                while (reader.Read())
-                {
-                    Utilizador u = new Utilizador();
-                    u.Localizacao = new Localizacao();
-                    u.NFuncionario = Convert.ToInt32(reader["N_FUNCIONARIO"].ToString());
-                    u.Nome = reader["NOME"].ToString();
-                    u.Email = reader["EMAIL"].ToString();
-                    u.Telemovel = reader["TELEFONE"].ToString();
-                    u.Localizacao.Rua1 = reader["RUA"].ToString();
-                    u.Localizacao.Porta = Convert.ToInt32(reader["N_PORTA"].ToString());
-                    user.Add(u);
-                }
-
-                empregados.ItemsSource = user;
-
-                dataHandler.closeSGBDConnection();
-            }
+            empregados.ItemsSource = dataHandler.getEmpregadosFromDB();
         }
 
         private void empregados_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -140,13 +115,24 @@ namespace Trabalho_BD_IHC
         }
         private void verDetalhesEmpregado(object sender, RoutedEventArgs e)
         {
-            Utilizador user = (Utilizador)empregados.SelectedItem;
-            InformaçãoEmpregado page = new InformaçãoEmpregado(dataHandler, user);
-            this.NavigationService.Navigate(page);
+            DetalhesEmpregado window = new DetalhesEmpregado(dataHandler, (Utilizador)empregados.SelectedItem);
+            window.Show();
         }
 
         public void refresh() {
 
+        }
+
+        private void editarEmpregado_Click(object sender, RoutedEventArgs e)
+        {
+            Utilizador u = (Utilizador)empregados.SelectedItem;
+            if (u.NFuncionario == 1)
+                Xceed.Wpf.Toolkit.MessageBox.Show("Não tem permissões para editar a informação deste empregado!","", MessageBoxButton.OK, MessageBoxImage.Error);
+            else
+            {
+                this.NavigationService.Navigate(new EditarEmpregado(dataHandler, u));
+            }
+            
         }
     }
 }

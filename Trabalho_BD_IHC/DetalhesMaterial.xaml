@@ -2,55 +2,141 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Trabalho_BD_IHC"
         mc:Ignorable="d"
-        Title="DetalhesMaterial" Height="300" Width="300" Loaded="Window_Loaded">
+        Title="DetalhesMaterial"  Height="600" MinHeight="450" MinWidth="650" Width="750" Loaded="Window_Loaded" Icon="details.png">
+
     <Grid>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.1*"/>
+            <ColumnDefinition Width="0.7*"/>
             <ColumnDefinition Width="0.05*"/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="0.05*"/>
             <ColumnDefinition Width="0.7*"/>
             <ColumnDefinition Width="0.05*"/>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="0.05*"/>
-            <ColumnDefinition Width="0.7*"/>
-            <ColumnDefinition Width="0.05*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="0.1*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.05*"/>
-            <RowDefinition Height="0.4*"/>
-            <RowDefinition Height="0.05*"/>
-            <RowDefinition Height="0.4*"/>
-            <RowDefinition Height="0.05*"/>
-            <RowDefinition Height="0.4*"/>
-            <RowDefinition Height="0.05*"/>
-            <RowDefinition Height="0.4*"/>
-            <RowDefinition Height="0.05*"/>
-            <RowDefinition Height="0.4*"/>
-            <RowDefinition Height="0.05*"/>
+            <RowDefinition Height="0.07*"/>
             <RowDefinition />
             <RowDefinition Height="0.05*"/>
-            <RowDefinition />
+            <RowDefinition Height="0.8*"/>
             <RowDefinition Height="0.05*"/>
+            <RowDefinition Height="1.35*"/>
+            <RowDefinition Height="0.07*"/>
         </Grid.RowDefinitions>
+        <GroupBox materialDesign:ColorZoneAssist.Mode="Accent" Header="Informações Material" Grid.Column="1" Grid.ColumnSpan="7" Grid.Row="1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.1*"/>
+                    <ColumnDefinition Width="0.7*"/>
+                    <ColumnDefinition Width="0.05*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="0.05*"/>
+                    <ColumnDefinition Width="0.7*"/>
+                    <ColumnDefinition Width="0.05*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="0.1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Label Content="Designação" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
+                <TextBlock Name="design" Grid.Row="0" Grid.Column="3" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
+                <Label Content="Cor" Grid.Row="0" Grid.Column="5" HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
+                <TextBlock Name="cor" Grid.Row="0" Grid.Column="7" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
+                
+                <!--pano-->
+                <Label Visibility="Hidden" Name="panoTipo" Content="Tipo:"  Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
+                <TextBlock Name="txt1" TextWrapping="Wrap" Grid.Row="1" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
 
-        <Label Content="Tipo: " Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right"></Label>
-        <Label Name="tipo" Grid.Row="1" Grid.Column="3" HorizontalAlignment="Left"></Label>
-        <Label Content="Designação: " Grid.Row="1"  Grid.Column="5" HorizontalAlignment="Right"></Label>
-        <Label Name="designacao" Grid.Row="1"   Grid.Column="7" HorizontalAlignment="Left"></Label>
+                <Label Visibility="Hidden" Name="panoGramagem" Content="Gramagem:" Grid.Row="1" Grid.Column="5" HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
+                <TextBlock Name="txt2" TextWrapping="Wrap" Grid.Row="1" Grid.Column="7" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
 
-        <Label Content="Referencia: " Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right"></Label>
-        <Label Name="referencia" Grid.Row="3" Grid.Column="3" HorizontalAlignment="Left"></Label>
-        <Label Content="Cor: " Grid.Row="3"  Grid.Column="5" HorizontalAlignment="Right"></Label>
-        <Label Name="cor" Grid.Row="3"   Grid.Column="7" HorizontalAlignment="Left"></Label>
+                <Label Visibility="Hidden" Name="panoArea" Content="Area Armazem:" Grid.Row="2" Grid.Column="1"  HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
+                <TextBlock Name="txt3" TextWrapping="Wrap" Grid.Row="2" Grid.Column="3"  HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
 
-        <Label Content="Nome do Fornecedor: " Grid.Row="5" Grid.Column="1" HorizontalAlignment="Right"></Label>
-        <Label Name="fornecedor" Grid.Row="5" Grid.Column="3" HorizontalAlignment="Left"></Label>
-        <Label Grid.Row="5"  Grid.Column="5" HorizontalAlignment="Right">
-            <TextBlock TextWrapping="Wrap">Referencia do material no fornecedor:</TextBlock>
-        </Label>
-        <Label Name="referenciaFornecedor" Grid.Row="5"   Grid.Column="7" HorizontalAlignment="Left"></Label>
+                <Label Visibility="Hidden" Name="panoPreço" Content="Preço:" Grid.Row="2" Grid.Column="5"  HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
+                <TextBlock Name="txt4" TextWrapping="Wrap" Grid.Row="2" Grid.Column="7"  HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
+
+                <!--linha-->
+                <Label Visibility="Hidden" Name="linhaGrossura" Content="Grossura:" HorizontalAlignment="Right" Grid.Row="1" Grid.Column="1"  VerticalAlignment="Center"></Label>
+                <Label Visibility="Hidden" Name="linhaPreço" Content="Preço:" HorizontalAlignment="Right" Grid.Row="1" Grid.Column="5"  VerticalAlignment="Center"></Label>
+                <Label Visibility="Hidden" Name="linhaQuantidade" Content="Quantidade Armazém:" HorizontalAlignment="Right" Grid.Row="2" Grid.Column="1"   VerticalAlignment="Center"></Label>
+
+                <!--fecho-->
+                <Label Visibility="Hidden" Name="fechoComprimento" Content="Comprimento:" HorizontalAlignment="Right" Grid.Row="1" Grid.Column="1"  VerticalAlignment="Center"></Label>
+                <Label Visibility="Hidden" Name="fechoTamanhoDente" Content="Tamanho Dente:" HorizontalAlignment="Right" Grid.Row="1" Grid.Column="5"   VerticalAlignment="Center"></Label>
+                <Label Visibility="Hidden" Name="fechoQuantidade" Content="Quantidade Armazém:" HorizontalAlignment="Right" Grid.Row="2" Grid.Column="1"  VerticalAlignment="Center"></Label>
+                <Label Visibility="Hidden" Name="fechoPreço" Content="Preço:" HorizontalAlignment="Right" Grid.Row="2" Grid.Column="5"  VerticalAlignment="Center"></Label>
+
+                <!--Mola-->
+                <Label Visibility="Hidden" Name="molaDiametro" Content="Diâmetro:"  Grid.Row="1" Grid.Column="1"  HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
+                <Label Visibility="Hidden" Name="molaQuantidade" Content="Quantidade Armazém"  Grid.Row="1" Grid.Column="5" HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
+                <Label Visibility="Hidden" Name="molaPreço" Content="Preço:"  Grid.Row="2" Grid.Column="1"  HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
+
+                <!--Botão-->
+                <Label Visibility="Hidden" Name="botaoDiametro" Content="Diâmetro:"  Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
+                <Label Visibility="Hidden" Name="botaoQuantidade" Content="Quantidade Armazém"  Grid.Row="1" Grid.Column="5"  HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
+                <Label Visibility="Hidden" Name="botaoPreço" Content="Preço:" Grid.Row="2" Grid.Column="1"  HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
+
+                <!--Elástico-->
+                <Label Visibility="Hidden" Name="elasticoComprimento" Content="Comprimento:"  Grid.Row="1" Grid.Column="1"  HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
+                <Label Visibility="Hidden" Name="elasticoLargura" Content="Largura:"  Grid.Row="1" Grid.Column="5"  HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
+                <Label Visibility="Hidden" Name="elasticoQuantidade" Content="Quantidade Armazém:"  Grid.Row="2" Grid.Column="1"  HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
+                <Label Visibility="Hidden" Name="elasticoPreço" Content="Preço:" Grid.Row="2" Grid.Column="5"  HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
+
+                <!--Fita velcro-->
+                <Label Visibility="Hidden" Name="velcroComprimento" Content="Comprimento:"  Grid.Row="1" Grid.Column="1"  HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
+                <Label Visibility="Hidden" Name="velcroLargura" Content="Largura:" Grid.Row="1" Grid.Column="5"  HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
+                <Label Visibility="Hidden" Name="velcroQuantidade" Content="Quantidade Armazém:" Grid.Row="2" Grid.Column="1"  HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
+                <Label Visibility="Hidden" Name="velcroPreço" Content="Preço:" Grid.Row="2" Grid.Column="5"  HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
+            </Grid>
+        </GroupBox>
+        <GroupBox materialDesign:ColorZoneAssist.Mode="Dark"  Header="Informações de Identificação do Material" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="7" VerticalAlignment="Center">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.1*"/>
+                    <ColumnDefinition Width="0.7*"/>
+                    <ColumnDefinition Width="0.05*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="0.05*"/>
+                    <ColumnDefinition Width="0.7*"/>
+                    <ColumnDefinition Width="0.05*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="0.1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Label Content="Referência Fábrica:"  Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
+                <TextBlock Name="refFabr" Grid.Row="0"  Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
+                <Label Content="Referência Fornecedor: " Grid.Row="0"  Grid.Column="5" HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
+                <TextBlock Name="refForn" Grid.Row="0"   Grid.Column="7" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
+
+                <Label Content="NIF Fornecedor:" Grid.Row="1"  Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
+                <TextBlock Name="nifForn" Grid.Row="1"   Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
+                <Label Content="Fornecedor:" Grid.Row="1"  Grid.Column="5" HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
+                <TextBlock Name="nomeForn" Grid.Row="1"   Grid.Column="7" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Produtos que usam este material" Grid.Column="1" Grid.ColumnSpan="7" Grid.Row="5">
+            <DataGrid Name="produtos" IsReadOnly="True" AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <materialDesign:MaterialDataGridTextColumn Binding="{Binding Tamanho}" Header="Tamanho" ></materialDesign:MaterialDataGridTextColumn>
+                    <materialDesign:MaterialDataGridTextColumn Binding="{Binding Cor}" Header="Cor" ></materialDesign:MaterialDataGridTextColumn>
+                    <materialDesign:MaterialDataGridTextColumn Binding="{Binding ID}" Header="ID" ></materialDesign:MaterialDataGridTextColumn>
+                    <materialDesign:MaterialDataGridTextColumn Binding="{Binding Quantidade}" Header="Quantidade Necessária" ></materialDesign:MaterialDataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
     </Grid>
+
 </Window>
