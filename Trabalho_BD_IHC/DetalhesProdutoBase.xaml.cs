@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
@@ -23,25 +24,30 @@ namespace Trabalho_BD_IHC
     {
         private DataHandler dataHandler;
         private ProdutoBase produtoBase;
+        private ObservableCollection<ProdutoPersonalizado> produtosPersonalizados; 
         public DetalhesProdutoBase(DataHandler dataHandler, int referencia)
         {
             InitializeComponent();
             this.dataHandler = dataHandler;
             this.produtoBase = dataHandler.getProdutoBaseFromDB(referencia);
+            nomeProduto.Text = produtoBase.Nome;
+            ivaProduto.Text = produtoBase.IVA1.ToString();
+            refProduto.Text = produtoBase.Referencia.ToString();
+            gestorProduto.Text = produtoBase.GestorProducao.NFuncionario.ToString();
+            instrucoesProduto.Text = produtoBase.InstrProd;
+            dataProduto.Text = produtoBase.DataAlteraçao.ToString("dd/MM/yyyy");
+            produtosPersonalizados=dataHandler.getProdutosPersonalizadosFromProdutoBaseDB(referencia);
+            produtosPers.ItemsSource = produtosPersonalizados;
+           
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private void DataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (produtoBase.Pic != null)
+            ProdutoPersonalizado produtoSelecionado = ((ProdutoPersonalizado)produtosPers.SelectedItem);
+            if (produtoSelecionado != null)
             {
-                var ms = new MemoryStream();
-                Utilizador.loggedUser.Imagem.Save(ms, ImageFormat.Png);
-                var bi = new BitmapImage();
-                bi.BeginInit();
-                bi.CacheOption = BitmapCacheOption.OnLoad;
-                bi.StreamSource = ms;
-                bi.EndInit();
-                desenhoImagem.Source = bi;
+                DetalhesProdutoPersonalizado window = new DetalhesProdutoPersonalizado(dataHandler, produtoSelecionado.ProdutoBase.Referencia, produtoSelecionado.Tamanho, produtoSelecionado.Cor, produtoSelecionado.ID);
+                window.Show();
             }
         }
     }

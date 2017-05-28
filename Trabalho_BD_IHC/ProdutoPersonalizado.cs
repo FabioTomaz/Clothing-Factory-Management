@@ -22,6 +22,8 @@ namespace Trabalho_BD_IHC
         public ProdutoPersonalizado()
         {
             this.ProdutoBase = new ProdutoBase();
+            this.etiqueta = new Etiqueta();
+            this.materiaisTexteis = new ObservableCollection<MaterialTextil>();
         }
 
         public string Tamanho

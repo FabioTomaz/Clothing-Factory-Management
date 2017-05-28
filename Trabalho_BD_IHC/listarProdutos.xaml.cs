@@ -43,8 +43,6 @@ namespace Trabalho_BD_IHC
             }
             else
             {//pagina desenhos personalizados
-                editarProdutoPersonalizado.IsEnabled = false;
-                removerProdutoPersonalizado.IsEnabled = false;
                 detalhesProdutoPersonalizado.IsEnabled = false;
                 produzirProduto.IsEnabled = false;
                 produtosPersonalizadosLista.Focus();
@@ -127,8 +125,6 @@ namespace Trabalho_BD_IHC
             e.Handled = true;
             if (produtosPersonalizadosLista.SelectedItems.Count > 0)
             {
-                editarProdutoPersonalizado.IsEnabled = true;
-                removerProdutoPersonalizado.IsEnabled = true;
                 detalhesProdutoPersonalizado.IsEnabled = true;
                 produzirProduto.IsEnabled = true;
             }
@@ -136,6 +132,25 @@ namespace Trabalho_BD_IHC
             {
                 editarProdutoBase.IsEnabled = true;
                 detalhesProdutoBase.IsEnabled = true;
+            }
+        }
+
+        private void detalhesProdutoBase_Click(object sender, RoutedEventArgs e)
+        {
+            if (produtosBaseLista.SelectedItems.Count == 1) {
+                Console.WriteLine(((ProdutoBase)produtosBaseLista.SelectedItem).Referencia);
+                DetalhesProdutoBase detalhes = new DetalhesProdutoBase(dataHandler, ((ProdutoBase)produtosBaseLista.SelectedItem).Referencia);
+                detalhes.Show();
+            }
+        }
+
+        private void detalhesProdutoPersonalizado_Click(object sender, RoutedEventArgs e)
+        {
+            if (produtosPersonalizadosLista.SelectedItems.Count == 1)
+            {
+                ProdutoPersonalizado prod = (ProdutoPersonalizado)produtosPersonalizadosLista.SelectedItem;
+                DetalhesProdutoPersonalizado detalhes = new DetalhesProdutoPersonalizado(dataHandler, prod.ProdutoBase.Referencia, prod.Tamanho, prod.Cor, prod.ID);
+                detalhes.Show();
             }
         }
     }

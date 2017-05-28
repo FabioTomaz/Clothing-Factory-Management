@@ -57,7 +57,7 @@
                             <Button x:Name="editarProdutoBase" Grid.Row="3" Grid.Column="1" Style="{StaticResource editarButton}" IsEnabled="False" Click="EditarProdutoBase_click">
                                 <TextBlock TextWrapping="Wrap">Editar Modelo</TextBlock>
                             </Button>
-                            <Button x:Name="detalhesProdutoBase" Grid.Row="5" Grid.Column="1" Style="{StaticResource detalhesButton}" IsEnabled="False">
+                            <Button x:Name="detalhesProdutoBase" Click="detalhesProdutoBase_Click" Grid.Row="5" Grid.Column="1" Style="{StaticResource detalhesButton}" IsEnabled="False">
                                 <TextBlock TextWrapping="Wrap">Ver Mais Detalhes</TextBlock>
                             </Button>
                         </Grid>
@@ -115,8 +115,8 @@
                             <Button x:Name="produzirProduto" Style="{StaticResource adicionarButton}" Grid.Row="3" Grid.Column="1" Click="ProduzirProdutoPers_click" IsEnabled="False">
                                 <TextBlock TextWrapping="Wrap">Produzir Produto</TextBlock>
                             </Button>
-                            <Button x:Name="detalhesProdutoPersonalizado" Grid.Row="5" Grid.Column="1" Style="{StaticResource detalhesButton}" IsEnabled="False">
-                                <TextBlock TextWrapping="Wrap">Ver mais Informação</TextBlock>
+                            <Button x:Name="detalhesProdutoPersonalizado" Click="detalhesProdutoPersonalizado_Click" Grid.Row="5" Grid.Column="1" Style="{StaticResource detalhesButton}" IsEnabled="False">
+                                <TextBlock TextWrapping="Wrap">Ver mais Detalhes</TextBlock>
                             </Button>
                         </Grid>
                     </GroupBox>

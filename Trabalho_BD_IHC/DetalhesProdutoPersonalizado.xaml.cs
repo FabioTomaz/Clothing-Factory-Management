@@ -19,9 +19,10 @@ namespace Trabalho_BD_IHC
     /// </summary>
     public partial class DetalhesProdutoPersonalizado : Window
     {
-        public DetalhesProdutoPersonalizado()
+        public DetalhesProdutoPersonalizado(DataHandler dataHandler, int referencia, string tamanho, string cor, int id)
         {
             InitializeComponent();
+
         }
     }
 }
