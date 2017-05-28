@@ -42,10 +42,12 @@ namespace Trabalho_BD_IHC
             distrito.Text = emp.Localizacao.Distrito;
             localidade.Text = emp.Localizacao.Localidade;
             string userTypes = "";
-            string lastItem = emp.TiposUser[emp.TiposUser.Count - 1];
+            int c = emp.TiposUser.Count;
+            int n = 0;
             foreach (string s in emp.TiposUser)
             {
-                if(s.Equals(lastItem, StringComparison.Ordinal))
+                n++;
+                if (n == c) //último elemento
                     userTypes += s + ".";
                 else
                     userTypes += s + ", ";

@@ -28,23 +28,21 @@ namespace Trabalho_BD_IHC
             this.filial = filial;
             this.dataHandler = dataHandler;
             InitializeComponent();
- 
+            nFil.Text = (dataHandler.getNfilialFromDB(filial.Email, filial.Telefone)).ToString();
             email.Text = filial.Email;
             fax.Text = filial.Fax;
             telefone.Text = filial.Telefone;
             distrito.Text = filial.Localizacao.Distrito;
             localidade.Text = filial.Localizacao.Localidade;
             cdgPostal.Text = filial.Localizacao.CodigoPostal;
-            rua.Text = filial.Localizacao.Rua1+ ", nº "+ filial.Localizacao.Porta.ToString();
-            Utilizador user = null; 
+            rua.Text = filial.Localizacao.Rua1 + ", nº " + filial.Localizacao.Porta.ToString();
+            Utilizador user = dataHandler.getChefeFilialFromDB(filial.Chefe.NFuncionario);
             nome.Content = user.Nome;
             nFuncionario.Content = user.NFuncionario;
             funTelefone.Content = user.Telemovel;
             funEmail.Content = user.Email;
             funRua.Content = user.Localizacao.Rua1+", nº " + user.Localizacao.Porta;
             funLocalidade.Content = user.Localizacao.Localidade;
-
-
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -57,8 +55,8 @@ namespace Trabalho_BD_IHC
         private void utilizadores_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (utilizadores.SelectedItems.Count == 1) { 
-                //DetalhesUtilizador window = new DetalhesUtilizador(dataHandler, (Utilizador)utilizadores.SelectedItem);
-                //window.Show();
+               DetalhesEmpregado window = new DetalhesEmpregado(dataHandler, (Utilizador)utilizadores.SelectedItem);
+               window.Show();
             }
         }
     }

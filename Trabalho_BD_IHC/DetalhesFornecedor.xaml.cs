@@ -43,5 +43,11 @@ namespace Trabalho_BD_IHC
         {
             materiais.ItemsSource = dataHandler.getMateriaisFornecedorFromDB(Convert.ToInt32(fornecedor.NIF_Fornecedor));
         }
+
+        private void materiais_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            DetalhesMaterial window = new DetalhesMaterial(dataHandler, (MaterialTextil)materiais.SelectedItem);
+            window.Show();
+        }
     }
 }

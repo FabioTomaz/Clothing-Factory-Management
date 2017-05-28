@@ -74,7 +74,7 @@
                 <TextBlock Name="saida" Grid.Row="3"   Grid.Column="8" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center"></TextBlock>
 
                 <Label Content="Funções: "  Grid.Row="4" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
-                <TextBlock Name="funcao" Grid.Row="4"  Grid.Column="4" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
+                <TextBlock Name="funcao" Grid.Row="4"  Grid.Column="4" Grid.ColumnSpan="5" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
                 
             </Grid>
         </GroupBox>

@@ -94,7 +94,7 @@
             </Grid>
         </GroupBox>
         <GroupBox Header="Materiais Disponiveis para encomenda" Grid.Column="1" Grid.ColumnSpan="7" Grid.Row="5">
-            <DataGrid Name="materiais" IsReadOnly="True" AutoGenerateColumns="False">
+            <DataGrid Name="materiais" IsReadOnly="True" AutoGenerateColumns="False" MouseDoubleClick="materiais_MouseDoubleClick">
                 <DataGrid.Columns>
                     <materialDesign:MaterialDataGridTextColumn Binding="{Binding Designacao}" Header="Designação" ></materialDesign:MaterialDataGridTextColumn>
                     <materialDesign:MaterialDataGridTextColumn Binding="{Binding Cor}" Header="Cor" ></materialDesign:MaterialDataGridTextColumn>

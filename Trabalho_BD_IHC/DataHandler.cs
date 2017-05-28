@@ -598,30 +598,6 @@ namespace Trabalho_BD_IHC
             return utilizador;
         }
 
-        public ObservableCollection<Fornecedor> getFornecedoresFromDB() {
-            if (!this.verifySGBDConnection())
-                return null;
-            SqlCommand cmd = new SqlCommand("SELECT * FROM FORNECEDOR", Cn);
-            SqlDataReader reader = cmd.ExecuteReader();
-            ObservableCollection<Fornecedor> fornecedores = new ObservableCollection<Fornecedor>();
-            while (reader.Read())
-            {
-                Fornecedor f = new Fornecedor();
-                f.NIF_Fornecedor = reader["NIF"].ToString();
-                f.Email = reader["EMAIL"].ToString();
-                f.Nome = reader["NOME"].ToString();
-                f.Fax = reader["FAX"].ToString();
-                f.Telefone = reader["TELEFONE"].ToString();
-                f.Designacao = reader["DESIGNACAO"].ToString();
-                f.Localizacao = new Localizacao();
-                f.Localizacao.CodigoPostal = reader["CODPOSTAL1"].ToString() + "-" + reader["CODPOSTAL2"].ToString();
-                f.Localizacao.Rua1 = reader["RUA"].ToString();
-                f.Localizacao.Porta = Convert.ToInt32(reader["N_PORTA"].ToString());
-                fornecedores.Add(f);
-            }
-            closeSGBDConnection();
-            return fornecedores;
-        }
 
         public String entregarEncomenda(int nEncomenda)
         {
@@ -1427,9 +1403,18 @@ namespace Trabalho_BD_IHC
                 u.Localizacao.Rua1 = reader["RUA"].ToString();
                 u.Localizacao.Localidade = reader["LOCALIDADE"].ToString();
                 u.Localizacao.Porta = Convert.ToInt32(reader["N_PORTA"].ToString());
+                u.Filial = new filial();
+                u.Filial.NFilial = Convert.ToInt32(reader["N_FABRICA"].ToString());
+                u.Supervisor = new Utilizador();
+                u.Supervisor.NFuncionario = Convert.ToInt32(reader["N_FUNCIONARIO_SUPER"].ToString());
                 users.Add(u);
             }
             reader.Close();
+            
+            foreach (Utilizador u in users)
+            {
+                u.TiposUser = this.getUserTypesFromDB(u.NFuncionario);
+            }
             this.closeSGBDConnection();
             return users;
         }
@@ -1465,7 +1450,41 @@ namespace Trabalho_BD_IHC
             this.closeSGBDConnection();
             return u;
         }
+
         //-------------------Fornecedor-------------
+
+        public ObservableCollection<Fornecedor> getFornecedoresFromDB()
+        {
+            if (!this.verifySGBDConnection())
+                return null;
+            SqlCommand cmd = new SqlCommand("SELECT NOME, NIF, EMAIL, TELEFONE, FAX, DESIGNACAO, "
+                + " FORNECEDOR.CODPOSTAL1 as cod1, FORNECEDOR.CODPOSTAL2 as cod2, RUA, DISTRITO, LOCALIDADE, "
+                + " N_PORTA FROM FORNECEDOR JOIN ZONA ON "
+                + "(ZONA.CODPOSTAL1 = FORNECEDOR.CODPOSTAL1 AND ZONA.CODPOSTAL2 = FORNECEDOR.CODPOSTAL2)", Cn);
+            SqlDataReader reader = cmd.ExecuteReader();
+            ObservableCollection<Fornecedor> fornecedores = new ObservableCollection<Fornecedor>();
+            while (reader.Read())
+            {
+                Fornecedor f = new Fornecedor();
+                f.NIF_Fornecedor = reader["NIF"].ToString();
+                f.Email = reader["EMAIL"].ToString();
+                f.Nome = reader["NOME"].ToString();
+                f.Fax = reader["FAX"].ToString();
+                f.Telefone = reader["TELEFONE"].ToString();
+                f.Designacao = reader["DESIGNACAO"].ToString();
+                f.Localizacao = new Localizacao();
+                f.Localizacao.CodigoPostal = reader["cod1"].ToString() + "-" + reader["cod2"].ToString();
+                f.Localizacao.Rua1 = reader["RUA"].ToString();
+                f.Localizacao.Distrito = reader["DISTRITO"].ToString();
+                f.Localizacao.Localidade = reader["LOCALIDADE"].ToString();
+                f.Localizacao.Porta = Convert.ToInt32(reader["N_PORTA"].ToString());
+                fornecedores.Add(f);
+            }
+            closeSGBDConnection();
+            return fornecedores;
+        }
+
+
         public void EnviarFornecedor(Fornecedor f)
         {
 
@@ -1506,6 +1525,421 @@ namespace Trabalho_BD_IHC
             }
         }
 
+        public ObservableCollection<MaterialTextil> getMateriaisFornecedorFromDB(int NifForn)
+        {
+            if (!this.verifySGBDConnection())
+                return null;
+            SqlCommand cmd = new SqlCommand(" SELECT * FROM MATERIAIS_TÊXTEIS "
+                + "WHERE NIF_FORNECEDOR = @nifForn", Cn);
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@nifForn", NifForn);
+            SqlDataReader reader = cmd.ExecuteReader();
+            ObservableCollection<MaterialTextil> mat = new ObservableCollection<MaterialTextil>();
+            while (reader.Read())
+            {
+                MaterialTextil m = new MaterialTextil();
+                m.Referencia = Convert.ToInt32(reader["REFERENCIA_FABRICA"].ToString());
+                m.ReferenciaFornecedor = reader["REFERENCIA_FORN"].ToString();
+                m.Cor = reader["COR"].ToString();
+                m.Designacao = reader["DESIGNACAO"].ToString();
+                m.Fornecedor = new Fornecedor();
+                m.Fornecedor.NIF_Fornecedor = NifForn.ToString();
+                mat.Add(m);
+            }
+            reader.Close();
+            closeSGBDConnection();
+            return mat;
+        }
+
+        public void AtualizarFornecedor(Fornecedor f)
+        {
+            int rows = 0;
+            if (!this.verifySGBDConnection())
+                return;
+
+            SqlCommand cmd = new SqlCommand();
+
+            cmd.CommandText = "UPDATE FORNECEDOR " + "SET EMAIL = @EMAIL, "
+                + " TELEFONE = @TELEFONE, " + " CODPOSTAL1 = @CODPOSTAL1, " + " CODPOSTAL2 = @CODPOSTAL2, " +
+                " FAX = @Fax, " + "  RUA = @RUA, " + " N_PORTA = @N_PORTA, "
+                + "DESIGNACAO = @desi, " + "NOME = @nome " + "WHERE NIF = @NIF";
+            cmd.Parameters.Clear();
+            if (string.IsNullOrEmpty(f.Fax))
+            {
+                cmd.Parameters.AddWithValue("@Fax", DBNull.Value);
+            }
+            else
+            {
+                cmd.Parameters.AddWithValue("@Fax", f.Fax);
+            }
+            cmd.Parameters.AddWithValue("@NIF", f.NIF_Fornecedor);
+            cmd.Parameters.AddWithValue("@EMAIL", f.Email);
+            cmd.Parameters.AddWithValue("@TELEFONE", f.Telefone);
+            cmd.Parameters.AddWithValue("@CODPOSTAL1", f.Localizacao.CodigoPostal1);
+            cmd.Parameters.AddWithValue("@CODPOSTAL2", f.Localizacao.CodigoPostal2);
+            cmd.Parameters.AddWithValue("@RUA", f.Localizacao.Rua1);
+            cmd.Parameters.AddWithValue("@N_PORTA", f.Localizacao.Porta);
+            cmd.Parameters.AddWithValue("@desi", f.Designacao);
+            cmd.Parameters.AddWithValue("@nome", f.Nome);
+            cmd.Connection = this.Cn;
+
+            try
+            {
+                rows = cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Não foi possivel atualizar a Filial na base de dados\n" + ex.Message);
+            }
+            finally
+            {
+                if (rows == 1)
+                    Xceed.Wpf.Toolkit.MessageBox.Show("A atualização do Fornecedor foi submetida com sucesso!", "Atualização Bem Sucedida", MessageBoxButton.OK, MessageBoxImage.Information);
+                else
+                   if (Xceed.Wpf.Toolkit.MessageBox.Show("Não foi possivel atualizar a informação do fornecedor. Pretende tentar novamente?", "Erro", MessageBoxButton.YesNo, MessageBoxImage.Exclamation) == MessageBoxResult.Yes)
+                    this.AtualizarFornecedor(f);
+                this.closeSGBDConnection();
+            }
+        }
+
+        // ------------ empregados --------
+
+        public ObservableCollection<Utilizador> getEmpregadosFromDB()
+        {
+            if (!this.verifySGBDConnection())
+                return null;
+
+            SqlCommand cmd = new SqlCommand("SELECT N_FUNCIONARIO, NOME, EMAIL, TELEFONE, RUA, N_PORTA, "
+                + "DISTRITO, LOCALIDADE, SALARIO, N_FABRICA, HORA_ENTRADA, HORA_SAIDA, UTILIZADOR.CODPOSTAL1 as cod1, "
+                + " UTILIZADOR.CODPOSTAL2 as cod2, IMAGEM, N_FUNCIONARIO_SUPER FROM UTILIZADOR JOIN ZONA ON "
+                + "(ZONA.CODPOSTAL1 = UTILIZADOR.CODPOSTAL1 AND ZONA.CODPOSTAL2 = UTILIZADOR.CODPOSTAL2)", this.Cn);
+            SqlDataReader reader = cmd.ExecuteReader();
+            ObservableCollection<Utilizador> user = new ObservableCollection<Utilizador>();
+            while (reader.Read())
+            {
+                Utilizador u = new Utilizador();
+                u.Localizacao = new Localizacao();
+                u.NFuncionario = Convert.ToInt32(reader["N_FUNCIONARIO"].ToString());
+                u.Nome = reader["NOME"].ToString();
+                u.Email = reader["EMAIL"].ToString();
+                u.Telemovel = reader["TELEFONE"].ToString();
+                u.Salario = Convert.ToDouble(reader["SALARIO"].ToString());
+                u.HoraEntrada = TimeSpan.Parse(reader["HORA_ENTRADA"].ToString());
+                u.HoraSaida = TimeSpan.Parse(reader["HORA_SAIDA"].ToString());
+
+                u.Filial = new filial();
+                u.Filial.NFilial = Convert.ToInt32(reader["N_FABRICA"].ToString());
+                u.Supervisor = new Utilizador();
+                u.Supervisor.NFuncionario = Convert.ToInt32(reader["N_FUNCIONARIO_SUPER"].ToString());
+                u.Localizacao.CodigoPostal = reader["cod1"].ToString() + "-" + reader["cod2"].ToString();
+                u.Localizacao.Rua1 = reader["RUA"].ToString();
+                u.Localizacao.Porta = Convert.ToInt32(reader["N_PORTA"].ToString());
+                u.Localizacao.Distrito = reader["DISTRITO"].ToString();
+                u.Localizacao.Localidade = reader["LOCALIDADE"].ToString();
+
+                byte[] img = null;
+                try
+                {
+                    img = (byte[])reader["IMAGEM"];
+                }
+                catch (InvalidCastException e)
+                {
+
+                }
+                if (img != null)
+                {
+                    MemoryStream ms = new MemoryStream(img);
+                    u.Imagem = Image.FromStream(ms);
+                }
+                user.Add(u);
+            }
+            reader.Close();
+
+            foreach (Utilizador u in user)
+            {
+                u.TiposUser = this.getUserTypesFromDB(u.NFuncionario);
+            }
+            this.closeSGBDConnection();
+            return user;
+        }
+
+        public List<string> getUserTypesFromDB(int nFunc)
+        {
+
+            SqlCommand cmd = new SqlCommand("SELECT TIPO FROM [UTILIZADOR-TIPOS]"
+            + " JOIN [TIPO-UTILIZADOR] ON ID_TIPO = ID WHERE UTILIZADOR = @nFunc", this.Cn);
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@nFunc", nFunc);
+            List<string> userTypes = new List<string>();
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                userTypes.Add(reader["TIPO"].ToString());
+            }
+            reader.Close();
+            return userTypes;
+        }
+
+        public void EnviarEmpregado(Utilizador user)
+        {
+
+            if (!this.verifySGBDConnection())
+                return;
+            SqlCommand cmd = new SqlCommand();
+
+            cmd.CommandText = "INSERT INTO UTILIZADOR (NOME, EMAIL, SALARIO, PASS, TELEFONE, N_FABRICA, "
+                + " HORA_ENTRADA, HORA_SAIDA, CODPOSTAL1, CODPOSTAL2, RUA, N_PORTA, N_FUNCIONARIO_SUPER) "
+                + "VALUES (@NOME, @email, @salario, @pass, @telefone, @nFilial, @entrada, @saida, @cod1, @cod2, @rua, "
+                + "@nPorta, @super);";
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@NOME", user.Nome);
+            cmd.Parameters.AddWithValue("@email", user.Email);
+            cmd.Parameters.AddWithValue("@salario", user.Salario);
+            cmd.Parameters.AddWithValue("@pass", user.Password);
+            cmd.Parameters.AddWithValue("@telefone", user.Telemovel);
+            cmd.Parameters.AddWithValue("@nFilial", user.Filial.NFilial);
+            cmd.Parameters.AddWithValue("@entrada", user.HoraEntrada);
+            cmd.Parameters.AddWithValue("@saida", user.HoraSaida);
+            cmd.Parameters.AddWithValue("@cod1", user.Localizacao.CodigoPostal1);
+            cmd.Parameters.AddWithValue("@cod2", user.Localizacao.CodigoPostal2);
+            cmd.Parameters.AddWithValue("@rua", user.Localizacao.Rua1);
+            cmd.Parameters.AddWithValue("@nPorta", user.Localizacao.Porta);
+            cmd.Parameters.AddWithValue("@super", user.Supervisor.NFuncionario);
+
+            cmd.Connection = this.Cn;
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Falha ao registar o empregado.\n Detalhes do erro: \n " + ex.Message);
+            }
+            finally
+            {
+                this.closeSGBDConnection();
+            }
+            //obter o nº do Funcionario inserido
+            int n = this.getLastIdentity("UTILIZADOR");
+            //inserir o tipo de funcionario
+            int id;
+            if (!this.verifySGBDConnection())
+                return;
+            foreach (string s in user.TiposUser)
+            {
+                id = getTypeIDfromDB(s);
+                if (!this.verifySGBDConnection())
+                    return;
+                cmd = new SqlCommand("INSERT INTO [UTILIZADOR-TIPOS](UTILIZADOR, ID_TIPO) VALUES " +
+                    "(@nFunc, @IDtipo)", this.cn);
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@nFunc", n);
+
+                cmd.Parameters.AddWithValue("@IDtipo", id);
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Falha ao registar o tipo de empregado. \n Detalhes do erro: \n" + ex.Message);
+                }
+                finally
+                {
+                    this.closeSGBDConnection();
+                }
+            }
+        }
+
+        public int getTypeIDfromDB(string type)
+        {
+            if (!this.verifySGBDConnection())
+                return 0;
+            SqlCommand cmd = new SqlCommand("SELECT dbo.getTypeID(@type);", this.cn);
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@type", type);
+            int n = Convert.ToInt32(cmd.ExecuteScalar());
+            this.closeSGBDConnection();
+            return n;
+        }
+
+        public void atualizarEmpregado(Utilizador user)
+        {
+            if (!this.verifySGBDConnection())
+                return;
+            SqlCommand cmd = new SqlCommand();
+
+            cmd.CommandText = "UPDATE UTILIZADOR SET NOME = @NOME, EMAIL = @email, SALARIO = @salario, "
+                + " TELEFONE = @telefone , N_FABRICA = @nFilial, HORA_ENTRADA = @entrada, HORA_SAIDA = @saida, "
+                + " CODPOSTAL1 = @cod1, CODPOSTAL2 = @cod2, RUA = @rua, N_PORTA = @nPorta, N_FUNCIONARIO_SUPER = @super "
+                + "WHERE N_FUNCIONARIO = @nfunc";
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@nfunc", user.NFuncionario);
+            cmd.Parameters.AddWithValue("@NOME", user.Nome);
+            cmd.Parameters.AddWithValue("@email", user.Email);
+            cmd.Parameters.AddWithValue("@salario", user.Salario);
+            cmd.Parameters.AddWithValue("@telefone", user.Telemovel);
+            cmd.Parameters.AddWithValue("@nFilial", user.Filial.NFilial);
+            cmd.Parameters.AddWithValue("@entrada", user.HoraEntrada);
+            cmd.Parameters.AddWithValue("@saida", user.HoraSaida);
+            cmd.Parameters.AddWithValue("@cod1", user.Localizacao.CodigoPostal1);
+            cmd.Parameters.AddWithValue("@cod2", user.Localizacao.CodigoPostal2);
+            cmd.Parameters.AddWithValue("@rua", user.Localizacao.Rua1);
+            cmd.Parameters.AddWithValue("@nPorta", user.Localizacao.Porta);
+            cmd.Parameters.AddWithValue("@super", user.Supervisor.NFuncionario);
+
+            cmd.Connection = this.Cn;
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Falha ao editar o empregado.\n Detalhes do erro: \n " + ex.Message);
+            }
+            finally
+            {
+                this.closeSGBDConnection();
+            }
+
+
+            if (!this.verifySGBDConnection())
+                return;
+            cmd = new SqlCommand("DELETE FROM [UTILIZADOR-TIPOS] WHERE UTILIZADOR = @nFunc ", this.cn);
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@nFunc", user.NFuncionario);
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Falha ao editar o tipo de empregado. \n Detalhes do erro: \n" + ex.Message);
+            }
+            finally
+            {
+                this.closeSGBDConnection();
+            }
+
+            //editar o tipo de funcionario
+            int id;
+            if (!this.verifySGBDConnection())
+                return;
+            foreach (string s in user.TiposUser)
+            {
+                id = getTypeIDfromDB(s);
+                if (!this.verifySGBDConnection())
+                    return;
+                cmd = new SqlCommand("INSERT INTO [UTILIZADOR-TIPOS] (UTILIZADOR, ID_TIPO) VALUES " +
+                    "(@nFunc, @IDtipo)", this.cn);
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@nFunc", user.NFuncionario);
+                cmd.Parameters.AddWithValue("@IDtipo", id);
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Falha ao editar o tipo de empregado. \n Detalhes do erro: \n" + ex.Message);
+                }
+                finally
+                {
+                    this.closeSGBDConnection();
+                }
+            }
+        }
+
+        public Utilizador getSupervisor(int nFunc)
+        {
+            if (!this.verifySGBDConnection())
+                return null;
+            SqlCommand cmd = new SqlCommand("SELECT * FROM UTILIZADOR WHERE N_FUNCIONARIO = @supervisor", Cn);
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@supervisor", nFunc);
+            SqlDataReader reader = cmd.ExecuteReader();
+            Utilizador user = new Utilizador();
+            while (reader.Read())
+            {
+                user.NFuncionario = Convert.ToInt32(reader["N_FUNCIONARIO"].ToString());
+                user.Nome = reader["NOME"].ToString();
+                user.Email = reader["EMAIL"].ToString();
+                user.Telemovel = reader["TELEFONE"].ToString();
+                user.HoraEntrada = TimeSpan.Parse(reader["HORA_ENTRADA"].ToString());
+                user.HoraSaida = TimeSpan.Parse(reader["HORA_SAIDA"].ToString());
+                byte[] img = null;
+                try
+                {
+                    img = (byte[])reader["IMAGEM"];
+                }
+                catch (InvalidCastException e)
+                {
+
+                }
+                if (img != null)
+                {
+                    MemoryStream ms = new MemoryStream(img);
+                    user.Imagem = Image.FromStream(ms);
+                }
+            }
+            reader.Close();
+            this.closeSGBDConnection();
+            return user;
+        }
+
+        //materiais 
+
+        public ObservableCollection<MaterialTextil> getMateriaisFromDB()
+        {
+            this.verifySGBDConnection();
+            SqlCommand cmd = new SqlCommand("SELECT * "
+                                + " FROM [MATERIAIS_TÊXTEIS] JOIN FORNECEDOR ON FORNECEDOR.NIF=[MATERIAIS_TÊXTEIS].NIF_FORNECEDOR"
+                                , this.Cn);
+
+            SqlDataReader reader = cmd.ExecuteReader();
+            ObservableCollection<MaterialTextil> m = new ObservableCollection<MaterialTextil>();
+            while (reader.Read())
+            {
+                MaterialTextil material = new MaterialTextil();
+                material.Fornecedor = new Fornecedor();
+                material.Referencia = Convert.ToInt32(reader["REFERENCIA_FABRICA"].ToString());
+                material.ReferenciaFornecedor = reader["REFERENCIA_FORN"].ToString();
+                material.Cor = reader["COR"].ToString();
+                material.Designacao = reader["DESIGNACAO"].ToString();
+                material.Fornecedor.Nome = reader["NOME"].ToString();
+                material.Fornecedor.NIF_Fornecedor = reader["NIF"].ToString();
+                m.Add(material);
+            }
+
+            reader.Close();
+            this.closeSGBDConnection();
+            return m;
+        }
+
+        public ObservableCollection<ProdutoPersonalizado> getProdutosContainingMaterial(int refFabrica)
+        {
+            if (!this.verifySGBDConnection())
+                return null;
+            SqlCommand cmd = new SqlCommand("SELECT * FROM [MATERIAIS-PRODUTO] WHERE REFERENCIA_FABRICA = @ref", Cn);
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@ref", refFabrica);
+            SqlDataReader reader = cmd.ExecuteReader();
+            ObservableCollection<ProdutoPersonalizado> produtos = new ObservableCollection<ProdutoPersonalizado>();
+            while (reader.Read())
+            {
+                ProdutoPersonalizado prod = new ProdutoPersonalizado();
+                prod.ProdutoBase = new ProdutoBase();
+                prod.ProdutoBase.Referencia = Convert.ToInt32(reader["REFERENCIA"].ToString());
+                prod.Tamanho = reader["TAMANHO"].ToString();
+                prod.Cor = reader["COR"].ToString();
+                prod.ID = Convert.ToInt32(reader["ID"].ToString());
+                prod.Quantidade = Convert.ToInt32(reader["QUANTIDADE"].ToString());
+                produtos.Add(prod);
+            }
+            reader.Close();
+            this.closeSGBDConnection();
+            return produtos;
+        }
 
     }
 }
