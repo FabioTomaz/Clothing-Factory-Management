@@ -12,11 +12,11 @@ namespace Trabalho_BD_IHC
         private ProdutoBase produtoBase;
         private String tamanho;
         private String cor;
-        private int id;
+        private int? id;
         private double preco;
         private Etiqueta etiqueta;
         private int unidadesStock;
-        private int quantidade;
+        private int? quantidade;
         private ObservableCollection<MaterialTextil> materiaisTexteis;
 
         public ProdutoPersonalizado()
@@ -52,7 +52,7 @@ namespace Trabalho_BD_IHC
             }
         }
 
-        public int ID
+        public int? ID
         {
             get
             {
@@ -130,7 +130,7 @@ namespace Trabalho_BD_IHC
             }
         }
 
-        public int Quantidade
+        public int? Quantidade
         {
             get
             {

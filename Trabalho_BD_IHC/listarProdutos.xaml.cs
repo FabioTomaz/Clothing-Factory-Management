@@ -99,7 +99,7 @@ namespace Trabalho_BD_IHC
             if (produtosBaseLista.SelectedItems.Count == 1)
             {
                 Console.WriteLine(((ProdutoBase)produtosBaseLista.SelectedItem).Referencia);
-                DetalhesProdutoBase detalhes = new DetalhesProdutoBase(dataHandler, ((ProdutoBase)produtosBaseLista.SelectedItem).Referencia);
+                DetalhesProdutoBase detalhes = new DetalhesProdutoBase(dataHandler, (int)((ProdutoBase)produtosBaseLista.SelectedItem).Referencia);
                 detalhes.Show();
             }
         }
@@ -109,7 +109,7 @@ namespace Trabalho_BD_IHC
             if (produtosPersonalizadosLista.SelectedItems.Count == 1)
             {
                 ProdutoPersonalizado prod = (ProdutoPersonalizado)produtosPersonalizadosLista.SelectedItem;
-                DetalhesProdutoPersonalizado detalhes = new DetalhesProdutoPersonalizado(dataHandler, prod.ProdutoBase.Referencia, prod.Tamanho, prod.Cor, prod.ID);
+                DetalhesProdutoPersonalizado detalhes = new DetalhesProdutoPersonalizado(dataHandler, (int)prod.ProdutoBase.Referencia, prod.Tamanho, prod.Cor, (int)prod.ID);
                 detalhes.Show();
             }
         }

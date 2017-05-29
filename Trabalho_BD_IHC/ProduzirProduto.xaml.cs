@@ -32,7 +32,7 @@ namespace Trabalho_BD_IHC
             InitializeComponent();
             this.dataHandler = dataHandler;
             this.prodPers = prodPers;
-            this.mtProd = materiaisProduto(prodPers.ProdutoBase.Referencia, prodPers.Tamanho, prodPers.Cor, prodPers.ID);
+            this.mtProd = materiaisProduto((int)prodPers.ProdutoBase.Referencia, prodPers.Tamanho, prodPers.Cor, (int)prodPers.ID);
             this.invalidMaterials = 0;
         }
 

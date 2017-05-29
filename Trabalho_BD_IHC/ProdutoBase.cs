@@ -11,7 +11,7 @@ namespace Trabalho_BD_IHC
 {
     public class ProdutoBase
     {
-        private int referencia;
+        private int? referencia;
         private String nome;
         private double IVA;
         private DateTime dataAlteraçao;
@@ -19,7 +19,7 @@ namespace Trabalho_BD_IHC
         private Utilizador gestorProducao;
         private byte[] pic;
 
-        public int Referencia
+        public int? Referencia
         {
             get
             {

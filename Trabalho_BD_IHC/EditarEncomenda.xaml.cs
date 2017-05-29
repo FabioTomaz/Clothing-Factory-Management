@@ -39,65 +39,45 @@ namespace Trabalho_BD_IHC
             dataPrevista.SelectedDate = Encomenda.DataPrevistaEntrega;
         }
 
-        private void updateEncomenda() {
-            int rows = 0;
-            dataHandler.verifySGBDConnection();
-            SqlCommand cmd = new SqlCommand("UPDATE ENCOMENDA SET DESCONTO=@DESCONTO, DATA_ENTREGA_PREV = @DATEP WHERE N_ENCOMENDA=@ENCOMENDA"
-                                , dataHandler.Cn);
-            cmd.Parameters.Clear();
-            cmd.Parameters.AddWithValue("@ENCOMENDA", Encomenda.NEncomenda);
-            cmd.Parameters.AddWithValue("@DESCONTO", Encomenda.Desconto);
-            cmd.Parameters.AddWithValue("@DATEP", Encomenda.DataPrevistaEntrega);
-
-            try
-            {
-                rows = cmd.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Não foi possivel atualizar o contacto na base de dados\n" + ex.Message);
-            }
-            finally
-            {
-                if (rows == 1)
-                {
-                    dataHandler.closeSGBDConnection();
-                    MessageBox.Show("Edição da encomenda realizada com sucesso", "", MessageBoxButton.OK, MessageBoxImage.Asterisk);
-                }
-                else
-                   if (MessageBox.Show("Não foi possivel atualizar a encomenda na base de dados. Deseja tentar novamente?", "Erro", MessageBoxButton.OKCancel, MessageBoxImage.Exclamation) == MessageBoxResult.OK)
-                    updateEncomenda();
-                   else
-                    dataHandler.closeSGBDConnection();
-            }
-        } 
-
         private void cancelar_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.GoBack();
+            if (Xceed.Wpf.Toolkit.MessageBox.Show("Tem a certeza que deseja cancelar a edição da encomenda? Perderá todos os dados que tenha introduzido.",
+     "Cancelar Registo de Cliente", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            {//sim
+                this.NavigationService.GoBack();
+            }
+        }
+
+        public void validar()
+        {
+            if (dataPrevista.SelectedDate == null)
+                throw new Exception("Não foi selecionada nenhuma data de entrega prevista!");
+            else if(localEntrega.SelectedItem==null)
+                throw new Exception("Não foi selecionado nenhum local para entregar a encomenda!");
         }
 
         private void confirmar_Click(object sender, RoutedEventArgs e)
         {
+            try { 
+                validar();
+            }catch(Exception ex)
+            {
+                Xceed.Wpf.Toolkit.MessageBox.Show(ex.Message, "ERRO", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            Encomenda.Desconto = (double)txtDesconto.Value;
+            Encomenda.DataPrevistaEntrega = dataPrevista.SelectedDate.Value;
+            Encomenda.LocalEntrega = localEntrega.SelectedItem.ToString();
             try
             {
-                Encomenda.Desconto = (double)txtDesconto.Value;
-                Encomenda.DataPrevistaEntrega = dataPrevista.SelectedDate.Value;
+                dataHandler.atualizarEncomenda(Encomenda);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                Xceed.Wpf.Toolkit.MessageBox.Show(ex.Message, "ERRO", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
-            try
-            {
-                updateEncomenda();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                return;
-            }
+            Xceed.Wpf.Toolkit.MessageBox.Show("Encomenda registada com sucesso", "Sucesso", MessageBoxButton.OK, MessageBoxImage.Warning);
             this.NavigationService.GoBack();
         }
     }

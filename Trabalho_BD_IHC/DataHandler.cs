@@ -326,7 +326,7 @@ namespace Trabalho_BD_IHC
                     enc.DataEntrega = Convert.ToDateTime(reader["DATA_ENTREGA"].ToString());
                 }
                 enc.LocalEntrega = reader["LOCALENTREGA"].ToString();
-                enc.Estado = reader["ESTADO"].ToString();
+                enc.Estado =  reader["ESTADO"].ToString();
                 enc.GestorVendas = new Utilizador();
                 enc.GestorVendas.NFuncionario = Convert.ToInt32(reader["N_GESTOR_VENDA"].ToString());
                 enc.GestorVendas.Nome = reader["GESTOR_NOME"].ToString();
@@ -336,14 +336,44 @@ namespace Trabalho_BD_IHC
             return list;
         }
 
+        public void atualizarEncomenda(Encomenda encomenda)
+        {
+            int rows = 0;
+            verifySGBDConnection();
+            SqlCommand cmd = new SqlCommand("UPDATE ENCOMENDA SET DESCONTO=@DESCONTO, DATA_ENTREGA_PREV = @DATEP WHERE N_ENCOMENDA=@ENCOMENDA"
+                                , Cn);
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@ENCOMENDA", encomenda.NEncomenda);
+            cmd.Parameters.AddWithValue("@DESCONTO", encomenda.Desconto);
+            cmd.Parameters.AddWithValue("@DATEP", encomenda.DataPrevistaEntrega);
+
+            try
+            {
+                rows = cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Não foi possivel atualizar o contacto na base de dados\n" + ex.Message);
+            }
+            finally
+            {
+                if (rows != 1)
+                    throw new Exception("Algo de errado ocorreu durante a atualização da encomenda na base de dados.");
+                closeSGBDConnection();
+            }
+        }
+
         public ObservableCollection<Encomenda> getEncomendasFromDB()
         {
             if (!this.verifySGBDConnection())
                 return null;
-            SqlCommand cmd = new SqlCommand("SELECT ENCOMENDA.N_ENCOMENDA,[LOCAIS-ENTREGA-ENCOMENDA].DESCRICAO AS LOCALENTREGA ,DATA_CONFIRMACAO, DATA_ENTREGA_PREV, ESTADO.DESCRIÇAO, DESCONTO, CLIENTE.NCLIENTE, CLIENTE.NOME, N_GESTOR_VENDA, SUM([PRODUTO-PERSONALIZADO].PRECO*CONTEUDO_ENCOMENDA.QUANTIDADE) AS PRECOTOTAL "
+            SqlCommand cmd = new SqlCommand("SELECT ENCOMENDA.N_ENCOMENDA,[LOCAIS-ENTREGA-ENCOMENDA].DESCRICAO AS LOCALENTREGA ,DATA_CONFIRMACAO, DATA_ENTREGA_PREV, ESTADO.DESCRIÇAO, DESCONTO, CLIENTE.NCLIENTE, CLIENTE.NOME, N_GESTOR_VENDA, SUM([PRODUTO-PERSONALIZADO].PRECO*CONTEUDO_ENCOMENDA.QUANTIDADE)*(1-(DESCONTO/100)) AS PRECOTOTAL "
                                 + " FROM ENCOMENDA JOIN CLIENTE ON CLIENTE.NCLIENTE = ENCOMENDA.CLIENTE"
                                 + " JOIN CONTEUDO_ENCOMENDA ON CONTEUDO_ENCOMENDA.N_ENCOMENDA=ENCOMENDA.N_ENCOMENDA"
                                 + " JOIN [PRODUTO-PERSONALIZADO] ON CONTEUDO_ENCOMENDA.REFERENCIA_PRODUTO=[PRODUTO-PERSONALIZADO].REFERENCIA"
+                                + " AND CONTEUDO_ENCOMENDA.TAMANHO_PRODUTO = [PRODUTO-PERSONALIZADO].TAMANHO "
+                                + " AND CONTEUDO_ENCOMENDA.COR_PRODUTO = [PRODUTO-PERSONALIZADO].COR"
+                                + " AND CONTEUDO_ENCOMENDA.ID_PRODUTO = [PRODUTO-PERSONALIZADO].ID"
                                 + " JOIN ESTADO ON ENCOMENDA.ESTADO=ESTADO.ID"
                                 + " JOIN [LOCAIS-ENTREGA-ENCOMENDA] ON ENCOMENDA.LOCALENTREGA=[LOCAIS-ENTREGA-ENCOMENDA].ID"
                                 + " GROUP BY [LOCAIS-ENTREGA-ENCOMENDA].DESCRICAO, ENCOMENDA.N_ENCOMENDA, DATA_CONFIRMACAO, DATA_ENTREGA_PREV, ESTADO.DESCRIÇAO, DESCONTO, CLIENTE.NCLIENTE, CLIENTE.NOME, N_GESTOR_VENDA;"
@@ -379,6 +409,9 @@ namespace Trabalho_BD_IHC
                                 + " FROM ENCOMENDA JOIN CLIENTE ON CLIENTE.NCLIENTE = ENCOMENDA.CLIENTE"
                                 + " JOIN CONTEUDO_ENCOMENDA ON CONTEUDO_ENCOMENDA.N_ENCOMENDA=ENCOMENDA.N_ENCOMENDA"
                                 + " JOIN [PRODUTO-PERSONALIZADO] ON CONTEUDO_ENCOMENDA.REFERENCIA_PRODUTO=[PRODUTO-PERSONALIZADO].REFERENCIA"
+                                + " AND CONTEUDO_ENCOMENDA.TAMANHO_PRODUTO = [PRODUTO-PERSONALIZADO].TAMANHO "
+                                + " AND CONTEUDO_ENCOMENDA.COR_PRODUTO = [PRODUTO-PERSONALIZADO].COR"
+                                + " AND CONTEUDO_ENCOMENDA.ID_PRODUTO = [PRODUTO-PERSONALIZADO].ID"
                                 + " JOIN ESTADO ON ENCOMENDA.ESTADO=ESTADO.ID"
                                 + " JOIN UTILIZADOR ON UTILIZADOR.N_FUNCIONARIO=N_GESTOR_VENDA"
                                 + " WHERE ENCOMENDA.N_ENCOMENDA=@encomenda"
@@ -469,11 +502,39 @@ namespace Trabalho_BD_IHC
             return produtosPers;
         }
 
+        public Boolean checkIfProdutoPersonalizadoExists(ProdutoPersonalizado prod)
+        {
+            if (!this.verifySGBDConnection())
+                return false;
+
+            SqlCommand cmd = new SqlCommand("SELECT * "
+                            + " FROM [PRODUTO-PERSONALIZADO] "
+                            + " WHERE [PRODUTO-PERSONALIZADO].REFERENCIA=@REFERENCIA AND [PRODUTO-PERSONALIZADO].TAMANHO=@TAMANHO AND [PRODUTO-PERSONALIZADO].COR=@COR AND [PRODUTO-PERSONALIZADO].ID=@ID;"
+                            , cn);
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@REFERENCIA", prod.ProdutoBase.Referencia);
+            cmd.Parameters.AddWithValue("@TAMANHO", prod.Tamanho);
+            cmd.Parameters.AddWithValue("@COR", prod.Cor);
+            cmd.Parameters.AddWithValue("@ID", prod.ID);
+           
+            if (((int)cmd.ExecuteScalar())>=1)
+            {
+                Console.WriteLine("sim");
+                closeSGBDConnection();
+                return true;
+            }else
+            {
+                Console.WriteLine("sim");
+                closeSGBDConnection();
+                return false;
+            }
+        }
 
         public ProdutoPersonalizado getProdutoPersonalizadoFromDB(int referencia, String tamanho, String cor, int id)
         {
             if (!this.verifySGBDConnection())
                 return null;
+            
             SqlCommand cmd = new SqlCommand("SELECT PRECO, UNIDADES_ARMAZEM, ETIQUETA.N_ETIQUETA, NORMAS, PAIS_FABRICO, COMPOSICAO "
                             + " FROM [PRODUTO-PERSONALIZADO] JOIN [ETIQUETA] ON [PRODUTO-PERSONALIZADO].N_ETIQUETA=[ETIQUETA].N_ETIQUETA"
                             + " WHERE [PRODUTO-PERSONALIZADO].REFERENCIA=@REFERENCIA AND [PRODUTO-PERSONALIZADO].TAMANHO=@TAMANHO AND [PRODUTO-PERSONALIZADO].COR=@COR AND [PRODUTO-PERSONALIZADO].ID=@ID;"
@@ -952,11 +1013,11 @@ namespace Trabalho_BD_IHC
             {
                 this.verifySGBDConnection();
                 SqlCommand values = new SqlCommand();
-                int referencia = (listaProdutos.ElementAt(i)).ProdutoBase.Referencia;
+                int referencia = (int)(listaProdutos.ElementAt(i)).ProdutoBase.Referencia;
                 String cor = (listaProdutos.ElementAt(i)).Cor;
                 String tamanho = (listaProdutos.ElementAt(i)).Tamanho;
-                int id = (listaProdutos.ElementAt(i)).ID;
-                int quantidade = (listaProdutos.ElementAt(i)).Quantidade;
+                int id = (int)(listaProdutos.ElementAt(i)).ID;
+                int quantidade = (int)(listaProdutos.ElementAt(i)).Quantidade;
                 values.Parameters.Clear();
                 values.Parameters.AddWithValue("@ENCOMENDA", nencomenda);
                 values.Parameters.AddWithValue("@REFERENCIA", referencia);

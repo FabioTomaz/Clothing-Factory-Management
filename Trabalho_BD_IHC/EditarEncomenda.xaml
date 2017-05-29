@@ -7,7 +7,7 @@
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:local="clr-namespace:Trabalho_BD_IHC"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
+      d:DesignHeight="600" d:DesignWidth="600"
       Title="EditarEncomenda">
     <Grid Background="White">
             <Grid.ColumnDefinitions>
@@ -46,43 +46,49 @@
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.05*"></ColumnDefinition>
-                    <ColumnDefinition Width="30"></ColumnDefinition>
-                    <ColumnDefinition Width="0.05*"></ColumnDefinition>
                     <ColumnDefinition Width="1*"></ColumnDefinition>
-                    <ColumnDefinition Width="30"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
                     <ColumnDefinition Width="1*"></ColumnDefinition>
                     <ColumnDefinition Width="0.05*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="0.05*"></RowDefinition>
-                    <RowDefinition Height="35"></RowDefinition>
-                    <RowDefinition Height="0.01*"></RowDefinition>
-                    <RowDefinition Height="40"></RowDefinition>
-                    <RowDefinition Height="0.01*"></RowDefinition>
-                    <RowDefinition Height="35"></RowDefinition>
-                    <RowDefinition Height="0.01*"></RowDefinition>
-                    <RowDefinition Height="1.7*"></RowDefinition>
-                    <RowDefinition Height="0.05*"></RowDefinition>
-
+                    <RowDefinition Height="0.1*"></RowDefinition>
+                    <RowDefinition ></RowDefinition>
+                    <RowDefinition ></RowDefinition>
+                    <RowDefinition ></RowDefinition>
+                    <RowDefinition ></RowDefinition>
+                    <RowDefinition Height="0.1*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <materialDesign:PackIcon Kind="Account" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-                <TextBlock Name="txtCliente" Grid.Column="3" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left"></TextBlock>
-                <materialDesign:PackIcon Kind="Calendar" Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" materialDesign:HintAssist.IsFloating="True" HorizontalAlignment="Right"/>
-                <DatePicker Name="dataPrevista" materialDesign:HintAssist.Hint="Data Prevista para Entrega" materialDesign:HintAssist.IsFloating="True" Grid.Row="5" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Bottom"></DatePicker>
-                <materialDesign:PackIcon Kind="HomeMapMarker" Grid.Row="5" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Right"></materialDesign:PackIcon>
-                <ComboBox materialDesign:HintAssist.Hint="Local da Entrega" materialDesign:HintAssist.IsFloating="True" Name="localEntrega" Grid.Row="5" Grid.Column="5" VerticalAlignment="Bottom">
-                    <ComboBoxItem Content="Entrega ao Domicilio"></ComboBoxItem>
-                    <ComboBoxItem Content="Entrega na Fábrica"></ComboBoxItem>
-                </ComboBox>
-                <materialDesign:PackIcon Kind= "Margin" Grid.Row="7" Grid.Column="1"  VerticalAlignment="Center" HorizontalAlignment="Right"/>
-                <StackPanel Name="ParentPanel" Orientation="Horizontal" HorizontalAlignment="Stretch"  Grid.Row="7" Grid.Column="3" Grid.ColumnSpan="3">
-                    <Slider IsSnapToTickEnabled="True" TickFrequency="1" materialDesign:HintAssist.Hint="Desconto Aplicavel Da Encomenda" VerticalAlignment="Center"  Name="txtDesconto" Maximum="100" Minimum="0" Value="0" HorizontalAlignment="Left" Width="200"></Slider>
+                <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <materialDesign:PackIcon Kind="Account"  VerticalAlignment="Center"/>
+                    <TextBlock  VerticalAlignment="Center" Margin="5,0,0,0">Numero do Cliente: </TextBlock>
+                    <TextBox Name="txtCliente" Margin="5,0,0,0" VerticalAlignment="Center"></TextBox>
+                </StackPanel>
+                <StackPanel Margin="15,0,0,0" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="5" Orientation="Horizontal" VerticalAlignment="Center">
+                    <materialDesign:PackIcon Kind="Numeric"  VerticalAlignment="Center"/>
+                    <TextBlock  VerticalAlignment="Center" Margin="5,0,0,0">Numero da Encomenda: </TextBlock>
+                    <TextBlock VerticalAlignment="Center" Margin="5,0,0,0" Name="nEncomenda"></TextBlock>
+                </StackPanel>
+                <StackPanel Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="Calendar" Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" materialDesign:HintAssist.IsFloating="True" HorizontalAlignment="Right"/>
+                    <TextBlock  VerticalAlignment="Center" Margin="5,0,0,0">Data prevista da entrega da encomenda: </TextBlock>
+                    <DatePicker Margin="10,0,0,0" Name="dataPrevista" VerticalAlignment="Bottom"></DatePicker>
+                </StackPanel>
+                <StackPanel Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="HomeMapMarker" Grid.Row="3" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Right"></materialDesign:PackIcon>
+                    <TextBlock  VerticalAlignment="Center" Margin="5,0,0,0">Local Previsto para entrega da encomenda:</TextBlock>
+                    <ComboBox Margin="5,0,0,0" Name="localEntrega" VerticalAlignment="Center">
+                        <ComboBoxItem Content="Entrega ao Domicilio"></ComboBoxItem>
+                        <ComboBoxItem Content="Entrega na Fábrica"></ComboBoxItem>
+                    </ComboBox>
+                </StackPanel>
+
+                <StackPanel Name="ParentPanel" Orientation="Horizontal"  Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3">
+                    <materialDesign:PackIcon Kind= "Margin" Grid.Row="7" Grid.Column="1"  VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                    <TextBlock  VerticalAlignment="Center" Margin="5,0,0,0">Percentagem de descontos da encomenda:</TextBlock>
+                    <Slider  Margin="5,0,0,0" IsSnapToTickEnabled="True" TickFrequency="1" materialDesign:HintAssist.Hint="Desconto Aplicavel Da Encomenda" VerticalAlignment="Center"  Name="txtDesconto" Maximum="100" Minimum="0" Value="0" HorizontalAlignment="Left" Width="200"></Slider>
                     <TextBox x:Name="myTextBox" Margin="5,0,0,0" Text="{Binding ElementName=txtDesconto,Path=Value}" VerticalAlignment="Center"/>
                     <Label VerticalAlignment="Center">% Desconto</Label>
-                </StackPanel>
-                <StackPanel Margin="15,0,0,0" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="5" Orientation="Horizontal" VerticalAlignment="Center">
-                    <TextBlock >Numero da Encomenda:</TextBlock>
-                    <TextBlock Margin="5,0,0,0" Name="nEncomenda"></TextBlock>
                 </StackPanel>
             </Grid>
         </GroupBox>

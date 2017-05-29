@@ -51,15 +51,18 @@ namespace Trabalho_BD_IHC
 
         }
 
-        private void GroupBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void produtos_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            /*
+            
             if (produtos.SelectedItems.Count == 1)
             {
-                DetalhesProdutoPersonalizado window = new DetalhesProdutoPersonalizado(dataHandler, (ProdutoPersonalizado)produtos.SelectedItem);
+                int referencia = (int)((ProdutoPersonalizado)produtos.SelectedItem).ProdutoBase.Referencia;
+                string tamanho = ((ProdutoPersonalizado)produtos.SelectedItem).Tamanho;
+                string cor = ((ProdutoPersonalizado)produtos.SelectedItem).Cor;
+                int id = (int)((ProdutoPersonalizado)produtos.SelectedItem).ID;
+                DetalhesProdutoPersonalizado window = new DetalhesProdutoPersonalizado(dataHandler, referencia, tamanho, cor, id);
                 window.Show();
             }
-            */
         }
     }
 }
