@@ -228,21 +228,19 @@ namespace Trabalho_BD_IHC
 
         private void confirmar_Click(object sender, RoutedEventArgs e)
         {
-            if (!dataHandler.verifySGBDConnection())
-                return;
-            SqlCommand cmd = new SqlCommand("SELECT dbo.nUnidadesProd(@ref, @tamanho, @cor, @id);", dataHandler.Cn);
-            cmd.Parameters.Clear();
-            cmd.Parameters.AddWithValue("@ref", prodPers.ProdutoBase.Referencia);
-            cmd.Parameters.AddWithValue("@tamanho", prodPers.Tamanho);
-            cmd.Parameters.AddWithValue("@cor", prodPers.Cor);
-            cmd.Parameters.AddWithValue("@id", prodPers.ID);
-            int nUn = Convert.ToInt32(cmd.ExecuteScalar());
-            nUn++; //incrementar por um a quantidade de produto que existe
-            cmd = new SqlCommand("UPDATE[PRODUTO-PERSONALIZADO] SET UNIDADES_ARMAZEM = @nUni "
-                +"WHERE REFERENCIA = @ref AND TAMANHO = @tamanho AND COR = @cor AND ID = id;", dataHandler.Cn);
-            cmd.Parameters.AddWithValue("@nUni", nUn);
-            cmd.ExecuteNonQuery();
-            dataHandler.closeSGBDConnection();
+            if (string.IsNullOrEmpty(quantidade.Text))
+                Xceed.Wpf.Toolkit.MessageBox.Show("Selecione a quantidade de produto que pretende produzir", "", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            else
+            {
+               if( dataHandler.produzirProduto(prodPers, Convert.ToInt32(quantidade.Text)))
+                {
+                    Xceed.Wpf.Toolkit.MessageBox.Show("O produto foi produzido com sucesso!", "", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                    this.NavigationService.GoBack();
+                }
+               else
+                    Xceed.Wpf.Toolkit.MessageBox.Show("Ocorreu um erro ao produzir o produto. Verifique se está devidamente conetado á internet ou tente mais tarde.", "", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            }
         }
 
         private void DGproduçao_SelectionChanged(object sender, SelectionChangedEventArgs e)

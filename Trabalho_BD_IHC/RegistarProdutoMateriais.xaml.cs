@@ -43,18 +43,7 @@ namespace Trabalho_BD_IHC
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             e.Handled = true;
-            if (!dataHandler.verifySGBDConnection())
-            {
-                MessageBoxResult result = MessageBox.Show("A conexão à base de dados é instável ou inexistente. Por favor tente mais tarde", "Erro de Base de Dados", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
-            else
-            {
-                ListarProdutos lp = new ListarProdutos(dataHandler);
-                ObservableCollection<MaterialTextil> mt = getMateriais(dataHandler);
-                materiaisView.ItemsSource = mt;
-                dataHandler.closeSGBDConnection();
-            }
-
+            materiaisView.ItemsSource = dataHandler.getMateriais();
         }
 
         public RegistarProdutoMateriais(DataHandler dataHandler, ProdutoPersonalizado prod)
@@ -65,70 +54,7 @@ namespace Trabalho_BD_IHC
             materiaisSelecionados = new ObservableCollection<MaterialTextil>();
         }
 
-        private bool EnviarProduto(ProdutoPersonalizado prod)
-        {
-            //registar etiqueta na base de dados primerio
-            //inserir primeiro a nova etiqueta na base de dados
-            dataHandler.insertEtiqueta(prod.Etiqueta.Normas, prod.Etiqueta.Composicao, prod.Etiqueta.PaisFabrico);
-            //obter o numero da etiqueta adicionada, pois é necessario para o registo do produto
-            prod.Etiqueta.Numero = dataHandler.getEtiqueta(prod.Etiqueta.Normas, prod.Etiqueta.Composicao, prod.Etiqueta.PaisFabrico);
 
-            //produto
-            if (!dataHandler.verifySGBDConnection())
-                return false;
-            SqlCommand cmd = new SqlCommand();
-
-            cmd.CommandText = "INSERT INTO [PRODUTO-PERSONALIZADO] (REFERENCIA, TAMANHO, COR, PRECO, N_ETIQUETA) "
-                + "VALUES (@refProdBase, @tamanho, @cor, @preco, @nEt);";
-            cmd.Parameters.Clear();
-            cmd.Parameters.AddWithValue("@refProdBase", prod.ProdutoBase.Referencia);
-            cmd.Parameters.AddWithValue("@tamanho", prod.Tamanho);
-            cmd.Parameters.AddWithValue("@cor", prod.Cor);
-            cmd.Parameters.AddWithValue("@preco", prod.Preco);
-            cmd.Parameters.AddWithValue("@nEt", prod.Etiqueta.Numero);
-            cmd.Connection = dataHandler.Cn;
-            try
-            {
-                cmd.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Falha ao registar o Produto Personalizado na base de dados. \n ERROR MESSAGE: \n" + ex.Message);
-            }
-            finally
-            {
-                dataHandler.closeSGBDConnection();
-            }
-            //materiais do produto
-            int ID = dataHandler.getLastIdentity("[PRODUTO-PERSONALIZADO]");
-
-            for (int i = 0; i < materiaisSelecionados.Count; i++)
-            {
-                if (!dataHandler.verifySGBDConnection())
-                    return false;
-                cmd = new SqlCommand();
-                cmd.CommandText = "INSERT INTO [MATERIAIS-PRODUTO] (REFERENCIA, TAMANHO, COR, ID, REFERENCIA_FABRICA, QUANTIDADE) "
-                    + "VALUES (@refProdBase, @tamanho, @cor, @id, @refFabrica, @qtd);";
-                cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@refProdBase", prod.ProdutoBase.Referencia);
-                cmd.Parameters.AddWithValue("@tamanho", prod.Tamanho);
-                cmd.Parameters.AddWithValue("@cor", prod.Cor);
-                cmd.Parameters.AddWithValue("@id", ID);
-                cmd.Parameters.AddWithValue("@refFabrica", materiaisSelecionados.ElementAt(i).Referencia);
-                cmd.Parameters.AddWithValue("@qtd", Convert.ToDouble(materiaisSelecionados.ElementAt(i).QuantidadeSelecionada));
-                cmd.Connection = dataHandler.Cn;
-                cmd.Connection = dataHandler.Cn;
-                try
-                {
-                    cmd.ExecuteNonQuery();
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception("Falha ao registar o Produto na base de dados. \n ERROR MESSAGE: \n" + ex.Message);
-                }
-            }
-            return true;
-        }
 
         private void cancelar_Click(object sender, RoutedEventArgs e)
         {
@@ -170,7 +96,7 @@ namespace Trabalho_BD_IHC
             }
             try
             {
-                EnviarProduto(prod);
+                dataHandler.EnviarProduto(prod, materiaisSelecionados);
             }
             catch (Exception ex)
             {
@@ -182,26 +108,7 @@ namespace Trabalho_BD_IHC
             this.NavigationService.Navigate(page);
         }
 
-        private ObservableCollection<MaterialTextil> getMateriais(DataHandler dataHandler)
-        {
-            ObservableCollection<MaterialTextil> materiaisTexteis = new ObservableCollection<MaterialTextil>();
 
-            SqlCommand cmd = new SqlCommand("SELECT * FROM MATERIAIS_TÊXTEIS", dataHandler.Cn);
-            SqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
-            {
-                MaterialTextil Mt = new MaterialTextil();
-                Mt.Fornecedor = new Fornecedor();
-                Mt.Referencia = Convert.ToInt32(reader["REFERENCIA_FABRICA"].ToString());
-                Mt.ReferenciaFornecedor = reader["REFERENCIA_FORN"].ToString();
-                Mt.Designacao = reader["DESIGNACAO"].ToString();
-                Mt.Cor = reader["COR"].ToString();
-                Mt.Fornecedor.NIF_Fornecedor = reader["NIF_FORNECEDOR"].ToString();
-                materiaisTexteis.Add(Mt);
-            }
-            reader.Close();
-            return materiaisTexteis;
-        }
 
         private void hideAll()
         {

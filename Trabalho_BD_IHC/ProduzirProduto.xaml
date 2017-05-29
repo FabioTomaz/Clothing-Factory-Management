@@ -3,6 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:wpfTool="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Trabalho_BD_IHC"
       mc:Ignorable="d" 
@@ -93,10 +94,19 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.5*"></ColumnDefinition>
                         <ColumnDefinition Width="1*"></ColumnDefinition>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <materialDesign:PackIcon Grid.Column="0" Kind="ThumbUp" Height="25" Width="25" ></materialDesign:PackIcon>
-                    <TextBlock Grid.Column="1" Text="É agora possível produzir este produto! Carregue em 'Produzir' para efetuar a produção!" TextWrapping="Wrap"></TextBlock>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition Height="0.05"></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <materialDesign:PackIcon Grid.Row="0" Grid.Column="0" Kind="ThumbUp" Height="25" Width="25" ></materialDesign:PackIcon>
+                    <TextBlock Grid.Column="1" Grid.ColumnSpan="3" Text="É agora possível produzir este produto! Selecione em baixo a quantidade que pretende em produzir e de seguida carregue em 'Produzir' para efetuar a produção!" TextWrapping="Wrap"></TextBlock>
+                    <wpfTool:IntegerUpDown Name="quantidade" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Center" Width="80" Minimum="1" VerticalAlignment="Center"></wpfTool:IntegerUpDown>
                 </Grid>
+                
             </Grid>
             
         </GroupBox>
