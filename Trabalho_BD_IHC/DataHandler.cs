@@ -2107,6 +2107,149 @@ namespace Trabalho_BD_IHC
             this.closeSGBDConnection();
             return produtos;
         }
+        public bool produzirProduto(ProdutoPersonalizado prodPers, int qtd)
+        {
+            if (!this.verifySGBDConnection())
+                return false;
+            SqlCommand cmd = new SqlCommand("DECLARE @OUT VARCHAR(100); EXEC dbo.produzirProduto @ref, "
+                + "@tamanho, @cor, @id, @qtd, @OUT;", this.Cn);
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@ref", prodPers.ProdutoBase.Referencia);
+            cmd.Parameters.AddWithValue("@tamanho", prodPers.Tamanho);
+            cmd.Parameters.AddWithValue("@cor", prodPers.Cor);
+            cmd.Parameters.AddWithValue("@id", prodPers.ID);
+            cmd.Parameters.AddWithValue("@qtd", qtd);
+            cmd.ExecuteNonQuery();
 
+            this.closeSGBDConnection();
+            return true;
+        }
+
+        public ObservableCollection<ProdutoPersonalizado> getProdutosPers()
+        {
+            SqlCommand cmd = new SqlCommand("SELECT TAMANHO, COR, ID, PRECO, UNIDADES_ARMAZEM, "
+                + "[PRODUTO-PERSONALIZADO].REFERENCIA, [PRODUTO-BASE].NOME as nomeBase, DATA_ALTERACAO, "
+                + "INSTRUCOES_PRODUCAO, IVA, PAIS_FABRICO, [PRODUTO-PERSONALIZADO].N_ETIQUETA, NORMAS, "
+                + "PAIS_FABRICO, COMPOSICAO FROM[PRODUTO-PERSONALIZADO] JOIN[PRODUTO-BASE] ON "
+                + "[PRODUTO-PERSONALIZADO].REFERENCIA = [PRODUTO-BASE].REFERENCIA JOIN "
+                + "ETIQUETA ON ETIQUETA.N_ETIQUETA = [PRODUTO-PERSONALIZADO].N_ETIQUETA; "
+                , this.Cn);
+            SqlDataReader reader = cmd.ExecuteReader();
+            ObservableCollection<ProdutoPersonalizado> produtoPers = new ObservableCollection<ProdutoPersonalizado>();
+            while (reader.Read())
+            {
+                ProdutoPersonalizado prod = new ProdutoPersonalizado();
+                prod.Tamanho = reader["TAMANHO"].ToString();
+                prod.Cor = reader["COR"].ToString();
+                prod.ID = Convert.ToInt32(reader["ID"].ToString());
+                prod.Preco = Convert.ToDouble(reader["PRECO"].ToString());
+                prod.UnidadesStock = Convert.ToInt32(reader["UNIDADES_ARMAZEM"].ToString());
+                prod.ProdutoBase = new ProdutoBase();
+                prod.ProdutoBase.Referencia = Convert.ToInt32(reader["REFERENCIA"].ToString());
+                prod.ProdutoBase.Nome = reader["nomeBase"].ToString();
+                prod.ProdutoBase.InstrProd = reader["INSTRUCOES_PRODUCAO"].ToString();
+                prod.ProdutoBase.DataAlteraçao = Convert.ToDateTime(reader["DATA_ALTERACAO"]);
+                prod.ProdutoBase.IVA1 = Convert.ToDouble(reader["IVA"].ToString());
+                prod.Etiqueta = new Etiqueta();
+                prod.Etiqueta.PaisFabrico = reader["PAIS_FABRICO"].ToString();
+                prod.Etiqueta.Numero = Convert.ToInt32(reader["N_ETIQUETA"].ToString());
+                prod.Etiqueta.Normas = reader["NORMAS"].ToString();
+                prod.Etiqueta.PaisFabrico = reader["PAIS_FABRICO"].ToString();
+                prod.Etiqueta.Composicao = reader["COMPOSICAO"].ToString();
+                produtoPers.Add(prod);
+            }
+            reader.Close();
+            this.closeSGBDConnection();
+            return produtoPers;
+        }
+
+        public ObservableCollection<MaterialTextil> getMateriais()
+        {
+            if (!this.verifySGBDConnection())
+                return null;
+            ObservableCollection<MaterialTextil> materiaisTexteis = new ObservableCollection<MaterialTextil>();
+
+            SqlCommand cmd = new SqlCommand("SELECT * FROM MATERIAIS_TÊXTEIS", this.Cn);
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                MaterialTextil Mt = new MaterialTextil();
+                Mt.Fornecedor = new Fornecedor();
+                Mt.Referencia = Convert.ToInt32(reader["REFERENCIA_FABRICA"].ToString());
+                Mt.ReferenciaFornecedor = reader["REFERENCIA_FORN"].ToString();
+                Mt.Designacao = reader["DESIGNACAO"].ToString();
+                Mt.Cor = reader["COR"].ToString();
+                Mt.Fornecedor.NIF_Fornecedor = reader["NIF_FORNECEDOR"].ToString();
+                materiaisTexteis.Add(Mt);
+            }
+            reader.Close();
+            this.closeSGBDConnection();
+            return materiaisTexteis;
+        }
+
+        public bool EnviarProduto(ProdutoPersonalizado prod, ObservableCollection<MaterialTextil> materiaisSelecionados)
+        {
+            //registar etiqueta na base de dados primerio
+            //inserir primeiro a nova etiqueta na base de dados
+            this.insertEtiqueta(prod.Etiqueta.Normas, prod.Etiqueta.Composicao, prod.Etiqueta.PaisFabrico);
+            //obter o numero da etiqueta adicionada, pois é necessario para o registo do produto
+            prod.Etiqueta.Numero = this.getEtiqueta(prod.Etiqueta.Normas, prod.Etiqueta.Composicao, prod.Etiqueta.PaisFabrico);
+
+            //produto
+            if (!this.verifySGBDConnection())
+                return false;
+            SqlCommand cmd = new SqlCommand();
+
+            cmd.CommandText = "INSERT INTO [PRODUTO-PERSONALIZADO] (REFERENCIA, TAMANHO, COR, PRECO, N_ETIQUETA) "
+                + "VALUES (@refProdBase, @tamanho, @cor, @preco, @nEt);";
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@refProdBase", prod.ProdutoBase.Referencia);
+            cmd.Parameters.AddWithValue("@tamanho", prod.Tamanho);
+            cmd.Parameters.AddWithValue("@cor", prod.Cor);
+            cmd.Parameters.AddWithValue("@preco", prod.Preco);
+            cmd.Parameters.AddWithValue("@nEt", prod.Etiqueta.Numero);
+            cmd.Connection = this.Cn;
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Falha ao registar o Produto na base de dados. \n ERROR MESSAGE: \n" + ex.Message);
+            }
+            finally
+            {
+                this.closeSGBDConnection();
+            }
+            //materiais do produto
+            int ID = this.getLastIdentity("[PRODUTO-PERSONALIZADO]");
+
+            for (int i = 0; i < materiaisSelecionados.Count; i++)
+            {
+                if (!this.verifySGBDConnection())
+                    return false;
+                cmd = new SqlCommand();
+                cmd.CommandText = "INSERT INTO [MATERIAIS-PRODUTO] (REFERENCIA, TAMANHO, COR, ID, REFERENCIA_FABRICA, QUANTIDADE) "
+                    + "VALUES (@refProdBase, @tamanho, @cor, @id, @refFabrica, @qtd);";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@refProdBase", prod.ProdutoBase.Referencia);
+                cmd.Parameters.AddWithValue("@tamanho", prod.Tamanho);
+                cmd.Parameters.AddWithValue("@cor", prod.Cor);
+                cmd.Parameters.AddWithValue("@id", ID);
+                cmd.Parameters.AddWithValue("@refFabrica", materiaisSelecionados.ElementAt(i).Referencia);
+                cmd.Parameters.AddWithValue("@qtd", Convert.ToDouble(materiaisSelecionados.ElementAt(i).QuantidadeSelecionada));
+                cmd.Connection = this.Cn;
+                cmd.Connection = this.Cn;
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Falha ao registar o Produto na base de dados. \n ERROR MESSAGE: \n" + ex.Message);
+                }
+            }
+            return true;
+        }
     }
 }
