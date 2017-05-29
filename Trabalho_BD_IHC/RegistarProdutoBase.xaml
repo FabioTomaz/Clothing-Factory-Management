@@ -38,7 +38,7 @@
                     <RowDefinition></RowDefinition>
                     <RowDefinition Height="0.3*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Button x:Name="confirmar" Style="{StaticResource confirmarButton}" Content="Produzir"  Grid.Row="1" Grid.Column="1" IsEnabled="True" Click="confirmar_Click"/>
+                <Button x:Name="confirmar" Style="{StaticResource confirmarButton}" Content="Confirmar"  Grid.Row="1" Grid.Column="1" IsEnabled="True" Click="confirmar_Click"/>
                 <Button x:Name="cancelar" Style="{StaticResource cancelarButton}" Content="Cancelar" Grid.Row="3" Grid.Column="1" Click="cancelar_Click"/>
             </Grid>
         </GroupBox>
@@ -69,7 +69,7 @@
                     <RowDefinition Height="2*"></RowDefinition>
                     <RowDefinition Height="0.05*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Label Content="Referencia do Produto: " VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="1" Grid.Column="1"></Label>
+                <Label Content="Referencia do Produto: " VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"></Label>
                 <Label Name="refProduto" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="2"></Label>
                 <Label Content="Nome do Produto:" Grid.Row="3" Grid.ColumnSpan="2" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                 <TextBox Name="txtNomeModelo" VerticalAlignment="Center" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="7" HorizontalAlignment="Left"
@@ -89,7 +89,10 @@
                     <Image Width="auto" Height="auto" Name="imgPhoto" Stretch="Uniform" />
                 </GroupBox>
                 <Button Name ="adicionarFoto" Grid.Column="3" Style="{StaticResource adicionarButton}" Grid.Row="11" Grid.ColumnSpan="3" Margin="10,0,10,0" VerticalAlignment="Center" Click="btnAdicionarImagem_Click">
-                    <TextBlock TextWrapping="Wrap" Text="Adicionar Imagem" Margin="4,0,0,0"/>
+                    <TextBlock TextWrapping="Wrap" Text="Adicionar/Alterar Imagem" Margin="4,0,0,0"/>
+                </Button>
+                <Button Name ="removerFoto" Grid.Column="3" Style="{StaticResource removerButton}" Grid.Row="13" Grid.ColumnSpan="3" Margin="10,0,10,0" VerticalAlignment="Center" Click="removerFoto_Click">
+                    <TextBlock TextWrapping="Wrap" Text="Remover Imagem" Margin="4,0,0,0"/>
                 </Button>
             </Grid>
         </GroupBox>

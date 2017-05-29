@@ -53,6 +53,8 @@ namespace Trabalho_BD_IHC
                 throw new Exception("Não foi escolhido um nome para o produto!");
             else if (txtInstruçoes.Text.Equals(""))
                 throw new Exception("Não foram especificadas as instruções de produção deste produto!");
+            else if (imgPhoto.Source == null)
+                throw new Exception("Não foi introduzida uma foto do desenho do produto!");
         }
 
         private void cancelar_Click(object sender, RoutedEventArgs e)
@@ -75,8 +77,7 @@ namespace Trabalho_BD_IHC
                 ProdutoBase.IVA1 = txtIva.Value;
                 ProdutoBase.GestorProducao = new Utilizador();
                 ProdutoBase.GestorProducao.NFuncionario = 2; //---> suposto mais tarde colocar o nº do user
-                if(imgPhoto.Source!=null)
-                    ProdutoBase.Pic = BitMapToByte((BitmapImage)imgPhoto.Source);
+                ProdutoBase.Pic = getJPGFromImageControl((BitmapImage)imgPhoto.Source);
             try
             {
                 dataHandler.registarProdutoBase(ProdutoBase);
@@ -100,25 +101,21 @@ namespace Trabalho_BD_IHC
             if (op.ShowDialog() == true)
             {
                 imgPhoto.Source = new BitmapImage(new Uri(op.FileName));
-
             }
         }
 
-        public Byte[] BitMapToByte(BitmapImage imageSource)
+        public byte[] getJPGFromImageControl(BitmapImage imageC)
         {
-            Stream stream = imageSource.StreamSource;
-            Byte[] buffer = null;
-            if (stream != null && stream.Length > 0)
-            {
-                using (BinaryReader br = new BinaryReader(stream))
-                {
-                    buffer = br.ReadBytes((Int32)stream.Length);
-                }
-            }
-
-            return buffer;
+            MemoryStream memStream = new MemoryStream();
+            JpegBitmapEncoder encoder = new JpegBitmapEncoder();
+            encoder.Frames.Add(BitmapFrame.Create(imageC));
+            encoder.Save(memStream);
+            return memStream.ToArray();
         }
 
-
+        private void removerFoto_Click(object sender, RoutedEventArgs e)
+        {
+            imgPhoto.Source = null;
+        }
     }
 }

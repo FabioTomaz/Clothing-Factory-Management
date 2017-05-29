@@ -166,7 +166,6 @@ C:\Users\young\Source\Repos\ihc_bd2\Trabalho_BD_IHC\obj\Debug\DetalhesMaterial.g
 C:\Users\young\Source\Repos\ihc_bd2\Trabalho_BD_IHC\obj\Debug\EditarProdutoBase.g.cs
 C:\Users\young\Source\Repos\ihc_bd2\Trabalho_BD_IHC\obj\Debug\EditarCliente.g.cs
 C:\Users\young\Source\Repos\ihc_bd2\Trabalho_BD_IHC\obj\Debug\EditarEncomenda.g.cs
-C:\Users\young\Source\Repos\ihc_bd2\Trabalho_BD_IHC\obj\Debug\InformaçãoEmpregado.g.cs
 C:\Users\young\Source\Repos\ihc_bd2\Trabalho_BD_IHC\obj\Debug\RegistarProdutoBase.g.cs
 C:\Users\young\Source\Repos\ihc_bd2\Trabalho_BD_IHC\obj\Debug\RegistarEmpregado.g.cs
 C:\Users\young\Source\Repos\ihc_bd2\Trabalho_BD_IHC\obj\Debug\RegistarMaterial.g.cs
@@ -207,7 +206,6 @@ C:\Users\young\Source\Repos\ihc_bd2\Trabalho_BD_IHC\obj\Debug\DetalhesMaterial.b
 C:\Users\young\Source\Repos\ihc_bd2\Trabalho_BD_IHC\obj\Debug\EditarProdutoBase.baml
 C:\Users\young\Source\Repos\ihc_bd2\Trabalho_BD_IHC\obj\Debug\EditarCliente.baml
 C:\Users\young\Source\Repos\ihc_bd2\Trabalho_BD_IHC\obj\Debug\EditarEncomenda.baml
-C:\Users\young\Source\Repos\ihc_bd2\Trabalho_BD_IHC\obj\Debug\InformaçãoEmpregado.baml
 C:\Users\young\Source\Repos\ihc_bd2\Trabalho_BD_IHC\obj\Debug\RegistarProdutoBase.baml
 C:\Users\young\Source\Repos\ihc_bd2\Trabalho_BD_IHC\obj\Debug\RegistarEmpregado.baml
 C:\Users\young\Source\Repos\ihc_bd2\Trabalho_BD_IHC\obj\Debug\RegistarMaterial.baml
@@ -297,3 +295,9 @@ C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\obj
 C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\obj\Debug\DetalhesProdutoPersonalizado.baml
 C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\obj\Debug\EditarEmpregado.baml
 C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\obj\Debug\EditarFornecedor.baml
+C:\Users\young\Source\Repos\ihc_bd2\Trabalho_BD_IHC\obj\Debug\DetalhesEmpregado.g.cs
+C:\Users\young\Source\Repos\ihc_bd2\Trabalho_BD_IHC\obj\Debug\EditarEmpregado.g.cs
+C:\Users\young\Source\Repos\ihc_bd2\Trabalho_BD_IHC\obj\Debug\EditarFornecedor.g.cs
+C:\Users\young\Source\Repos\ihc_bd2\Trabalho_BD_IHC\obj\Debug\DetalhesEmpregado.baml
+C:\Users\young\Source\Repos\ihc_bd2\Trabalho_BD_IHC\obj\Debug\EditarEmpregado.baml
+C:\Users\young\Source\Repos\ihc_bd2\Trabalho_BD_IHC\obj\Debug\EditarFornecedor.baml
