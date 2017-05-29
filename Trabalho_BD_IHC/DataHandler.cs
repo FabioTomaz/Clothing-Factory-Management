@@ -240,6 +240,35 @@ namespace Trabalho_BD_IHC
             return items;
         }
 
+        public ObservableCollection<Cliente> searchClientesInDB(string nome)
+        {
+            if (!this.verifySGBDConnection())
+                return null;
+            SqlCommand cmd = new SqlCommand("SELECT * FROM CLIENTE JOIN ZONA ON CLIENTE.CODPOSTAL1=ZONA.CODPOSTAL1 AND CLIENTE.CODPOSTAL2=ZONA.CODPOSTAL2 "
+                +"WHERE NOME LIKE @nome", cn);
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@nome", "%" + nome + "%");
+            SqlDataReader reader = cmd.ExecuteReader();
+            ObservableCollection<Cliente> items = new ObservableCollection<Cliente>();
+            while (reader.Read())
+            {
+                Cliente C = new Cliente();
+                C.Nome = reader["NOME"].ToString();
+                C.Nif = reader["NIF"].ToString();
+                C.Nib = reader["NIB"].ToString();
+                C.Email = reader["EMAIL"].ToString();
+                C.Telemovel = reader["TELEMOVEL"].ToString();
+                C.CodigoPostal = reader["CODPOSTAL1"].ToString() + "-" + reader["CODPOSTAL2"].ToString();
+                C.Rua = reader["RUA"].ToString();
+                C.NCasa = Convert.ToInt32(reader["N_PORTA"].ToString());
+                C.NCliente = Convert.ToInt32(reader["NCLIENTE"].ToString());
+                C.Distrito = reader["DISTRITO"].ToString();
+                C.Localidade = reader["LOCALIDADE"].ToString();
+                items.Add(C);
+            }
+            closeSGBDConnection();
+            return items;
+        }
 
         public Cliente getClienteFromDB(int nCliente)
         {
@@ -1290,6 +1319,41 @@ namespace Trabalho_BD_IHC
             this.closeSGBDConnection();
             return FiliaisTexteis;
         }
+
+        public ObservableCollection<filial> searchFiliaisInDB(int nFilial)
+        {
+            if (!this.verifySGBDConnection())
+                return null;
+
+            ObservableCollection<filial> FiliaisTexteis = new ObservableCollection<filial>();
+            SqlCommand cmd = new SqlCommand("SELECT * FROM [FABRICA-FILIAL] JOIN ZONA ON "
+                + "([FABRICA-FILIAL].CODPOSTAL1 = ZONA.CODPOSTAL1 AND [FABRICA-FILIAL].CODPOSTAL2 = ZONA.CODPOSTAL2) "
+                + "JOIN UTILIZADOR ON CHEFE = N_FUNCIONARIO WHERE N_FILIAL = @nFilial", this.Cn);
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@nFilial", nFilial);
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                filial f = new filial();
+                f.NFilial = Convert.ToInt32(reader["N_FILIAL"].ToString());
+                f.Email = reader["EMAIL"].ToString();
+                f.Telefone = reader["TELEFONE"].ToString();
+                f.Fax = reader["FAX"].ToString();
+                f.Localizacao = new Localizacao();
+                f.Localizacao.CodigoPostal = reader["CODPOSTAL1"].ToString() + "-" + reader["CODPOSTAL2"].ToString();
+                f.Localizacao.Rua1 = reader["RUA"].ToString();
+                f.Localizacao.Porta = Convert.ToInt32(reader["N_PORTA"].ToString());
+                f.Localizacao.Localidade = reader["LOCALIDADE"].ToString();
+                f.Localizacao.Distrito = reader["DISTRITO"].ToString();
+                f.Chefe = new Utilizador();
+                f.Chefe.NFuncionario = Convert.ToInt32(reader["CHEFE"].ToString());
+                f.Chefe.Nome = reader["NOME"].ToString();
+                FiliaisTexteis.Add(f);
+            }
+            reader.Close();
+            this.closeSGBDConnection();
+            return FiliaisTexteis;
+        }
         public void EnviarFilial(filial f)
         {
 
@@ -1460,8 +1524,6 @@ namespace Trabalho_BD_IHC
             return u;
         }
 
-        //-------------------Fornecedor-------------
-
         public ObservableCollection<Fornecedor> getFornecedoresFromDB()
         {
             if (!this.verifySGBDConnection())
@@ -1493,6 +1555,39 @@ namespace Trabalho_BD_IHC
             return fornecedores;
         }
 
+        public ObservableCollection<Fornecedor> searchFornecedoresInDB(string nome)
+        {
+            if (!this.verifySGBDConnection())
+                return null;
+            SqlCommand cmd = new SqlCommand("SELECT NOME, NIF, EMAIL, TELEFONE, FAX, DESIGNACAO, "
+                + " FORNECEDOR.CODPOSTAL1 as cod1, FORNECEDOR.CODPOSTAL2 as cod2, RUA, DISTRITO, LOCALIDADE, "
+                + " N_PORTA FROM FORNECEDOR JOIN ZONA ON "
+                + "(ZONA.CODPOSTAL1 = FORNECEDOR.CODPOSTAL1 AND ZONA.CODPOSTAL2 = FORNECEDOR.CODPOSTAL2)"
+                + " WHERE NOME LIKE  @nome;", this.Cn);
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@nome", "%" + nome + "%");
+            SqlDataReader reader = cmd.ExecuteReader();
+            ObservableCollection<Fornecedor> fornecedores = new ObservableCollection<Fornecedor>();
+            while (reader.Read())
+            {
+                Fornecedor f = new Fornecedor();
+                f.NIF_Fornecedor = reader["NIF"].ToString();
+                f.Email = reader["EMAIL"].ToString();
+                f.Nome = reader["NOME"].ToString();
+                f.Fax = reader["FAX"].ToString();
+                f.Telefone = reader["TELEFONE"].ToString();
+                f.Designacao = reader["DESIGNACAO"].ToString();
+                f.Localizacao = new Localizacao();
+                f.Localizacao.CodigoPostal = reader["cod1"].ToString() + "-" + reader["cod2"].ToString();
+                f.Localizacao.Rua1 = reader["RUA"].ToString();
+                f.Localizacao.Distrito = reader["DISTRITO"].ToString();
+                f.Localizacao.Localidade = reader["LOCALIDADE"].ToString();
+                f.Localizacao.Porta = Convert.ToInt32(reader["N_PORTA"].ToString());
+                fornecedores.Add(f);
+            }
+            this.closeSGBDConnection();
+            return fornecedores;
+        }
 
         public void EnviarFornecedor(Fornecedor f)
         {
@@ -1671,6 +1766,69 @@ namespace Trabalho_BD_IHC
             this.closeSGBDConnection();
             return user;
         }
+
+        public ObservableCollection<Utilizador> searchEmpregadosInDB(string nome)
+        {
+            if (!this.verifySGBDConnection())
+                return null;
+
+            SqlCommand cmd = new SqlCommand("SELECT N_FUNCIONARIO, NOME, EMAIL, TELEFONE, RUA, N_PORTA, "
+                + "DISTRITO, LOCALIDADE, SALARIO, N_FABRICA, HORA_ENTRADA, HORA_SAIDA, UTILIZADOR.CODPOSTAL1 as cod1, "
+                + " UTILIZADOR.CODPOSTAL2 as cod2, IMAGEM, N_FUNCIONARIO_SUPER FROM UTILIZADOR JOIN ZONA ON "
+                + "(ZONA.CODPOSTAL1 = UTILIZADOR.CODPOSTAL1 AND ZONA.CODPOSTAL2 = UTILIZADOR.CODPOSTAL2) "
+                + "WHERE NOME LIKE @nome;", this.Cn);
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@nome", "%" + nome + "%");
+            SqlDataReader reader = cmd.ExecuteReader();
+            ObservableCollection<Utilizador> user = new ObservableCollection<Utilizador>();
+            while (reader.Read())
+            {
+                Utilizador u = new Utilizador();
+                u.Localizacao = new Localizacao();
+                u.NFuncionario = Convert.ToInt32(reader["N_FUNCIONARIO"].ToString());
+                u.Nome = reader["NOME"].ToString();
+                u.Email = reader["EMAIL"].ToString();
+                u.Telemovel = reader["TELEFONE"].ToString();
+                u.Salario = Convert.ToDouble(reader["SALARIO"].ToString());
+                u.HoraEntrada = TimeSpan.Parse(reader["HORA_ENTRADA"].ToString());
+                u.HoraSaida = TimeSpan.Parse(reader["HORA_SAIDA"].ToString());
+
+                u.Filial = new filial();
+                u.Filial.NFilial = Convert.ToInt32(reader["N_FABRICA"].ToString());
+                u.Supervisor = new Utilizador();
+                u.Supervisor.NFuncionario = Convert.ToInt32(reader["N_FUNCIONARIO_SUPER"].ToString());
+                u.Localizacao.CodigoPostal = reader["cod1"].ToString() + "-" + reader["cod2"].ToString();
+                u.Localizacao.Rua1 = reader["RUA"].ToString();
+                u.Localizacao.Porta = Convert.ToInt32(reader["N_PORTA"].ToString());
+                u.Localizacao.Distrito = reader["DISTRITO"].ToString();
+                u.Localizacao.Localidade = reader["LOCALIDADE"].ToString();
+
+                byte[] img = null;
+                try
+                {
+                    img = (byte[])reader["IMAGEM"];
+                }
+                catch (InvalidCastException e)
+                {
+
+                }
+                if (img != null)
+                {
+                    MemoryStream ms = new MemoryStream(img);
+                    u.Imagem = Image.FromStream(ms);
+                }
+                user.Add(u);
+            }
+            reader.Close();
+
+            foreach (Utilizador u in user)
+            {
+                u.TiposUser = this.getUserTypesFromDB(u.NFuncionario);
+            }
+            this.closeSGBDConnection();
+            return user;
+        }
+
 
         public List<string> getUserTypesFromDB(int nFunc)
         {
