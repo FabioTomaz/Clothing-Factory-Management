@@ -27,7 +27,8 @@ namespace Trabalho_BD_IHC
             }
         }
 
-        public DataHandler() {
+        public DataHandler()
+        {
             Cn = getSGBDConnection();
         }
         private SqlConnection getSGBDConnection()
@@ -45,7 +46,8 @@ namespace Trabalho_BD_IHC
                 {
                     Cn.Open();
                 }
-                catch (System.Data.SqlClient.SqlException) {
+                catch (System.Data.SqlClient.SqlException)
+                {
                     return false;
                 }
 
@@ -61,7 +63,8 @@ namespace Trabalho_BD_IHC
             return Cn.State == ConnectionState.Closed;
         }
 
-        public void registarCliente(Cliente cl) {
+        public void registarCliente(Cliente cl)
+        {
             verifySGBDConnection();
             SqlCommand cmd = new SqlCommand();
 
@@ -127,7 +130,7 @@ namespace Trabalho_BD_IHC
         public int getEncomendasDesteMes()
         {
             verifySGBDConnection();
-            int result=0;
+            int result = 0;
             SqlCommand cmd = new SqlCommand("select dbo.getEncomendasMes()", cn);
             result = Convert.ToInt32(cmd.ExecuteScalar().ToString());
             closeSGBDConnection();
@@ -140,7 +143,7 @@ namespace Trabalho_BD_IHC
             Double result = 0;
             SqlCommand cmd = new SqlCommand("select dbo.getLucroGeradoMes()", cn);
             String strResult = cmd.ExecuteScalar().ToString();
-            if(!strResult.Equals(""))
+            if (!strResult.Equals(""))
                 result = Convert.ToDouble(strResult);
             closeSGBDConnection();
             return result;
@@ -191,7 +194,8 @@ namespace Trabalho_BD_IHC
             return result;
         }
 
-        public int getNProdutosVendidosAteHoje() {
+        public int getNProdutosVendidosAteHoje()
+        {
             verifySGBDConnection();
             int result = 0;
             SqlCommand cmd = new SqlCommand("select dbo.getTotalProdutosVendidos()", cn);
@@ -214,7 +218,8 @@ namespace Trabalho_BD_IHC
             return result;
         }
 
-        public ObservableCollection<Cliente> getClientesFromDB() {
+        public ObservableCollection<Cliente> getClientesFromDB()
+        {
             if (!this.verifySGBDConnection())
                 return null;
             SqlCommand cmd = new SqlCommand("SELECT * FROM CLIENTE JOIN ZONA ON CLIENTE.CODPOSTAL1=ZONA.CODPOSTAL1 AND CLIENTE.CODPOSTAL2=ZONA.CODPOSTAL2", cn);
@@ -228,7 +233,7 @@ namespace Trabalho_BD_IHC
                 C.Nib = reader["NIB"].ToString();
                 C.Email = reader["EMAIL"].ToString();
                 C.Telemovel = reader["TELEMOVEL"].ToString();
-                C.CodigoPostal = reader["CODPOSTAL1"].ToString()+"-"+ reader["CODPOSTAL2"].ToString();
+                C.CodigoPostal = reader["CODPOSTAL1"].ToString() + "-" + reader["CODPOSTAL2"].ToString();
                 C.Rua = reader["RUA"].ToString();
                 C.NCasa = Convert.ToInt32(reader["N_PORTA"].ToString());
                 C.NCliente = Convert.ToInt32(reader["NCLIENTE"].ToString());
@@ -245,7 +250,7 @@ namespace Trabalho_BD_IHC
             if (!this.verifySGBDConnection())
                 return null;
             SqlCommand cmd = new SqlCommand("SELECT * FROM CLIENTE JOIN ZONA ON CLIENTE.CODPOSTAL1=ZONA.CODPOSTAL1 AND CLIENTE.CODPOSTAL2=ZONA.CODPOSTAL2 "
-                +"WHERE NOME LIKE @nome", cn);
+                + "WHERE NOME LIKE @nome", cn);
             cmd.Parameters.Clear();
             cmd.Parameters.AddWithValue("@nome", "%" + nome + "%");
             SqlDataReader reader = cmd.ExecuteReader();
@@ -290,7 +295,7 @@ namespace Trabalho_BD_IHC
             C.NCasa = Convert.ToInt32(reader["N_PORTA"].ToString());
             C.NCliente = Convert.ToInt32(reader["NCLIENTE"].ToString());
             C.Distrito = reader["DISTRITO"].ToString();
-            C.Localidade = reader["LOCALIDADE"].ToString();     
+            C.Localidade = reader["LOCALIDADE"].ToString();
             closeSGBDConnection();
             return C;
         }
@@ -424,7 +429,7 @@ namespace Trabalho_BD_IHC
                 prod.ProdutoBase.Referencia = Convert.ToInt32(reader["REF"].ToString());
                 prod.ProdutoBase.Nome = reader["NOME"].ToString();
                 prod.Preco = Convert.ToDouble(reader["PRICE"].ToString());
-                prod.Tamanho= reader["TAM"].ToString();
+                prod.Tamanho = reader["TAM"].ToString();
                 prod.Cor = reader["COLOR"].ToString();
                 prod.ID = Convert.ToInt32(reader["IDENT"].ToString());
                 prod.UnidadesStock = Convert.ToInt32(reader["UA"].ToString());
@@ -475,7 +480,7 @@ namespace Trabalho_BD_IHC
                             , cn);
             cmd.Parameters.Clear();
             cmd.Parameters.AddWithValue("@REFERENCIA", referencia);
-            cmd.Parameters.AddWithValue("@TAMANHO",tamanho);
+            cmd.Parameters.AddWithValue("@TAMANHO", tamanho);
             cmd.Parameters.AddWithValue("@COR", cor);
             cmd.Parameters.AddWithValue("@ID", id);
             SqlDataReader reader = cmd.ExecuteReader();
@@ -556,7 +561,7 @@ namespace Trabalho_BD_IHC
             }
             catch (InvalidCastException ex)
             {
-                throw new InvalidCastException("Não foi possivel obter a imagem do desenho do produto base da base de dados. ERRO: "+ ex.Message);
+                throw new InvalidCastException("Não foi possivel obter a imagem do desenho do produto base da base de dados. ERRO: " + ex.Message);
             }
             reader.Close();
             closeSGBDConnection();
@@ -670,11 +675,11 @@ namespace Trabalho_BD_IHC
             cmd.Parameters.AddWithValue("@Data_alteracao", DateTime.Today);
             cmd.Parameters.AddWithValue("@instr", produtoBase.InstrProd);
             cmd.Parameters.AddWithValue("@nGestor", produtoBase.GestorProducao.NFuncionario);
-                IDataParameter par = cmd.CreateParameter();
-                par.ParameterName = "@imagem";
-                par.DbType = DbType.Binary;
-                par.Value = produtoBase.Pic;
-                cmd.Parameters.Add(par);
+            IDataParameter par = cmd.CreateParameter();
+            par.ParameterName = "@imagem";
+            par.DbType = DbType.Binary;
+            par.Value = produtoBase.Pic;
+            cmd.Parameters.Add(par);
             cmd.Connection = Cn;
             try
             {
@@ -1457,7 +1462,7 @@ namespace Trabalho_BD_IHC
             if (!this.verifySGBDConnection())
                 return null;
             SqlCommand cmd = new SqlCommand("SELECT * FROM UTILIZADOR JOIN ZONA ON (ZONA.CODPOSTAL1 = UTILIZADOR.CODPOSTAL1 AND ZONA.CODPOSTAL2 = UTILIZADOR.CODPOSTAL2) "
-                +" WHERE N_FABRICA = @nFilial", this.Cn);
+                + " WHERE N_FABRICA = @nFilial", this.Cn);
             ObservableCollection<Utilizador> users = new ObservableCollection<Utilizador>();
             cmd.Parameters.Clear();
             cmd.Parameters.AddWithValue("@nFilial", nFilial);
@@ -1483,7 +1488,7 @@ namespace Trabalho_BD_IHC
                 users.Add(u);
             }
             reader.Close();
-            
+
             foreach (Utilizador u in users)
             {
                 u.TiposUser = this.getUserTypesFromDB(u.NFuncionario);
@@ -1497,10 +1502,10 @@ namespace Trabalho_BD_IHC
             if (!this.verifySGBDConnection())
                 return null;
             SqlCommand cmd = new SqlCommand("SELECT N_FUNCIONARIO, UTILIZADOR.EMAIL as userMail, SALARIO, NOME, UTILIZADOR.TELEFONE as userPhone, "
-                +" HORA_ENTRADA, HORA_SAIDA, UTILIZADOR.CODPOSTAL1 as codP1, UTILIZADOR.CODPOSTAL2 as codP2, UTILIZADOR.RUA as userRua, UTILIZADOR.N_PORTA as userPorta, "
-                +" ZONA.LOCALIDADE as loc, N_FUNCIONARIO_SUPER FROM UTILIZADOR JOIN[FABRICA-FILIAL]  ON CHEFE = N_FUNCIONARIO "
-                +" JOIN ZONA ON(ZONA.CODPOSTAL1 = UTILIZADOR.CODPOSTAL1 AND ZONA.CODPOSTAL2 = UTILIZADOR.CODPOSTAL2) "
-                +" WHERE CHEFE = 1", this.Cn);
+                + " HORA_ENTRADA, HORA_SAIDA, UTILIZADOR.CODPOSTAL1 as codP1, UTILIZADOR.CODPOSTAL2 as codP2, UTILIZADOR.RUA as userRua, UTILIZADOR.N_PORTA as userPorta, "
+                + " ZONA.LOCALIDADE as loc, N_FUNCIONARIO_SUPER FROM UTILIZADOR JOIN[FABRICA-FILIAL]  ON CHEFE = N_FUNCIONARIO "
+                + " JOIN ZONA ON(ZONA.CODPOSTAL1 = UTILIZADOR.CODPOSTAL1 AND ZONA.CODPOSTAL2 = UTILIZADOR.CODPOSTAL2) "
+                + " WHERE CHEFE = 1", this.Cn);
             Utilizador u = new Utilizador();
             u.Localizacao = new Localizacao();
             cmd.Parameters.Clear();
@@ -2249,6 +2254,27 @@ namespace Trabalho_BD_IHC
                     throw new Exception("Falha ao registar o Produto na base de dados. \n ERROR MESSAGE: \n" + ex.Message);
                 }
             }
+            return true;
+        }
+
+        public bool changePass(int nFunc, String oldPass, String newPass)
+        {
+            if (!this.verifySGBDConnection())
+                return false;
+            SqlCommand cmd = new SqlCommand("SELECT dbo.getUserPass(@nFunc)", Cn);
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@nFunc", nFunc);
+            String userPass = (String)cmd.ExecuteScalar();
+            if (!userPass.Equals(oldPass, StringComparison.Ordinal))
+            {
+                Xceed.Wpf.Toolkit.MessageBox.Show("A palavra passe atual está incorreta. A password não foi alterada.", "", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            cmd = new SqlCommand("UPDATE  UTILIZADOR SET PASS = @pass WHERE N_FUNCIONARIO = @nFunc", Cn);
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@pass", newPass);
+            cmd.Parameters.AddWithValue("@nFunc", nFunc);
+            cmd.ExecuteNonQuery();
             return true;
         }
     }

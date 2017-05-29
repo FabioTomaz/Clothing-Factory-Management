@@ -228,5 +228,11 @@ namespace Trabalho_BD_IHC
                 listarFornecedores.refresh();
             }
         }
+
+        private void MudarPass_Click_2(object sender, RoutedEventArgs e)
+        {
+            MudarPasse window = new MudarPasse(dataHandler);
+            window.Show();
+        }
     }
 }

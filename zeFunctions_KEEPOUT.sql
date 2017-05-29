@@ -15,4 +15,14 @@ GO
 
 
 
-SELECT * FROM [FABRICA-FILIAL]
+ CREATE FUNCTION dbo.getUserPass (@nFunc int ) RETURNS VARCHAR(30)
+AS
+	BEGIN
+		DECLARE @pass VARCHAR(30)
+		SELECT @pass = PASS FROM UTILIZADOR 
+		WHERE N_FUNCIONARIO = @nFunc
+		return @pass
+	END
+GO
+
+SELECT dbo.getUserPass(1)

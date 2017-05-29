@@ -137,6 +137,9 @@
       <DependentUpon>ListarFiliais.xaml</DependentUpon>
     </Compile>
     <Compile Include="Localizacao.cs" />
+    <Compile Include="MudarPasse.xaml.cs">
+      <DependentUpon>MudarPasse.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ProdutoPersonalizado.cs" />
     <Compile Include="ProduzirProduto.xaml.cs">
       <DependentUpon>ProduzirProduto.xaml</DependentUpon>
@@ -249,6 +252,10 @@
     <Page Include="ListarFiliais.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MudarPasse.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ProduzirProduto.xaml">
       <SubType>Designer</SubType>
@@ -508,6 +515,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="ajuda.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="mudarPass.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
