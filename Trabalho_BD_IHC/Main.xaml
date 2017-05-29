@@ -29,7 +29,7 @@
                         <ColumnDefinition Width="0.1*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="0.1*"/>
+                        <RowDefinition Height="0.15*"/>
                         <RowDefinition Height="0.9*"/>
                         <RowDefinition Height="0.9*"/>
                         <RowDefinition Height="0.9*"/>
@@ -41,8 +41,16 @@
                         <RowDefinition/>
                         <RowDefinition Height="0.1*"/>
                     </Grid.RowDefinitions>
-                    
-                    <GroupBox Header="Informações Pessoais" Template="{StaticResource blueGroupBox}" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="3">
+
+                    <GroupBox materialDesign:ColorZoneAssist.Mode="PrimaryDark" Header="Informações Pessoais" Style="{DynamicResource MaterialDesignCardGroupBox}" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="3">
+                        <GroupBox.HeaderTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="Account" Height="32" Width="32" VerticalAlignment="Center" />
+                                    <TextBlock Margin="8,0,0,0" VerticalAlignment="Center" Text="Informações Pessoais"  Style="{StaticResource MaterialDesignSubheadingTextBlock}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </GroupBox.HeaderTemplate>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition></ColumnDefinition>
@@ -96,7 +104,15 @@
                             
                         </Grid>
                     </GroupBox>
-                    <GroupBox Header="Informações de Fábrica Filial" Template="{StaticResource greenGroupBox}" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="5" Grid.RowSpan="2">
+                    <GroupBox Header="Informações de Fábrica Filial" Style="{DynamicResource MaterialDesignCardGroupBox}" materialDesign:ColorZoneAssist.Mode="PrimaryMid" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="5" Grid.RowSpan="2">
+                        <GroupBox.HeaderTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="Home" Height="32" Width="32" VerticalAlignment="Center" />
+                                    <TextBlock Margin="8,0,0,0" VerticalAlignment="Center" Text="Fábrica Filial"  Style="{StaticResource MaterialDesignSubheadingTextBlock}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </GroupBox.HeaderTemplate>
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition></RowDefinition>
@@ -129,10 +145,27 @@
                             </StackPanel>
                         </Grid>
                     </GroupBox>
-                    <GroupBox Header="Imagem de Perfil" Template="{StaticResource blackGroupBox}" Grid.Row="1" Grid.RowSpan="3" Grid.Column="4">
+                    <GroupBox materialDesign:ColorZoneAssist.Mode="Dark" Style="{DynamicResource MaterialDesignCardGroupBox}"  Grid.Row="1" Grid.RowSpan="3" Grid.Column="4">
+                        <GroupBox.HeaderTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="HumanGreeting" Height="32" Width="32" VerticalAlignment="Center" />
+                                    <TextBlock Margin="8,0,0,0" VerticalAlignment="Center" Text="Imagem de Perfil"  Style="{StaticResource MaterialDesignSubheadingTextBlock}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </GroupBox.HeaderTemplate>
                         <Image Name="userImage" Source="person.png"></Image>
                     </GroupBox>
-                    <GroupBox Header="Notificações Importantes" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="8" Grid.RowSpan="2">
+                    <GroupBox materialDesign:ColorZoneAssist.Mode="Accent" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="8" Grid.RowSpan="2" Style="{DynamicResource MaterialDesignCardGroupBox}">
+                        <GroupBox.HeaderTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="ChartBar" Height="32" Width="32" VerticalAlignment="Center" />
+                                    <TextBlock Margin="8,0,0,0" VerticalAlignment="Center" Text="Estatisticas Gerais"  Style="{StaticResource MaterialDesignSubheadingTextBlock}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </GroupBox.HeaderTemplate>
+                        
                         <StackPanel Name="notificationStack">
                         </StackPanel>
                     </GroupBox>

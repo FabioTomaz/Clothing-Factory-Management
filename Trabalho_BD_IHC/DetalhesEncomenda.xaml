@@ -75,11 +75,11 @@
                 <Label Name="localEntrega" Grid.Row="9"   Grid.Column="4" HorizontalAlignment="Left"></Label>
             </Grid>
         </GroupBox>
-        <GroupBox Header="Produtos Incluidos na Encomenda" Grid.Column="1" Grid.ColumnSpan="7" Grid.Row="3" Grid.RowSpan="3" MouseDoubleClick="GroupBox_MouseDoubleClick">
-            <DataGrid Name="produtos" Grid.Column="1" Grid.ColumnSpan="7" Grid.Row="11" Grid.RowSpan="3" IsReadOnly="True" AutoGenerateColumns="False">
+        <GroupBox Header="Produtos Incluidos na Encomenda" Grid.Column="1" Grid.ColumnSpan="7" Grid.Row="3" Grid.RowSpan="3">
+            <DataGrid Name="produtos" MouseDoubleClick="produtos_MouseDoubleClick" Grid.Column="1" Grid.ColumnSpan="7" Grid.Row="11" Grid.RowSpan="3" IsReadOnly="True" AutoGenerateColumns="False">
                 <DataGrid.Columns>
                     <materialDesign:MaterialDataGridTextColumn Header="Nome"  Binding="{Binding ProdutoBase.Nome}" />
-                    <materialDesign:MaterialDataGridTextColumn Header="Referencia" Binding="{Binding ProdutoBase.Referencia}" />
+                    <materialDesign:MaterialDataGridTextColumn SortDirection="Descending" Header="Referencia" Binding="{Binding ProdutoBase.Referencia}" />
                     <materialDesign:MaterialDataGridTextColumn Header="Cor"  Binding="{Binding Cor}" />
                     <materialDesign:MaterialDataGridTextColumn Header="Tamanho" Binding="{Binding Tamanho}" />
                     <materialDesign:MaterialDataGridTextColumn Header="Modelo" Binding="{Binding ID}" />

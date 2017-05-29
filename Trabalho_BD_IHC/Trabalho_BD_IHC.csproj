@@ -406,13 +406,11 @@
     <Resource Include="add.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="cliente.png" />
     <Resource Include="draw.png" />
     <Resource Include="encomenda.png" />
     <Resource Include="help.png" />
     <Resource Include="product.png" />
     <Resource Include="profile.png" />
-    <Resource Include="settings.png" />
     <Resource Include="stats.png" />
   </ItemGroup>
   <ItemGroup>
@@ -441,9 +439,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="fornecedor.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="botao.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="elastico.png" />

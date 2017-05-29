@@ -45,9 +45,27 @@ namespace Trabalho_BD_IHC
         }
 
         private void validarDados() {
-            if(txtCliente.Text.Equals("") || localEntrega.SelectedIndex==-1 || dataPrevista.SelectedDate == null)
+            List<ProdutoPersonalizado> lista = ((IEnumerable<ProdutoPersonalizado>)this.produtosEncomenda.ItemsSource).ToList();
+            if (txtCliente.Text.Equals("") || localEntrega.SelectedIndex==-1 || dataPrevista.SelectedDate == null)
             {
                 throw new Exception("Por favor preencha todos os campos relativos á encomenda antes de avançar.");
+            }else if (produtosEncomenda.Items.Count==0)
+            {
+                throw new Exception("Uma encomenda tem de ter pelo menos um produto!");
+            }
+            for (int i = 0; i < lista.Count; i++)
+            {
+                ProdutoPersonalizado prod = lista.ElementAt(i);
+                if (prod.ProdutoBase.Referencia == null || prod.Tamanho == null || prod.Cor == null || prod.ID == null || prod.Quantidade == null)
+                    throw new Exception("Por favor preencha todos os dados referentes aos produtos da encomenda");
+            }
+            for (int i=0; i<produtosEncomenda.Items.Count; i++)
+            {
+                ProdutoPersonalizado prod = lista.ElementAt(i);
+                if (!dataHandler.checkIfProdutoPersonalizadoExists(prod))
+                {
+                    throw new Exception("O produto especificado na linha "+i+" não existe está registado na base de dados. \nSe pretende registar esse produto por favor dirija-se á tab de produção.");
+                }
             }
         }
 
@@ -58,6 +76,7 @@ namespace Trabalho_BD_IHC
             }catch(Exception ex)
             {
                 Xceed.Wpf.Toolkit.MessageBox.Show(ex.Message, "ERRO", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
             }
             Encomenda encomenda = new Encomenda();
             encomenda.Cliente = new Cliente();
