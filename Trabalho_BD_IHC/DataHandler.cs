@@ -436,27 +436,32 @@ namespace Trabalho_BD_IHC
         }
 
 
-        public ProdutoPersonalizado getProdutoPersonalizadoFromDB(int referencia)
+        public ProdutoPersonalizado getProdutoPersonalizadoFromDB(int referencia, String tamanho, String cor, int id)
         {
             if (!this.verifySGBDConnection())
                 return null;
-            SqlCommand cmd = new SqlCommand("SELECT [PRODUTO-BASE].REFERENCIA, TAMANHO, COR, ID, N_ETIQUETA, PRECO, UNIDADES_ARMAZEM "
-                            + "FROM [PRODUTO-BASE] JOIN [PRODUTO-PERSONALIZADO] ON [PRODUTO-PERSONALIZADO].REFERENCIA=[PRODUTO-BASE].REFERENCIA"
-                            + " WHERE [PRODUTO-BASE].REFERENCIA=@REFERENCIA;"
+            SqlCommand cmd = new SqlCommand("SELECT PRECO, UNIDADES_ARMAZEM, ETIQUETA.N_ETIQUETA, NORMAS, PAIS_FABRICO, COMPOSICAO "
+                            + " FROM [PRODUTO-PERSONALIZADO] JOIN [ETIQUETA] ON [PRODUTO-PERSONALIZADO].N_ETIQUETA=[ETIQUETA].N_ETIQUETA"
+                            + " WHERE [PRODUTO-PERSONALIZADO].REFERENCIA=@REFERENCIA AND [PRODUTO-PERSONALIZADO].TAMANHO=@TAMANHO AND [PRODUTO-PERSONALIZADO].COR=@COR AND [PRODUTO-PERSONALIZADO].ID=@ID;"
                             , cn);
             cmd.Parameters.Clear();
             cmd.Parameters.AddWithValue("@REFERENCIA", referencia);
+            cmd.Parameters.AddWithValue("@TAMANHO",tamanho);
+            cmd.Parameters.AddWithValue("@COR", cor);
+            cmd.Parameters.AddWithValue("@ID", id);
             SqlDataReader reader = cmd.ExecuteReader();
             reader.Read();
             ProdutoPersonalizado prod = new ProdutoPersonalizado();
-            prod.ProdutoBase.Referencia = Convert.ToInt32(reader["REFERENCIA"].ToString());
-            //prod.ProdutoBase.Nome =
-            prod.Tamanho = reader["TAMANHO"].ToString();
-            prod.Cor = reader["COR"].ToString();
-            prod.ID = Convert.ToInt32(reader["ID"].ToString());
+            prod.ProdutoBase.Referencia = referencia;
+            prod.Tamanho = tamanho;
+            prod.Cor = cor;
+            prod.ID = id;
             prod.Preco = Convert.ToDouble(reader["PRECO"].ToString());
             prod.UnidadesStock = Convert.ToInt32(reader["UNIDADES_ARMAZEM"].ToString());
             prod.Etiqueta.Numero = Convert.ToInt32(reader["N_ETIQUETA"].ToString());
+            prod.Etiqueta.Normas = reader["NORMAS"].ToString();
+            prod.Etiqueta.PaisFabrico = reader["PAIS_FABRICO"].ToString();
+            prod.Etiqueta.Composicao = reader["COMPOSICAO"].ToString();
             reader.Close();
             closeSGBDConnection();
             return prod;
@@ -628,15 +633,19 @@ namespace Trabalho_BD_IHC
 
             SqlCommand cmd = new SqlCommand();
 
-            cmd.CommandText = "INSERT INTO Produto (NOME, IVA, DATA_ALTERACAO, INSTRUCOES_PRODUCAO, N_GESTOR_PROD, IMAGEM_DESENHO) "
-                + "values (@nome_Produto, @iva, @Data_alteracao, @instr, @nGestor,@imagem ) ";
+            cmd.CommandText = "INSERT INTO [PRODUTO-BASE] (NOME, IVA, DATA_ALTERACAO, INSTRUCOES_PRODUCAO, N_GESTOR_PROD, IMAGEM_DESENHO) "
+                + "values (@nome_Produto, @iva, @Data_alteracao, @instr, @nGestor, @imagem ) ";
             cmd.Parameters.Clear();
             cmd.Parameters.AddWithValue("@nome_Produto", produtoBase.Nome);
             cmd.Parameters.AddWithValue("@iva", produtoBase.IVA1);
             cmd.Parameters.AddWithValue("@Data_alteracao", DateTime.Today);
             cmd.Parameters.AddWithValue("@instr", produtoBase.InstrProd);
             cmd.Parameters.AddWithValue("@nGestor", produtoBase.GestorProducao.NFuncionario);
-            cmd.Parameters.AddWithValue("@imagem", produtoBase.Pic);
+                IDataParameter par = cmd.CreateParameter();
+                par.ParameterName = "@imagem";
+                par.DbType = DbType.Binary;
+                par.Value = produtoBase.Pic;
+                cmd.Parameters.Add(par);
             cmd.Connection = Cn;
             try
             {

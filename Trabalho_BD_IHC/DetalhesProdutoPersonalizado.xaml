@@ -3,10 +3,96 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:Trabalho_BD_IHC"
         mc:Ignorable="d"
-        Title="DetalhesProdutoPersonalizado" Height="300" Width="300">
+        Title="DetalhesProdutoPersonalizado" Height="550" MinHeight="500" MinWidth="750" Width="850" Icon="details.png">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.05*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="0.05*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="0.05*"/>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="0.05*"/>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="0.05*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.07*"/>
+            <RowDefinition  Height="1*"/>
+            <RowDefinition Height="0.05*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="0.05*"/>
+            <RowDefinition Height="1.35*"/>
+            <RowDefinition Height="0.07*"/>
+        </Grid.RowDefinitions>
+        <GroupBox Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="1" Grid.RowSpan="3" materialDesign:ColorZoneAssist.Mode="Accent" Header="Caracteristicas do Produto" Style="{DynamicResource MaterialDesignCardGroupBox}" Margin="16">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition ></RowDefinition>
+                    <RowDefinition ></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Label Content="Referencia: " VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+                <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left" Name="refProduto" Grid.Column="1"></TextBlock>
+                <Label Content="Tamanho: " Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+                <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left" Name="tamanhoProduto" Grid.Column="3"></TextBlock>
+                <Label Content="Cor: " Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+                <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left" Name="corProduto" Grid.Column="1" Grid.Row="1"></TextBlock>
+                <Label Content="Versão: " Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+                <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left"  Name="versaoProduto" Grid.Column="3" Grid.Row="1"></TextBlock>
+                <Label Content="Preço por unidade: " Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+                <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left" Name="precoProduto" Grid.Column="1" Grid.Row="2"></TextBlock>
+                <Label Content="Unidades em Stock: " Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+                <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left" Name="unidadesProduto" Grid.Column="3" Grid.Row="2"></TextBlock>
+                <Label Content="Lucro por Unidade: " Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+                <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left" Name="lucroProduto" Grid.Column="1" Grid.Row="3"></TextBlock>
+                <Label Content="Unidades Produzidas: " Grid.Row="3" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+                <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left" Name="producaoProduto" Grid.Column="3" Grid.Row="3"></TextBlock>
+            </Grid>
+
+        </GroupBox>
+        <GroupBox Grid.Column="5" Grid.ColumnSpan="3" Grid.Row="1" Grid.RowSpan="3" materialDesign:ColorZoneAssist.Mode="Dark" Header="Etiqueta do Produto" Style="{DynamicResource MaterialDesignCardGroupBox}" Margin="16">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Label Content="Numero de Etiqueta: " VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+                <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left" Name="nEtiqueta" Grid.Row="0" Grid.Column="1"></TextBlock>
+                <Label Content="Normas: " VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="1"></Label>
+                <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left" Name="normasEtiqueta" Grid.Row="1" Grid.Column="1"></TextBlock>
+                <Label Content="Pais de Fabrico: " VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="2"></Label>
+                <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left" Name="paisEtiqueta" Grid.Row="2" Grid.Column="1"></TextBlock>
+                <Label Content="Composição: " VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="3"></Label>
+                <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left" Name="composicaoEtiqueta" Grid.Row="3" Grid.Column="1"></TextBlock>
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Materias Primas Usadas para a Produção de uma Unidade deste Produto" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="7">
+            <DataGrid Name="materias" IsReadOnly="True" MouseDoubleClick="produtosPers_MouseDoubleClick" AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <materialDesign:MaterialDataGridTextColumn Binding="{Binding Referencia}" Header="Referencia" ></materialDesign:MaterialDataGridTextColumn>
+                    <materialDesign:MaterialDataGridTextColumn Binding="{Binding Tipo}" Header="Tipo" ></materialDesign:MaterialDataGridTextColumn>
+                    <materialDesign:MaterialDataGridTextColumn Binding="{Binding Cor}" Header="Cor" ></materialDesign:MaterialDataGridTextColumn>
+                    <materialDesign:MaterialDataGridTextColumn Binding="{Binding Quantidade}" Header="Quantidade" ></materialDesign:MaterialDataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
     </Grid>
 </Window>

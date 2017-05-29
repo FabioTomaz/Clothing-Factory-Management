@@ -19,10 +19,34 @@ namespace Trabalho_BD_IHC
     /// </summary>
     public partial class DetalhesProdutoPersonalizado : Window
     {
+        private DataHandler dataHandler;
+        private ProdutoPersonalizado prod;
         public DetalhesProdutoPersonalizado(DataHandler dataHandler, int referencia, string tamanho, string cor, int id)
         {
             InitializeComponent();
+            this.dataHandler=dataHandler;
+            prod = new ProdutoPersonalizado();
+            prod = dataHandler.getProdutoPersonalizadoFromDB(referencia, tamanho, cor, id);
+            refProduto.Text = prod.ProdutoBase.Referencia.ToString();
+            tamanhoProduto.Text = prod.Tamanho;
+            corProduto.Text = prod.Cor;
+            versaoProduto.Text = prod.ID.ToString();
+            precoProduto.Text = prod.Preco.ToString();
+            unidadesProduto.Text = prod.UnidadesStock.ToString();
+            nEtiqueta.Text = prod.Etiqueta.Numero.ToString();
+            normasEtiqueta.Text = prod.Etiqueta.Normas.ToString();
+            paisEtiqueta.Text = prod.Etiqueta.PaisFabrico.ToString();
+            composicaoEtiqueta.Text = prod.Etiqueta.Composicao.ToString();
+        }
 
+        private void produtosPers_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            //MaterialTextil produtoSelecionado = ((MaterialTextil)materias.SelectedItem);
+            //if (produtoSelecionado != null)
+            //{
+            //    DetalhesMaterial window = new DetalhesMaterial(dataHandler, );
+            //    window.Show();
+            //}
         }
     }
 }
