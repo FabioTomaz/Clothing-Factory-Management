@@ -73,19 +73,22 @@
                     <materialDesign:PackIcon Kind="Email"></materialDesign:PackIcon>
                     <TextBlock Text="E-Mail: "/>
                 </StackPanel>
-                <TextBox Name="txtEmail" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center"></TextBox>
+                <TextBox Name="txtEmail" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" 
+                          materialDesign:HintAssist.Hint="Indique o email da filial na forma xxx@xxx.xxx" materialDesign:HintAssist.IsFloating="True"></TextBox>
                 
                 <StackPanel Orientation="Horizontal"  Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Center">
                     <materialDesign:PackIcon Kind="Fax"></materialDesign:PackIcon>
                     <TextBlock Text="Fax(opcional): "/>
                 </StackPanel>
-                <TextBox Name="txtFax" Grid.Row="3" Grid.Column="2" VerticalAlignment="Center"></TextBox>
+                <TextBox Name="txtFax" Grid.Row="3" Grid.Column="2" VerticalAlignment="Center" 
+                          materialDesign:HintAssist.Hint="Indique o nº fax da filial" materialDesign:HintAssist.IsFloating="True"></TextBox>
 
                 <StackPanel Orientation="Horizontal"  Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Center">
                     <materialDesign:PackIcon Kind="Phone"></materialDesign:PackIcon>
                     <TextBlock Text="Telemóvel: "/>
                 </StackPanel>
-                <TextBox Name="txtTelemovel" Grid.Row="5" Grid.Column="2" VerticalAlignment="Center"></TextBox>
+                <TextBox Name="txtTelemovel" Grid.Row="5" Grid.Column="2" VerticalAlignment="Center"
+                          materialDesign:HintAssist.Hint="Indique o nº telemóvel da filial" materialDesign:HintAssist.IsFloating="True" ></TextBox>
                
                 <StackPanel Orientation="Horizontal"  Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Center">
                     <materialDesign:PackIcon Kind="ZipBox"></materialDesign:PackIcon>
@@ -100,18 +103,21 @@
                     <materialDesign:PackIcon Kind="Map"></materialDesign:PackIcon>
                     <TextBlock Text="Rua: "/>
                 </StackPanel>
-                <TextBox Name="txtRua" Grid.Row="9" Grid.Column="2" Grid.ColumnSpan="2" VerticalAlignment="Center"></TextBox>
+                <TextBox Name="txtRua" Grid.Row="9" Grid.Column="2" Grid.ColumnSpan="2" VerticalAlignment="Center"
+                          materialDesign:HintAssist.Hint="Indique a rua da filial" materialDesign:HintAssist.IsFloating="True"></TextBox>
                 <StackPanel Orientation="Horizontal"  Grid.Row="11" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Center">
                     <materialDesign:PackIcon Kind="Glassdoor"></materialDesign:PackIcon>
                     <TextBlock Text="Nº Porta: "/>
                 </StackPanel>
-                <TextBox Name="txtNumeroPorta" PreviewTextInput="NumberValidationTextBox" Grid.Row="11" Grid.Column="2" VerticalAlignment="Center"></TextBox>
+                <TextBox Name="txtNumeroPorta" PreviewTextInput="NumberValidationTextBox" Grid.Row="11" Grid.Column="2" VerticalAlignment="Center"
+                          materialDesign:HintAssist.Hint="Indique o nº de porta da filial" materialDesign:HintAssist.IsFloating="True"></TextBox>
 
                 <StackPanel Orientation="Horizontal"  Grid.Row="13" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Center">
                     <materialDesign:PackIcon Kind="NaturePeople"></materialDesign:PackIcon>
                     <TextBlock Text="Nº Chefe Filial: "/>
                 </StackPanel>
-                <TextBox Name="txtNChefe" PreviewTextInput="NumberValidationTextBox" Grid.Row="13" Grid.Column="2" VerticalAlignment="Center"></TextBox>
+                <TextBox Name="txtNChefe" PreviewTextInput="NumberValidationTextBox" Grid.Row="13" Grid.Column="2" VerticalAlignment="Center"
+                          materialDesign:HintAssist.Hint="Indique o nº de funcionário do chefe da filial" materialDesign:HintAssist.IsFloating="True"></TextBox>
             </Grid>
         </GroupBox>
     </Grid>

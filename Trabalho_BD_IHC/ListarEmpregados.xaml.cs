@@ -53,8 +53,8 @@ namespace Trabalho_BD_IHC
         {
             int listViewIndex = empregados.SelectedIndex;
 
-            if (MessageBox.Show("Tem a certeza que pretende eliminar este empregado da base de dados?\n"
-                +"Só deve eliminar um empregado caso este já não trabalhe mais nesta fábrica. Este processo é irreversivel! ", "Question", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
+            if (Xceed.Wpf.Toolkit.MessageBox.Show("Tem a certeza que pretende eliminar este empregado da base de dados?\n"
+                + "Só deve eliminar um empregado caso este já não trabalhe mais nesta fábrica. Este processo é irreversivel! ", "Question", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
             {
                 return;
             }
@@ -66,7 +66,7 @@ namespace Trabalho_BD_IHC
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    Xceed.Wpf.Toolkit.MessageBox.Show(ex.Message);
                     return;
                 }
                 try
@@ -76,7 +76,7 @@ namespace Trabalho_BD_IHC
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    Xceed.Wpf.Toolkit.MessageBox.Show(ex.Message);
                     return;
                 }
             }
@@ -99,7 +99,7 @@ namespace Trabalho_BD_IHC
             }
             catch (SqlException ex)
             {
-                MessageBox.Show(ex.Message);
+                Xceed.Wpf.Toolkit.MessageBox.Show(ex.Message);
                 return;
             }
             finally
@@ -119,7 +119,8 @@ namespace Trabalho_BD_IHC
             window.Show();
         }
 
-        public void refresh() {
+        public void refresh()
+        {
 
         }
 
@@ -127,12 +128,19 @@ namespace Trabalho_BD_IHC
         {
             Utilizador u = (Utilizador)empregados.SelectedItem;
             if (u.NFuncionario == 1)
-                Xceed.Wpf.Toolkit.MessageBox.Show("Não tem permissões para editar a informação deste empregado!","", MessageBoxButton.OK, MessageBoxImage.Error);
+                Xceed.Wpf.Toolkit.MessageBox.Show("Não tem permissões para editar a informação deste empregado!", "", MessageBoxButton.OK, MessageBoxImage.Error);
             else
             {
                 this.NavigationService.Navigate(new EditarEmpregado(dataHandler, u));
             }
-            
+
+        }
+
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+
+            empregados.ItemsSource = dataHandler.searchEmpregadosInDB(txtnameSearch.Text);
+
         }
     }
 }

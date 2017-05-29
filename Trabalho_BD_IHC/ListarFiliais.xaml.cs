@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data.SqlClient;
 using System.Collections.ObjectModel;
+using System.Text.RegularExpressions;
 
 namespace Trabalho_BD_IHC
 {
@@ -47,10 +48,18 @@ namespace Trabalho_BD_IHC
             }
         }
 
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
-
+            if(txtNfilial.Text.Length == 0)
+                Xceed.Wpf.Toolkit.MessageBox.Show("Tem que introduzir algo na caixa de texto antes de poder pesquisar", "", MessageBoxButton.OK, MessageBoxImage.Warning);
+            else
+                Filiais.ItemsSource = dataHandler.searchFiliaisInDB(Convert.ToInt32(txtNfilial.Text));
         }
 
         private void registarFilial_Click(object sender, RoutedEventArgs e)
@@ -68,6 +77,7 @@ namespace Trabalho_BD_IHC
         {
             this.NavigationService.Navigate(new EditarFilial(dataHandler, (filial)Filiais.SelectedItem));
         }
+
     }
 
 

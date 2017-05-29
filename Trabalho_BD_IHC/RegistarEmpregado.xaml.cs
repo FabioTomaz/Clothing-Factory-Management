@@ -30,7 +30,6 @@ namespace Trabalho_BD_IHC
         }
 
 
-
         private void cancelar_Click(object sender, RoutedEventArgs e)
         {
             if (MessageBox.Show("Tem a certeza que deseja cancelar o registo de empregado? Perderá todos os dados que tenha introduzido.",
@@ -128,20 +127,6 @@ namespace Trabalho_BD_IHC
         {
             Regex regex = new Regex("[^0-9.,]+");
             e.Handled = regex.IsMatch(e.Text);
-        }
-
-        private void btnAdicionarImagem_Click(object sender, RoutedEventArgs e)
-        {
-            Microsoft.Win32.OpenFileDialog op = new Microsoft.Win32.OpenFileDialog();
-            op.Title = "Select a picture";
-            op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
-              "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
-              "Portable Network Graphic (*.png)|*.png";
-            if (op.ShowDialog() == true)
-            {
-                imgPhoto.Source = new BitmapImage(new Uri(op.FileName));
-
-            }
         }
 
         public bool IsValidEmail(string email)

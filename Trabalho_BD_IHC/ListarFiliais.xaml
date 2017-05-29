@@ -104,8 +104,8 @@
                                         <Button Style="{DynamicResource MaterialDesignToolButton}">
                                             <materialDesign:PackIcon Kind="Magnify" Opacity=".56" />
                                         </Button>
-                                        <TextBox Grid.Column="1" Margin="8 0 0 0" materialDesign:HintAssist.Hint="Pesquisa por Nº de Filial" 
-                                         materialDesign:TextFieldAssist.DecorationVisibility="Hidden" BorderThickness="0"
+                                        <TextBox Name="txtNfilial" Grid.Column="1" Margin="8 0 0 0" materialDesign:HintAssist.Hint="Pesquisa por Nº de Filial" 
+                                         materialDesign:TextFieldAssist.DecorationVisibility="Hidden" BorderThickness="0" PreviewTextInput="NumberValidationTextBox"
                                          MinWidth="200" VerticalAlignment="Center" />
                                         <Button  Grid.Column="2" Style="{DynamicResource MaterialDesignToolForegroundButton}" Margin="8 0 0 0" Panel.ZIndex="0" Click="SearchButton_Click">
                                             <materialDesign:PackIcon Kind="Send" />
@@ -124,7 +124,7 @@
                                             <RowDefinition></RowDefinition>
                                             <RowDefinition></RowDefinition>
                                         </Grid.RowDefinitions>
-                                        <TextBlock Text="Nº filial:" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" ></TextBlock>
+                                        <TextBlock Text="Nº chefe Filial:" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" ></TextBlock>
                                         <TextBox Grid.Row="0" Grid.Column="1" materialDesign:HintAssist.Hint="Número da fábrica filial" VerticalAlignment="Center" ></TextBox>
 
                                         <TextBlock Text="E-mail da filial:" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" ></TextBlock>

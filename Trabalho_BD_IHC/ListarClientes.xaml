@@ -6,7 +6,7 @@
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:local="clr-namespace:Trabalho_BD_IHC"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
+      d:DesignHeight="600" d:DesignWidth="900"
       Title="ListarClientes" Loaded="Page_Loaded">
     <Grid Background="White">
         <Grid.ColumnDefinitions>
@@ -50,21 +50,96 @@
                 <Button x:Name="removerCliente" Style="{StaticResource removerButton}" Grid.Row="5" Grid.Column="1" IsEnabled="False" Click="removerCliente_Click">
                     <TextBlock TextWrapping="Wrap">Remover Cliente</TextBlock>
                 </Button>
-                <Button x:Name="detalhesCliente" Style="{StaticResource detalhesButton}" Grid.Row="7" Grid.Column="1" IsEnabled="False" Click="detalhesCliente_Click">
+                <Button x:Name="detalhesCliente" Style="{StaticResource detalhesButton}" Grid.Row="7" Grid.Column="1" IsEnabled="False" Click="verdetalhesCliente">
                     <TextBlock TextWrapping="Wrap">Ver mais detalhes</TextBlock>
                 </Button>
             </Grid>
         </GroupBox>
-        <GroupBox Header="Listagem de Clientes" Grid.Row="1" Grid.Column="3">
-            <DataGrid Name="clientes" SelectionChanged="clientes_SelectionChanged" IsReadOnly="True" MouseDoubleClick="detalhesCliente_Click" AutoGenerateColumns="False">
-                <DataGrid.Columns  >
-                    <materialDesign:MaterialDataGridTextColumn  Header="NIF" Binding="{Binding Nif}" />
-                    <materialDesign:MaterialDataGridTextColumn Header="Name"  Binding="{Binding Nome}" />
-                    <materialDesign:MaterialDataGridTextColumn Header="Mail" Binding="{Binding Email}" />
-                    <materialDesign:MaterialDataGridTextColumn Header="Telemovel" Binding="{Binding Telemovel}" />
-                </DataGrid.Columns>
-            </DataGrid>
-        </GroupBox>
+        <Grid Grid.Column="3" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.1*"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.Resources>
+                <Style x:Key="informationStyle" TargetType="{x:Type ListViewItem}">
+                    <EventSetter Event='MouseDoubleClick' Handler='verdetalhesCliente'/>
+                </Style>
+            </Grid.Resources>
+            <GroupBox Grid.Column="3" Grid.Row="0" Grid.RowSpan="2" Header="Listagem de Clientes da Empresa">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition ></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <materialDesign:ColorZone Mode="PrimaryMid" Grid.Row="0" Padding="10">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition Height="10"></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <materialDesign:ColorZone Mode="Standard" Padding="8 4 8 4" CornerRadius="2" Panel.ZIndex="1"
+                                       materialDesign:ShadowAssist.ShadowDepth="Depth1" Grid.Column="0" Grid.ColumnSpan="2">
+                                <Grid >
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Button Style="{DynamicResource MaterialDesignToolButton}">
+                                        <materialDesign:PackIcon Kind="Magnify" Opacity=".56" />
+                                    </Button>
+                                    <TextBox Name="txtnomeCl"  Grid.Column="1" Margin="8 0 0 0" materialDesign:HintAssist.Hint="Pesquisa por Nome" 
+                                         materialDesign:TextFieldAssist.DecorationVisibility="Hidden" BorderThickness="0"
+                                         MinWidth="200" VerticalAlignment="Center"/>
+                                    <Button  Grid.Column="2" Style="{DynamicResource MaterialDesignToolForegroundButton}" Margin="8 0 0 0" Panel.ZIndex="0" Click="searchButton_Click">
+                                        <materialDesign:PackIcon Kind="Send" />
+                                    </Button>
+                                </Grid>
+                            </materialDesign:ColorZone>
+                            <Expander HorizontalAlignment="Stretch" Header="Pesquisa Avançada" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Foreground="Black">
+                                <Grid TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition></RowDefinition>
+                                        <RowDefinition></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Label Content="NIF Cliente:  " HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0"></Label>
+                                    <TextBox Name="txtNIF" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center"></TextBox>
+
+                                    <Label Content="Telefone Cliente:  " HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="2" Grid.Row="0"></Label>
+                                    <TextBox Name="txtTelefone" Grid.Column="3" Grid.Row="0" VerticalAlignment="Center"></TextBox>
+
+                                    <Label Content="E-mail Cliente:  " HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Grid.Row="1"></Label>
+                                    <TextBox Name="txtEmail" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center"></TextBox>
+
+                                    <Label Content="Rua Cliente:  " HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="2" Grid.Row="1"></Label>
+                                    <TextBox Name="txtRua" Grid.Column="3" Grid.Row="1" VerticalAlignment="Center"></TextBox>
+                                </Grid>
+                            </Expander>
+                        </Grid>
+                    </materialDesign:ColorZone>
+                    <DataGrid Grid.Row="1"  Name="clientes" SelectionChanged="clientes_SelectionChanged" 
+                              IsReadOnly="True" SelectionUnit="FullRow" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <materialDesign:MaterialDataGridTextColumn  Header="NIF" Binding="{Binding Nif}" />
+                            <materialDesign:MaterialDataGridTextColumn Header="Name"  Binding="{Binding Nome}" />
+                            <materialDesign:MaterialDataGridTextColumn Header="Mail" Binding="{Binding Email}" />
+                            <materialDesign:MaterialDataGridTextColumn Header="Telemovel" Binding="{Binding Telemovel}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </GroupBox>
+        </Grid>
     </Grid>
 
 </Page>

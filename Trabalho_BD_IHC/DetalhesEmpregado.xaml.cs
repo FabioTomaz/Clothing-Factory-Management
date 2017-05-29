@@ -57,7 +57,7 @@ namespace Trabalho_BD_IHC
             if (emp.Imagem != null)
             {
                 var ms = new MemoryStream();
-                Utilizador.loggedUser.Imagem.Save(ms, ImageFormat.Png);
+                emp.Imagem.Save(ms, ImageFormat.Png);
                 var bi = new BitmapImage();
                 bi.BeginInit();
                 bi.CacheOption = BitmapCacheOption.OnLoad;
@@ -79,7 +79,7 @@ namespace Trabalho_BD_IHC
             if (u.Imagem != null)
             {
                 var ms = new MemoryStream();
-                Utilizador.loggedUser.Imagem.Save(ms, ImageFormat.Png);
+                u.Imagem.Save(ms, ImageFormat.Png);
                 var bi = new BitmapImage();
                 bi.BeginInit();
                 bi.CacheOption = BitmapCacheOption.OnLoad;

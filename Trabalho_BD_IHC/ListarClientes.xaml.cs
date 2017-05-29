@@ -105,13 +105,17 @@ namespace Trabalho_BD_IHC
             }
         }
 
+        private void searchButton_Click(object sender, RoutedEventArgs e)
+        {
+            clientes.ItemsSource = dataHandler.searchClientesInDB(txtnomeCl.Text);
+        }
         private void editarCliente_Click(object sender, RoutedEventArgs e)
         {
             EditarCliente page = new EditarCliente(dataHandler, (Cliente)clientes.SelectedItem);
             this.NavigationService.Navigate(page);
         }
 
-        private void detalhesCliente_Click(object sender, RoutedEventArgs e)
+        private void verdetalhesCliente(object sender, RoutedEventArgs e)
         {
             DetalhesCliente window = new DetalhesCliente(dataHandler, (Cliente)clientes.SelectedItem);
             window.Show();

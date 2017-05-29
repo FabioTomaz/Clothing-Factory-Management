@@ -71,5 +71,10 @@ namespace Trabalho_BD_IHC
         {
             this.NavigationService.Navigate(new EditarFornecedor(dataHandler, (Fornecedor)Fornecedores.SelectedItem));
         }
+
+        private void searchButton_Click(object sender, RoutedEventArgs e)
+        {
+            Fornecedores.ItemsSource = dataHandler.searchFornecedoresInDB(txtnomeForn.Text);
+        }
     }
 }
