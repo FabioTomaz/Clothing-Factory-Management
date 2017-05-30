@@ -86,7 +86,7 @@
                                 <Button Style="{DynamicResource MaterialDesignToolButton}">
                                     <materialDesign:PackIcon Kind="Magnify" Opacity=".56" />
                                 </Button>
-                                <TextBox Name="txtnomeCl"  Grid.Column="1" Margin="8 0 0 0" materialDesign:HintAssist.Hint="Pesquisar..." 
+                                <TextBox Name="txtInput"  Grid.Column="1" Margin="8 0 0 0" materialDesign:HintAssist.Hint="Pesquisar..." 
                                          materialDesign:TextFieldAssist.DecorationVisibility="Hidden" BorderThickness="0"
                                          MinWidth="200" VerticalAlignment="Center" KeyDown="txtnomeCl_KeyDown"/>
                                 <Button  Grid.Column="2" Style="{DynamicResource MaterialDesignToolForegroundButton}" Margin="8 0 0 0" Panel.ZIndex="0" Click="Button_Click">

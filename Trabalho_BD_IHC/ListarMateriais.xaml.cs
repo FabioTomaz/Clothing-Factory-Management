@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data.SqlClient;
 using System.Collections.ObjectModel;
+using System.Text.RegularExpressions;
 
 namespace Trabalho_BD_IHC
 {
@@ -127,6 +128,10 @@ namespace Trabalho_BD_IHC
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            if (!string.IsNullOrEmpty(input.Text) || Regex.IsMatch(input.Text, @"^\d+$"))
+                materiais.ItemsSource = dataHandler.getMateriais();
+            else
+                Xceed.Wpf.Toolkit.MessageBox.Show("Por favor, indique o número da referência de fábrica do material a pesquisar", "Informação", MessageBoxButton.OK, MessageBoxImage.Warning);
 
         }
     }
