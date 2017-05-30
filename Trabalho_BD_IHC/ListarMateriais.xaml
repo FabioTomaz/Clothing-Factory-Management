@@ -7,7 +7,7 @@
               xmlns:wpfTool="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
       xmlns:local="clr-namespace:Trabalho_BD_IHC"
       mc:Ignorable="d" 
-      d:DesignHeight="400" d:DesignWidth="900"
+      d:DesignHeight="600" d:DesignWidth="900"
       Title="ListarMateriais" Loaded="Page_Loaded">
     <Grid>
     <materialDesign:DialogHost Name="dialogMateriais">
@@ -15,13 +15,13 @@
                 <StackPanel Margin="16" HorizontalAlignment="Center">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock VerticalAlignment="Center" Text="Quantidade:  "/>
-                        <TextBox MaxLength="3" Width="30" VerticalAlignment="Center" Name="quantidade" />
+                        <TextBox MaxLength="3" Width="25" VerticalAlignment="Center" Name="quantidade" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
                         <Button Style="{StaticResource MaterialDesignFlatButton}"
                                         IsDefault="True"
                                         Margin="0 8 8 0"
-                                        Command="materialDesign:DialogHost.CloseDialogCommand">
+                                        Command="materialDesign:DialogHost.CloseDialogCommand" Click="Button_Click_1">
                             Adicionar 
                         </Button>
                         <Button Style="{StaticResource MaterialDesignFlatButton}"
@@ -153,11 +153,10 @@
                             </materialDesign:ColorZone>
                             <DataGrid IsReadOnly="True" AutoGenerateColumns="False" Name="materiais" Grid.Row="1" SelectionChanged="materiais_SelectionChanged">
                                 <DataGrid.Columns>
-                                    <materialDesign:MaterialDataGridTextColumn SortDirection="Ascending" Header="Referêcia Fábrica" Binding="{Binding Referencia}" />
-                                    <materialDesign:MaterialDataGridTextColumn Header="Tipo" Binding="{Binding Designacao}"/>
+                                    <materialDesign:MaterialDataGridTextColumn SortDirection="Ascending" Header="Referêcia Interna" Binding="{Binding Referencia}" />
+                                    <materialDesign:MaterialDataGridTextColumn Header="Tipo de Material" Binding="{Binding TipoMaterial1}"/>
                                     <materialDesign:MaterialDataGridTextColumn Header="Cor" Binding="{Binding Cor}"/>
-                                    <materialDesign:MaterialDataGridTextColumn Header="Preço" Binding="{Binding Preco}"></materialDesign:MaterialDataGridTextColumn>
-                                    <materialDesign:MaterialDataGridTextColumn Header="Quantidade em Armazem" Binding="{Binding Cor}"/>
+                                    <materialDesign:MaterialDataGridTextColumn Header="Quantidade em Armazem" Binding="{Binding QuantidadeStockD}"/>
                                 </DataGrid.Columns>
                             </DataGrid>
                         </Grid>

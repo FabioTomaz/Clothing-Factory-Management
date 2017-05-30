@@ -233,8 +233,6 @@ C:\Users\young\Source\Repos\ihc_bd2\Trabalho_BD_IHC\obj\Debug\ProduzirProduto.g.
 C:\Users\young\Source\Repos\ihc_bd2\Trabalho_BD_IHC\obj\Debug\ProduzirProduto.baml
 C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\obj\Debug\ProduzirProduto.g.cs
 C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\obj\Debug\ProduzirProduto.baml
-C:\Users\young\Source\Repos\ihc_bd2\Trabalho_BD_IHC\obj\Debug\teste.g.cs
-C:\Users\young\Source\Repos\ihc_bd2\Trabalho_BD_IHC\obj\Debug\teste.baml
 C:\Users\young\Source\Repos\ihc_bd2\Trabalho_BD_IHC\bin\Debug\Dragablz.dll
 C:\Users\young\Source\Repos\ihc_bd2\Trabalho_BD_IHC\bin\Debug\Dragablz.pdb
 C:\Users\young\Source\Repos\ihc_bd2\Trabalho_BD_IHC\bin\Debug\Dragablz.xml
@@ -313,3 +311,5 @@ C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\obj
 C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\obj\Debug\EditarInfPessoal.g.cs
 C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\obj\Debug\Ajuda.baml
 C:\Users\Bruno Silva\Desktop\Trabalhos\Projeto BD_IHC\ihc_bd\Trabalho_BD_IHC\obj\Debug\EditarInfPessoal.baml
+C:\Users\young\Source\Repos\ihc_bd2\Trabalho_BD_IHC\obj\Debug\Imagem.g.cs
+C:\Users\young\Source\Repos\ihc_bd2\Trabalho_BD_IHC\obj\Debug\Imagem.baml

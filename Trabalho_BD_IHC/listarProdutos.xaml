@@ -16,7 +16,7 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
         </Grid.RowDefinitions>
-        <dragablz:TabablzControl Grid.Row="0" Margin="10,0,-10,0">
+        <dragablz:TabablzControl Grid.Row="0">
             <TabItem Name="produtoBase" Header="Desenho de Produtos" Grid.Column="1" Grid.Row="0" Loaded="Page_Load">
                 <Grid Background="White">
                     <Grid.ColumnDefinitions>

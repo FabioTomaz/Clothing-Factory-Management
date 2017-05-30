@@ -79,7 +79,7 @@ namespace Trabalho_BD_IHC
             cmd.Parameters.Clear(); //falta inserir a imagem do produto!
             cmd.Parameters.AddWithValue("@NOME", prod.Nome);
             cmd.Parameters.AddWithValue("@iva", prod.IVA1);
-            cmd.Parameters.AddWithValue("@N_GestorProd", 2); //--> do funcionario q editou
+            cmd.Parameters.AddWithValue("@N_GestorProd", Utilizador.loggedUser.NFuncionario); //--> do funcionario q editou
             cmd.Parameters.AddWithValue("@DataAlt", DateTime.Today);
             cmd.Parameters.AddWithValue("@IntrProd", prod.InstrProd);
             cmd.Parameters.AddWithValue("@Referencia", prod.Referencia);

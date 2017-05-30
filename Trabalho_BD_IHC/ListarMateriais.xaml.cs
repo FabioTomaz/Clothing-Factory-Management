@@ -134,6 +134,20 @@ namespace Trabalho_BD_IHC
                 Xceed.Wpf.Toolkit.MessageBox.Show("Por favor, indique o número da referência de fábrica do material a pesquisar", "Informação", MessageBoxButton.OK, MessageBoxImage.Warning);
 
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            Xceed.Wpf.Toolkit.MessageBox.Show(dataHandler.adicionarMaterial(((MaterialTextil)materiais.SelectedItem).Referencia, Convert.ToInt32(quantidade.Text)), "Resultado", MessageBoxButton.OK, MessageBoxImage.Information);
+            this.refresh();
+        }
+
+        public void refresh()
+        {
+            adicionarMaterial.IsEnabled = false;
+            detalhesMaterial.IsEnabled = false;
+            materiais.Focus();
+            materiais.ItemsSource = dataHandler.getMateriaisFromDB();
+        }
     }
 
 
