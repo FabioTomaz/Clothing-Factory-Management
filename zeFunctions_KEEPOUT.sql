@@ -26,3 +26,4 @@ AS
 GO
 
 SELECT dbo.getUserPass(1)
+

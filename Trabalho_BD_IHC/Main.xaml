@@ -170,7 +170,7 @@
                         </StackPanel>
                     </GroupBox>
                     <Button Content="Alterar Foto" Style="{StaticResource imageButton}" Grid.Column="4" Grid.Row="5" VerticalAlignment="Center" Click="Button_Click_1"/>
-                    <Button Content="Alterar Informações Pessoais" Style="{StaticResource  editarButton}"  Grid.Column="4" Grid.Row="6" VerticalAlignment="Center"/>
+                    <Button Content="Alterar Informações Pessoais" Style="{StaticResource  editarButton}"  Grid.Column="4" Grid.Row="6" VerticalAlignment="Center" Click="mudarInfo_Click"/>
                     <Button Content="Alterar PassWord"  Style="{StaticResource  passwordButton}" Grid.Column="4" Grid.Row="8" VerticalAlignment="Center" Click="MudarPass_Click_2"/>
                     <Button Content="Terminar Sessão"  Style="{StaticResource  loggoutButton}" Grid.Column="4" Grid.Row="9" VerticalAlignment="Center" Click="Button_Click"/>
                 </Grid>

@@ -100,6 +100,11 @@ namespace Trabalho_BD_IHC
                 userImage.Source = bi;
             }
         }
+        public void refresh()
+        {
+            Utilizador.loggedUser = dataHandler.getUtilizadorFromDB(Utilizador.loggedUser.NFuncionario);
+            fillUserInfo();
+        }
 
         public void fillNotifications()
         {
@@ -167,7 +172,11 @@ namespace Trabalho_BD_IHC
                 this.Close();
             }
         }
-
+        private void mudarInfo_Click(object sender, RoutedEventArgs e)
+        {
+            EditarInfPessoal window = new EditarInfPessoal(dataHandler, Utilizador.loggedUser, this);
+            window.Show();
+        }
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             Microsoft.Win32.OpenFileDialog op = new Microsoft.Win32.OpenFileDialog();
@@ -234,5 +243,7 @@ namespace Trabalho_BD_IHC
             MudarPasse window = new MudarPasse(dataHandler);
             window.Show();
         }
+
+
     }
 }

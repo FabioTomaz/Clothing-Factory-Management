@@ -121,6 +121,9 @@
     <Compile Include="EditarFilial.xaml.cs">
       <DependentUpon>EditarFilial.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EditarInfPessoal.xaml.cs">
+      <DependentUpon>EditarInfPessoal.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EditarProdutoBase.xaml.cs">
       <DependentUpon>EditarProdutoBase.xaml</DependentUpon>
     </Compile>
@@ -232,6 +235,10 @@
     <Page Include="EditarFilial.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="EditarInfPessoal.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="EditarProdutoBase.xaml">
       <Generator>MSBuild:Compile</Generator>
