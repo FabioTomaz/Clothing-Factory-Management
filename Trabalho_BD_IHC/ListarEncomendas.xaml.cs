@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data.SqlClient;
+using System.Text.RegularExpressions;
 
 namespace Trabalho_BD_IHC
 {
@@ -105,12 +106,30 @@ namespace Trabalho_BD_IHC
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (pesquisaNCLIENTE.IsEnabled)
+            if (pesquisaNENCOMENDA.IsEnabled)
+            {
+                if (!string.IsNullOrEmpty(txtInput.Text) || Regex.IsMatch(txtInput.Text, @"^\d+$"))
+                {
+                    ObservableCollection<Encomenda> items = new ObservableCollection<Encomenda>();
+                    items.Add(dataHandler.getEncomendaFromDB(Convert.ToInt32(txtInput.Text)));
+                    encomendas.ItemsSource = items;
+                }
+                else
+                {
+                    Xceed.Wpf.Toolkit.MessageBox.Show("Por favor, indique o número do funcionário que pretende pesquisar", "Informação", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+            }
+            else
             {
 
-            }else
-            {
-
+                if (!string.IsNullOrEmpty(txtInput.Text) || Regex.IsMatch(txtInput.Text, @"^\d+$"))
+                {
+                    encomendas.ItemsSource = dataHandler.getEncomendaDB(Convert.ToInt32(txtInput.Text));
+                }
+                else
+                {
+                    Xceed.Wpf.Toolkit.MessageBox.Show("Por favor, indique o número do funcionário que pretende pesquisar", "Informação", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
             }
         }
 

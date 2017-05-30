@@ -33,10 +33,12 @@ namespace Trabalho_BD_IHC
         }
         private SqlConnection getSGBDConnection()
         {
-            return new SqlConnection("data source=tcp: 193.136.175.33\\SQLSERVER2012,8293; initial catalog=p4g3;"
-                + " User ID=p4g3; Password=fabiobruno;");
+            return new SqlConnection("data source=localhost;integrated security=true;initial catalog=GESTAO-FABRICA-VESTUARIO-LABORAL");
         }
-
+        /*db-->> data source=tcp: 193.136.175.33\\SQLSERVER2012,8293; initial catalog=p4g3;"
+                + " User ID=p4g3; Password=fabiobruno;*/
+        /*localhost --> "data source=localhost;integrated security=true;initial catalog=GESTAO-FABRICA-VESTUARIO-LABORAL"
+         */
         public bool verifySGBDConnection()
         {
             if (Cn == null)
@@ -51,7 +53,7 @@ namespace Trabalho_BD_IHC
                 {
                     return false;
                 }
-            
+
 
             return Cn.State == ConnectionState.Open;
         }
@@ -429,6 +431,7 @@ namespace Trabalho_BD_IHC
             return enc;
         }
 
+
         public Encomenda getEncomendaFromDB(int nEncomenda)
         {
             if (!this.verifySGBDConnection())
@@ -463,6 +466,47 @@ namespace Trabalho_BD_IHC
             Enc.Preco = Convert.ToDouble(reader["PRECOTOTAL"].ToString());
             closeSGBDConnection();
             return Enc;
+        }
+
+        public ObservableCollection<Encomenda> getEncomendaDB(int nCliente)
+        {
+            if (!this.verifySGBDConnection())
+                return null;
+            SqlCommand cmd = new SqlCommand("SELECT ENCOMENDA.N_ENCOMENDA, DATA_CONFIRMACAO, DATA_ENTREGA_PREV, ESTADO.DESCRIÇAO, DESCONTO, CLIENTE.NCLIENTE, CLIENTE.NOME AS CNOME, N_GESTOR_VENDA, SUM([PRODUTO-PERSONALIZADO].PRECO*CONTEUDO_ENCOMENDA.QUANTIDADE) AS PRECOTOTAL "
+                                + " FROM ENCOMENDA JOIN CLIENTE ON CLIENTE.NCLIENTE = ENCOMENDA.CLIENTE"
+                                + " JOIN CONTEUDO_ENCOMENDA ON CONTEUDO_ENCOMENDA.N_ENCOMENDA=ENCOMENDA.N_ENCOMENDA"
+                                + " JOIN [PRODUTO-PERSONALIZADO] ON CONTEUDO_ENCOMENDA.REFERENCIA_PRODUTO=[PRODUTO-PERSONALIZADO].REFERENCIA"
+                                + " AND CONTEUDO_ENCOMENDA.TAMANHO_PRODUTO = [PRODUTO-PERSONALIZADO].TAMANHO "
+                                + " AND CONTEUDO_ENCOMENDA.COR_PRODUTO = [PRODUTO-PERSONALIZADO].COR"
+                                + " AND CONTEUDO_ENCOMENDA.ID_PRODUTO = [PRODUTO-PERSONALIZADO].ID"
+                                + " JOIN ESTADO ON ENCOMENDA.ESTADO=ESTADO.ID"
+                                + " JOIN UTILIZADOR ON UTILIZADOR.N_FUNCIONARIO=N_GESTOR_VENDA"
+                                + " WHERE CLIENTE.NCLIENTE LIKE @nCli"
+                                + " GROUP BY ENCOMENDA.N_ENCOMENDA, DATA_CONFIRMACAO, DATA_ENTREGA_PREV, ESTADO.DESCRIÇAO, DESCONTO, CLIENTE.NCLIENTE, CLIENTE.NOME, N_GESTOR_VENDA;"
+                                , cn);
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@nCli", nCliente);
+            SqlDataReader reader = cmd.ExecuteReader();
+            ObservableCollection<Encomenda> enc = new ObservableCollection<Encomenda>();
+            while (reader.Read())
+            {
+                Encomenda Enc = new Encomenda();
+                Enc.Cliente = new Cliente();
+                Enc.GestorVendas = new Utilizador();
+                Enc.NEncomenda = Convert.ToInt32(reader["N_ENCOMENDA"].ToString());
+                Enc.Estado = reader["DESCRIÇAO"].ToString();
+                Enc.DataPrevistaEntrega = Convert.ToDateTime(reader["DATA_ENTREGA_PREV"]);
+                Enc.DataConfirmacao = Convert.ToDateTime(reader["DATA_CONFIRMACAO"]);
+                Enc.Desconto = Convert.ToInt32(reader["DESCONTO"]);
+                Enc.GestorVendas.NFuncionario = Convert.ToInt32(reader["N_GESTOR_VENDA"].ToString());
+                Enc.Cliente.Nome = reader["NOME"].ToString();
+                Enc.Cliente.NCliente = Convert.ToInt32(reader["NCLIENTE"].ToString());
+                Enc.LocalEntrega = reader["LOCALENTREGA"].ToString();
+                Enc.Preco = Convert.ToDouble(reader["PRECOTOTAL"].ToString());
+                enc.Add(Enc);
+            }
+            closeSGBDConnection();
+            return enc;
         }
 
         public ObservableCollection<ProdutoPersonalizado> getProdutosFromEncomendaDB(int nEncomenda)
@@ -547,13 +591,11 @@ namespace Trabalho_BD_IHC
 
             if (((int)cmd.ExecuteScalar()) >= 1)
             {
-                Console.WriteLine("sim");
                 closeSGBDConnection();
                 return true;
             }
             else
             {
-                Console.WriteLine("sim");
                 closeSGBDConnection();
                 return false;
             }
@@ -626,6 +668,7 @@ namespace Trabalho_BD_IHC
             return produtosBase;
         }
 
+       
         public ProdutoBase getProdutoBaseFromDB(int referencia)
         {
             if (!this.verifySGBDConnection())
@@ -2260,6 +2303,48 @@ namespace Trabalho_BD_IHC
                 + "[PRODUTO-PERSONALIZADO].REFERENCIA = [PRODUTO-BASE].REFERENCIA JOIN "
                 + "ETIQUETA ON ETIQUETA.N_ETIQUETA = [PRODUTO-PERSONALIZADO].N_ETIQUETA; "
                 , this.Cn);
+            SqlDataReader reader = cmd.ExecuteReader();
+            ObservableCollection<ProdutoPersonalizado> produtoPers = new ObservableCollection<ProdutoPersonalizado>();
+            while (reader.Read())
+            {
+                ProdutoPersonalizado prod = new ProdutoPersonalizado();
+                prod.Tamanho = reader["TAMANHO"].ToString();
+                prod.Cor = reader["COR"].ToString();
+                prod.ID = Convert.ToInt32(reader["ID"].ToString());
+                prod.Preco = Convert.ToDouble(reader["PRECO"].ToString());
+                prod.UnidadesStock = Convert.ToInt32(reader["UNIDADES_ARMAZEM"].ToString());
+                prod.ProdutoBase = new ProdutoBase();
+                prod.ProdutoBase.Referencia = Convert.ToInt32(reader["REFERENCIA"].ToString());
+                prod.ProdutoBase.Nome = reader["nomeBase"].ToString();
+                prod.ProdutoBase.InstrProd = reader["INSTRUCOES_PRODUCAO"].ToString();
+                prod.ProdutoBase.DataAlteraçao = Convert.ToDateTime(reader["DATA_ALTERACAO"]);
+                prod.ProdutoBase.IVA1 = Convert.ToDouble(reader["IVA"].ToString());
+                prod.Etiqueta = new Etiqueta();
+                prod.Etiqueta.PaisFabrico = reader["PAIS_FABRICO"].ToString();
+                prod.Etiqueta.Numero = Convert.ToInt32(reader["N_ETIQUETA"].ToString());
+                prod.Etiqueta.Normas = reader["NORMAS"].ToString();
+                prod.Etiqueta.PaisFabrico = reader["PAIS_FABRICO"].ToString();
+                prod.Etiqueta.Composicao = reader["COMPOSICAO"].ToString();
+                produtoPers.Add(prod);
+            }
+            reader.Close();
+            this.closeSGBDConnection();
+            return produtoPers;
+        }
+
+        public ObservableCollection<ProdutoPersonalizado> searchAndGetProdutosPersID(int ID)
+        {
+            if (!this.verifySGBDConnection())
+                return null;
+            SqlCommand cmd = new SqlCommand("SELECT TAMANHO, COR, ID, PRECO, UNIDADES_ARMAZEM, "
+                + "[PRODUTO-PERSONALIZADO].REFERENCIA, [PRODUTO-BASE].NOME as nomeBase, DATA_ALTERACAO, "
+                + "INSTRUCOES_PRODUCAO, IVA, PAIS_FABRICO, [PRODUTO-PERSONALIZADO].N_ETIQUETA, NORMAS, "
+                + "PAIS_FABRICO, COMPOSICAO FROM[PRODUTO-PERSONALIZADO] JOIN[PRODUTO-BASE] ON "
+                + "[PRODUTO-PERSONALIZADO].REFERENCIA = [PRODUTO-BASE].REFERENCIA JOIN "
+                + "ETIQUETA ON ETIQUETA.N_ETIQUETA = [PRODUTO-PERSONALIZADO].N_ETIQUETA WHERE ID = @id; "
+                , this.Cn);
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@id", ID);
             SqlDataReader reader = cmd.ExecuteReader();
             ObservableCollection<ProdutoPersonalizado> produtoPers = new ObservableCollection<ProdutoPersonalizado>();
             while (reader.Read())

@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data.SqlClient;
+using System.Text.RegularExpressions;
 
 namespace Trabalho_BD_IHC
 {
@@ -116,14 +117,31 @@ namespace Trabalho_BD_IHC
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
+            if (!string.IsNullOrEmpty(txtInput.Text))
+            {
+                ObservableCollection<ProdutoBase> prod = new ObservableCollection<ProdutoBase>();
+                prod.Add(dataHandler.getProdutoBaseFromDB(Convert.ToInt32(txtInput.Text)));
+                produtosBaseLista.ItemsSource = prod;
+            }
+            else
+                Xceed.Wpf.Toolkit.MessageBox.Show("Por favor, indique a referência do desenho que pretende pesquisar", "Informação", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
 
         private void txtnomeCl_KeyUp(object sender, KeyEventArgs e)
-        { 
+        {
             if (e.Key != System.Windows.Input.Key.Enter) return;
-            produtosBaseLista.ItemsSource = dataHandler.searchClientesInDB(txtnomeCl.Text);
+            produtosBaseLista.ItemsSource = dataHandler.searchClientesInDB(txtInput.Text);
             e.Handled = true;
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtInputPers.Text) || Regex.IsMatch(txtInputPers.Text, @"^\d+$"))
+                produtosPersonalizadosLista.ItemsSource = dataHandler.searchAndGetProdutosPersID(Convert.ToInt32(txtInputPers.Text));
+
+            else
+                Xceed.Wpf.Toolkit.MessageBox.Show("Por favor, indique o nº do id do produto que pretende pesquisar", "Informação", MessageBoxButton.OK, MessageBoxImage.Warning);
+
         }
     }
 }

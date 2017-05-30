@@ -16,7 +16,7 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
         </Grid.RowDefinitions>
-        <dragablz:TabablzControl  Grid.Column="1" Grid.Row="0" Grid.RowSpan="11">
+        <dragablz:TabablzControl Grid.Row="0" Margin="10,0,-10,0">
             <TabItem Name="produtoBase" Header="Desenho de Produtos" Grid.Column="1" Grid.Row="0" Loaded="Page_Load">
                 <Grid Background="White">
                     <Grid.ColumnDefinitions>
@@ -90,8 +90,8 @@
                                             <Button Style="{DynamicResource MaterialDesignToolButton}">
                                                 <materialDesign:PackIcon Kind="Magnify" Opacity=".56" />
                                             </Button>
-                                            <TextBox Name="txtnomeCl" KeyUp="txtnomeCl_KeyUp"  Grid.Column="1" Margin="8 0 0 0" materialDesign:HintAssist.Hint="Pesquisa por Nome" 
-                                         materialDesign:TextFieldAssist.DecorationVisibility="Hidden" BorderThickness="0"
+                                            <TextBox Name="txtInput" KeyUp="txtnomeCl_KeyUp"  Grid.Column="1" Margin="8 0 0 0" materialDesign:HintAssist.Hint="Pesquisa por referência" 
+                                             materialDesign:TextFieldAssist.DecorationVisibility="Hidden" BorderThickness="0"
                                          MinWidth="200" VerticalAlignment="Center"/>
                                             <Button  Grid.Column="2" Style="{DynamicResource MaterialDesignToolForegroundButton}" Margin="8 0 0 0" Panel.ZIndex="0" Click="Button_Click">
                                                 <materialDesign:PackIcon Kind="Send" />
@@ -175,8 +175,63 @@
                             </Button>
                         </Grid>
                     </GroupBox>
-                    <GroupBox Header="Listagem de Produtos da Empresa" Grid.Column="3" Grid.Row="1">
-                        <DataGrid Name="produtosPersonalizadosLista" AutoGenerateColumns="False" Grid.Row="1" IsReadOnly="True" SelectionChanged="produtos_SelectionChanged">
+                    <GroupBox x:Name="produtoPersGB" Header="Listagem de Produtos da Empresa" Grid.Row="1" Grid.Column="3">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition ></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <materialDesign:ColorZone Mode="PrimaryMid" Grid.Row="0" Padding="10">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition></RowDefinition>
+                                        <RowDefinition Height="10"></RowDefinition>
+                                        <RowDefinition></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <materialDesign:ColorZone Mode="Standard" Padding="8 4 8 4" CornerRadius="2" Panel.ZIndex="1"
+                                       materialDesign:ShadowAssist.ShadowDepth="Depth1" Grid.Column="0" Grid.ColumnSpan="2">
+                                        <Grid >
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <Button Style="{DynamicResource MaterialDesignToolButton}">
+                                                <materialDesign:PackIcon Kind="Magnify" Opacity=".56" />
+                                            </Button>
+                                            <TextBox Name="txtInputPers" KeyUp="txtnomeCl_KeyUp"  Grid.Column="1" Margin="8 0 0 0" materialDesign:HintAssist.Hint="Pesquisa por Nome" 
+                                             materialDesign:TextFieldAssist.DecorationVisibility="Hidden" BorderThickness="0"
+                                         MinWidth="200" VerticalAlignment="Center"/>
+                                            <Button  Grid.Column="2" Style="{DynamicResource MaterialDesignToolForegroundButton}" Margin="8 0 0 0" Panel.ZIndex="0" Click="Button_Click_1">
+                                                <materialDesign:PackIcon Kind="Send" />
+                                            </Button>
+                                        </Grid>
+                                    </materialDesign:ColorZone>
+                                    <Expander HorizontalAlignment="Stretch" Header="Tipo de Pesquisa" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Foreground="Black">
+                                        <Grid TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                                                <ColumnDefinition></ColumnDefinition>
+                                                <ColumnDefinition></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                            </Grid.RowDefinitions>
+                                            <Label Content="Pesquisar por:  " HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0"></Label>
+                                            <RadioButton GroupName="tipoPesquisa"  Name="pesquisaRef" Content="Referência Desenho" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center"></RadioButton>
+                                            <RadioButton GroupName="tipoPesquisa"  Name="pesquisaTam" Content="Tamanho" Grid.Column="2" Grid.Row="0" VerticalAlignment="Center"></RadioButton>
+                                            <RadioButton GroupName="tipoPesquisa"  Name="pesquisaCor" Content="Cor" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center"></RadioButton>
+                                            <RadioButton GroupName="tipoPesquisa"  Name="pesquisaID" Content="ID de Produto" Grid.Column="2" Grid.Row="1" VerticalAlignment="Center"></RadioButton>
+                                        </Grid>
+                                    </Expander>
+                                </Grid>
+                            </materialDesign:ColorZone>
+                            <DataGrid Name="produtosPersonalizadosLista" AutoGenerateColumns="False" Grid.Row="1" IsReadOnly="True" SelectionChanged="produtos_SelectionChanged">
                             <DataGrid.Columns>
                                 <materialDesign:MaterialDataGridTextColumn Header="ID"  Binding="{Binding ID}" />
                                 <materialDesign:MaterialDataGridTextColumn Header="Nome" Binding="{Binding ProdutoBase.Nome}" />
@@ -184,9 +239,10 @@
                                 <materialDesign:MaterialDataGridTextColumn Header="Tamanho" Binding="{Binding Tamanho}" />
                                 <materialDesign:MaterialDataGridTextColumn Header="Preço(€)" Binding="{Binding Preco}" />
                                 <materialDesign:MaterialDataGridTextColumn Header="Unidades" Binding="{Binding UnidadesStock}" />
-                                <materialDesign:MaterialDataGridTextColumn Header="Referência Modelo" Binding="{Binding ProdutoBase.Referencia}"/>
-                            </DataGrid.Columns>
-                        </DataGrid>
+                                <materialDesign:MaterialDataGridTextColumn Header="Referência Desenho" Binding="{Binding ProdutoBase.Referencia}"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Grid>
                     </GroupBox>
                 </Grid>
 

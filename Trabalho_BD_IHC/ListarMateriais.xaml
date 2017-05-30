@@ -106,7 +106,7 @@
                                             <Button Style="{DynamicResource MaterialDesignToolButton}">
                                                 <materialDesign:PackIcon Kind="Magnify" Opacity=".56" />
                                             </Button>
-                                            <TextBox Grid.Column="1" Margin="8 0 0 0" materialDesign:HintAssist.Hint="Pesquisa por Referencia" 
+                                            <TextBox Name="input" Grid.Column="1" Margin="8 0 0 0" materialDesign:HintAssist.Hint="Pesquisa por Referencia Fabrica" 
                                          materialDesign:TextFieldAssist.DecorationVisibility="Hidden" BorderThickness="0"
                                          MinWidth="200" VerticalAlignment="Center" KeyDown="TextBox_KeyDown"/>
                                             <Button  Grid.Column="2" Style="{DynamicResource MaterialDesignToolForegroundButton}" Margin="8 0 0 0" Panel.ZIndex="0" Click="Button_Click">
