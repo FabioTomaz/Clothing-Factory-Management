@@ -145,16 +145,21 @@
                             </StackPanel>
                         </Grid>
                     </GroupBox>
-                    <GroupBox materialDesign:ColorZoneAssist.Mode="Dark" Style="{DynamicResource MaterialDesignCardGroupBox}"  Grid.Row="1" Grid.RowSpan="3" Grid.Column="4">
+                    <GroupBox materialDesign:ColorZoneAssist.Mode="Dark" Style="{DynamicResource MaterialDesignCardGroupBox}"  Grid.Row="1" Grid.RowSpan="5" Grid.Column="4">
                         <GroupBox.HeaderTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
                                     <materialDesign:PackIcon Kind="HumanGreeting" Height="32" Width="32" VerticalAlignment="Center" />
                                     <TextBlock Margin="8,0,0,0" VerticalAlignment="Center" Text="Imagem de Perfil"  Style="{StaticResource MaterialDesignSubheadingTextBlock}"/>
+                                    <Button Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}"
+                                        Margin="10 0 0 0" HorizontalAlignment="Left"
+                                        ToolTip="Aumentar Imagem" Click="Button_Click_2">
+                                        <materialDesign:PackIcon Kind="ArrowExpand" Height="24" Width="24" />
+                                    </Button>
                                 </StackPanel>
                             </DataTemplate>
                         </GroupBox.HeaderTemplate>
-                        <Image Name="userImage" Source="person.png"></Image>
+                        <Image MouseDown="userImage_MouseDown" Name="userImage" Source="person.png"></Image>
                     </GroupBox>
                     <GroupBox materialDesign:ColorZoneAssist.Mode="Accent" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="8" Grid.RowSpan="2" Style="{DynamicResource MaterialDesignCardGroupBox}">
                         <GroupBox.HeaderTemplate>
@@ -169,10 +174,18 @@
                         <StackPanel Name="notificationStack">
                         </StackPanel>
                     </GroupBox>
-                    <Button Content="Alterar Foto" Style="{StaticResource imageButton}" Grid.Column="4" Grid.Row="5" VerticalAlignment="Center" Click="Button_Click_1"/>
-                    <Button Content="Alterar Informações Pessoais" Style="{StaticResource  editarButton}"  Grid.Column="4" Grid.Row="6" VerticalAlignment="Center" Click="mudarInfo_Click"/>
-                    <Button Content="Alterar PassWord"  Style="{StaticResource  passwordButton}" Grid.Column="4" Grid.Row="8" VerticalAlignment="Center" Click="MudarPass_Click_2"/>
-                    <Button Content="Terminar Sessão"  Style="{StaticResource  loggoutButton}" Grid.Column="4" Grid.Row="9" VerticalAlignment="Center" Click="Button_Click"/>
+                    <Grid Grid.Column="4" Grid.Row="6" Grid.RowSpan="4">
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Button Content="Alterar Foto" Style="{StaticResource imageButton}" Grid.Row="0" VerticalAlignment="Center" Click="Button_Click_1"/>
+                        <Button Content="Alterar Informações Pessoais" Style="{StaticResource  editarButton}"  Grid.Row="1" VerticalAlignment="Center" Click="mudarInfo_Click"/>
+                        <Button Content="Alterar PassWord"  Style="{StaticResource  passwordButton}" Grid.Row="2" VerticalAlignment="Center" Click="MudarPass_Click_2"/>
+                        <Button Content="Terminar Sessão"  Style="{StaticResource  loggoutButton}" Grid.Row="3" VerticalAlignment="Center" Click="Button_Click"/>
+                    </Grid>
                 </Grid>
             </TabItem>
             <TabItem Name="clientes" Header="Clientes"  IsEnabled="True">

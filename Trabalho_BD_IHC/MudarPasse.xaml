@@ -6,13 +6,13 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:Trabalho_BD_IHC"
         mc:Ignorable="d"
-        Title="MudarPasse" ResizeMode="CanMinimize" Height="250" Width="500" MaxHeight="350" MinHeight="250" MaxWidth="500" MinWidth="500" Background="White" Icon="login.png"
+        Title="MudarPasse" ResizeMode="CanMinimize" Height="250" Width="500" MaxHeight="350" MinHeight="250" MaxWidth="500" MinWidth="500" Background="White" Icon="password.png"
     WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.1*"></ColumnDefinition>
-                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="1.2*"></ColumnDefinition>
                 <ColumnDefinition Width="0.1*"></ColumnDefinition>
                 <ColumnDefinition Width="2*"></ColumnDefinition>
                 <ColumnDefinition Width="0.1*"></ColumnDefinition>

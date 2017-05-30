@@ -1,5 +1,4 @@
-﻿using MaterialDesignThemes.Wpf;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,13 +15,14 @@ using System.Windows.Shapes;
 namespace Trabalho_BD_IHC
 {
     /// <summary>
-    /// Interaction logic for teste.xaml
+    /// Interaction logic for Imagem.xaml
     /// </summary>
-    public partial class teste : Window
+    public partial class Imagem : Window
     {
-        public teste()
+        public Imagem(BitmapImage image)
         {
             InitializeComponent();
+            this.image.Source = image;
         }
     }
 }

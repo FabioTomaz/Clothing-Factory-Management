@@ -38,7 +38,18 @@ namespace Trabalho_BD_IHC
             dataProduto.Text = produtoBase.DataAlteraçao.ToString("dd/MM/yyyy");
             produtosPersonalizados=dataHandler.getProdutosPersonalizadosFromProdutoBaseDB(referencia);
             produtosPers.ItemsSource = produtosPersonalizados;
-           
+            if (produtoBase.Pic != null)
+            {
+                var ms = new MemoryStream();
+                Utilizador.loggedUser.Imagem.Save(ms, ImageFormat.Png);
+                var bi = new BitmapImage();
+                bi.BeginInit();
+                bi.CacheOption = BitmapCacheOption.OnLoad;
+                bi.StreamSource = ms;
+                bi.EndInit();
+                imagemDesenho.Source = bi;
+            }
+
         }
 
         private void DataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -47,6 +58,15 @@ namespace Trabalho_BD_IHC
             if (produtoSelecionado != null)
             {
                 DetalhesProdutoPersonalizado window = new DetalhesProdutoPersonalizado(dataHandler, (int)produtoSelecionado.ProdutoBase.Referencia, produtoSelecionado.Tamanho, produtoSelecionado.Cor, (int)produtoSelecionado.ID);
+                window.Show();
+            }
+        }
+
+        private void Image_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left && e.ClickCount == 2 && imagemDesenho.Source != null)
+            {
+                Imagem window = new Imagem((BitmapImage)imagemDesenho.Source);
                 window.Show();
             }
         }

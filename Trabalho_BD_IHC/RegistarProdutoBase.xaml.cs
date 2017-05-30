@@ -76,7 +76,7 @@ namespace Trabalho_BD_IHC
                 ProdutoBase.InstrProd = txtInstruçoes.Text;
                 ProdutoBase.IVA1 = txtIva.Value;
                 ProdutoBase.GestorProducao = new Utilizador();
-                ProdutoBase.GestorProducao.NFuncionario = 2; //---> suposto mais tarde colocar o nº do user
+                ProdutoBase.GestorProducao.NFuncionario = Utilizador.loggedUser.NFuncionario; //---> suposto mais tarde colocar o nº do user
                 ProdutoBase.Pic = getJPGFromImageControl((BitmapImage)imgPhoto.Source);
             try
             {

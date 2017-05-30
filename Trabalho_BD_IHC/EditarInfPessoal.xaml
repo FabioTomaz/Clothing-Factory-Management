@@ -7,7 +7,7 @@
       xmlns:local="clr-namespace:Trabalho_BD_IHC"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
-      Title="EditarInfPessoal" Height="600" MinHeight="400" MinWidth="650" Width="700" Closing="Window_Closing">
+      Title="EditarInfPessoal" Height="400" MinHeight="400" MinWidth="650" Width="650" Closing="Window_Closing" Icon="profile.png">
     <Grid Background="White">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="24*"/>

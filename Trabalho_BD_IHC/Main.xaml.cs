@@ -217,9 +217,9 @@ namespace Trabalho_BD_IHC
             finally
             {
                 if (rows == 1)
-                    MessageBox.Show("Atualização realizada com sucesso", "", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+                    Xceed.Wpf.Toolkit.MessageBox.Show("Atualização realizada com sucesso", "", MessageBoxButton.OK, MessageBoxImage.Asterisk);
                 else
-                   if (MessageBox.Show("Não foi possivel atualizar o perfil do cliente. Deseja Tentar Novamente?", "Erro", MessageBoxButton.YesNo, MessageBoxImage.Exclamation) == MessageBoxResult.Yes)
+                   if (Xceed.Wpf.Toolkit.MessageBox.Show("Não foi possivel atualizar o perfil do cliente. Deseja Tentar Novamente?", "Erro", MessageBoxButton.YesNo, MessageBoxImage.Exclamation) == MessageBoxResult.Yes)
                     sendUserImageToDB(imgLoc);
                 dataHandler.closeSGBDConnection();
             }
@@ -244,6 +244,19 @@ namespace Trabalho_BD_IHC
             window.Show();
         }
 
+        private void userImage_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left && e.ClickCount == 2 && userImage.Source!=null)
+            {
+                Imagem window = new Imagem((BitmapImage)userImage.Source);
+                window.Show();
+            }
+        }
 
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            Imagem window = new Imagem((BitmapImage)userImage.Source);
+            window.Show();
+        }
     }
 }

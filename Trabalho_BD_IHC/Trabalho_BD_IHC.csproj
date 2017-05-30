@@ -136,6 +136,9 @@
     <Compile Include="EditarEncomenda.xaml.cs">
       <DependentUpon>EditarEncomenda.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Imagem.xaml.cs">
+      <DependentUpon>Imagem.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ListarFornecedores.xaml.cs">
       <DependentUpon>ListarFornecedores.xaml</DependentUpon>
     </Compile>
@@ -199,9 +202,6 @@
     <Compile Include="RegistarEncomenda.xaml.cs">
       <DependentUpon>RegistarEncomenda.xaml</DependentUpon>
     </Compile>
-    <Compile Include="teste.xaml.cs">
-      <DependentUpon>teste.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Utilizador.cs" />
     <Page Include="Ajuda.xaml">
       <SubType>Designer</SubType>
@@ -256,6 +256,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="EditarEncomenda.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Imagem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -369,10 +373,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="RegistarEncomenda.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="teste.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

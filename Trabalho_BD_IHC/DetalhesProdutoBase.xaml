@@ -60,7 +60,7 @@
 
         </GroupBox>
         <GroupBox Grid.Column="5" Grid.ColumnSpan="3" Grid.Row="1" Grid.RowSpan="3" materialDesign:ColorZoneAssist.Mode="Dark" Header="Imagem do Desenho do Produto" Style="{DynamicResource MaterialDesignCardGroupBox}" Margin="16">
-            <Image ></Image>
+            <Image Name="imagemDesenho" MouseDown="Image_MouseDown"></Image>
         </GroupBox>
         <GroupBox Header="Produtos Personalizados Que Têm por Base este Produto" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="7">
             <DataGrid Name="produtosPers" IsReadOnly="True" MouseDoubleClick="DataGrid_MouseDoubleClick" AutoGenerateColumns="False">
