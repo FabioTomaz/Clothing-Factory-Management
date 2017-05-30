@@ -113,5 +113,17 @@ namespace Trabalho_BD_IHC
                 detalhes.Show();
             }
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void txtnomeCl_KeyUp(object sender, KeyEventArgs e)
+        { 
+            if (e.Key != System.Windows.Input.Key.Enter) return;
+            produtosBaseLista.ItemsSource = dataHandler.searchClientesInDB(txtnomeCl.Text);
+            e.Handled = true;
+        }
     }
 }
