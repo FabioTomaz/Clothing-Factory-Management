@@ -33,7 +33,8 @@ namespace Trabalho_BD_IHC
         }
         private SqlConnection getSGBDConnection()
         {
-            return new SqlConnection("data source=localhost;integrated security=true;initial catalog=GESTAO-FABRICA-VESTUARIO-LABORAL");
+            return new SqlConnection("data source=tcp: 193.136.175.33\\SQLSERVER2012,8293; initial catalog=p4g3;"
+                + " User ID=p4g3; Password=fabiobruno;");
         }
 
         public bool verifySGBDConnection()
@@ -50,6 +51,7 @@ namespace Trabalho_BD_IHC
                 {
                     return false;
                 }
+            
 
             return Cn.State == ConnectionState.Open;
         }
@@ -137,14 +139,15 @@ namespace Trabalho_BD_IHC
             cmd.Parameters.AddWithValue("@cor", prod.Cor);
             cmd.Parameters.AddWithValue("@id", prod.ID);
             SqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read()) { 
+            while (reader.Read())
+            {
                 MaterialTextil mat = new MaterialTextil();
                 mat.Referencia = Convert.ToInt32(reader["REFERENCIA_FABRICA"].ToString());
                 mat.Cor = reader["COR"].ToString();
                 mat.Designacao = reader["DESIGNACAO"].ToString();
-                mat.Fornecedor.NIF_Fornecedor= reader["NIF_FORNECEDOR"].ToString();
-                mat.ReferenciaFornecedor= reader["REFERENCIA_FORN"].ToString();
-                mat.QuantidadeSelecionadaD= Convert.ToInt32(reader["QUANTIDADE"].ToString());
+                mat.Fornecedor.NIF_Fornecedor = reader["NIF_FORNECEDOR"].ToString();
+                mat.ReferenciaFornecedor = reader["REFERENCIA_FORN"].ToString();
+                mat.QuantidadeSelecionadaD = Convert.ToInt32(reader["QUANTIDADE"].ToString());
                 //mat.Preco =;
                 result.Add(mat);
             }
@@ -351,7 +354,7 @@ namespace Trabalho_BD_IHC
                     enc.DataEntrega = Convert.ToDateTime(reader["DATA_ENTREGA"].ToString());
                 }
                 enc.LocalEntrega = reader["LOCALENTREGA"].ToString();
-                enc.Estado =  reader["ESTADO"].ToString();
+                enc.Estado = reader["ESTADO"].ToString();
                 enc.GestorVendas = new Utilizador();
                 enc.GestorVendas.NFuncionario = Convert.ToInt32(reader["N_GESTOR_VENDA"].ToString());
                 enc.GestorVendas.Nome = reader["GESTOR_NOME"].ToString();
@@ -541,13 +544,14 @@ namespace Trabalho_BD_IHC
             cmd.Parameters.AddWithValue("@TAMANHO", prod.Tamanho);
             cmd.Parameters.AddWithValue("@COR", prod.Cor);
             cmd.Parameters.AddWithValue("@ID", prod.ID);
-           
-            if (((int)cmd.ExecuteScalar())>=1)
+
+            if (((int)cmd.ExecuteScalar()) >= 1)
             {
                 Console.WriteLine("sim");
                 closeSGBDConnection();
                 return true;
-            }else
+            }
+            else
             {
                 Console.WriteLine("sim");
                 closeSGBDConnection();
@@ -559,7 +563,7 @@ namespace Trabalho_BD_IHC
         {
             if (!this.verifySGBDConnection())
                 return null;
-            
+
             SqlCommand cmd = new SqlCommand("SELECT PRECO, UNIDADES_ARMAZEM, ETIQUETA.N_ETIQUETA, NORMAS, PAIS_FABRICO, COMPOSICAO "
                             + " FROM [PRODUTO-PERSONALIZADO] JOIN [ETIQUETA] ON [PRODUTO-PERSONALIZADO].N_ETIQUETA=[ETIQUETA].N_ETIQUETA"
                             + " WHERE [PRODUTO-PERSONALIZADO].REFERENCIA=@REFERENCIA AND [PRODUTO-PERSONALIZADO].TAMANHO=@TAMANHO AND [PRODUTO-PERSONALIZADO].COR=@COR AND [PRODUTO-PERSONALIZADO].ID=@ID;"
@@ -2027,23 +2031,17 @@ namespace Trabalho_BD_IHC
                 return;
             SqlCommand cmd = new SqlCommand();
 
-            cmd.CommandText = "UPDATE UTILIZADOR SET NOME = @NOME, EMAIL = @email, SALARIO = @salario, "
-                + " TELEFONE = @telefone , N_FABRICA = @nFilial, HORA_ENTRADA = @entrada, HORA_SAIDA = @saida, "
-                + " CODPOSTAL1 = @cod1, CODPOSTAL2 = @cod2, RUA = @rua, N_PORTA = @nPorta, N_FUNCIONARIO_SUPER = @super "
+            cmd.CommandText = "UPDATE UTILIZADOR SET NOME = @NOME, SALARIO = @salario, "
+                + " N_FABRICA = @nFilial, HORA_ENTRADA = @entrada, HORA_SAIDA = @saida, "
+                + " N_FUNCIONARIO_SUPER = @super "
                 + "WHERE N_FUNCIONARIO = @nfunc";
             cmd.Parameters.Clear();
             cmd.Parameters.AddWithValue("@nfunc", user.NFuncionario);
             cmd.Parameters.AddWithValue("@NOME", user.Nome);
-            cmd.Parameters.AddWithValue("@email", user.Email);
             cmd.Parameters.AddWithValue("@salario", user.Salario);
-            cmd.Parameters.AddWithValue("@telefone", user.Telemovel);
             cmd.Parameters.AddWithValue("@nFilial", user.Filial.NFilial);
             cmd.Parameters.AddWithValue("@entrada", user.HoraEntrada);
             cmd.Parameters.AddWithValue("@saida", user.HoraSaida);
-            cmd.Parameters.AddWithValue("@cod1", user.Localizacao.CodigoPostal1);
-            cmd.Parameters.AddWithValue("@cod2", user.Localizacao.CodigoPostal2);
-            cmd.Parameters.AddWithValue("@rua", user.Localizacao.Rua1);
-            cmd.Parameters.AddWithValue("@nPorta", user.Localizacao.Porta);
             cmd.Parameters.AddWithValue("@super", user.Supervisor.NFuncionario);
 
             cmd.Connection = this.Cn;
@@ -2107,6 +2105,43 @@ namespace Trabalho_BD_IHC
                 }
             }
         }
+
+
+        public void editarInfPessoal(Utilizador user)
+        {
+            if (!this.verifySGBDConnection())
+                return;
+            SqlCommand cmd = new SqlCommand();
+
+            cmd.CommandText = "UPDATE UTILIZADOR SET EMAIL = @email, "
+                + " TELEFONE = @telefone , CODPOSTAL1 = @cod1, CODPOSTAL2 = @cod2, RUA = @rua, N_PORTA = @nPorta "
+                + "WHERE N_FUNCIONARIO = @nfunc";
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@nfunc", user.NFuncionario);
+            cmd.Parameters.AddWithValue("@email", user.Email);
+            cmd.Parameters.AddWithValue("@telefone", user.Telemovel);
+            cmd.Parameters.AddWithValue("@cod1", user.Localizacao.CodigoPostal1);
+            cmd.Parameters.AddWithValue("@cod2", user.Localizacao.CodigoPostal2);
+            cmd.Parameters.AddWithValue("@rua", user.Localizacao.Rua1);
+            cmd.Parameters.AddWithValue("@nPorta", user.Localizacao.Porta);
+
+            cmd.Connection = this.Cn;
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Falha ao editar informações pessoais.\n Detalhes do erro: \n " + ex.Message);
+            }
+            finally
+            {
+                this.closeSGBDConnection();
+            }
+        }
+
+
+
 
         public Utilizador getSupervisor(int nFunc)
         {

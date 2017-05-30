@@ -73,7 +73,11 @@ namespace Trabalho_BD_IHC
 
         private Boolean checkUser(String user)
         {
-            dataHandler.verifySGBDConnection();
+            if (!dataHandler.verifySGBDConnection())
+            {
+                Xceed.Wpf.Toolkit.MessageBox.Show("Não foi possivel inicar sessão na base de dados", "erro", MessageBoxButton.OK, MessageBoxImage.Error);
+                
+            }
             int rows=0;
             SqlCommand cmd = new SqlCommand("SELECT * FROM UTILIZADOR WHERE N_FUNCIONARIO=@USER", dataHandler.Cn);
             cmd.Parameters.Clear();
