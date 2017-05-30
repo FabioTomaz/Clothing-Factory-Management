@@ -33,7 +33,8 @@ namespace Trabalho_BD_IHC
         }
         private SqlConnection getSGBDConnection()
         {
-            return new SqlConnection("data source=localhost;integrated security=true;initial catalog=GESTAO-FABRICA-VESTUARIO-LABORAL");
+            return new SqlConnection("data source=tcp: 193.136.175.33\\SQLSERVER2012,8293; initial catalog=p4g3;"
+                + " User ID=p4g3; Password=fabiobruno;");
         }
         /*db-->> data source=tcp: 193.136.175.33\\SQLSERVER2012,8293; initial catalog=p4g3;"
                 + " User ID=p4g3; Password=fabiobruno;*/
@@ -273,6 +274,32 @@ namespace Trabalho_BD_IHC
             }
             closeSGBDConnection();
             return items;
+        }
+
+        public double getQuantidadeMaterial(int referencia)
+        {
+            verifySGBDConnection();
+            double result = 0;
+            SqlCommand cmd = new SqlCommand("select dbo.getQuantidadeMaterial(@referencia)", cn);
+            cmd.Parameters.AddWithValue("@referencia", referencia);
+            String strResult = cmd.ExecuteScalar().ToString();
+            if (!strResult.Equals(""))
+                result = Convert.ToDouble(strResult);
+            closeSGBDConnection();
+            return result;
+        }
+
+        public double getPrecoMaterial(int referencia)
+        {
+            verifySGBDConnection();
+            double result = 0;
+            SqlCommand cmd = new SqlCommand("select dbo.getPrecoMaterial(@referencia)", cn);
+            cmd.Parameters.AddWithValue("@referencia", referencia);
+            String strResult = cmd.ExecuteScalar().ToString();
+            if (!strResult.Equals(""))
+                result = Convert.ToDouble(strResult);
+            closeSGBDConnection();
+            return result;
         }
 
         public ObservableCollection<Cliente> searchClientesInDB(string nome)
@@ -828,6 +855,29 @@ namespace Trabalho_BD_IHC
             }
         }
 
+        public String adicionarMaterial(int referencia, double quantidade)
+        {
+            verifySGBDConnection();
+            SqlCommand cmd = new SqlCommand("dbo.adicionarMaterial", cn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            // set up the parameters
+            cmd.Parameters.Add("@ref", SqlDbType.Int);
+            cmd.Parameters.Add("@qtd", SqlDbType.Decimal);
+            cmd.Parameters.Add("@out", SqlDbType.VarChar, 70).Direction = ParameterDirection.Output;
+
+            // set parameter values
+            cmd.Parameters["@ref"].Value = referencia;
+            cmd.Parameters["@qtd"].Value = quantidade;
+
+            // execute stored procedure
+            cmd.ExecuteNonQuery();
+
+            // read output value from @NewId
+            String strResult = cmd.Parameters["@out"].Value.ToString();
+            return strResult;
+        }
+
         public void inserirMaterial(MaterialTextil mat)
         {
 
@@ -1118,18 +1168,12 @@ namespace Trabalho_BD_IHC
 
         public String getMaterialType(int referencia)
         {
-            if (this.verifySGBDConnection())
-            {
-                SqlCommand cmd = new SqlCommand("SELECT dbo.getTipoMaterial(@referencia)", this.cn);
-                cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@referencia", referencia);
-                String s = (String)cmd.ExecuteScalar();
-
-                this.closeSGBDConnection();
-                return s;
-            }
-            this.closeSGBDConnection();
-            return "";
+            verifySGBDConnection();
+            SqlCommand cmd = new SqlCommand("select dbo.getTipoMaterial(@referencia)", cn);
+            cmd.Parameters.AddWithValue("@referencia", referencia);
+            String strResult = cmd.ExecuteScalar().ToString();
+            closeSGBDConnection();
+            return strResult;
         }
 
         public Etiqueta getEtiqueta(int n)
@@ -2246,8 +2290,12 @@ namespace Trabalho_BD_IHC
                 material.Fornecedor.NIF_Fornecedor = reader["NIF"].ToString();
                 m.Add(material);
             }
-
             reader.Close();
+            for(int i=0; i<m.Count; i++)
+            {
+                m.ElementAt(i).TipoMaterial1 = getMaterialType(m.ElementAt(i).Referencia);
+                m.ElementAt(i).QuantidadeStockD = getQuantidadeMaterial(m.ElementAt(i).Referencia);
+            }
             this.closeSGBDConnection();
             return m;
         }

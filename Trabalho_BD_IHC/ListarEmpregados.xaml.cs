@@ -60,7 +60,10 @@ namespace Trabalho_BD_IHC
 
         public void refresh()
         {
-
+            editarEmpregado.IsEnabled = false;
+            detalhesEmpregado.IsEnabled = false;
+            empregados.Focus();
+            empregados.ItemsSource = dataHandler.getEmpregadosFromDB();
         }
 
         private void editarEmpregado_Click(object sender, RoutedEventArgs e)
@@ -77,9 +80,7 @@ namespace Trabalho_BD_IHC
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
-
             empregados.ItemsSource = dataHandler.searchEmpregadosInDB(txtnameSearch.Text);
-
         }
     }
 }
