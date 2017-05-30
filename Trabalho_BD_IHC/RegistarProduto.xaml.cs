@@ -91,17 +91,17 @@ namespace Trabalho_BD_IHC
                     Xceed.Wpf.Toolkit.MessageBox.Show("Por favor, preencha todos os campos relativos à criação de nova etiqueta!", "", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
-                else if (txtNormas.Text.Length > 100)
+                if (txtNormas.Text.Length > 100)
                 {
                     Xceed.Wpf.Toolkit.MessageBox.Show("A especificação das normas é demasiado longa! Indique apenas o essencial.", "", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
-                else if (txtComp.Text.Length > 100)
+                if (txtComp.Text.Length > 100)
                 {
                     Xceed.Wpf.Toolkit.MessageBox.Show("A especificação da composição da etiqueta é demasiado longa! Indique apenas o essencial.", "", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
-                else if (txtComp.Text.Length > 20)
+                if (txtPais.Text.Length > 20)
                 {
                     Xceed.Wpf.Toolkit.MessageBox.Show("O nome do País especificado é demasiado longo! Use acrónimos ou abreviações.", "", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
@@ -170,7 +170,7 @@ namespace Trabalho_BD_IHC
             etiquetaNova.Visibility = Visibility.Hidden;
             etiquetaExisente.Visibility = Visibility.Visible;
             //fazer bind de todas as etiquetas existentas na base de dados para a combo box
-            ObservableCollection<Etiqueta> et = getEtiquetas();
+            ObservableCollection<Etiqueta> et = dataHandler.getEtiquetas();
             cbEtiqueta.ItemsSource = et;
             if (et.Count > 0)
             {
@@ -185,48 +185,7 @@ namespace Trabalho_BD_IHC
             etiquetaExisente.Visibility = Visibility.Hidden;
         }
 
-        public ObservableCollection<Etiqueta> getEtiquetas()
-        {
-            if (dataHandler.verifySGBDConnection())
-            {
-                SqlCommand cmd = new SqlCommand("SELECT * FROM ETIQUETA", dataHandler.Cn);
-                SqlDataReader reader = cmd.ExecuteReader();
-                ObservableCollection<Etiqueta> etiquetas = new ObservableCollection<Etiqueta>();
-                while (reader.Read())
-                {
-                    Etiqueta et = new Etiqueta();
-                    et.Numero = Convert.ToInt32(reader["N_ETIQUETA"].ToString());
-                    et.Normas = reader["NORMAS"].ToString();
-                    et.Composicao = reader["COMPOSICAO"].ToString();
-                    et.PaisFabrico = reader["PAIS_FABRICO"].ToString();
-                    etiquetas.Add(et);
-                }
-                reader.Close();
-                dataHandler.closeSGBDConnection();
-                return etiquetas;
-            }
-            return null;
-        }
+       
 
-        private ObservableCollection<MaterialTextil> getMateriais()
-        {
-            ObservableCollection<MaterialTextil> materiaisTexteis = new ObservableCollection<MaterialTextil>();
-
-            SqlCommand cmd = new SqlCommand("SELECT * FROM MATERIAIS_TÊXTEIS", dataHandler.Cn);
-            SqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
-            {
-                MaterialTextil Mt = new MaterialTextil();
-                Mt.Fornecedor = new Fornecedor();
-                Mt.Referencia = Convert.ToInt32(reader["REFERENCIA_FABRICA"].ToString());
-                Mt.ReferenciaFornecedor = reader["REFERENCIA_FORN"].ToString();
-                Mt.Designacao = reader["DESIGNACAO"].ToString();
-                Mt.Cor = reader["COR"].ToString();
-                Mt.Fornecedor.NIF_Fornecedor = reader["NIF_FORNECEDOR"].ToString();
-                materiaisTexteis.Add(Mt);
-            }
-            reader.Close();
-            return materiaisTexteis;
-        }
     }
 }

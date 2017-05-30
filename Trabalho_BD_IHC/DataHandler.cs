@@ -2380,6 +2380,28 @@ namespace Trabalho_BD_IHC
             return produtoPers;
         }
 
+        public ObservableCollection<Etiqueta> getEtiquetas()
+        {
+            if (!this.verifySGBDConnection())
+                return null;
+
+            SqlCommand cmd = new SqlCommand("SELECT * FROM ETIQUETA", this.Cn);
+            SqlDataReader reader = cmd.ExecuteReader();
+            ObservableCollection<Etiqueta> etiquetas = new ObservableCollection<Etiqueta>();
+            while (reader.Read())
+            {
+                Etiqueta et = new Etiqueta();
+                et.Numero = Convert.ToInt32(reader["N_ETIQUETA"].ToString());
+                et.Normas = reader["NORMAS"].ToString();
+                et.Composicao = reader["COMPOSICAO"].ToString();
+                et.PaisFabrico = reader["PAIS_FABRICO"].ToString();
+                etiquetas.Add(et);
+            }
+            reader.Close();
+            this.closeSGBDConnection();
+            return etiquetas;
+        }
+
         public ObservableCollection<ProdutoPersonalizado> searchAndGetProdutosPersID(int ID)
         {
             if (!this.verifySGBDConnection())

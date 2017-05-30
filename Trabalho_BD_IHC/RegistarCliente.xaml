@@ -88,7 +88,7 @@
                     <TextBlock Text="NIF: "/>
                 </StackPanel>
                 <TextBox Name="txtNIF" Grid.Row="5" Grid.Column="2" VerticalAlignment="Center"
-                          materialDesign:HintAssist.Hint="Deverá ter 9 carateres" materialDesign:HintAssist.IsFloating="True" PreviewTextInput="NumberValidationTextBox"></TextBox>
+                          materialDesign:HintAssist.Hint="Deverá ter 9 carateres numéricos" materialDesign:HintAssist.IsFloating="True" PreviewTextInput="NumberValidationTextBox"></TextBox>
                 <StackPanel Orientation="Horizontal"  Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Center">
                     <materialDesign:PackIcon Kind="Email"></materialDesign:PackIcon>
                     <TextBlock Text="E-Mail: "/>
@@ -99,7 +99,8 @@
                     <materialDesign:PackIcon Kind="Phone"></materialDesign:PackIcon>
                     <TextBlock Text="Telemovel: "/>
                 </StackPanel>                
-                <TextBox Name="txtTelemovel" Grid.Row="9" Grid.Column="2" VerticalAlignment="Center"></TextBox>
+                <TextBox Name="txtTelemovel" Grid.Row="9" Grid.Column="2" 
+                         materialDesign:HintAssist.Hint="Telemóvel cliente" materialDesign:HintAssist.IsFloating="True" PreviewTextInput="NumberValidationTextBox" VerticalAlignment="Center"></TextBox>
                 <StackPanel Orientation="Horizontal"  Grid.Row="11" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Center">
                     <materialDesign:PackIcon Kind="ZipBox"></materialDesign:PackIcon>
                     <TextBlock Text="Código Postal: "/>
