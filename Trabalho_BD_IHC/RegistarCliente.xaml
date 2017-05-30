@@ -75,22 +75,26 @@
                     <materialDesign:PackIcon Kind="Account"></materialDesign:PackIcon>
                     <TextBlock Text="Nome: "/>
                 </StackPanel>
-                <TextBox Name="txtNome" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" VerticalAlignment="Center"></TextBox>
+                <TextBox Name="txtNome" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" 
+                         materialDesign:HintAssist.Hint="Nome do cliente" materialDesign:HintAssist.IsFloating="True" VerticalAlignment="Center"></TextBox>
                 <StackPanel Orientation="Horizontal"  Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Center">
                     <materialDesign:PackIcon Kind="Bank"></materialDesign:PackIcon>
-                    <TextBlock Text="NIB: "/>
+                    <TextBlock Text="NIB(opcional):"/>
                 </StackPanel>
-                <TextBox Name="txtNIB" Grid.Row="3" Grid.Column="2" VerticalAlignment="Center"></TextBox>
+                <TextBox Name="txtNIB" Grid.Row="3" Grid.Column="2"
+                          materialDesign:HintAssist.Hint="Deverá ter 21 carateres" materialDesign:HintAssist.IsFloating="True" VerticalAlignment="Center"></TextBox>
                 <StackPanel Orientation="Horizontal"  Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Center">
                     <materialDesign:PackIcon Kind="Numeric"></materialDesign:PackIcon>
                     <TextBlock Text="NIF: "/>
                 </StackPanel>
-                <TextBox Name="txtNIF" Grid.Row="5" Grid.Column="2" VerticalAlignment="Center" PreviewTextInput="NumberValidationTextBox"></TextBox>
+                <TextBox Name="txtNIF" Grid.Row="5" Grid.Column="2" VerticalAlignment="Center"
+                          materialDesign:HintAssist.Hint="Deverá ter 9 carateres" materialDesign:HintAssist.IsFloating="True" PreviewTextInput="NumberValidationTextBox"></TextBox>
                 <StackPanel Orientation="Horizontal"  Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Center">
                     <materialDesign:PackIcon Kind="Email"></materialDesign:PackIcon>
                     <TextBlock Text="E-Mail: "/>
                 </StackPanel>
-                <TextBox Name="txtEmail" Grid.Row="7" Grid.Column="2" VerticalAlignment="Center"></TextBox>
+                <TextBox Name="txtEmail" Grid.Row="7" Grid.Column="2" VerticalAlignment="Center" 
+                          materialDesign:HintAssist.Hint="Email do cliente" materialDesign:HintAssist.IsFloating="True"></TextBox>
                 <StackPanel Orientation="Horizontal"  Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Center">
                     <materialDesign:PackIcon Kind="Phone"></materialDesign:PackIcon>
                     <TextBlock Text="Telemovel: "/>
@@ -109,12 +113,14 @@
                     <materialDesign:PackIcon Kind="Map"></materialDesign:PackIcon>
                     <TextBlock Text="Rua: "/>
                 </StackPanel>
-                <TextBox Name="txtRua" Grid.Row="13" Grid.Column="2" Grid.ColumnSpan="2" VerticalAlignment="Center"></TextBox>
+                <TextBox Name="txtRua" Grid.Row="13" Grid.Column="2" Grid.ColumnSpan="2" 
+                        materialDesign:HintAssist.Hint="Rua do cliente" materialDesign:HintAssist.IsFloating="True"  VerticalAlignment="Center"></TextBox>
                 <StackPanel Orientation="Horizontal"  Grid.Row="15" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Center">
                     <materialDesign:PackIcon Kind="Glassdoor"></materialDesign:PackIcon>
                     <TextBlock Text="Porta: "/>
                 </StackPanel>
-                <TextBox Name="txtNumeroPorta" PreviewTextInput="NumberValidationTextBox" Grid.Row="15" Grid.Column="2" VerticalAlignment="Center"></TextBox>
+                <TextBox Name="txtNumeroPorta" PreviewTextInput="NumberValidationTextBox"
+                          materialDesign:HintAssist.Hint="Nº porta do cliente " materialDesign:HintAssist.IsFloating="True" Grid.Row="15" Grid.Column="2" VerticalAlignment="Center"></TextBox>
                 
             <StackPanel Orientation="Horizontal"  Grid.Row="17" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Center">
                     <materialDesign:PackIcon Kind="Numeric"></materialDesign:PackIcon>

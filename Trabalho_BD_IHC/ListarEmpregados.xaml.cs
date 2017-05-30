@@ -31,7 +31,6 @@ namespace Trabalho_BD_IHC
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            removerEmpregado.IsEnabled = false;
             editarEmpregado.IsEnabled = false;
             detalhesEmpregado.IsEnabled = false;
             empregados.Focus();
@@ -44,67 +43,7 @@ namespace Trabalho_BD_IHC
             if (empregados.SelectedItems.Count > 0)
             {
                 editarEmpregado.IsEnabled = true;
-                removerEmpregado.IsEnabled = true;
                 detalhesEmpregado.IsEnabled = true;
-            }
-        }
-
-        private void removerEmpregado_Click(object sender, RoutedEventArgs e)
-        {
-            int listViewIndex = empregados.SelectedIndex;
-
-            if (Xceed.Wpf.Toolkit.MessageBox.Show("Tem a certeza que pretende eliminar este empregado da base de dados?\n"
-                + "Só deve eliminar um empregado caso este já não trabalhe mais nesta fábrica. Este processo é irreversivel! ", "Question", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
-            {
-                return;
-            }
-            else
-            {
-                try
-                {
-                    RemoverEmpregado((Utilizador)empregados.SelectedItem);
-                }
-                catch (Exception ex)
-                {
-                    Xceed.Wpf.Toolkit.MessageBox.Show(ex.Message);
-                    return;
-                }
-                try
-                {
-                    ((ObservableCollection<Utilizador>)empregados.ItemsSource).RemoveAt(listViewIndex);
-
-                }
-                catch (Exception ex)
-                {
-                    Xceed.Wpf.Toolkit.MessageBox.Show(ex.Message);
-                    return;
-                }
-            }
-        }
-
-        private void RemoverEmpregado(Utilizador empregado)
-        {
-            if (!dataHandler.verifySGBDConnection())
-                return;
-            SqlCommand cmd = new SqlCommand();
-
-            cmd.CommandText = "DELETE Utilizador WHERE N_FUNCIONARIO=@empregadoN ";
-            cmd.Parameters.Clear();
-            cmd.Parameters.AddWithValue("@empregadoN", empregado.NFuncionario);
-            cmd.Connection = dataHandler.Cn;
-
-            try
-            {
-                cmd.ExecuteNonQuery();
-            }
-            catch (SqlException ex)
-            {
-                Xceed.Wpf.Toolkit.MessageBox.Show(ex.Message);
-                return;
-            }
-            finally
-            {
-                dataHandler.closeSGBDConnection();
             }
         }
 

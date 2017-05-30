@@ -82,13 +82,13 @@
                     <TextBlock Text="Designação: "/>
                 </StackPanel>
                 <TextBox Name="txtDesi" Grid.Row="3" Grid.Column="2" VerticalAlignment="Center" Grid.ColumnSpan="2" 
-                         materialDesign:HintAssist.Hint="Indique uma descrição que identifique a empresa fornecedora" materialDesign:HintAssist.IsFloating="True"></TextBox>
+                         materialDesign:HintAssist.Hint="Descreva a empresa fornecedora" materialDesign:HintAssist.IsFloating="True"></TextBox>
                 <StackPanel Orientation="Horizontal"  Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Center">
                     <materialDesign:PackIcon Kind="Numeric"></materialDesign:PackIcon>
                     <TextBlock Text="NIF: "/>
                 </StackPanel>
                 <TextBox Name="txtNIF" Grid.Row="5" Grid.Column="2" VerticalAlignment="Center" PreviewTextInput="NumberValidationTextBox"
-                         materialDesign:HintAssist.Hint="Indique o NIF da empresa fornecedora. Deverá ter 9 carateres" materialDesign:HintAssist.IsFloating="True"></TextBox>
+                         materialDesign:HintAssist.Hint="O NIF deverá ter 9 carateres" materialDesign:HintAssist.IsFloating="True"></TextBox>
                 <StackPanel Orientation="Horizontal"  Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Center">
                     <materialDesign:PackIcon Kind="Email"></materialDesign:PackIcon>
                     <TextBlock Text="E-Mail: "/>
@@ -107,7 +107,7 @@
                     <TextBlock Text="Telemovel: "/>
                 </StackPanel>
                 <TextBox Name="txtTelemovel" Grid.Row="11" Grid.Column="2" VerticalAlignment="Center"
-                         materialDesign:HintAssist.Hint="Indique o nº telemóvel da empresa fornecedora" materialDesign:HintAssist.IsFloating="True"></TextBox>
+                         materialDesign:HintAssist.Hint="Nº telemóvel da empresa fornecedora" materialDesign:HintAssist.IsFloating="True"></TextBox>
                
                 
                 <StackPanel Orientation="Horizontal"  Grid.Row="13" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Center">
@@ -124,13 +124,13 @@
                     <TextBlock Text="Rua: "/>
                 </StackPanel>
                 <TextBox Name="txtRua" Grid.Row="15" Grid.Column="2" Grid.ColumnSpan="2" VerticalAlignment="Center"
-                         materialDesign:HintAssist.Hint="Indique a rua da empresa fornecedora" materialDesign:HintAssist.IsFloating="True"></TextBox>
+                         materialDesign:HintAssist.Hint="Rua da empresa fornecedora" materialDesign:HintAssist.IsFloating="True"></TextBox>
                 <StackPanel Orientation="Horizontal"  Grid.Row="17" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Center">
                     <materialDesign:PackIcon Kind="Glassdoor"></materialDesign:PackIcon>
                     <TextBlock Text="Porta: "/>
                 </StackPanel>
                 <TextBox Name="txtNumeroPorta" PreviewTextInput="NumberValidationTextBox" Grid.Row="17" Grid.Column="2" 
-                         materialDesign:HintAssist.Hint="Indique o nº porta da empresa fornecedora" materialDesign:HintAssist.IsFloating="True" VerticalAlignment="Center"></TextBox>
+                         materialDesign:HintAssist.Hint="Nº porta da empresa fornecedora" materialDesign:HintAssist.IsFloating="True" VerticalAlignment="Center"></TextBox>
                 <Grid Grid.Row="17" Grid.Column="1" Grid.ColumnSpan="3">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="2*"></ColumnDefinition>
