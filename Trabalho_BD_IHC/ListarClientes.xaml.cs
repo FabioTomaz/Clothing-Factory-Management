@@ -138,5 +138,12 @@ namespace Trabalho_BD_IHC
             if (items != null)
                 clientes.ItemsSource = items;
         }
+
+        private void txtnomeCl_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key != System.Windows.Input.Key.Enter) return;
+            clientes.ItemsSource = dataHandler.searchClientesInDB(txtnomeCl.Text);
+            e.Handled = true;
+        }
     }
 }

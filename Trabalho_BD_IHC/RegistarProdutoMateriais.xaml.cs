@@ -58,7 +58,7 @@ namespace Trabalho_BD_IHC
 
         private void cancelar_Click(object sender, RoutedEventArgs e)
         {
-            if (MessageBox.Show("Tem a certeza que deseja cancelar o registo do produto? Perderá todos os dados que tenha introduzido",
+            if (Xceed.Wpf.Toolkit.MessageBox.Show("Tem a certeza que deseja cancelar o registo do produto? Perderá todos os dados que tenha introduzido",
                  "", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {//sim
                 ListarProdutos page = new ListarProdutos(dataHandler);
@@ -76,7 +76,7 @@ namespace Trabalho_BD_IHC
             //o utilizador ja tem q ter selecionado materiais para o produto
             if (materiaisSelectedView.Items.Count <= 0)
             {
-                MessageBox.Show("Por favor, selecione os materiais necessários para a " +
+                Xceed.Wpf.Toolkit.MessageBox.Show("Por favor, selecione os materiais necessários para a " +
                     "posterior produção deste produto", "", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
@@ -91,7 +91,7 @@ namespace Trabalho_BD_IHC
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                Xceed.Wpf.Toolkit.MessageBox.Show(ex.Message, "ERRO", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
             try
@@ -103,7 +103,7 @@ namespace Trabalho_BD_IHC
                 MessageBox.Show(ex.Message);
                 return;
             }
-            MessageBox.Show("Produto registado com sucesso!", "", MessageBoxButton.OK, MessageBoxImage.Information);
+            Xceed.Wpf.Toolkit.MessageBox.Show("Produto registado com sucesso!", "", MessageBoxButton.OK, MessageBoxImage.Information);
             ListarProdutos page = new ListarProdutos(dataHandler);
             this.NavigationService.Navigate(page);
         }

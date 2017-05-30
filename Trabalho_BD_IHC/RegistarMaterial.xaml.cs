@@ -179,11 +179,10 @@ namespace Trabalho_BD_IHC
 
         private void cancelar_Click(object sender, RoutedEventArgs e)
         {
-            if (MessageBox.Show("Tem a certeza que deseja cancelar o registo do material? Perderá todos os dados que tenha introduzido",
+            if (Xceed.Wpf.Toolkit.MessageBox.Show("Tem a certeza que deseja cancelar o registo do material? Perderá todos os dados que tenha introduzido",
                  "", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {//sim
-                ListarProdutos page = new ListarProdutos(dataHandler);
-                this.NavigationService.Navigate(page);
+                this.NavigationService.GoBack();
             }
         }
 

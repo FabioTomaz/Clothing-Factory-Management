@@ -73,13 +73,7 @@
                         <Button x:Name="adicionarMaterial" Style="{StaticResource adicionarButton}" Grid.Row="3" Grid.Column="1" IsEnabled="False" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}">
                             <TextBlock TextWrapping="Wrap">Adicionar Material</TextBlock>
                         </Button>
-                        <Button x:Name="editarMaterial" Style="{StaticResource editarButton}" Grid.Row="5" Grid.Column="1" IsEnabled="False">
-                            <TextBlock TextWrapping="Wrap">Editar Material</TextBlock>
-                        </Button>
-                        <Button x:Name="removerMaterial" Style="{StaticResource removerButton}" Grid.Row="7" Grid.Column="1" IsEnabled="False" Click="removerMaterial_Click">
-                            <TextBlock TextWrapping="Wrap">Remover Material</TextBlock>
-                        </Button>
-                        <Button x:Name="detalhesMaterial" Style="{StaticResource detalhesButton}" Grid.Row="9" Grid.Column="1" IsEnabled="False" Click="detalhesMaterial_Click">
+                        <Button x:Name="detalhesMaterial" Style="{StaticResource detalhesButton}" Grid.Row="5" Grid.Column="1" IsEnabled="False" Click="detalhesMaterial_Click">
                             <TextBlock TextWrapping="Wrap">Ver Mais detalhes</TextBlock>
                         </Button>
                     </Grid>
@@ -159,10 +153,11 @@
                             </materialDesign:ColorZone>
                             <DataGrid IsReadOnly="True" AutoGenerateColumns="False" Name="materiais" Grid.Row="1" SelectionChanged="materiais_SelectionChanged">
                                 <DataGrid.Columns>
-                                    <materialDesign:MaterialDataGridTextColumn Header="Referêcia Fábrica" Binding="{Binding Referencia}" />
+                                    <materialDesign:MaterialDataGridTextColumn SortDirection="Ascending" Header="Referêcia Fábrica" Binding="{Binding Referencia}" />
                                     <materialDesign:MaterialDataGridTextColumn Header="Tipo" Binding="{Binding Designacao}"/>
                                     <materialDesign:MaterialDataGridTextColumn Header="Cor" Binding="{Binding Cor}"/>
-                                    <materialDesign:MaterialDataGridTextColumn Header="Quantidade" Binding="{Binding Cor}"/>
+                                    <materialDesign:MaterialDataGridTextColumn Header="Preço" Binding="{Binding Preco}"></materialDesign:MaterialDataGridTextColumn>
+                                    <materialDesign:MaterialDataGridTextColumn Header="Quantidade em Armazem" Binding="{Binding Cor}"/>
                                 </DataGrid.Columns>
                             </DataGrid>
                         </Grid>

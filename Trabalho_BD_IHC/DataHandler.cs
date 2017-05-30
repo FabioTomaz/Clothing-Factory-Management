@@ -126,6 +126,31 @@ namespace Trabalho_BD_IHC
             }
         }
 
+        public ObservableCollection<MaterialTextil> getMateriaisFromProdutoPersonalizado(ProdutoPersonalizado prod)
+        {
+            verifySGBDConnection();
+            ObservableCollection<MaterialTextil> result = new ObservableCollection<MaterialTextil>();
+            SqlCommand cmd = new SqlCommand("select * from dbo.getMateriaisFromProdutoPersonalizado(@ref, @tam, @cor, @id);", cn);
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@ref", prod.ProdutoBase.Referencia);
+            cmd.Parameters.AddWithValue("@tam", prod.Tamanho);
+            cmd.Parameters.AddWithValue("@cor", prod.Cor);
+            cmd.Parameters.AddWithValue("@id", prod.ID);
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read()) { 
+                MaterialTextil mat = new MaterialTextil();
+                mat.Referencia = Convert.ToInt32(reader["REFERENCIA_FABRICA"].ToString());
+                mat.Cor = reader["COR"].ToString();
+                mat.Designacao = reader["DESIGNACAO"].ToString();
+                mat.Fornecedor.NIF_Fornecedor= reader["NIF_FORNECEDOR"].ToString();
+                mat.ReferenciaFornecedor= reader["REFERENCIA_FORN"].ToString();
+                mat.QuantidadeSelecionadaD= Convert.ToInt32(reader["QUANTIDADE"].ToString());
+                //mat.Preco =;
+                result.Add(mat);
+            }
+            closeSGBDConnection();
+            return result;
+        }
 
         public int getEncomendasDesteMes()
         {

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Data.SqlClient;
+using System.Text.RegularExpressions;
 
 namespace Trabalho_BD_IHC
 {
@@ -123,6 +124,18 @@ namespace Trabalho_BD_IHC
                 password.Visibility = Visibility.Visible;
             }
              
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            Ajuda window = new Ajuda();
+            window.ShowDialog();
+        }
+
+        private void nEmpregado_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
         }
     }
 }

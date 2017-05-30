@@ -87,10 +87,10 @@
         <GroupBox Header="Materias Primas Usadas para a Produção de uma Unidade deste Produto" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="7">
             <DataGrid Name="materias" IsReadOnly="True" MouseDoubleClick="produtosPers_MouseDoubleClick" AutoGenerateColumns="False">
                 <DataGrid.Columns>
-                    <materialDesign:MaterialDataGridTextColumn Binding="{Binding Referencia}" Header="Referencia" ></materialDesign:MaterialDataGridTextColumn>
-                    <materialDesign:MaterialDataGridTextColumn Binding="{Binding Tipo}" Header="Tipo" ></materialDesign:MaterialDataGridTextColumn>
+                    <materialDesign:MaterialDataGridTextColumn SortDirection="Ascending" Binding="{Binding Referencia}" Header="Referencia" ></materialDesign:MaterialDataGridTextColumn>
+                    <materialDesign:MaterialDataGridTextColumn Binding="{Binding Designacao}" Header="Tipo" ></materialDesign:MaterialDataGridTextColumn>
                     <materialDesign:MaterialDataGridTextColumn Binding="{Binding Cor}" Header="Cor" ></materialDesign:MaterialDataGridTextColumn>
-                    <materialDesign:MaterialDataGridTextColumn Binding="{Binding Quantidade}" Header="Quantidade" ></materialDesign:MaterialDataGridTextColumn>
+                    <materialDesign:MaterialDataGridTextColumn Binding="{Binding QuantidadeSelecionadaD}" Header="Quantidade" ></materialDesign:MaterialDataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>

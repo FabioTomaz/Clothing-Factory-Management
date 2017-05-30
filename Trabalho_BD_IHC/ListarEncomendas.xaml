@@ -6,7 +6,7 @@
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:local="clr-namespace:Trabalho_BD_IHC"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
+      d:DesignHeight="600" d:DesignWidth="900"
       Title="ListarEncomendas"  Loaded="Page_Loaded">
     <Grid Background="White">
         <Grid.ColumnDefinitions>
@@ -59,15 +59,69 @@
             </Grid>
         </GroupBox>
         <GroupBox Grid.Column="3" Grid.Row="1" Header="Listagem de Encomendas da Empresa">
-            <DataGrid IsReadOnly="True" AutoGenerateColumns="False" Name="encomendas" Grid.Row="1" SelectionChanged="encomendas_SelectionChanged">
-                <DataGrid.Columns>
-                    <materialDesign:MaterialDataGridTextColumn  Header="Nº Encomenda" Binding="{Binding NEncomenda}" />
-                    <materialDesign:MaterialDataGridTextColumn Header="Nº Cliente"  Binding="{Binding Cliente.NCliente}" />
-                    <materialDesign:MaterialDataGridTextColumn Header="Estado Encomenda" Binding="{Binding Estado}" />
-                    <materialDesign:MaterialDataGridTextColumn Header="Data de Entrega Prevista" Binding="{Binding DataPrevistaEntrega, StringFormat=d}" />
-                    <materialDesign:MaterialDataGridTextColumn Header="Preço(€)" Binding="{Binding Preco}" />
-                </DataGrid.Columns>
-            </DataGrid>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition ></RowDefinition>
+                </Grid.RowDefinitions>
+                <materialDesign:ColorZone Mode="PrimaryMid" Grid.Row="0" Padding="10">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition Height="10"></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <materialDesign:ColorZone Mode="Standard" Padding="8 4 8 4" CornerRadius="2" Panel.ZIndex="1"
+                                       materialDesign:ShadowAssist.ShadowDepth="Depth1" Grid.Column="0" Grid.ColumnSpan="2">
+                            <Grid >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Button Style="{DynamicResource MaterialDesignToolButton}">
+                                    <materialDesign:PackIcon Kind="Magnify" Opacity=".56" />
+                                </Button>
+                                <TextBox Name="txtnomeCl"  Grid.Column="1" Margin="8 0 0 0" materialDesign:HintAssist.Hint="Pesquisar..." 
+                                         materialDesign:TextFieldAssist.DecorationVisibility="Hidden" BorderThickness="0"
+                                         MinWidth="200" VerticalAlignment="Center" KeyDown="txtnomeCl_KeyDown"/>
+                                <Button  Grid.Column="2" Style="{DynamicResource MaterialDesignToolForegroundButton}" Margin="8 0 0 0" Panel.ZIndex="0" Click="Button_Click">
+                                    <materialDesign:PackIcon Kind="Send" />
+                                </Button>
+                            </Grid>
+                        </materialDesign:ColorZone>
+                        <Expander HorizontalAlignment="Stretch" Header="Tipo de Pesquisa" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Foreground="Black">
+                            <Grid TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Label Content="Pesquisar por:  " HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0"></Label>
+                                <RadioButton GroupName="tipoPesquisa" IsEnabled="True"  Name="pesquisaNENCOMENDA" Content="Numero de Encomenda" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center"></RadioButton>
+                                <RadioButton GroupName="tipoPesquisa"  Name="pesquisaNCLIENTE" Content="Numero de Cliente" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center"></RadioButton>
+                            </Grid>
+                        </Expander>
+                    </Grid>
+                </materialDesign:ColorZone>
+                <DataGrid IsReadOnly="True" AutoGenerateColumns="False" Name="encomendas" Grid.Row="1" SelectionChanged="encomendas_SelectionChanged">
+                    <DataGrid.Columns>
+                        <materialDesign:MaterialDataGridTextColumn SortDirection="Ascending" Header="Nº Encomenda" Binding="{Binding NEncomenda}" />
+                        <materialDesign:MaterialDataGridTextColumn Header="Nº Cliente"  Binding="{Binding Cliente.NCliente}" />
+                        <materialDesign:MaterialDataGridTextColumn Header="Estado Encomenda" Binding="{Binding Estado}" />
+                        <materialDesign:MaterialDataGridTextColumn Header="Data de Entrega Prevista" Binding="{Binding DataPrevistaEntrega, StringFormat=d}" />
+                        <materialDesign:MaterialDataGridTextColumn Header="Preço(€)" Binding="{Binding Preco}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
         </GroupBox>
     </Grid>
 </Page>

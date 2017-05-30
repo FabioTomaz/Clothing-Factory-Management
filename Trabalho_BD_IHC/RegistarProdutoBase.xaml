@@ -7,7 +7,7 @@
       xmlns:wpfTool="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
       xmlns:local="clr-namespace:Trabalho_BD_IHC"
       mc:Ignorable="d" 
-      d:DesignHeight="600" d:DesignWidth="600"
+      d:DesignHeight="600" d:DesignWidth="900"
       Title="RegistarProdutoBase">
     <Grid Background="White">
         <Grid.ColumnDefinitions>
@@ -74,10 +74,12 @@
                 <Label Content="Nome do Produto:" Grid.Row="3" Grid.ColumnSpan="2" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                 <TextBox Name="txtNomeModelo" VerticalAlignment="Center" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="7" HorizontalAlignment="Left"
                            materialDesign:HintAssist.Hint="Indique o Nome do Produto que Pretende Registar" materialDesign:HintAssist.IsFloating="True"  />
-
-                <Label Content="IVA Aplicavel ao Produto: " Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                <Slider Name="txtIva" VerticalAlignment="Center" Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="3" Maximum="100.0" Minimum="0.00" Value="0.0" ></Slider>
-                <Label Grid.Column="5" Grid.Row="5" VerticalAlignment="Center">%</Label>
+                <Label Content="IVA Aplicavel ao Produto: "  Grid.Row="5" Grid.Column="0"  Grid.ColumnSpan="2" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                <StackPanel Grid.Row="5" Grid.Column="2" Orientation="Horizontal" Grid.ColumnSpan="4" VerticalAlignment="Center" HorizontalAlignment="Left">
+                    <Slider TickFrequency="1" IsSnapToTickEnabled="True"  Name="txtIva" VerticalAlignment="Center" Maximum="100" Minimum="0" Value="0" Width="250"></Slider>
+                    <TextBox x:Name="myTextBox" Margin="5,0,0,0" Text="{Binding ElementName=txtIva,Path=Value}" VerticalAlignment="Center"/>
+                    <Label VerticalAlignment="Center">%</Label>
+                </StackPanel>
                 <GroupBox materialDesign:ShadowAssist.ShadowDepth="Depth3" materialDesign:ColorZoneAssist.Mode="Accent" BorderThickness="0" Grid.RowSpan="3" Header="Instruções de Produção: " Grid.Row="7" Grid.ColumnSpan="6" VerticalAlignment="Top">
                 <TextBox AcceptsTab="True" AcceptsReturn="True" TextWrapping="Wrap" Name="txtInstruçoes" 
                          VerticalAlignment="Bottom"  

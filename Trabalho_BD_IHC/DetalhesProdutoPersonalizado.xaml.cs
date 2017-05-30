@@ -37,16 +37,17 @@ namespace Trabalho_BD_IHC
             normasEtiqueta.Text = prod.Etiqueta.Normas.ToString();
             paisEtiqueta.Text = prod.Etiqueta.PaisFabrico.ToString();
             composicaoEtiqueta.Text = prod.Etiqueta.Composicao.ToString();
+            materias.ItemsSource = dataHandler.getMateriaisFromProdutoPersonalizado(prod);
         }
 
         private void produtosPers_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            //MaterialTextil produtoSelecionado = ((MaterialTextil)materias.SelectedItem);
-            //if (produtoSelecionado != null)
-            //{
-            //    DetalhesMaterial window = new DetalhesMaterial(dataHandler, );
-            //    window.Show();
-            //}
+            MaterialTextil produtoSelecionado = ((MaterialTextil)materias.SelectedItem);
+            if (produtoSelecionado != null)
+            {
+                DetalhesMaterial window = new DetalhesMaterial(dataHandler, produtoSelecionado);
+                window.Show();
+            }
         }
     }
 }
