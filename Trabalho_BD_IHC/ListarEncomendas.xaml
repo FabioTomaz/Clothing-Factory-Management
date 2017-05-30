@@ -106,7 +106,7 @@
                                     <RowDefinition></RowDefinition>
                                 </Grid.RowDefinitions>
                                 <Label Content="Pesquisar por:  " HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0"></Label>
-                                <RadioButton GroupName="tipoPesquisa" IsEnabled="True"  Name="pesquisaNENCOMENDA" Content="Numero de Encomenda" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center"></RadioButton>
+                                <RadioButton GroupName="tipoPesquisa" IsChecked="True"  Name="pesquisaNENCOMENDA" Content="Numero de Encomenda" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center"></RadioButton>
                                 <RadioButton GroupName="tipoPesquisa"  Name="pesquisaNCLIENTE" Content="Numero de Cliente" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center"></RadioButton>
                             </Grid>
                         </Expander>

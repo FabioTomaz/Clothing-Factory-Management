@@ -1,6 +1,3 @@
-USE [GESTAO-FABRICA-VESTUARIO-LABORAL]
-GO
-
 INSERT INTO CLIENTE (NOME, NIB, NIF, EMAIL, TELEMOVEL, CODPOSTAL1, CODPOSTAL2, RUA, N_PORTA) VALUES
 	('Bruno Silva', 784526412578965412354, 222444489, 'bjpsilva@hotmail.com', 919225360, 3865, 229, 'Maria de Lurdes Breu', 10),
 	('Andreia Pires', 784526412548965412354, 222544489, 'bjpsilva533@gmail.com', 919225361, 3865,229, 'Avenida da Liberdade', 25),
@@ -11,7 +8,7 @@ INSERT INTO UTILIZADOR (NOME, EMAIL, SALARIO, PASS, TELEFONE, N_FABRICA,
 HORA_ENTRADA, HORA_SAIDA, CODPOSTAL1, CODPOSTAL2, RUA, N_PORTA, N_FUNCIONARIO_SUPER) VALUES
 	('António Cruz', 'acruz@mail.pt', 1000, 'cruz33', 925447557, 1, '09:30:00 AM', '18:00:00 PM', 4435,605, 'rua da Feira', 12, 1),
 	('Rui Jorge', 'rjorge@mail.pt', 1200, 'jorge33', 91475557, 1, '09:30:00 AM', '18:00:00 PM', 2865,467, 'rua da caridade', 12, 1),
-	('José Pacheco', 'jospach@mail.pt', 1500, 'pch45', 91511710, 1, '09:00:00 AM', '17:00:00 PM', 4960,619, 'rua Maria Breu', 20, 1);
+	('José Pacheco', 'jospach@mail.pt', 1500, 'pch45', 91511710, 1, '09:00:00 AM', '17:00:00 PM', 3750, 589, 'rua Maria Breu', 20, 1);
 
 INSERT INTO [UTILIZADOR-TIPOS](UTILIZADOR, ID_TIPO) VALUES
 	(2,2),

@@ -17,7 +17,7 @@
         <Grid.RowDefinitions>
         </Grid.RowDefinitions>
         <dragablz:TabablzControl  Grid.Column="1" Grid.Row="0" Grid.RowSpan="11">
-            <TabItem Name="produtoBase" Header="Modelo" Grid.Column="1" Grid.Row="0" Loaded="Page_Load">
+            <TabItem Name="produtoBase" Header="Desenho de Produtos" Grid.Column="1" Grid.Row="0" Loaded="Page_Load">
                 <Grid Background="White">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="24*"/>
@@ -52,30 +52,85 @@
                                 <RowDefinition Height="0.1*"></RowDefinition>
                             </Grid.RowDefinitions>
                             <Button x:Name="registarProdutoBase" Grid.Row="1" Grid.Column="1" Style="{StaticResource registarButton}" Click="registarProdutoBase_click">
-                                <TextBlock TextWrapping="Wrap">Registar um novo Modelo</TextBlock>
+                                <TextBlock TextWrapping="Wrap">Registar Desenho</TextBlock>
                             </Button>
                             <Button x:Name="editarProdutoBase" Grid.Row="3" Grid.Column="1" Style="{StaticResource editarButton}" IsEnabled="False" Click="EditarProdutoBase_click">
-                                <TextBlock TextWrapping="Wrap">Editar Modelo</TextBlock>
+                                <TextBlock TextWrapping="Wrap">Editar Desenho</TextBlock>
                             </Button>
                             <Button x:Name="detalhesProdutoBase" Click="detalhesProdutoBase_Click" Grid.Row="5" Grid.Column="1" Style="{StaticResource detalhesButton}" IsEnabled="False">
                                 <TextBlock TextWrapping="Wrap">Ver Mais Detalhes</TextBlock>
                             </Button>
                         </Grid>
                     </GroupBox>
-                    <GroupBox x:Name="produtoBaseGB" Header="Listagem de Modelos da Empresa" Grid.Row="1" Grid.Column="3">
-                        <DataGrid IsReadOnly="True" AutoGenerateColumns="False" Name="produtosBaseLista" SelectionChanged="produtos_SelectionChanged">
-                            <DataGrid.Columns>
-                                <materialDesign:MaterialDataGridTextColumn Header="Referência" Binding="{Binding Referencia}" />
-                                <materialDesign:MaterialDataGridTextColumn Header="Nome"  Binding="{Binding Nome}" />
-                                <materialDesign:MaterialDataGridTextColumn Header="Autor" Binding="{Binding GestorProducao.Nome}" />
-                                <materialDesign:MaterialDataGridTextColumn Header="Ultima Modificação" Binding="{Binding DataAlteraçao, StringFormat=d}" />
-                            </DataGrid.Columns>
-                        </DataGrid>
+                    <GroupBox x:Name="produtoBaseGB" Header="Listagem de Desenhos de Produtos da Empresa" Grid.Row="1" Grid.Column="3">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition ></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <materialDesign:ColorZone Mode="PrimaryMid" Grid.Row="0" Padding="10">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition></RowDefinition>
+                                        <RowDefinition Height="10"></RowDefinition>
+                                        <RowDefinition></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <materialDesign:ColorZone Mode="Standard" Padding="8 4 8 4" CornerRadius="2" Panel.ZIndex="1"
+                                       materialDesign:ShadowAssist.ShadowDepth="Depth1" Grid.Column="0" Grid.ColumnSpan="2">
+                                        <Grid >
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <Button Style="{DynamicResource MaterialDesignToolButton}">
+                                                <materialDesign:PackIcon Kind="Magnify" Opacity=".56" />
+                                            </Button>
+                                            <TextBox Name="txtnomeCl" KeyUp="txtnomeCl_KeyUp"  Grid.Column="1" Margin="8 0 0 0" materialDesign:HintAssist.Hint="Pesquisa por Nome" 
+                                         materialDesign:TextFieldAssist.DecorationVisibility="Hidden" BorderThickness="0"
+                                         MinWidth="200" VerticalAlignment="Center"/>
+                                            <Button  Grid.Column="2" Style="{DynamicResource MaterialDesignToolForegroundButton}" Margin="8 0 0 0" Panel.ZIndex="0" Click="Button_Click">
+                                                <materialDesign:PackIcon Kind="Send" />
+                                            </Button>
+                                        </Grid>
+                                    </materialDesign:ColorZone>
+                                    <Expander HorizontalAlignment="Stretch" Header="Tipo de Pesquisa" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Foreground="Black">
+                                        <Grid TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                                                <ColumnDefinition></ColumnDefinition>
+                                                <ColumnDefinition></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                            </Grid.RowDefinitions>
+                                            <Label Content="Pesquisar por:  " HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0"></Label>
+                                            <RadioButton GroupName="tipoPesquisa"  Name="pesquisaREFERENCIA" Content="Referencia do Produto" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center"></RadioButton>
+                                            <RadioButton GroupName="tipoPesquisa"  Name="pesquisaNOME" Content="Nome do Produto" Grid.Column="2" Grid.Row="0" VerticalAlignment="Center"></RadioButton>
+                                            <RadioButton GroupName="tipoPesquisa"  Name="pesquisaGESTOR" Content="Criador do Desenho" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center"></RadioButton>
+                                        </Grid>
+                                    </Expander>
+                                </Grid>
+                            </materialDesign:ColorZone>
+                            <DataGrid IsReadOnly="True" Grid.Row="1" AutoGenerateColumns="False" Name="produtosBaseLista" SelectionChanged="produtos_SelectionChanged">
+                                <DataGrid.Columns>
+                                    <materialDesign:MaterialDataGridTextColumn Header="Referência" Binding="{Binding Referencia}" />
+                                    <materialDesign:MaterialDataGridTextColumn Header="Nome"  Binding="{Binding Nome}" />
+                                    <materialDesign:MaterialDataGridTextColumn Header="Autor" Binding="{Binding GestorProducao.Nome}" />
+                                    <materialDesign:MaterialDataGridTextColumn Header="Ultima Modificação" Binding="{Binding DataAlteraçao, StringFormat=d}" />
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Grid>
                     </GroupBox>
                 </Grid>
 
             </TabItem>
-            <TabItem Name ="produtoPers" Header="Produto" Grid.Column="1" Grid.Row="0" Loaded="Page_Load">
+            <TabItem Name ="produtoPers" Header="Produtos" Grid.Column="1" Grid.Row="0" Loaded="Page_Load">
                 <Grid Background="White">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="24*"/>
@@ -110,7 +165,7 @@
                                 <RowDefinition Height="0.1*"></RowDefinition>
                             </Grid.RowDefinitions>
                             <Button x:Name="registarProdutoPersonalizado" Grid.Row="1" Grid.Column="1" Style="{StaticResource registarButton}" Click="registarProdutoPers_click">
-                                <TextBlock TextWrapping="Wrap">Registar novo Produto</TextBlock>
+                                <TextBlock TextWrapping="Wrap">Registar Produto</TextBlock>
                             </Button>
                             <Button x:Name="produzirProduto" Style="{StaticResource adicionarButton}" Grid.Row="3" Grid.Column="1" Click="ProduzirProdutoPers_click" IsEnabled="False">
                                 <TextBlock TextWrapping="Wrap">Produzir Produto</TextBlock>

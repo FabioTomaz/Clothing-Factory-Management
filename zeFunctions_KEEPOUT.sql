@@ -1,7 +1,3 @@
-USE [GESTAO-FABRICA-VESTUARIO-LABORAL]
-GO
-
-
 
  CREATE FUNCTION dbo.getTypeID (@type varchar(50) ) RETURNS INT
 AS
@@ -24,6 +20,3 @@ AS
 		return @pass
 	END
 GO
-
-SELECT dbo.getUserPass(1)
-

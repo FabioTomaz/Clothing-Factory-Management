@@ -1,6 +1,3 @@
-USE [GESTAO-FABRICA-VESTUARIO-LABORAL]
-GO
-
 CREATE FUNCTION dbo.getEncomendasMes () RETURNS int
 AS
 BEGIN
@@ -10,6 +7,7 @@ BEGIN
 	WHERE Year(DATA_ENTREGA_PREV) = Year(CURRENT_TIMESTAMP) AND Month(DATA_ENTREGA_PREV) = Month(CURRENT_TIMESTAMP)
 	RETURN @x;
 END
+GO
 
 CREATE FUNCTION dbo.getDinheiroGeradoMes() RETURNS decimal(10,2)
 BEGIN
@@ -23,6 +21,7 @@ BEGIN
 	WHERE Year(DATA_ENTREGA) = Year(CURRENT_TIMESTAMP) AND Month(DATA_ENTREGA) = Month(CURRENT_TIMESTAMP);
 	RETURN @x;
 END
+GO
 
 
 CREATE FUNCTION dbo.getDinheiroGastoMes() RETURNS decimal(10,2)
@@ -42,7 +41,7 @@ BEGIN
 	WHERE Year(DATA_ENTREGA) = Year(CURRENT_TIMESTAMP) AND Month(DATA_ENTREGA) = Month(CURRENT_TIMESTAMP);
 	RETURN @x;
 END
-
+GO
 
 CREATE FUNCTION dbo.getLucroGeradoMes() RETURNS decimal(10,2)
 BEGIN
@@ -54,6 +53,7 @@ BEGIN
 	set @lucro = @dinheiroGerado-@dinheiroGasto;
 	return @lucro;
 END
+GO
 
 CREATE FUNCTION dbo.getProdutoMaisVendidoMes() RETURNS TABLE
 AS
