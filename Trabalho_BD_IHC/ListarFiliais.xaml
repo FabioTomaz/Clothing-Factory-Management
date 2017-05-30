@@ -141,7 +141,7 @@
                         </materialDesign:ColorZone>
                         <DataGrid IsReadOnly="True" AutoGenerateColumns="False" Name="Filiais" Grid.Row="1" SelectionChanged="Filiais_SelectionChanged">
                             <DataGrid.Columns>
-                                <materialDesign:MaterialDataGridTextColumn Header="Nº Filial" Binding="{Binding NFilial}" />
+                                <materialDesign:MaterialDataGridTextColumn SortDirection="Ascending" Header="Nº Filial" Binding="{Binding NFilial}" />
                                 <materialDesign:MaterialDataGridTextColumn Header="E-mail" Binding="{Binding Email}"/>
                                 <materialDesign:MaterialDataGridTextColumn Header="Telefone" Binding="{Binding Telefone}"/>
                                 <materialDesign:MaterialDataGridTextColumn Header="Distrito" Binding="{Binding Localizacao.Distrito}"/>

@@ -124,8 +124,8 @@
                     <DataGrid Grid.Row="1"  Name="Fornecedores" SelectionChanged="Fornecedores_SelectionChanged" 
                               IsReadOnly="True" SelectionUnit="FullRow" AutoGenerateColumns="False">
                         <DataGrid.Columns>
+                            <materialDesign:MaterialDataGridTextColumn SortDirection="Ascending" Header="Fornecedor" Binding="{Binding Nome}" />
                             <materialDesign:MaterialDataGridTextColumn Header="NIF" Binding="{Binding NIF_Fornecedor}" />
-                            <materialDesign:MaterialDataGridTextColumn Header="Fornecedor" Binding="{Binding Nome}" />
                             <materialDesign:MaterialDataGridTextColumn Header="Designação" Binding="{Binding Designacao}" />
                             <materialDesign:MaterialDataGridTextColumn Header="Telefone" Binding="{Binding Telefone}" />
                             <materialDesign:MaterialDataGridTextColumn Header="E-mail" Binding="{Binding Email}" />

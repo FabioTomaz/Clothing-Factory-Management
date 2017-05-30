@@ -18,7 +18,12 @@ namespace Trabalho_BD_IHC
         private String quantidadeStock;
         private double quantidadeSelecionadaD;
         private double quantidadeStockD;
+        private double preco;
 
+        public MaterialTextil()
+        {
+            this.fornecedor = new Fornecedor();
+        }
 
         public int Referencia
         {
@@ -147,6 +152,19 @@ namespace Trabalho_BD_IHC
             set
             {
                 quantidadeSelecionada = value;
+            }
+        }
+
+        public double Preco
+        {
+            get
+            {
+                return preco;
+            }
+
+            set
+            {
+                preco = value;
             }
         }
     }

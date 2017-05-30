@@ -7,7 +7,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Trabalho_BD_IHC"
       mc:Ignorable="d" 
-      d:DesignHeight="600" d:DesignWidth="600"
+      d:DesignHeight="600" d:DesignWidth="900"
       Title="EditarProdutoBase">
     <Grid Background="White">
         <Grid.ColumnDefinitions>
@@ -75,8 +75,11 @@
                 <Label Name="txtNomeModelo" VerticalAlignment="Center" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="7" HorizontalAlignment="Left"/>
 
                 <Label Content="IVA Aplicavel ao Produto: " Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                <Slider Name="txtIva" VerticalAlignment="Center" Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="3" Maximum="100.0" Minimum="0.00" Value="0.0" ></Slider>
-                <Label Grid.Column="5" Grid.Row="5" VerticalAlignment="Center">%</Label>
+                <StackPanel Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="6" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
+                    <Slider TickFrequency="1" IsSnapToTickEnabled="True"  Name="txtIva" VerticalAlignment="Center" Maximum="100" Minimum="0" Value="0" Width="250"></Slider>
+                    <TextBox x:Name="myTextBox" Margin="5,0,0,0" Text="{Binding ElementName=txtIva,Path=Value}" VerticalAlignment="Center"/>
+                    <Label VerticalAlignment="Center">%</Label>
+                </StackPanel>                <Label Grid.Column="5" Grid.Row="5" VerticalAlignment="Center">%</Label>
                 <GroupBox materialDesign:ShadowAssist.ShadowDepth="Depth3" materialDesign:ColorZoneAssist.Mode="Accent" BorderThickness="0" Grid.RowSpan="3" Header="Instruções de Produção: " Grid.Row="7" Grid.ColumnSpan="6" VerticalAlignment="Top">
                     <TextBox AcceptsTab="True" AcceptsReturn="True" TextWrapping="Wrap" Name="txtInstruçoes" 
                          VerticalAlignment="Bottom"  

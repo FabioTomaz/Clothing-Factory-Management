@@ -47,7 +47,7 @@ namespace Trabalho_BD_IHC
 
         private void cancelar_Click(object sender, RoutedEventArgs e)
         {
-            if (MessageBox.Show("Tem a certeza que deseja cancelar o registo do produto? Perderá todos os dados que tenha introduzido",
+            if (Xceed.Wpf.Toolkit.MessageBox.Show("Tem a certeza que deseja cancelar o registo do produto? Perderá todos os dados que tenha introduzido",
                 "", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {//sim
                 this.NavigationService.GoBack();
@@ -59,28 +59,28 @@ namespace Trabalho_BD_IHC
             //verificar se um tamanho foi selecionado
             if (cbTamanho.SelectedIndex <= -1)
             {
-                MessageBox.Show("Por favor, selecione o tamanho a atribuir ao produto!", "", MessageBoxButton.OK, MessageBoxImage.Error);
+                Xceed.Wpf.Toolkit.MessageBox.Show("Por favor, selecione o tamanho a atribuir ao produto!", "", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             //verificar se uma cor foi selecionada
             if (txtCor.SelectedColorText == "")
             {
-                MessageBox.Show("Por favor, selecione uma cor a atribuir ao produto!", "", MessageBoxButton.OK, MessageBoxImage.Error);
+                Xceed.Wpf.Toolkit.MessageBox.Show("Por favor, selecione uma cor a atribuir ao produto!", "", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             if (txtPreço.Text == "")
             {
-                MessageBox.Show("Por favor, indique o preço a atribuir ao produto!", "", MessageBoxButton.OK, MessageBoxImage.Error);
+                Xceed.Wpf.Toolkit.MessageBox.Show("Por favor, indique o preço a atribuir ao produto!", "", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             if (Convert.ToDouble(txtPreço.Text) <= 0)
             {
-                MessageBox.Show("O preço do produto deve ser maior que 0!", "", MessageBoxButton.OK, MessageBoxImage.Error);
+                Xceed.Wpf.Toolkit.MessageBox.Show("O preço do produto deve ser maior que 0!", "", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             if (rdEtiquetaExis.IsChecked == false && rdEtiquetaNova.IsChecked == false)
             {
-                MessageBox.Show("Por favor, adicione uma etiqueta existente ao produto, ou crie uma nova!", "", MessageBoxButton.OK, MessageBoxImage.Error);
+                Xceed.Wpf.Toolkit.MessageBox.Show("Por favor, adicione uma etiqueta existente ao produto, ou crie uma nova!", "", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             //validar os formularios de preenchimento de uma etiqueta nova
@@ -88,22 +88,22 @@ namespace Trabalho_BD_IHC
             {
                 if (txtNormas.Text.Length == 0 || txtComp.Text.Length == 0 || txtPais.Text.Length == 0)
                 {
-                    MessageBox.Show("Por favor, preencha todos os campos relativos à criação de nova etiqueta!", "", MessageBoxButton.OK, MessageBoxImage.Error);
+                    Xceed.Wpf.Toolkit.MessageBox.Show("Por favor, preencha todos os campos relativos à criação de nova etiqueta!", "", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
                 else if (txtNormas.Text.Length > 100)
                 {
-                    MessageBox.Show("A especificação das normas é demasiado longa! Indique apenas o essencial.", "", MessageBoxButton.OK, MessageBoxImage.Error);
+                    Xceed.Wpf.Toolkit.MessageBox.Show("A especificação das normas é demasiado longa! Indique apenas o essencial.", "", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
                 else if (txtComp.Text.Length > 100)
                 {
-                    MessageBox.Show("A especificação da composição da etiqueta é demasiado longa! Indique apenas o essencial.", "", MessageBoxButton.OK, MessageBoxImage.Error);
+                    Xceed.Wpf.Toolkit.MessageBox.Show("A especificação da composição da etiqueta é demasiado longa! Indique apenas o essencial.", "", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
                 else if (txtComp.Text.Length > 20)
                 {
-                    MessageBox.Show("O nome do País especificado é demasiado longo! Use acrónimos ou abreviações.", "", MessageBoxButton.OK, MessageBoxImage.Error);
+                    Xceed.Wpf.Toolkit.MessageBox.Show("O nome do País especificado é demasiado longo! Use acrónimos ou abreviações.", "", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
             }

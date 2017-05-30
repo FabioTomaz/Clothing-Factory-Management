@@ -102,5 +102,21 @@ namespace Trabalho_BD_IHC
             if (items != null)
                 encomendas.ItemsSource = items;
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (pesquisaNCLIENTE.IsEnabled)
+            {
+
+            }else
+            {
+
+            }
+        }
+
+        private void txtnomeCl_KeyDown(object sender, KeyEventArgs e)
+        {
+
+        }
     }
 }

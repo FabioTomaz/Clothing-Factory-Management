@@ -42,7 +42,7 @@
                     <ColumnDefinition Width="0.1*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Label Name="labelEmpregado" VerticalAlignment="Center" Content="Nº de Empregado: " Grid.Row="1" Grid.Column="1"/>
-                <TextBox Name="nEmpregado" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center"/>
+                <TextBox Name="nEmpregado" PreviewTextInput="nEmpregado_PreviewTextInput" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center"/>
                 <Label Name="labelPassword" VerticalAlignment="Center" Content="Password: " Grid.Row="3" Grid.Column="1"></Label>
                 <PasswordBox Name="password" Grid.Row="3" Grid.Column="2" VerticalAlignment="Center"/>
                 <TextBox Name="passwordText" Grid.Row="3" Grid.Column="2" VerticalAlignment="Center" Visibility="Hidden"></TextBox>
@@ -55,7 +55,7 @@
         <Button Grid.Column="3" Grid.Row="2" IsDefault="True" VerticalAlignment="Center" Style="{StaticResource confirmarButton}" Click="Button_Click">
                 Login
             </Button>
-        <Button Grid.Column="1" Grid.Row="2" Style="{StaticResource MaterialDesignRaisedDarkButton}" ToolTip="Obtenha Ajuda Sobre o Inicio de Sessão no Sistema" VerticalAlignment="Center" Click="Button_Click_1">
+        <Button Grid.Column="1" Grid.Row="2" Click="Button_Click_2" Style="{StaticResource MaterialDesignRaisedDarkButton}" ToolTip="Obtenha Ajuda Sobre o Inicio de Sessão no Sistema" VerticalAlignment="Center" >
                 Ajuda
             </Button>
         

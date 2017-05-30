@@ -25,4 +25,3 @@ AS
 	END
 GO
 
-SELECT dbo.getUserPass(1)

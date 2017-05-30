@@ -32,8 +32,6 @@ namespace Trabalho_BD_IHC
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             adicionarMaterial.IsEnabled = false;
-            removerMaterial.IsEnabled = false;
-            editarMaterial.IsEnabled = false;
             detalhesMaterial.IsEnabled = false;
             materiais.Focus();
             materiais.ItemsSource = dataHandler.getMateriaisFromDB();
@@ -45,8 +43,6 @@ namespace Trabalho_BD_IHC
             if (materiais.SelectedItems.Count > 0)
             {
                 adicionarMaterial.IsEnabled = true;
-                removerMaterial.IsEnabled = true;
-                editarMaterial.IsEnabled = true;
                 detalhesMaterial.IsEnabled = true;
             }
         }
