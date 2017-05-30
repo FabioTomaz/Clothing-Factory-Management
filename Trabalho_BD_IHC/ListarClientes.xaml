@@ -124,7 +124,7 @@
                     <DataGrid Grid.Row="1"  Name="clientes" SelectionChanged="clientes_SelectionChanged" 
                               IsReadOnly="True" SelectionUnit="FullRow" AutoGenerateColumns="False">
                         <DataGrid.Columns>
-                            <materialDesign:MaterialDataGridTextColumn SortDirection="Ascending" Header="Nº de Cliente" Binding="{Binding Nif}" />
+                            <materialDesign:MaterialDataGridTextColumn SortDirection="Ascending" Header="Nº de Cliente" Binding="{Binding NCliente}" />
                             <materialDesign:MaterialDataGridTextColumn Header="Name"  Binding="{Binding Nome}" />
                             <materialDesign:MaterialDataGridTextColumn Header="Mail" Binding="{Binding Email}" />
                             <materialDesign:MaterialDataGridTextColumn Header="Telemovel" Binding="{Binding Telemovel}" />

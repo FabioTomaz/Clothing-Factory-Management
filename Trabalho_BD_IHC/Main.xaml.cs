@@ -104,10 +104,15 @@ namespace Trabalho_BD_IHC
         {
             Utilizador.loggedUser = dataHandler.getUtilizadorFromDB(Utilizador.loggedUser.NFuncionario);
             fillUserInfo();
+            fillNotifications();
         }
 
         public void fillNotifications()
         {
+            for(int i=0; i<notificationStack.Children.Count; i++)
+            {
+                notificationStack.Children.RemoveAt(i);
+            }
             int encomendasMes = dataHandler.getEncomendasDesteMes();
             MaterialDesignThemes.Wpf.Card chip1 = new MaterialDesignThemes.Wpf.Card
             {
@@ -123,16 +128,16 @@ namespace Trabalho_BD_IHC
             double dinheiroGasto = dataHandler.getDinheiroGastoMes();
             double dinheiroGerado = dataHandler.getDinheiroGeradoMes();
 
-            MaterialDesignThemes.Wpf.Card chip2 = new MaterialDesignThemes.Wpf.Card
-            {
-                Content = new TextBlock
-                {
-                    Text = "Neste mês foram vendidos até ao momento " + dinheiroGerado + " euros em produtos. No entanto foram gastos" + dinheiroGasto + " euros em matérias primas gerando um saldo final de " + lucroMes + " euros.",
-                    TextWrapping = TextWrapping.Wrap
-                },
-                Margin = new Thickness(0, 4, 0, 0)
-            };
-            notificationStack.Children.Add(chip2);
+            //MaterialDesignThemes.Wpf.Card chip2 = new MaterialDesignThemes.Wpf.Card
+            //{
+            //    Content = new TextBlock
+            //    {
+            //        Text = "Neste mês foram vendidos até ao momento " + dinheiroGerado + " euros em produtos. No entanto foram gastos" + dinheiroGasto + " euros em matérias primas gerando um saldo final de " + lucroMes + " euros.",
+            //        TextWrapping = TextWrapping.Wrap
+            //    },
+            //    Margin = new Thickness(0, 4, 0, 0)
+            //};
+            //notificationStack.Children.Add(chip2);
 
             int nProdutos = dataHandler.getNProdutosVendidosAteHoje();
             MaterialDesignThemes.Wpf.Card chip3 = new MaterialDesignThemes.Wpf.Card
@@ -234,6 +239,7 @@ namespace Trabalho_BD_IHC
                 materiaisFrame.Content = new ListarMateriais(dataHandler);
                 empregadosFrame.Content = new ListarEmpregados(dataHandler);
                 filiaisFrame.Content = new ListarFiliais(dataHandler);
+                refresh();
                 listarFornecedores.refresh();
             }
         }

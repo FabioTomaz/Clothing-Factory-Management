@@ -233,13 +233,13 @@
                             </materialDesign:ColorZone>
                             <DataGrid Name="produtosPersonalizadosLista" AutoGenerateColumns="False" Grid.Row="1" IsReadOnly="True" SelectionChanged="produtos_SelectionChanged">
                             <DataGrid.Columns>
-                                <materialDesign:MaterialDataGridTextColumn Header="ID"  Binding="{Binding ID}" />
+                                    <materialDesign:MaterialDataGridTextColumn Header="Referência Desenho" Binding="{Binding ProdutoBase.Referencia}"/>
+                                    <materialDesign:MaterialDataGridTextColumn Header="ID"  Binding="{Binding ID}" />
                                 <materialDesign:MaterialDataGridTextColumn Header="Nome" Binding="{Binding ProdutoBase.Nome}" />
                                 <materialDesign:MaterialDataGridTextColumn Header="Cor" Binding="{Binding Cor}" />
                                 <materialDesign:MaterialDataGridTextColumn Header="Tamanho" Binding="{Binding Tamanho}" />
                                 <materialDesign:MaterialDataGridTextColumn Header="Preço(€)" Binding="{Binding Preco}" />
                                 <materialDesign:MaterialDataGridTextColumn Header="Unidades" Binding="{Binding UnidadesStock}" />
-                                <materialDesign:MaterialDataGridTextColumn Header="Referência Desenho" Binding="{Binding ProdutoBase.Referencia}"/>
                                 </DataGrid.Columns>
                             </DataGrid>
                         </Grid>
