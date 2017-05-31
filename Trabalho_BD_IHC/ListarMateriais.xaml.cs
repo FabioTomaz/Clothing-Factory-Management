@@ -126,14 +126,15 @@ namespace Trabalho_BD_IHC
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e) //procurar materiais
         {
             if (!string.IsNullOrEmpty(input.Text) || Regex.IsMatch(input.Text, @"^\d+$"))
-                materiais.ItemsSource = dataHandler.getMateriais();
+                materiais.ItemsSource = dataHandler.getMaterialFromDB(Convert.ToInt32(input.Text));
             else
                 Xceed.Wpf.Toolkit.MessageBox.Show("Por favor, indique o número da referência de fábrica do material a pesquisar", "Informação", MessageBoxButton.OK, MessageBoxImage.Warning);
 
         }
+
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {

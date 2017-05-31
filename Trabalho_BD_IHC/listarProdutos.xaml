@@ -90,9 +90,9 @@
                                             <Button Style="{DynamicResource MaterialDesignToolButton}">
                                                 <materialDesign:PackIcon Kind="Magnify" Opacity=".56" />
                                             </Button>
-                                            <TextBox Name="txtInput" KeyUp="txtnomeCl_KeyUp"  Grid.Column="1" Margin="8 0 0 0" materialDesign:HintAssist.Hint="Pesquisa por referência" 
-                                             materialDesign:TextFieldAssist.DecorationVisibility="Hidden" BorderThickness="0"
-                                         MinWidth="200" VerticalAlignment="Center"/>
+                                            <TextBox Name="txtInput" Grid.Column="1" Margin="8 0 0 0" materialDesign:HintAssist.Hint="Pesquisar" 
+                                             materialDesign:TextFieldAssist.DecorationVisibility="Hidden" BorderThickness="0" KeyUp="txtsearchMo_KeyUp"
+                                                MinWidth="200" VerticalAlignment="Center"/>
                                             <Button  Grid.Column="2" Style="{DynamicResource MaterialDesignToolForegroundButton}" Margin="8 0 0 0" Panel.ZIndex="0" Click="Button_Click">
                                                 <materialDesign:PackIcon Kind="Send" />
                                             </Button>
@@ -203,7 +203,7 @@
                                             <Button Style="{DynamicResource MaterialDesignToolButton}">
                                                 <materialDesign:PackIcon Kind="Magnify" Opacity=".56" />
                                             </Button>
-                                            <TextBox Name="txtInputPers" KeyUp="txtnomeCl_KeyUp"  Grid.Column="1" Margin="8 0 0 0" materialDesign:HintAssist.Hint="Pesquisa por Nome" 
+                                            <TextBox Name="txtInputPers" KeyUp="txtsearchPro_KeyUp"  Grid.Column="1" Margin="8 0 0 0" materialDesign:HintAssist.Hint="Pesquisar" 
                                              materialDesign:TextFieldAssist.DecorationVisibility="Hidden" BorderThickness="0"
                                          MinWidth="200" VerticalAlignment="Center"/>
                                             <Button  Grid.Column="2" Style="{DynamicResource MaterialDesignToolForegroundButton}" Margin="8 0 0 0" Panel.ZIndex="0" Click="Button_Click_1">

@@ -58,6 +58,8 @@ namespace Trabalho_BD_IHC
             window.Show();
         }
 
+
+
         public void refresh()
         {
             editarEmpregado.IsEnabled = false;
@@ -81,6 +83,13 @@ namespace Trabalho_BD_IHC
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
             empregados.ItemsSource = dataHandler.searchEmpregadosInDB(txtnameSearch.Text);
+        }
+
+        private void txtsearchCl_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key != System.Windows.Input.Key.Enter) return;
+            SearchButton_Click(sender, e);
+            e.Handled = true;
         }
     }
 }

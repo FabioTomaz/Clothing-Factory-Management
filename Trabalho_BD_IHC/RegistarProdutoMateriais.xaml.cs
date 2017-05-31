@@ -43,7 +43,7 @@ namespace Trabalho_BD_IHC
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             e.Handled = true;
-            materiaisView.ItemsSource = dataHandler.getMateriais();
+            materiaisView.ItemsSource = dataHandler.getMateriaisFromDB();
         }
 
         public RegistarProdutoMateriais(DataHandler dataHandler, ProdutoPersonalizado prod)

@@ -33,8 +33,7 @@ namespace Trabalho_BD_IHC
         }
         private SqlConnection getSGBDConnection()
         {
-            return new SqlConnection("data source=tcp: 193.136.175.33\\SQLSERVER2012,8293; initial catalog=p4g3;"
-                + " User ID=p4g3; Password=fabiobruno;");
+            return new SqlConnection("data source=localhost;integrated security=true;initial catalog=GESTAO-FABRICA-VESTUARIO-LABORAL");
         }
         /*db-->> data source=tcp: 193.136.175.33\\SQLSERVER2012,8293; initial catalog=p4g3;"
                 + " User ID=p4g3; Password=fabiobruno;*/
@@ -2300,6 +2299,39 @@ namespace Trabalho_BD_IHC
             return m;
         }
 
+        public ObservableCollection<MaterialTextil> getMaterialFromDB(int refFabrica)
+        {
+            this.verifySGBDConnection();
+            SqlCommand cmd = new SqlCommand("SELECT * "
+                                + " FROM [MATERIAIS_TÊXTEIS] JOIN FORNECEDOR ON FORNECEDOR.NIF=[MATERIAIS_TÊXTEIS].NIF_FORNECEDOR "
+                                + "WHERE REFERENCIA_FABRICA = @ref"
+                                , this.Cn);
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@ref", refFabrica);
+            SqlDataReader reader = cmd.ExecuteReader();
+            ObservableCollection<MaterialTextil> m = new ObservableCollection<MaterialTextil>();
+            while (reader.Read())
+            {
+                MaterialTextil material = new MaterialTextil();
+                material.Fornecedor = new Fornecedor();
+                material.Referencia = Convert.ToInt32(reader["REFERENCIA_FABRICA"].ToString());
+                material.ReferenciaFornecedor = reader["REFERENCIA_FORN"].ToString();
+                material.Cor = reader["COR"].ToString();
+                material.Designacao = reader["DESIGNACAO"].ToString();
+                material.Fornecedor.Nome = reader["NOME"].ToString();
+                material.Fornecedor.NIF_Fornecedor = reader["NIF"].ToString();
+                m.Add(material);
+            }
+            reader.Close();
+            for (int i = 0; i < m.Count; i++)
+            {
+                m.ElementAt(i).TipoMaterial1 = getMaterialType(m.ElementAt(i).Referencia);
+                m.ElementAt(i).QuantidadeStockD = getQuantidadeMaterial(m.ElementAt(i).Referencia);
+            }
+            this.closeSGBDConnection();
+            return m;
+        }
+
         public ObservableCollection<ProdutoPersonalizado> getProdutosContainingMaterial(int refFabrica)
         {
             if (!this.verifySGBDConnection())
@@ -2444,30 +2476,7 @@ namespace Trabalho_BD_IHC
             return produtoPers;
         }
 
-        public ObservableCollection<MaterialTextil> getMateriais()
-        {
-            if (!this.verifySGBDConnection())
-                return null;
-            ObservableCollection<MaterialTextil> materiaisTexteis = new ObservableCollection<MaterialTextil>();
-
-            SqlCommand cmd = new SqlCommand("SELECT * FROM MATERIAIS_TÊXTEIS", this.Cn);
-            SqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
-            {
-                MaterialTextil Mt = new MaterialTextil();
-                Mt.Fornecedor = new Fornecedor();
-                Mt.Referencia = Convert.ToInt32(reader["REFERENCIA_FABRICA"].ToString());
-                Mt.ReferenciaFornecedor = reader["REFERENCIA_FORN"].ToString();
-                Mt.Designacao = reader["DESIGNACAO"].ToString();
-                Mt.Cor = reader["COR"].ToString();
-                Mt.Fornecedor.NIF_Fornecedor = reader["NIF_FORNECEDOR"].ToString();
-                materiaisTexteis.Add(Mt);
-            }
-            reader.Close();
-            this.closeSGBDConnection();
-            return materiaisTexteis;
-        }
-
+        
         public bool EnviarProduto(ProdutoPersonalizado prod, ObservableCollection<MaterialTextil> materiaisSelecionados)
         {
             //registar etiqueta na base de dados primerio

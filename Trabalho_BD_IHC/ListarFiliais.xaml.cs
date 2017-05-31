@@ -62,6 +62,13 @@ namespace Trabalho_BD_IHC
                 Filiais.ItemsSource = dataHandler.searchFiliaisInDB(Convert.ToInt32(txtNfilial.Text));
         }
 
+        private void txtsearchFi_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key != System.Windows.Input.Key.Enter) return;
+            SearchButton_Click(sender, e);
+            e.Handled = true;
+        }
+
         private void registarFilial_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new RegistarFilial(dataHandler));

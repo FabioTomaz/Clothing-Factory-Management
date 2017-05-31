@@ -106,7 +106,7 @@
                                         </Button>
                                         <TextBox Name="txtNfilial" Grid.Column="1" Margin="8 0 0 0" materialDesign:HintAssist.Hint="Pesquisa por Nº de Filial" 
                                          materialDesign:TextFieldAssist.DecorationVisibility="Hidden" BorderThickness="0" PreviewTextInput="NumberValidationTextBox"
-                                         MinWidth="200" VerticalAlignment="Center" />
+                                         MinWidth="200" VerticalAlignment="Center" KeyUp="txtsearchFi_KeyUp" />
                                         <Button  Grid.Column="2" Style="{DynamicResource MaterialDesignToolForegroundButton}" Margin="8 0 0 0" Panel.ZIndex="0" Click="SearchButton_Click">
                                             <materialDesign:PackIcon Kind="Send" />
                                         </Button>

@@ -133,9 +133,11 @@ namespace Trabalho_BD_IHC
             }
         }
 
-        private void txtnomeCl_KeyDown(object sender, KeyEventArgs e)
+        private void txtsearchEn_KeyUp(object sender, KeyEventArgs e)
         {
-
+            if (e.Key != System.Windows.Input.Key.Enter) return;
+            Button_Click(sender, e);
+            e.Handled = true;
         }
     }
 }

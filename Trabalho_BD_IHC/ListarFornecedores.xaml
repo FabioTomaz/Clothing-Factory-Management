@@ -86,7 +86,7 @@
                                         <materialDesign:PackIcon Kind="Magnify" Opacity=".56" />
                                     </Button>
                                     <TextBox Name="txtnomeForn"  Grid.Column="1" Margin="8 0 0 0" materialDesign:HintAssist.Hint="Pesquisa por Nome" 
-                                         materialDesign:TextFieldAssist.DecorationVisibility="Hidden" BorderThickness="0"
+                                         materialDesign:TextFieldAssist.DecorationVisibility="Hidden" BorderThickness="0" KeyUp="txtsearchFo_KeyUp"
                                          MinWidth="200" VerticalAlignment="Center"/>
                                     <Button  Grid.Column="2" Style="{DynamicResource MaterialDesignToolForegroundButton}" Margin="8 0 0 0" Panel.ZIndex="0" Click="searchButton_Click">
                                         <materialDesign:PackIcon Kind="Send" />

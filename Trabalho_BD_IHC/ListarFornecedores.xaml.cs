@@ -76,5 +76,12 @@ namespace Trabalho_BD_IHC
         {
             Fornecedores.ItemsSource = dataHandler.searchFornecedoresInDB(txtnomeForn.Text);
         }
+
+        private void txtsearchFo_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key != System.Windows.Input.Key.Enter) return;
+            searchButton_Click(sender, e);
+            e.Handled = true;
+        }
     }
 }

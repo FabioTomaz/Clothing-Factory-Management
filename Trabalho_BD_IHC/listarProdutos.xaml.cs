@@ -127,10 +127,17 @@ namespace Trabalho_BD_IHC
                 Xceed.Wpf.Toolkit.MessageBox.Show("Por favor, indique a referência do desenho que pretende pesquisar", "Informação", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
 
-        private void txtnomeCl_KeyUp(object sender, KeyEventArgs e)
+        private void txtsearchMo_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.Key != System.Windows.Input.Key.Enter) return;
-            produtosBaseLista.ItemsSource = dataHandler.searchClientesInDB(txtInput.Text);
+            Button_Click(sender, e);
+            e.Handled = true;
+        }
+
+        private void txtsearchPro_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key != System.Windows.Input.Key.Enter) return;
+            Button_Click_1(sender, e);
             e.Handled = true;
         }
 
@@ -141,7 +148,6 @@ namespace Trabalho_BD_IHC
 
             else
                 Xceed.Wpf.Toolkit.MessageBox.Show("Por favor, indique o nº do id do produto que pretende pesquisar", "Informação", MessageBoxButton.OK, MessageBoxImage.Warning);
-
         }
     }
 }
