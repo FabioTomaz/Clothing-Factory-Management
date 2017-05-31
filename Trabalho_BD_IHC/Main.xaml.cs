@@ -45,7 +45,7 @@ namespace Trabalho_BD_IHC
             listarEncomendas = new ListarEncomendas(dataHandler);
             listarProdutos = new ListarProdutos(dataHandler);
             listarMateriais = new ListarMateriais(dataHandler);
-            listarEmpregados = new ListarEmpregados(dataHandler);
+            listarEmpregados = new ListarEmpregados(dataHandler, this);
             listarFornecedores = new ListarFornecedores(dataHandler);
             listarFiliais = new ListarFiliais(dataHandler);
 
@@ -237,7 +237,7 @@ namespace Trabalho_BD_IHC
                 encomendasFrame.Content = new ListarEncomendas(dataHandler);
                 produtosFrame.Content = new ListarProdutos(dataHandler);
                 materiaisFrame.Content = new ListarMateriais(dataHandler);
-                empregadosFrame.Content = new ListarEmpregados(dataHandler);
+                empregadosFrame.Content = new ListarEmpregados(dataHandler, this);
                 filiaisFrame.Content = new ListarFiliais(dataHandler);
                 refresh();
                 listarFornecedores.refresh();

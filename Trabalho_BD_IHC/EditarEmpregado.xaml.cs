@@ -23,12 +23,14 @@ namespace Trabalho_BD_IHC
     public partial class EditarEmpregado : Page
     {
         private DataHandler dataHandler;
+        private MainWindow main;
         Utilizador u;
-        public EditarEmpregado(DataHandler dh, Utilizador u)
+        public EditarEmpregado(DataHandler dh, Utilizador u, MainWindow main)
         {
             InitializeComponent();
             this.dataHandler = dh;
             this.u = u;
+            this.main = main;
             txtNome.Text = u.Nome;
             txtSalario.Text = u.Salario.ToString();
             txtnFilial.Text = u.Filial.NFilial.ToString();

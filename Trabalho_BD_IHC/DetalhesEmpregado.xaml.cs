@@ -89,5 +89,22 @@ namespace Trabalho_BD_IHC
             }
         }
 
+        private void userImage_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left && e.ClickCount == 2 && userImage.Source != null)
+            {
+                Imagem window = new Imagem((BitmapImage)userImage.Source);
+                window.Show();
+            }
+        }
+
+        private void SupImage_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left && e.ClickCount == 2 && SupImage.Source != null)
+            {
+                Imagem window = new Imagem((BitmapImage)SupImage.Source);
+                window.Show();
+            }
+        }
     }
 }

@@ -70,5 +70,11 @@ namespace Trabalho_BD_IHC
                 window.Show();
             }
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Imagem window = new Imagem((BitmapImage)imagemDesenho.Source);
+            window.Show();
+        }
     }
 }

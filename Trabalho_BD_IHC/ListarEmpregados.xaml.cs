@@ -23,9 +23,11 @@ namespace Trabalho_BD_IHC
     public partial class ListarEmpregados : Page
     {
         private DataHandler dataHandler;
-        public ListarEmpregados(DataHandler dataHandler)
+        private MainWindow main;
+        public ListarEmpregados(DataHandler dataHandler, MainWindow main)
         {
             InitializeComponent();
+            this.main = main;
             this.dataHandler = dataHandler;
         }
 
@@ -75,7 +77,7 @@ namespace Trabalho_BD_IHC
                 Xceed.Wpf.Toolkit.MessageBox.Show("Não tem permissões para editar a informação deste empregado!", "", MessageBoxButton.OK, MessageBoxImage.Error);
             else
             {
-                this.NavigationService.Navigate(new EditarEmpregado(dataHandler, u));
+                this.NavigationService.Navigate(new EditarEmpregado(dataHandler, u, main));
             }
 
         }

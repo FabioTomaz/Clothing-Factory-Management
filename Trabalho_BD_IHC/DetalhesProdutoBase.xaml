@@ -60,6 +60,18 @@
 
         </GroupBox>
         <GroupBox Grid.Column="5" Grid.ColumnSpan="3" Grid.Row="1" Grid.RowSpan="3" materialDesign:ColorZoneAssist.Mode="Dark" Header="Imagem do Desenho do Produto" Style="{DynamicResource MaterialDesignCardGroupBox}" Margin="16">
+            <GroupBox.HeaderTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <TextBlock Margin="8,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Imagem do Desenho"  Style="{StaticResource MaterialDesignSubheadingTextBlock}"/>
+                        <Button Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}"
+                                        Margin="0 0 10 0" 
+                                        ToolTip="Aumentar Imagem" Click="Button_Click" HorizontalAlignment="Right">
+                            <materialDesign:PackIcon Kind="ArrowExpand" Height="24" Width="24" />
+                        </Button>
+                    </Grid>
+                </DataTemplate>
+            </GroupBox.HeaderTemplate>
             <Image Name="imagemDesenho" MouseDown="Image_MouseDown"></Image>
         </GroupBox>
         <GroupBox Header="Produtos Personalizados Que Têm por Base este Produto" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="7">
