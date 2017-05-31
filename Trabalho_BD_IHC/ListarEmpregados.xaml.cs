@@ -91,5 +91,10 @@ namespace Trabalho_BD_IHC
             SearchButton_Click(sender, e);
             e.Handled = true;
         }
+
+        private void empregados_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            editarEmpregado_Click(sender, e);
+        }
     }
 }

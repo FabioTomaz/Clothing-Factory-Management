@@ -83,5 +83,11 @@ namespace Trabalho_BD_IHC
             searchButton_Click(sender, e);
             e.Handled = true;
         }
+
+        private void Fornecedores_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            DetalhesFornecedor window = new DetalhesFornecedor(dataHandler, (Fornecedor)Fornecedores.SelectedItem);
+            window.Show();
+        }
     }
 }

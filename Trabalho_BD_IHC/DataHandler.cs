@@ -301,7 +301,7 @@ namespace Trabalho_BD_IHC
             return result;
         }
 
-        public ObservableCollection<Cliente> searchClientesInDB(string nome)
+        public ObservableCollection<Cliente> getClientesInDBFromName(string nome)
         {
             if (!this.verifySGBDConnection())
                 return null;
@@ -329,6 +329,94 @@ namespace Trabalho_BD_IHC
             }
             closeSGBDConnection();
             return items;
+        }
+
+        public ObservableCollection<Cliente> getClientesInDBFromEmail(string email)
+        {
+            if (!this.verifySGBDConnection())
+                return null;
+            SqlCommand cmd = new SqlCommand("SELECT * FROM CLIENTE JOIN ZONA ON CLIENTE.CODPOSTAL1=ZONA.CODPOSTAL1 AND CLIENTE.CODPOSTAL2=ZONA.CODPOSTAL2 "
+                + "WHERE EMAIL LIKE @email", cn);
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@email", "%" + email + "%");
+            SqlDataReader reader = cmd.ExecuteReader();
+            ObservableCollection<Cliente> items = new ObservableCollection<Cliente>();
+            while (reader.Read())
+            {
+                Cliente C = new Cliente();
+                C.Nome = reader["NOME"].ToString();
+                C.Nif = reader["NIF"].ToString();
+                C.Nib = reader["NIB"].ToString();
+                C.Email = reader["EMAIL"].ToString();
+                C.Telemovel = reader["TELEMOVEL"].ToString();
+                C.CodigoPostal = reader["CODPOSTAL1"].ToString() + "-" + reader["CODPOSTAL2"].ToString();
+                C.Rua = reader["RUA"].ToString();
+                C.NCasa = Convert.ToInt32(reader["N_PORTA"].ToString());
+                C.NCliente = Convert.ToInt32(reader["NCLIENTE"].ToString());
+                C.Distrito = reader["DISTRITO"].ToString();
+                C.Localidade = reader["LOCALIDADE"].ToString();
+                items.Add(C);
+            }
+            closeSGBDConnection();
+            return items;
+        }
+
+        public Cliente getClientesInDBnCliente(int nCliente)
+        {
+            if (!this.verifySGBDConnection())
+                return null;
+            SqlCommand cmd = new SqlCommand("SELECT * FROM CLIENTE JOIN ZONA ON CLIENTE.CODPOSTAL1=ZONA.CODPOSTAL1 AND CLIENTE.CODPOSTAL2=ZONA.CODPOSTAL2 "
+                + "WHERE NCLIENTE = @nCliente", cn);
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@nCliente", nCliente);
+            SqlDataReader reader = cmd.ExecuteReader();
+            Cliente C = new Cliente();
+            reader.Read();
+
+
+            C.Nome = reader["NOME"].ToString();
+            C.Nif = reader["NIF"].ToString();
+            C.Nib = reader["NIB"].ToString();
+            C.Email = reader["EMAIL"].ToString();
+            C.Telemovel = reader["TELEMOVEL"].ToString();
+            C.CodigoPostal = reader["CODPOSTAL1"].ToString() + "-" + reader["CODPOSTAL2"].ToString();
+            C.Rua = reader["RUA"].ToString();
+            C.NCasa = Convert.ToInt32(reader["N_PORTA"].ToString());
+            C.NCliente = Convert.ToInt32(reader["NCLIENTE"].ToString());
+            C.Distrito = reader["DISTRITO"].ToString();
+            C.Localidade = reader["LOCALIDADE"].ToString();
+
+            closeSGBDConnection();
+            return C;
+        }
+
+        public Cliente getClientesInDBNIF(int NIF)
+        {
+            if (!this.verifySGBDConnection())
+                return null;
+            SqlCommand cmd = new SqlCommand("SELECT * FROM CLIENTE JOIN ZONA ON CLIENTE.CODPOSTAL1=ZONA.CODPOSTAL1 AND CLIENTE.CODPOSTAL2=ZONA.CODPOSTAL2 "
+                + "WHERE NIF = @NIF", cn);
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@NIF", NIF);
+            SqlDataReader reader = cmd.ExecuteReader();
+            Cliente C = new Cliente();
+            reader.Read();
+
+
+            C.Nome = reader["NOME"].ToString();
+            C.Nif = reader["NIF"].ToString();
+            C.Nib = reader["NIB"].ToString();
+            C.Email = reader["EMAIL"].ToString();
+            C.Telemovel = reader["TELEMOVEL"].ToString();
+            C.CodigoPostal = reader["CODPOSTAL1"].ToString() + "-" + reader["CODPOSTAL2"].ToString();
+            C.Rua = reader["RUA"].ToString();
+            C.NCasa = Convert.ToInt32(reader["N_PORTA"].ToString());
+            C.NCliente = Convert.ToInt32(reader["NCLIENTE"].ToString());
+            C.Distrito = reader["DISTRITO"].ToString();
+            C.Localidade = reader["LOCALIDADE"].ToString();
+
+            closeSGBDConnection();
+            return C;
         }
 
         public Cliente getClienteFromDB(int nCliente)
@@ -694,7 +782,7 @@ namespace Trabalho_BD_IHC
             return produtosBase;
         }
 
-       
+
         public ProdutoBase getProdutoBaseFromDB(int referencia)
         {
             if (!this.verifySGBDConnection())
@@ -2290,7 +2378,7 @@ namespace Trabalho_BD_IHC
                 m.Add(material);
             }
             reader.Close();
-            for(int i=0; i<m.Count; i++)
+            for (int i = 0; i < m.Count; i++)
             {
                 m.ElementAt(i).TipoMaterial1 = getMaterialType(m.ElementAt(i).Referencia);
                 m.ElementAt(i).QuantidadeStockD = getQuantidadeMaterial(m.ElementAt(i).Referencia);
@@ -2476,7 +2564,7 @@ namespace Trabalho_BD_IHC
             return produtoPers;
         }
 
-        
+
         public bool EnviarProduto(ProdutoPersonalizado prod, ObservableCollection<MaterialTextil> materiaisSelecionados)
         {
             //registar etiqueta na base de dados primerio

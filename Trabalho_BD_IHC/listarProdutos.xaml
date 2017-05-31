@@ -117,7 +117,8 @@
                                     </Expander>
                                 </Grid>
                             </materialDesign:ColorZone>
-                            <DataGrid IsReadOnly="True" Grid.Row="1" AutoGenerateColumns="False" Name="produtosBaseLista" SelectionChanged="produtos_SelectionChanged">
+                            <DataGrid IsReadOnly="True" Grid.Row="1" AutoGenerateColumns="False" Name="produtosBaseLista" MouseDoubleClick="produtosBaseLista_MouseDoubleClick"
+                                      SelectionChanged="produtos_SelectionChanged">
                                 <DataGrid.Columns>
                                     <materialDesign:MaterialDataGridTextColumn Header="Referência" Binding="{Binding Referencia}" />
                                     <materialDesign:MaterialDataGridTextColumn Header="Nome"  Binding="{Binding Nome}" />
@@ -231,7 +232,8 @@
                                     </Expander>
                                 </Grid>
                             </materialDesign:ColorZone>
-                            <DataGrid Name="produtosPersonalizadosLista" AutoGenerateColumns="False" Grid.Row="1" IsReadOnly="True" SelectionChanged="produtos_SelectionChanged">
+                            <DataGrid Name="produtosPersonalizadosLista" AutoGenerateColumns="False" MouseDoubleClick="produtosPersonalizadosLista_MouseDoubleClick"
+                                      Grid.Row="1" IsReadOnly="True" SelectionChanged="produtos_SelectionChanged">
                             <DataGrid.Columns>
                                     <materialDesign:MaterialDataGridTextColumn Header="Referência Desenho" Binding="{Binding ProdutoBase.Referencia}"/>
                                     <materialDesign:MaterialDataGridTextColumn Header="ID"  Binding="{Binding ID}" />

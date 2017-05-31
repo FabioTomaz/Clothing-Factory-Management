@@ -85,6 +85,11 @@ namespace Trabalho_BD_IHC
             this.NavigationService.Navigate(new EditarFilial(dataHandler, (filial)Filiais.SelectedItem));
         }
 
+        private void Filiais_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            DetalhesFilial window = new DetalhesFilial(dataHandler, (filial)Filiais.SelectedItem);
+            window.Show();
+        }
     }
 
 

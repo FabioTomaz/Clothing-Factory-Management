@@ -149,5 +149,15 @@ namespace Trabalho_BD_IHC
             else
                 Xceed.Wpf.Toolkit.MessageBox.Show("Por favor, indique o nº do id do produto que pretende pesquisar", "Informação", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
+
+        private void produtosPersonalizadosLista_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            detalhesProdutoPersonalizado_Click(sender, e);
+        }
+
+        private void produtosBaseLista_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            detalhesProdutoBase_Click(sender, e);
+        }
     }
 }

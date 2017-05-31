@@ -121,7 +121,7 @@
                             </Expander>
                         </Grid>
                     </materialDesign:ColorZone>
-                    <DataGrid Grid.Row="1"  Name="Fornecedores" SelectionChanged="Fornecedores_SelectionChanged" 
+                    <DataGrid Grid.Row="1"  Name="Fornecedores" SelectionChanged="Fornecedores_SelectionChanged" MouseDoubleClick="Fornecedores_MouseDoubleClick"
                               IsReadOnly="True" SelectionUnit="FullRow" AutoGenerateColumns="False">
                         <DataGrid.Columns>
                             <materialDesign:MaterialDataGridTextColumn SortDirection="Ascending" Header="Fornecedor" Binding="{Binding Nome}" />

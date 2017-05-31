@@ -139,7 +139,7 @@
                                 </Expander>
                             </Grid>
                         </materialDesign:ColorZone>
-                        <DataGrid IsReadOnly="True" AutoGenerateColumns="False" Name="Filiais" Grid.Row="1" SelectionChanged="Filiais_SelectionChanged">
+                        <DataGrid IsReadOnly="True" AutoGenerateColumns="False" Name="Filiais" MouseDoubleClick="Filiais_MouseDoubleClick" Grid.Row="1" SelectionChanged="Filiais_SelectionChanged">
                             <DataGrid.Columns>
                                 <materialDesign:MaterialDataGridTextColumn SortDirection="Ascending" Header="Nº Filial" Binding="{Binding NFilial}" />
                                 <materialDesign:MaterialDataGridTextColumn Header="E-mail" Binding="{Binding Email}"/>

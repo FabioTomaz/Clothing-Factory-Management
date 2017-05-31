@@ -69,7 +69,8 @@
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"></RowDefinition>
-                        <RowDefinition ></RowDefinition>
+                        <RowDefinition Height="1*"></RowDefinition>
+                        <RowDefinition Height="3*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <materialDesign:ColorZone Mode="PrimaryMid" Grid.Row="0" Padding="10">
                         <Grid>
@@ -93,7 +94,7 @@
                                     <Button Style="{DynamicResource MaterialDesignToolButton}">
                                         <materialDesign:PackIcon Kind="Magnify" Opacity=".56" />
                                     </Button>
-                                    <TextBox Name="txtnomeCl" KeyUp="txtnomeCl_KeyUp"  Grid.Column="1" Margin="8 0 0 0" materialDesign:HintAssist.Hint="Pesquisa por Nome" 
+                                    <TextBox Name="txtnomeCl" KeyUp="txtnomeCl_KeyUp"  Grid.Column="1" Margin="8 0 0 0" materialDesign:HintAssist.Hint="Pesquisar" 
                                          materialDesign:TextFieldAssist.DecorationVisibility="Hidden" BorderThickness="0"
                                          MinWidth="200" VerticalAlignment="Center"/>
                                     <Button  Grid.Column="2" Style="{DynamicResource MaterialDesignToolForegroundButton}" Margin="8 0 0 0" Panel.ZIndex="0" Click="searchButton_Click">
@@ -101,33 +102,33 @@
                                     </Button>
                                 </Grid>
                             </materialDesign:ColorZone>
-                            <Expander HorizontalAlignment="Stretch" Header="Pesquisa Avançada" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Foreground="Black">
-                                <Grid TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="0.5*"></ColumnDefinition>
-                                        <ColumnDefinition></ColumnDefinition>
-                                        <ColumnDefinition></ColumnDefinition>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition></RowDefinition>
-                                        <RowDefinition></RowDefinition>
-                                    </Grid.RowDefinitions>
-                                    <Label Content="Pesquisar por:  " HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0"></Label>
-                                    <RadioButton GroupName="tipoPesquisa" IsChecked="True"  Name="pesquisaNOME" Content="Nome de Cliente" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center"></RadioButton>
-                                    <RadioButton GroupName="tipoPesquisa"  Name="pesquisaNCLIENTE" Content="Numero de Cliente" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center"></RadioButton>
-                                    <RadioButton GroupName="tipoPesquisa"  Name="pesquisaNIF" Content="NIF do Cliente" Grid.Column="2" Grid.Row="0" VerticalAlignment="Center"></RadioButton>
-                                    <RadioButton GroupName="tipoPesquisa"  Name="pesquisaMAIL" Content="Email do Cliente" Grid.Column="2" Grid.Row="1" VerticalAlignment="Center"></RadioButton>
-                                </Grid>
-                            </Expander>
+                            <Grid Grid.Row="2"></Grid>
                         </Grid>
                     </materialDesign:ColorZone>
-                    <DataGrid Grid.Row="1"  Name="clientes" SelectionChanged="clientes_SelectionChanged" 
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Label Content="Pesquisar por:  " HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0"></Label>
+                        <RadioButton IsChecked="True"  Name="pesquisaNOME" Content="Nome de Cliente" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center"></RadioButton>
+                        <RadioButton  Name="pesquisaNCLIENTE" Content="Número de Cliente" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center"></RadioButton>
+                        <RadioButton Name="pesquisaNIF" Content="NIF do Cliente" Grid.Column="2" Grid.Row="0" VerticalAlignment="Center"></RadioButton>
+                        <RadioButton  Name="pesquisaMAIL" Content="Email do Cliente" Grid.Column="2" Grid.Row="1" VerticalAlignment="Center"></RadioButton>
+                    </Grid>
+                    <DataGrid Grid.Row="2"  Name="clientes" SelectionChanged="clientes_SelectionChanged" MouseDoubleClick="clientes_MouseDoubleClick"
                               IsReadOnly="True" SelectionUnit="FullRow" AutoGenerateColumns="False">
                         <DataGrid.Columns>
                             <materialDesign:MaterialDataGridTextColumn SortDirection="Ascending" Header="Nº de Cliente" Binding="{Binding NCliente}" />
                             <materialDesign:MaterialDataGridTextColumn Header="Name"  Binding="{Binding Nome}" />
                             <materialDesign:MaterialDataGridTextColumn Header="Mail" Binding="{Binding Email}" />
                             <materialDesign:MaterialDataGridTextColumn Header="Telemovel" Binding="{Binding Telemovel}" />
+                            <materialDesign:MaterialDataGridTextColumn Header="NIF" Binding="{Binding Nif}" />
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>

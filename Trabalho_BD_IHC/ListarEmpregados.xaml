@@ -130,7 +130,8 @@
                             </Expander>
                         </Grid>
                     </materialDesign:ColorZone>
-                    <DataGrid Grid.Row="1"  Name="empregados" SelectionChanged="empregados_SelectionChanged" IsReadOnly="True" AutoGenerateColumns="False">
+                    <DataGrid Grid.Row="1"  Name="empregados" SelectionChanged="empregados_SelectionChanged" 
+                             MouseDoubleClick="empregados_MouseDoubleClick" IsReadOnly="True" AutoGenerateColumns="False">
                         <DataGrid.Columns>
                             <materialDesign:MaterialDataGridTextColumn SortDirection="Ascending" Header="Nº Empregado" Binding="{Binding NFuncionario}" />
                             <materialDesign:MaterialDataGridTextColumn Header="Nº filial" Binding="{Binding Supervisor.NFuncionario}" />

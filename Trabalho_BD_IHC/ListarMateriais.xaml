@@ -151,7 +151,8 @@
                                     </Expander>
                                 </Grid>
                             </materialDesign:ColorZone>
-                            <DataGrid IsReadOnly="True" AutoGenerateColumns="False" Name="materiais" Grid.Row="1" SelectionChanged="materiais_SelectionChanged">
+                            <DataGrid IsReadOnly="True" AutoGenerateColumns="False" Name="materiais" Grid.Row="1" 
+                                     MouseDoubleClick="materiais_MouseDoubleClick" SelectionChanged="materiais_SelectionChanged">
                                 <DataGrid.Columns>
                                     <materialDesign:MaterialDataGridTextColumn SortDirection="Ascending" Header="Referêcia Interna" Binding="{Binding Referencia}" />
                                     <materialDesign:MaterialDataGridTextColumn Header="Tipo de Material" Binding="{Binding TipoMaterial1}"/>

@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data.SqlClient;
+using System.Text.RegularExpressions;
 
 namespace Trabalho_BD_IHC
 {
@@ -27,6 +28,7 @@ namespace Trabalho_BD_IHC
         {
             InitializeComponent();
             this.dataHandler = dataHandler;
+            pesquisaNOME.IsChecked = true;
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
@@ -107,7 +109,32 @@ namespace Trabalho_BD_IHC
 
         private void searchButton_Click(object sender, RoutedEventArgs e)
         {
-            clientes.ItemsSource = dataHandler.searchClientesInDB(txtnomeCl.Text);
+            if(pesquisaNOME.IsChecked == true)
+                clientes.ItemsSource = dataHandler.getClientesInDBFromName(txtnomeCl.Text);
+            else if(pesquisaNCLIENTE.IsChecked == true)
+            {
+                if(!string.IsNullOrEmpty(txtnomeCl.Text) || Regex.IsMatch(txtnomeCl.Text, @"^\d+$"))
+                {
+                    ObservableCollection<Cliente> cl = new ObservableCollection<Cliente>();
+                    cl.Add(dataHandler.getClientesInDBnCliente(Convert.ToInt32(txtnomeCl.Text)));
+                    clientes.ItemsSource = cl;
+                }
+                else
+                    Xceed.Wpf.Toolkit.MessageBox.Show("Tem que introduzir um número de cliente na caixa de texto antes de poder pesquisar", "", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            else if (pesquisaNIF.IsChecked == true)
+            {
+                if(!string.IsNullOrEmpty(txtnomeCl.Text) || Regex.IsMatch(txtnomeCl.Text, @"^\d+$"))
+                {
+                    ObservableCollection<Cliente> cl = new ObservableCollection<Cliente>();
+                    cl.Add(dataHandler.getClientesInDBnCliente(Convert.ToInt32(txtnomeCl.Text)));
+                    clientes.ItemsSource = cl;
+                }
+                else
+                    Xceed.Wpf.Toolkit.MessageBox.Show("Tem que introduzir um NIF na caixa de texto antes de poder pesquisar", "", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            else if (pesquisaMAIL.IsChecked == true)
+                clientes.ItemsSource = dataHandler.getClientesInDBFromEmail(txtnomeCl.Text);
         }
         private void editarCliente_Click(object sender, RoutedEventArgs e)
         {
@@ -142,8 +169,14 @@ namespace Trabalho_BD_IHC
         private void txtnomeCl_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.Key != System.Windows.Input.Key.Enter) return;
-            clientes.ItemsSource = dataHandler.searchClientesInDB(txtnomeCl.Text);
+            searchButton_Click(sender, e);
             e.Handled = true;
+        }
+
+        private void clientes_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            DetalhesCliente window = new DetalhesCliente(dataHandler, (Cliente)clientes.SelectedItem);
+            window.Show();
         }
     }
 }

@@ -112,7 +112,8 @@
                         </Expander>
                     </Grid>
                 </materialDesign:ColorZone>
-                <DataGrid IsReadOnly="True" AutoGenerateColumns="False" Name="encomendas" Grid.Row="1" SelectionChanged="encomendas_SelectionChanged">
+                <DataGrid IsReadOnly="True" AutoGenerateColumns="False" Name="encomendas" Grid.Row="1" 
+                         MouseDoubleClick="encomendas_MouseDoubleClick" SelectionChanged="encomendas_SelectionChanged">
                     <DataGrid.Columns>
                         <materialDesign:MaterialDataGridTextColumn SortDirection="Ascending" Header="Nº Encomenda" Binding="{Binding NEncomenda}" />
                         <materialDesign:MaterialDataGridTextColumn Header="Nº Cliente"  Binding="{Binding Cliente.NCliente}" />

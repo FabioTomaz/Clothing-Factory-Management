@@ -85,8 +85,8 @@ namespace Trabalho_BD_IHC
 
         private void detalhesEncomenda_Click(object sender, RoutedEventArgs e)
         {
-            DetalhesEncomenda page = new DetalhesEncomenda(dataHandler, ((Encomenda)encomendas.SelectedItem).NEncomenda);
-            page.Show();
+            DetalhesEncomenda window = new DetalhesEncomenda(dataHandler, ((Encomenda)encomendas.SelectedItem).NEncomenda);
+            window.Show();
         }
 
         private void entregarEncomenda_Click(object sender, RoutedEventArgs e)
@@ -138,6 +138,12 @@ namespace Trabalho_BD_IHC
             if (e.Key != System.Windows.Input.Key.Enter) return;
             Button_Click(sender, e);
             e.Handled = true;
+        }
+
+        private void encomendas_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            DetalhesEncomenda window = new DetalhesEncomenda(dataHandler, ((Encomenda)encomendas.SelectedItem).NEncomenda);
+            window.Show();
         }
     }
 }

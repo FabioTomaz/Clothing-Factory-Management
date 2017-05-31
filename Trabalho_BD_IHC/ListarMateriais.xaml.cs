@@ -54,64 +54,7 @@ namespace Trabalho_BD_IHC
             NavigationService.Navigate(page);
         }
 
-        private void removerMaterial_Click(object sender, RoutedEventArgs e)
-        {
-            int listViewIndex = materiais.SelectedIndex;
-
-            if (MessageBox.Show("Tem a certeza que pretende eliminar este Material?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
-            {
-                return;
-            }
-            else
-            {
-                try
-                {
-                    RemoverMaterial((MaterialTextil)materiais.SelectedItem);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                    return;
-                }
-                try
-                {
-                    ((ObservableCollection<MaterialTextil>)materiais.ItemsSource).RemoveAt(listViewIndex);
-
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                    return;
-                }
-            }
-        }
-
-        private void RemoverMaterial(MaterialTextil material)
-        {
-            dataHandler.verifySGBDConnection();
-            SqlCommand cmd = new SqlCommand();
-
-            cmd.CommandText = "DELETE MATERIAIS_TÊXTEIS WHERE REFERENCIA_FABRICA=@REFERENCIA ";
-            cmd.Parameters.Clear();
-            cmd.Parameters.AddWithValue("@REFERENCIA", material.Referencia);
-            cmd.Connection = dataHandler.Cn;
-
-            try
-            {
-                cmd.ExecuteNonQuery();
-                MessageBox.Show("Material Apagado com sucesso!");
-            }
-            catch (SqlException ex)
-            {
-                MessageBox.Show(ex.Message);
-                return;
-            }
-            finally
-            {
-                dataHandler.closeSGBDConnection();
-            }
-        }
-
+      
         private void detalhesMaterial_Click(object sender, RoutedEventArgs e)
         {
             DetalhesMaterial window = new DetalhesMaterial(dataHandler, (MaterialTextil)materiais.SelectedItem);
@@ -148,6 +91,12 @@ namespace Trabalho_BD_IHC
             detalhesMaterial.IsEnabled = false;
             materiais.Focus();
             materiais.ItemsSource = dataHandler.getMateriaisFromDB();
+        }
+
+        private void materiais_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            DetalhesMaterial window = new DetalhesMaterial(dataHandler, (MaterialTextil)materiais.SelectedItem);
+            window.Show();
         }
     }
 
