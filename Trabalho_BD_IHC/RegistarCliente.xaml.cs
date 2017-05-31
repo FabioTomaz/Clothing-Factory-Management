@@ -87,7 +87,7 @@ namespace Trabalho_BD_IHC
                 throw new Exception("O NIB introduzido está incorreto.");
             if (txtNIB.Text.Trim().Length != 0 && txtNIB.Text.Trim().Length != 21)
                 throw new Exception("O NIB introduzido está incorreto.");
-            if (txtNIF.Text.Trim().Length !=9)
+            if (txtNIF.Text.Trim().Length > 9)
                 throw new Exception("O NIF introduzido está incorreto.");
             try { 
                 MailAddress m = new MailAddress(txtEmail.Text);

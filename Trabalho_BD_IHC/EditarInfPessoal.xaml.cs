@@ -68,7 +68,7 @@ namespace Trabalho_BD_IHC
             user.Localizacao.Porta = Convert.ToInt32(txtNumeroPorta.Text);
             try
             {
-                //dataHandler.editarInfPessoal(user);
+                dataHandler.editarInfPessoal(user);
             }
             catch (Exception ex)
             {

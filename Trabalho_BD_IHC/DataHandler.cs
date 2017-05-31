@@ -33,8 +33,7 @@ namespace Trabalho_BD_IHC
         }
         private SqlConnection getSGBDConnection()
         {
-            return new SqlConnection("data source=tcp: 193.136.175.33\\SQLSERVER2012,8293; initial catalog=p4g3;"
-                + " User ID=p4g3; Password=fabiobruno;");
+            return new SqlConnection("data source=localhost;integrated security=true;initial catalog=GESTAO-FABRICA-VESTUARIO-LABORAL");
         }
         /*db-->> data source=tcp: 193.136.175.33\\SQLSERVER2012,8293; initial catalog=p4g3;"
                 + " User ID=p4g3; Password=fabiobruno;*/
@@ -77,8 +76,15 @@ namespace Trabalho_BD_IHC
                 "VALUES (@NOME, @NIB, @NIF, @EMAIL, @TELEMOVEL, @CODPOSTAL1, @CODPOSTAL2, @RUA, @N_PORTA);";
             cmd.Parameters.Clear();
             cmd.Parameters.AddWithValue("@NOME", cl.Nome);
-            cmd.Parameters.AddWithValue("@NIB", cl.Nib);
-            cmd.Parameters.AddWithValue("@NIF", cl.Nif);
+            if (string.IsNullOrEmpty(cl.Nib))
+                cmd.Parameters.AddWithValue("@NIB", DBNull.Value);
+            else
+                cmd.Parameters.AddWithValue("@NIB", cl.Nib);
+            if (string.IsNullOrEmpty(cl.Nib))
+                cmd.Parameters.AddWithValue("@NIF", DBNull.Value);
+            else
+                cmd.Parameters.AddWithValue("@NIF", cl.Nif);
+
             cmd.Parameters.AddWithValue("@EMAIL", cl.Email);
             cmd.Parameters.AddWithValue("@TELEMOVEL", cl.Telemovel);
             cmd.Parameters.AddWithValue("@CODPOSTAL1", Convert.ToInt32(cl.CodigoPostal.Split('-')[0]));
@@ -90,9 +96,15 @@ namespace Trabalho_BD_IHC
             {
                 cmd.ExecuteNonQuery();
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
-                throw new Exception("Falha ao adicionar cliente na base de dados. \n ERROR MESSAGE: \n" + ex.Message);
+                switch (ex.Number)
+                {
+                    case 547:
+                        throw new Exception("O código postal que indicou não existe. Por favor indique um código postal válido.");
+                    default:
+                        throw new Exception("Ocorreu um erro inesperado. Por favor contacte o seu administrador da base de dados.\n Erro:\n" + ex); ;
+                }
             }
             finally
             {
@@ -121,9 +133,16 @@ namespace Trabalho_BD_IHC
             {
                 cmd.ExecuteNonQuery();
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
-                throw new Exception("Falha ao atualizar o cliente na base de dados.\nMensagem de Erro: " + ex.Message);
+                switch (ex.Number)
+                {
+                    case 547:
+                        throw new Exception("O código postal que indicou não existe. Por favor indique um código postal válido.");
+                    default:
+                        throw new Exception("Ocorreu um erro inesperado. Por favor contacte o seu administrador da base de dados.\n Erro:\n"+ex); ;
+                }
+
             }
             finally
             {
