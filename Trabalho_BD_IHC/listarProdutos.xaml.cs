@@ -112,14 +112,34 @@ namespace Trabalho_BD_IHC
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(txtInput.Text))
+            if (pesquisaREFERENCIA.IsChecked == true)
             {
-                ObservableCollection<ProdutoBase> prod = new ObservableCollection<ProdutoBase>();
-                prod.Add(dataHandler.getProdutoBaseFromDB(Convert.ToInt32(txtInput.Text)));
-                produtosBaseLista.ItemsSource = prod;
+                if (!string.IsNullOrEmpty(txtInput.Text) && Regex.IsMatch(txtInput.Text, @"^\d+$"))
+                {
+                    ObservableCollection<ProdutoBase> prod = new ObservableCollection<ProdutoBase>();
+                    prod.Add(dataHandler.getProdutoBaseFromDBWithRef(Convert.ToInt32(txtInput.Text)));
+                    produtosBaseLista.ItemsSource = prod;
+                }
+                else
+                    produtosBaseLista.ItemsSource = dataHandler.getProdutosBaseFromDB();
             }
-            else
-                Xceed.Wpf.Toolkit.MessageBox.Show("Por favor, indique a referência do desenho que pretende pesquisar", "Informação", MessageBoxButton.OK, MessageBoxImage.Warning);
+            else if (pesquisaNOME.IsChecked == true)
+            {
+                produtosBaseLista.ItemsSource = dataHandler.getProdutosBaseFromDBNome(txtInput.Text);
+            }
+            else if (pesquisaGESTOR.IsChecked == true)
+            {
+                if (!string.IsNullOrEmpty(txtInput.Text) && Regex.IsMatch(txtInput.Text, @"^\d+$"))
+                {
+                    ObservableCollection<ProdutoBase> prod = new ObservableCollection<ProdutoBase>();
+                    prod.Add(dataHandler.getProdutoBaseFromDBNGestor(Convert.ToInt32(txtInput.Text)));
+                    produtosBaseLista.ItemsSource = prod;
+                }
+
+
+                else
+                    produtosBaseLista.ItemsSource = dataHandler.getProdutosBaseFromDB();
+            }
         }
 
         private void txtsearchMo_KeyUp(object sender, KeyEventArgs e)
@@ -138,11 +158,31 @@ namespace Trabalho_BD_IHC
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(txtInputPers.Text) || Regex.IsMatch(txtInputPers.Text, @"^\d+$"))
-                produtosPersonalizadosLista.ItemsSource = dataHandler.searchAndGetProdutosPersID(Convert.ToInt32(txtInputPers.Text));
+            if (pesquisaRef.IsChecked == true)
+            {
 
-            else
-                Xceed.Wpf.Toolkit.MessageBox.Show("Por favor, indique o nº do id do produto que pretende pesquisar", "Informação", MessageBoxButton.OK, MessageBoxImage.Warning);
+                if (!string.IsNullOrEmpty(txtInputPers.Text) && Regex.IsMatch(txtInputPers.Text, @"^\d+$"))
+                    produtosPersonalizadosLista.ItemsSource = dataHandler.searchAndGetProdutosPersID(Convert.ToInt32(txtInputPers.Text));
+
+                else
+                {
+                    produtosPersonalizadosLista.ItemsSource = dataHandler.getProdutosPers();
+                }
+            }
+            else if (pesquisaCor.IsChecked == true)
+            {
+                produtosPersonalizadosLista.ItemsSource = dataHandler.getProdutosPersonalizadosFromDBCor(txtInputPers.Text);
+            }
+            else if (pesquisaID.IsChecked == true)
+            {
+                if (!string.IsNullOrEmpty(txtInputPers.Text) && Regex.IsMatch(txtInputPers.Text, @"^\d+$"))
+                    produtosPersonalizadosLista.ItemsSource = dataHandler.getProdutosPersonalizadosFromDBid(Convert.ToInt32(txtInputPers.Text));
+
+                else
+                {
+                    produtosPersonalizadosLista.ItemsSource = dataHandler.getProdutosPers();
+                }
+            }
         }
 
         private void produtosPersonalizadosLista_MouseDoubleClick(object sender, MouseButtonEventArgs e)
