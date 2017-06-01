@@ -2684,6 +2684,36 @@ namespace Trabalho_BD_IHC
             return m;
         }
 
+        public ObservableCollection<MaterialTextil> materiaisProduto(int referencia, String tamanho, String cor, int id, int qtProd)
+        {
+            ObservableCollection<MaterialTextil> mt = new ObservableCollection<MaterialTextil>();
+            if (!this.verifySGBDConnection())
+                return mt;
+            SqlCommand cmd = new SqlCommand("SELECT * FROM dbo.getProductMaterials(@ref, @tamanho, @cor, @id);", this.Cn);
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@ref", referencia);
+            cmd.Parameters.AddWithValue("@tamanho", tamanho);
+            cmd.Parameters.AddWithValue("@cor", cor);
+            cmd.Parameters.AddWithValue("@id", id);
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                MaterialTextil m = new MaterialTextil();
+                m.Designacao = reader["DESIGNACAO"].ToString();
+                m.Fornecedor = new Fornecedor();
+                m.Fornecedor.NIF_Fornecedor = reader["NIF_FORNECEDOR"].ToString();
+                m.ReferenciaFornecedor = reader["REFERENCIA_FORN"].ToString();
+                m.Cor = reader["COR"].ToString();
+                m.Referencia = Convert.ToInt32(reader["REFERENCIA_FABRICA"].ToString());
+                m.QuantidadeSelecionada = (Convert.ToDouble(reader["QUANTIDADE"].ToString()) * qtProd).ToString();
+                m.QuantidadeSelecionadaD = Convert.ToDouble(m.QuantidadeSelecionada) * qtProd;
+                mt.Add(m);
+            }
+            reader.Close();
+            this.closeSGBDConnection();
+            return mt;
+        }
 
 
         public ObservableCollection<ProdutoPersonalizado> getProdutosContainingMaterial(int refFabrica)
