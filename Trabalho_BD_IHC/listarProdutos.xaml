@@ -227,7 +227,6 @@
                                             <Label Content="Pesquisar por:  " HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0"></Label>
                                             <RadioButton IsChecked="True" Name="pesquisaRef" Content="Referência Desenho" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center"></RadioButton>
                                             <RadioButton  Name="pesquisaCor" Content="Cor" Grid.Column="2" Grid.Row="0" VerticalAlignment="Center"></RadioButton>
-                                            <RadioButton  Name="pesquisaID" Content="ID de Produto" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center"></RadioButton>
                                         </Grid>
                                     </Expander>
                                 </Grid>

@@ -54,7 +54,7 @@ namespace Trabalho_BD_IHC
             NavigationService.Navigate(page);
         }
 
-      
+
         private void detalhesMaterial_Click(object sender, RoutedEventArgs e)
         {
             DetalhesMaterial window = new DetalhesMaterial(dataHandler, (MaterialTextil)materiais.SelectedItem);
@@ -71,11 +71,17 @@ namespace Trabalho_BD_IHC
 
         private void Button_Click(object sender, RoutedEventArgs e) //procurar materiais
         {
-            if (!string.IsNullOrEmpty(input.Text) || Regex.IsMatch(input.Text, @"^\d+$"))
-                materiais.ItemsSource = dataHandler.getMaterialFromDB(Convert.ToInt32(input.Text));
-            else
-                Xceed.Wpf.Toolkit.MessageBox.Show("Por favor, indique o número da referência de fábrica do material a pesquisar", "Informação", MessageBoxButton.OK, MessageBoxImage.Warning);
-
+            if (txtRef.IsChecked == true)
+            {
+                if (!string.IsNullOrEmpty(input.Text) && Regex.IsMatch(input.Text, @"^\d+$"))
+                    materiais.ItemsSource = dataHandler.getMaterialFromDBRef(Convert.ToInt32(input.Text));
+                else
+                    materiais.ItemsSource = dataHandler.getMateriaisFromDB();
+            }
+            else if (txtCor.IsChecked == true)
+            {
+                materiais.ItemsSource = dataHandler.getMaterialFromDBCor(input.Text);
+            }
         }
 
 

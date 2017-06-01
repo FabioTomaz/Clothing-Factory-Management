@@ -140,7 +140,7 @@ namespace Trabalho_BD_IHC
                     case 547:
                         throw new Exception("O código postal que indicou não existe. Por favor indique um código postal válido.");
                     default:
-                        throw new Exception("Ocorreu um erro inesperado. Por favor contacte o seu administrador da base de dados.\n Erro:\n"+ex); ;
+                        throw new Exception("Ocorreu um erro inesperado. Por favor contacte o seu administrador da base de dados.\n Erro:\n" + ex); ;
                 }
 
             }
@@ -417,7 +417,7 @@ namespace Trabalho_BD_IHC
             SqlCommand cmd = new SqlCommand("SELECT * FROM CLIENTE JOIN ZONA ON CLIENTE.CODPOSTAL1=ZONA.CODPOSTAL1 AND CLIENTE.CODPOSTAL2=ZONA.CODPOSTAL2 "
                 + "WHERE NIF LIKE @NIF", cn);
             cmd.Parameters.Clear();
-            cmd.Parameters.AddWithValue("@NIF", "%"+NIF+"%");
+            cmd.Parameters.AddWithValue("@NIF", "%" + NIF + "%");
             SqlDataReader reader = cmd.ExecuteReader();
             ObservableCollection<Cliente> items = new ObservableCollection<Cliente>();
             while (reader.Read())
@@ -749,7 +749,7 @@ namespace Trabalho_BD_IHC
                             + " WHERE COR LIKE @cor;"
                             , cn);
             cmd.Parameters.Clear();
-            cmd.Parameters.AddWithValue("@cor", "%"+cor+"%");
+            cmd.Parameters.AddWithValue("@cor", "%" + cor + "%");
             SqlDataReader reader = cmd.ExecuteReader();
             ObservableCollection<ProdutoPersonalizado> produtosPers = new ObservableCollection<ProdutoPersonalizado>();
             while (reader.Read())
@@ -1741,7 +1741,7 @@ namespace Trabalho_BD_IHC
             return FiliaisTexteis;
         }
 
-        public ObservableCollection<filial> searchFiliaisInDB(int nFilial)
+        public ObservableCollection<filial> getFiliaisInDBnFil(int nFilial)
         {
             if (!this.verifySGBDConnection())
                 return null;
@@ -1775,6 +1775,77 @@ namespace Trabalho_BD_IHC
             this.closeSGBDConnection();
             return FiliaisTexteis;
         }
+
+        public ObservableCollection<filial> getFiliaisInDBEmail(string email)
+        {
+            if (!this.verifySGBDConnection())
+                return null;
+
+            ObservableCollection<filial> FiliaisTexteis = new ObservableCollection<filial>();
+            SqlCommand cmd = new SqlCommand("SELECT * FROM [FABRICA-FILIAL] JOIN ZONA ON "
+                + "([FABRICA-FILIAL].CODPOSTAL1 = ZONA.CODPOSTAL1 AND [FABRICA-FILIAL].CODPOSTAL2 = ZONA.CODPOSTAL2) "
+                + "JOIN UTILIZADOR ON CHEFE = N_FUNCIONARIO WHERE  [FABRICA-FILIAL].EMAIL LIKE @email", this.Cn);
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@email", "%" + email + "%");
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                filial f = new filial();
+                f.NFilial = Convert.ToInt32(reader["N_FILIAL"].ToString());
+                f.Email = reader["EMAIL"].ToString();
+                f.Telefone = reader["TELEFONE"].ToString();
+                f.Fax = reader["FAX"].ToString();
+                f.Localizacao = new Localizacao();
+                f.Localizacao.CodigoPostal = reader["CODPOSTAL1"].ToString() + "-" + reader["CODPOSTAL2"].ToString();
+                f.Localizacao.Rua1 = reader["RUA"].ToString();
+                f.Localizacao.Porta = Convert.ToInt32(reader["N_PORTA"].ToString());
+                f.Localizacao.Localidade = reader["LOCALIDADE"].ToString();
+                f.Localizacao.Distrito = reader["DISTRITO"].ToString();
+                f.Chefe = new Utilizador();
+                f.Chefe.NFuncionario = Convert.ToInt32(reader["CHEFE"].ToString());
+                f.Chefe.Nome = reader["NOME"].ToString();
+                FiliaisTexteis.Add(f);
+            }
+            reader.Close();
+            this.closeSGBDConnection();
+            return FiliaisTexteis;
+        }
+
+        public ObservableCollection<filial> getFiliaisInDBPhone(string tel)
+        {
+            if (!this.verifySGBDConnection())
+                return null;
+
+            ObservableCollection<filial> FiliaisTexteis = new ObservableCollection<filial>();
+            SqlCommand cmd = new SqlCommand("SELECT * FROM [FABRICA-FILIAL] JOIN ZONA ON "
+                + "([FABRICA-FILIAL].CODPOSTAL1 = ZONA.CODPOSTAL1 AND [FABRICA-FILIAL].CODPOSTAL2 = ZONA.CODPOSTAL2) "
+                + "JOIN UTILIZADOR ON CHEFE = N_FUNCIONARIO WHERE [FABRICA-FILIAL].TELEFONE LIKE @tel", this.Cn);
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@tel", "%" + tel + "%");
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                filial f = new filial();
+                f.NFilial = Convert.ToInt32(reader["N_FILIAL"].ToString());
+                f.Email = reader["EMAIL"].ToString();
+                f.Telefone = reader["TELEFONE"].ToString();
+                f.Fax = reader["FAX"].ToString();
+                f.Localizacao = new Localizacao();
+                f.Localizacao.CodigoPostal = reader["CODPOSTAL1"].ToString() + "-" + reader["CODPOSTAL2"].ToString();
+                f.Localizacao.Rua1 = reader["RUA"].ToString();
+                f.Localizacao.Porta = Convert.ToInt32(reader["N_PORTA"].ToString());
+                f.Localizacao.Localidade = reader["LOCALIDADE"].ToString();
+                f.Localizacao.Distrito = reader["DISTRITO"].ToString();
+                f.Chefe = new Utilizador();
+                f.Chefe.NFuncionario = Convert.ToInt32(reader["CHEFE"].ToString());
+                f.Chefe.Nome = reader["NOME"].ToString();
+                FiliaisTexteis.Add(f);
+            }
+            reader.Close();
+            this.closeSGBDConnection();
+            return FiliaisTexteis;
+        }
+
         public void EnviarFilial(filial f)
         {
 
@@ -2539,7 +2610,8 @@ namespace Trabalho_BD_IHC
             return m;
         }
 
-        public ObservableCollection<MaterialTextil> getMaterialFromDB(int refFabrica)
+
+        public ObservableCollection<MaterialTextil> getMaterialFromDBRef(int refFabrica)
         {
             this.verifySGBDConnection();
             SqlCommand cmd = new SqlCommand("SELECT * "
@@ -2563,14 +2635,56 @@ namespace Trabalho_BD_IHC
                 m.Add(material);
             }
             reader.Close();
+
+
             for (int i = 0; i < m.Count; i++)
             {
                 m.ElementAt(i).TipoMaterial1 = getMaterialType(m.ElementAt(i).Referencia);
                 m.ElementAt(i).QuantidadeStockD = getQuantidadeMaterial(m.ElementAt(i).Referencia);
             }
+
+
             this.closeSGBDConnection();
             return m;
         }
+
+        public ObservableCollection<MaterialTextil> getMaterialFromDBCor(string cor)
+        {
+            this.verifySGBDConnection();
+            SqlCommand cmd = new SqlCommand("SELECT * "
+                                + " FROM [MATERIAIS_TÊXTEIS] JOIN FORNECEDOR ON FORNECEDOR.NIF=[MATERIAIS_TÊXTEIS].NIF_FORNECEDOR "
+                                + "WHERE COR LIKE @cor"
+                                , this.Cn);
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@cor", "%" + cor + "%");
+            SqlDataReader reader = cmd.ExecuteReader();
+            ObservableCollection<MaterialTextil> m = new ObservableCollection<MaterialTextil>();
+            while (reader.Read())
+            {
+                MaterialTextil material = new MaterialTextil();
+                material.Fornecedor = new Fornecedor();
+                material.Referencia = Convert.ToInt32(reader["REFERENCIA_FABRICA"].ToString());
+                material.ReferenciaFornecedor = reader["REFERENCIA_FORN"].ToString();
+                material.Cor = reader["COR"].ToString();
+                material.Designacao = reader["DESIGNACAO"].ToString();
+                material.Fornecedor.Nome = reader["NOME"].ToString();
+                material.Fornecedor.NIF_Fornecedor = reader["NIF"].ToString();
+                m.Add(material);
+            }
+            reader.Close();
+
+            for (int i = 0; i < m.Count; i++)
+            {
+                m.ElementAt(i).TipoMaterial1 = getMaterialType(m.ElementAt(i).Referencia);
+                m.ElementAt(i).QuantidadeStockD = getQuantidadeMaterial(m.ElementAt(i).Referencia);
+            }
+
+
+            this.closeSGBDConnection();
+            return m;
+        }
+
+
 
         public ObservableCollection<ProdutoPersonalizado> getProdutosContainingMaterial(int refFabrica)
         {

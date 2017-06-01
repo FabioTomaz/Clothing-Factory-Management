@@ -61,8 +61,8 @@
                 </Grid.RowDefinitions>
                 <TextBlock Text="Produto Selecionado:" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" TextWrapping="Wrap"></TextBlock>
                 <TextBlock Name="nomeProduto"  Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" TextWrapping="Wrap" HorizontalAlignment="Left"></TextBlock>
-                <DataGrid Name="DGproduçao" SelectionChanged="DGproduçao_SelectionChanged" Grid.Row="1" Grid.ColumnSpan="4"
-                      Grid.RowSpan="3" IsReadOnly="True" AutoGenerateColumns="False" Loaded="DGproduçao_Loaded" >
+                <DataGrid Name="DGproduçao" Grid.Row="1" Grid.ColumnSpan="4"
+                      Grid.RowSpan="3" IsReadOnly="True" AutoGenerateColumns="False">
                     <DataGrid.Columns  >
                         <materialDesign:MaterialDataGridTextColumn  Header="Referência" Binding="{Binding  Referencia}" />
                         <materialDesign:MaterialDataGridTextColumn Header="Designação"  Binding="{Binding Designacao}" />
@@ -73,7 +73,7 @@
                     </DataGrid.Columns>
                 </DataGrid>
                 <TextBlock Text="Indique a quantidade de produto a produzir" TextWrapping="Wrap" Grid.Row="4"  Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Center" ></TextBlock>
-                <wpfTool:IntegerUpDown Name="quantidade" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="4" 
+                <wpfTool:IntegerUpDown Name="quantidade" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="4" ValueChanged="quantidade_ValueChanged"
                                       Value="1" HorizontalAlignment="Center" Width="80" Minimum="1" VerticalAlignment="Center"></wpfTool:IntegerUpDown>
                 
             </Grid>

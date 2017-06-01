@@ -27,145 +27,121 @@ namespace Trabalho_BD_IHC
         private ProdutoPersonalizado prodPers;
         private ObservableCollection<MaterialTextil> mtProd;
         private int invalidMaterials;
-        private bool produzivel;
         public ProduzirProduto(DataHandler dataHandler, ProdutoPersonalizado prodPers)
         {
             InitializeComponent();
             this.dataHandler = dataHandler;
             this.prodPers = prodPers;
-            this.mtProd = materiaisProduto((int)prodPers.ProdutoBase.Referencia, prodPers.Tamanho, prodPers.Cor, (int)prodPers.ID);
-            this.invalidMaterials = 0;
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            nomeProduto.Text = prodPers.ProdutoBase.Nome.ToString();
-            //obter os materiais necessários para o produto
-
-            ObservableCollection<MaterialTextil> materiaisProd = new ObservableCollection<MaterialTextil>();
-            String s = "";
-            foreach (MaterialTextil mt in mtProd)
-            {   //passar as funçoes pra sql
-                s = dataHandler.getMaterialType(mt.Referencia);
-                if (s.Equals("Pano", StringComparison.Ordinal))
-                {
-                    Pano p = dataHandler.getPano(mt.Referencia);
-                    mt.QuantidadeStock = p.AreaArmazem + " m^2";
-                    mt.QuantidadeStockD = p.AreaArmazem;
-                    //passar para a observable collection que tem todos os detalhes do material o double da 
-                    //quantidade necessária para o produzir
-                    p.QuantidadeNecessaria = Convert.ToDouble(mt.QuantidadeSelecionada);
-                    materiaisProd.Add(p);
-                    //acrescentar as unidades na variavel que vai ser usada para o bind
-                    mt.QuantidadeSelecionada = mt.QuantidadeSelecionada + " m^2";
-                }
-                else if (s.Equals("Linha", StringComparison.Ordinal))
-                {
-                    Linha l = dataHandler.getLinha(mt.Referencia);
-                    mt.QuantidadeStock = l.ComprimentoStock + " m";
-                    mt.QuantidadeStockD = l.ComprimentoStock;
-                    //passar para a observable collection que tem todos os detalhes do material o double da 
-                    //quantidade necessária para o produzir
-                    l.QuantidadeNecessaria = Convert.ToDouble(mt.QuantidadeSelecionada);
-                    materiaisProd.Add(l);
-                    //acrescentar as unidades na variavel que vai ser usada para o bind
-                    mt.QuantidadeSelecionada = mt.QuantidadeSelecionada + " m";
-                }
-                else if (s.Equals("Fecho", StringComparison.Ordinal))
-                {
-                    Fecho f = dataHandler.getFecho(mt.Referencia);
-                    mt.QuantidadeStock = f.QuantidadeArmazem + " un.";
-                    mt.QuantidadeStockD = f.QuantidadeArmazem;
-                    //passar para a observable collection que tem todos os detalhes do material o double da 
-                    //quantidade necessária para o produzir
-                    f.QuantidadeNecessaria = Convert.ToInt32(mt.QuantidadeSelecionada);
-                    materiaisProd.Add(f);
-                    //acrescentar as unidades na variavel que vai ser usada para o bind
-                    mt.QuantidadeSelecionada = mt.QuantidadeSelecionada + " un.";
-                }
-                else if (s.Equals("Mola", StringComparison.Ordinal))
-                {
-                    Mola m = dataHandler.getMola(mt.Referencia);
-                    mt.QuantidadeStock = m.QuantidadeArmazem + " un.";
-                    mt.QuantidadeStockD = m.QuantidadeArmazem;
-                    //passar para a observable collection que tem todos os detalhes do material o double da 
-                    //quantidade necessária para o produzir
-                    m.QuantidadeNecessaria = Convert.ToInt32(mt.QuantidadeSelecionada);
-                    materiaisProd.Add(m);
-                    //acrescentar as unidades na variavel que vai ser usada para o bind
-                    mt.QuantidadeSelecionada = mt.QuantidadeSelecionada + " un.";
-                }
-                else if (s.Equals("Botão", StringComparison.Ordinal))
-                {
-                    Botao b = dataHandler.getBotao(mt.Referencia);
-                    mt.QuantidadeStock = b.QuantidadeArmazem + " un.";
-                    mt.QuantidadeStockD = b.QuantidadeArmazem;
-                    //passar para a observable collection que tem todos os detalhes do material o double da 
-                    //quantidade necessária para o produzir
-                    b.QuantidadeNecessaria = Convert.ToInt32(mt.QuantidadeSelecionada);
-                    materiaisProd.Add(b);
-                    //acrescentar as unidades na variavel que vai ser usada para o bind
-                    mt.QuantidadeSelecionada = mt.QuantidadeSelecionada + " un.";
-                }
-                else if (s.Equals("Elástico", StringComparison.Ordinal))
-                {
-                    Elastico el = dataHandler.getElastico(mt.Referencia);
-                    mt.QuantidadeStock = el.QuantidadeArmazem + " un.";
-                    mt.QuantidadeStockD = el.QuantidadeArmazem;
-                    //passar para a observable collection que tem todos os detalhes do material o double da 
-                    //quantidade necessária para o produzir
-                    el.QuantidadeNecessaria = Convert.ToInt32(mt.QuantidadeSelecionada);
-                    materiaisProd.Add(el);
-                    //acrescentar as unidades na variavel que vai ser usada para o bind
-                    mt.QuantidadeSelecionada = mt.QuantidadeSelecionada + " un.";
-                }
-                else if (s.Equals("Fita de Velcro", StringComparison.Ordinal))
-                {
-                    FitaVelcro fv = dataHandler.getFitaVelcro(mt.Referencia);
-                    mt.QuantidadeStock = fv.QuantidadeArmazem + " un.";
-                    mt.QuantidadeStockD = fv.QuantidadeArmazem;
-                    //passar para a observable collection que tem todos os detalhes do material o double da 
-                    //quantidade necessária para o produzir
-                    fv.QuantidadeNecessaria = Convert.ToInt32(mt.QuantidadeSelecionada);
-                    materiaisProd.Add(fv);
-                    //acrescentar as unidades na variavel que vai ser usada para o bind
-                    mt.QuantidadeSelecionada = mt.QuantidadeSelecionada + " un.";
-                }
-            }
-            DGproduçao.ItemsSource = mtProd;
-        }
-
-
-        private void DGproduçao_Loaded(object sender, RoutedEventArgs e)
-        {
-            List<String> materiaisInvalidos = new List<String>();
             if (IsLoaded)
             {
-                for (int i = 0; i < DGproduçao.Items.Count; i++)
-                {
-                    MaterialTextil mt = ((MaterialTextil)DGproduçao.Items[i]);
-                    for (int j = 0; j < mtProd.Count; j++)
+                nomeProduto.Text = prodPers.ProdutoBase.Nome.ToString();
+                //obter os materiais necessários para o produto
+                int quantProd = Convert.ToInt32(quantidade.Text);
+                mtProd = materiaisProduto((int)prodPers.ProdutoBase.Referencia, prodPers.Tamanho, prodPers.Cor, (int)prodPers.ID, quantProd);
+                ObservableCollection<MaterialTextil> materiaisProd = new ObservableCollection<MaterialTextil>();
+                String s = "";
+                
+                foreach (MaterialTextil mt in mtProd)
+                {   //passar as funçoes pra sql
+                    s = dataHandler.getMaterialType(mt.Referencia);
+                    if (s.Equals("Pano", StringComparison.Ordinal))
                     {
-                        if (mtProd.ElementAt(j).Referencia == mt.Referencia)
-                        {
-                            //se tivermos quantidade de material insuficiente
-                            if (mtProd.ElementAt(j).QuantidadeStockD < mtProd.ElementAt(j).QuantidadeSelecionadaD)
-                            {
-                                invalidMaterials++;
-                                materiaisInvalidos.Add(mtProd.ElementAt(j).Designacao.ToString());
-                            }
-                        }
+                        Pano p = dataHandler.getPano(mt.Referencia);
+                        mt.QuantidadeStock = p.AreaArmazem + " m^2";
+                        mt.QuantidadeStockD = p.AreaArmazem;
+                        //passar para a observable collection que tem todos os detalhes do material o double da 
+                        //quantidade necessária para o produzir
+                        p.QuantidadeNecessaria = Convert.ToDouble(mt.QuantidadeSelecionada);
+                        materiaisProd.Add(p);
+                        //acrescentar as unidades na variavel que vai ser usada para o bind
+                        mt.QuantidadeSelecionada = mt.QuantidadeSelecionada + " m^2";
+                    }
+                    else if (s.Equals("Linha", StringComparison.Ordinal))
+                    {
+                        Linha l = dataHandler.getLinha(mt.Referencia);
+                        mt.QuantidadeStock = l.ComprimentoStock + " m";
+                        mt.QuantidadeStockD = l.ComprimentoStock ;
+                        //passar para a observable collection que tem todos os detalhes do material o double da 
+                        //quantidade necessária para o produzir
+                        l.QuantidadeNecessaria = Convert.ToDouble(mt.QuantidadeSelecionada);
+                        materiaisProd.Add(l);
+                        //acrescentar as unidades na variavel que vai ser usada para o bind
+                        mt.QuantidadeSelecionada = mt.QuantidadeSelecionada + " m";
+                    }
+                    else if (s.Equals("Fecho", StringComparison.Ordinal))
+                    {
+                        Fecho f = dataHandler.getFecho(mt.Referencia);
+                        mt.QuantidadeStock = f.QuantidadeArmazem + " un.";
+                        mt.QuantidadeStockD = f.QuantidadeArmazem;
+                        //passar para a observable collection que tem todos os detalhes do material o double da 
+                        //quantidade necessária para o produzir
+                        f.QuantidadeNecessaria = Convert.ToInt32(mt.QuantidadeSelecionada);
+                        materiaisProd.Add(f);
+                        //acrescentar as unidades na variavel que vai ser usada para o bind
+                        mt.QuantidadeSelecionada = mt.QuantidadeSelecionada + " un.";
+                    }
+                    else if (s.Equals("Mola", StringComparison.Ordinal))
+                    {
+                        Mola m = dataHandler.getMola(mt.Referencia);
+                        mt.QuantidadeStock = m.QuantidadeArmazem + " un.";
+                        mt.QuantidadeStockD = m.QuantidadeArmazem;
+                        //passar para a observable collection que tem todos os detalhes do material o double da 
+                        //quantidade necessária para o produzir
+                        m.QuantidadeNecessaria = Convert.ToInt32(mt.QuantidadeSelecionada);
+                        materiaisProd.Add(m);
+                        //acrescentar as unidades na variavel que vai ser usada para o bind
+                        mt.QuantidadeSelecionada = mt.QuantidadeSelecionada + " un.";
+                    }
+                    else if (s.Equals("Botão", StringComparison.Ordinal))
+                    {
+                        Botao b = dataHandler.getBotao(mt.Referencia);
+                        mt.QuantidadeStock = b.QuantidadeArmazem + " un.";
+                        mt.QuantidadeStockD = b.QuantidadeArmazem;
+                        //passar para a observable collection que tem todos os detalhes do material o double da 
+                        //quantidade necessária para o produzir
+                        b.QuantidadeNecessaria = Convert.ToInt32(mt.QuantidadeSelecionada);
+                        materiaisProd.Add(b);
+                        //acrescentar as unidades na variavel que vai ser usada para o bind
+                        mt.QuantidadeSelecionada = mt.QuantidadeSelecionada + " un.";
+                    }
+                    else if (s.Equals("Elástico", StringComparison.Ordinal))
+                    {
+                        Elastico el = dataHandler.getElastico(mt.Referencia);
+                        mt.QuantidadeStock = el.QuantidadeArmazem + " un.";
+                        mt.QuantidadeStockD = el.QuantidadeArmazem;
+                        //passar para a observable collection que tem todos os detalhes do material o double da 
+                        //quantidade necessária para o produzir
+                        el.QuantidadeNecessaria = Convert.ToInt32(mt.QuantidadeSelecionada);
+                        materiaisProd.Add(el);
+                        //acrescentar as unidades na variavel que vai ser usada para o bind
+                        mt.QuantidadeSelecionada = mt.QuantidadeSelecionada + " un.";
+                    }
+                    else if (s.Equals("Fita de Velcro", StringComparison.Ordinal))
+                    {
+                        FitaVelcro fv = dataHandler.getFitaVelcro(mt.Referencia);
+                        mt.QuantidadeStock = fv.QuantidadeArmazem + " un.";
+                        mt.QuantidadeStockD = fv.QuantidadeArmazem;
+                        //passar para a observable collection que tem todos os detalhes do material o double da 
+                        //quantidade necessária para o produzir
+                        fv.QuantidadeNecessaria = Convert.ToInt32(mt.QuantidadeSelecionada);
+                        materiaisProd.Add(fv);
+                        //acrescentar as unidades na variavel que vai ser usada para o bind
+                        mt.QuantidadeSelecionada = mt.QuantidadeSelecionada + " un.";
                     }
                 }
-                if (invalidMaterials > 0)
-                    produzivel = false;
-                else
-                    produzivel = true;
+                DGproduçao.ItemsSource = mtProd;
             }
         }
 
+
+       
+
         //devolve todos os materiais necessários para a produção do produto selecionado
-        private ObservableCollection<MaterialTextil> materiaisProduto(int referencia, String tamanho, String cor, int id)
+        private ObservableCollection<MaterialTextil> materiaisProduto(int referencia, String tamanho, String cor, int id, int qtProd)
         {
             ObservableCollection<MaterialTextil> mt = new ObservableCollection<MaterialTextil>();
             if (!dataHandler.verifySGBDConnection())
@@ -187,8 +163,8 @@ namespace Trabalho_BD_IHC
                 m.ReferenciaFornecedor = reader["REFERENCIA_FORN"].ToString();
                 m.Cor = reader["COR"].ToString();
                 m.Referencia = Convert.ToInt32(reader["REFERENCIA_FABRICA"].ToString());
-                m.QuantidadeSelecionada = reader["QUANTIDADE"].ToString();
-                m.QuantidadeSelecionadaD = Convert.ToDouble(m.QuantidadeSelecionada);
+                m.QuantidadeSelecionada = (Convert.ToDouble(reader["QUANTIDADE"].ToString()) * qtProd).ToString();
+                m.QuantidadeSelecionadaD = Convert.ToDouble(m.QuantidadeSelecionada)* qtProd;
                 mt.Add(m);
             }
             reader.Close();
@@ -206,20 +182,21 @@ namespace Trabalho_BD_IHC
                 Xceed.Wpf.Toolkit.MessageBox.Show("Selecione a quantidade de produto que pretende produzir", "", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             else
             {
-               if( dataHandler.produzirProduto(prodPers, Convert.ToInt32(quantidade.Text)))
+                if (dataHandler.produzirProduto(prodPers, Convert.ToInt32(quantidade.Text)))
                 {
                     Xceed.Wpf.Toolkit.MessageBox.Show("O produto foi produzido com sucesso!", "", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                     this.NavigationService.GoBack();
                 }
-               else
+                else
                     Xceed.Wpf.Toolkit.MessageBox.Show("Não foi possível produzir o produto, pois não tem quantidade de material suficiente para a produção. Encomende o material em falta.", "", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
-        private void DGproduçao_SelectionChanged(object sender, SelectionChangedEventArgs e)
+
+        private void quantidade_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-
+            if(IsLoaded)
+                Page_Loaded(sender, e);
         }
-
     }
 }

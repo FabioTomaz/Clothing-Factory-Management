@@ -104,8 +104,8 @@
                                         <Button Style="{DynamicResource MaterialDesignToolButton}">
                                             <materialDesign:PackIcon Kind="Magnify" Opacity=".56" />
                                         </Button>
-                                        <TextBox Name="txtNfilial" Grid.Column="1" Margin="8 0 0 0" materialDesign:HintAssist.Hint="Pesquisa por Nº de Filial" 
-                                         materialDesign:TextFieldAssist.DecorationVisibility="Hidden" BorderThickness="0" PreviewTextInput="NumberValidationTextBox"
+                                        <TextBox Name="txtInput" Grid.Column="1" Margin="8 0 0 0" materialDesign:HintAssist.Hint="Pesquisa por Nº de Filial" 
+                                         materialDesign:TextFieldAssist.DecorationVisibility="Hidden" BorderThickness="0"
                                          MinWidth="200" VerticalAlignment="Center" KeyUp="txtsearchFi_KeyUp" />
                                         <Button  Grid.Column="2" Style="{DynamicResource MaterialDesignToolForegroundButton}" Margin="8 0 0 0" Panel.ZIndex="0" Click="SearchButton_Click">
                                             <materialDesign:PackIcon Kind="Send" />
@@ -124,17 +124,15 @@
                                             <RowDefinition></RowDefinition>
                                             <RowDefinition></RowDefinition>
                                         </Grid.RowDefinitions>
-                                        <TextBlock Text="Nº chefe Filial:" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" ></TextBlock>
-                                        <TextBox Grid.Row="0" Grid.Column="1" materialDesign:HintAssist.Hint="Número da fábrica filial" VerticalAlignment="Center" ></TextBox>
+                                        <TextBlock Text="Nº Filial:" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" ></TextBlock>
+                                        <RadioButton Name="txtnFil" Grid.Row="0" Grid.Column="1" IsChecked="True" VerticalAlignment="Center" ></RadioButton>
 
                                         <TextBlock Text="E-mail da filial:" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" ></TextBlock>
-                                        <TextBox Grid.Row="0" Grid.Column="3" materialDesign:HintAssist.Hint="E-mail da fábrica filial" VerticalAlignment="Center"  ></TextBox>
+                                        <RadioButton Name="txtEmail" Grid.Row="0" Grid.Column="3" VerticalAlignment="Center"  ></RadioButton>
 
                                         <TextBlock Text="Nº telefone da filial" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" ></TextBlock>
-                                        <TextBox Grid.Row="1" Grid.Column="1"  materialDesign:HintAssist.Hint="Telefone da fábrica filial" VerticalAlignment="Center"  ></TextBox>
+                                        <RadioButton Name="txtPhone" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center"  ></RadioButton>
 
-                                        <TextBlock Text="Rua da filial" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" ></TextBlock>
-                                        <TextBox Grid.Row="1" Grid.Column="3"  materialDesign:HintAssist.Hint="Rua da fábrica filial" VerticalAlignment="Center"  ></TextBox>
                                     </Grid>
                                 </Expander>
                             </Grid>

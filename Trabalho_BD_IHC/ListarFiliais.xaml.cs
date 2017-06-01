@@ -56,10 +56,22 @@ namespace Trabalho_BD_IHC
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
-            if(txtNfilial.Text.Length == 0)
-                Xceed.Wpf.Toolkit.MessageBox.Show("Tem que introduzir algo na caixa de texto antes de poder pesquisar", "", MessageBoxButton.OK, MessageBoxImage.Warning);
-            else
-                Filiais.ItemsSource = dataHandler.searchFiliaisInDB(Convert.ToInt32(txtNfilial.Text));
+            if(txtnFil.IsChecked == true)
+            {
+                if (!string.IsNullOrEmpty(txtInput.Text) && Regex.IsMatch(txtInput.Text, @"^\d+$"))
+                    Filiais.ItemsSource = dataHandler.getFiliaisInDBnFil(Convert.ToInt32(txtInput.Text));
+                else
+                    Filiais.ItemsSource = dataHandler.getFiliaisFromDB();
+            }
+            if (txtEmail.IsChecked == true)
+            {
+                Filiais.ItemsSource = dataHandler.getFiliaisInDBEmail(txtInput.Text);
+            }
+            if (txtPhone.IsChecked == true)
+            {
+                Filiais.ItemsSource = dataHandler.getFiliaisInDBPhone(txtInput.Text);
+            }
+
         }
 
         private void txtsearchFi_KeyUp(object sender, KeyEventArgs e)

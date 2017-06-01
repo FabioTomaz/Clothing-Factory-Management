@@ -106,7 +106,7 @@
                                             <Button Style="{DynamicResource MaterialDesignToolButton}">
                                                 <materialDesign:PackIcon Kind="Magnify" Opacity=".56" />
                                             </Button>
-                                            <TextBox Name="input" Grid.Column="1" Margin="8 0 0 0" materialDesign:HintAssist.Hint="Pesquisa por Referencia Fabrica" 
+                                            <TextBox Name="input" Grid.Column="1" Margin="8 0 0 0" materialDesign:HintAssist.Hint="Pesquisar" 
                                          materialDesign:TextFieldAssist.DecorationVisibility="Hidden" BorderThickness="0"
                                          MinWidth="200" VerticalAlignment="Center" KeyDown="TextBox_KeyDown"/>
                                             <Button  Grid.Column="2" Style="{DynamicResource MaterialDesignToolForegroundButton}" Margin="8 0 0 0" Panel.ZIndex="0" Click="Button_Click">
@@ -126,26 +126,14 @@
                                             <RowDefinition></RowDefinition>
                                             <RowDefinition></RowDefinition>
                                         </Grid.RowDefinitions>
-                                        <Label Content="Tipo de Material:  " HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0"></Label>
-                                        <ComboBox VerticalAlignment="Center" Text="Your Content" Grid.Column="1" materialDesign:HintAssist.Hint="Tipo de Material">
-                                            <ComboBoxItem>Pano</ComboBoxItem>
-                                            <ComboBoxItem>Linha</ComboBoxItem>
-                                            <ComboBoxItem>Botão</ComboBoxItem>
-                                            <ComboBoxItem>Mola</ComboBoxItem>
-                                            <ComboBoxItem>Elástico</ComboBoxItem>
-                                            <ComboBoxItem>Fita de Velcro</ComboBoxItem>
-                                            <ComboBoxItem>Outro</ComboBoxItem>
-                                        </ComboBox>
+                                        <Label Content="Nº referência Fábrica:  " HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0"></Label>
+                                        <RadioButton IsChecked="True" Name="txtRef" VerticalAlignment="Center" Grid.Column="1" />
+
                                         <Label Content="Cor:  " HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="2" Grid.Row="0"></Label>
-                                        <wpfTool:ColorPicker Grid.Column="3" Grid.Row="0" VerticalAlignment="Center"></wpfTool:ColorPicker>
-                                        <Label HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Column="0" Grid.Row="1" Content="Preço Minimo:  "></Label>
-                                        <Slider Minimum="0" VerticalAlignment="Center" Maximum="1000" Grid.Row="1" Grid.Column="1"  Style="{StaticResource MaterialDesignDiscreteSlider}" 
-                    ToolTip="MaterialDesignDiscreteSlider"
-                    Value="0"/>
-                                        <Label HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Column="2" Grid.Row="1" Content="Preço Máximo:  "></Label>
-                                        <Slider Minimum="0" VerticalAlignment="Center" Maximum="1000" Grid.Row="1" Grid.Column="3"  Style="{StaticResource MaterialDesignDiscreteSlider}" 
-                    ToolTip="MaterialDesignDiscreteSlider"
-                    Value="0"/>
+                                        <RadioButton Name="txtCor" Grid.Column="3" Grid.Row="0" VerticalAlignment="Center"></RadioButton>
+                                        
+                                        <Label HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Grid.Row="1" Content="Designação:"></Label>
+                                        <RadioButton Name="txtDes" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" />
 
                                     </Grid>
                                     </Expander>

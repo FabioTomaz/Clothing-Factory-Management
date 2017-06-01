@@ -173,16 +173,6 @@ namespace Trabalho_BD_IHC
             {
                 produtosPersonalizadosLista.ItemsSource = dataHandler.getProdutosPersonalizadosFromDBCor(txtInputPers.Text);
             }
-            else if (pesquisaID.IsChecked == true)
-            {
-                if (!string.IsNullOrEmpty(txtInputPers.Text) && Regex.IsMatch(txtInputPers.Text, @"^\d+$"))
-                    produtosPersonalizadosLista.ItemsSource = dataHandler.getProdutosPersonalizadosFromDBid(Convert.ToInt32(txtInputPers.Text));
-
-                else
-                {
-                    produtosPersonalizadosLista.ItemsSource = dataHandler.getProdutosPers();
-                }
-            }
         }
 
         private void produtosPersonalizadosLista_MouseDoubleClick(object sender, MouseButtonEventArgs e)
