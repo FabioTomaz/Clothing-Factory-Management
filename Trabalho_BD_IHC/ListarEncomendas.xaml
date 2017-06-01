@@ -88,7 +88,8 @@
                                 </Button>
                                 <TextBox Name="txtInput"  Grid.Column="1" Margin="8 0 0 0" materialDesign:HintAssist.Hint="Pesquisar" 
                                          materialDesign:TextFieldAssist.DecorationVisibility="Hidden" BorderThickness="0"
-                                         MinWidth="200" VerticalAlignment="Center" KeyDown="txtsearchEn_KeyUp"/>
+                                         MinWidth="200" VerticalAlignment="Center" KeyDown="txtsearchEn_KeyUp">
+                                </TextBox>
                                 <Button  Grid.Column="2" Style="{DynamicResource MaterialDesignToolForegroundButton}" Margin="8 0 0 0" Panel.ZIndex="0" Click="Button_Click">
                                     <materialDesign:PackIcon Kind="Send" />
                                 </Button>
@@ -106,8 +107,8 @@
                                     <RowDefinition></RowDefinition>
                                 </Grid.RowDefinitions>
                                 <Label Content="Pesquisar por:  " HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0"></Label>
-                                <RadioButton GroupName="tipoPesquisa" IsChecked="True"  Name="pesquisaNENCOMENDA" Content="Numero de Encomenda" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center"></RadioButton>
-                                <RadioButton GroupName="tipoPesquisa"  Name="pesquisaNCLIENTE" Content="Numero de Cliente" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center"></RadioButton>
+                                <RadioButton GroupName="tipoPesquisa" Checked="pesquisaNENCOMENDA_Checked" IsChecked="True"  Name="pesquisaNENCOMENDA" Content="Numero de Encomenda" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center"></RadioButton>
+                                <RadioButton GroupName="tipoPesquisa" Checked="pesquisaNCLIENTE_Checked" Name="pesquisaNCLIENTE" Content="Numero de Cliente" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center"></RadioButton>
                             </Grid>
                         </Expander>
                     </Grid>
