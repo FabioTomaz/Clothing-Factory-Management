@@ -27,6 +27,7 @@ namespace Trabalho_BD_IHC
         private ProdutoPersonalizado prodPers;
         private ObservableCollection<MaterialTextil> mtProd;
         private int invalidMaterials;
+        private bool produzivel;
         public ProduzirProduto(DataHandler dataHandler, ProdutoPersonalizado prodPers)
         {
             InitializeComponent();
@@ -156,37 +157,10 @@ namespace Trabalho_BD_IHC
                         }
                     }
                 }
-            }
-            if (invalidMaterials > 0)
-            {
-                failed.Visibility = Visibility.Visible;
-                produzir.IsEnabled = false;
-                String st = "";
-                int c = 0;
-                foreach (String s in materiaisInvalidos)
-                {
-                    c++;
-
-                    if (s.Equals(materiaisInvalidos.Last(), StringComparison.Ordinal))
-                    {
-                        st += s + ".";
-                    }
-                    else
-                    {
-                        st += s + ", ";
-                    }
-                    if (c > 5)
-                    {
-                        st += ", e mais outros materiais."; //impedir que a string seja muito extensa
-                        break;
-                    }
-                    materiaisNecessarios.Text = st;
-                }
-            }
-            else
-            {
-                produzir.IsEnabled = true;
-                success.Visibility = Visibility.Visible;
+                if (invalidMaterials > 0)
+                    produzivel = false;
+                else
+                    produzivel = true;
             }
         }
 
@@ -238,8 +212,7 @@ namespace Trabalho_BD_IHC
                     this.NavigationService.GoBack();
                 }
                else
-                    Xceed.Wpf.Toolkit.MessageBox.Show("Ocorreu um erro ao produzir o produto. Verifique se está devidamente conetado á internet ou tente mais tarde.", "", MessageBoxButton.OK, MessageBoxImage.Error);
-
+                    Xceed.Wpf.Toolkit.MessageBox.Show("Não foi possível produzir o produto, pois não tem quantidade de material suficiente para a produção. Encomende o material em falta.", "", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

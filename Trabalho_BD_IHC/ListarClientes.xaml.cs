@@ -38,7 +38,7 @@ namespace Trabalho_BD_IHC
             detalhesCliente.IsEnabled = false;
             clientes.Focus();
             ObservableCollection<Cliente> items = dataHandler.getClientesFromDB();
-            if(items!=null)
+            if (items != null)
                 clientes.ItemsSource = items;
         }
 
@@ -109,30 +109,22 @@ namespace Trabalho_BD_IHC
 
         private void searchButton_Click(object sender, RoutedEventArgs e)
         {
-            if(pesquisaNOME.IsChecked == true)
+            if (pesquisaNOME.IsChecked == true)
                 clientes.ItemsSource = dataHandler.getClientesInDBFromName(txtnomeCl.Text);
-            else if(pesquisaNCLIENTE.IsChecked == true)
+            else if (pesquisaNCLIENTE.IsChecked == true)
             {
-                if(!string.IsNullOrEmpty(txtnomeCl.Text) || Regex.IsMatch(txtnomeCl.Text, @"^\d+$"))
+                if (!string.IsNullOrEmpty(txtnomeCl.Text) || Regex.IsMatch(txtnomeCl.Text, @"^\d+$"))
                 {
                     ObservableCollection<Cliente> cl = new ObservableCollection<Cliente>();
                     cl.Add(dataHandler.getClientesInDBnCliente(Convert.ToInt32(txtnomeCl.Text)));
                     clientes.ItemsSource = cl;
                 }
                 else
-                    Xceed.Wpf.Toolkit.MessageBox.Show("Tem que introduzir um número de cliente na caixa de texto antes de poder pesquisar", "", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    clientes.ItemsSource = dataHandler.getClientesFromDB();
             }
             else if (pesquisaNIF.IsChecked == true)
-            {
-                if(!string.IsNullOrEmpty(txtnomeCl.Text) || Regex.IsMatch(txtnomeCl.Text, @"^\d+$"))
-                {
-                    ObservableCollection<Cliente> cl = new ObservableCollection<Cliente>();
-                    cl.Add(dataHandler.getClientesInDBnCliente(Convert.ToInt32(txtnomeCl.Text)));
-                    clientes.ItemsSource = cl;
-                }
-                else
-                    Xceed.Wpf.Toolkit.MessageBox.Show("Tem que introduzir um NIF na caixa de texto antes de poder pesquisar", "", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
+                clientes.ItemsSource = dataHandler.getClientesInDBNIF(txtnomeCl.Text);
+            
             else if (pesquisaMAIL.IsChecked == true)
                 clientes.ItemsSource = dataHandler.getClientesInDBFromEmail(txtnomeCl.Text);
         }
@@ -159,7 +151,8 @@ namespace Trabalho_BD_IHC
             }
         }
 
-        public void refresh() {
+        public void refresh()
+        {
             clientes.Focus();
             ObservableCollection<Cliente> items = dataHandler.getClientesFromDB();
             if (items != null)

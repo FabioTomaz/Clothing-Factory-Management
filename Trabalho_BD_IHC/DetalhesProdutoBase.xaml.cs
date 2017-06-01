@@ -29,7 +29,7 @@ namespace Trabalho_BD_IHC
         {
             InitializeComponent();
             this.dataHandler = dataHandler;
-            this.produtoBase = dataHandler.getProdutoBaseFromDB(referencia);
+            this.produtoBase = dataHandler.getProdutoBaseFromDBWithRef(referencia);
             nomeProduto.Text = produtoBase.Nome;
             ivaProduto.Text = produtoBase.IVA1.ToString();
             refProduto.Text = produtoBase.Referencia.ToString();

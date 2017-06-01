@@ -72,40 +72,9 @@
 
                     </DataGrid.Columns>
                 </DataGrid>
-                <Grid Name="failed" Grid.Row="4" Grid.RowSpan="3" Grid.ColumnSpan="4" Visibility="Hidden">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*"></ColumnDefinition>
-                        <ColumnDefinition Width="1*"></ColumnDefinition>
-                        <ColumnDefinition Width="1*"></ColumnDefinition>
-                        <ColumnDefinition Width="1*"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <materialDesign:PackIcon Kind="Alert" Height="30" Width="30" HorizontalAlignment="Center" ></materialDesign:PackIcon>
-                    <TextBlock Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" TextWrapping="Wrap"
-                     Text="Não é possível produzir este produto pois não existe uma quantidade suficiente em stock do seguinte material:"></TextBlock>
-                    <TextBlock Name="materiaisNecessarios" Grid.ColumnSpan="4" Grid.Row="1" TextWrapping="Wrap"></TextBlock>
-                    <TextBlock Grid.Row="2" Grid.ColumnSpan="4" TextWrapping="Wrap" Text="Pode encomendar mais materiais indo para a página de materiais, selecionando o material em falta e clicando em 'Adicionar Material'."></TextBlock>
-                </Grid>
-                <Grid Name="success" Grid.Row="4" Grid.RowSpan="3" Grid.ColumnSpan="4" Visibility="Hidden">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.5*"></ColumnDefinition>
-                        <ColumnDefinition Width="1*"></ColumnDefinition>
-                        <ColumnDefinition Width="1*"></ColumnDefinition>
-                        <ColumnDefinition Width="1*"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition Height="0.05"></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <materialDesign:PackIcon Grid.Row="0" Grid.Column="0" Kind="ThumbUp" Height="25" Width="25" ></materialDesign:PackIcon>
-                    <TextBlock Grid.Column="1" Grid.ColumnSpan="3" Text="É agora possível produzir este produto! Selecione em baixo a quantidade que pretende em produzir e de seguida carregue em 'Produzir' para efetuar a produção!" TextWrapping="Wrap"></TextBlock>
-                    <wpfTool:IntegerUpDown Name="quantidade" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Center" Width="80" Minimum="1" VerticalAlignment="Center"></wpfTool:IntegerUpDown>
-                </Grid>
+                <TextBlock Text="Indique a quantidade de produto a produzir" TextWrapping="Wrap" Grid.Row="4"  Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Center" ></TextBlock>
+                <wpfTool:IntegerUpDown Name="quantidade" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="4" 
+                                      Value="1" HorizontalAlignment="Center" Width="80" Minimum="1" VerticalAlignment="Center"></wpfTool:IntegerUpDown>
                 
             </Grid>
             

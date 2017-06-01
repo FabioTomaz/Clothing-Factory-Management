@@ -33,8 +33,7 @@ namespace Trabalho_BD_IHC
         }
         private SqlConnection getSGBDConnection()
         {
-            return new SqlConnection("data source=tcp: 193.136.175.33\\SQLSERVER2012,8293; initial catalog=p4g3;"
-                + " User ID=p4g3; Password=fabiobruno;");
+            return new SqlConnection("data source=localhost;integrated security=true;initial catalog=GESTAO-FABRICA-VESTUARIO-LABORAL");
         }
         /*db-->> data source=tcp: 193.136.175.33\\SQLSERVER2012,8293; initial catalog=p4g3;"
                 + " User ID=p4g3; Password=fabiobruno;*/
@@ -411,33 +410,36 @@ namespace Trabalho_BD_IHC
             return C;
         }
 
-        public Cliente getClientesInDBNIF(int NIF)
+        public ObservableCollection<Cliente> getClientesInDBNIF(string NIF)
         {
             if (!this.verifySGBDConnection())
                 return null;
             SqlCommand cmd = new SqlCommand("SELECT * FROM CLIENTE JOIN ZONA ON CLIENTE.CODPOSTAL1=ZONA.CODPOSTAL1 AND CLIENTE.CODPOSTAL2=ZONA.CODPOSTAL2 "
-                + "WHERE NIF = @NIF", cn);
+                + "WHERE NIF LIKE @NIF", cn);
             cmd.Parameters.Clear();
-            cmd.Parameters.AddWithValue("@NIF", NIF);
+            cmd.Parameters.AddWithValue("@NIF", "%"+NIF+"%");
             SqlDataReader reader = cmd.ExecuteReader();
-            Cliente C = new Cliente();
-            reader.Read();
-
-
-            C.Nome = reader["NOME"].ToString();
-            C.Nif = reader["NIF"].ToString();
-            C.Nib = reader["NIB"].ToString();
-            C.Email = reader["EMAIL"].ToString();
-            C.Telemovel = reader["TELEMOVEL"].ToString();
-            C.CodigoPostal = reader["CODPOSTAL1"].ToString() + "-" + reader["CODPOSTAL2"].ToString();
-            C.Rua = reader["RUA"].ToString();
-            C.NCasa = Convert.ToInt32(reader["N_PORTA"].ToString());
-            C.NCliente = Convert.ToInt32(reader["NCLIENTE"].ToString());
-            C.Distrito = reader["DISTRITO"].ToString();
-            C.Localidade = reader["LOCALIDADE"].ToString();
+            ObservableCollection<Cliente> items = new ObservableCollection<Cliente>();
+            while (reader.Read())
+            {
+                Cliente C = new Cliente();
+                C.Nome = reader["NOME"].ToString();
+                C.Nif = reader["NIF"].ToString();
+                C.Nib = reader["NIB"].ToString();
+                C.Email = reader["EMAIL"].ToString();
+                C.Telemovel = reader["TELEMOVEL"].ToString();
+                C.CodigoPostal = reader["CODPOSTAL1"].ToString() + "-" + reader["CODPOSTAL2"].ToString();
+                C.Rua = reader["RUA"].ToString();
+                C.NCasa = Convert.ToInt32(reader["N_PORTA"].ToString());
+                C.NCliente = Convert.ToInt32(reader["NCLIENTE"].ToString());
+                C.Distrito = reader["DISTRITO"].ToString();
+                C.Localidade = reader["LOCALIDADE"].ToString();
+                items.Add(C);
+            }
+            reader.Close();
 
             closeSGBDConnection();
-            return C;
+            return items;
         }
 
         public Cliente getClienteFromDB(int nCliente)
@@ -709,6 +711,64 @@ namespace Trabalho_BD_IHC
             return produtosPers;
         }
 
+        public ObservableCollection<ProdutoPersonalizado> getProdutosPersonalizadosFromDBid(int ID)
+        {
+            if (!this.verifySGBDConnection())
+                return null;
+            SqlCommand cmd = new SqlCommand("SELECT [PRODUTO-BASE].REFERENCIA, TAMANHO, COR, ID, N_ETIQUETA, PRECO, UNIDADES_ARMAZEM "
+                            + "FROM [PRODUTO-BASE] JOIN [PRODUTO-PERSONALIZADO] ON [PRODUTO-PERSONALIZADO].REFERENCIA=[PRODUTO-BASE].REFERENCIA"
+                            + " WHERE ID = @ID;"
+                            , cn);
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@id", ID);
+            SqlDataReader reader = cmd.ExecuteReader();
+            ObservableCollection<ProdutoPersonalizado> produtosPers = new ObservableCollection<ProdutoPersonalizado>();
+            while (reader.Read())
+            {
+                ProdutoPersonalizado prod = new ProdutoPersonalizado();
+                prod.ProdutoBase.Referencia = Convert.ToInt32(reader["REFERENCIA"].ToString());
+                prod.Tamanho = reader["TAMANHO"].ToString();
+                prod.Cor = reader["COR"].ToString();
+                prod.ID = Convert.ToInt32(reader["ID"].ToString());
+                prod.Preco = Convert.ToDouble(reader["PRECO"].ToString());
+                prod.UnidadesStock = Convert.ToInt32(reader["UNIDADES_ARMAZEM"].ToString());
+                prod.Etiqueta.Numero = Convert.ToInt32(reader["N_ETIQUETA"].ToString());
+                produtosPers.Add(prod);
+            }
+            reader.Close();
+            closeSGBDConnection();
+            return produtosPers;
+        }
+
+        public ObservableCollection<ProdutoPersonalizado> getProdutosPersonalizadosFromDBCor(string cor)
+        {
+            if (!this.verifySGBDConnection())
+                return null;
+            SqlCommand cmd = new SqlCommand("SELECT [PRODUTO-BASE].REFERENCIA, TAMANHO, COR, ID, N_ETIQUETA, PRECO, UNIDADES_ARMAZEM "
+                            + "FROM [PRODUTO-BASE] JOIN [PRODUTO-PERSONALIZADO] ON [PRODUTO-PERSONALIZADO].REFERENCIA=[PRODUTO-BASE].REFERENCIA"
+                            + " WHERE COR LIKE @cor;"
+                            , cn);
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@cor", "%"+cor+"%");
+            SqlDataReader reader = cmd.ExecuteReader();
+            ObservableCollection<ProdutoPersonalizado> produtosPers = new ObservableCollection<ProdutoPersonalizado>();
+            while (reader.Read())
+            {
+                ProdutoPersonalizado prod = new ProdutoPersonalizado();
+                prod.ProdutoBase.Referencia = Convert.ToInt32(reader["REFERENCIA"].ToString());
+                prod.Tamanho = reader["TAMANHO"].ToString();
+                prod.Cor = reader["COR"].ToString();
+                prod.ID = Convert.ToInt32(reader["ID"].ToString());
+                prod.Preco = Convert.ToDouble(reader["PRECO"].ToString());
+                prod.UnidadesStock = Convert.ToInt32(reader["UNIDADES_ARMAZEM"].ToString());
+                prod.Etiqueta.Numero = Convert.ToInt32(reader["N_ETIQUETA"].ToString());
+                produtosPers.Add(prod);
+            }
+            reader.Close();
+            closeSGBDConnection();
+            return produtosPers;
+        }
+
         public Boolean checkIfProdutoPersonalizadoExists(ProdutoPersonalizado prod)
         {
             if (!this.verifySGBDConnection())
@@ -803,14 +863,51 @@ namespace Trabalho_BD_IHC
             return produtosBase;
         }
 
-
-        public ProdutoBase getProdutoBaseFromDB(int referencia)
+        public ObservableCollection<ProdutoBase> getProdutosBaseFromDBNome(string nome)
         {
             if (!this.verifySGBDConnection())
                 return null;
             SqlCommand cmd = new SqlCommand("SELECT REFERENCIA, IMAGEM_DESENHO, [PRODUTO-BASE].NOME as nomeProduto, INSTRUCOES_PRODUCAO, "
-                            + "DATA_ALTERACAO, IVA, N_GESTOR_PROD FROM [PRODUTO-BASE] "
-                            + "WHERE REFERENCIA=@REF;", cn);
+                            + "DATA_ALTERACAO, IVA, N_FUNCIONARIO, UTILIZADOR.NOME as userName FROM [PRODUTO-BASE] "
+                            + "JOIN UTILIZADOR ON N_GESTOR_PROD=N_FUNCIONARIO WHERE [PRODUTO-BASE].NOME LIKE @nome", cn);
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@nome", "%" + nome + "%");
+            SqlDataReader reader = cmd.ExecuteReader();
+            ObservableCollection<ProdutoBase> produtosBase = new ObservableCollection<ProdutoBase>();
+            while (reader.Read())
+            {
+                ProdutoBase prod = new ProdutoBase();
+                prod.Referencia = Convert.ToInt32(reader["REFERENCIA"].ToString());
+                prod.Nome = reader["nomeProduto"].ToString();
+                prod.InstrProd = reader["INSTRUCOES_PRODUCAO"].ToString();
+                prod.DataAlteraçao = Convert.ToDateTime(reader["DATA_ALTERACAO"]);
+                prod.IVA1 = Convert.ToDouble(reader["IVA"].ToString());
+                prod.GestorProducao = new Utilizador();
+                prod.GestorProducao.NFuncionario = Convert.ToInt32(reader["N_FUNCIONARIO"].ToString());
+                prod.GestorProducao.Nome = reader["userName"].ToString();
+                try
+                {
+                    prod.Pic = (byte[])reader["IMAGEM_DESENHO"];
+                }
+                catch (InvalidCastException e)
+                {
+                    throw new InvalidCastException("Não foi possivel obter a imagem do desenho do produto base da base de dados.");
+                }
+                produtosBase.Add(prod);
+            }
+            reader.Close();
+            closeSGBDConnection();
+            return produtosBase;
+        }
+
+
+        public ProdutoBase getProdutoBaseFromDBWithRef(int referencia)
+        {
+            if (!this.verifySGBDConnection())
+                return null;
+            SqlCommand cmd = new SqlCommand("SELECT REFERENCIA, IMAGEM_DESENHO, [PRODUTO-BASE].NOME as nomeProduto, INSTRUCOES_PRODUCAO, "
+                            + "DATA_ALTERACAO, IVA, N_GESTOR_PROD, UTILIZADOR.NOME as userName FROM [PRODUTO-BASE] "
+                            + " JOIN UTILIZADOR ON N_GESTOR_PROD=N_FUNCIONARIO WHERE REFERENCIA=@REF;", cn);
             cmd.Parameters.Clear();
             cmd.Parameters.AddWithValue("@REF", referencia);
             SqlDataReader reader = cmd.ExecuteReader();
@@ -823,6 +920,40 @@ namespace Trabalho_BD_IHC
             prod.IVA1 = Convert.ToDouble(reader["IVA"].ToString());
             prod.GestorProducao = new Utilizador();
             prod.GestorProducao.NFuncionario = Convert.ToInt32(reader["N_GESTOR_PROD"].ToString());
+            prod.GestorProducao.Nome = reader["userName"].ToString();
+            try
+            {
+                prod.Pic = (byte[])reader["IMAGEM_DESENHO"];
+            }
+            catch (InvalidCastException ex)
+            {
+                throw new InvalidCastException("Não foi possivel obter a imagem do desenho do produto base da base de dados. ERRO: " + ex.Message);
+            }
+            reader.Close();
+            closeSGBDConnection();
+            return prod;
+        }
+
+        public ProdutoBase getProdutoBaseFromDBNGestor(int nGestor)
+        {
+            if (!this.verifySGBDConnection())
+                return null;
+            SqlCommand cmd = new SqlCommand("SELECT REFERENCIA, IMAGEM_DESENHO, [PRODUTO-BASE].NOME as nomeProduto, INSTRUCOES_PRODUCAO, "
+                            + "DATA_ALTERACAO, IVA, N_GESTOR_PROD, UTILIZADOR.NOME as userName FROM [PRODUTO-BASE] "
+                            + " JOIN UTILIZADOR ON N_GESTOR_PROD=N_FUNCIONARIO WHERE N_GESTOR_PROD = @ges;", cn);
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@ges", nGestor);
+            SqlDataReader reader = cmd.ExecuteReader();
+            reader.Read();
+            ProdutoBase prod = new ProdutoBase();
+            prod.Referencia = Convert.ToInt32(reader["REFERENCIA"].ToString());
+            prod.Nome = reader["nomeProduto"].ToString();
+            prod.InstrProd = reader["INSTRUCOES_PRODUCAO"].ToString();
+            prod.DataAlteraçao = Convert.ToDateTime(reader["DATA_ALTERACAO"]);
+            prod.IVA1 = Convert.ToDouble(reader["IVA"].ToString());
+            prod.GestorProducao = new Utilizador();
+            prod.GestorProducao.NFuncionario = Convert.ToInt32(reader["N_GESTOR_PROD"].ToString());
+            prod.GestorProducao.Nome = reader["userName"].ToString();
             try
             {
                 prod.Pic = (byte[])reader["IMAGEM_DESENHO"];
@@ -2469,18 +2600,26 @@ namespace Trabalho_BD_IHC
         {
             if (!this.verifySGBDConnection())
                 return false;
-            SqlCommand cmd = new SqlCommand("DECLARE @OUT VARCHAR(100); EXEC dbo.produzirProduto @ref, "
-                + "@tamanho, @cor, @id, @qtd, @OUT;", this.Cn);
-            cmd.Parameters.Clear();
+
+            SqlCommand cmd = new SqlCommand("DECLARE @validation INT; EXEC dbo.produzirProduto @ref, "
+                + "@tamanho, @cor, @id, @qtd, @validation OUTPUT; SELECT @validation", this.Cn);
+
             cmd.Parameters.AddWithValue("@ref", prodPers.ProdutoBase.Referencia);
             cmd.Parameters.AddWithValue("@tamanho", prodPers.Tamanho);
             cmd.Parameters.AddWithValue("@cor", prodPers.Cor);
             cmd.Parameters.AddWithValue("@id", prodPers.ID);
             cmd.Parameters.AddWithValue("@qtd", qtd);
-            cmd.ExecuteNonQuery();
-
+            int retVal = Convert.ToInt32(cmd.ExecuteScalar());
             this.closeSGBDConnection();
-            return true;
+            if (retVal == 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
         }
 
         public ObservableCollection<ProdutoPersonalizado> getProdutosPers()
