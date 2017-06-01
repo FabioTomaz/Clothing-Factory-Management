@@ -145,5 +145,14 @@ namespace Trabalho_BD_IHC
             DetalhesEncomenda window = new DetalhesEncomenda(dataHandler, ((Encomenda)encomendas.SelectedItem).NEncomenda);
             window.Show();
         }
+
+        private void pesquisaNENCOMENDA_Checked(object sender, RoutedEventArgs e)
+        {
+        }
+
+        private void pesquisaNCLIENTE_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
