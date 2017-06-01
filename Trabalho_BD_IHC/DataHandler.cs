@@ -33,8 +33,7 @@ namespace Trabalho_BD_IHC
         }
         private SqlConnection getSGBDConnection()
         {
-            return new SqlConnection("data source=tcp: 193.136.175.33\\SQLSERVER2012,8293; initial catalog=p4g3;"
-                + " User ID=p4g3; Password=fabiobruno;");
+            return new SqlConnection("data source=localhost;integrated security=true;initial catalog=GESTAO-FABRICA-VESTUARIO-LABORAL");
         }
         /*db-->> data source=tcp: 193.136.175.33\\SQLSERVER2012,8293; initial catalog=p4g3;"
                 + " User ID=p4g3; Password=fabiobruno;*/
@@ -2469,18 +2468,26 @@ namespace Trabalho_BD_IHC
         {
             if (!this.verifySGBDConnection())
                 return false;
-            SqlCommand cmd = new SqlCommand("DECLARE @OUT VARCHAR(100); EXEC dbo.produzirProduto @ref, "
-                + "@tamanho, @cor, @id, @qtd, @OUT;", this.Cn);
-            cmd.Parameters.Clear();
+
+            SqlCommand cmd = new SqlCommand("DECLARE @validation INT; EXEC dbo.produzirProduto @ref, "
+                + "@tamanho, @cor, @id, @qtd, @validation OUTPUT; SELECT @validation", this.Cn);
+
             cmd.Parameters.AddWithValue("@ref", prodPers.ProdutoBase.Referencia);
             cmd.Parameters.AddWithValue("@tamanho", prodPers.Tamanho);
             cmd.Parameters.AddWithValue("@cor", prodPers.Cor);
             cmd.Parameters.AddWithValue("@id", prodPers.ID);
             cmd.Parameters.AddWithValue("@qtd", qtd);
-            cmd.ExecuteNonQuery();
-
+            int retVal = Convert.ToInt32(cmd.ExecuteScalar());
             this.closeSGBDConnection();
-            return true;
+            if (retVal == 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
         }
 
         public ObservableCollection<ProdutoPersonalizado> getProdutosPers()

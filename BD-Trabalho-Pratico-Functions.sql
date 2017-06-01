@@ -86,10 +86,9 @@ BEGIN
 END
 GO
 
-CREATE PROC dbo.produzirProduto (@REFERENCIA INT, @TAMANHO VARCHAR(5), @COR VARCHAR(15), @ID INT, @qtdProdutoPrecisa INT, @OUT VARCHAR(70) OUTPUT)
+CREATE PROC dbo.produzirProduto (@REFERENCIA INT, @TAMANHO VARCHAR(5), @COR VARCHAR(15), @ID INT, @qtdProdutoPrecisa INT, @validation INT OUTPUT)
 AS
 	BEGIN
-		DECLARE @validation bit;
 		SET @validation = 1;
 		DECLARE @qtdProdutoExistente as int;
 		SELECT @qtdProdutoExistente = UNIDADES_ARMAZEM from [PRODUTO-PERSONALIZADO] 
@@ -141,6 +140,9 @@ AS
 	END
 GO
 
+DECLARE @validation as INT;
+EXEC dbo.produzirProduto 2, 'M', 'azul claro', 3 , 1 , @validation OUTPUT;
+SELECT @validation
 CREATE FUNCTION dbo.checkIfCodPostalExists(@codPostal1 int, @codPostal2 int) returns bit
 as
 begin
