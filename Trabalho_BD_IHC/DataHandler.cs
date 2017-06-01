@@ -33,7 +33,8 @@ namespace Trabalho_BD_IHC
         }
         private SqlConnection getSGBDConnection()
         {
-            return new SqlConnection("data source=localhost;integrated security=true;initial catalog=GESTAO-FABRICA-VESTUARIO-LABORAL");
+            return new SqlConnection("data source=tcp: 193.136.175.33\\SQLSERVER2012,8293; initial catalog=p4g3;"
+                + " User ID=p4g3; Password=fabiobruno;");
         }
         /*db-->> data source=tcp: 193.136.175.33\\SQLSERVER2012,8293; initial catalog=p4g3;"
                 + " User ID=p4g3; Password=fabiobruno;*/
@@ -2484,6 +2485,7 @@ namespace Trabalho_BD_IHC
 
         public ObservableCollection<ProdutoPersonalizado> getProdutosPers()
         {
+            verifySGBDConnection();
             SqlCommand cmd = new SqlCommand("SELECT TAMANHO, COR, ID, PRECO, UNIDADES_ARMAZEM, "
                 + "[PRODUTO-PERSONALIZADO].REFERENCIA, [PRODUTO-BASE].NOME as nomeBase, DATA_ALTERACAO, "
                 + "INSTRUCOES_PRODUCAO, IVA, PAIS_FABRICO, [PRODUTO-PERSONALIZADO].N_ETIQUETA, NORMAS, "
