@@ -90,6 +90,12 @@ namespace Trabalho_BD_IHC
             DetalhesFilial window = new DetalhesFilial(dataHandler, (filial)Filiais.SelectedItem);
             window.Show();
         }
+
+        public void refresh()
+        {
+            Filiais.Focus();
+            Filiais.ItemsSource = dataHandler.getFiliaisFromDB();
+        }
     }
 
 

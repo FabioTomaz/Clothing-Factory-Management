@@ -42,9 +42,9 @@ namespace Trabalho_BD_IHC
             this.dataHandler = dataHandler;
 
             listarClientes = new ListarClientes(dataHandler);
-            listarEncomendas = new ListarEncomendas(dataHandler);
-            listarProdutos = new ListarProdutos(dataHandler);
             listarMateriais = new ListarMateriais(dataHandler);
+            listarProdutos = new ListarProdutos(dataHandler);
+            listarEncomendas = new ListarEncomendas(dataHandler);
             listarEmpregados = new ListarEmpregados(dataHandler, this);
             listarFornecedores = new ListarFornecedores(dataHandler);
             listarFiliais = new ListarFiliais(dataHandler);
@@ -109,60 +109,14 @@ namespace Trabalho_BD_IHC
 
         public void fillNotifications()
         {
-            for(int i=0; i<notificationStack.Children.Count; i++)
-            {
-                notificationStack.Children.RemoveAt(i);
-            }
-            int encomendasMes = dataHandler.getEncomendasDesteMes();
-            MaterialDesignThemes.Wpf.Card chip1 = new MaterialDesignThemes.Wpf.Card
-            {
-                Content = new TextBlock
-                {
-                    Text = "Existem " + encomendasMes + " encomendas para serem entregues este mês.",
-                    TextWrapping = TextWrapping.Wrap
-                }
-            };
-            notificationStack.Children.Add(chip1);
-
             double lucroMes = dataHandler.getSaldoDesteMes();
             double dinheiroGasto = dataHandler.getDinheiroGastoMes();
             double dinheiroGerado = dataHandler.getDinheiroGeradoMes();
-
-            //MaterialDesignThemes.Wpf.Card chip2 = new MaterialDesignThemes.Wpf.Card
-            //{
-            //    Content = new TextBlock
-            //    {
-            //        Text = "Neste mês foram vendidos até ao momento " + dinheiroGerado + " euros em produtos. No entanto foram gastos" + dinheiroGasto + " euros em matérias primas gerando um saldo final de " + lucroMes + " euros.",
-            //        TextWrapping = TextWrapping.Wrap
-            //    },
-            //    Margin = new Thickness(0, 4, 0, 0)
-            //};
-            //notificationStack.Children.Add(chip2);
-
+            int encomendasMes = dataHandler.getEncomendasDesteMes();
             int nProdutos = dataHandler.getNProdutosVendidosAteHoje();
-            MaterialDesignThemes.Wpf.Card chip3 = new MaterialDesignThemes.Wpf.Card
-            {
-                Content = new TextBlock
-                {
-                    Text = "Até ao momento foram vendidos " + nProdutos + " produtos",
-                    TextWrapping = TextWrapping.Wrap
-                },
-                Padding= new Thickness(4),
-                Margin = new Thickness(0, 4, 0, 0)
-            };
-            notificationStack.Children.Add(chip3);
-
-            int nProdutosMes = dataHandler.getNProdutosVendidosMes();
-            MaterialDesignThemes.Wpf.Card chip4 = new MaterialDesignThemes.Wpf.Card
-            {
-                Content = new TextBlock
-                {
-                    Text = "Neste mês foram vendidos até ao momento " + nProdutosMes + " produtos",
-                    TextWrapping = TextWrapping.Wrap
-                },
-                Margin = new Thickness(0, 4, 0, 0)
-            };
-            notificationStack.Children.Add(chip4);
+            int nProdutosDesteMes = dataHandler.getNProdutosVendidosMes();
+            nEncomendasPrevistas.Content = "Existem " + encomendasMes + " encomendas para serem entregues este mês.";
+            nProdutosMes.Content = "Neste mês foram vendidos até ao momento " + nProdutosDesteMes + " produtos";
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -232,15 +186,15 @@ namespace Trabalho_BD_IHC
 
         private void tabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(e.Source is TabControl) {
-                listarClientes.refresh();
-                encomendasFrame.Content = new ListarEncomendas(dataHandler);
-                produtosFrame.Content = new ListarProdutos(dataHandler);
-                materiaisFrame.Content = new ListarMateriais(dataHandler);
-                empregadosFrame.Content = new ListarEmpregados(dataHandler, this);
-                filiaisFrame.Content = new ListarFiliais(dataHandler);
-                refresh();
-                listarFornecedores.refresh();
+            if(e.Source is Dragablz.TabablzControl) {
+                Dragablz.TabablzControl tabItem = (Dragablz.TabablzControl)e.Source;
+                string nome = ((TabItem)tabItem.SelectedItem).Name;
+                if(nome.Equals("conta"))
+                    this.refresh();
+                else if(nome.Equals("producao"))
+                    listarProdutos.refresh();
+                else if(nome.Equals("materiais"))
+                    listarMateriais.refresh();
             }
         }
 

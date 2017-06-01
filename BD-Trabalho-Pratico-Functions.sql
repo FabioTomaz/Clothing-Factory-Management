@@ -40,6 +40,7 @@ RETURN	SELECT [MATERIAIS-PRODUTO].QUANTIDADE,  MATERIAIS_TÊXTEIS.COR, MATERIAIS_
 		JOIN MATERIAIS_TÊXTEIS ON MATERIAIS_TÊXTEIS.REFERENCIA_FABRICA=[MATERIAIS-PRODUTO].REFERENCIA_FABRICA 
 		WHERE [MATERIAIS-PRODUTO].REFERENCIA=@REF AND [MATERIAIS-PRODUTO].TAMANHO=TAMANHO AND [MATERIAIS-PRODUTO].COR=@COR AND [MATERIAIS-PRODUTO].ID=@ID
 GO
+select dbo.getTipoMaterial(1);
 
 CREATE FUNCTION getQuantidadeMaterial(@referenciaMaterial INT) RETURNS DECIMAL(10,2)
 AS 
@@ -85,9 +86,10 @@ BEGIN
 END
 GO
 
-CREATE PROC dbo.produzirProduto (@REFERENCIA INT, @TAMANHO VARCHAR(5), @COR VARCHAR(15), @ID INT, @qtdProdutoPrecisa INT, @validation INT OUTPUT)
+CREATE PROC dbo.produzirProduto (@REFERENCIA INT, @TAMANHO VARCHAR(5), @COR VARCHAR(15), @ID INT, @qtdProdutoPrecisa INT, @OUT VARCHAR(70) OUTPUT)
 AS
 	BEGIN
+		DECLARE @validation bit;
 		SET @validation = 1;
 		DECLARE @qtdProdutoExistente as int;
 		SELECT @qtdProdutoExistente = UNIDADES_ARMAZEM from [PRODUTO-PERSONALIZADO] 
@@ -139,9 +141,26 @@ AS
 	END
 GO
 
-DECLARE @validation as INT;
-EXEC dbo.produzirProduto 2, 'M', 'azul claro', 3 , 1 , @validation OUTPUT;
-SELECT @validation
+CREATE FUNCTION dbo.checkIfCodPostalExists(@codPostal1 int, @codPostal2 int) returns bit
+as
+begin
+	DECLARE @exists bit;
+	select @exists=count(*) from ZONA WHERE CODPOSTAL1=@codPostal1 AND CODPOSTAL2=@codPostal2
+	return @exists;
+end
+go
+
+CREATE FUNCTION dbo.checkIfFornecedorExists ON CLIENTE
+as
+begin
+	DECLARE @exists bit;
+	select @exists=count(*) from CLIENTE WHERE CODPOSTAL1=@codPostal1 AND CODPOSTAL2=@codPostal2
+	return @exists;
+end
+go
+
+--DECLARE @OUT VARCHAR(100);
+--EXEC dbo.produzirProduto 2, 'M', 'azul claro', 3 , 1 , @OUT
 
 --drop proc dbo.produzirProduto
 
@@ -230,6 +249,7 @@ AS
 			SET @OUT = 'A quantidade indicada foi adicionada com sucesso';
 	END
 GO
+
 --SELECT * FROM UTILIZADOR JOIN ZONA ON ( UTILIZADOR.CODPOSTAL1 = ZONA.CODPOSTAL1 AND UTILIZADOR.CODPOSTAL2 = ZONA.CODPOSTAL2)
 --WHERE N_FUNCIONARIO =1
 

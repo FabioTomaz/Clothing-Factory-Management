@@ -166,13 +166,16 @@
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
                                     <materialDesign:PackIcon Kind="ChartBar" Height="32" Width="32" VerticalAlignment="Center" />
-                                    <TextBlock Margin="8,0,0,0" VerticalAlignment="Center" Text="Estatisticas Gerais"  Style="{StaticResource MaterialDesignSubheadingTextBlock}"/>
+                                    <TextBlock Margin="8,0,0,0" VerticalAlignment="Center" Text="Estatisticas Deste Mês"  Style="{StaticResource MaterialDesignSubheadingTextBlock}"/>
                                 </StackPanel>
                             </DataTemplate>
                         </GroupBox.HeaderTemplate>
-                        
-                        <StackPanel Name="notificationStack">
-                        </StackPanel>
+                        <ScrollViewer>
+                            <StackPanel Name="notificationStack">
+                                <materialDesign:Card Name="nEncomendasPrevistas" Margin="5,7,5,0"></materialDesign:Card>
+                                <materialDesign:Card Name="nProdutosMes" Margin="5,7,5,0"></materialDesign:Card>
+                            </StackPanel>
+                        </ScrollViewer>
                     </GroupBox>
                     <Grid Grid.Column="4" Grid.Row="6" Grid.RowSpan="4">
                         <Grid.RowDefinitions>

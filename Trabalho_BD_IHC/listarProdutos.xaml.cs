@@ -47,12 +47,7 @@ namespace Trabalho_BD_IHC
                 detalhesProdutoPersonalizado.IsEnabled = false;
                 produzirProduto.IsEnabled = false;
                 produtosPersonalizadosLista.Focus();
-                if (!dataHandler.verifySGBDConnection())
-                {
-                    MessageBoxResult result = MessageBox.Show("A conexão à base de dados é instável ou inexistente. Por favor tente mais tarde", "Erro de Base de Dados", MessageBoxButton.OK, MessageBoxImage.Warning);
-                }
-                else
-                    produtosPersonalizadosLista.ItemsSource = dataHandler.getProdutosPers();
+                produtosPersonalizadosLista.ItemsSource = dataHandler.getProdutosPers();
             }
             dataHandler.closeSGBDConnection();
         }
@@ -158,6 +153,12 @@ namespace Trabalho_BD_IHC
         private void produtosBaseLista_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             detalhesProdutoBase_Click(sender, e);
+        }
+
+        public void refresh()
+        {
+            ObservableCollection<ProdutoBase> produtoBase = dataHandler.getProdutosBaseFromDB();
+            produtosBaseLista.ItemsSource = produtoBase;
         }
     }
 }
