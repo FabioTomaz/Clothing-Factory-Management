@@ -101,10 +101,10 @@
                                             <ColumnDefinition Width="*" />
                                             <ColumnDefinition Width="Auto" />
                                         </Grid.ColumnDefinitions>
-                                        <Button Style="{DynamicResource MaterialDesignToolButton}">
+                                        <Button Style="{DynamicResource MaterialDesignToolButton}" ToolTip="Limpar Pesquisa" Click="Button_Click">
                                             <materialDesign:PackIcon Kind="Magnify" Opacity=".56" />
                                         </Button>
-                                        <TextBox Name="txtInput" Grid.Column="1" Margin="8 0 0 0" materialDesign:HintAssist.Hint="Pesquisa por Nº de Filial" 
+                                        <TextBox Name="txtInput" Grid.Column="1" Margin="8 0 0 0" materialDesign:HintAssist.Hint="Pesquisa por Numero da Filial" 
                                          materialDesign:TextFieldAssist.DecorationVisibility="Hidden" BorderThickness="0"
                                          MinWidth="200" VerticalAlignment="Center" KeyUp="txtsearchFi_KeyUp" />
                                         <Button  Grid.Column="2" Style="{DynamicResource MaterialDesignToolForegroundButton}" Margin="8 0 0 0" Panel.ZIndex="0" Click="SearchButton_Click">
@@ -112,7 +112,7 @@
                                         </Button>
                                     </Grid>
                                 </materialDesign:ColorZone>
-                                <Expander HorizontalAlignment="Stretch" Header="Mais opções de Pesquisa" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Foreground="Black">
+                                <Expander HorizontalAlignment="Stretch" Header="Tipo de Pesquisa" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Foreground="Black">
                                     <Grid TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition></ColumnDefinition>
@@ -124,15 +124,10 @@
                                             <RowDefinition></RowDefinition>
                                             <RowDefinition></RowDefinition>
                                         </Grid.RowDefinitions>
-                                        <TextBlock Text="Nº Filial:" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" ></TextBlock>
-                                        <RadioButton Name="txtnFil" Grid.Row="0" Grid.Column="1" IsChecked="True" VerticalAlignment="Center" ></RadioButton>
-
-                                        <TextBlock Text="E-mail da filial:" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" ></TextBlock>
-                                        <RadioButton Name="txtEmail" Grid.Row="0" Grid.Column="3" VerticalAlignment="Center"  ></RadioButton>
-
-                                        <TextBlock Text="Nº telefone da filial" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" ></TextBlock>
-                                        <RadioButton Name="txtPhone" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center"  ></RadioButton>
-
+                                        <TextBlock Text="Pesquisar por: " Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" ></TextBlock>
+                                        <RadioButton Name="txtnFil" Checked="txtnFil_Checked" Content="Nº Filial" Grid.Row="0" Grid.Column="1" IsChecked="True" VerticalAlignment="Center" ></RadioButton>
+                                        <RadioButton Name="txtEmail" Checked="txtEmail_Checked" Content="E-mail" Grid.Row="0" Grid.Column="3" VerticalAlignment="Center"  ></RadioButton>
+                                        <RadioButton Name="txtPhone" Checked="txtPhone_Checked" Content="Telefone/Telémovel" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center"  ></RadioButton>
                                     </Grid>
                                 </Expander>
                             </Grid>

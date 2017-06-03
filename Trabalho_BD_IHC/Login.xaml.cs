@@ -49,9 +49,9 @@ namespace Trabalho_BD_IHC
                 MessageBoxResult result = Xceed.Wpf.Toolkit.MessageBox.Show("Por favor preencha os campos de incio de sessão e tente novamente.", "Erro de Inicio de Sessão", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else {
-                if (checkUser(nEmpregado.Text))
+                if (dataHandler.checkUser(nEmpregado.Text))
                 {
-                    if (checkLogin(nEmpregado.Text, pass)) {
+                    if (dataHandler.checkLogin(nEmpregado.Text, pass)) {
                         Utilizador.loggedUser = dataHandler.getUtilizadorFromDB(Convert.ToInt32(nEmpregado.Text));
                         Utilizador.loggedUser.Supervisor = dataHandler.getUtilizadorFromDB(Utilizador.loggedUser.Supervisor.NFuncionario);
                         this.Hide();
@@ -68,50 +68,6 @@ namespace Trabalho_BD_IHC
                     MessageBoxResult result = Xceed.Wpf.Toolkit.MessageBox.Show("O numero de funcionário introduzido não está registado no sistema. Por favor reeintroduza parametros de inicio de sessão corretos e tente novamente.", "Erro de Inicio de Sessão", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 }
             }
-        }
-
-
-        private Boolean checkUser(String user)
-        {
-            if (!dataHandler.verifySGBDConnection())
-            {
-                Xceed.Wpf.Toolkit.MessageBox.Show("Não foi possivel inicar sessão na base de dados", "erro", MessageBoxButton.OK, MessageBoxImage.Error);
-                
-            }
-            int rows=0;
-            SqlCommand cmd = new SqlCommand("SELECT * FROM UTILIZADOR WHERE N_FUNCIONARIO=@USER", dataHandler.Cn);
-            cmd.Parameters.Clear();
-            cmd.Parameters.AddWithValue("@USER", user);
-            SqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read()) {
-                rows += 1;
-            }
-            dataHandler.closeSGBDConnection();
-            return (rows==1);
-        }
-
-        private Boolean checkLogin(String user, String password)
-        {
-            dataHandler.verifySGBDConnection();
-            SqlCommand cmd = new SqlCommand("SELECT N_FUNCIONARIO, PASS FROM UTILIZADOR WHERE N_FUNCIONARIO=@USER", dataHandler.Cn);
-            cmd.Parameters.Clear();
-            cmd.Parameters.AddWithValue("@USER", user);
-            SqlDataReader reader = cmd.ExecuteReader();
-            reader.Read();
-            String bdPass = reader["PASS"].ToString();
-            dataHandler.closeSGBDConnection();
-            if (password.Equals(bdPass))
-                return true;
-            return false;
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void CheckBox_Click(object sender, RoutedEventArgs e)
-        {
         }
 
         private void CheckBox_Click_1(object sender, RoutedEventArgs e)

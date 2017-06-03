@@ -65,46 +65,6 @@ namespace Trabalho_BD_IHC
             }
         }
 
-        private void AtualizarProdutoBase(ProdutoBase prod)
-        {
-            int rows = 0;
-
-            if (!dataHandler.verifySGBDConnection())
-                return;
-
-            SqlCommand cmd = new SqlCommand();
-
-            cmd.CommandText = "UPDATE [PRODUTO-BASE] " + "SET  NOME = @NOME, " + "   DATA_ALTERACAO = @DataAlt, " +
-                "IVA = @iva"+"  N_GESTOR_PROD = @N_GestorProd, " + " INSTRUCOES_PRODUCAO = @IntrProd " + "WHERE REFERENCIA = @Referencia";
-            cmd.Parameters.Clear(); //falta inserir a imagem do produto!
-            cmd.Parameters.AddWithValue("@NOME", prod.Nome);
-            cmd.Parameters.AddWithValue("@iva", prod.IVA1);
-            cmd.Parameters.AddWithValue("@N_GestorProd", Utilizador.loggedUser.NFuncionario); //--> do funcionario q editou
-            cmd.Parameters.AddWithValue("@DataAlt", DateTime.Today);
-            cmd.Parameters.AddWithValue("@IntrProd", prod.InstrProd);
-            cmd.Parameters.AddWithValue("@Referencia", prod.Referencia);
-            //cmd.Parameters.AddWithValue("@Imagem", des.);
-            cmd.Connection = dataHandler.Cn;
-
-            try
-            {
-                rows = cmd.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Não foi possivel atualizar o Produto Base. \n ERROR MESSAGE: \n" + ex.Message);
-            }
-            finally
-            {
-                if (rows == 1)
-                    MessageBox.Show("Produto atualizado com sucesso!", "", MessageBoxButton.OK, MessageBoxImage.Asterisk);
-                else
-                   if (MessageBox.Show("Não foi possivel atualizar o Produto Base", "Erro", MessageBoxButton.OKCancel, MessageBoxImage.Exclamation) == MessageBoxResult.Cancel)
-                    AtualizarProdutoBase(prod);
-                dataHandler.closeSGBDConnection();
-            }
-        }
-
         
 
         private void confirmar_Click(object sender, RoutedEventArgs e)
@@ -116,7 +76,7 @@ namespace Trabalho_BD_IHC
                 prod.Pic = ProdutoBase.Pic = getJPGFromImageControl((BitmapImage)imgPhoto.Source);
             try
             {
-                AtualizarProdutoBase(prod);
+                dataHandler.AtualizarProdutoBase(prod);
             }
             catch (Exception ex)
             {

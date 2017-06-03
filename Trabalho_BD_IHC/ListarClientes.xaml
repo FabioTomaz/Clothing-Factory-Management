@@ -90,10 +90,10 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <Button Style="{DynamicResource MaterialDesignToolButton}">
+                                    <Button Style="{DynamicResource MaterialDesignToolButton}" ToolTip="Limpar Pesquisa" Click="Button_Click">
                                         <materialDesign:PackIcon Kind="Magnify" Opacity=".56" />
                                     </Button>
-                                    <TextBox Name="txtnomeCl" KeyUp="txtnomeCl_KeyUp"  Grid.Column="1" Margin="8 0 0 0" materialDesign:HintAssist.Hint="Pesquisa por Nome" 
+                                    <TextBox Name="txtnomeCl" KeyUp="txtnomeCl_KeyUp"  Grid.Column="1" Margin="8 0 0 0" materialDesign:HintAssist.Hint="Pesquisar por Nome do Cliente" 
                                          materialDesign:TextFieldAssist.DecorationVisibility="Hidden" BorderThickness="0"
                                          MinWidth="200" VerticalAlignment="Center">
                                         
@@ -115,10 +115,10 @@
                                         <RowDefinition></RowDefinition>
                                     </Grid.RowDefinitions>
                                     <Label Content="Pesquisar por:  " HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0"></Label>
-                                    <RadioButton GroupName="tipoPesquisa" IsChecked="True"  Name="pesquisaNOME" Content="Nome de Cliente" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center"></RadioButton>
-                                    <RadioButton GroupName="tipoPesquisa"  Name="pesquisaNCLIENTE" Content="Numero de Cliente" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center"></RadioButton>
-                                    <RadioButton GroupName="tipoPesquisa"  Name="pesquisaNIF" Content="NIF do Cliente" Grid.Column="2" Grid.Row="0" VerticalAlignment="Center"></RadioButton>
-                                    <RadioButton GroupName="tipoPesquisa"  Name="pesquisaMAIL" Content="Email do Cliente" Grid.Column="2" Grid.Row="1" VerticalAlignment="Center"></RadioButton>
+                                    <RadioButton GroupName="tipoPesquisa" Checked="pesquisaNOME_Checked" IsChecked="True"  Name="pesquisaNOME" Content="Nome de Cliente" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center"></RadioButton>
+                                    <RadioButton GroupName="tipoPesquisa" Checked="pesquisaNCLIENTE_Checked" Name="pesquisaNCLIENTE" Content="Numero de Cliente" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center"></RadioButton>
+                                    <RadioButton GroupName="tipoPesquisa" Checked="pesquisaNIF_Checked" Name="pesquisaNIF" Content="NIF do Cliente" Grid.Column="2" Grid.Row="0" VerticalAlignment="Center"></RadioButton>
+                                    <RadioButton GroupName="tipoPesquisa" Checked="pesquisaMAIL_Checked" Name="pesquisaMAIL" Content="Email do Cliente" Grid.Column="2" Grid.Row="1" VerticalAlignment="Center"></RadioButton>
                                 </Grid>
                             </Expander>
                         </Grid>

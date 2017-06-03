@@ -77,7 +77,7 @@ namespace Trabalho_BD_IHC
                 Xceed.Wpf.Toolkit.MessageBox.Show(ex.Message, "ERRO", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
-            Xceed.Wpf.Toolkit.MessageBox.Show("Encomenda registada com sucesso", "Sucesso", MessageBoxButton.OK, MessageBoxImage.Warning);
+            Xceed.Wpf.Toolkit.MessageBox.Show("Encomenda Editada com sucesso", "Sucesso", MessageBoxButton.OK, MessageBoxImage.Information);
             this.NavigationService.GoBack();
         }
     }

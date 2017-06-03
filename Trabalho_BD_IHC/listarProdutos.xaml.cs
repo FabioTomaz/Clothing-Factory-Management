@@ -117,11 +117,11 @@ namespace Trabalho_BD_IHC
                 if (!string.IsNullOrEmpty(txtInput.Text) && Regex.IsMatch(txtInput.Text, @"^\d+$"))
                 {
                     ObservableCollection<ProdutoBase> prod = new ObservableCollection<ProdutoBase>();
-                    prod.Add(dataHandler.getProdutoBaseFromDBWithRef(Convert.ToInt32(txtInput.Text)));
+                    ProdutoBase prodBase = dataHandler.getProdutoBaseFromDBWithRef(Convert.ToInt32(txtInput.Text));
+                    if(prodBase!=null)
+                        prod.Add(prodBase);
                     produtosBaseLista.ItemsSource = prod;
                 }
-                else
-                    produtosBaseLista.ItemsSource = dataHandler.getProdutosBaseFromDB();
             }
             else if (pesquisaNOME.IsChecked == true)
             {
@@ -136,9 +136,6 @@ namespace Trabalho_BD_IHC
                     produtosBaseLista.ItemsSource = prod;
                 }
 
-
-                else
-                    produtosBaseLista.ItemsSource = dataHandler.getProdutosBaseFromDB();
             }
         }
 
@@ -163,15 +160,11 @@ namespace Trabalho_BD_IHC
 
                 if (!string.IsNullOrEmpty(txtInputPers.Text) && Regex.IsMatch(txtInputPers.Text, @"^\d+$"))
                     produtosPersonalizadosLista.ItemsSource = dataHandler.searchAndGetProdutosPersID(Convert.ToInt32(txtInputPers.Text));
-
-                else
-                {
-                    produtosPersonalizadosLista.ItemsSource = dataHandler.getProdutosPers();
-                }
             }
             else if (pesquisaCor.IsChecked == true)
             {
-                produtosPersonalizadosLista.ItemsSource = dataHandler.getProdutosPersonalizadosFromDBCor(txtInputPers.Text);
+                if (!string.IsNullOrEmpty(txtInputPers.Text))
+                    produtosPersonalizadosLista.ItemsSource = dataHandler.getProdutosPersonalizadosFromDBCor(txtInputPers.Text);
             }
         }
 
@@ -185,10 +178,46 @@ namespace Trabalho_BD_IHC
             detalhesProdutoBase_Click(sender, e);
         }
 
-        public void refresh()
+        public void refreshProdutosBase()
         {
             ObservableCollection<ProdutoBase> produtoBase = dataHandler.getProdutosBaseFromDB();
             produtosBaseLista.ItemsSource = produtoBase;
+        }
+
+        public void refreshProdutosPersonalizados()
+        {
+            ObservableCollection<ProdutoPersonalizado> produtosPersonalizados = dataHandler.getProdutosPers();
+            produtosBaseLista.ItemsSource = produtosPersonalizados;
+        }
+
+        private void pesquisaNOME_Checked(object sender, RoutedEventArgs e)
+        {
+            txtInput.Text = "";
+            txtInput.SetValue(MaterialDesignThemes.Wpf.HintAssist.HintProperty, "Pesquisar Por Nome do Produto");
+        }
+
+        private void pesquisaGESTOR_Checked(object sender, RoutedEventArgs e)
+        {
+            txtInput.Text = "";
+            txtInput.SetValue(MaterialDesignThemes.Wpf.HintAssist.HintProperty, "Pesquisar Por Gestor do Produto");
+        }
+
+        private void pesquisaREFERENCIA_Checked(object sender, RoutedEventArgs e)
+        {
+            txtInput.Text = "";
+            txtInput.SetValue(MaterialDesignThemes.Wpf.HintAssist.HintProperty, "Pesquisar Por Referencia do Produto");
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            txtInput.Text = "";
+            refreshProdutosBase();
+        }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            txtInputPers.Text = "";
+            refreshProdutosPersonalizados();
         }
     }
 }

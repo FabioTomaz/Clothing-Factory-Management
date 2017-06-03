@@ -191,8 +191,10 @@ namespace Trabalho_BD_IHC
                 string nome = ((TabItem)tabItem.SelectedItem).Name;
                 if(nome.Equals("conta"))
                     this.refresh();
-                else if(nome.Equals("producao"))
-                    listarProdutos.refresh();
+                else if (nome.Equals("producao")) {
+                    listarProdutos.refreshProdutosBase();
+                    listarProdutos.refreshProdutosPersonalizados();
+                }
                 else if(nome.Equals("materiais"))
                     listarMateriais.refresh();
             }

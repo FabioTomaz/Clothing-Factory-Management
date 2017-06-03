@@ -6,7 +6,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:Trabalho_BD_IHC"
         mc:Ignorable="d"
-        Title="DetalhesFornecedor" Height="600" MinHeight="400" MinWidth="650" Width="700" Loaded="Window_Loaded" Icon="details.png">
+        Title="Detalhes do Fornecedor" Height="600" MinHeight="400" MinWidth="650" Width="700" Loaded="Window_Loaded" Icon="details.png">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.1*"/>

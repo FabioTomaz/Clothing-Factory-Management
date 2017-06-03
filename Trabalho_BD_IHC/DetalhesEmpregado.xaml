@@ -7,7 +7,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:Trabalho_BD_IHC"
         mc:Ignorable="d"
-        Title="Detalhes de Empregado" Height="600" MinHeight="400" MinWidth="670" Width="720" Loaded="Window_Loaded" Icon="details.png">
+        Title="Detalhes do Empregado" Height="600" MinHeight="400" MinWidth="670" Width="720" Loaded="Window_Loaded" Icon="details.png">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.1*"/>

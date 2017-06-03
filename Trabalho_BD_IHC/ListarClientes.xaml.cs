@@ -171,5 +171,35 @@ namespace Trabalho_BD_IHC
             DetalhesCliente window = new DetalhesCliente(dataHandler, (Cliente)clientes.SelectedItem);
             window.Show();
         }
+
+        private void pesquisaNOME_Checked(object sender, RoutedEventArgs e)
+        {
+            txtnomeCl.Text = "";
+            txtnomeCl.SetValue(MaterialDesignThemes.Wpf.HintAssist.HintProperty, "Pesquisar Por Nome do Cliente");
+        }
+
+        private void pesquisaNCLIENTE_Checked(object sender, RoutedEventArgs e)
+        {
+            txtnomeCl.Text = "";
+            txtnomeCl.SetValue(MaterialDesignThemes.Wpf.HintAssist.HintProperty, "Pesquisar Por Numero de Cliente");
+        }
+
+        private void pesquisaNIF_Checked(object sender, RoutedEventArgs e)
+        {
+            txtnomeCl.Text = "";
+            txtnomeCl.SetValue(MaterialDesignThemes.Wpf.HintAssist.HintProperty, "Pesquisar Por NIF do Cliente");
+        }
+
+        private void pesquisaMAIL_Checked(object sender, RoutedEventArgs e)
+        {
+            txtnomeCl.Text = "";
+            txtnomeCl.SetValue(MaterialDesignThemes.Wpf.HintAssist.HintProperty, "Pesquisar Por E-mail do Cliente");
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            txtnomeCl.Text = "";
+            this.refresh();
+        }
     }
 }

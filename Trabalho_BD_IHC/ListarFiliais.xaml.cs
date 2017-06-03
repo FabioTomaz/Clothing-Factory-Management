@@ -108,6 +108,30 @@ namespace Trabalho_BD_IHC
             Filiais.Focus();
             Filiais.ItemsSource = dataHandler.getFiliaisFromDB();
         }
+
+        private void txtnFil_Checked(object sender, RoutedEventArgs e)
+        {
+            txtInput.Text = "";
+            txtInput.SetValue(MaterialDesignThemes.Wpf.HintAssist.HintProperty, "Pesquisar Por Numero da Filial");
+        }
+
+        private void txtEmail_Checked(object sender, RoutedEventArgs e)
+        {
+            txtInput.Text = "";
+            txtInput.SetValue(MaterialDesignThemes.Wpf.HintAssist.HintProperty, "Pesquisar Por E-Mail da Filial");
+        }
+
+        private void txtPhone_Checked(object sender, RoutedEventArgs e)
+        {
+            txtInput.Text = "";
+            txtInput.SetValue(MaterialDesignThemes.Wpf.HintAssist.HintProperty, "Pesquisar Por Telefone/Telemovel da Filial");
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            txtInput.Text = "";
+            this.refresh();
+        }
     }
 
 

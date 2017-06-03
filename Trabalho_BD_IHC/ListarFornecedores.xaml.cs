@@ -89,5 +89,11 @@ namespace Trabalho_BD_IHC
             DetalhesFornecedor window = new DetalhesFornecedor(dataHandler, (Fornecedor)Fornecedores.SelectedItem);
             window.Show();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            txtnomeForn.Text = "";
+            this.refresh();
+        }
     }
 }

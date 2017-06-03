@@ -83,10 +83,10 @@
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <Button Style="{DynamicResource MaterialDesignToolButton}">
+                                <Button Style="{DynamicResource MaterialDesignToolButton}" ToolTip="Limpar Pesquisa" Click="Button_Click_1">
                                     <materialDesign:PackIcon Kind="Magnify" Opacity=".56" />
                                 </Button>
-                                <TextBox Name="txtInput"  Grid.Column="1" Margin="8 0 0 0" materialDesign:HintAssist.Hint="Pesquisar" 
+                                <TextBox Name="txtInput"  Grid.Column="1" Margin="8 0 0 0" materialDesign:HintAssist.Hint="Pesquisar por Numero de Encomenda" 
                                          materialDesign:TextFieldAssist.DecorationVisibility="Hidden" BorderThickness="0"
                                          MinWidth="200" VerticalAlignment="Center" KeyDown="txtsearchEn_KeyUp">
                                 </TextBox>
@@ -107,8 +107,9 @@
                                     <RowDefinition></RowDefinition>
                                 </Grid.RowDefinitions>
                                 <Label Content="Pesquisar por:  " HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0"></Label>
-                                <RadioButton GroupName="tipoPesquisa" Checked="pesquisaNENCOMENDA_Checked" IsChecked="True"  Name="pesquisaNENCOMENDA" Content="Numero de Encomenda" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center"></RadioButton>
-                                <RadioButton GroupName="tipoPesquisa" Checked="pesquisaNCLIENTE_Checked" Name="pesquisaNCLIENTE" Content="Numero de Cliente" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center"></RadioButton>
+                                <RadioButton Checked="pesquisaNENCOMENDA_Checked" IsChecked="True"  Name="pesquisaNENCOMENDA" Content="Numero de Encomenda" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center"></RadioButton>
+                                <RadioButton Checked="pesquisaNCLIENTE_Checked" Name="pesquisaNCLIENTE" Content="Numero de Cliente" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center"></RadioButton>
+                                <RadioButton Checked="pesquisaNOMECLIENTE_Checked" Name="pesquisaNOMECLIENTE" Content="Nome do Cliente" Grid.Column="2" Grid.Row="0" VerticalAlignment="Center"></RadioButton>
                             </Grid>
                         </Expander>
                     </Grid>

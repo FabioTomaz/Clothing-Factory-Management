@@ -82,7 +82,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <Button Style="{DynamicResource MaterialDesignToolButton}">
+                                    <Button Style="{DynamicResource MaterialDesignToolButton}" ToolTip="Limpar Pesquisa" Click="Button_Click">
                                         <materialDesign:PackIcon Kind="Magnify" Opacity=".56" />
                                     </Button>
                                     <TextBox Name="txtnomeForn"  Grid.Column="1" Margin="8 0 0 0" materialDesign:HintAssist.Hint="Pesquisa por Nome" 

@@ -111,24 +111,17 @@ namespace Trabalho_BD_IHC
                 if (!string.IsNullOrEmpty(txtInput.Text) || Regex.IsMatch(txtInput.Text, @"^\d+$"))
                 {
                     ObservableCollection<Encomenda> items = new ObservableCollection<Encomenda>();
-                    items.Add(dataHandler.getEncomendaFromDB(Convert.ToInt32(txtInput.Text)));
+                    Encomenda enc = dataHandler.getEncomendaFromDB(Convert.ToInt32(txtInput.Text));
+                    if(enc!=null)
+                        items.Add(enc);
                     encomendas.ItemsSource = items;
-                }
-                else
-                {
-                    Xceed.Wpf.Toolkit.MessageBox.Show("Por favor, indique o número do funcionário que pretende pesquisar", "Informação", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
             else
             {
-
                 if (!string.IsNullOrEmpty(txtInput.Text) || Regex.IsMatch(txtInput.Text, @"^\d+$"))
                 {
                     encomendas.ItemsSource = dataHandler.getEncomendaDB(Convert.ToInt32(txtInput.Text));
-                }
-                else
-                {
-                    Xceed.Wpf.Toolkit.MessageBox.Show("Por favor, indique o número do funcionário que pretende pesquisar", "Informação", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
         }
@@ -146,13 +139,36 @@ namespace Trabalho_BD_IHC
             window.Show();
         }
 
+        private void txtInput_NumberTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
         private void pesquisaNENCOMENDA_Checked(object sender, RoutedEventArgs e)
         {
+            txtInput.Text = "";
+            txtInput.SetValue(MaterialDesignThemes.Wpf.HintAssist.HintProperty, "Pesquisar Por Numero de Encomenda");
+            txtInput.PreviewTextInput+= txtInput_NumberTextInput;
         }
 
         private void pesquisaNCLIENTE_Checked(object sender, RoutedEventArgs e)
         {
+            txtInput.Text = "";
+            txtInput.SetValue(MaterialDesignThemes.Wpf.HintAssist.HintProperty, "Pesquisar Por Numero de Cliente");
+        }
 
+        private void pesquisaNOMECLIENTE_Checked(object sender, RoutedEventArgs e)
+        {
+            txtInput.Text = "";
+            txtInput.SetValue(MaterialDesignThemes.Wpf.HintAssist.HintProperty, "Pesquisar Por Nome do Cliente");
+            txtInput.PreviewTextInput -= txtInput_NumberTextInput;
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            txtInput.Text = "";
+            refresh();
         }
     }
 }

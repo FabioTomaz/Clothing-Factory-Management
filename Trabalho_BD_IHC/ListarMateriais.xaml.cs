@@ -104,6 +104,30 @@ namespace Trabalho_BD_IHC
             DetalhesMaterial window = new DetalhesMaterial(dataHandler, (MaterialTextil)materiais.SelectedItem);
             window.Show();
         }
+
+        private void txtRef_Checked(object sender, RoutedEventArgs e)
+        {
+            input.Text = "";
+            input.SetValue(MaterialDesignThemes.Wpf.HintAssist.HintProperty, "Pesquisar Por Referencia do Material");
+        }
+
+        private void txtCor_Checked(object sender, RoutedEventArgs e)
+        {
+            input.Text = "";
+            input.SetValue(MaterialDesignThemes.Wpf.HintAssist.HintProperty, "Pesquisar Por Cor do Material");
+        }
+
+        private void txtDes_Checked(object sender, RoutedEventArgs e)
+        {
+            input.Text = "";
+            input.SetValue(MaterialDesignThemes.Wpf.HintAssist.HintProperty, "Pesquisar Por Descrição do Material");
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            input.Text = "";
+            this.refresh();
+        }
     }
 
 

@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Trabalho_BD_IHC"
         mc:Ignorable="d"
-        Title="DetalhesMaterial"  Height="600" MinHeight="450" MinWidth="650" Width="750" Loaded="Window_Loaded" Icon="details.png">
+        Title="Detalhes do Material Textil"  Height="600" MinHeight="450" MinWidth="650" Width="750" Loaded="Window_Loaded" Icon="details.png">
 
     <Grid>
         <Grid.ColumnDefinitions>

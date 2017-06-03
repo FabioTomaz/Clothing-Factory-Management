@@ -98,5 +98,11 @@ namespace Trabalho_BD_IHC
         {
             editarEmpregado_Click(sender, e);
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            txtnameSearch.Text = "";
+            this.refresh();
+        }
     }
 }

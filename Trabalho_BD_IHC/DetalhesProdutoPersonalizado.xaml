@@ -6,7 +6,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:Trabalho_BD_IHC"
         mc:Ignorable="d"
-        Title="DetalhesProdutoPersonalizado" Height="550" MinHeight="500" MinWidth="750" Width="850" Icon="details.png">
+        Title="Detalhes do Produto Personalizado" Height="550" MinHeight="500" MinWidth="750" Width="850" Icon="details.png">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.05*"/>
