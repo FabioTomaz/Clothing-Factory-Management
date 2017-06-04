@@ -47,10 +47,7 @@
                 <Button x:Name="editarCliente" Style="{StaticResource editarButton}" Grid.Row="3" Grid.Column="1" IsEnabled="False" Click="editarCliente_Click">
                     <TextBlock TextWrapping="Wrap">Editar Cliente</TextBlock>
                 </Button>
-                <Button x:Name="removerCliente" Style="{StaticResource removerButton}" Grid.Row="5" Grid.Column="1" IsEnabled="False" Click="removerCliente_Click">
-                    <TextBlock TextWrapping="Wrap">Remover Cliente</TextBlock>
-                </Button>
-                <Button x:Name="detalhesCliente" Style="{StaticResource detalhesButton}" Grid.Row="7" Grid.Column="1" IsEnabled="False" Click="verdetalhesCliente">
+                <Button x:Name="detalhesCliente" Style="{StaticResource detalhesButton}" Grid.Row="5" Grid.Column="1" IsEnabled="False" Click="verdetalhesCliente">
                     <TextBlock TextWrapping="Wrap">Ver mais detalhes</TextBlock>
                 </Button>
             </Grid>

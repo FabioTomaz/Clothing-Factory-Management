@@ -33,7 +33,6 @@ namespace Trabalho_BD_IHC
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            removerCliente.IsEnabled = false;
             editarCliente.IsEnabled = false;
             detalhesCliente.IsEnabled = false;
             clientes.Focus();
@@ -145,7 +144,6 @@ namespace Trabalho_BD_IHC
             e.Handled = true;
             if (clientes.SelectedItems.Count > 0)
             {
-                removerCliente.IsEnabled = true;
                 editarCliente.IsEnabled = true;
                 detalhesCliente.IsEnabled = true;
             }

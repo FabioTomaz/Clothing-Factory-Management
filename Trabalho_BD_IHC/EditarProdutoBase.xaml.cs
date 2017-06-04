@@ -72,6 +72,8 @@ namespace Trabalho_BD_IHC
             ProdutoBase prod = new ProdutoBase();
             prod.IVA1 = txtIva.Value;
             prod.InstrProd = txtInstruçoes.Text;
+            prod.GestorProducao = Utilizador.loggedUser;
+            Console.WriteLine(prod.GestorProducao.NFuncionario);
             if(imgPhoto.Source!=null)
                 prod.Pic = ProdutoBase.Pic = getJPGFromImageControl((BitmapImage)imgPhoto.Source);
             try
