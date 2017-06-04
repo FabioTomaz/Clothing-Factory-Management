@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data.SqlClient;
 using System.Windows.Markup;
+using System.Text.RegularExpressions;
 
 namespace Trabalho_BD_IHC
 {
@@ -60,18 +61,41 @@ namespace Trabalho_BD_IHC
                 }
             }
         }
-    
 
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void validarInput()
+        {
+            if (string.IsNullOrEmpty(corMaterial.SelectedColorText))
+                throw new Exception("Não foi escolhido uma cor para o material!");
+            else if (txtReferenciaFornecedor.Text.Equals(""))
+                throw new Exception("Não foi introduzido uma referência de fornecedor para o material!");
+            else if (txtFornecedorNif.Text.Equals(""))
+                throw new Exception("Não foi introduzida nenhum NIF de fornecedor para este material!");
+        }
 
         private void confirmar_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                validarInput();
+            }
+            catch (Exception ex)
+            {
+                Xceed.Wpf.Toolkit.MessageBox.Show(ex.Message, "ERRO", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
             MaterialTextil material=null;
 
             if (((ComboBoxItem)tipoMaterial.SelectedItem).Name.Equals("Pano"))
             {
                 material = new Pano();
                 material.Fornecedor = new Fornecedor();
-                material.Cor = corMaterial.SelectedColor.ToString();
+                material.Cor = corMaterial.SelectedColorText;
                 material.Designacao = txtDescriçãoMaterial.Text;
                 material.Fornecedor.NIF_Fornecedor = txtFornecedorNif.Text;
                 material.ReferenciaFornecedor = txtReferenciaFornecedor.Text;

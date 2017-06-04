@@ -134,7 +134,7 @@
                              MouseDoubleClick="empregados_MouseDoubleClick" IsReadOnly="True" AutoGenerateColumns="False">
                         <DataGrid.Columns>
                             <materialDesign:MaterialDataGridTextColumn SortDirection="Ascending" Header="Nº Empregado" Binding="{Binding NFuncionario}" />
-                            <materialDesign:MaterialDataGridTextColumn Header="Nº filial" Binding="{Binding Supervisor.NFuncionario}" />
+                            <materialDesign:MaterialDataGridTextColumn Header="Nº filial" Binding="{Binding Filial.NFilial}" />
                             <materialDesign:MaterialDataGridTextColumn Header="Nome" Binding="{Binding Nome}" />
                             <materialDesign:MaterialDataGridTextColumn Header="E-mail" Binding="{Binding Email}" />
                             <materialDesign:MaterialDataGridTextColumn Header="Telefone" Binding="{Binding Telemovel}" />

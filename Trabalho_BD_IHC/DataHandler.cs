@@ -754,62 +754,87 @@ namespace Trabalho_BD_IHC
             return produtosPers;
         }
 
-        public ObservableCollection<ProdutoPersonalizado> getProdutosPersonalizadosFromDBid(int ID)
+        public ObservableCollection<ProdutoPersonalizado> getProdutosPersonalizadosFromDBRef(int refer)
         {
             if (!this.verifySGBDConnection())
                 return null;
-            SqlCommand cmd = new SqlCommand("SELECT [PRODUTO-BASE].REFERENCIA, TAMANHO, COR, ID, N_ETIQUETA, PRECO, UNIDADES_ARMAZEM "
-                            + "FROM [PRODUTO-BASE] JOIN [PRODUTO-PERSONALIZADO] ON [PRODUTO-PERSONALIZADO].REFERENCIA=[PRODUTO-BASE].REFERENCIA"
-                            + " WHERE ID = @ID;"
-                            , cn);
+            SqlCommand cmd = new SqlCommand("SELECT TAMANHO, COR, ID, PRECO, UNIDADES_ARMAZEM, "
+                + "[PRODUTO-PERSONALIZADO].REFERENCIA, [PRODUTO-BASE].NOME as nomeBase, DATA_ALTERACAO, "
+                + "INSTRUCOES_PRODUCAO, IVA, PAIS_FABRICO, [PRODUTO-PERSONALIZADO].N_ETIQUETA, NORMAS, "
+                + "PAIS_FABRICO, COMPOSICAO FROM[PRODUTO-PERSONALIZADO] JOIN[PRODUTO-BASE] ON "
+                + "[PRODUTO-PERSONALIZADO].REFERENCIA = [PRODUTO-BASE].REFERENCIA JOIN "
+                + "ETIQUETA ON ETIQUETA.N_ETIQUETA = [PRODUTO-PERSONALIZADO].N_ETIQUETA WHERE [PRODUTO-PERSONALIZADO].REFERENCIA = @refer; "
+                , this.Cn);
             cmd.Parameters.Clear();
-            cmd.Parameters.AddWithValue("@id", ID);
+            cmd.Parameters.AddWithValue("@refer", refer);
             SqlDataReader reader = cmd.ExecuteReader();
-            ObservableCollection<ProdutoPersonalizado> produtosPers = new ObservableCollection<ProdutoPersonalizado>();
+            ObservableCollection<ProdutoPersonalizado> produtoPers = new ObservableCollection<ProdutoPersonalizado>();
             while (reader.Read())
             {
                 ProdutoPersonalizado prod = new ProdutoPersonalizado();
-                prod.ProdutoBase.Referencia = Convert.ToInt32(reader["REFERENCIA"].ToString());
                 prod.Tamanho = reader["TAMANHO"].ToString();
                 prod.Cor = reader["COR"].ToString();
                 prod.ID = Convert.ToInt32(reader["ID"].ToString());
                 prod.Preco = Convert.ToDouble(reader["PRECO"].ToString());
                 prod.UnidadesStock = Convert.ToInt32(reader["UNIDADES_ARMAZEM"].ToString());
+                prod.ProdutoBase = new ProdutoBase();
+                prod.ProdutoBase.Referencia = Convert.ToInt32(reader["REFERENCIA"].ToString());
+                prod.ProdutoBase.Nome = reader["nomeBase"].ToString();
+                prod.ProdutoBase.InstrProd = reader["INSTRUCOES_PRODUCAO"].ToString();
+                prod.ProdutoBase.DataAlteraçao = Convert.ToDateTime(reader["DATA_ALTERACAO"]);
+                prod.ProdutoBase.IVA1 = Convert.ToDouble(reader["IVA"].ToString());
+                prod.Etiqueta = new Etiqueta();
+                prod.Etiqueta.PaisFabrico = reader["PAIS_FABRICO"].ToString();
                 prod.Etiqueta.Numero = Convert.ToInt32(reader["N_ETIQUETA"].ToString());
-                produtosPers.Add(prod);
+                prod.Etiqueta.Normas = reader["NORMAS"].ToString();
+                prod.Etiqueta.PaisFabrico = reader["PAIS_FABRICO"].ToString();
+                prod.Etiqueta.Composicao = reader["COMPOSICAO"].ToString();
+                produtoPers.Add(prod);
             }
             reader.Close();
-            closeSGBDConnection();
-            return produtosPers;
+            this.closeSGBDConnection();
+            return produtoPers;
         }
 
         public ObservableCollection<ProdutoPersonalizado> getProdutosPersonalizadosFromDBCor(string cor)
         {
-            if (!this.verifySGBDConnection())
-                return null;
-            SqlCommand cmd = new SqlCommand("SELECT [PRODUTO-BASE].REFERENCIA, TAMANHO, COR, ID, N_ETIQUETA, PRECO, UNIDADES_ARMAZEM "
-                            + "FROM [PRODUTO-BASE] JOIN [PRODUTO-PERSONALIZADO] ON [PRODUTO-PERSONALIZADO].REFERENCIA=[PRODUTO-BASE].REFERENCIA"
-                            + " WHERE COR LIKE @cor;"
-                            , cn);
+            verifySGBDConnection();
+            SqlCommand cmd = new SqlCommand("SELECT TAMANHO, COR, ID, PRECO, UNIDADES_ARMAZEM, "
+                + "[PRODUTO-PERSONALIZADO].REFERENCIA, [PRODUTO-BASE].NOME as nomeBase, DATA_ALTERACAO, "
+                + "INSTRUCOES_PRODUCAO, IVA, PAIS_FABRICO, [PRODUTO-PERSONALIZADO].N_ETIQUETA, NORMAS, "
+                + "PAIS_FABRICO, COMPOSICAO FROM[PRODUTO-PERSONALIZADO] JOIN[PRODUTO-BASE] ON "
+                + "[PRODUTO-PERSONALIZADO].REFERENCIA = [PRODUTO-BASE].REFERENCIA JOIN "
+                + "ETIQUETA ON ETIQUETA.N_ETIQUETA = [PRODUTO-PERSONALIZADO].N_ETIQUETA WHERE COR LIKE @cor; "
+                , this.Cn);
             cmd.Parameters.Clear();
             cmd.Parameters.AddWithValue("@cor", "%" + cor + "%");
             SqlDataReader reader = cmd.ExecuteReader();
-            ObservableCollection<ProdutoPersonalizado> produtosPers = new ObservableCollection<ProdutoPersonalizado>();
+            ObservableCollection<ProdutoPersonalizado> produtoPers = new ObservableCollection<ProdutoPersonalizado>();
             while (reader.Read())
             {
                 ProdutoPersonalizado prod = new ProdutoPersonalizado();
-                prod.ProdutoBase.Referencia = Convert.ToInt32(reader["REFERENCIA"].ToString());
                 prod.Tamanho = reader["TAMANHO"].ToString();
                 prod.Cor = reader["COR"].ToString();
                 prod.ID = Convert.ToInt32(reader["ID"].ToString());
                 prod.Preco = Convert.ToDouble(reader["PRECO"].ToString());
                 prod.UnidadesStock = Convert.ToInt32(reader["UNIDADES_ARMAZEM"].ToString());
+                prod.ProdutoBase = new ProdutoBase();
+                prod.ProdutoBase.Referencia = Convert.ToInt32(reader["REFERENCIA"].ToString());
+                prod.ProdutoBase.Nome = reader["nomeBase"].ToString();
+                prod.ProdutoBase.InstrProd = reader["INSTRUCOES_PRODUCAO"].ToString();
+                prod.ProdutoBase.DataAlteraçao = Convert.ToDateTime(reader["DATA_ALTERACAO"]);
+                prod.ProdutoBase.IVA1 = Convert.ToDouble(reader["IVA"].ToString());
+                prod.Etiqueta = new Etiqueta();
+                prod.Etiqueta.PaisFabrico = reader["PAIS_FABRICO"].ToString();
                 prod.Etiqueta.Numero = Convert.ToInt32(reader["N_ETIQUETA"].ToString());
-                produtosPers.Add(prod);
+                prod.Etiqueta.Normas = reader["NORMAS"].ToString();
+                prod.Etiqueta.PaisFabrico = reader["PAIS_FABRICO"].ToString();
+                prod.Etiqueta.Composicao = reader["COMPOSICAO"].ToString();
+                produtoPers.Add(prod);
             }
             reader.Close();
-            closeSGBDConnection();
-            return produtosPers;
+            this.closeSGBDConnection();
+            return produtoPers;
         }
 
         public Boolean checkIfProdutoPersonalizadoExists(ProdutoPersonalizado prod)
@@ -1918,29 +1943,29 @@ namespace Trabalho_BD_IHC
             else
             {
                 cmd.Parameters.AddWithValue("@Fax", f.Fax);
-
-                cmd.Parameters.AddWithValue("@Email", f.Email);
-                cmd.Parameters.AddWithValue("@TELEFONE", f.Telefone);
-                cmd.Parameters.AddWithValue("@COD_POSTAL1", f.Localizacao.CodigoPostal1);
-                cmd.Parameters.AddWithValue("@COD_POSTAL2", f.Localizacao.CodigoPostal2);
-                cmd.Parameters.AddWithValue("@RUA", f.Localizacao.Rua1);
-                cmd.Parameters.AddWithValue("@N_PORTA", f.Localizacao.Porta);
-                cmd.Parameters.AddWithValue("@chefe", f.Chefe.NFuncionario);
-                cmd.Connection = this.Cn;
-                try
-                {
-                    cmd.ExecuteNonQuery();
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception("Falha ao adicionar Fábrica Filial na base de dados. \n ERROR MESSAGE: \n" + ex.Message);
-                }
-                finally
-                {
-
-                    this.closeSGBDConnection();
-                }
             }
+            cmd.Parameters.AddWithValue("@Email", f.Email);
+            cmd.Parameters.AddWithValue("@TELEFONE", f.Telefone);
+            cmd.Parameters.AddWithValue("@COD_POSTAL1", f.Localizacao.CodigoPostal1);
+            cmd.Parameters.AddWithValue("@COD_POSTAL2", f.Localizacao.CodigoPostal2);
+            cmd.Parameters.AddWithValue("@RUA", f.Localizacao.Rua1);
+            cmd.Parameters.AddWithValue("@N_PORTA", f.Localizacao.Porta);
+            cmd.Parameters.AddWithValue("@chefe", f.Chefe.NFuncionario);
+            cmd.Connection = this.Cn;
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Falha ao adicionar Fábrica Filial na base de dados. \n ERROR MESSAGE: \n" + ex.Message);
+            }
+            finally
+            {
+
+                this.closeSGBDConnection();
+            }
+
         }
 
         public int getNfilialFromDB(string email, string telefone)
@@ -1966,9 +1991,17 @@ namespace Trabalho_BD_IHC
 
             cmd.CommandText = "UPDATE [FABRICA-FILIAL] " + "SET EMAIL = @EMAIL, "
                 + " TELEFONE = @TELEFONE, " + " CODPOSTAL1 = @CODPOSTAL1, " + " CODPOSTAL2 = @CODPOSTAL2, " +
-                " TELEFONE = @TELEFONE, " + "  RUA = @RUA, " + " N_PORTA = @N_PORTA "
-                + "CHEFE = @chefe" + "WHERE N_FILIAL = @N_FILIAL";
+                " RUA = @RUA, " + " N_PORTA = @N_PORTA, FAX = @Fax, "
+                + "CHEFE = @chefe" + " WHERE N_FILIAL = @N_FILIAL";
             cmd.Parameters.Clear();
+            if (string.IsNullOrEmpty(f.Fax))
+            {
+                cmd.Parameters.AddWithValue("@Fax", DBNull.Value);
+            }
+            else
+            {
+                cmd.Parameters.AddWithValue("@Fax", f.Fax);
+            }
             cmd.Parameters.AddWithValue("@N_FILIAL", f.NFilial);
             cmd.Parameters.AddWithValue("@EMAIL", f.Email);
             cmd.Parameters.AddWithValue("@TELEFONE", f.Telefone);
@@ -2283,26 +2316,33 @@ namespace Trabalho_BD_IHC
         {
             if (!this.verifySGBDConnection())
                 return null;
-            SqlCommand cmd = new SqlCommand(" SELECT * FROM MATERIAIS_TÊXTEIS "
-                + "WHERE NIF_FORNECEDOR = @nifForn", Cn);
+            SqlCommand cmd = new SqlCommand("SELECT * "
+                                + " FROM [MATERIAIS_TÊXTEIS] JOIN FORNECEDOR ON FORNECEDOR.NIF=[MATERIAIS_TÊXTEIS].NIF_FORNECEDOR "
+                                + "WHERE NIF_FORNECEDOR = @nif", this.Cn);
             cmd.Parameters.Clear();
-            cmd.Parameters.AddWithValue("@nifForn", NifForn);
+            cmd.Parameters.AddWithValue("@nif", NifForn);
             SqlDataReader reader = cmd.ExecuteReader();
-            ObservableCollection<MaterialTextil> mat = new ObservableCollection<MaterialTextil>();
+            ObservableCollection<MaterialTextil> m = new ObservableCollection<MaterialTextil>();
             while (reader.Read())
             {
-                MaterialTextil m = new MaterialTextil();
-                m.Referencia = Convert.ToInt32(reader["REFERENCIA_FABRICA"].ToString());
-                m.ReferenciaFornecedor = reader["REFERENCIA_FORN"].ToString();
-                m.Cor = reader["COR"].ToString();
-                m.Designacao = reader["DESIGNACAO"].ToString();
-                m.Fornecedor = new Fornecedor();
-                m.Fornecedor.NIF_Fornecedor = NifForn.ToString();
-                mat.Add(m);
+                MaterialTextil material = new MaterialTextil();
+                material.Fornecedor = new Fornecedor();
+                material.Referencia = Convert.ToInt32(reader["REFERENCIA_FABRICA"].ToString());
+                material.ReferenciaFornecedor = reader["REFERENCIA_FORN"].ToString();
+                material.Cor = reader["COR"].ToString();
+                material.Designacao = reader["DESIGNACAO"].ToString();
+                material.Fornecedor.Nome = reader["NOME"].ToString();
+                material.Fornecedor.NIF_Fornecedor = reader["NIF"].ToString();
+                m.Add(material);
             }
             reader.Close();
-            closeSGBDConnection();
-            return mat;
+            for (int i = 0; i < m.Count; i++)
+            {
+                m.ElementAt(i).TipoMaterial1 = getMaterialType(m.ElementAt(i).Referencia);
+                m.ElementAt(i).QuantidadeStockD = getQuantidadeMaterial(m.ElementAt(i).Referencia);
+            }
+            this.closeSGBDConnection();
+            return m;
         }
 
         public void AtualizarFornecedor(Fornecedor f)

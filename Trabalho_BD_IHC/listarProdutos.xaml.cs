@@ -155,14 +155,12 @@ namespace Trabalho_BD_IHC
         {
             if (pesquisaRef.IsChecked == true)
             {
-
                 if (!string.IsNullOrEmpty(txtInputPers.Text) && Regex.IsMatch(txtInputPers.Text, @"^\d+$"))
-                    produtosPersonalizadosLista.ItemsSource = dataHandler.searchAndGetProdutosPersID(Convert.ToInt32(txtInputPers.Text));
+                    produtosPersonalizadosLista.ItemsSource = dataHandler.getProdutosPersonalizadosFromDBRef(Convert.ToInt32(txtInputPers.Text));
             }
             else if (pesquisaCor.IsChecked == true)
             {
-                if (!string.IsNullOrEmpty(txtInputPers.Text))
-                    produtosPersonalizadosLista.ItemsSource = dataHandler.getProdutosPersonalizadosFromDBCor(txtInputPers.Text);
+               produtosPersonalizadosLista.ItemsSource = dataHandler.getProdutosPersonalizadosFromDBCor(txtInputPers.Text);
             }
         }
 
@@ -185,25 +183,37 @@ namespace Trabalho_BD_IHC
         public void refreshProdutosPersonalizados()
         {
             ObservableCollection<ProdutoPersonalizado> produtosPersonalizados = dataHandler.getProdutosPers();
-            produtosBaseLista.ItemsSource = produtosPersonalizados;
+            produtosPersonalizadosLista.ItemsSource = produtosPersonalizados;
         }
 
         private void pesquisaNOME_Checked(object sender, RoutedEventArgs e)
         {
             txtInput.Text = "";
-            txtInput.SetValue(MaterialDesignThemes.Wpf.HintAssist.HintProperty, "Pesquisar Por Nome do Produto");
+            txtInput.SetValue(MaterialDesignThemes.Wpf.HintAssist.HintProperty, "Pesquisar Por Nome do Desenho de produto");
         }
 
         private void pesquisaGESTOR_Checked(object sender, RoutedEventArgs e)
         {
             txtInput.Text = "";
-            txtInput.SetValue(MaterialDesignThemes.Wpf.HintAssist.HintProperty, "Pesquisar Por Gestor do Produto");
+            txtInput.SetValue(MaterialDesignThemes.Wpf.HintAssist.HintProperty, "Pesquisar Por Gestor do Desenho de produto");
         }
 
         private void pesquisaREFERENCIA_Checked(object sender, RoutedEventArgs e)
         {
             txtInput.Text = "";
-            txtInput.SetValue(MaterialDesignThemes.Wpf.HintAssist.HintProperty, "Pesquisar Por Referencia do Produto");
+            txtInput.SetValue(MaterialDesignThemes.Wpf.HintAssist.HintProperty, "Pesquisar Por Referencia de Desenho de produto");
+        }
+
+        private void pesquisaRef_Checked(object sender, RoutedEventArgs e)
+        {
+            txtInput.Text = "";
+            txtInputPers.SetValue(MaterialDesignThemes.Wpf.HintAssist.HintProperty, "Pesquisar Por referência do desenho de produto associdado");
+        }
+
+        private void pesquisaCor_Checked(object sender, RoutedEventArgs e)
+        {
+            txtInput.Text = "";
+            txtInputPers.SetValue(MaterialDesignThemes.Wpf.HintAssist.HintProperty, "Pesquisar Por Cor do produto");
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
@@ -217,5 +227,7 @@ namespace Trabalho_BD_IHC
             txtInputPers.Text = "";
             refreshProdutosPersonalizados();
         }
+
+        
     }
 }

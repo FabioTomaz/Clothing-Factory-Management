@@ -116,7 +116,7 @@
                 <Image Source="fornecedor.png" Width="20" Grid.Row="7" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right"/>
                 <TextBox Name="txtFornecedorNif" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="NIF do Fornecedor" Grid.Row="7" Grid.Column="1" ></TextBox>
                 <Image Source="referencia.png" Width="20" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right"></Image>
-                <TextBox Name="txtReferenciaFornecedor" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Referencia" Grid.Row="5" Grid.Column="1">
+                <TextBox Name="txtReferenciaFornecedor" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  PreviewTextInput="NumberValidationTextBox" materialDesign:HintAssist.Hint="Referencia" Grid.Row="5" Grid.Column="1">
                 </TextBox>
                 <Label Grid.Column="0" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Center">Cor:</Label>
 

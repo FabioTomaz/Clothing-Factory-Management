@@ -56,15 +56,6 @@ namespace Trabalho_BD_IHC
         {
             try
             {
-                filial.Telefone = txtTelemovel.Text;
-                filial.Fax = txtFax.Text;
-                filial.Email = txtEmail.Text;
-                filial.Localizacao.CodigoPostal1 = Convert.ToInt32(txtcodigoPostal1.Text);
-                filial.Localizacao.CodigoPostal2 = Convert.ToInt32(txtcodigoPostal2.Text);
-                filial.Localizacao.Rua1 = txtRua.Text;
-                filial.Localizacao.Porta = int.Parse(txtNumeroPorta.Text);
-                filial.NFilial = dataHandler.getNfilialFromDB(filial.Email, filial.Telefone);
-                filial.Chefe.NFuncionario = Convert.ToInt32(txtNChefe.Text);
                 validarInput();
             }
             catch (Exception ex)
@@ -72,8 +63,18 @@ namespace Trabalho_BD_IHC
                 MessageBox.Show(ex.Message);
                 return;
             }
+
+            filial.Telefone = txtTelemovel.Text;
+            filial.Fax = txtFax.Text;
+            filial.Email = txtEmail.Text;
+            filial.Localizacao.CodigoPostal1 = Convert.ToInt32(txtcodigoPostal1.Text);
+            filial.Localizacao.CodigoPostal2 = Convert.ToInt32(txtcodigoPostal2.Text);
+            filial.Localizacao.Rua1 = txtRua.Text;
+            filial.Localizacao.Porta = int.Parse(txtNumeroPorta.Text);
+            filial.Chefe.NFuncionario = Convert.ToInt32(txtNChefe.Text);
             try
             {
+                Console.WriteLine("hey");
                 dataHandler.AtualizarFilial(filial);
             }
             catch (Exception ex)
