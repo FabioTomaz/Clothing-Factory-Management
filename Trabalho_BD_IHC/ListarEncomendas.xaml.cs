@@ -106,9 +106,9 @@ namespace Trabalho_BD_IHC
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (pesquisaNENCOMENDA.IsEnabled)
+            if (pesquisaNENCOMENDA.IsChecked == true)
             {
-                if (!string.IsNullOrEmpty(txtInput.Text) || Regex.IsMatch(txtInput.Text, @"^\d+$"))
+                if (!string.IsNullOrEmpty(txtInput.Text) && Regex.IsMatch(txtInput.Text, @"^\d+$"))
                 {
                     ObservableCollection<Encomenda> items = new ObservableCollection<Encomenda>();
                     Encomenda enc = dataHandler.getEncomendaFromDB(Convert.ToInt32(txtInput.Text));
@@ -117,9 +117,14 @@ namespace Trabalho_BD_IHC
                     encomendas.ItemsSource = items;
                 }
             }
-            else
+            else if (pesquisaNOMECLIENTE.IsChecked == true)
             {
-                if (!string.IsNullOrEmpty(txtInput.Text) || Regex.IsMatch(txtInput.Text, @"^\d+$"))
+                encomendas.ItemsSource = dataHandler.getEncomendaDBcliente(txtInput.Text);
+            }
+
+            else if (pesquisaNCLIENTE.IsChecked == true)
+            {
+                if (!string.IsNullOrEmpty(txtInput.Text) && Regex.IsMatch(txtInput.Text, @"^\d+$"))
                 {
                     encomendas.ItemsSource = dataHandler.getEncomendaDB(Convert.ToInt32(txtInput.Text));
                 }

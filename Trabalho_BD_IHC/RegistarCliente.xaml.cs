@@ -83,12 +83,10 @@ namespace Trabalho_BD_IHC
             Regex regex = new Regex("[^a-bA-B]+");
             if (txtNome.Text.Trim().Length>50 || txtNome.Text.Trim().Length < 5)
                 throw new Exception("O nome introduzido está incorreto. Deverá ter no minimo 5 caracteres e no maximo 50");
-            if (txtNIB.Text.Trim().Length!=0 && txtNIB.Text.Trim().Length != 21)
-                throw new Exception("O NIB introduzido está incorreto.");
-            if (txtNIB.Text.Trim().Length != 0 && txtNIB.Text.Trim().Length != 21)
-                throw new Exception("O NIB introduzido está incorreto.");
-            if (txtNIF.Text.Trim().Length > 9)
-                throw new Exception("O NIF introduzido está incorreto.");
+            if (txtNIF.Text.Trim().Length != 21 && txtNIB.Text.Trim().Length != 0)
+                throw new Exception("O NIB introduzido está tem um nº de carateres errado");
+            if (txtNIF.Text.Trim().Length != 9 && txtNIF.Text.Trim().Length != 0)
+                throw new Exception("O NIF introduzido está tem um nº de carateres errado");
             try { 
                 MailAddress m = new MailAddress(txtEmail.Text);
             }catch(Exception e) { 
@@ -104,18 +102,6 @@ namespace Trabalho_BD_IHC
                 throw new Exception("Por favor introduza a porta do cliente");
         }
 
-        public bool NibIsValid(string nib)
-        {
-            Regex nibRegex = new Regex(@"^\d{21}$", RegexOptions.Compiled);
-            int result = 0;
-            for (int nibIndex = 0; nibIndex < 19; nibIndex++)
-            {
-                result += Convert.ToInt32(nib[nibIndex].ToString(CultureInfo.InvariantCulture));
-                result *= 10;
-                result %= 94;
-            }
-            result = 94 - ((result * 10) % 97);
-            return nib.Substring(19).Equals(result.ToString("00"));
-        }
+       
     }
 }

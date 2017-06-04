@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data.SqlClient;
 using System.Text.RegularExpressions;
+using System.Net.Mail;
 
 namespace Trabalho_BD_IHC
 {
@@ -58,8 +59,44 @@ namespace Trabalho_BD_IHC
             e.Handled = regex.IsMatch(e.Text);
         }
 
+
+        private void validarInput()
+        {
+            Regex regex = new Regex("[^a-bA-B]+");
+            if (txtNIF.Text.Trim().Length != 21 && txtNIB.Text.Trim().Length != 0)
+                throw new Exception("O NIB introduzido está tem um um nº de carateres errado.");
+            if (txtNIF.Text.Trim().Length != 9 && txtNIF.Text.Trim().Length != 0)
+                throw new Exception("O NIF introduzido está tem um nº de carateres errado.");
+            try
+            {
+                MailAddress m = new MailAddress(txtEmail.Text);
+            }
+            catch (Exception e)
+            {
+                throw new Exception("O Email introduzido está incorreto.");
+            }
+            if (txtTelemovel.Text.Trim().Length != 9)
+                throw new Exception("O Telemovel introduzido está incorreto.");
+            if (txtcodigoPostal1.Text.Length != 4 || txtcodigoPostal2.Text.Length != 3)
+                throw new Exception("O Código Postal introduzido está incorreto.");
+            if (txtRua.Text.Trim().Length == 0)
+                throw new Exception("Por favor introduza a rua do cliente");
+            if (txtNumeroPorta.Text.Trim().Length == 0)
+                throw new Exception("Por favor introduza a porta do cliente");
+        }
+
         private void confirmar_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                validarInput();
+            }
+            catch (Exception ex)
+            {
+                Xceed.Wpf.Toolkit.MessageBox.Show(ex.Message, "Erro", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                return;
+            }
+
             try
             {
                 cliente.Nif = txtNIF.Text.ToString();

@@ -112,7 +112,7 @@ namespace Trabalho_BD_IHC
                 clientes.ItemsSource = dataHandler.getClientesInDBFromName(txtnomeCl.Text);
             else if (pesquisaNCLIENTE.IsChecked == true)
             {
-                if (!string.IsNullOrEmpty(txtnomeCl.Text) || Regex.IsMatch(txtnomeCl.Text, @"^\d+$"))
+                if (!string.IsNullOrEmpty(txtnomeCl.Text) && Regex.IsMatch(txtnomeCl.Text, @"^\d+$"))
                 {
                     ObservableCollection<Cliente> cl = new ObservableCollection<Cliente>();
                     cl.Add(dataHandler.getClientesInDBnCliente(Convert.ToInt32(txtnomeCl.Text)));

@@ -119,6 +119,7 @@
                     <DataGrid.Columns>
                         <materialDesign:MaterialDataGridTextColumn SortDirection="Ascending" Header="Nº Encomenda" Binding="{Binding NEncomenda}" />
                         <materialDesign:MaterialDataGridTextColumn Header="Nº Cliente"  Binding="{Binding Cliente.NCliente}" />
+                        <materialDesign:MaterialDataGridTextColumn Header="Nome Cliente"  Binding="{Binding Cliente.Nome}" />
                         <materialDesign:MaterialDataGridTextColumn Header="Estado Encomenda" Binding="{Binding Estado}" />
                         <materialDesign:MaterialDataGridTextColumn Header="Data de Entrega Prevista" Binding="{Binding DataPrevistaEntrega, StringFormat=d}" />
                         <materialDesign:MaterialDataGridTextColumn Header="Preço(€)" Binding="{Binding Preco}" />

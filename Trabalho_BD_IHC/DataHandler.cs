@@ -119,7 +119,7 @@ namespace Trabalho_BD_IHC
                 cmd.Parameters.AddWithValue("@NIB", DBNull.Value);
             else
                 cmd.Parameters.AddWithValue("@NIB", cl.Nib);
-            if (string.IsNullOrEmpty(cl.Nib))
+            if (string.IsNullOrEmpty(cl.Nif))
                 cmd.Parameters.AddWithValue("@NIF", DBNull.Value);
             else
                 cmd.Parameters.AddWithValue("@NIF", cl.Nif);
@@ -609,6 +609,7 @@ namespace Trabalho_BD_IHC
         }
 
 
+
         public Encomenda getEncomendaFromDB(int nEncomenda)
         {
             if (!this.verifySGBDConnection())
@@ -652,7 +653,7 @@ namespace Trabalho_BD_IHC
         {
             if (!this.verifySGBDConnection())
                 return null;
-            SqlCommand cmd = new SqlCommand("SELECT ENCOMENDA.N_ENCOMENDA, DATA_CONFIRMACAO, DATA_ENTREGA_PREV, ESTADO.DESCRIÇAO, DESCONTO, CLIENTE.NCLIENTE, CLIENTE.NOME AS CNOME, N_GESTOR_VENDA, SUM([PRODUTO-PERSONALIZADO].PRECO*CONTEUDO_ENCOMENDA.QUANTIDADE) AS PRECOTOTAL "
+            SqlCommand cmd = new SqlCommand("SELECT ENCOMENDA.N_ENCOMENDA, LOCALENTREGA, DATA_CONFIRMACAO, DATA_ENTREGA_PREV, ESTADO.DESCRIÇAO, DESCONTO, CLIENTE.NCLIENTE, CLIENTE.NOME AS CNOME, N_GESTOR_VENDA, SUM([PRODUTO-PERSONALIZADO].PRECO*CONTEUDO_ENCOMENDA.QUANTIDADE) AS PRECOTOTAL "
                                 + " FROM ENCOMENDA JOIN CLIENTE ON CLIENTE.NCLIENTE = ENCOMENDA.CLIENTE"
                                 + " JOIN CONTEUDO_ENCOMENDA ON CONTEUDO_ENCOMENDA.N_ENCOMENDA=ENCOMENDA.N_ENCOMENDA"
                                 + " JOIN [PRODUTO-PERSONALIZADO] ON CONTEUDO_ENCOMENDA.REFERENCIA_PRODUTO=[PRODUTO-PERSONALIZADO].REFERENCIA"
@@ -662,7 +663,7 @@ namespace Trabalho_BD_IHC
                                 + " JOIN ESTADO ON ENCOMENDA.ESTADO=ESTADO.ID"
                                 + " JOIN UTILIZADOR ON UTILIZADOR.N_FUNCIONARIO=N_GESTOR_VENDA"
                                 + " WHERE CLIENTE.NCLIENTE LIKE @nCli"
-                                + " GROUP BY ENCOMENDA.N_ENCOMENDA, DATA_CONFIRMACAO, DATA_ENTREGA_PREV, ESTADO.DESCRIÇAO, DESCONTO, CLIENTE.NCLIENTE, CLIENTE.NOME, N_GESTOR_VENDA;"
+                                + " GROUP BY ENCOMENDA.N_ENCOMENDA, DATA_CONFIRMACAO, DATA_ENTREGA_PREV, LOCALENTREGA, ESTADO.DESCRIÇAO, DESCONTO, CLIENTE.NCLIENTE, CLIENTE.NOME, N_GESTOR_VENDA;"
                                 , cn);
             cmd.Parameters.Clear();
             cmd.Parameters.AddWithValue("@nCli", nCliente);
@@ -679,7 +680,7 @@ namespace Trabalho_BD_IHC
                 Enc.DataConfirmacao = Convert.ToDateTime(reader["DATA_CONFIRMACAO"]);
                 Enc.Desconto = Convert.ToInt32(reader["DESCONTO"]);
                 Enc.GestorVendas.NFuncionario = Convert.ToInt32(reader["N_GESTOR_VENDA"].ToString());
-                Enc.Cliente.Nome = reader["NOME"].ToString();
+                Enc.Cliente.Nome = reader["CNOME"].ToString();
                 Enc.Cliente.NCliente = Convert.ToInt32(reader["NCLIENTE"].ToString());
                 Enc.LocalEntrega = reader["LOCALENTREGA"].ToString();
                 Enc.Preco = Convert.ToDouble(reader["PRECOTOTAL"].ToString());
@@ -688,6 +689,48 @@ namespace Trabalho_BD_IHC
             closeSGBDConnection();
             return enc;
         }
+
+        public ObservableCollection<Encomenda> getEncomendaDBcliente(string nomeCli)
+        {
+            if (!this.verifySGBDConnection())
+                return null;
+            SqlCommand cmd = new SqlCommand("SELECT ENCOMENDA.N_ENCOMENDA, DATA_CONFIRMACAO, LOCALENTREGA, DATA_ENTREGA_PREV, ESTADO.DESCRIÇAO, DESCONTO, CLIENTE.NCLIENTE, CLIENTE.NOME AS CNOME, N_GESTOR_VENDA, SUM([PRODUTO-PERSONALIZADO].PRECO*CONTEUDO_ENCOMENDA.QUANTIDADE) AS PRECOTOTAL "
+                                + " FROM ENCOMENDA JOIN CLIENTE ON CLIENTE.NCLIENTE = ENCOMENDA.CLIENTE"
+                                + " JOIN CONTEUDO_ENCOMENDA ON CONTEUDO_ENCOMENDA.N_ENCOMENDA=ENCOMENDA.N_ENCOMENDA"
+                                + " JOIN [PRODUTO-PERSONALIZADO] ON CONTEUDO_ENCOMENDA.REFERENCIA_PRODUTO=[PRODUTO-PERSONALIZADO].REFERENCIA"
+                                + " AND CONTEUDO_ENCOMENDA.TAMANHO_PRODUTO = [PRODUTO-PERSONALIZADO].TAMANHO "
+                                + " AND CONTEUDO_ENCOMENDA.COR_PRODUTO = [PRODUTO-PERSONALIZADO].COR"
+                                + " AND CONTEUDO_ENCOMENDA.ID_PRODUTO = [PRODUTO-PERSONALIZADO].ID"
+                                + " JOIN ESTADO ON ENCOMENDA.ESTADO=ESTADO.ID"
+                                + " JOIN UTILIZADOR ON UTILIZADOR.N_FUNCIONARIO=N_GESTOR_VENDA"
+                                + " WHERE CLIENTE.NOME LIKE @nomeCli"
+                                + " GROUP BY ENCOMENDA.N_ENCOMENDA, DATA_CONFIRMACAO, DATA_ENTREGA_PREV, ESTADO.DESCRIÇAO, DESCONTO, LOCALENTREGA, CLIENTE.NCLIENTE, CLIENTE.NOME, N_GESTOR_VENDA;"
+                                , cn);
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@nomeCli", "%"+nomeCli+"%");
+            SqlDataReader reader = cmd.ExecuteReader();
+            ObservableCollection<Encomenda> enc = new ObservableCollection<Encomenda>();
+            while (reader.Read())
+            {
+                Encomenda Enc = new Encomenda();
+                Enc.Cliente = new Cliente();
+                Enc.GestorVendas = new Utilizador();
+                Enc.NEncomenda = Convert.ToInt32(reader["N_ENCOMENDA"].ToString());
+                Enc.Estado = reader["DESCRIÇAO"].ToString();
+                Enc.DataPrevistaEntrega = Convert.ToDateTime(reader["DATA_ENTREGA_PREV"]);
+                Enc.DataConfirmacao = Convert.ToDateTime(reader["DATA_CONFIRMACAO"]);
+                Enc.Desconto = Convert.ToInt32(reader["DESCONTO"]);
+                Enc.GestorVendas.NFuncionario = Convert.ToInt32(reader["N_GESTOR_VENDA"].ToString());
+                Enc.Cliente.Nome = reader["CNOME"].ToString();
+                Enc.Cliente.NCliente = Convert.ToInt32(reader["NCLIENTE"].ToString());
+                Enc.LocalEntrega = reader["LOCALENTREGA"].ToString();
+                Enc.Preco = Convert.ToDouble(reader["PRECOTOTAL"].ToString());
+                enc.Add(Enc);
+            }
+            closeSGBDConnection();
+            return enc;
+        }
+
 
         public ObservableCollection<ProdutoPersonalizado> getProdutosFromEncomendaDB(int nEncomenda)
         {
