@@ -108,7 +108,8 @@ namespace Trabalho_BD_IHC
             telefoneUtilizador.Content = Utilizador.loggedUser.Telemovel;
             salario.Content = Utilizador.loggedUser.Salario;
             nFuncionario.Content = Utilizador.loggedUser.NFuncionario;
-            supervisor.Content =  String.Format("{0} (Nome: {1})", Utilizador.loggedUser.Supervisor.NFuncionario, Utilizador.loggedUser.Supervisor.Nome);
+            if(Utilizador.loggedUser.Supervisor != null)
+                supervisor.Content =  String.Format("{0} (Nome: {1})", Utilizador.loggedUser.Supervisor.NFuncionario, Utilizador.loggedUser.Supervisor.Nome);
             numFilial.Content = Utilizador.loggedUser.Filial.NFilial;
             emailFilial.Content = Utilizador.loggedUser.Filial.Email;
             faxFilial.Content = Utilizador.loggedUser.Filial.Fax;

@@ -1111,6 +1111,8 @@ namespace Trabalho_BD_IHC
             }
             reader.Close();
             this.closeSGBDConnection();
+            if (utilizador.Supervisor!= null && !string.IsNullOrEmpty(utilizador.Supervisor.NFuncionario.ToString()))
+                utilizador.Supervisor = getSupervisor(utilizador.Supervisor.NFuncionario);
             return utilizador;
         }
 

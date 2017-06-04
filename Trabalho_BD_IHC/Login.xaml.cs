@@ -53,7 +53,8 @@ namespace Trabalho_BD_IHC
                 {
                     if (dataHandler.checkLogin(nEmpregado.Text, pass)) {
                         Utilizador.loggedUser = dataHandler.getUtilizadorFromDB(Convert.ToInt32(nEmpregado.Text));
-                        Utilizador.loggedUser.Supervisor = dataHandler.getUtilizadorFromDB(Utilizador.loggedUser.Supervisor.NFuncionario);
+                        if(Utilizador.loggedUser.Supervisor != null)
+                            Utilizador.loggedUser.Supervisor = dataHandler.getUtilizadorFromDB(Utilizador.loggedUser.Supervisor.NFuncionario);
                         this.Hide();
                         MainWindow main = new MainWindow(dataHandler);
                         main.ShowDialog();
