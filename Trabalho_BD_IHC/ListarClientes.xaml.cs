@@ -41,69 +41,10 @@ namespace Trabalho_BD_IHC
                 clientes.ItemsSource = items;
         }
 
-        private void RemoveCliente(Cliente cliente)
-        {
-            if (!dataHandler.verifySGBDConnection())
-                return;
-            SqlCommand cmd = new SqlCommand();
-
-            cmd.CommandText = "DELETE Cliente WHERE NIF=@clienteNIF ";
-            cmd.Parameters.Clear();
-            cmd.Parameters.AddWithValue("@clienteNIF", cliente.Nif);
-            cmd.Connection = dataHandler.Cn;
-
-            try
-            {
-                cmd.ExecuteNonQuery();
-            }
-            catch (SqlException ex)
-            {
-                MessageBox.Show(ex.Message);
-                return;
-            }
-            finally
-            {
-                dataHandler.closeSGBDConnection();
-            }
-            MessageBox.Show("Cliente Removido com sucesso!", "", MessageBoxButton.OK, MessageBoxImage.Information);
-        }
-
         private void registarCliente_Click(object sender, RoutedEventArgs e)
         {
             RegistarCliente page = new RegistarCliente(dataHandler);
             NavigationService.Navigate(page);
-        }
-
-        private void removerCliente_Click(object sender, RoutedEventArgs e)
-        {
-            int listViewIndex = clientes.SelectedIndex;
-
-            if (MessageBox.Show("Tem a certeza que pretende eliminar este cliente?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
-            {
-                return;
-            }
-            else
-            {
-                try
-                {
-                    RemoveCliente((Cliente)clientes.SelectedItem);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                    return;
-                }
-                try
-                {
-                    ((ObservableCollection<Cliente>)clientes.ItemsSource).RemoveAt(listViewIndex);
-
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                    return;
-                }
-            }
         }
 
         private void searchButton_Click(object sender, RoutedEventArgs e)

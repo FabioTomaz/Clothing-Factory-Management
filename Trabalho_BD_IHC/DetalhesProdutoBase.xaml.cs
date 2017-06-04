@@ -38,18 +38,26 @@ namespace Trabalho_BD_IHC
             dataProduto.Text = produtoBase.DataAlteraçao.ToString("dd/MM/yyyy");
             produtosPersonalizados=dataHandler.getProdutosPersonalizadosFromProdutoBaseDB(referencia);
             produtosPers.ItemsSource = produtosPersonalizados;
-            if (produtoBase.Pic != null)
-            {
-                var ms = new MemoryStream();
-                Utilizador.loggedUser.Imagem.Save(ms, ImageFormat.Png);
-                var bi = new BitmapImage();
-                bi.BeginInit();
-                bi.CacheOption = BitmapCacheOption.OnLoad;
-                bi.StreamSource = ms;
-                bi.EndInit();
-                imagemDesenho.Source = bi;
-            }
+            imagemDesenho.Source = LoadImage(produtoBase.Pic);
 
+        }
+
+        private static BitmapImage LoadImage(byte[] imageData)
+        {
+            if (imageData == null || imageData.Length == 0) return null;
+            var image = new BitmapImage();
+            using (var mem = new MemoryStream(imageData))
+            {
+                mem.Position = 0;
+                image.BeginInit();
+                image.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
+                image.CacheOption = BitmapCacheOption.OnLoad;
+                image.UriSource = null;
+                image.StreamSource = mem;
+                image.EndInit();
+            }
+            image.Freeze();
+            return image;
         }
 
         private void DataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)

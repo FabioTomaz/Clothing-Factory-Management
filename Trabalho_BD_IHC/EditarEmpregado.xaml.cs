@@ -61,7 +61,7 @@ namespace Trabalho_BD_IHC
 
         private void cancelar_Click(object sender, RoutedEventArgs e)
         {
-            if (MessageBox.Show("Tem a certeza que deseja cancelar a edição dos dados do empregado? Perderá todos as alterações que tenha feito.",
+            if (Xceed.Wpf.Toolkit.MessageBox.Show("Tem a certeza que deseja cancelar a edição dos dados do empregado? Perderá todos as alterações que tenha feito.",
                 "", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {//sim
                 this.NavigationService.GoBack();
