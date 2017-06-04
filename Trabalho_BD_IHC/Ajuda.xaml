@@ -6,18 +6,19 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:Trabalho_BD_IHC"
         mc:Ignorable="d"
-        Title="Ajuda" Height="450" Width="350" Icon="ajuda.png">
+        Title="Ajuda" Height="460" Width="410" MinWidth="410" MaxWidth="410" MaxHeight="460" MinHeight="460" Icon="ajuda.png">
     <Grid>
         <materialDesign:Card Margin="10,10,10,10">
             <StackPanel>
-                <TextBlock TextWrapping="Wrap" Foreground="Red">Este software deverá ser utilizado apenas por funcionários desta empresa. Dependendo das permições de cada usuário algumas funcionalidades do sistema poderão ficar bloqueadas.<LineBreak/></TextBlock>
+                <TextBlock TextWrapping="Wrap" Foreground="Red">Este software deverá ser utilizado apenas por funcionários desta empresa. Dependendo das permições de cada utilizador algumas funcionalidades do sistema poderão ficar bloqueadas.<LineBreak/></TextBlock>
                 <TextBlock TextWrapping="Wrap">Se não consegue aceder ao sistema as causas do problema poderão ser: </TextBlock>
                 <TextBlock TextWrapping="Wrap">1 - As suas credenciais de acesso estão incorretas.</TextBlock>
                 <TextBlock TextWrapping="Wrap">2 - O servidor da base de dados associado ao sistema está em manutenção ou desativado.</TextBlock>
                 <TextBlock TextWrapping="Wrap">3 - Foi-lhe retirado o acesso ao sistema.</TextBlock>
                 <TextBlock TextWrapping="Wrap"><LineBreak></LineBreak> Se perdeu as suas credenciais de acesso ao sistema por favor contacte o seu supervisor</TextBlock>
                 <TextBlock TextWrapping="Wrap">Se por outro lado, o problema estiver do lado da base de dados por favor contacte o administrador da mesma.</TextBlock>
-                <TextBlock TextWrapping="Wrap"><LineBreak></LineBreak> PARA OS PROFESSORES: O login deverá ser realizado com o numero de funcionário 1 e a palavra pass 'qwerty'. Este utilizador é considerado como o chefe da empresa e como tal tem permições para realizar qualquer ação sobre o sistema</TextBlock>
+                <TextBlock TextWrapping="Wrap" Foreground="Blue"><LineBreak></LineBreak> PARA OS PROFESSORES: O login deverá ser realizado com o numero de funcionário 1 e a palavra pass 'qwerty'. Este utilizador é considerado como o chefe da empresa e como tal tem permições para realizar qualquer ação sobre o sistema</TextBlock>
+                <TextBlock TextWrapping="Wrap" Foreground="DarkRed"><LineBreak></LineBreak> AVISOS: Cuidado ao mudar a password. A app não tem um sistema de recuperação de passwords portanto se a password for perdida só poderá ser recuperada acedendo á base de dados.</TextBlock>
             </StackPanel>
         </materialDesign:Card>
     </Grid>

@@ -131,5 +131,15 @@ namespace Trabalho_BD_IHC
             nifForn.Text = mat.Fornecedor.NIF_Fornecedor;
             nomeForn.Text = mat.Fornecedor.Nome;
         }
+
+        private void produtos_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (produtos.SelectedItems.Count == 1 && Utilizador.loggedUser.TiposUser.Contains("Gestor de Produção"))
+            {
+                DetalhesMaterial window = new DetalhesMaterial(dataHandler, (MaterialTextil)produtos.SelectedItem);
+                window.Show();
+            }
+
+        }
     }
 }

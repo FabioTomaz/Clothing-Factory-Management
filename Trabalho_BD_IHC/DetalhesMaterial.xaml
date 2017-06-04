@@ -127,8 +127,8 @@
                 <TextBlock Name="nomeForn" Grid.Row="1"   Grid.Column="7" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
             </Grid>
         </GroupBox>
-        <GroupBox Header="Produtos que usam este material" Grid.Column="1" Grid.ColumnSpan="7" Grid.Row="5">
-            <DataGrid Name="produtos" IsReadOnly="True" AutoGenerateColumns="False">
+        <GroupBox Header="Produtos que usam este material" Grid.Column="1" Grid.ColumnSpan="7" Grid.Row="5" >
+            <DataGrid Name="produtos" IsReadOnly="True" AutoGenerateColumns="False" MouseDoubleClick="produtos_MouseDoubleClick">
                 <DataGrid.Columns>
                     <materialDesign:MaterialDataGridTextColumn Binding="{Binding Tamanho}" Header="Tamanho" ></materialDesign:MaterialDataGridTextColumn>
                     <materialDesign:MaterialDataGridTextColumn Binding="{Binding Cor}" Header="Cor" ></materialDesign:MaterialDataGridTextColumn>
