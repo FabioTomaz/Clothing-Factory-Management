@@ -31,19 +31,22 @@ namespace Trabalho_BD_IHC
             this.dataHandler = dataHandler;
             this.ProdutoBase = ProdutoBase;
             refProduto.Content = ProdutoBase.Referencia;
-            txtNomeModelo.Content = ProdutoBase.Nome;
+            txtNomeModelo.Text = ProdutoBase.Nome;
             txtIva.Value = ProdutoBase.IVA1;
             txtInstruçoes.Text = ProdutoBase.InstrProd;
             if (ProdutoBase.Pic != null)
             {
-                var ms = new MemoryStream();
-                Utilizador.loggedUser.Imagem.Save(ms, ImageFormat.Png);
-                var bi = new BitmapImage();
-                bi.BeginInit();
-                bi.CacheOption = BitmapCacheOption.OnLoad;
-                bi.StreamSource = ms;
-                bi.EndInit();
-                imgPhoto.Source = bi;
+                var image = new BitmapImage();
+                using (var mem = new MemoryStream(ProdutoBase.Pic))
+                {
+                    mem.Position = 0;
+                    image.BeginInit();
+                    image.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
+                    image.CacheOption = BitmapCacheOption.OnLoad;
+                    image.UriSource = null;
+                    image.StreamSource = mem;
+                    image.EndInit();
+                }
             }
             txtInstruçoes.Focus();
         }
@@ -51,14 +54,14 @@ namespace Trabalho_BD_IHC
         private void validar()
         {
             if (txtInstruçoes.Text.Equals(""))
-                throw new Exception("Não foram especificadas as instruções de produção deste produto!");
+                throw new Exception("Não foram especificadas as instruções de produção deste desenho de produto!");
             else if (imgPhoto.Source == null)
                 throw new Exception("Não foi introduzida uma foto do desenho do produto!");
         }
 
         private void cancelar_Click(object sender, RoutedEventArgs e)
         {
-            if (Xceed.Wpf.Toolkit.MessageBox.Show("Tem a certeza que deseja cancelar a atualização do produto? Perderá todos os dados que tenha introduzido.",
+            if (Xceed.Wpf.Toolkit.MessageBox.Show("Tem a certeza que deseja cancelar a atualização do desenho de produto? Perderá todos os dados que tenha introduzido.",
      "Cancelar Atualização de Produto", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {//sim
                 this.NavigationService.GoBack();
@@ -69,23 +72,24 @@ namespace Trabalho_BD_IHC
 
         private void confirmar_Click(object sender, RoutedEventArgs e)
         {
-            ProdutoBase prod = new ProdutoBase();
-            prod.IVA1 = txtIva.Value;
-            prod.InstrProd = txtInstruçoes.Text;
-            prod.GestorProducao = Utilizador.loggedUser;
-            Console.WriteLine(prod.GestorProducao.NFuncionario);
+            
+            ProdutoBase.IVA1 = txtIva.Value;
+            ProdutoBase.InstrProd = txtInstruçoes.Text;
+            ProdutoBase.Nome = txtNomeModelo.Text;
+            ProdutoBase.GestorProducao = Utilizador.loggedUser;
+            Console.WriteLine(ProdutoBase.GestorProducao.NFuncionario);
             if(imgPhoto.Source!=null)
-                prod.Pic = ProdutoBase.Pic = getJPGFromImageControl((BitmapImage)imgPhoto.Source);
+                ProdutoBase.Pic = ProdutoBase.Pic = getJPGFromImageControl((BitmapImage)imgPhoto.Source);
             try
             {
-                dataHandler.AtualizarProdutoBase(prod);
+                dataHandler.AtualizarProdutoBase(ProdutoBase);
             }
             catch (Exception ex)
             {
                 Xceed.Wpf.Toolkit.MessageBox.Show(ex.Message, "Erro", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
-            Xceed.Wpf.Toolkit.MessageBox.Show("Produto Base atualizado com sucesso!", "Sucesso", MessageBoxButton.OK, MessageBoxImage.Information);
+            Xceed.Wpf.Toolkit.MessageBox.Show("Desenho de produto atualizado com sucesso!", "Sucesso", MessageBoxButton.OK, MessageBoxImage.Information);
             this.NavigationService.GoBack();
         }
 

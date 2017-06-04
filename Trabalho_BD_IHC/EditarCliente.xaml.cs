@@ -29,7 +29,7 @@ namespace Trabalho_BD_IHC
             InitializeComponent();
             this.dataHandler = dataHandler;
             this.cliente = cliente;
-            labelNIF.Content = cliente.NCliente;
+            txtNIF.Text = cliente.Nif;
             labelNome.Content = cliente.Nome;
             String[] split = cliente.CodigoPostal.Split('-');
             txtcodigoPostal1.Text = split[0];
@@ -62,7 +62,7 @@ namespace Trabalho_BD_IHC
         {
             try
             {
-                cliente.Nif = labelNIF.Content.ToString();
+                cliente.Nif = txtNIF.Text.ToString();
                 cliente.Nome = labelNome.Content.ToString();
                 cliente.Nib = txtNIB.Text;
                 cliente.Telemovel = txtTelemovel.Text;

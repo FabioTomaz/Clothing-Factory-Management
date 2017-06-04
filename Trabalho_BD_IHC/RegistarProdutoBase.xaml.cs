@@ -26,6 +26,7 @@ namespace Trabalho_BD_IHC
     {
         private DataHandler dataHandler;
         private int currentRow = 1;
+        String imgLoc;
         public int CurrentRow
         {
             get
@@ -64,20 +65,26 @@ namespace Trabalho_BD_IHC
 
         private void confirmar_Click(object sender, RoutedEventArgs e)
         {
-            try { 
+            try
+            {
                 validar();
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 Xceed.Wpf.Toolkit.MessageBox.Show(ex.Message, "ERRO", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
             ProdutoBase ProdutoBase = new ProdutoBase();
-                ProdutoBase.Nome = txtNomeModelo.Text;
-                ProdutoBase.InstrProd = txtInstruçoes.Text;
-                ProdutoBase.IVA1 = txtIva.Value;
-                ProdutoBase.GestorProducao = new Utilizador();
-                ProdutoBase.GestorProducao.NFuncionario = Utilizador.loggedUser.NFuncionario; //---> suposto mais tarde colocar o nº do user
-                ProdutoBase.Pic = getJPGFromImageControl((BitmapImage)imgPhoto.Source);
+            ProdutoBase.Nome = txtNomeModelo.Text;
+            ProdutoBase.InstrProd = txtInstruçoes.Text;
+            ProdutoBase.IVA1 = txtIva.Value;
+            ProdutoBase.GestorProducao = new Utilizador();
+            ProdutoBase.GestorProducao.NFuncionario = Utilizador.loggedUser.NFuncionario; //---> suposto mais tarde colocar o nº do user
+            byte[] images = null;
+            FileStream stream = new FileStream(imgLoc, FileMode.Open, FileAccess.Read);
+            BinaryReader br = new BinaryReader(stream);
+            images = br.ReadBytes((int)stream.Length);
+            ProdutoBase.Pic = images;
             try
             {
                 dataHandler.registarProdutoBase(ProdutoBase);
@@ -87,7 +94,7 @@ namespace Trabalho_BD_IHC
                 Xceed.Wpf.Toolkit.MessageBox.Show(ex.Message, "ERRO", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
-            Xceed.Wpf.Toolkit.MessageBox.Show("A informação do produto foi registada com sucesso!", "SUCESSO", MessageBoxButton.OK, MessageBoxImage.Information);
+            Xceed.Wpf.Toolkit.MessageBox.Show("A informação do desenho do produto foi registada com sucesso!", "SUCESSO", MessageBoxButton.OK, MessageBoxImage.Information);
             this.NavigationService.GoBack();
         }
 
@@ -101,6 +108,7 @@ namespace Trabalho_BD_IHC
             if (op.ShowDialog() == true)
             {
                 imgPhoto.Source = new BitmapImage(new Uri(op.FileName));
+                imgLoc = op.FileName.ToString();
             }
         }
 
