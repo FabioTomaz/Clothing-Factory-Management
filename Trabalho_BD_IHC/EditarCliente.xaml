@@ -85,7 +85,7 @@
                     <materialDesign:PackIcon Kind="Numeric"></materialDesign:PackIcon>
                     <TextBlock Text="NIF: "/>
                 </StackPanel>
-                <Label Name="labelNIF" Grid.Row="5" Grid.Column="2" VerticalAlignment="Center"></Label>
+                <TextBox Name="txtNIF" Grid.Row="5" Grid.Column="2" VerticalAlignment="Center"></TextBox>
                 <StackPanel Orientation="Horizontal"  Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Center">
                     <materialDesign:PackIcon Kind="Email"></materialDesign:PackIcon>
                     <TextBlock Text="E-Mail: "/>
@@ -102,7 +102,7 @@
                 </StackPanel>
                 <StackPanel Grid.Row="11" Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
                     <TextBox MaxLength="4" Width="40" PreviewTextInput="NumberValidationTextBox" Name="txtcodigoPostal1" VerticalAlignment="Center"></TextBox>
-                    <TextBlock Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Text="-"></TextBlock>
+                    <TextBlock Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Text="- "></TextBlock>
                     <TextBox MaxLength="3" Width="30" PreviewTextInput="NumberValidationTextBox" Grid.Column="2" Name="txtcodigoPostal2" HorizontalAlignment="Stretch" VerticalAlignment="Center"></TextBox>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal"  Grid.Row="13" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Center">

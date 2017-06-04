@@ -131,9 +131,7 @@ namespace Trabalho_BD_IHC
             {
                 if (!string.IsNullOrEmpty(txtInput.Text) && Regex.IsMatch(txtInput.Text, @"^\d+$"))
                 {
-                    ObservableCollection<ProdutoBase> prod = new ObservableCollection<ProdutoBase>();
-                    prod.Add(dataHandler.getProdutoBaseFromDBNGestor(Convert.ToInt32(txtInput.Text)));
-                    produtosBaseLista.ItemsSource = prod;
+                    produtosBaseLista.ItemsSource = dataHandler.getProdutoBaseFromDBNGestor(Convert.ToInt32(txtInput.Text));
                 }
 
             }

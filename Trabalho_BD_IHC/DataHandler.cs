@@ -156,10 +156,11 @@ namespace Trabalho_BD_IHC
             verifySGBDConnection();
             SqlCommand cmd = new SqlCommand();
 
-            cmd.CommandText = "UPDATE CLIENTE SET NIB=@NIB, EMAIL=@EMAIL, TELEMOVEL=@TELEMOVEL, CODPOSTAL1=@CODPOSTAL1, CODPOSTAL2=@CODPOSTAL2, RUA=@RUA, N_PORTA=@N_PORTA " +
+            cmd.CommandText = "UPDATE CLIENTE SET NIF = @NIF, NIB=@NIB, EMAIL=@EMAIL, TELEMOVEL=@TELEMOVEL, CODPOSTAL1=@CODPOSTAL1, CODPOSTAL2=@CODPOSTAL2, RUA=@RUA, N_PORTA=@N_PORTA " +
                 "WHERE CLIENTE.NCLIENTE=@NCLIENTE;";
             cmd.Parameters.Clear();
             cmd.Parameters.AddWithValue("@NIB", cl.Nib);
+            cmd.Parameters.AddWithValue("@NIF", cl.Nif);
             cmd.Parameters.AddWithValue("@EMAIL", cl.Email);
             cmd.Parameters.AddWithValue("@TELEMOVEL", cl.Telemovel);
             cmd.Parameters.AddWithValue("@CODPOSTAL1", Convert.ToInt32(cl.CodigoPostal.Split('-')[0]));
@@ -628,7 +629,8 @@ namespace Trabalho_BD_IHC
             cmd.Parameters.AddWithValue("@encomenda", nEncomenda);
             SqlDataReader reader = cmd.ExecuteReader();
             Encomenda Enc = null;
-            if (reader.Read()) {
+            if (reader.Read())
+            {
                 Enc = new Encomenda();
                 Enc.Cliente = new Cliente();
                 Enc.GestorVendas = new Utilizador();
@@ -953,7 +955,8 @@ namespace Trabalho_BD_IHC
             cmd.Parameters.AddWithValue("@REF", referencia);
             SqlDataReader reader = cmd.ExecuteReader();
             ProdutoBase prod = null;
-            if (reader.Read()) { 
+            if (reader.Read())
+            {
                 prod = new ProdutoBase();
                 prod.Referencia = Convert.ToInt32(reader["REFERENCIA"].ToString());
                 prod.Nome = reader["nomeProduto"].ToString();
@@ -977,7 +980,7 @@ namespace Trabalho_BD_IHC
             return prod;
         }
 
-        public ProdutoBase getProdutoBaseFromDBNGestor(int nGestor)
+        public ObservableCollection<ProdutoBase> getProdutoBaseFromDBNGestor(int nGestor)
         {
             if (!this.verifySGBDConnection())
                 return null;
@@ -988,26 +991,32 @@ namespace Trabalho_BD_IHC
             cmd.Parameters.AddWithValue("@ges", nGestor);
             SqlDataReader reader = cmd.ExecuteReader();
             reader.Read();
-            ProdutoBase prod = new ProdutoBase();
-            prod.Referencia = Convert.ToInt32(reader["REFERENCIA"].ToString());
-            prod.Nome = reader["nomeProduto"].ToString();
-            prod.InstrProd = reader["INSTRUCOES_PRODUCAO"].ToString();
-            prod.DataAlteraçao = Convert.ToDateTime(reader["DATA_ALTERACAO"]);
-            prod.IVA1 = Convert.ToDouble(reader["IVA"].ToString());
-            prod.GestorProducao = new Utilizador();
-            prod.GestorProducao.NFuncionario = Convert.ToInt32(reader["N_GESTOR_PROD"].ToString());
-            prod.GestorProducao.Nome = reader["userName"].ToString();
-            try
+
+            ObservableCollection<ProdutoBase> prods = new ObservableCollection<ProdutoBase>();
+            while (reader.Read())
             {
-                prod.Pic = (byte[])reader["IMAGEM_DESENHO"];
-            }
-            catch (InvalidCastException ex)
-            {
-                throw new InvalidCastException("Não foi possivel obter a imagem do desenho do produto base da base de dados. ERRO: " + ex.Message);
+                ProdutoBase prod = new ProdutoBase();
+                prod.Referencia = Convert.ToInt32(reader["REFERENCIA"].ToString());
+                prod.Nome = reader["nomeProduto"].ToString();
+                prod.InstrProd = reader["INSTRUCOES_PRODUCAO"].ToString();
+                prod.DataAlteraçao = Convert.ToDateTime(reader["DATA_ALTERACAO"]);
+                prod.IVA1 = Convert.ToDouble(reader["IVA"].ToString());
+                prod.GestorProducao = new Utilizador();
+                prod.GestorProducao.NFuncionario = Convert.ToInt32(reader["N_GESTOR_PROD"].ToString());
+                prod.GestorProducao.Nome = reader["userName"].ToString();
+                try
+                {
+                    prod.Pic = (byte[])reader["IMAGEM_DESENHO"];
+                }
+                catch (InvalidCastException ex)
+                {
+                    throw new InvalidCastException("Não foi possivel obter a imagem do desenho do produto base da base de dados. ERRO: " + ex.Message);
+                }
+                prods.Add(prod);
             }
             reader.Close();
             closeSGBDConnection();
-            return prod;
+            return prods;
         }
 
         public Utilizador getUtilizadorFromDB(int user)
@@ -1117,11 +1126,12 @@ namespace Trabalho_BD_IHC
             cmd.Parameters.AddWithValue("@Data_alteracao", DateTime.Today);
             cmd.Parameters.AddWithValue("@instr", produtoBase.InstrProd);
             cmd.Parameters.AddWithValue("@nGestor", produtoBase.GestorProducao.NFuncionario);
-            IDataParameter par = cmd.CreateParameter();
-            par.ParameterName = "@imagem";
-            par.DbType = DbType.Binary;
-            par.Value = produtoBase.Pic;
-            cmd.Parameters.Add(par);
+            cmd.Parameters.AddWithValue("@imagem", produtoBase.Pic);
+            /* IDataParameter par = cmd.CreateParameter();
+             par.ParameterName = "@imagem";
+             par.DbType = DbType.Binary;
+             par.Value = produtoBase.Pic;
+             cmd.Parameters.Add(par);*/
             cmd.Connection = Cn;
             try
             {
@@ -1129,7 +1139,7 @@ namespace Trabalho_BD_IHC
             }
             catch (Exception ex)
             {
-                throw new Exception("Falha ao registar o Produto Base na base de dados. \n MENSAGEM DE ERRO: \n" + ex.Message);
+                throw new Exception("Falha ao registar o Desenho produto na base de dados. \n MENSAGEM DE ERRO: \n" + ex.Message);
             }
             finally
             {
@@ -3113,7 +3123,7 @@ namespace Trabalho_BD_IHC
 
             SqlCommand cmd = new SqlCommand();
 
-            cmd.CommandText = "UPDATE [PRODUTO-BASE] SET  NOME = @NOME, DATA_ALTERACAO = @DataAlt, " +
+            cmd.CommandText = "UPDATE [PRODUTO-BASE] SET NOME = @NOME, DATA_ALTERACAO = @DataAlt, " +
                 " IVA = @iva, N_GESTOR_PROD = @N_GestorProd, INSTRUCOES_PRODUCAO = @IntrProd, IMAGEM_DESENHO=@imagem WHERE REFERENCIA = @Referencia";
             cmd.Parameters.Clear(); //falta inserir a imagem do produto!
             cmd.Parameters.AddWithValue("@NOME", prod.Nome);
@@ -3122,11 +3132,7 @@ namespace Trabalho_BD_IHC
             cmd.Parameters.AddWithValue("@DataAlt", DateTime.Today);
             cmd.Parameters.AddWithValue("@IntrProd", prod.InstrProd);
             cmd.Parameters.AddWithValue("@Referencia", prod.Referencia);
-            IDataParameter par = cmd.CreateParameter();
-            par.ParameterName = "@imagem";
-            par.DbType = DbType.Binary;
-            par.Value = prod.Pic;
-            cmd.Parameters.Add(par);
+            cmd.Parameters.AddWithValue("@imagem", prod.Pic);
             cmd.Connection = Cn;
 
             try
@@ -3135,13 +3141,11 @@ namespace Trabalho_BD_IHC
             }
             catch (Exception ex)
             {
-                throw new Exception("Não foi possivel atualizar o Produto Base. \n ERROR MESSAGE: \n" + ex.Message);
+                throw new Exception("Não foi possivel atualizar o Desenho produto \n ERROR MESSAGE: \n" + ex.Message);
             }
             finally
             {
-                if (rows == 1)
-                    Xceed.Wpf.Toolkit.MessageBox.Show("Produto atualizado com sucesso!", "", MessageBoxButton.OK, MessageBoxImage.Information);
-                else
+                if (rows != 1)
                     throw new Exception("Não foi possivel atualizar o Produto Base");
                 closeSGBDConnection();
             }

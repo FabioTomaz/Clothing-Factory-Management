@@ -95,6 +95,7 @@
                     <RowDefinition Height="5"></RowDefinition>
                     <RowDefinition Height="40"></RowDefinition>
                     <RowDefinition Height="10"></RowDefinition>
+                    <RowDefinition Height="0.4*"></RowDefinition>
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
@@ -106,7 +107,9 @@
                 </Grid.ColumnDefinitions>
                 <Button Name="adicionar" Grid.Row="1" Grid.Column="1" Style="{StaticResource adicionarButton}" Click="Button_Click">Adicionar Produto</Button>
                 <Button Name="remover" IsEnabled="False" Grid.Row="1" Grid.Column="3" Style="{StaticResource removerButton}" Click="Button_Click_1">RemoverProduto</Button>
-                <DataGrid  Name="produtosEncomenda" CanUserAddRows="False" Grid.Row="3" Grid.ColumnSpan="5" ItemsSource="{Binding ProdutoPersonalizado}" AutoGenerateColumns="False" SelectionChanged="produtosEncomenda_SelectionChanged">
+                <TextBlock Grid.Row="3" Grid.ColumnSpan="5" HorizontalAlignment="Center" TextWrapping="Wrap" 
+                Text="Use o botão 'adicionar' para inserir um novo produto na lista em baixo. Clique numa coluna da lista para preencher informação sobre o produto"></TextBlock>
+                <DataGrid  Name="produtosEncomenda" CanUserAddRows="False" Grid.Row="4" Grid.ColumnSpan="5" ItemsSource="{Binding ProdutoPersonalizado}" AutoGenerateColumns="False" SelectionChanged="produtosEncomenda_SelectionChanged">
                     <DataGrid.Columns>
                         <materialDesign:MaterialDataGridTextColumn Binding="{Binding ProdutoBase.Referencia}" Header="Referencia" ></materialDesign:MaterialDataGridTextColumn>
                         <materialDesign:MaterialDataGridTextColumn Binding="{Binding Tamanho}" Header="Tamanho" ></materialDesign:MaterialDataGridTextColumn>
