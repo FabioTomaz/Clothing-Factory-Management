@@ -85,7 +85,7 @@
                                     <Button Style="{DynamicResource MaterialDesignToolButton}" ToolTip="Limpar Pesquisa" Click="Button_Click">
                                         <materialDesign:PackIcon Kind="Magnify" Opacity=".56" />
                                     </Button>
-                                    <TextBox Name="txtnomeForn"  Grid.Column="1" Margin="8 0 0 0" materialDesign:HintAssist.Hint="Pesquisa por Nome" 
+                                    <TextBox Name="txtInput" Grid.Column="1" Margin="8 0 0 0" materialDesign:HintAssist.Hint="Pesquisa por Nome" 
                                          materialDesign:TextFieldAssist.DecorationVisibility="Hidden" BorderThickness="0" KeyUp="txtsearchFo_KeyUp"
                                          MinWidth="200" VerticalAlignment="Center"/>
                                     <Button  Grid.Column="2" Style="{DynamicResource MaterialDesignToolForegroundButton}" Margin="8 0 0 0" Panel.ZIndex="0" Click="searchButton_Click">
@@ -93,11 +93,10 @@
                                     </Button>
                                 </Grid>
                             </materialDesign:ColorZone>
-                            <Expander HorizontalAlignment="Stretch" Header="Pesquisa Avançada" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Foreground="Black">
+                            <Expander HorizontalAlignment="Stretch" Header="Tipo de Pesquisa" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Foreground="Black">
                                 <Grid TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition></ColumnDefinition>
-                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition Width="0.5*"></ColumnDefinition>
                                         <ColumnDefinition></ColumnDefinition>
                                         <ColumnDefinition></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
@@ -105,18 +104,11 @@
                                         <RowDefinition></RowDefinition>
                                         <RowDefinition></RowDefinition>
                                     </Grid.RowDefinitions>
-                                    <Label Content="NIF Fornecedor:  " HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0"></Label>
-                                    <TextBox Name="txtforn" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center"></TextBox>
-                                    
-                                    <Label Content="Telefone Fornecedor:  " HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="2" Grid.Row="0"></Label>
-                                    <TextBox Name="txtTelefone" Grid.Column="3" Grid.Row="0" VerticalAlignment="Center"></TextBox>
-
-                                    <Label Content="E-mail Fornecedor:  " HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Grid.Row="1"></Label>
-                                    <TextBox Name="txtEmail" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center"></TextBox>
-
-                                    <Label Content="Rua Fornecedor:  " HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="2" Grid.Row="1"></Label>
-                                    <TextBox Name="txtRua" Grid.Column="3" Grid.Row="1" VerticalAlignment="Center"></TextBox>
-
+                                    <Label Content="Pesquisar por:  " HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0"></Label>
+                                    <RadioButton GroupName="tipoPesquisa" Checked="pesquisaDES_Checked" IsChecked="True"  Name="pesquisaDES" Content="Designação do Fornecedor" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center"></RadioButton>
+                                    <RadioButton GroupName="tipoPesquisa" Checked="pesquisaTEL_Checked" Name="pesquisaTEL" Content="Telefone do fornecedor" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center"></RadioButton>
+                                    <RadioButton GroupName="tipoPesquisa" Checked="pesquisaNIF_Checked" Name="pesquisaNIF" Content="NIF do Fornecedor" Grid.Column="2" Grid.Row="0" VerticalAlignment="Center"></RadioButton>
+                                    <RadioButton GroupName="tipoPesquisa" Checked="pesquisaMAIL_Checked" Name="pesquisaMAIL" Content="Email do Fornecedor" Grid.Column="2" Grid.Row="1" VerticalAlignment="Center"></RadioButton>
                                 </Grid>
                             </Expander>
                         </Grid>

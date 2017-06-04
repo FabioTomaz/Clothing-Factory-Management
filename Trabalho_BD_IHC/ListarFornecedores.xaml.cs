@@ -74,7 +74,14 @@ namespace Trabalho_BD_IHC
 
         private void searchButton_Click(object sender, RoutedEventArgs e)
         {
-            Fornecedores.ItemsSource = dataHandler.searchFornecedoresInDB(txtnomeForn.Text);
+            if(pesquisaDES.IsChecked == true)
+                Fornecedores.ItemsSource = dataHandler.searchFornecedoresInDBDes(txtInput.Text);
+            else if(pesquisaTEL.IsChecked == true)
+                Fornecedores.ItemsSource = dataHandler.searchFornecedoresInDBTel(txtInput.Text);
+            else if (pesquisaMAIL.IsChecked == true)
+                Fornecedores.ItemsSource = dataHandler.searchFornecedoresInDBMail(txtInput.Text);
+            else if(pesquisaNIF.IsChecked == true)
+                Fornecedores.ItemsSource = dataHandler.searchFornecedoresInDBNIF(txtInput.Text);
         }
 
         private void txtsearchFo_KeyUp(object sender, KeyEventArgs e)
@@ -90,9 +97,34 @@ namespace Trabalho_BD_IHC
             window.Show();
         }
 
+        private void pesquisaDES_Checked(object sender, RoutedEventArgs e)
+        {
+            txtInput.Text = "";
+            txtInput.SetValue(MaterialDesignThemes.Wpf.HintAssist.HintProperty, "Pesquisar Por Designação do Fornecedor");
+        }
+
+        private void pesquisaTEL_Checked(object sender, RoutedEventArgs e)
+        {
+            txtInput.Text = "";
+            txtInput.SetValue(MaterialDesignThemes.Wpf.HintAssist.HintProperty, "Pesquisar Por Número de telemóvel de Fornecedor");
+        }
+
+        private void pesquisaNIF_Checked(object sender, RoutedEventArgs e)
+        {
+            txtInput.Text = "";
+            txtInput.SetValue(MaterialDesignThemes.Wpf.HintAssist.HintProperty, "Pesquisar Por NIF do Fornecedor");
+        }
+
+        private void pesquisaMAIL_Checked(object sender, RoutedEventArgs e)
+        {
+            txtInput.Text = "";
+            txtInput.SetValue(MaterialDesignThemes.Wpf.HintAssist.HintProperty, "Pesquisar Por E-mail do Fornecedor");
+        }
+
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            txtnomeForn.Text = "";
+            txtInput.Text = "";
             this.refresh();
         }
     }

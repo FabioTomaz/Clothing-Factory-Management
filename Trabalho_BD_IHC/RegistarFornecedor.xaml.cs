@@ -81,10 +81,10 @@ namespace Trabalho_BD_IHC
                 dataHandler.EnviarFornecedor(Fornecedor);
             }catch(Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                Xceed.Wpf.Toolkit.MessageBox.Show(ex.Message);
                 return;
             }
-            MessageBox.Show("Fornecedor Registado com sucesso!", "", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            Xceed.Wpf.Toolkit.MessageBox.Show("Fornecedor Registado com sucesso!", "", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             this.NavigationService.GoBack();
         }
 

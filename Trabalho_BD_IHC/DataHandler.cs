@@ -2090,7 +2090,7 @@ namespace Trabalho_BD_IHC
             return fornecedores;
         }
 
-        public ObservableCollection<Fornecedor> searchFornecedoresInDB(string nome)
+        public ObservableCollection<Fornecedor> searchFornecedoresInDBDes(string des)
         {
             if (!this.verifySGBDConnection())
                 return null;
@@ -2098,9 +2098,9 @@ namespace Trabalho_BD_IHC
                 + " FORNECEDOR.CODPOSTAL1 as cod1, FORNECEDOR.CODPOSTAL2 as cod2, RUA, DISTRITO, LOCALIDADE, "
                 + " N_PORTA FROM FORNECEDOR JOIN ZONA ON "
                 + "(ZONA.CODPOSTAL1 = FORNECEDOR.CODPOSTAL1 AND ZONA.CODPOSTAL2 = FORNECEDOR.CODPOSTAL2)"
-                + " WHERE NOME LIKE  @nome;", this.Cn);
+                + " WHERE DESIGNACAO LIKE  @des;", this.Cn);
             cmd.Parameters.Clear();
-            cmd.Parameters.AddWithValue("@nome", "%" + nome + "%");
+            cmd.Parameters.AddWithValue("@des", "%" + des + "%");
             SqlDataReader reader = cmd.ExecuteReader();
             ObservableCollection<Fornecedor> fornecedores = new ObservableCollection<Fornecedor>();
             while (reader.Read())
@@ -2123,6 +2123,110 @@ namespace Trabalho_BD_IHC
             this.closeSGBDConnection();
             return fornecedores;
         }
+
+        public ObservableCollection<Fornecedor> searchFornecedoresInDBTel(string tel)
+        {
+            if (!this.verifySGBDConnection())
+                return null;
+            SqlCommand cmd = new SqlCommand("SELECT NOME, NIF, EMAIL, TELEFONE, FAX, DESIGNACAO, "
+                + " FORNECEDOR.CODPOSTAL1 as cod1, FORNECEDOR.CODPOSTAL2 as cod2, RUA, DISTRITO, LOCALIDADE, "
+                + " N_PORTA FROM FORNECEDOR JOIN ZONA ON "
+                + "(ZONA.CODPOSTAL1 = FORNECEDOR.CODPOSTAL1 AND ZONA.CODPOSTAL2 = FORNECEDOR.CODPOSTAL2)"
+                + " WHERE TELEFONE LIKE @tel;", this.Cn);
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@tel", "%" + tel + "%");
+            SqlDataReader reader = cmd.ExecuteReader();
+            ObservableCollection<Fornecedor> fornecedores = new ObservableCollection<Fornecedor>();
+            while (reader.Read())
+            {
+                Fornecedor f = new Fornecedor();
+                f.NIF_Fornecedor = reader["NIF"].ToString();
+                f.Email = reader["EMAIL"].ToString();
+                f.Nome = reader["NOME"].ToString();
+                f.Fax = reader["FAX"].ToString();
+                f.Telefone = reader["TELEFONE"].ToString();
+                f.Designacao = reader["DESIGNACAO"].ToString();
+                f.Localizacao = new Localizacao();
+                f.Localizacao.CodigoPostal = reader["cod1"].ToString() + "-" + reader["cod2"].ToString();
+                f.Localizacao.Rua1 = reader["RUA"].ToString();
+                f.Localizacao.Distrito = reader["DISTRITO"].ToString();
+                f.Localizacao.Localidade = reader["LOCALIDADE"].ToString();
+                f.Localizacao.Porta = Convert.ToInt32(reader["N_PORTA"].ToString());
+                fornecedores.Add(f);
+            }
+            this.closeSGBDConnection();
+            return fornecedores;
+        }
+
+        public ObservableCollection<Fornecedor> searchFornecedoresInDBMail(string mail)
+        {
+            if (!this.verifySGBDConnection())
+                return null;
+            SqlCommand cmd = new SqlCommand("SELECT NOME, NIF, EMAIL, TELEFONE, FAX, DESIGNACAO, "
+                + " FORNECEDOR.CODPOSTAL1 as cod1, FORNECEDOR.CODPOSTAL2 as cod2, RUA, DISTRITO, LOCALIDADE, "
+                + " N_PORTA FROM FORNECEDOR JOIN ZONA ON "
+                + "(ZONA.CODPOSTAL1 = FORNECEDOR.CODPOSTAL1 AND ZONA.CODPOSTAL2 = FORNECEDOR.CODPOSTAL2)"
+                + " WHERE EMAIL LIKE @mail;", this.Cn);
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@mail", "%" + mail + "%");
+            SqlDataReader reader = cmd.ExecuteReader();
+            ObservableCollection<Fornecedor> fornecedores = new ObservableCollection<Fornecedor>();
+            while (reader.Read())
+            {
+                Fornecedor f = new Fornecedor();
+                f.NIF_Fornecedor = reader["NIF"].ToString();
+                f.Email = reader["EMAIL"].ToString();
+                f.Nome = reader["NOME"].ToString();
+                f.Fax = reader["FAX"].ToString();
+                f.Telefone = reader["TELEFONE"].ToString();
+                f.Designacao = reader["DESIGNACAO"].ToString();
+                f.Localizacao = new Localizacao();
+                f.Localizacao.CodigoPostal = reader["cod1"].ToString() + "-" + reader["cod2"].ToString();
+                f.Localizacao.Rua1 = reader["RUA"].ToString();
+                f.Localizacao.Distrito = reader["DISTRITO"].ToString();
+                f.Localizacao.Localidade = reader["LOCALIDADE"].ToString();
+                f.Localizacao.Porta = Convert.ToInt32(reader["N_PORTA"].ToString());
+                fornecedores.Add(f);
+            }
+            this.closeSGBDConnection();
+            return fornecedores;
+        }
+
+        public ObservableCollection<Fornecedor> searchFornecedoresInDBNIF(string nif)
+        {
+            if (!this.verifySGBDConnection())
+                return null;
+            SqlCommand cmd = new SqlCommand("SELECT NOME, NIF, EMAIL, TELEFONE, FAX, DESIGNACAO, "
+                + " FORNECEDOR.CODPOSTAL1 as cod1, FORNECEDOR.CODPOSTAL2 as cod2, RUA, DISTRITO, LOCALIDADE, "
+                + " N_PORTA FROM FORNECEDOR JOIN ZONA ON "
+                + "(ZONA.CODPOSTAL1 = FORNECEDOR.CODPOSTAL1 AND ZONA.CODPOSTAL2 = FORNECEDOR.CODPOSTAL2)"
+                + " WHERE NIF LIKE @nif;", this.Cn);
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@nif", "%" + nif + "%");
+            SqlDataReader reader = cmd.ExecuteReader();
+            ObservableCollection<Fornecedor> fornecedores = new ObservableCollection<Fornecedor>();
+            while (reader.Read())
+            {
+                Fornecedor f = new Fornecedor();
+                f.NIF_Fornecedor = reader["NIF"].ToString();
+                f.Email = reader["EMAIL"].ToString();
+                f.Nome = reader["NOME"].ToString();
+                f.Fax = reader["FAX"].ToString();
+                f.Telefone = reader["TELEFONE"].ToString();
+                f.Designacao = reader["DESIGNACAO"].ToString();
+                f.Localizacao = new Localizacao();
+                f.Localizacao.CodigoPostal = reader["cod1"].ToString() + "-" + reader["cod2"].ToString();
+                f.Localizacao.Rua1 = reader["RUA"].ToString();
+                f.Localizacao.Distrito = reader["DISTRITO"].ToString();
+                f.Localizacao.Localidade = reader["LOCALIDADE"].ToString();
+                f.Localizacao.Porta = Convert.ToInt32(reader["N_PORTA"].ToString());
+                fornecedores.Add(f);
+            }
+            this.closeSGBDConnection();
+            return fornecedores;
+        }
+
+
 
         public void EnviarFornecedor(Fornecedor f)
         {
