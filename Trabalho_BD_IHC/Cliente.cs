@@ -178,5 +178,18 @@ namespace Trabalho_BD_IHC
                 _localidade = value;
             }
         }
+
+        public int NPorta
+        {
+            get
+            {
+                return _nPorta;
+            }
+
+            set
+            {
+                _nPorta = value;
+            }
+        }
     }
 }

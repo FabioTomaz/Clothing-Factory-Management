@@ -32,7 +32,7 @@ namespace Trabalho_BD_IHC
 
         private void cancelar_Click(object sender, RoutedEventArgs e)
         {
-            if (MessageBox.Show("Tem a certeza que deseja cancelar o registo de empregado? Perderá todos os dados que tenha introduzido.",
+            if (Xceed.Wpf.Toolkit.MessageBox.Show("Tem a certeza que deseja cancelar o registo de empregado? Perderá todos os dados que tenha introduzido.",
                 "", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {//sim
                 this.NavigationService.GoBack();
@@ -57,7 +57,14 @@ namespace Trabalho_BD_IHC
             user.Salario = Convert.ToDouble(txtSalario.Text);
             user.Telemovel = txtTelemovel.Text;
             user.Filial = new filial();
-
+            if ((Boolean)ckEmpr.IsChecked)
+                user.TiposUser.Add("Gestor da Empresa");
+            if ((Boolean)ckEmpr.IsChecked)
+                user.TiposUser.Add("Gestor de Produção");
+            if ((Boolean)ckEmpr.IsChecked)
+                user.TiposUser.Add("Gestor de Vendas");
+            if ((Boolean)ckEmpr.IsChecked)
+                user.TiposUser.Add("Gestor de Recursos Humanos");
             user.Filial.NFilial = Convert.ToInt32(txtnFilial.Text);
             List<string> tiposUser = new List<string>();
             if (ckEmpr.IsChecked == true)

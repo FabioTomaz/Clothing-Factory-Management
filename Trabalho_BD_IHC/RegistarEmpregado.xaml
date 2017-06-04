@@ -79,7 +79,7 @@
                     <TextBlock Text="Nome: "/>
                 </StackPanel>
                 <TextBox Name="txtNome" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center"
-                         materialDesign:HintAssist.Hint="Indique o nome completo do empregado" materialDesign:HintAssist.IsFloating="True"></TextBox>
+                         materialDesign:HintAssist.Hint="Nome completo do empregado" materialDesign:HintAssist.IsFloating="True"></TextBox>
                 <StackPanel Orientation="Horizontal"  Grid.Row="3" Grid.Column="3" VerticalAlignment="Center">
                     <materialDesign:PackIcon Kind="Cash"></materialDesign:PackIcon>
                     <TextBlock Text="Salário(€):"/>
@@ -90,19 +90,19 @@
                     <TextBlock Text="Password a atribuir: "/>
                 </StackPanel>
                 <TextBox Name="txtPass" Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" 
-                materialDesign:HintAssist.Hint="Indique a password inicial do empregado" materialDesign:HintAssist.IsFloating="True"></TextBox>
+                materialDesign:HintAssist.Hint="Password inicial do empregado" materialDesign:HintAssist.IsFloating="True"></TextBox>
                 <StackPanel Orientation="Horizontal"  Grid.Row="5" Grid.Column="3" VerticalAlignment="Center">
                     <materialDesign:PackIcon Kind="Email"></materialDesign:PackIcon>
                     <TextBlock Text="E-Mail: "/>
                 </StackPanel>
                 <TextBox Name="txtEmail" Grid.Row="5" Grid.Column="4" VerticalAlignment="Center"
-                         materialDesign:HintAssist.Hint="Indique o email do empregado na forma xxx@xxx.xxx" materialDesign:HintAssist.IsFloating="True"></TextBox>
+                         materialDesign:HintAssist.Hint="Email do empregado" materialDesign:HintAssist.IsFloating="True"></TextBox>
                 <StackPanel Orientation="Horizontal"  Grid.Row="7" Grid.Column="0" VerticalAlignment="Center">
                     <materialDesign:PackIcon Kind="Phone"></materialDesign:PackIcon>
                     <TextBlock Text="Telemovel: "/>
                 </StackPanel>
                 <TextBox Name="txtTelemovel" Grid.Row="7" Grid.Column="1" VerticalAlignment="Center"
-                         materialDesign:HintAssist.Hint="Indique o nº telemóvel do empregado" materialDesign:HintAssist.IsFloating="True"></TextBox>
+                         materialDesign:HintAssist.Hint="Telemóvel/Telefone do empregado" materialDesign:HintAssist.IsFloating="True"></TextBox>
                 <StackPanel Orientation="Horizontal"  Grid.Row="7" Grid.Column="3" Grid.ColumnSpan="3" VerticalAlignment="Center">
                     <materialDesign:PackIcon Kind="ZipBox"></materialDesign:PackIcon>
                     <TextBlock Text="Código Postal: "/>
@@ -117,40 +117,40 @@
                     <TextBlock Text="Rua: "/>
                 </StackPanel>
                 <TextBox Name="txtRua" Grid.Row="9" Grid.Column="1"  VerticalAlignment="Center"
-                          materialDesign:HintAssist.Hint="Indique a Rua do empregado" materialDesign:HintAssist.IsFloating="True"></TextBox>
+                          materialDesign:HintAssist.Hint="Rua do empregado" materialDesign:HintAssist.IsFloating="True"></TextBox>
                 <StackPanel Orientation="Horizontal"  Grid.Row="9" Grid.Column="3" Grid.ColumnSpan="3" VerticalAlignment="Center">
                     <materialDesign:PackIcon Kind="Glassdoor"></materialDesign:PackIcon>
                     <TextBlock Text="Nº Porta: "/>
                 </StackPanel>
                 <TextBox Name="txtNumeroPorta" PreviewTextInput="NumberValidationTextBox" Grid.Row="9" Grid.Column="4"
-                          materialDesign:HintAssist.Hint="Indique o número de porta do empregado" materialDesign:HintAssist.IsFloating="True" VerticalAlignment="Center"></TextBox>
+                          materialDesign:HintAssist.Hint="Nº de porta do empregado" materialDesign:HintAssist.IsFloating="True" VerticalAlignment="Center"></TextBox>
                 <StackPanel Orientation="Horizontal"  Grid.Row="11" Grid.Column="0" VerticalAlignment="Center">
                     <materialDesign:PackIcon Kind="Factory"></materialDesign:PackIcon>
                     <TextBlock Text="Nº Filial:"/>
                 </StackPanel>
                 <TextBox Name="txtnFilial" PreviewTextInput="NumberValidationTextBox" Grid.Row="11" Grid.Column="1" 
-                          materialDesign:HintAssist.Hint="Indique o nº da filial na qual pretende associar o empregado" materialDesign:HintAssist.IsFloating="True" VerticalAlignment="Center"></TextBox>
+                          materialDesign:HintAssist.Hint="Nº da filial em que o empregado trabalha" materialDesign:HintAssist.IsFloating="True" VerticalAlignment="Center"></TextBox>
 
                 <StackPanel Orientation="Horizontal"  Grid.Row="11" Grid.Column="3" VerticalAlignment="Center">
                     <materialDesign:PackIcon Kind="NaturePeople"></materialDesign:PackIcon>
                     <TextBlock Text="Nº Supervisor:" TextWrapping="Wrap"/>
                 </StackPanel>
                 <TextBox Name="txtSuper" PreviewTextInput="NumberValidationTextBox" Grid.Row="11" Grid.Column="4"
-                          materialDesign:HintAssist.Hint="Indique o nº do funcionário supervisor" materialDesign:HintAssist.IsFloating="True" VerticalAlignment="Center"></TextBox>
+                          materialDesign:HintAssist.Hint="Nº do funcionário supervisor" materialDesign:HintAssist.IsFloating="True" VerticalAlignment="Center"></TextBox>
 
                 <StackPanel Orientation="Horizontal"  Grid.Row="13" Grid.Column="0" VerticalAlignment="Center">
                     <materialDesign:PackIcon Kind="ClockStart"></materialDesign:PackIcon>
                     <TextBlock Text="Hora Entrada:"/>
                 </StackPanel>
-                <wpfTool:TimePicker Name="txtEntrada" TimeInterval="0:30"
-                          Value="8:00" Format="ShortTime" Grid.Row="13" Grid.Column="1" VerticalAlignment="Center"></wpfTool:TimePicker>
+                <materialDesign:TimePicker Name="txtEntrada" SelectedTime="9:00"
+                         Grid.Row="13" Grid.Column="1" VerticalAlignment="Center"></materialDesign:TimePicker>
 
                 <StackPanel Orientation="Horizontal"  Grid.Row="13" Grid.Column="3" VerticalAlignment="Center">
                     <materialDesign:PackIcon Kind="ClockEnd"></materialDesign:PackIcon>
                     <TextBlock Text="Hora Saída:"/>
                 </StackPanel>
-                <wpfTool:TimePicker Name="txtSaida" TimeInterval="0:30"
-                          Value="18:00" Format="ShortTime" Grid.Row="13" Grid.Column="4" VerticalAlignment="Center"></wpfTool:TimePicker>
+                <materialDesign:TimePicker Name="txtSaida" SelectedTime="17:00"
+                          Grid.Row="13" Grid.Column="4" VerticalAlignment="Center"></materialDesign:TimePicker>
             </Grid>
         </GroupBox>
     </Grid>

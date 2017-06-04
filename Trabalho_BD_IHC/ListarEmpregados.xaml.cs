@@ -96,7 +96,8 @@ namespace Trabalho_BD_IHC
 
         private void empregados_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            editarEmpregado_Click(sender, e);
+            DetalhesEmpregado window = new DetalhesEmpregado(dataHandler, (Utilizador)empregados.SelectedItem);
+            window.Show();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

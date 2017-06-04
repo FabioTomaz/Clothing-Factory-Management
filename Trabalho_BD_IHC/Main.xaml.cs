@@ -59,11 +59,36 @@ namespace Trabalho_BD_IHC
 
             fillUserInfo();
             fillNotifications();
+            limitFunctions();
         }
 
         private void myFrame_ContentRendered(object sender, EventArgs e)
         {
             clientesFrame.NavigationUIVisibility = System.Windows.Navigation.NavigationUIVisibility.Hidden;
+        }
+
+        private void limitFunctions()
+        {
+            List<String> tipos = Utilizador.loggedUser.TiposUser;
+            if (!tipos.Contains("Gestor de Produção"))
+            {
+                tabControl.Items.Remove(producao);
+                tabControl.Items.Remove(materiais);
+            }
+            if (!tipos.Contains("Gestor de Vendas"))
+            {
+                tabControl.Items.Remove(encomendas);
+                tabControl.Items.Remove(clientes);
+            }
+            if (!tipos.Contains("Gestor da Empresa"))
+            {
+                tabControl.Items.Remove(empresa);
+                tabControl.Items.Remove(Fornecedores);
+            }
+            if(!tipos.Contains<String>("Gestor de Recursos Humanos"))
+            {
+                tabControl.Items.Remove(empregados);     
+            }
         }
 
         private void login() {
@@ -89,6 +114,12 @@ namespace Trabalho_BD_IHC
             faxFilial.Content = Utilizador.loggedUser.Filial.Fax;
             telefoneFilial.Content = Utilizador.loggedUser.Filial.Telefone;
             moradaFilial.Content = String.Format("{0} , {1}, {2}, porta nº{3}", Utilizador.loggedUser.Localizacao.Distrito, Utilizador.loggedUser.Localizacao.Localidade, Utilizador.loggedUser.Localizacao.Rua1, Utilizador.loggedUser.Localizacao.Porta);
+            String str = "";
+            for (int i=0; i<Utilizador.loggedUser.TiposUser.Count; i++)
+            {
+                str += " [" + Utilizador.loggedUser.TiposUser.ElementAt(i) + "] ";
+            }
+            funcoes.Content = str;
             if (Utilizador.loggedUser.Imagem != null) { 
                 var ms = new MemoryStream();
                 Utilizador.loggedUser.Imagem.Save(ms, ImageFormat.Png);

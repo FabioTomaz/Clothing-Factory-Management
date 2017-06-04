@@ -22,10 +22,20 @@ namespace Trabalho_BD_IHC
         private TimeSpan horaSaida;
         private filial filial;
         private List<String> tiposUser;
-        private string tipoUser;
         private Utilizador supervisor;
         private Image imagem;
+        private Boolean gestorProducao;
+        private Boolean gestorEmpresa;
+        private Boolean gestorVendas;
+        private Boolean gestorRecursosHumanos;
         public static Utilizador loggedUser;
+
+
+        public Utilizador()
+        {
+            this.tiposUser = new List<string>();
+        }
+
         public int NFuncionario
         {
             get
@@ -196,17 +206,5 @@ namespace Trabalho_BD_IHC
             }
         }
 
-        public string TipoUser
-        {
-            get
-            {
-                return tipoUser;
-            }
-
-            set
-            {
-                tipoUser = value;
-            }
-        }
     }
 }

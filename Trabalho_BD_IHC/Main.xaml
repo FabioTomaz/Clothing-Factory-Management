@@ -8,7 +8,7 @@
         xmlns:local="clr-namespace:Trabalho_BD_IHC"
         xmlns:wpfTool="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
         mc:Ignorable="d"
-        Title="Gestão de Produção, Stock e Venda" Height="600" MinHeight="500" Width="900" MinWidth="750" Icon="GPSV.png" WindowStartupLocation="CenterScreen" >
+        Title="Gestão de Produção, Stock e Venda" Height="600" MinHeight="500" Width="950" MinWidth="750" Icon="GPSV.png" WindowStartupLocation="CenterScreen" >
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -61,6 +61,7 @@
                                 <RowDefinition></RowDefinition>
                                 <RowDefinition></RowDefinition>
                                 <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
                             </Grid.RowDefinitions>
                             <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
                                 <Label Content="Nome: "></Label>
@@ -74,7 +75,7 @@
 
                             <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
                                 <Label Content="Telefone/Telemovel: "></Label>
-                                <Label Name="telefoneUtilizador" Content="Telefone: " Grid.Column="1" Grid.Row="1"></Label>
+                                <Label Name="telefoneUtilizador" Grid.Column="1" Grid.Row="1"></Label>
                             </StackPanel>
 
                             <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
@@ -101,7 +102,12 @@
                                 <Label Content="Nº do Supervisor: "></Label>
                                 <Label Name="supervisor"></Label>
                             </StackPanel>
-                            
+
+                            <StackPanel Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal">
+                                <Label Content="Funções: "></Label>
+                                <Label Name="funcoes"></Label>
+                            </StackPanel>
+
                         </Grid>
                     </GroupBox>
                     <GroupBox Header="Informações de Fábrica Filial" Style="{DynamicResource MaterialDesignCardGroupBox}" materialDesign:ColorZoneAssist.Mode="PrimaryMid" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="5" Grid.RowSpan="2">
@@ -191,25 +197,25 @@
                     </Grid>
                 </Grid>
             </TabItem>
-            <TabItem Name="clientes" Header="Clientes"  IsEnabled="True">
+            <TabItem Name="clientes" Header="Clientes">
                 <Frame Name="clientesFrame" NavigationUIVisibility="Hidden"></Frame>
             </TabItem>
-            <TabItem Name="encomendas" Header="Encomendas"  IsEnabled="True">
+            <TabItem Name="encomendas" Header="Encomendas">
                 <Frame Name="encomendasFrame" NavigationUIVisibility="Hidden"></Frame>
             </TabItem>
-            <TabItem Name="producao" Header="Produção"  IsEnabled="True">
+            <TabItem Name="producao" Header="Produção">
                 <Frame Name="produtosFrame" NavigationUIVisibility="Hidden"></Frame>
             </TabItem>
-            <TabItem Name="materiais" Header="Matérias Primas"  IsEnabled="True">
+            <TabItem Name="materiais" Header="Matérias Primas">
                 <Frame Name="materiaisFrame" NavigationUIVisibility="Hidden"></Frame>
             </TabItem>
             <TabItem Name="Fornecedores" Header="Fornecedores" >
                 <Frame Name="fornecedoresFrame" NavigationUIVisibility="Hidden"></Frame>
             </TabItem>
-            <TabItem Name="empresa" Header="Empresa"  IsEnabled="False">
+            <TabItem Name="empresa" Header="Empresa" >
                 <Frame Name="filiaisFrame" NavigationUIVisibility="Hidden"></Frame>
             </TabItem>
-            <TabItem Name="empregados" Header="Recursos Humanos" >
+            <TabItem Name="empregados" Header="Recursos Humanos">
                 <Frame Name="empregadosFrame" NavigationUIVisibility="Hidden"></Frame>
             </TabItem>
         </dragablz:TabablzControl>

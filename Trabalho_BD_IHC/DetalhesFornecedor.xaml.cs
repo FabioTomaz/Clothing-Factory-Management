@@ -46,8 +46,11 @@ namespace Trabalho_BD_IHC
 
         private void materiais_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            DetalhesMaterial window = new DetalhesMaterial(dataHandler, (MaterialTextil)materiais.SelectedItem);
-            window.Show();
+            if (materiais.SelectedItems.Count == 1 && Utilizador.loggedUser.TiposUser.Contains("Gestor de Produção"))
+            {
+                DetalhesMaterial window = new DetalhesMaterial(dataHandler, (MaterialTextil)materiais.SelectedItem);
+                window.Show();
+            }
         }
     }
 }

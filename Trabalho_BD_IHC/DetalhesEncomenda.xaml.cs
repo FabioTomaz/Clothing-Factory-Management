@@ -54,7 +54,7 @@ namespace Trabalho_BD_IHC
         private void produtos_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             
-            if (produtos.SelectedItems.Count == 1)
+            if (produtos.SelectedItems.Count == 1 && Utilizador.loggedUser.TiposUser.Contains("Gestor de Produção"))
             {
                 int referencia = (int)((ProdutoPersonalizado)produtos.SelectedItem).ProdutoBase.Referencia;
                 string tamanho = ((ProdutoPersonalizado)produtos.SelectedItem).Tamanho;

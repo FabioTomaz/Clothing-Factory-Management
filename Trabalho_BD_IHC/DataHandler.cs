@@ -1047,7 +1047,7 @@ namespace Trabalho_BD_IHC
                 utilizador.Password = reader["PASS"].ToString();
                 utilizador.Salario = Convert.ToDouble(reader["SALARIO"].ToString());
                 utilizador.Telemovel = reader["TELEFONEUSER"].ToString();
-                utilizador.TipoUser = reader["TIPO"].ToString();
+                utilizador.TiposUser.Add(reader["TIPO"].ToString());
                 utilizador.Localizacao = new Localizacao();
                 utilizador.Localizacao.CodigoPostal = reader["CODUSER1"].ToString() + "-" + reader["CODUSER2"].ToString();
                 utilizador.Localizacao.Distrito = reader["DISTRITOUSER"].ToString();
@@ -1073,6 +1073,7 @@ namespace Trabalho_BD_IHC
                     MemoryStream ms = new MemoryStream(img);
                     utilizador.Imagem = Image.FromStream(ms);
                 }
+                Console.WriteLine(utilizador.TiposUser);
             }
             reader.Close();
             this.closeSGBDConnection();

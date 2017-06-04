@@ -35,8 +35,8 @@ namespace Trabalho_BD_IHC
             txtSalario.Text = u.Salario.ToString();
             txtnFilial.Text = u.Filial.NFilial.ToString();
             txtSuper.Text = u.Supervisor.NFuncionario.ToString();
-            txtSaida.Value = DateTime.Parse(u.HoraSaida.ToString());
-            txtEntrada.Value = DateTime.Parse(u.HoraEntrada.ToString());
+            txtSaida.SelectedTime = DateTime.Parse(u.HoraSaida.ToString());
+            txtEntrada.SelectedTime = DateTime.Parse(u.HoraEntrada.ToString());
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)

@@ -54,7 +54,7 @@ namespace Trabalho_BD_IHC
 
         private void utilizadores_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (utilizadores.SelectedItems.Count == 1) { 
+            if (utilizadores.SelectedItems.Count == 1 && Utilizador.loggedUser.TiposUser.Contains("Gestor de Recursos Humanos")) { 
                DetalhesEmpregado window = new DetalhesEmpregado(dataHandler, (Utilizador)utilizadores.SelectedItem);
                window.Show();
             }
