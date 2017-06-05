@@ -114,7 +114,7 @@ namespace Trabalho_BD_IHC
             emailFilial.Content = Utilizador.loggedUser.Filial.Email;
             faxFilial.Content = Utilizador.loggedUser.Filial.Fax;
             telefoneFilial.Content = Utilizador.loggedUser.Filial.Telefone;
-            moradaFilial.Content = String.Format("{0} , {1}, {2}, porta nº{3}", Utilizador.loggedUser.Localizacao.Distrito, Utilizador.loggedUser.Localizacao.Localidade, Utilizador.loggedUser.Localizacao.Rua1, Utilizador.loggedUser.Localizacao.Porta);
+            moradaFilial.Content = String.Format("{0} , {1}, {2}, porta nº{3}", Utilizador.loggedUser.Filial.Localizacao.Distrito, Utilizador.loggedUser.Filial.Localizacao.Localidade, Utilizador.loggedUser.Filial.Localizacao.Rua1, Utilizador.loggedUser.Filial.Localizacao.Porta);
             String str = "";
             for (int i=0; i<Utilizador.loggedUser.TiposUser.Count; i++)
             {

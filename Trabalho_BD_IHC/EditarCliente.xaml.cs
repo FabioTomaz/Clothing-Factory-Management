@@ -64,7 +64,7 @@ namespace Trabalho_BD_IHC
         {
             Regex regex = new Regex("[^a-bA-B]+");
             if (txtNIF.Text.Trim().Length != 21 && txtNIB.Text.Trim().Length != 0)
-                throw new Exception("O NIB introduzido está tem um um nº de carateres errado.");
+                throw new Exception("O NIB introduzido tem um nº de carateres errado.");
             if (txtNIF.Text.Trim().Length != 9 && txtNIF.Text.Trim().Length != 0)
                 throw new Exception("O NIF introduzido está tem um nº de carateres errado.");
             try
