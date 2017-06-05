@@ -24,10 +24,14 @@ namespace Trabalho_BD_IHC
     public partial class ListarEncomendas : Page
     {
         private DataHandler dataHandler;
-        public ListarEncomendas(DataHandler dataHandler)
+        private ListarProdutos listarProdutos;
+        private MainWindow main;
+        public ListarEncomendas(DataHandler dataHandler, ListarProdutos listarProdutos, MainWindow main)
         {
             InitializeComponent();
             this.dataHandler = dataHandler;
+            this.listarProdutos = listarProdutos;
+            this.main = main;
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
@@ -94,6 +98,8 @@ namespace Trabalho_BD_IHC
             String resultado = dataHandler.entregarEncomenda(((Encomenda)encomendas.SelectedItem).NEncomenda);
             Xceed.Wpf.Toolkit.MessageBox.Show(resultado, "Resultado" ,MessageBoxButton.OK, MessageBoxImage.Information);
             this.refresh();
+            listarProdutos.refreshProdutosPersonalizados();
+            main.refresh();
         }
 
         public void refresh()

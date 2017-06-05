@@ -27,11 +27,13 @@ namespace Trabalho_BD_IHC
         private ProdutoPersonalizado prodPers;
         private ObservableCollection<MaterialTextil> mtProd;
         private int invalidMaterials;
-        public ProduzirProduto(DataHandler dataHandler, ProdutoPersonalizado prodPers)
+        private ListarMateriais listarMateriais;
+        public ProduzirProduto(DataHandler dataHandler, ProdutoPersonalizado prodPers, ListarMateriais listarMateriais)
         {
             InitializeComponent();
             this.dataHandler = dataHandler;
             this.prodPers = prodPers;
+            this.listarMateriais = listarMateriais;
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
@@ -140,6 +142,7 @@ namespace Trabalho_BD_IHC
         
         private void cancelar_Click(object sender, RoutedEventArgs e)
         {
+            listarMateriais.refresh();
             this.NavigationService.GoBack();
         }
 

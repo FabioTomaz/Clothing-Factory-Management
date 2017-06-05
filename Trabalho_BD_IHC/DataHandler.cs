@@ -959,14 +959,6 @@ namespace Trabalho_BD_IHC
                 prod.GestorProducao = new Utilizador();
                 prod.GestorProducao.NFuncionario = Convert.ToInt32(reader["N_FUNCIONARIO"].ToString());
                 prod.GestorProducao.Nome = reader["userName"].ToString();
-                try
-                {
-                    prod.Pic = (byte[])reader["IMAGEM_DESENHO"];
-                }
-                catch (InvalidCastException e)
-                {
-                    throw new InvalidCastException("Não foi possivel obter a imagem do desenho do produto base da base de dados.");
-                }
                 produtosBase.Add(prod);
             }
             reader.Close();

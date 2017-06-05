@@ -25,6 +25,7 @@ namespace Trabalho_BD_IHC
     {
         private DataHandler dataHandler;
         private int currentRow = 1;
+        private ListarMateriais listaMateriais;
         private ObservableCollection<MaterialTextil> materiaisSelecionados;
         public int CurrentRow
         {
@@ -38,10 +39,11 @@ namespace Trabalho_BD_IHC
             }
         }
 
-        public RegistarProduto(DataHandler dataHandler)
+        public RegistarProduto(DataHandler dataHandler, ListarMateriais listaMateriais)
         {
             InitializeComponent();
             this.dataHandler = dataHandler;
+            this.listaMateriais = listaMateriais;
             materiaisSelecionados = new ObservableCollection<MaterialTextil>();
         }
 
@@ -139,7 +141,7 @@ namespace Trabalho_BD_IHC
                 MessageBox.Show(ex.Message);
                 return;
             }
-            RegistarProdutoMateriais page = new RegistarProdutoMateriais(dataHandler, prodPers);
+            RegistarProdutoMateriais page = new RegistarProdutoMateriais(dataHandler, prodPers, listaMateriais);
             this.NavigationService.Navigate(page);
         }
 
@@ -152,7 +154,7 @@ namespace Trabalho_BD_IHC
             }
             else
             {
-                ListarProdutos lp = new ListarProdutos(dataHandler);
+                ListarProdutos lp = new ListarProdutos(dataHandler, listaMateriais);
                 ObservableCollection<ProdutoBase> prodBase = dataHandler.getProdutosBaseFromDB();
                 cbProdBase.ItemsSource = prodBase;
                 if (prodBase.Count > 0)

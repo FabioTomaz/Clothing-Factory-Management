@@ -23,11 +23,13 @@ namespace Trabalho_BD_IHC
     /// </summary>
     public partial class ListarProdutos : Page
     {
-        DataHandler dataHandler;
-        public ListarProdutos(DataHandler dataHadler)
+        private DataHandler dataHandler;
+        private ListarMateriais listarMateriais;
+        public ListarProdutos(DataHandler dataHadler, ListarMateriais listarMateriais)
         {
             InitializeComponent();
             this.dataHandler = dataHadler;
+            this.listarMateriais = listarMateriais;
         }
 
         private void Page_Load(object sender, RoutedEventArgs e)
@@ -59,19 +61,19 @@ namespace Trabalho_BD_IHC
         }
         private void EditarProdutoBase_click(object sender, RoutedEventArgs e)
         {
-            EditarProdutoBase page = new EditarProdutoBase(dataHandler, (ProdutoBase)produtosBaseLista.SelectedItem);
+            EditarProdutoBase page = new EditarProdutoBase(dataHandler, (int)((ProdutoBase)produtosBaseLista.SelectedItem).Referencia);
             this.NavigationService.Navigate(page);
         }
 
         private void registarProdutoPers_click(object sender, RoutedEventArgs e)
         {
-            RegistarProduto page = new RegistarProduto(dataHandler);
+            RegistarProduto page = new RegistarProduto(dataHandler, listarMateriais);
             NavigationService.Navigate(page);
         }
 
         private void ProduzirProdutoPers_click(object sender, RoutedEventArgs e)
         {
-            ProduzirProduto page = new ProduzirProduto(dataHandler, (ProdutoPersonalizado)produtosPersonalizadosLista.SelectedItem);
+            ProduzirProduto page = new ProduzirProduto(dataHandler, (ProdutoPersonalizado)produtosPersonalizadosLista.SelectedItem, listarMateriais);
             this.NavigationService.Navigate(page);
         }
 

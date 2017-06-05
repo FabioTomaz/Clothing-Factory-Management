@@ -43,8 +43,8 @@ namespace Trabalho_BD_IHC
 
             listarClientes = new ListarClientes(dataHandler);
             listarMateriais = new ListarMateriais(dataHandler);
-            listarProdutos = new ListarProdutos(dataHandler);
-            listarEncomendas = new ListarEncomendas(dataHandler);
+            listarProdutos = new ListarProdutos(dataHandler, listarMateriais);
+            listarEncomendas = new ListarEncomendas(dataHandler, listarProdutos, this);
             listarEmpregados = new ListarEmpregados(dataHandler, this);
             listarFornecedores = new ListarFornecedores(dataHandler);
             listarFiliais = new ListarFiliais(dataHandler);
@@ -218,18 +218,14 @@ namespace Trabalho_BD_IHC
 
         private void tabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(e.Source is Dragablz.TabablzControl) {
-                Dragablz.TabablzControl tabItem = (Dragablz.TabablzControl)e.Source;
-                string nome = ((TabItem)tabItem.SelectedItem).Name;
-                if(nome.Equals("conta"))
-                    this.refresh();
-                else if (nome.Equals("producao")) {
-                    listarProdutos.refreshProdutosBase();
-                    listarProdutos.refreshProdutosPersonalizados();
-                }
-                else if(nome.Equals("materiais"))
-                    listarMateriais.refresh();
-            }
+            //if(e.Source is Dragablz.TabablzControl) {
+            //    Dragablz.TabablzControl tabItem = (Dragablz.TabablzControl)e.Source;
+            //    string nome = ((TabItem)tabItem.SelectedItem).Name;
+            //    if(nome.Equals("conta"))
+            //        this.refresh();
+            //    else if(nome.Equals("materiais"))
+            //        listarMateriais.refresh();
+            //}
         }
 
         private void MudarPass_Click_2(object sender, RoutedEventArgs e)

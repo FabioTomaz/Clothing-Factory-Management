@@ -25,6 +25,7 @@ namespace Trabalho_BD_IHC
     {
         private DataHandler dataHandler;
         private int currentRow = 1;
+        private ListarMateriais listarMateriais;
         private ObservableCollection<MaterialTextil> materiaisSelecionados;
         private ProdutoPersonalizado prod;
         public int CurrentRow
@@ -46,11 +47,12 @@ namespace Trabalho_BD_IHC
             materiaisView.ItemsSource = dataHandler.getMateriaisFromDB();
         }
 
-        public RegistarProdutoMateriais(DataHandler dataHandler, ProdutoPersonalizado prod)
+        public RegistarProdutoMateriais(DataHandler dataHandler, ProdutoPersonalizado prod, ListarMateriais listarMateriais)
         {
             InitializeComponent();
             this.dataHandler = dataHandler;
             this.prod = prod;
+            this.listarMateriais = listarMateriais;
             materiaisSelecionados = new ObservableCollection<MaterialTextil>();
         }
 
@@ -61,7 +63,7 @@ namespace Trabalho_BD_IHC
             if (Xceed.Wpf.Toolkit.MessageBox.Show("Tem a certeza que deseja cancelar o registo do produto? Perderá todos os dados que tenha introduzido",
                  "", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {//sim
-                ListarProdutos page = new ListarProdutos(dataHandler);
+                ListarProdutos page = new ListarProdutos(dataHandler, listarMateriais);
                 this.NavigationService.Navigate(page);
             }
         }
@@ -104,7 +106,7 @@ namespace Trabalho_BD_IHC
                 return;
             }
             Xceed.Wpf.Toolkit.MessageBox.Show("Produto registado com sucesso!", "", MessageBoxButton.OK, MessageBoxImage.Information);
-            ListarProdutos page = new ListarProdutos(dataHandler);
+            ListarProdutos page = new ListarProdutos(dataHandler, listarMateriais);
             this.NavigationService.Navigate(page);
         }
 

@@ -25,11 +25,11 @@ namespace Trabalho_BD_IHC
     {
         DataHandler dataHandler;
         ProdutoBase ProdutoBase;
-        public EditarProdutoBase(DataHandler dataHandler, ProdutoBase ProdutoBase)
+        public EditarProdutoBase(DataHandler dataHandler, int refProdutoBase)
         {
             InitializeComponent();
             this.dataHandler = dataHandler;
-            this.ProdutoBase = ProdutoBase;
+            this.ProdutoBase = dataHandler.getProdutoBaseFromDBWithRef(refProdutoBase);
             refProduto.Content = ProdutoBase.Referencia;
             txtNomeModelo.Text = ProdutoBase.Nome;
             txtIva.Value = ProdutoBase.IVA1;
