@@ -2494,7 +2494,7 @@ namespace Trabalho_BD_IHC
             return user;
         }
 
-        public ObservableCollection<Utilizador> searchEmpregadosInDB(string nome)
+        public ObservableCollection<Utilizador> getEmpregadosInDBnome(string nome)
         {
             if (!this.verifySGBDConnection())
                 return null;
@@ -2556,6 +2556,130 @@ namespace Trabalho_BD_IHC
             return user;
         }
 
+
+        public ObservableCollection<Utilizador> getEmpregadosInDBnFil(int nFil)
+        {
+            if (!this.verifySGBDConnection())
+                return null;
+
+            SqlCommand cmd = new SqlCommand("SELECT N_FUNCIONARIO, NOME, EMAIL, TELEFONE, RUA, N_PORTA, "
+                + "DISTRITO, LOCALIDADE, SALARIO, N_FABRICA, HORA_ENTRADA, HORA_SAIDA, UTILIZADOR.CODPOSTAL1 as cod1, "
+                + " UTILIZADOR.CODPOSTAL2 as cod2, IMAGEM, N_FUNCIONARIO_SUPER FROM UTILIZADOR JOIN ZONA ON "
+                + "(ZONA.CODPOSTAL1 = UTILIZADOR.CODPOSTAL1 AND ZONA.CODPOSTAL2 = UTILIZADOR.CODPOSTAL2) "
+                + "WHERE N_FABRICA = @nFil;", this.Cn);
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@nFil", nFil);
+            SqlDataReader reader = cmd.ExecuteReader();
+            ObservableCollection<Utilizador> user = new ObservableCollection<Utilizador>();
+            while (reader.Read())
+            {
+                Utilizador u = new Utilizador();
+                u.Localizacao = new Localizacao();
+                u.NFuncionario = Convert.ToInt32(reader["N_FUNCIONARIO"].ToString());
+                u.Nome = reader["NOME"].ToString();
+                u.Email = reader["EMAIL"].ToString();
+                u.Telemovel = reader["TELEFONE"].ToString();
+                u.Salario = Convert.ToDouble(reader["SALARIO"].ToString());
+                u.HoraEntrada = TimeSpan.Parse(reader["HORA_ENTRADA"].ToString());
+                u.HoraSaida = TimeSpan.Parse(reader["HORA_SAIDA"].ToString());
+
+                u.Filial = new filial();
+                u.Filial.NFilial = Convert.ToInt32(reader["N_FABRICA"].ToString());
+                u.Supervisor = new Utilizador();
+                u.Supervisor.NFuncionario = Convert.ToInt32(reader["N_FUNCIONARIO_SUPER"].ToString());
+                u.Localizacao.CodigoPostal = reader["cod1"].ToString() + "-" + reader["cod2"].ToString();
+                u.Localizacao.Rua1 = reader["RUA"].ToString();
+                u.Localizacao.Porta = Convert.ToInt32(reader["N_PORTA"].ToString());
+                u.Localizacao.Distrito = reader["DISTRITO"].ToString();
+                u.Localizacao.Localidade = reader["LOCALIDADE"].ToString();
+
+                byte[] img = null;
+                try
+                {
+                    img = (byte[])reader["IMAGEM"];
+                }
+                catch (InvalidCastException e)
+                {
+
+                }
+                if (img != null)
+                {
+                    MemoryStream ms = new MemoryStream(img);
+                    u.Imagem = Image.FromStream(ms);
+                }
+                user.Add(u);
+            }
+            reader.Close();
+
+            foreach (Utilizador u in user)
+            {
+                u.TiposUser = this.getUserTypesFromDB(u.NFuncionario);
+            }
+            this.closeSGBDConnection();
+            return user;
+        }
+
+        public ObservableCollection<Utilizador> getEmpregadosInDBnEmp(int nEmp)
+        {
+            if (!this.verifySGBDConnection())
+                return null;
+
+            SqlCommand cmd = new SqlCommand("SELECT N_FUNCIONARIO, NOME, EMAIL, TELEFONE, RUA, N_PORTA, "
+                + "DISTRITO, LOCALIDADE, SALARIO, N_FABRICA, HORA_ENTRADA, HORA_SAIDA, UTILIZADOR.CODPOSTAL1 as cod1, "
+                + " UTILIZADOR.CODPOSTAL2 as cod2, IMAGEM, N_FUNCIONARIO_SUPER FROM UTILIZADOR JOIN ZONA ON "
+                + "(ZONA.CODPOSTAL1 = UTILIZADOR.CODPOSTAL1 AND ZONA.CODPOSTAL2 = UTILIZADOR.CODPOSTAL2) "
+                + "WHERE N_FUNCIONARIO = @nEmp;", this.Cn);
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@nEmp", nEmp);
+            SqlDataReader reader = cmd.ExecuteReader();
+            ObservableCollection<Utilizador> user = new ObservableCollection<Utilizador>();
+            while (reader.Read())
+            {
+                Utilizador u = new Utilizador();
+                u.Localizacao = new Localizacao();
+                u.NFuncionario = Convert.ToInt32(reader["N_FUNCIONARIO"].ToString());
+                u.Nome = reader["NOME"].ToString();
+                u.Email = reader["EMAIL"].ToString();
+                u.Telemovel = reader["TELEFONE"].ToString();
+                u.Salario = Convert.ToDouble(reader["SALARIO"].ToString());
+                u.HoraEntrada = TimeSpan.Parse(reader["HORA_ENTRADA"].ToString());
+                u.HoraSaida = TimeSpan.Parse(reader["HORA_SAIDA"].ToString());
+
+                u.Filial = new filial();
+                u.Filial.NFilial = Convert.ToInt32(reader["N_FABRICA"].ToString());
+                u.Supervisor = new Utilizador();
+                u.Supervisor.NFuncionario = Convert.ToInt32(reader["N_FUNCIONARIO_SUPER"].ToString());
+                u.Localizacao.CodigoPostal = reader["cod1"].ToString() + "-" + reader["cod2"].ToString();
+                u.Localizacao.Rua1 = reader["RUA"].ToString();
+                u.Localizacao.Porta = Convert.ToInt32(reader["N_PORTA"].ToString());
+                u.Localizacao.Distrito = reader["DISTRITO"].ToString();
+                u.Localizacao.Localidade = reader["LOCALIDADE"].ToString();
+
+                byte[] img = null;
+                try
+                {
+                    img = (byte[])reader["IMAGEM"];
+                }
+                catch (InvalidCastException e)
+                {
+
+                }
+                if (img != null)
+                {
+                    MemoryStream ms = new MemoryStream(img);
+                    u.Imagem = Image.FromStream(ms);
+                }
+                user.Add(u);
+            }
+            reader.Close();
+
+            foreach (Utilizador u in user)
+            {
+                u.TiposUser = this.getUserTypesFromDB(u.NFuncionario);
+            }
+            this.closeSGBDConnection();
+            return user;
+        }
 
         public List<string> getUserTypesFromDB(int nFunc)
         {

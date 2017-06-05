@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data.SqlClient;
+using System.Text.RegularExpressions;
 
 namespace Trabalho_BD_IHC
 {
@@ -84,7 +85,19 @@ namespace Trabalho_BD_IHC
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
-            empregados.ItemsSource = dataHandler.searchEmpregadosInDB(txtnameSearch.Text);
+            if (nome.IsChecked == true)
+                empregados.ItemsSource = dataHandler.getEmpregadosInDBnome(txtInput.Text);
+            else if (nFil.IsChecked == true)
+            {
+                if (!string.IsNullOrEmpty(txtInput.Text) && Regex.IsMatch(txtInput.Text, @"^\d+$"))
+                    empregados.ItemsSource = dataHandler.getEmpregadosInDBnFil(Convert.ToInt32(txtInput.Text));
+            }
+            else if (nEmpr.IsChecked == true)
+            {
+                if (!string.IsNullOrEmpty(txtInput.Text) && Regex.IsMatch(txtInput.Text, @"^\d+$"))
+                    empregados.ItemsSource = dataHandler.getEmpregadosInDBnEmp(Convert.ToInt32(txtInput.Text));
+            }
+
         }
 
         private void txtsearchCl_KeyUp(object sender, KeyEventArgs e)
@@ -100,9 +113,27 @@ namespace Trabalho_BD_IHC
             window.Show();
         }
 
+        private void pesquisaFil_Checked(object sender, RoutedEventArgs e)
+        {
+            txtInput.Text = "";
+            txtInput.SetValue(MaterialDesignThemes.Wpf.HintAssist.HintProperty, "Pesquisar Por Nº Filial");
+        }
+
+        private void pesquisaNome_Checked(object sender, RoutedEventArgs e)
+        {
+            txtInput.Text = "";
+            txtInput.SetValue(MaterialDesignThemes.Wpf.HintAssist.HintProperty, "Pesquisar Por Nome do empregado");
+        }
+
+        private void pesquisaNEmp_Checked(object sender, RoutedEventArgs e)
+        {
+            txtInput.Text = "";
+            txtInput.SetValue(MaterialDesignThemes.Wpf.HintAssist.HintProperty, "Pesquisar Por Nº do empregado");
+        }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            txtnameSearch.Text = "";
+            txtInput.Text = "";
             this.refresh();
         }
     }
