@@ -112,9 +112,8 @@
                 <DataGrid  Name="produtosEncomenda" CanUserAddRows="False" Grid.Row="4" Grid.ColumnSpan="5" ItemsSource="{Binding ProdutoPersonalizado}" AutoGenerateColumns="False" SelectionChanged="produtosEncomenda_SelectionChanged">
                     <DataGrid.Columns>
                         <materialDesign:MaterialDataGridTextColumn Binding="{Binding ProdutoBase.Referencia}" Header="Referencia" ></materialDesign:MaterialDataGridTextColumn>
-                        <materialDesign:MaterialDataGridTextColumn Binding="{Binding Tamanho}" Header="Tamanho" ></materialDesign:MaterialDataGridTextColumn>
-                        <materialDesign:MaterialDataGridTextColumn Binding="{Binding Cor}" Header="Cor" ></materialDesign:MaterialDataGridTextColumn>
                         <materialDesign:MaterialDataGridTextColumn Binding="{Binding ID}" Header="Modelo" ></materialDesign:MaterialDataGridTextColumn>
+                        <materialDesign:MaterialDataGridTextColumn Binding="{Binding Tamanho}" Header="Tamanho" ></materialDesign:MaterialDataGridTextColumn>
                         <materialDesign:MaterialDataGridTextColumn Binding="{Binding Quantidade}" Header="Quantidade" ></materialDesign:MaterialDataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>

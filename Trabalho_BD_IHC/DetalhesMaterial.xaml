@@ -130,9 +130,9 @@
         <GroupBox Header="Produtos que usam este material" Grid.Column="1" Grid.ColumnSpan="7" Grid.Row="5" >
             <DataGrid Name="produtos" IsReadOnly="True" AutoGenerateColumns="False" MouseDoubleClick="produtos_MouseDoubleClick">
                 <DataGrid.Columns>
-                    <materialDesign:MaterialDataGridTextColumn Binding="{Binding Tamanho}" Header="Tamanho" ></materialDesign:MaterialDataGridTextColumn>
-                    <materialDesign:MaterialDataGridTextColumn Binding="{Binding Cor}" Header="Cor" ></materialDesign:MaterialDataGridTextColumn>
-                    <materialDesign:MaterialDataGridTextColumn Binding="{Binding ID}" Header="ID" ></materialDesign:MaterialDataGridTextColumn>
+                    <materialDesign:MaterialDataGridTextColumn Binding="{Binding ProdutoBase.Referencia}" Header="Referencia do Produto" ></materialDesign:MaterialDataGridTextColumn>
+                    <materialDesign:MaterialDataGridTextColumn Binding="{Binding ID}" Header="Modelo do Produto" ></materialDesign:MaterialDataGridTextColumn>
+                    <materialDesign:MaterialDataGridTextColumn Binding="{Binding Tamanho}" Header="Tamanho do Produto" ></materialDesign:MaterialDataGridTextColumn>
                     <materialDesign:MaterialDataGridTextColumn Binding="{Binding Quantidade}" Header="Quantidade Necessária" ></materialDesign:MaterialDataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>

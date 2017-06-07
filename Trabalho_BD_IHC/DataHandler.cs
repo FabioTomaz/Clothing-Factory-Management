@@ -33,8 +33,7 @@ namespace Trabalho_BD_IHC
         }
         private SqlConnection getSGBDConnection()
         {
-            return new SqlConnection("data source=tcp: 193.136.175.33\\SQLSERVER2012,8293; initial catalog=p4g3;"
-                + " User ID=p4g3; Password=fabiobruno;");
+            return new SqlConnection("data source=localhost;integrated security=true;initial catalog=GESTAO-FABRICA-VESTUARIO-LABORAL");
         }
         /*db-->> data source=tcp: 193.136.175.33\\SQLSERVER2012,8293; initial catalog=p4g3;"
                 + " User ID=p4g3; Password=fabiobruno;*/
@@ -194,11 +193,10 @@ namespace Trabalho_BD_IHC
         {
             verifySGBDConnection();
             ObservableCollection<MaterialTextil> result = new ObservableCollection<MaterialTextil>();
-            SqlCommand cmd = new SqlCommand("select * from dbo.getMateriaisFromProdutoPersonalizado(@ref, @tam, @cor, @id);", cn);
+            SqlCommand cmd = new SqlCommand("select * from dbo.getMateriaisFromProdutoPersonalizado(@ref, @tam, @id);", cn);
             cmd.Parameters.Clear();
             cmd.Parameters.AddWithValue("@ref", prod.ProdutoBase.Referencia);
             cmd.Parameters.AddWithValue("@tam", prod.Tamanho);
-            cmd.Parameters.AddWithValue("@cor", prod.Cor);
             cmd.Parameters.AddWithValue("@id", prod.ID);
             SqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
@@ -579,7 +577,6 @@ namespace Trabalho_BD_IHC
                                 + " JOIN CONTEUDO_ENCOMENDA ON CONTEUDO_ENCOMENDA.N_ENCOMENDA=ENCOMENDA.N_ENCOMENDA"
                                 + " JOIN [PRODUTO-PERSONALIZADO] ON CONTEUDO_ENCOMENDA.REFERENCIA_PRODUTO=[PRODUTO-PERSONALIZADO].REFERENCIA"
                                 + " AND CONTEUDO_ENCOMENDA.TAMANHO_PRODUTO = [PRODUTO-PERSONALIZADO].TAMANHO "
-                                + " AND CONTEUDO_ENCOMENDA.COR_PRODUTO = [PRODUTO-PERSONALIZADO].COR"
                                 + " AND CONTEUDO_ENCOMENDA.ID_PRODUTO = [PRODUTO-PERSONALIZADO].ID"
                                 + " JOIN ESTADO ON ENCOMENDA.ESTADO=ESTADO.ID"
                                 + " JOIN [LOCAIS-ENTREGA-ENCOMENDA] ON ENCOMENDA.LOCALENTREGA=[LOCAIS-ENTREGA-ENCOMENDA].ID"
@@ -619,7 +616,6 @@ namespace Trabalho_BD_IHC
                                 + " JOIN CONTEUDO_ENCOMENDA ON CONTEUDO_ENCOMENDA.N_ENCOMENDA=ENCOMENDA.N_ENCOMENDA"
                                 + " JOIN [PRODUTO-PERSONALIZADO] ON CONTEUDO_ENCOMENDA.REFERENCIA_PRODUTO=[PRODUTO-PERSONALIZADO].REFERENCIA"
                                 + " AND CONTEUDO_ENCOMENDA.TAMANHO_PRODUTO = [PRODUTO-PERSONALIZADO].TAMANHO "
-                                + " AND CONTEUDO_ENCOMENDA.COR_PRODUTO = [PRODUTO-PERSONALIZADO].COR"
                                 + " AND CONTEUDO_ENCOMENDA.ID_PRODUTO = [PRODUTO-PERSONALIZADO].ID"
                                 + " JOIN ESTADO ON ENCOMENDA.ESTADO=ESTADO.ID"
                                 + " JOIN UTILIZADOR ON UTILIZADOR.N_FUNCIONARIO=N_GESTOR_VENDA"
@@ -772,7 +768,7 @@ namespace Trabalho_BD_IHC
         {
             if (!this.verifySGBDConnection())
                 return null;
-            SqlCommand cmd = new SqlCommand("SELECT [PRODUTO-BASE].REFERENCIA, TAMANHO, COR, ID, N_ETIQUETA, PRECO, UNIDADES_ARMAZEM "
+            SqlCommand cmd = new SqlCommand("SELECT [PRODUTO-BASE].REFERENCIA, TAMANHO, ID, PRECO, UNIDADES_ARMAZEM "
                             + "FROM [PRODUTO-BASE] JOIN [PRODUTO-PERSONALIZADO] ON [PRODUTO-PERSONALIZADO].REFERENCIA=[PRODUTO-BASE].REFERENCIA"
                             + " WHERE [PRODUTO-BASE].REFERENCIA=@REFERENCIA;"
                             , cn);
@@ -785,11 +781,9 @@ namespace Trabalho_BD_IHC
                 ProdutoPersonalizado prod = new ProdutoPersonalizado();
                 prod.ProdutoBase.Referencia = Convert.ToInt32(reader["REFERENCIA"].ToString());
                 prod.Tamanho = reader["TAMANHO"].ToString();
-                prod.Cor = reader["COR"].ToString();
                 prod.ID = Convert.ToInt32(reader["ID"].ToString());
                 prod.Preco = Convert.ToDouble(reader["PRECO"].ToString());
                 prod.UnidadesStock = Convert.ToInt32(reader["UNIDADES_ARMAZEM"].ToString());
-                prod.Etiqueta.Numero = Convert.ToInt32(reader["N_ETIQUETA"].ToString());
                 produtosPers.Add(prod);
             }
             reader.Close();
@@ -907,26 +901,28 @@ namespace Trabalho_BD_IHC
             }
         }
 
-        public ProdutoPersonalizado getProdutoPersonalizadoFromDB(int referencia, String tamanho, String cor, int id)
+        public ProdutoPersonalizado getProdutoPersonalizadoFromDB(int referencia, String tamanho, int id)
         {
             if (!this.verifySGBDConnection())
                 return null;
 
-            SqlCommand cmd = new SqlCommand("SELECT PRECO, UNIDADES_ARMAZEM, ETIQUETA.N_ETIQUETA, NORMAS, PAIS_FABRICO, COMPOSICAO "
-                            + " FROM [PRODUTO-PERSONALIZADO] JOIN [ETIQUETA] ON [PRODUTO-PERSONALIZADO].N_ETIQUETA=[ETIQUETA].N_ETIQUETA"
-                            + " WHERE [PRODUTO-PERSONALIZADO].REFERENCIA=@REFERENCIA AND [PRODUTO-PERSONALIZADO].TAMANHO=@TAMANHO AND [PRODUTO-PERSONALIZADO].COR=@COR AND [PRODUTO-PERSONALIZADO].ID=@ID;"
+            SqlCommand cmd = new SqlCommand("SELECT PRECO, COR, UNIDADES_ARMAZEM, COR,ETIQUETA.N_ETIQUETA, NORMAS, PAIS_FABRICO, COMPOSICAO "
+                            + " FROM [PRODUTO-PERSONALIZADO]"
+                            + " JOIN [PRODUTO-PERSONALIZADO-DETALHES] ON [PRODUTO-PERSONALIZADO-DETALHES].REFERENCIA=[PRODUTO-PERSONALIZADO].REFERENCIA"
+                            + " AND [PRODUTO-PERSONALIZADO-DETALHES].ID =[PRODUTO-PERSONALIZADO].ID"
+                            + " JOIN[ETIQUETA] ON [PRODUTO-PERSONALIZADO-DETALHES].N_ETIQUETA =[ETIQUETA].N_ETIQUETA"
+                            + " WHERE [PRODUTO-PERSONALIZADO].REFERENCIA=@REFERENCIA AND [PRODUTO-PERSONALIZADO].TAMANHO=@TAMANHO AND [PRODUTO-PERSONALIZADO].ID=@ID"          
                             , cn);
             cmd.Parameters.Clear();
             cmd.Parameters.AddWithValue("@REFERENCIA", referencia);
             cmd.Parameters.AddWithValue("@TAMANHO", tamanho);
-            cmd.Parameters.AddWithValue("@COR", cor);
             cmd.Parameters.AddWithValue("@ID", id);
             SqlDataReader reader = cmd.ExecuteReader();
             reader.Read();
             ProdutoPersonalizado prod = new ProdutoPersonalizado();
             prod.ProdutoBase.Referencia = referencia;
             prod.Tamanho = tamanho;
-            prod.Cor = cor;
+            prod.Cor = reader["COR"].ToString(); ;
             prod.ID = id;
             prod.Preco = Convert.ToDouble(reader["PRECO"].ToString());
             prod.UnidadesStock = Convert.ToInt32(reader["UNIDADES_ARMAZEM"].ToString());
@@ -1499,10 +1495,9 @@ namespace Trabalho_BD_IHC
                 values.Parameters.AddWithValue("@ENCOMENDA", nencomenda);
                 values.Parameters.AddWithValue("@REFERENCIA", referencia);
                 values.Parameters.AddWithValue("@TAMANHO", tamanho);
-                values.Parameters.AddWithValue("@COR", cor);
                 values.Parameters.AddWithValue("@ID", id);
                 values.Parameters.AddWithValue("@QUANTIDADE", quantidade);
-                values.CommandText = "INSERT INTO [CONTEUDO_ENCOMENDA](N_ENCOMENDA, REFERENCIA_PRODUTO, TAMANHO_PRODUTO, COR_PRODUTO, ID_PRODUTO,QUANTIDADE) VALUES(@ENCOMENDA, @REFERENCIA, @TAMANHO, @COR, @ID,@QUANTIDADE)";
+                values.CommandText = "INSERT INTO [CONTEUDO_ENCOMENDA](N_ENCOMENDA, REFERENCIA_PRODUTO, TAMANHO_PRODUTO, ID_PRODUTO,QUANTIDADE) VALUES(@ENCOMENDA, @REFERENCIA, @TAMANHO, @ID,@QUANTIDADE)";
                 values.Connection = this.Cn;
                 try
                 {
@@ -3043,16 +3038,15 @@ namespace Trabalho_BD_IHC
             return m;
         }
 
-        public ObservableCollection<MaterialTextil> materiaisProduto(int referencia, String tamanho, String cor, int id, int qtProd)
+        public ObservableCollection<MaterialTextil> materiaisProduto(int referencia, String tamanho, int id, int qtProd)
         {
             ObservableCollection<MaterialTextil> mt = new ObservableCollection<MaterialTextil>();
             if (!this.verifySGBDConnection())
                 return mt;
-            SqlCommand cmd = new SqlCommand("SELECT * FROM dbo.getProductMaterials(@ref, @tamanho, @cor, @id);", this.Cn);
+            SqlCommand cmd = new SqlCommand("SELECT * FROM dbo.getProductMaterials(@ref, @tamanho, @id);", this.Cn);
             cmd.Parameters.Clear();
             cmd.Parameters.AddWithValue("@ref", referencia);
             cmd.Parameters.AddWithValue("@tamanho", tamanho);
-            cmd.Parameters.AddWithValue("@cor", cor);
             cmd.Parameters.AddWithValue("@id", id);
             SqlDataReader reader = cmd.ExecuteReader();
 
@@ -3090,7 +3084,6 @@ namespace Trabalho_BD_IHC
                 prod.ProdutoBase = new ProdutoBase();
                 prod.ProdutoBase.Referencia = Convert.ToInt32(reader["REFERENCIA"].ToString());
                 prod.Tamanho = reader["TAMANHO"].ToString();
-                prod.Cor = reader["COR"].ToString();
                 prod.ID = Convert.ToInt32(reader["ID"].ToString());
                 prod.Quantidade = Convert.ToInt32(reader["QUANTIDADE"].ToString());
                 produtos.Add(prod);
@@ -3105,11 +3098,10 @@ namespace Trabalho_BD_IHC
                 return false;
 
             SqlCommand cmd = new SqlCommand("DECLARE @validation INT; EXEC dbo.produzirProduto @ref, "
-                + "@tamanho, @cor, @id, @qtd, @validation OUTPUT; SELECT @validation", this.Cn);
+                + "@tamanho, @id, @qtd, @validation OUTPUT; SELECT @validation", this.Cn);
 
             cmd.Parameters.AddWithValue("@ref", prodPers.ProdutoBase.Referencia);
             cmd.Parameters.AddWithValue("@tamanho", prodPers.Tamanho);
-            cmd.Parameters.AddWithValue("@cor", prodPers.Cor);
             cmd.Parameters.AddWithValue("@id", prodPers.ID);
             cmd.Parameters.AddWithValue("@qtd", qtd);
             int retVal = Convert.ToInt32(cmd.ExecuteScalar());
@@ -3128,12 +3120,15 @@ namespace Trabalho_BD_IHC
         public ObservableCollection<ProdutoPersonalizado> getProdutosPers()
         {
             verifySGBDConnection();
-            SqlCommand cmd = new SqlCommand("SELECT TAMANHO, COR, ID, PRECO, UNIDADES_ARMAZEM, "
-                + "[PRODUTO-PERSONALIZADO].REFERENCIA, [PRODUTO-BASE].NOME as nomeBase, DATA_ALTERACAO, "
-                + "INSTRUCOES_PRODUCAO, IVA, PAIS_FABRICO, [PRODUTO-PERSONALIZADO].N_ETIQUETA, NORMAS, "
-                + "PAIS_FABRICO, COMPOSICAO FROM[PRODUTO-PERSONALIZADO] JOIN[PRODUTO-BASE] ON "
-                + "[PRODUTO-PERSONALIZADO].REFERENCIA = [PRODUTO-BASE].REFERENCIA JOIN "
-                + "ETIQUETA ON ETIQUETA.N_ETIQUETA = [PRODUTO-PERSONALIZADO].N_ETIQUETA; "
+            SqlCommand cmd = new SqlCommand("SELECT TAMANHO, COR, [PRODUTO-PERSONALIZADO].ID, PRECO, UNIDADES_ARMAZEM,"
+                + " [PRODUTO-PERSONALIZADO].REFERENCIA, [PRODUTO-BASE].NOME as nomeBase, DATA_ALTERACAO,"
+                + " INSTRUCOES_PRODUCAO, IVA, PAIS_FABRICO, [PRODUTO-PERSONALIZADO-DETALHES].N_ETIQUETA, NORMAS,"
+                + " PAIS_FABRICO, COMPOSICAO "
+                + " FROM [PRODUTO-PERSONALIZADO]"
+                + " JOIN [PRODUTO-BASE] ON [PRODUTO-BASE].REFERENCIA=[PRODUTO-PERSONALIZADO].REFERENCIA"
+                + " JOIN [PRODUTO-PERSONALIZADO-DETALHES] ON [PRODUTO-PERSONALIZADO-DETALHES].REFERENCIA=[PRODUTO-PERSONALIZADO].REFERENCIA"
+                + " AND [PRODUTO-PERSONALIZADO-DETALHES].ID =[PRODUTO-PERSONALIZADO].ID"
+                + " JOIN ETIQUETA ON [PRODUTO-PERSONALIZADO-DETALHES].N_ETIQUETA = ETIQUETA.N_ETIQUETA"
                 , this.Cn);
             SqlDataReader reader = cmd.ExecuteReader();
             ObservableCollection<ProdutoPersonalizado> produtoPers = new ObservableCollection<ProdutoPersonalizado>();

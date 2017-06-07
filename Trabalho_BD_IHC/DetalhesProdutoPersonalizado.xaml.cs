@@ -21,15 +21,16 @@ namespace Trabalho_BD_IHC
     {
         private DataHandler dataHandler;
         private ProdutoPersonalizado prod;
-        public DetalhesProdutoPersonalizado(DataHandler dataHandler, int referencia, string tamanho, string cor, int id)
+        public DetalhesProdutoPersonalizado(DataHandler dataHandler, int referencia, string tamanho, int id)
         {
             InitializeComponent();
             this.dataHandler=dataHandler;
             prod = new ProdutoPersonalizado();
-            prod = dataHandler.getProdutoPersonalizadoFromDB(referencia, tamanho, cor, id);
+            prod = dataHandler.getProdutoPersonalizadoFromDB(referencia, tamanho, id);
             refProduto.Text = prod.ProdutoBase.Referencia.ToString();
             tamanhoProduto.Text = prod.Tamanho;
-            corProduto.Text = prod.Cor;
+            corProduto.Content = prod.Cor;
+            corProduto.Background= new SolidColorBrush((Color)ColorConverter.ConvertFromString(prod.Cor));
             versaoProduto.Text = prod.ID.ToString();
             precoProduto.Text = prod.Preco.ToString();
             unidadesProduto.Text = prod.UnidadesStock.ToString();

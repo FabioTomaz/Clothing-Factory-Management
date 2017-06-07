@@ -165,7 +165,7 @@
                                 </StackPanel>
                             </DataTemplate>
                         </GroupBox.HeaderTemplate>
-                        <Image MouseDown="userImage_MouseDown" Name="userImage" Source="person.png"></Image>
+                        <Image MouseDown="userImage_MouseDown" Name="userImage"></Image>
                     </GroupBox>
                     <GroupBox materialDesign:ColorZoneAssist.Mode="Accent" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="8" Grid.RowSpan="2" Style="{DynamicResource MaterialDesignCardGroupBox}">
                         <GroupBox.HeaderTemplate>

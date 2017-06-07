@@ -34,15 +34,15 @@ AS
 	END
 GO
 
-CREATE FUNCTION dbo.getMateriaisFromProdutoPersonalizado(@REF INT, @TAM VARCHAR(5), @COR VARCHAR(15), @ID INT) RETURNS TABLE
+CREATE FUNCTION dbo.getMateriaisFromProdutoPersonalizado(@REF INT, @TAM VARCHAR(5), @ID INT) RETURNS TABLE
 AS
 RETURN	SELECT [MATERIAIS-PRODUTO].QUANTIDADE,  MATERIAIS_TÊXTEIS.COR, MATERIAIS_TÊXTEIS.DESIGNACAO, MATERIAIS_TÊXTEIS.NIF_FORNECEDOR, MATERIAIS_TÊXTEIS.REFERENCIA_FABRICA, MATERIAIS_TÊXTEIS.REFERENCIA_FORN FROM [MATERIAIS-PRODUTO] 
 		JOIN MATERIAIS_TÊXTEIS ON MATERIAIS_TÊXTEIS.REFERENCIA_FABRICA=[MATERIAIS-PRODUTO].REFERENCIA_FABRICA 
-		WHERE [MATERIAIS-PRODUTO].REFERENCIA=@REF AND [MATERIAIS-PRODUTO].TAMANHO=TAMANHO AND [MATERIAIS-PRODUTO].COR=@COR AND [MATERIAIS-PRODUTO].ID=@ID
+		WHERE [MATERIAIS-PRODUTO].REFERENCIA=@REF AND [MATERIAIS-PRODUTO].TAMANHO=TAMANHO AND [MATERIAIS-PRODUTO].ID=@ID
 GO
-select dbo.getTipoMaterial(1);
 
-CREATE FUNCTION getQuantidadeMaterial(@referenciaMaterial INT) RETURNS DECIMAL(10,2)
+
+CREATE FUNCTION dbo.getQuantidadeMaterial(@referenciaMaterial INT) RETURNS DECIMAL(10,2)
 AS 
 BEGIN
 	DECLARE @qtdExistente decimal(10,2);
@@ -63,8 +63,6 @@ AS
 BEGIN
 	DECLARE @qtdExistente DECIMAL(10,2);
 	SET @qtdExistente= dbo.getQuantidadeMaterial(@referenciaMaterial);
-	print @qtdExistente;
-	print @qtdPrecisa;
 	IF dbo.getTipoMaterial(@referenciaMaterial) = 'Pano'
 		BEGIN
 			UPDATE PANO
@@ -86,32 +84,52 @@ BEGIN
 END
 GO
 
-CREATE PROC dbo.produzirProduto (@REFERENCIA INT, @TAMANHO VARCHAR(5), @COR VARCHAR(15), @ID INT, @qtdProdutoPrecisa INT, @validation INT OUTPUT)
+CREATE FUNCTION dbo.checkIfProdutoPersonalizadoExits(@REFERENCIA INT, @TAMANHO VARCHAR(5), @ID INT) RETURNS BIT
+AS 
+	BEGIN
+		DECLARE @n INT;
+		SELECT @n=COUNT(*) FROM [PRODUTO-PERSONALIZADO] WHERE REFERENCIA=@REFERENCIA AND ID=@ID AND TAMANHO=@TAMANHO;
+		DECLARE @exists BIT;
+		IF @n>0
+			SET @exists=1;
+		ELSE
+			SET @exists=0;
+		RETURN @exists;
+	END
+GO
+
+CREATE PROC dbo.produzirProduto (@REFERENCIA INT, @TAMANHO VARCHAR(5), @ID INT, @qtdProdutoPrecisa INT, @validation INT OUTPUT)
 AS
 	BEGIN
-		SET @validation = 1;
+		SET @validation = dbo.checkIfProdutoPersonalizadoExits(@REFERENCIA, @TAMANHO, @ID);
+		print @validation;
+		IF @validation=0
+			RETURN;
 		DECLARE @qtdProdutoExistente as int;
 		SELECT @qtdProdutoExistente = UNIDADES_ARMAZEM from [PRODUTO-PERSONALIZADO] 
-		where  REFERENCIA=@REFERENCIA AND COR=@COR AND TAMANHO=@TAMANHO AND ID=@ID;
+		WHERE REFERENCIA=@REFERENCIA AND TAMANHO=@TAMANHO AND ID=@ID;
 		IF (@qtdProdutoExistente-@qtdProdutoExistente) >= 0
 			BEGIN
 				DECLARE @referenciaMaterial as int;
 				DECLARE @qtdPrecisa as decimal(10,2);
 				DECLARE @qtdExistente as decimal(10,2);
 				DECLARE cursorMaterial CURSOR FOR 
-				SELECT REFERENCIA_FABRICA, [MATERIAIS-PRODUTO].QUANTIDADE FROM [PRODUTO-PERSONALIZADO] 
-				JOIN [MATERIAIS-PRODUTO] ON [PRODUTO-PERSONALIZADO].REFERENCIA=[MATERIAIS-PRODUTO].REFERENCIA
-				WHERE [PRODUTO-PERSONALIZADO].REFERENCIA=@REFERENCIA 
-				AND [PRODUTO-PERSONALIZADO].COR=@COR 
-				AND [PRODUTO-PERSONALIZADO].TAMANHO=@TAMANHO
+				SELECT REFERENCIA_FABRICA, QUANTIDADE FROM [PRODUTO-PERSONALIZADO] 
+				JOIN [MATERIAIS-PRODUTO] ON 
+				[PRODUTO-PERSONALIZADO].REFERENCIA=[MATERIAIS-PRODUTO].REFERENCIA
+				AND [PRODUTO-PERSONALIZADO].ID=[MATERIAIS-PRODUTO].ID 
+				AND [PRODUTO-PERSONALIZADO].TAMANHO=[MATERIAIS-PRODUTO].TAMANHO
+				WHERE [PRODUTO-PERSONALIZADO].REFERENCIA=@REFERENCIA
+				AND [PRODUTO-PERSONALIZADO].TAMANHO = @TAMANHO 
 				AND [PRODUTO-PERSONALIZADO].ID = @ID;
 				OPEN cursorMaterial;
 				FETCH cursorMaterial INTO @referenciaMaterial, @qtdPrecisa;
 				WHILE @@FETCH_STATUS= 0
 				BEGIN
-					set @qtdPrecisa = @qtdPrecisa*@qtdProdutoPrecisa;
-					IF((dbo.getQuantidadeMaterial(@referenciaMaterial)-@qtdPrecisa)<0)
-						SET @validation = 0;
+					IF((dbo.getQuantidadeMaterial(@referenciaMaterial)-(@qtdPrecisa*@qtdProdutoPrecisa))<0)
+						BEGIN
+							SET @validation = 0;
+						END
 					FETCH cursorMaterial INTO @referenciaMaterial , @qtdPrecisa;
 				END
 				
@@ -124,7 +142,7 @@ AS
 					WHILE @@FETCH_STATUS = 0
 						BEGIN
 							SET @qtdPrecisa=@qtdPrecisa*@qtdProdutoPrecisa;
-							exec dbo.usarMaterial @referenciaMaterial, @qtdPrecisa;
+							EXEC dbo.usarMaterial @referenciaMaterial, @qtdPrecisa;
 							FETCH cursorMaterial INTO @referenciaMaterial , @qtdPrecisa;
 						END
 					CLOSE cursorMaterial;
@@ -132,7 +150,6 @@ AS
 					SET UNIDADES_ARMAZEM=@qtdProdutoExistente+@qtdProdutoPrecisa
 					WHERE [PRODUTO-PERSONALIZADO].REFERENCIA=@REFERENCIA 
 					AND [PRODUTO-PERSONALIZADO].TAMANHO=@TAMANHO 
-					AND [PRODUTO-PERSONALIZADO].COR=@COR 
 					AND [PRODUTO-PERSONALIZADO].ID=@ID; 
 				END
 				DEALLOCATE cursorMaterial;
@@ -140,23 +157,18 @@ AS
 	END
 GO
 
+BEGIN TRAN;
 DECLARE @validation as INT;
-EXEC dbo.produzirProduto 2, 'M', 'azul claro', 3 , 1 , @validation OUTPUT;
-SELECT @validation
+EXEC dbo.produzirProduto 4, 'XL', 1 , 1 , @validation OUTPUT;
+SELECT @validation;
+COMMIT TRAN;
+
+
 CREATE FUNCTION dbo.checkIfCodPostalExists(@codPostal1 int, @codPostal2 int) returns bit
 as
 begin
 	DECLARE @exists bit;
 	select @exists=count(*) from ZONA WHERE CODPOSTAL1=@codPostal1 AND CODPOSTAL2=@codPostal2
-	return @exists;
-end
-go
-
-CREATE FUNCTION dbo.checkIfFornecedorExists ON CLIENTE
-as
-begin
-	DECLARE @exists bit;
-	select @exists=count(*) from CLIENTE WHERE CODPOSTAL1=@codPostal1 AND CODPOSTAL2=@codPostal2
 	return @exists;
 end
 go
@@ -184,22 +196,22 @@ AS
 	END
 GO
 
-CREATE FUNCTION dbo.getProductMaterials (@referencia int, @tamanho varchar(5), @cor varchar(15), @id int) RETURNS Table
+CREATE FUNCTION dbo.getProductMaterials (@referencia int, @tamanho varchar(5), @id int) RETURNS Table
 AS
 	Return(
 		SELECT MATERIAIS_TÊXTEIS.REFERENCIA_FABRICA, REFERENCIA_FORN, NIF_FORNECEDOR, MATERIAIS_TÊXTEIS.COR, DESIGNACAO, QUANTIDADE 
 		FROM MATERIAIS_TÊXTEIS JOIN [MATERIAIS-PRODUTO] 
 		ON MATERIAIS_TÊXTEIS.REFERENCIA_FABRICA = [MATERIAIS-PRODUTO].REFERENCIA_FABRICA
-		WHERE REFERENCIA = @referencia AND TAMANHO = @tamanho AND [MATERIAIS-PRODUTO].COR = @cor AND ID = @id
+		WHERE REFERENCIA = @referencia AND TAMANHO = @tamanho AND ID = @id
 		)
 GO
 
-CREATE FUNCTION dbo.nUnidadesProd (@referencia int, @tamanho varchar(5), @cor varchar(15),  @id int ) RETURNS INT
+CREATE FUNCTION dbo.nUnidadesProd (@referencia int, @tamanho varchar(5),  @id int ) RETURNS INT
 AS
 	BEGIN
 		DECLARE @nUnidades INT
 		SELECT @nUnidades = UNIDADES_ARMAZEM FROM [PRODUTO-PERSONALIZADO] 
-		WHERE REFERENCIA = @referencia AND TAMANHO = @tamanho AND COR = @cor AND ID = @id
+		WHERE REFERENCIA = @referencia AND TAMANHO = @tamanho AND ID = @id
 		return @nUnidades
 	END
 GO
@@ -231,6 +243,7 @@ GO
 CREATE PROC dbo.adicionarMaterial(@ref int, @qtd decimal(10,2), @OUT VARCHAR(70) OUTPUT)
 AS
 	BEGIN
+		BEGIN TRAN;
 		DECLARE @qtdExistente decimal(10,2);
 		SELECT @qtdExistente=dbo.getQuantidadeMaterial(@ref);
 		IF dbo.getTipoMaterial(@ref) = 'Pano'
@@ -249,12 +262,27 @@ AS
 				UPDATE ACESSORIO SET QUANTIDADE_ARMAZEM=@qtdExistente+@qtd WHERE ACESSORIO.REFERENCIA_FABRICA=@ref;
 			END
 			SET @OUT = 'A quantidade indicada foi adicionada com sucesso';
+		COMMIT TRAN;
 	END
 GO
 
 --SELECT * FROM UTILIZADOR JOIN ZONA ON ( UTILIZADOR.CODPOSTAL1 = ZONA.CODPOSTAL1 AND UTILIZADOR.CODPOSTAL2 = ZONA.CODPOSTAL2)
 --WHERE N_FUNCIONARIO =1
 
-SELECT * FROM [FABRICA-FILIAL] JOIN ZONA ON 
-           ([FABRICA-FILIAL].CODPOSTAL1 = ZONA.CODPOSTAL1 AND [FABRICA-FILIAL].CODPOSTAL2 = ZONA.CODPOSTAL2)
-		   JOIN UTILIZADOR ON CHEFE = N_FUNCIONARIO
+CREATE FUNCTION dbo.checkIfModeloExists(@ref int, @modelo INT) RETURNS BIT
+AS
+	BEGIN
+		BEGIN TRAN;
+		DECLARE @n INT;
+		SELECT @n=COUNT(*) FROM [PRODUTO-PERSONALIZADO] WHERE REFERENCIA=@ref AND ID=@modelo;
+		DECLARE @exists BIT;
+		IF @n>0
+			SET @exists=1;
+		ELSE
+			SET @exists=0;
+		COMMIT TRAN;
+		RETURN @exists;
+	END
+GO
+
+CREATE PROCEDURE registarProdutoPersonalizado(@ref int, )

@@ -245,6 +245,10 @@ namespace Trabalho_BD_IHC
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
+            if ((userImage.Source) == null) { 
+                Xceed.Wpf.Toolkit.MessageBox.Show("O utilizador não pussui qualquer imagem para ser expandida!", "ERRO", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
             Imagem window = new Imagem((BitmapImage)userImage.Source);
             window.Show();
         }

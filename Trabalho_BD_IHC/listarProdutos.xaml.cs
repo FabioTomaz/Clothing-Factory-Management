@@ -107,7 +107,7 @@ namespace Trabalho_BD_IHC
             if (produtosPersonalizadosLista.SelectedItems.Count == 1)
             {
                 ProdutoPersonalizado prod = (ProdutoPersonalizado)produtosPersonalizadosLista.SelectedItem;
-                DetalhesProdutoPersonalizado detalhes = new DetalhesProdutoPersonalizado(dataHandler, (int)prod.ProdutoBase.Referencia, prod.Tamanho, prod.Cor, (int)prod.ID);
+                DetalhesProdutoPersonalizado detalhes = new DetalhesProdutoPersonalizado(dataHandler, (int)prod.ProdutoBase.Referencia, prod.Tamanho, (int)prod.ID);
                 detalhes.Show();
             }
         }

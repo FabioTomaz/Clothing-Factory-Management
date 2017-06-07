@@ -48,7 +48,7 @@
                 <Label Content="Tamanho: " Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
                 <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left" Name="tamanhoProduto" Grid.Column="3"></TextBlock>
                 <Label Content="Cor: " Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
-                <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left" Name="corProduto" Grid.Column="1" Grid.Row="1"></TextBlock>
+                <materialDesign:Chip VerticalAlignment="Center" HorizontalAlignment="Left" Name="corProduto" Grid.Column="1" Grid.Row="1"></materialDesign:Chip>
                 <Label Content="Versão: " Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
                 <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left"  Name="versaoProduto" Grid.Column="3" Grid.Row="1"></TextBlock>
                 <Label Content="Preço por unidade: " Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
@@ -59,6 +59,7 @@
                 <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left" Name="lucroProduto" Grid.Column="1" Grid.Row="3"></TextBlock>
                 <Label Content="Unidades Produzidas: " Grid.Row="3" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
                 <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left" Name="producaoProduto" Grid.Column="3" Grid.Row="3"></TextBlock>
+                
             </Grid>
 
         </GroupBox>

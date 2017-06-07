@@ -43,7 +43,7 @@ namespace Trabalho_BD_IHC
                 nomeProduto.Text = prodPers.ProdutoBase.Nome.ToString();
                 //obter os materiais necessários para o produto
                 int quantProd = Convert.ToInt32(quantidade.Text);
-                mtProd = dataHandler.materiaisProduto((int)prodPers.ProdutoBase.Referencia, prodPers.Tamanho, prodPers.Cor, (int)prodPers.ID, quantProd);
+                mtProd = dataHandler.materiaisProduto((int)prodPers.ProdutoBase.Referencia, prodPers.Tamanho, (int)prodPers.ID, quantProd);
                 ObservableCollection<MaterialTextil> materiaisProd = new ObservableCollection<MaterialTextil>();
                 String s = "";
                 

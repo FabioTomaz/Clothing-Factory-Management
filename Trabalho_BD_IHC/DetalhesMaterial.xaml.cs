@@ -136,7 +136,8 @@ namespace Trabalho_BD_IHC
         {
             if (produtos.SelectedItems.Count == 1 && Utilizador.loggedUser.TiposUser.Contains("Gestor de Produção"))
             {
-                DetalhesMaterial window = new DetalhesMaterial(dataHandler, (MaterialTextil)produtos.SelectedItem);
+                ProdutoPersonalizado prod = (ProdutoPersonalizado)produtos.SelectedItem;
+                DetalhesProdutoPersonalizado window = new DetalhesProdutoPersonalizado(dataHandler, (int)prod.ProdutoBase.Referencia, prod.Tamanho, (int)prod.ID);
                 window.Show();
             }
 

@@ -56,7 +56,7 @@ namespace Trabalho_BD_IHC
             for (int i = 0; i < lista.Count; i++)
             {
                 ProdutoPersonalizado prod = lista.ElementAt(i);
-                if (prod.ProdutoBase.Referencia == null || prod.Tamanho == null || prod.Cor == null || prod.ID == null || prod.Quantidade == null)
+                if (prod.ProdutoBase.Referencia == null || prod.Tamanho == null || prod.ID == null || prod.Quantidade == null)
                     throw new Exception("Por favor preencha todos os dados referentes aos produtos da encomenda");
             }
             for (int i=0; i<produtosEncomenda.Items.Count; i++)

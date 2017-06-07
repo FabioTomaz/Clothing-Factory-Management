@@ -65,7 +65,7 @@ namespace Trabalho_BD_IHC
             ProdutoPersonalizado produtoSelecionado = ((ProdutoPersonalizado)produtosPers.SelectedItem);
             if (produtoSelecionado != null)
             {
-                DetalhesProdutoPersonalizado window = new DetalhesProdutoPersonalizado(dataHandler, (int)produtoSelecionado.ProdutoBase.Referencia, produtoSelecionado.Tamanho, produtoSelecionado.Cor, (int)produtoSelecionado.ID);
+                DetalhesProdutoPersonalizado window = new DetalhesProdutoPersonalizado(dataHandler, (int)produtoSelecionado.ProdutoBase.Referencia, produtoSelecionado.Tamanho, (int)produtoSelecionado.ID);
                 window.Show();
             }
         }

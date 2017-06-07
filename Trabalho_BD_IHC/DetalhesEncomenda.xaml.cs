@@ -60,7 +60,7 @@ namespace Trabalho_BD_IHC
                 string tamanho = ((ProdutoPersonalizado)produtos.SelectedItem).Tamanho;
                 string cor = ((ProdutoPersonalizado)produtos.SelectedItem).Cor;
                 int id = (int)((ProdutoPersonalizado)produtos.SelectedItem).ID;
-                DetalhesProdutoPersonalizado window = new DetalhesProdutoPersonalizado(dataHandler, referencia, tamanho, cor, id);
+                DetalhesProdutoPersonalizado window = new DetalhesProdutoPersonalizado(dataHandler, referencia, tamanho, id);
                 window.Show();
             }
         }
