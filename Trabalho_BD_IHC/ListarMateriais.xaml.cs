@@ -87,7 +87,7 @@ namespace Trabalho_BD_IHC
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            Xceed.Wpf.Toolkit.MessageBox.Show(dataHandler.adicionarMaterial(((MaterialTextil)materiais.SelectedItem).Referencia, Convert.ToInt32(quantidade.Text)), "Resultado", MessageBoxButton.OK, MessageBoxImage.Information);
+            Xceed.Wpf.Toolkit.MessageBox.Show(dataHandler.adicionarMaterial(((MaterialTextil)materiais.SelectedItem).Referencia, Convert.ToDouble(quantidade.Text.Replace('.',','))), "Resultado", MessageBoxButton.OK, MessageBoxImage.Information);
             this.refresh();
         }
 

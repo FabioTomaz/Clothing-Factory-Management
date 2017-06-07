@@ -3224,6 +3224,22 @@ namespace Trabalho_BD_IHC
         }
 
 
+        public int getModelo(ProdutoPersonalizado prod) {
+            //produto
+            if (!this.verifySGBDConnection())
+                return -1;
+
+            SqlCommand cmd = new SqlCommand("SELECT dbo.registarProdutoPersonalizado (@ref, "
+                + "@cor, @nEtiqueta);", this.Cn);
+
+            cmd.Parameters.AddWithValue("@ref", prod.ProdutoBase.Referencia);
+            cmd.Parameters.AddWithValue("@cor", prod.Cor);
+            cmd.Parameters.AddWithValue("@nEtiqueta", prod.Etiqueta.Numero);
+            int retVal = Convert.ToInt32(cmd.ExecuteScalar());
+            this.closeSGBDConnection();
+            return retVal;
+        }
+
         public bool EnviarProduto(ProdutoPersonalizado prod, ObservableCollection<MaterialTextil> materiaisSelecionados)
         {
             //registar etiqueta na base de dados primerio
@@ -3235,47 +3251,38 @@ namespace Trabalho_BD_IHC
             //produto
             if (!this.verifySGBDConnection())
                 return false;
-            SqlCommand cmd = new SqlCommand();
 
-            cmd.CommandText = "INSERT INTO [PRODUTO-PERSONALIZADO] (REFERENCIA, TAMANHO, COR, PRECO, N_ETIQUETA) "
-                + "VALUES (@refProdBase, @tamanho, @cor, @preco, @nEt);";
-            cmd.Parameters.Clear();
-            cmd.Parameters.AddWithValue("@refProdBase", prod.ProdutoBase.Referencia);
+            SqlCommand cmd = new SqlCommand("EXEC dbo.registarProdutoPersonalizado @ref, "
+                + "@tamanho, @cor, @nEtiqueta , @preco;", this.Cn);
+
+            cmd.Parameters.AddWithValue("@ref", prod.ProdutoBase.Referencia);
             cmd.Parameters.AddWithValue("@tamanho", prod.Tamanho);
             cmd.Parameters.AddWithValue("@cor", prod.Cor);
+            cmd.Parameters.AddWithValue("@nEtiqueta", prod.Etiqueta.Numero);
             cmd.Parameters.AddWithValue("@preco", prod.Preco);
-            cmd.Parameters.AddWithValue("@nEt", prod.Etiqueta.Numero);
-            cmd.Connection = this.Cn;
-            try
-            {
-                cmd.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Falha ao registar o Produto na base de dados. \n ERROR MESSAGE: \n" + ex.Message);
-            }
-            finally
-            {
-                this.closeSGBDConnection();
-            }
+            int retVal = Convert.ToInt32(cmd.ExecuteScalar());
+            this.closeSGBDConnection();
+            if (retVal != 1)
+                throw new Exception("Não foi possivel registar o produto na base de dados");
+
             //materiais do produto
-            int ID = this.getLastIdentity("[PRODUTO-PERSONALIZADO]");
+            int ID = this.getModelo(prod);
+            if(ID==-1)
+                throw new Exception("Não foi possivel registar o produto na base de dados");
 
             for (int i = 0; i < materiaisSelecionados.Count; i++)
             {
                 if (!this.verifySGBDConnection())
                     return false;
                 cmd = new SqlCommand();
-                cmd.CommandText = "INSERT INTO [MATERIAIS-PRODUTO] (REFERENCIA, TAMANHO, COR, ID, REFERENCIA_FABRICA, QUANTIDADE) "
-                    + "VALUES (@refProdBase, @tamanho, @cor, @id, @refFabrica, @qtd);";
+                cmd.CommandText = "INSERT INTO [MATERIAIS-PRODUTO] (REFERENCIA, TAMANHO, ID, REFERENCIA_FABRICA, QUANTIDADE) "
+                    + "VALUES (@refProdBase, @tamanho, @id, @refFabrica, @qtd);";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@refProdBase", prod.ProdutoBase.Referencia);
                 cmd.Parameters.AddWithValue("@tamanho", prod.Tamanho);
-                cmd.Parameters.AddWithValue("@cor", prod.Cor);
                 cmd.Parameters.AddWithValue("@id", ID);
                 cmd.Parameters.AddWithValue("@refFabrica", materiaisSelecionados.ElementAt(i).Referencia);
                 cmd.Parameters.AddWithValue("@qtd", Convert.ToDouble(materiaisSelecionados.ElementAt(i).QuantidadeSelecionada));
-                cmd.Connection = this.Cn;
                 cmd.Connection = this.Cn;
                 try
                 {
@@ -3283,7 +3290,7 @@ namespace Trabalho_BD_IHC
                 }
                 catch (Exception ex)
                 {
-                    throw new Exception("Falha ao registar o Produto na base de dados. \n ERROR MESSAGE: \n" + ex.Message);
+                    throw new Exception("Falha a associar os materiais do produto na base de dados. \n ERROR MESSAGE: \n" + ex.Message);
                 }
             }
             return true;

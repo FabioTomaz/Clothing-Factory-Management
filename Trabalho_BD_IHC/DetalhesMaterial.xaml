@@ -50,7 +50,7 @@
                 <Label Content="Designação" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
                 <TextBlock Name="design" Grid.Row="0" Grid.Column="3" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
                 <Label Content="Cor" Grid.Row="0" Grid.Column="5" HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
-                <TextBlock Name="cor" Grid.Row="0" Grid.Column="7" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
+                <materialDesign:Chip Name="cor" Grid.Row="0" Grid.Column="7" HorizontalAlignment="Left" VerticalAlignment="Center"></materialDesign:Chip>
                 
                 <!--pano-->
                 <Label Visibility="Hidden" Name="panoTipo" Content="Tipo:"  Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"></Label>

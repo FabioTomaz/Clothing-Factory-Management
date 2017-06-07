@@ -41,7 +41,10 @@ namespace Trabalho_BD_IHC
         private void fillInfo()
         {
             design.Text = mat.Designacao;
-            cor.Text = mat.Cor;
+            cor.Background= new SolidColorBrush((Color)ColorConverter.ConvertFromString(mat.Cor));
+            if (cor.Background.Equals(new SolidColorBrush((Color)ColorConverter.ConvertFromString("Black"))))
+                cor.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("White"));
+            cor.Content = mat.Cor;
             mat.TipoMaterial1 = dataHandler.getMaterialType(mat.Referencia);
             if (mat.TipoMaterial1.Equals("Pano", StringComparison.Ordinal))
             {

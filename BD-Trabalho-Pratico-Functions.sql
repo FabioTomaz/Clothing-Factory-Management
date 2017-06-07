@@ -157,11 +157,11 @@ AS
 	END
 GO
 
-BEGIN TRAN;
-DECLARE @validation as INT;
-EXEC dbo.produzirProduto 4, 'XL', 1 , 1 , @validation OUTPUT;
-SELECT @validation;
-COMMIT TRAN;
+--BEGIN TRAN;
+--DECLARE @validation as INT;
+--EXEC dbo.produzirProduto 4, 'XL', 1 , 1 , @validation OUTPUT;
+--SELECT @validation;
+--COMMIT TRAN;
 
 
 CREATE FUNCTION dbo.checkIfCodPostalExists(@codPostal1 int, @codPostal2 int) returns bit
@@ -269,20 +269,65 @@ GO
 --SELECT * FROM UTILIZADOR JOIN ZONA ON ( UTILIZADOR.CODPOSTAL1 = ZONA.CODPOSTAL1 AND UTILIZADOR.CODPOSTAL2 = ZONA.CODPOSTAL2)
 --WHERE N_FUNCIONARIO =1
 
-CREATE FUNCTION dbo.checkIfModeloExists(@ref int, @modelo INT) RETURNS BIT
+CREATE FUNCTION dbo.existsEqualProdutoPersonalizado(@ref int, @cor varchar(15), @nEtiqueta int) RETURNS int
 AS
 	BEGIN
-		BEGIN TRAN;
-		DECLARE @n INT;
-		SELECT @n=COUNT(*) FROM [PRODUTO-PERSONALIZADO] WHERE REFERENCIA=@ref AND ID=@modelo;
-		DECLARE @exists BIT;
-		IF @n>0
-			SET @exists=1;
-		ELSE
-			SET @exists=0;
-		COMMIT TRAN;
-		RETURN @exists;
+		DECLARE @MODELO INT = -1;
+		SELECT @MODELO=MAX([PRODUTO-PERSONALIZADO].ID) FROM [PRODUTO-PERSONALIZADO] 
+		JOIN [PRODUTO-PERSONALIZADO-DETALHES] ON [PRODUTO-PERSONALIZADO-DETALHES].REFERENCIA=[PRODUTO-PERSONALIZADO].REFERENCIA 
+		AND [PRODUTO-PERSONALIZADO-DETALHES].ID=[PRODUTO-PERSONALIZADO].ID 
+		WHERE [PRODUTO-PERSONALIZADO].REFERENCIA=@ref 
+		AND COR=@cor 
+		AND N_ETIQUETA=@nEtiqueta;
+		RETURN @MODELO;
 	END
 GO
 
-CREATE PROCEDURE registarProdutoPersonalizado(@ref int, )
+--DROP FUNCTION dbo.existsEqualProdutoPersonalizado
+--SELECT dbo.existsEqualProdutoPersonalizado(1, '#e12022',1);
+
+--CREATE PROCEDURE registarProdutoPersonalizado(@ref int, @tamanho varchar(5), @cor varchar(15), @nEtiqueta int, @preco decimal(7,2))
+--AS
+--	BEGIN
+--		DECLARE @ID INT = dbo.existsEqualProdutoPersonalizado(@ref, @cor, @nEtiqueta); 
+--		PRINT @ID;
+--		if  @ID != NULL
+--			BEGIN
+--				select @ID=max(ID)+1 from [PRODUTO-PERSONALIZADO] where REFERENCIA=@ref;
+--				INSERT INTO [PRODUTO-PERSONALIZADO](REFERENCIA, ID, TAMANHO, PRECO, UNIDADES_ARMAZEM)
+--				VALUES(@ref, @ID, @tamanho, @preco, 0);
+--				INSERT INTO [PRODUTO-PERSONALIZADO-DETALHES](REFERENCIA, ID, COR, N_ETIQUETA)
+--				VALUES(@ref, @ID, @cor, @nEtiqueta);
+--			END
+--		ELSE 
+--			BEGIN
+--				DECLARE @COUNT INT;
+--				SELECT @COUNT = COUNT(*) FROM [PRODUTO-PERSONALIZADO] WHERE REFERENCIA=@ref AND TAMANHO=@tamanho;
+--				IF @COUNT !=0
+--					SELECT @ID = MAX(ID)+1 FROM [PRODUTO-PERSONALIZADO] WHERE REFERENCIA=@ref AND TAMANHO=@tamanho;
+--				ELSE
+--					BEGIN
+--						SET @ID=1;
+--						INSERT INTO [PRODUTO-PERSONALIZADO](REFERENCIA, ID, TAMANHO, PRECO, UNIDADES_ARMAZEM)
+--						VALUES(@ref, @ID, @tamanho, @preco, 0);
+--						INSERT INTO [PRODUTO-PERSONALIZADO-DETALHES](REFERENCIA, ID, COR, N_ETIQUETA)
+--						VALUES(@ref, @ID, @cor, @nEtiqueta);
+--					END
+
+--				Print 'else'
+--			END
+--	END
+--GO
+
+
+CREATE PROCEDURE registarProdutoPersonalizado(@ref int, @tamanho varchar(5), @cor varchar(15), @nEtiqueta int, @preco decimal(7,2))
+AS
+	BEGIN
+		DECLARE @ID INT;
+		SELECT @ID = COUNT(*)+1 FROM [PRODUTO-PERSONALIZADO] WHERE REFERENCIA=@ref AND TAMANHO=@tamanho;
+		INSERT INTO [PRODUTO-PERSONALIZADO](REFERENCIA, ID, TAMANHO, PRECO, UNIDADES_ARMAZEM)
+		VALUES(@ref, @ID, @tamanho, @preco, 0);
+		INSERT INTO [PRODUTO-PERSONALIZADO-DETALHES](REFERENCIA, ID, COR, N_ETIQUETA)
+		VALUES(@ref, @ID, @cor, @nEtiqueta);
+	END
+GO

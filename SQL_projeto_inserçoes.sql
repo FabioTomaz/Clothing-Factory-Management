@@ -43,10 +43,10 @@ INSERT INTO [PRODUTO-PERSONALIZADO] (REFERENCIA, TAMANHO, ID, PRECO, UNIDADES_AR
 	(2, 'M', 2, 19.99, 10);
 
 INSERT INTO [PRODUTO-PERSONALIZADO-DETALHES](REFERENCIA, ID, N_ETIQUETA, COR) VALUES
-	(1, 1, 1 , 'azul escuro'),
-	(1, 2, 2 , 'verde lima'),
-	(2, 1, 3 , 'azul claro'),
-	(2, 2, 1 , 'amarelo');
+	(1, 1, 1 , 'Blue'),
+	(1, 2, 2 , 'Green'),
+	(2, 1, 3 , 'Yellow'),
+	(2, 2, 1 , 'Grey');
 
 
 INSERT INTO CONTEUDO_ENCOMENDA (N_ENCOMENDA, REFERENCIA_PRODUTO, TAMANHO_PRODUTO, ID_PRODUTO ,QUANTIDADE) VALUES
@@ -60,15 +60,15 @@ INSERT INTO FORNECEDOR (NIF, EMAIL, NOME, FAX, TELEFONE, DESIGNACAO, CODPOSTAL1,
 	(478545217, 'forn_materiais@mail.pt', 'Textil material inc.', 222454485, 2135748, 'Fornecimento de materiais para produçao textil', 3750, 582, 'Rua do trabalho', 20);
 
 INSERT INTO MATERIAIS_TÊXTEIS (REFERENCIA_FORN, NIF_FORNECEDOR, COR, DESIGNACAO) VALUES
-	(300, 478545217, 'Azul', 'Pano linho'),
-	(302, 666999555, 'Preto', 'Pano texturado de ganga'),
-	(303, 666999555, 'Castanho', 'Mola com desenho infantil'),
-	(301, 478545217, 'Branco', 'Linha grossa'),
-	(304, 666999555, 'Amarelo', 'Elastico usualmente usado para coletes'),
-	(305, 666999555, 'Preto', 'Fecho de casaco'),
-	(306, 666999555, 'Castanho', 'Botão de calça'),
-	(307, 666999555, 'Amarelo', 'Fita velcro para casaco e afins'),
-	(308, 666999555, 'Amarelo', 'Pano amarelo teste');
+	(300, 478545217, 'Blue', 'Pano linho'),
+	(302, 666999555, 'Black', 'Pano texturado de ganga'),
+	(303, 666999555, 'Brown', 'Mola com desenho infantil'),
+	(301, 478545217, 'White', 'Linha grossa'),
+	(304, 666999555, 'Yellow', 'Elastico usualmente usado para coletes'),
+	(305, 666999555, 'Black', 'Fecho de casaco'),
+	(306, 666999555, 'Brown', 'Botão de calça'),
+	(307, 666999555, 'Yellow', 'Fita velcro para casaco e afins'),
+	(308, 666999555, 'Yellow', 'Pano amarelo teste');
 
 INSERT INTO PANO(REFERENCIA_FABRICA, TIPO, GRAMAGEM, AREA_ARMAZEM, PRECO_POR_M2) VALUES
 	(1, 'Cetim', 220, 152.3 , 2.5),
