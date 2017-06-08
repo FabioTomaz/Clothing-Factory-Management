@@ -1,3 +1,4 @@
+
 INSERT INTO CLIENTE (NOME, NIB, NIF, EMAIL, TELEMOVEL, CODPOSTAL1, CODPOSTAL2, RUA, N_PORTA) VALUES
 	('Bruno Silva', 784526412578965412354, 222444489, 'bjpsilva@hotmail.com', 919225360, 3865, 229, 'Maria de Lurdes Breu', 10),
 	('Andreia Pires', 784526412548965412354, 222544489, 'bjpsilva533@gmail.com', 919225361, 3865,229, 'Avenida da Liberdade', 25),
@@ -25,11 +26,10 @@ INSERT INTO ENCOMENDA (DATA_CONFIRMACAO, DATA_ENTREGA_PREV, LOCALENTREGA, ESTADO
 	('20170528', '20170704', 1, 2, 3, 3);
 	
 	
-INSERT INTO [PRODUTO-BASE] (NOME, DATA_ALTERACAO, IVA ,INSTRUCOES_PRODUCAO, N_GESTOR_PROD, IMAGEM_DESENHO) VALUES
-	('Bata azul', '20170424', 23.0 ,'Começar a trabalhar pelas mangas juntar os punhos...', 2, 'image'),
-	('Colete', '20170511', 23.0 ,'Comece por cozer as duas peças das costas adicione as mangas...', 2, 'image'),
-	('Botas Agricultura', '20170424', 23.0 ,'Forrar com plastico protetor usando o molde...', 2, 'image');
-
+INSERT INTO [PRODUTO-BASE] (NOME, DATA_ALTERACAO, IVA ,INSTRUCOES_PRODUCAO, N_GESTOR_PROD) VALUES
+	('Bata azul', '20170424', 23.0 ,'Começar a trabalhar pelas mangas juntar os punhos...', 2),
+	('Colete', '20170511', 23.0 ,'Comece por cozer as duas peças das costas adicione as mangas...', 2),
+	('Botas Agricultura', '20170424', 23.0 ,'Forrar com plastico protetor usando o molde...', 2);
 	
 INSERT INTO ETIQUETA (NORMAS, PAIS_FABRICO, COMPOSICAO) VALUES
 	('Lavagem a seco', 'Portugal', '60% algodão 30% polyester'),

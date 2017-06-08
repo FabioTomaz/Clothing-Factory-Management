@@ -91,7 +91,12 @@ namespace Trabalho_BD_IHC
 
         private void userImage_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.ChangedButton == MouseButton.Left && e.ClickCount == 2 && userImage.Source != null)
+            if ((userImage.Source) == null)
+            {
+                Xceed.Wpf.Toolkit.MessageBox.Show("O utilizador não pussui qualquer imagem para ser expandida!", "ERRO", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            if (e.ChangedButton == MouseButton.Left && e.ClickCount == 2)
             {
                 Imagem window = new Imagem((BitmapImage)userImage.Source);
                 window.Show();
@@ -100,7 +105,12 @@ namespace Trabalho_BD_IHC
 
         private void SupImage_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.ChangedButton == MouseButton.Left && e.ClickCount == 2 && SupImage.Source != null)
+            if ((SupImage.Source) == null)
+            {
+                Xceed.Wpf.Toolkit.MessageBox.Show("O supervisor não pussui qualquer imagem para ser expandida!", "ERRO", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            if (e.ChangedButton == MouseButton.Left && e.ClickCount == 2)
             {
                 Imagem window = new Imagem((BitmapImage)SupImage.Source);
                 window.Show();

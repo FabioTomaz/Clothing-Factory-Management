@@ -44,7 +44,6 @@ GO
 
 --drop function dbo.getDinheiroGastoMes
 --drop function dbo.getDinheiroGeradoMes
-SELECT DBO.getDinheiroGeradoMes();
 
 CREATE FUNCTION dbo.getLucroGeradoMes() RETURNS decimal(10,2)
 BEGIN

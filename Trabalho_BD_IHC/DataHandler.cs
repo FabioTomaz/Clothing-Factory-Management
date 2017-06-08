@@ -1022,13 +1022,16 @@ namespace Trabalho_BD_IHC
                 prod.GestorProducao = new Utilizador();
                 prod.GestorProducao.NFuncionario = Convert.ToInt32(reader["N_GESTOR_PROD"].ToString());
                 prod.GestorProducao.Nome = reader["userName"].ToString();
-                try
+                if (reader["IMAGEM_DESENHO"]!=DBNull.Value)
                 {
-                    prod.Pic = (byte[])reader["IMAGEM_DESENHO"];
-                }
-                catch (InvalidCastException ex)
-                {
-                    throw new InvalidCastException("Não foi possivel obter a imagem do desenho do produto base da base de dados. ERRO: " + ex.Message);
+                    try
+                    {
+                        prod.Pic = (byte[])reader["IMAGEM_DESENHO"];
+                    }
+                    catch (InvalidCastException ex)
+                    {
+                        throw new InvalidCastException("Não foi possivel obter a imagem do desenho do produto base da base de dados. ERRO: " + ex.Message);
+                    }
                 }
             }
             reader.Close();
@@ -3229,7 +3232,7 @@ namespace Trabalho_BD_IHC
             if (!this.verifySGBDConnection())
                 return -1;
 
-            SqlCommand cmd = new SqlCommand("SELECT dbo.registarProdutoPersonalizado (@ref, "
+            SqlCommand cmd = new SqlCommand("SELECT registarProdutoPersonalizado (@ref, "
                 + "@cor, @nEtiqueta);", this.Cn);
 
             cmd.Parameters.AddWithValue("@ref", prod.ProdutoBase.Referencia);
@@ -3252,7 +3255,7 @@ namespace Trabalho_BD_IHC
             if (!this.verifySGBDConnection())
                 return false;
 
-            SqlCommand cmd = new SqlCommand("EXEC dbo.registarProdutoPersonalizado @ref, "
+            SqlCommand cmd = new SqlCommand("EXEC registarProdutoPersonalizado @ref, "
                 + "@tamanho, @cor, @nEtiqueta , @preco;", this.Cn);
 
             cmd.Parameters.AddWithValue("@ref", prod.ProdutoBase.Referencia);
@@ -3262,11 +3265,10 @@ namespace Trabalho_BD_IHC
             cmd.Parameters.AddWithValue("@preco", prod.Preco);
             int retVal = Convert.ToInt32(cmd.ExecuteScalar());
             this.closeSGBDConnection();
-            if (retVal != 1)
-                throw new Exception("Não foi possivel registar o produto na base de dados");
 
             //materiais do produto
             int ID = this.getModelo(prod);
+            Console.WriteLine(ID);
             if(ID==-1)
                 throw new Exception("Não foi possivel registar o produto na base de dados");
 
