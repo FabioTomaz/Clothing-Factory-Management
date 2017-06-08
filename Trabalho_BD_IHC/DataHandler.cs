@@ -639,6 +639,7 @@ namespace Trabalho_BD_IHC
                 Enc.GestorVendas.NFuncionario = Convert.ToInt32(reader["N_GESTOR_VENDA"].ToString());
                 Enc.Cliente.Nome = reader["CNOME"].ToString();
                 Enc.Cliente.NCliente = Convert.ToInt32(reader["NCLIENTE"].ToString());
+                Console.WriteLine(Enc.Cliente.Nome);
                 Enc.Preco = Convert.ToDouble(reader["PRECOTOTAL"].ToString());
             }
             closeSGBDConnection();
@@ -654,7 +655,6 @@ namespace Trabalho_BD_IHC
                                 + " JOIN CONTEUDO_ENCOMENDA ON CONTEUDO_ENCOMENDA.N_ENCOMENDA=ENCOMENDA.N_ENCOMENDA"
                                 + " JOIN [PRODUTO-PERSONALIZADO] ON CONTEUDO_ENCOMENDA.REFERENCIA_PRODUTO=[PRODUTO-PERSONALIZADO].REFERENCIA"
                                 + " AND CONTEUDO_ENCOMENDA.TAMANHO_PRODUTO = [PRODUTO-PERSONALIZADO].TAMANHO "
-                                + " AND CONTEUDO_ENCOMENDA.COR_PRODUTO = [PRODUTO-PERSONALIZADO].COR"
                                 + " AND CONTEUDO_ENCOMENDA.ID_PRODUTO = [PRODUTO-PERSONALIZADO].ID"
                                 + " JOIN ESTADO ON ENCOMENDA.ESTADO=ESTADO.ID"
                                 + " JOIN UTILIZADOR ON UTILIZADOR.N_FUNCIONARIO=N_GESTOR_VENDA"
@@ -781,7 +781,6 @@ namespace Trabalho_BD_IHC
                                 + " JOIN CONTEUDO_ENCOMENDA ON CONTEUDO_ENCOMENDA.N_ENCOMENDA=ENCOMENDA.N_ENCOMENDA"
                                 + " JOIN [PRODUTO-PERSONALIZADO] ON CONTEUDO_ENCOMENDA.REFERENCIA_PRODUTO=[PRODUTO-PERSONALIZADO].REFERENCIA"
                                 + " AND CONTEUDO_ENCOMENDA.TAMANHO_PRODUTO = [PRODUTO-PERSONALIZADO].TAMANHO "
-                                + " AND CONTEUDO_ENCOMENDA.COR_PRODUTO = [PRODUTO-PERSONALIZADO].COR"
                                 + " AND CONTEUDO_ENCOMENDA.ID_PRODUTO = [PRODUTO-PERSONALIZADO].ID"
                                 + " JOIN ESTADO ON ENCOMENDA.ESTADO=ESTADO.ID"
                                 + " JOIN UTILIZADOR ON UTILIZADOR.N_FUNCIONARIO=N_GESTOR_VENDA"
@@ -818,12 +817,11 @@ namespace Trabalho_BD_IHC
         {
             if (!this.verifySGBDConnection())
                 return null;
-            SqlCommand cmd = new SqlCommand("SELECT [PRODUTO-PERSONALIZADO].REFERENCIA as REF, [PRODUTO-BASE].NOME , [PRODUTO-PERSONALIZADO].TAMANHO AS TAM, [PRODUTO-PERSONALIZADO].COR AS COLOR, [PRODUTO-PERSONALIZADO].ID AS IDENT, [PRODUTO-PERSONALIZADO].PRECO AS PRICE, [PRODUTO-PERSONALIZADO].UNIDADES_ARMAZEM AS UA, CONTEUDO_ENCOMENDA.QUANTIDADE AS QT"
+            SqlCommand cmd = new SqlCommand("SELECT [PRODUTO-PERSONALIZADO].REFERENCIA as REF, [PRODUTO-BASE].NOME , [PRODUTO-PERSONALIZADO].TAMANHO AS TAM, [PRODUTO-PERSONALIZADO].ID AS IDENT, [PRODUTO-PERSONALIZADO].PRECO AS PRICE, [PRODUTO-PERSONALIZADO].UNIDADES_ARMAZEM AS UA, CONTEUDO_ENCOMENDA.QUANTIDADE AS QT"
                                 + " FROM ENCOMENDA"
                                 + " JOIN CONTEUDO_ENCOMENDA ON CONTEUDO_ENCOMENDA.N_ENCOMENDA=ENCOMENDA.N_ENCOMENDA"
                                 + " JOIN [PRODUTO-PERSONALIZADO] ON CONTEUDO_ENCOMENDA.REFERENCIA_PRODUTO=[PRODUTO-PERSONALIZADO].REFERENCIA "
                                 + " AND CONTEUDO_ENCOMENDA.TAMANHO_PRODUTO = [PRODUTO-PERSONALIZADO].TAMANHO "
-                                + " AND CONTEUDO_ENCOMENDA.COR_PRODUTO = [PRODUTO-PERSONALIZADO].COR"
                                 + " AND CONTEUDO_ENCOMENDA.ID_PRODUTO = [PRODUTO-PERSONALIZADO].ID"
                                 + " JOIN [PRODUTO-BASE] ON [PRODUTO-BASE].REFERENCIA=[PRODUTO-PERSONALIZADO].REFERENCIA"
                                 + " WHERE ENCOMENDA.N_ENCOMENDA=@encomenda"
@@ -840,7 +838,6 @@ namespace Trabalho_BD_IHC
                 prod.ProdutoBase.Nome = reader["NOME"].ToString();
                 prod.Preco = Convert.ToDouble(reader["PRICE"].ToString());
                 prod.Tamanho = reader["TAM"].ToString();
-                prod.Cor = reader["COLOR"].ToString();
                 prod.ID = Convert.ToInt32(reader["IDENT"].ToString());
                 prod.UnidadesStock = Convert.ToInt32(reader["UA"].ToString());
                 prod.Quantidade = Convert.ToInt32(reader["QT"].ToString());
@@ -885,12 +882,11 @@ namespace Trabalho_BD_IHC
 
             SqlCommand cmd = new SqlCommand("SELECT * "
                             + " FROM [PRODUTO-PERSONALIZADO] "
-                            + " WHERE [PRODUTO-PERSONALIZADO].REFERENCIA=@REFERENCIA AND [PRODUTO-PERSONALIZADO].TAMANHO=@TAMANHO AND [PRODUTO-PERSONALIZADO].COR=@COR AND [PRODUTO-PERSONALIZADO].ID=@ID;"
+                            + " WHERE [PRODUTO-PERSONALIZADO].REFERENCIA=@REFERENCIA AND [PRODUTO-PERSONALIZADO].TAMANHO=@TAMANHO AND [PRODUTO-PERSONALIZADO].ID=@ID;"
                             , cn);
             cmd.Parameters.Clear();
             cmd.Parameters.AddWithValue("@REFERENCIA", prod.ProdutoBase.Referencia);
             cmd.Parameters.AddWithValue("@TAMANHO", prod.Tamanho);
-            cmd.Parameters.AddWithValue("@COR", prod.Cor);
             cmd.Parameters.AddWithValue("@ID", prod.ID);
 
             if (((int)cmd.ExecuteScalar()) >= 1)
@@ -3236,7 +3232,7 @@ namespace Trabalho_BD_IHC
             if (!this.verifySGBDConnection())
                 return -1;
 
-            SqlCommand cmd = new SqlCommand("SELECT registarProdutoPersonalizado (@ref, "
+            SqlCommand cmd = new SqlCommand("SELECT existsEqualProdutoPersonalizado (@ref, "
                 + "@cor, @nEtiqueta);", this.Cn);
 
             cmd.Parameters.AddWithValue("@ref", prod.ProdutoBase.Referencia);
@@ -3247,11 +3243,12 @@ namespace Trabalho_BD_IHC
             return retVal;
         }
 
-        public bool EnviarProduto(ProdutoPersonalizado prod, ObservableCollection<MaterialTextil> materiaisSelecionados)
+        public bool EnviarProduto(ProdutoPersonalizado prod, ObservableCollection<MaterialTextil> materiaisSelecionados, Boolean inserirEtiqueta)
         {
             //registar etiqueta na base de dados primerio
             //inserir primeiro a nova etiqueta na base de dados
-            this.insertEtiqueta(prod.Etiqueta.Normas, prod.Etiqueta.Composicao, prod.Etiqueta.PaisFabrico);
+            if(inserirEtiqueta)
+                this.insertEtiqueta(prod.Etiqueta.Normas, prod.Etiqueta.Composicao, prod.Etiqueta.PaisFabrico);
             //obter o numero da etiqueta adicionada, pois é necessario para o registo do produto
             prod.Etiqueta.Numero = this.getEtiqueta(prod.Etiqueta.Normas, prod.Etiqueta.Composicao, prod.Etiqueta.PaisFabrico);
 

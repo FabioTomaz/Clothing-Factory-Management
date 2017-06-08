@@ -120,11 +120,11 @@
                             <DataGrid IsReadOnly="True" Grid.Row="1" AutoGenerateColumns="False" Name="produtosBaseLista" MouseDoubleClick="produtosBaseLista_MouseDoubleClick"
                                       SelectionChanged="produtos_SelectionChanged">
                                 <DataGrid.Columns>
-                                    <materialDesign:MaterialDataGridTextColumn Header="Referência" Binding="{Binding Referencia}" />
+                                    <materialDesign:MaterialDataGridTextColumn Header="Referência" SortDirection="Ascending" Binding="{Binding Referencia}" />
                                     <materialDesign:MaterialDataGridTextColumn Header="Nome"  Binding="{Binding Nome}" />
                                     <materialDesign:MaterialDataGridTextColumn Header="Autor" Binding="{Binding GestorProducao.Nome}" />
                                     <materialDesign:MaterialDataGridTextColumn Header="Nº Gestor" Binding="{Binding GestorProducao.NFuncionario}" />
-                                    <materialDesign:MaterialDataGridTextColumn Header="Ultima Modificação" Binding="{Binding DataAlteraçao, StringFormat=d}" />
+                                    <materialDesign:MaterialDataGridTextColumn Header="Ultima Modificação" Binding="{Binding DataAlteraçao,  StringFormat='dd/MM/yyyy'}" />
                                 </DataGrid.Columns>
                             </DataGrid>
                         </Grid>
@@ -235,7 +235,7 @@
                                       Grid.Row="1" IsReadOnly="True" SelectionChanged="produtos_SelectionChanged">
                             <DataGrid.Columns>
                                     <materialDesign:MaterialDataGridTextColumn Header="Nome" Binding="{Binding ProdutoBase.Nome}" />
-                                    <materialDesign:MaterialDataGridTextColumn Header="Referência" Binding="{Binding ProdutoBase.Referencia}"/>
+                                    <materialDesign:MaterialDataGridTextColumn Header="Referência" SortDirection="Ascending" Binding="{Binding ProdutoBase.Referencia}"/>
                                     <materialDesign:MaterialDataGridTextColumn Header="Modelo"  Binding="{Binding ID}" />
                                     <materialDesign:MaterialDataGridTextColumn Header="Cor" Binding="{Binding Cor}" />
                                     <materialDesign:MaterialDataGridTextColumn Header="Tamanho" Binding="{Binding Tamanho}" />

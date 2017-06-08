@@ -20,7 +20,13 @@ namespace Trabalho_BD_IHC
         private Utilizador gestorVendas;
         private int quantidade;
         private double preco;
+        
 
+        public Encomenda()
+        {
+            this.cliente = new Cliente();
+            this.gestorVendas = new Utilizador();
+        }
         public Cliente Cliente
         {
             get

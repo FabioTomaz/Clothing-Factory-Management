@@ -35,8 +35,8 @@ namespace Trabalho_BD_IHC
             nomeCliente.Content =encomenda.Cliente.Nome;
             desconto.Content =encomenda.Desconto;
             preco.Content =encomenda.Preco;
-            dataConfirmaçao.Content =encomenda.DataConfirmacao;
-            dataPrevistaEntrega.Content =encomenda.DataPrevistaEntrega;
+            dataConfirmaçao.Content =encomenda.DataConfirmacao.ToString("dd/MM/yyyy");
+            dataPrevistaEntrega.Content =encomenda.DataPrevistaEntrega.ToString("dd/MM/yyyy");
             localEntrega.Content = encomenda.LocalEntrega;
             dataEntrega.Content =encomenda.DataEntrega;
         }

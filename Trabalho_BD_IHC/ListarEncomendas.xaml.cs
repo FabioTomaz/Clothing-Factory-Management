@@ -104,6 +104,10 @@ namespace Trabalho_BD_IHC
 
         public void refresh()
         {
+            detalhesEncomenda.IsEnabled = false;
+            cancelarEncomenda.IsEnabled = false;
+            editarEncomenda.IsEnabled = false;
+            entregarEncomenda.IsEnabled = false;
             encomendas.Focus();
             ObservableCollection<Encomenda> items = dataHandler.getEncomendasFromDB();
             if (items != null)
