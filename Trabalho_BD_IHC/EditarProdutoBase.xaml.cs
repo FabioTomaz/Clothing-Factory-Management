@@ -34,21 +34,27 @@ namespace Trabalho_BD_IHC
             txtNomeModelo.Text = ProdutoBase.Nome;
             txtIva.Value = ProdutoBase.IVA1;
             txtInstruçoes.Text = ProdutoBase.InstrProd;
-            if (ProdutoBase.Pic != null)
-            {
-                var image = new BitmapImage();
-                using (var mem = new MemoryStream(ProdutoBase.Pic))
-                {
-                    mem.Position = 0;
-                    image.BeginInit();
-                    image.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
-                    image.CacheOption = BitmapCacheOption.OnLoad;
-                    image.UriSource = null;
-                    image.StreamSource = mem;
-                    image.EndInit();
-                }
-            }
+            imgPhoto.Source = LoadImage(ProdutoBase.Pic);
             txtInstruçoes.Focus();
+        }
+
+
+        private static BitmapImage LoadImage(byte[] imageData)
+        {
+            if (imageData == null || imageData.Length == 0) return null;
+            var image = new BitmapImage();
+            using (var mem = new MemoryStream(imageData))
+            {
+                mem.Position = 0;
+                image.BeginInit();
+                image.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
+                image.CacheOption = BitmapCacheOption.OnLoad;
+                image.UriSource = null;
+                image.StreamSource = mem;
+                image.EndInit();
+            }
+            image.Freeze();
+            return image;
         }
 
         private void validar()
