@@ -686,6 +686,92 @@ namespace Trabalho_BD_IHC
             return enc;
         }
 
+        public ObservableCollection<ProdutoPersonalizado> getProdutosPersonalizadosFromDBRef(int refer)
+        {
+            if (!this.verifySGBDConnection())
+                return null;
+            SqlCommand cmd = new SqlCommand("SELECT TAMANHO, COR, [PRODUTO-PERSONALIZADO].ID, PRECO, "
+                + "UNIDADES_ARMAZEM, [PRODUTO-PERSONALIZADO].REFERENCIA, [PRODUTO-BASE].NOME as nomeBase, "
+                + "DATA_ALTERACAO, INSTRUCOES_PRODUCAO, IVA, PAIS_FABRICO, [PRODUTO-PERSONALIZADO-DETALHES].N_ETIQUETA, "
+                + "NORMAS, PAIS_FABRICO, COMPOSICAO FROM [PRODUTO-PERSONALIZADO] JOIN [PRODUTO-PERSONALIZADO-DETALHES] ON "
+                + "([PRODUTO-PERSONALIZADO-DETALHES].REFERENCIA = [PRODUTO-PERSONALIZADO].REFERENCIA AND [PRODUTO-PERSONALIZADO-DETALHES].ID = "
+                + "[PRODUTO-PERSONALIZADO].ID) JOIN [PRODUTO-BASE] ON [PRODUTO-PERSONALIZADO].REFERENCIA = "
+                + "[PRODUTO-BASE].REFERENCIA JOIN ETIQUETA ON ETIQUETA.N_ETIQUETA = [PRODUTO-PERSONALIZADO-DETALHES].N_ETIQUETA "
+                + " WHERE[PRODUTO-PERSONALIZADO].REFERENCIA = @refer; "
+                , this.Cn);
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@refer", refer);
+            SqlDataReader reader = cmd.ExecuteReader();
+            ObservableCollection<ProdutoPersonalizado> produtoPers = new ObservableCollection<ProdutoPersonalizado>();
+            while (reader.Read())
+            {
+                ProdutoPersonalizado prod = new ProdutoPersonalizado();
+                prod.Tamanho = reader["TAMANHO"].ToString();
+                prod.Cor = reader["COR"].ToString();
+                prod.ID = Convert.ToInt32(reader["ID"].ToString());
+                prod.Preco = Convert.ToDouble(reader["PRECO"].ToString());
+                prod.UnidadesStock = Convert.ToInt32(reader["UNIDADES_ARMAZEM"].ToString());
+                prod.ProdutoBase = new ProdutoBase();
+                prod.ProdutoBase.Referencia = Convert.ToInt32(reader["REFERENCIA"].ToString());
+                prod.ProdutoBase.Nome = reader["nomeBase"].ToString();
+                prod.ProdutoBase.InstrProd = reader["INSTRUCOES_PRODUCAO"].ToString();
+                prod.ProdutoBase.DataAlteraçao = Convert.ToDateTime(reader["DATA_ALTERACAO"]);
+                prod.ProdutoBase.IVA1 = Convert.ToDouble(reader["IVA"].ToString());
+                prod.Etiqueta = new Etiqueta();
+                prod.Etiqueta.PaisFabrico = reader["PAIS_FABRICO"].ToString();
+                prod.Etiqueta.Numero = Convert.ToInt32(reader["N_ETIQUETA"].ToString());
+                prod.Etiqueta.Normas = reader["NORMAS"].ToString();
+                prod.Etiqueta.PaisFabrico = reader["PAIS_FABRICO"].ToString();
+                prod.Etiqueta.Composicao = reader["COMPOSICAO"].ToString();
+                produtoPers.Add(prod);
+            }
+            reader.Close();
+            this.closeSGBDConnection();
+            return produtoPers;
+        }
+
+        public ObservableCollection<ProdutoPersonalizado> getProdutosPersonalizadosFromDBCor(string cor)
+        {
+            verifySGBDConnection();
+            SqlCommand cmd = new SqlCommand("SELECT TAMANHO, COR, [PRODUTO-PERSONALIZADO].ID, PRECO, "
+                + "UNIDADES_ARMAZEM, [PRODUTO-PERSONALIZADO].REFERENCIA, [PRODUTO-BASE].NOME as nomeBase, "
+                + "DATA_ALTERACAO, INSTRUCOES_PRODUCAO, IVA, PAIS_FABRICO, [PRODUTO-PERSONALIZADO-DETALHES].N_ETIQUETA, "
+                + "NORMAS, PAIS_FABRICO, COMPOSICAO FROM [PRODUTO-PERSONALIZADO] JOIN [PRODUTO-PERSONALIZADO-DETALHES] ON "
+                + "([PRODUTO-PERSONALIZADO-DETALHES].REFERENCIA = [PRODUTO-PERSONALIZADO].REFERENCIA AND [PRODUTO-PERSONALIZADO-DETALHES].ID = "
+                + "[PRODUTO-PERSONALIZADO].ID) JOIN [PRODUTO-BASE] ON [PRODUTO-PERSONALIZADO].REFERENCIA = "
+                + "[PRODUTO-BASE].REFERENCIA JOIN ETIQUETA ON ETIQUETA.N_ETIQUETA = [PRODUTO-PERSONALIZADO-DETALHES].N_ETIQUETA "
+                + " WHERE COR LIKE @cor; ", this.Cn);
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@cor", "%" + cor + "%");
+            SqlDataReader reader = cmd.ExecuteReader();
+            ObservableCollection<ProdutoPersonalizado> produtoPers = new ObservableCollection<ProdutoPersonalizado>();
+            while (reader.Read())
+            {
+                ProdutoPersonalizado prod = new ProdutoPersonalizado();
+                prod.Tamanho = reader["TAMANHO"].ToString();
+                prod.Cor = reader["COR"].ToString();
+                prod.ID = Convert.ToInt32(reader["ID"].ToString());
+                prod.Preco = Convert.ToDouble(reader["PRECO"].ToString());
+                prod.UnidadesStock = Convert.ToInt32(reader["UNIDADES_ARMAZEM"].ToString());
+                prod.ProdutoBase = new ProdutoBase();
+                prod.ProdutoBase.Referencia = Convert.ToInt32(reader["REFERENCIA"].ToString());
+                prod.ProdutoBase.Nome = reader["nomeBase"].ToString();
+                prod.ProdutoBase.InstrProd = reader["INSTRUCOES_PRODUCAO"].ToString();
+                prod.ProdutoBase.DataAlteraçao = Convert.ToDateTime(reader["DATA_ALTERACAO"]);
+                prod.ProdutoBase.IVA1 = Convert.ToDouble(reader["IVA"].ToString());
+                prod.Etiqueta = new Etiqueta();
+                prod.Etiqueta.PaisFabrico = reader["PAIS_FABRICO"].ToString();
+                prod.Etiqueta.Numero = Convert.ToInt32(reader["N_ETIQUETA"].ToString());
+                prod.Etiqueta.Normas = reader["NORMAS"].ToString();
+                prod.Etiqueta.PaisFabrico = reader["PAIS_FABRICO"].ToString();
+                prod.Etiqueta.Composicao = reader["COMPOSICAO"].ToString();
+                produtoPers.Add(prod);
+            }
+            reader.Close();
+            this.closeSGBDConnection();
+            return produtoPers;
+        }
+
         public ObservableCollection<Encomenda> getEncomendaDBcliente(string nomeCli)
         {
             if (!this.verifySGBDConnection())
@@ -790,89 +876,7 @@ namespace Trabalho_BD_IHC
             closeSGBDConnection();
             return produtosPers;
         }
-
-        public ObservableCollection<ProdutoPersonalizado> getProdutosPersonalizadosFromDBRef(int refer)
-        {
-            if (!this.verifySGBDConnection())
-                return null;
-            SqlCommand cmd = new SqlCommand("SELECT TAMANHO, COR, ID, PRECO, UNIDADES_ARMAZEM, "
-                + "[PRODUTO-PERSONALIZADO].REFERENCIA, [PRODUTO-BASE].NOME as nomeBase, DATA_ALTERACAO, "
-                + "INSTRUCOES_PRODUCAO, IVA, PAIS_FABRICO, [PRODUTO-PERSONALIZADO].N_ETIQUETA, NORMAS, "
-                + "PAIS_FABRICO, COMPOSICAO FROM[PRODUTO-PERSONALIZADO] JOIN[PRODUTO-BASE] ON "
-                + "[PRODUTO-PERSONALIZADO].REFERENCIA = [PRODUTO-BASE].REFERENCIA JOIN "
-                + "ETIQUETA ON ETIQUETA.N_ETIQUETA = [PRODUTO-PERSONALIZADO].N_ETIQUETA WHERE [PRODUTO-PERSONALIZADO].REFERENCIA = @refer; "
-                , this.Cn);
-            cmd.Parameters.Clear();
-            cmd.Parameters.AddWithValue("@refer", refer);
-            SqlDataReader reader = cmd.ExecuteReader();
-            ObservableCollection<ProdutoPersonalizado> produtoPers = new ObservableCollection<ProdutoPersonalizado>();
-            while (reader.Read())
-            {
-                ProdutoPersonalizado prod = new ProdutoPersonalizado();
-                prod.Tamanho = reader["TAMANHO"].ToString();
-                prod.Cor = reader["COR"].ToString();
-                prod.ID = Convert.ToInt32(reader["ID"].ToString());
-                prod.Preco = Convert.ToDouble(reader["PRECO"].ToString());
-                prod.UnidadesStock = Convert.ToInt32(reader["UNIDADES_ARMAZEM"].ToString());
-                prod.ProdutoBase = new ProdutoBase();
-                prod.ProdutoBase.Referencia = Convert.ToInt32(reader["REFERENCIA"].ToString());
-                prod.ProdutoBase.Nome = reader["nomeBase"].ToString();
-                prod.ProdutoBase.InstrProd = reader["INSTRUCOES_PRODUCAO"].ToString();
-                prod.ProdutoBase.DataAlteraçao = Convert.ToDateTime(reader["DATA_ALTERACAO"]);
-                prod.ProdutoBase.IVA1 = Convert.ToDouble(reader["IVA"].ToString());
-                prod.Etiqueta = new Etiqueta();
-                prod.Etiqueta.PaisFabrico = reader["PAIS_FABRICO"].ToString();
-                prod.Etiqueta.Numero = Convert.ToInt32(reader["N_ETIQUETA"].ToString());
-                prod.Etiqueta.Normas = reader["NORMAS"].ToString();
-                prod.Etiqueta.PaisFabrico = reader["PAIS_FABRICO"].ToString();
-                prod.Etiqueta.Composicao = reader["COMPOSICAO"].ToString();
-                produtoPers.Add(prod);
-            }
-            reader.Close();
-            this.closeSGBDConnection();
-            return produtoPers;
-        }
-
-        public ObservableCollection<ProdutoPersonalizado> getProdutosPersonalizadosFromDBCor(string cor)
-        {
-            verifySGBDConnection();
-            SqlCommand cmd = new SqlCommand("SELECT TAMANHO, COR, ID, PRECO, UNIDADES_ARMAZEM, "
-                + "[PRODUTO-PERSONALIZADO].REFERENCIA, [PRODUTO-BASE].NOME as nomeBase, DATA_ALTERACAO, "
-                + "INSTRUCOES_PRODUCAO, IVA, PAIS_FABRICO, [PRODUTO-PERSONALIZADO].N_ETIQUETA, NORMAS, "
-                + "PAIS_FABRICO, COMPOSICAO FROM[PRODUTO-PERSONALIZADO] JOIN[PRODUTO-BASE] ON "
-                + "[PRODUTO-PERSONALIZADO].REFERENCIA = [PRODUTO-BASE].REFERENCIA JOIN "
-                + "ETIQUETA ON ETIQUETA.N_ETIQUETA = [PRODUTO-PERSONALIZADO].N_ETIQUETA WHERE COR LIKE @cor; "
-                , this.Cn);
-            cmd.Parameters.Clear();
-            cmd.Parameters.AddWithValue("@cor", "%" + cor + "%");
-            SqlDataReader reader = cmd.ExecuteReader();
-            ObservableCollection<ProdutoPersonalizado> produtoPers = new ObservableCollection<ProdutoPersonalizado>();
-            while (reader.Read())
-            {
-                ProdutoPersonalizado prod = new ProdutoPersonalizado();
-                prod.Tamanho = reader["TAMANHO"].ToString();
-                prod.Cor = reader["COR"].ToString();
-                prod.ID = Convert.ToInt32(reader["ID"].ToString());
-                prod.Preco = Convert.ToDouble(reader["PRECO"].ToString());
-                prod.UnidadesStock = Convert.ToInt32(reader["UNIDADES_ARMAZEM"].ToString());
-                prod.ProdutoBase = new ProdutoBase();
-                prod.ProdutoBase.Referencia = Convert.ToInt32(reader["REFERENCIA"].ToString());
-                prod.ProdutoBase.Nome = reader["nomeBase"].ToString();
-                prod.ProdutoBase.InstrProd = reader["INSTRUCOES_PRODUCAO"].ToString();
-                prod.ProdutoBase.DataAlteraçao = Convert.ToDateTime(reader["DATA_ALTERACAO"]);
-                prod.ProdutoBase.IVA1 = Convert.ToDouble(reader["IVA"].ToString());
-                prod.Etiqueta = new Etiqueta();
-                prod.Etiqueta.PaisFabrico = reader["PAIS_FABRICO"].ToString();
-                prod.Etiqueta.Numero = Convert.ToInt32(reader["N_ETIQUETA"].ToString());
-                prod.Etiqueta.Normas = reader["NORMAS"].ToString();
-                prod.Etiqueta.PaisFabrico = reader["PAIS_FABRICO"].ToString();
-                prod.Etiqueta.Composicao = reader["COMPOSICAO"].ToString();
-                produtoPers.Add(prod);
-            }
-            reader.Close();
-            this.closeSGBDConnection();
-            return produtoPers;
-        }
+        
 
         public Boolean checkIfProdutoPersonalizadoExists(ProdutoPersonalizado prod)
         {

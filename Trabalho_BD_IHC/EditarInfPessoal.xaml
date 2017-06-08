@@ -67,12 +67,12 @@
                     <materialDesign:PackIcon Kind="Email"></materialDesign:PackIcon>
                     <TextBlock Text="E-Mail: "/>
                 </StackPanel>
-                <TextBox Name="txtEmail" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center"></TextBox>
+                <TextBox Name="txtTelemovel" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center"></TextBox>
                 <StackPanel Orientation="Horizontal"  Grid.Row="1" Grid.Column="0" VerticalAlignment="Center">
                     <materialDesign:PackIcon Kind="Phone"></materialDesign:PackIcon>
                     <TextBlock Text="Telemovel: "/>
                 </StackPanel>
-                <TextBox Name="txtTelemovel" Grid.Row="3" Grid.Column="2" VerticalAlignment="Center"></TextBox>
+                <TextBox Name="txtEmail" Grid.Row="3" Grid.Column="2" VerticalAlignment="Center"></TextBox>
                 <StackPanel Orientation="Horizontal"  Grid.Row="5" Grid.Column="0" VerticalAlignment="Center">
                     <materialDesign:PackIcon Kind="ZipBox"></materialDesign:PackIcon>
                     <TextBlock Text="Código Postal: "/>
