@@ -111,6 +111,7 @@ namespace Trabalho_BD_IHC
             }
 
             ProdutoPersonalizado prodPers = new ProdutoPersonalizado();
+            Boolean inserirEtiqueta=true;
             try
             {
                 ComboBoxItem cbi = (ComboBoxItem)cbTamanho.SelectedItem;
@@ -122,18 +123,18 @@ namespace Trabalho_BD_IHC
                 prodPers.ProdutoBase = new ProdutoBase();
                 prodPers.ProdutoBase = (ProdutoBase)cbProdBase.SelectedItem;
                 prodPers.MateriaisTexteis = new ObservableCollection<MaterialTextil>();
-
                 prodPers.Etiqueta = new Etiqueta();
                 if (rdEtiquetaExis.IsChecked == true)
                 {
                     prodPers.Etiqueta = (Etiqueta)cbEtiqueta.SelectedItem;
-
+                    inserirEtiqueta = false;
                 }
                 else if (rdEtiquetaNova.IsChecked == true)
                 {
                     prodPers.Etiqueta.Normas = txtNormas.Text;
                     prodPers.Etiqueta.Composicao = txtComp.Text;
                     prodPers.Etiqueta.PaisFabrico = txtPais.Text;
+                    inserirEtiqueta = true;
                 }
             }
             catch (Exception ex)
@@ -141,7 +142,7 @@ namespace Trabalho_BD_IHC
                 MessageBox.Show(ex.Message);
                 return;
             }
-            RegistarProdutoMateriais page = new RegistarProdutoMateriais(dataHandler, prodPers, listaMateriais);
+            RegistarProdutoMateriais page = new RegistarProdutoMateriais(dataHandler, prodPers, listaMateriais, inserirEtiqueta);
             this.NavigationService.Navigate(page);
         }
 

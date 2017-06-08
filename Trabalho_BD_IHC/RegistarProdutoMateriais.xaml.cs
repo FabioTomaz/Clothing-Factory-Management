@@ -28,6 +28,7 @@ namespace Trabalho_BD_IHC
         private ListarMateriais listarMateriais;
         private ObservableCollection<MaterialTextil> materiaisSelecionados;
         private ProdutoPersonalizado prod;
+        private Boolean inserirEtiqueta;
         public int CurrentRow
         {
             get
@@ -47,12 +48,13 @@ namespace Trabalho_BD_IHC
             materiaisView.ItemsSource = dataHandler.getMateriaisFromDB();
         }
 
-        public RegistarProdutoMateriais(DataHandler dataHandler, ProdutoPersonalizado prod, ListarMateriais listarMateriais)
+        public RegistarProdutoMateriais(DataHandler dataHandler, ProdutoPersonalizado prod, ListarMateriais listarMateriais, Boolean inserirEtiqueta)
         {
             InitializeComponent();
             this.dataHandler = dataHandler;
             this.prod = prod;
             this.listarMateriais = listarMateriais;
+            this.inserirEtiqueta = inserirEtiqueta;
             materiaisSelecionados = new ObservableCollection<MaterialTextil>();
         }
 
@@ -98,7 +100,7 @@ namespace Trabalho_BD_IHC
             }
             try
             {
-                dataHandler.EnviarProduto(prod, materiaisSelecionados);
+                dataHandler.EnviarProduto(prod, materiaisSelecionados, inserirEtiqueta);
             }
             catch (Exception ex)
             {
