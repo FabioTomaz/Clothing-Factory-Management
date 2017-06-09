@@ -87,13 +87,16 @@ namespace Trabalho_BD_IHC
             encomenda.DataConfirmacao = currentDate;
             encomenda.Desconto =  Convert.ToInt32(txtDesconto.Value);
             encomenda.GestorVendas.NFuncionario= Utilizador.loggedUser.NFuncionario;
-            encomenda.LocalEntrega = localEntrega.SelectedItem.ToString();
+            ComboBoxItem cbi = (ComboBoxItem)localEntrega.SelectedItem;
+            encomenda.LocalEntrega = cbi.Content.ToString();
+            Console.WriteLine(encomenda.LocalEntrega);
             encomenda.DataPrevistaEntrega = dataPrevista.SelectedDate.Value;
             List<ProdutoPersonalizado> lista = ((IEnumerable<ProdutoPersonalizado>)this.produtosEncomenda.ItemsSource).ToList();
 
 
             try
             {
+                
                 dataHandler.EnviarEncomenda(encomenda, lista);
                 Xceed.Wpf.Toolkit.MessageBox.Show("Encomenda Registada Com Sucesso!", "Envio de Encomenda", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.NavigationService.GoBack();
