@@ -296,9 +296,6 @@ begin
 end
 go
 
-select dbo.getMaxModelo(1);
-
-select dbo.getMaxModelo(1);
 --DROP FUNCTION dbo.existsEqualProdutoPersonalizado
 --SELECT dbo.existsEqualProdutoPersonalizado(1, '#e12022',1);
 
@@ -334,7 +331,6 @@ select dbo.getMaxModelo(1);
 --			END
 --	END
 --GO
-USE [GESTAO-FABRICA-VESTUARIO-LABORAL]
 
 CREATE PROCEDURE registarProdutoPersonalizado(@ref int, @tamanho varchar(5), @cor varchar(15), @nEtiqueta int, @preco decimal(7,2))
 AS
@@ -351,5 +347,3 @@ AS
 	END
 GO
 
-CREATE FUNCTION getProdutoMateriaisPreco(@ref int, @modelo, @tamanho)
-exec proc registarProdutoPersonalizado

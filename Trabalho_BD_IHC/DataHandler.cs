@@ -93,7 +93,7 @@ namespace Trabalho_BD_IHC
             {
                 throw new Exception("Não foi possivel inicar sessão na base de dados");
             }
-            SqlCommand cmd = new SqlCommand("SELECT N_FUNCIONARIO, PASS FROM UTILIZADOR WHERE N_FUNCIONARIO=@USER", Cn);
+            SqlCommand cmd = new SqlCommand("SELECT N_FUNCIONARIO, CAST(DecryptByPassPhrase('ThePassphrase', Pass) AS VARCHAR(30)) AS PASS FROM UTILIZADOR WHERE N_FUNCIONARIO=@USER", Cn);
             cmd.Parameters.Clear();
             cmd.Parameters.AddWithValue("@USER", user);
             SqlDataReader reader = cmd.ExecuteReader();
@@ -1085,7 +1085,7 @@ namespace Trabalho_BD_IHC
             if (!this.verifySGBDConnection())
                 return null;
             Utilizador utilizador = new Utilizador();
-            SqlCommand cmd = new SqlCommand("SELECT N_FUNCIONARIO, IMAGEM, UTILIZADOR.EMAIL AS EMAILUSER, SALARIO, NOME, TIPO, PASS, UTILIZADOR.TELEFONE AS TELEFONEUSER, HORA_ENTRADA, HORA_SAIDA, IMAGEM, N_FUNCIONARIO_SUPER, ZONAUSER.CODPOSTAL1 AS CODUSER1, ZONAUSER.CODPOSTAL2 AS CODUSER2 ,ZONAUSER.DISTRITO AS DISTRITOUSER, ZONAUSER.LOCALIDADE AS LOCALIDADEUSER, UTILIZADOR.RUA AS RUAUSER, UTILIZADOR.N_PORTA AS PORTAUSER, ZONAFABRICA.CODPOSTAL1 AS CODFABRICA1, ZONAFABRICA.CODPOSTAL2 AS CODFABRICA2, ZONAFABRICA.DISTRITO AS DISTRITOFABRICA, ZONAFABRICA.LOCALIDADE AS LOCALIDADEFABRICA, [FABRICA-FILIAL].RUA AS RUAFABRICA, [FABRICA-FILIAL].N_PORTA AS PORTAFABRICA, [FABRICA-FILIAL].EMAIL AS EMAILFABRICA, [FABRICA-FILIAL].TELEFONE AS TELEFONEFABRICA, [FABRICA-FILIAL].FAX AS FAXFABRICA, N_FILIAL  FROM UTILIZADOR"
+            SqlCommand cmd = new SqlCommand("SELECT N_FUNCIONARIO, IMAGEM, UTILIZADOR.EMAIL AS EMAILUSER, SALARIO, NOME, TIPO, CAST(DecryptByPassPhrase('ThePassphrase', Pass) AS VARCHAR(30)) AS PASS, UTILIZADOR.TELEFONE AS TELEFONEUSER, HORA_ENTRADA, HORA_SAIDA, IMAGEM, N_FUNCIONARIO_SUPER, ZONAUSER.CODPOSTAL1 AS CODUSER1, ZONAUSER.CODPOSTAL2 AS CODUSER2 ,ZONAUSER.DISTRITO AS DISTRITOUSER, ZONAUSER.LOCALIDADE AS LOCALIDADEUSER, UTILIZADOR.RUA AS RUAUSER, UTILIZADOR.N_PORTA AS PORTAUSER, ZONAFABRICA.CODPOSTAL1 AS CODFABRICA1, ZONAFABRICA.CODPOSTAL2 AS CODFABRICA2, ZONAFABRICA.DISTRITO AS DISTRITOFABRICA, ZONAFABRICA.LOCALIDADE AS LOCALIDADEFABRICA, [FABRICA-FILIAL].RUA AS RUAFABRICA, [FABRICA-FILIAL].N_PORTA AS PORTAFABRICA, [FABRICA-FILIAL].EMAIL AS EMAILFABRICA, [FABRICA-FILIAL].TELEFONE AS TELEFONEFABRICA, [FABRICA-FILIAL].FAX AS FAXFABRICA, N_FILIAL  FROM UTILIZADOR"
                                             + " JOIN ZONA AS ZONAUSER ON UTILIZADOR.CODPOSTAL1 = ZONAUSER.CODPOSTAL1 AND UTILIZADOR.CODPOSTAL2 = ZONAUSER.CODPOSTAL2"
                                             + " JOIN[FABRICA-FILIAL] ON [FABRICA-FILIAL].N_FILIAL = UTILIZADOR.N_FABRICA"
                                             + " JOIN ZONA AS ZONAFABRICA ON [FABRICA-FILIAL].CODPOSTAL1 = ZONAFABRICA.CODPOSTAL1 AND [FABRICA-FILIAL].CODPOSTAL2 = ZONAFABRICA.CODPOSTAL2"
@@ -2712,13 +2712,13 @@ namespace Trabalho_BD_IHC
 
             cmd.CommandText = "INSERT INTO UTILIZADOR (NOME, EMAIL, SALARIO, PASS, TELEFONE, N_FABRICA, "
                 + " HORA_ENTRADA, HORA_SAIDA, CODPOSTAL1, CODPOSTAL2, RUA, N_PORTA, N_FUNCIONARIO_SUPER) "
-                + "VALUES (@NOME, @email, @salario, @pass, @telefone, @nFilial, @entrada, @saida, @cod1, @cod2, @rua, "
+                + "VALUES (@NOME, @email, @salario, EncryptByPassPhrase('ThePassphrase', @pass), @telefone, @nFilial, @entrada, @saida, @cod1, @cod2, @rua, "
                 + "@nPorta, @super);";
             cmd.Parameters.Clear();
             cmd.Parameters.AddWithValue("@NOME", user.Nome);
             cmd.Parameters.AddWithValue("@email", user.Email);
             cmd.Parameters.AddWithValue("@salario", user.Salario);
-            cmd.Parameters.AddWithValue("@pass", user.Password);
+            cmd.Parameters.Add("@pass", SqlDbType.VarChar, 30).Value = user.Password;
             cmd.Parameters.AddWithValue("@telefone", user.Telemovel);
             cmd.Parameters.AddWithValue("@nFilial", user.Filial.NFilial);
             cmd.Parameters.AddWithValue("@entrada", user.HoraEntrada);
@@ -3317,9 +3317,9 @@ namespace Trabalho_BD_IHC
                 Xceed.Wpf.Toolkit.MessageBox.Show("A palavra passe atual está incorreta. A password não foi alterada.", "", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
-            cmd = new SqlCommand("UPDATE  UTILIZADOR SET PASS = @pass WHERE N_FUNCIONARIO = @nFunc", Cn);
+            cmd = new SqlCommand("UPDATE  UTILIZADOR SET PASS = EncryptByPassPhrase('ThePassphrase', @pass) WHERE N_FUNCIONARIO = @nFunc", Cn);
             cmd.Parameters.Clear();
-            cmd.Parameters.AddWithValue("@pass", newPass);
+            cmd.Parameters.Add("@pass", SqlDbType.VarChar, 30).Value=newPass;
             cmd.Parameters.AddWithValue("@nFunc", nFunc);
             cmd.ExecuteNonQuery();
             return true;
