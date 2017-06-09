@@ -184,7 +184,7 @@
                     <wpfTool:IntegerUpDown Name="txtTamanhoDente" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="3" Grid.Column="3" Maximum="1000" Minimum="0" Value="0" FormatString="F"  Width="100"></wpfTool:IntegerUpDown>
 
                     <Label Grid.Row="4" Grid.Column="0" Content="Preço/unidade (€): " HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
-                    <wpfTool:IntegerUpDown Name="txtPrecoUnidadeFecho" VerticalAlignment="Center" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" Width="100" Minimum="0" Value="0"  FormatString="F" HorizontalAlignment="Left"></wpfTool:IntegerUpDown>
+                    <wpfTool:DoubleUpDown Name="txtPrecoUnidadeFecho" VerticalAlignment="Center" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" Width="100" Minimum="0" Value="0"  FormatString="F" HorizontalAlignment="Left"></wpfTool:DoubleUpDown>
                 </Grid>
                 <Grid Name="mola" Visibility="Hidden" Grid.Column="0" Grid.Row="11" Grid.ColumnSpan="4" Grid.RowSpan="5">
                     <Grid.ColumnDefinitions>
@@ -203,7 +203,7 @@
                     <wpfTool:IntegerUpDown Name="txtDiametroMola" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="1" Grid.Column="2" Maximum="1000" Minimum="0" Value="0" FormatString="F"  Width="100"></wpfTool:IntegerUpDown>
                     
                     <Label Grid.Row="2" Grid.Column="0" Content="Preço/unidade (€): " HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
-                    <wpfTool:IntegerUpDown Name="txtPrecoUnidadeMola" VerticalAlignment="Center" Grid.Row="2" Grid.Column="2" Width="100" Minimum="0" Value="0"  FormatString="F" HorizontalAlignment="Left"></wpfTool:IntegerUpDown>
+                    <wpfTool:DoubleUpDown Name="txtPrecoUnidadeMola" VerticalAlignment="Center" Grid.Row="2" Grid.Column="2" Width="100" Minimum="0" Value="0"  FormatString="F" HorizontalAlignment="Left"></wpfTool:DoubleUpDown>
                 </Grid>
                 <Grid Name="botao" Visibility="Hidden" Grid.Column="0" Grid.Row="11" Grid.ColumnSpan="4" Grid.RowSpan="5">
                     <Grid.ColumnDefinitions>
@@ -222,7 +222,7 @@
                     <wpfTool:IntegerUpDown Name="txtDiametroBotao" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="1" Grid.Column="2" Maximum="1000" Minimum="0" Value="0" FormatString="F"  Width="100"></wpfTool:IntegerUpDown>
 
                     <Label Grid.Row="2" Grid.Column="0" Content="Preço/unidade (€): " HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
-                    <wpfTool:IntegerUpDown Name="txtPrecoUnidadeBotao" VerticalAlignment="Center" Grid.Row="2" Grid.Column="2" Width="100" Minimum="0" Value="0"  FormatString="F" HorizontalAlignment="Left"></wpfTool:IntegerUpDown>
+                    <wpfTool:DoubleUpDown Name="txtPrecoUnidadeBotao" VerticalAlignment="Center" Grid.Row="2" Grid.Column="2" Width="100" Minimum="0" Value="0"  FormatString="F" HorizontalAlignment="Left"></wpfTool:DoubleUpDown>
                 </Grid>
                 <Grid Name="elastico" Visibility="Hidden" Grid.Column="0" Grid.Row="11" Grid.ColumnSpan="4" Grid.RowSpan="5">
                     <Grid.ColumnDefinitions>
@@ -244,7 +244,7 @@
                     <wpfTool:IntegerUpDown Name="txtLarguraElastico" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" Maximum="1000" Minimum="0" Value="0" FormatString="F"  Width="100"></wpfTool:IntegerUpDown>
 
                     <Label Grid.Row="3" Grid.Column="0" Content="Preço/unidade (€): " HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
-                    <wpfTool:IntegerUpDown Name="txtPrecoUnidadeElastico" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="3" Grid.Column="1" Width="100" Minimum="0" Value="0"  FormatString="F"></wpfTool:IntegerUpDown>
+                    <wpfTool:DoubleUpDown Name="txtPrecoUnidadeElastico" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="3" Grid.Column="1" Width="100" Minimum="0" Value="0"  FormatString="F"></wpfTool:DoubleUpDown>
                 </Grid>
                 <Grid Name="fitaVelcro" Visibility="Hidden" Grid.Column="0" Grid.Row="11" Grid.ColumnSpan="4" Grid.RowSpan="5">
                     <Grid.ColumnDefinitions>
@@ -266,7 +266,7 @@
                     <wpfTool:IntegerUpDown Name="txtLarguraFita" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" Maximum="1000" Minimum="0" Value="0" FormatString="F"  Width="100"></wpfTool:IntegerUpDown>
 
                     <Label Grid.Row="3" Grid.Column="0" Content="Preço/unidade (€): " HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
-                    <wpfTool:IntegerUpDown Name="txtPrecoUnidadeFita" VerticalAlignment="Center" Grid.Row="3" Grid.Column="1" Width="100" Minimum="0" Value="0"  FormatString="F" HorizontalAlignment="Left"></wpfTool:IntegerUpDown>
+                    <wpfTool:DoubleUpDown Name="txtPrecoUnidadeFita" VerticalAlignment="Center" Grid.Row="3" Grid.Column="1" Width="100" Minimum="0" Value="0"  FormatString="F" HorizontalAlignment="Left"></wpfTool:DoubleUpDown>
                 </Grid>
                 
                 <Grid Name="outroTipoAcessorio" Visibility="Hidden" Grid.Column="0" Grid.Row="11" Grid.ColumnSpan="4" Grid.RowSpan="5">

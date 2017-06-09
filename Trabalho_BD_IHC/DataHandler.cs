@@ -1334,6 +1334,7 @@ namespace Trabalho_BD_IHC
                 acessoriocmd.Parameters.Clear();
                 acessoriocmd.Parameters.AddWithValue("@REFERENCIA", acessorio.Referencia);
                 acessoriocmd.Parameters.AddWithValue("@PRECO_UNIDADE", acessorio.PrecoUnidade);
+                Console.WriteLine(acessorio.PrecoUnidade);
                 acessoriocmd.CommandText = "INSERT INTO ACESSORIO (REFERENCIA_FABRICA, QUANTIDADE_ARMAZEM, PRECO_UNIDADE) " +
 "VALUES (@REFERENCIA, 0, @PRECO_UNIDADE);";
                 try
@@ -3232,12 +3233,10 @@ namespace Trabalho_BD_IHC
             if (!this.verifySGBDConnection())
                 return -1;
 
-            SqlCommand cmd = new SqlCommand("SELECT existsEqualProdutoPersonalizado (@ref, "
-                + "@cor, @nEtiqueta);", this.Cn);
+            SqlCommand cmd = new SqlCommand("SELECT dbo.getMaxModelo(@ref);"
+               , this.Cn);
 
             cmd.Parameters.AddWithValue("@ref", prod.ProdutoBase.Referencia);
-            cmd.Parameters.AddWithValue("@cor", prod.Cor);
-            cmd.Parameters.AddWithValue("@nEtiqueta", prod.Etiqueta.Numero);
             int retVal = Convert.ToInt32(cmd.ExecuteScalar());
             this.closeSGBDConnection();
             return retVal;

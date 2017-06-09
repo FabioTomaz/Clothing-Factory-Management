@@ -283,6 +283,18 @@ AS
 	END
 GO
 
+CREATE FUNCTION dbo.getMaxModelo(@ref int) returns int
+as
+begin
+	declare @max int;
+	select @max=max(ID) from [PRODUTO-PERSONALIZADO] WHERE REFERENCIA=@ref;
+	return @max;
+end
+go
+
+select dbo.getMaxModelo(1);
+
+select dbo.getMaxModelo(1);
 --DROP FUNCTION dbo.existsEqualProdutoPersonalizado
 --SELECT dbo.existsEqualProdutoPersonalizado(1, '#e12022',1);
 
@@ -318,16 +330,20 @@ GO
 --			END
 --	END
 --GO
-
+USE [GESTAO-FABRICA-VESTUARIO-LABORAL]
 
 CREATE PROCEDURE registarProdutoPersonalizado(@ref int, @tamanho varchar(5), @cor varchar(15), @nEtiqueta int, @preco decimal(7,2))
 AS
 	BEGIN
 		DECLARE @ID INT;
-		SELECT @ID = COUNT(*)+1 FROM [PRODUTO-PERSONALIZADO] WHERE REFERENCIA=@ref AND TAMANHO=@tamanho;
+		SELECT @ID = COUNT(*)+1 FROM [PRODUTO-PERSONALIZADO] join [PRODUTO-PERSONALIZADO-DETALHES] ON [PRODUTO-PERSONALIZADO].ID=[PRODUTO-PERSONALIZADO-DETALHES].ID AND [PRODUTO-PERSONALIZADO].REFERENCIA=[PRODUTO-PERSONALIZADO-DETALHES].REFERENCIA 
+		WHERE [PRODUTO-PERSONALIZADO].REFERENCIA=@ref;
 		INSERT INTO [PRODUTO-PERSONALIZADO](REFERENCIA, ID, TAMANHO, PRECO, UNIDADES_ARMAZEM)
 		VALUES(@ref, @ID, @tamanho, @preco, 0);
 		INSERT INTO [PRODUTO-PERSONALIZADO-DETALHES](REFERENCIA, ID, COR, N_ETIQUETA)
 		VALUES(@ref, @ID, @cor, @nEtiqueta);
 	END
 GO
+
+CREATE FUNCTION getProdutoMateriaisPreco(@ref int, @modelo, @tamanho)
+exec proc registarProdutoPersonalizado

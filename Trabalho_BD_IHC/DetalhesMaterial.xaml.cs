@@ -98,7 +98,7 @@ namespace Trabalho_BD_IHC
                 Botao botao = dataHandler.getBotao(mat.Referencia);
                 txt1.Text = botao.Diametro.ToString() + " cm";
                 txt2.Text = botao.QuantidadeArmazem.ToString() + " un.";
-                txt3.Text = botao.PrecoUnidade.ToString() + " €/un.";
+                txt3.Text = botao.PrecoUnidade + " €/un.";
                 txt4.Text = "";
                 botaoDiametro.Visibility = Visibility.Visible;
                 botaoPreço.Visibility = Visibility.Visible;
