@@ -61,6 +61,7 @@ GO
 CREATE PROC dbo.usarMaterial(@referenciaMaterial INT, @qtdPrecisa DECIMAL(10,2))
 AS
 BEGIN
+BEGIN TRAN
 	DECLARE @qtdExistente DECIMAL(10,2);
 	SET @qtdExistente= dbo.getQuantidadeMaterial(@referenciaMaterial);
 	IF dbo.getTipoMaterial(@referenciaMaterial) = 'Pano'
@@ -81,6 +82,7 @@ BEGIN
 			SET QUANTIDADE_ARMAZEM=@qtdExistente-@qtdPrecisa
 			WHERE REFERENCIA_FABRICA=@referenciaMaterial;
 		END
+COMMIT TRAN
 END
 GO
 
@@ -101,6 +103,7 @@ GO
 CREATE PROC dbo.produzirProduto (@REFERENCIA INT, @TAMANHO VARCHAR(5), @ID INT, @qtdProdutoPrecisa INT, @validation INT OUTPUT)
 AS
 	BEGIN
+	BEGIN TRAN
 		SET @validation = dbo.checkIfProdutoPersonalizadoExits(@REFERENCIA, @TAMANHO, @ID);
 		print @validation;
 		IF @validation=0
@@ -154,6 +157,7 @@ AS
 				END
 				DEALLOCATE cursorMaterial;
 		END
+		COMMIT TRAN
 	END
 GO
 
@@ -335,6 +339,7 @@ USE [GESTAO-FABRICA-VESTUARIO-LABORAL]
 CREATE PROCEDURE registarProdutoPersonalizado(@ref int, @tamanho varchar(5), @cor varchar(15), @nEtiqueta int, @preco decimal(7,2))
 AS
 	BEGIN
+	BEGIN TRAN
 		DECLARE @ID INT;
 		SELECT @ID = COUNT(*)+1 FROM [PRODUTO-PERSONALIZADO] join [PRODUTO-PERSONALIZADO-DETALHES] ON [PRODUTO-PERSONALIZADO].ID=[PRODUTO-PERSONALIZADO-DETALHES].ID AND [PRODUTO-PERSONALIZADO].REFERENCIA=[PRODUTO-PERSONALIZADO-DETALHES].REFERENCIA 
 		WHERE [PRODUTO-PERSONALIZADO].REFERENCIA=@ref;
@@ -342,6 +347,7 @@ AS
 		VALUES(@ref, @ID, @tamanho, @preco, 0);
 		INSERT INTO [PRODUTO-PERSONALIZADO-DETALHES](REFERENCIA, ID, COR, N_ETIQUETA)
 		VALUES(@ref, @ID, @cor, @nEtiqueta);
+	COMMIT TRAN
 	END
 GO
 
