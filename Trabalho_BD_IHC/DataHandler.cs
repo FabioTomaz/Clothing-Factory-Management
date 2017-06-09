@@ -611,16 +611,17 @@ namespace Trabalho_BD_IHC
         {
             if (!this.verifySGBDConnection())
                 return null;
-            SqlCommand cmd = new SqlCommand("SELECT ENCOMENDA.N_ENCOMENDA, DATA_CONFIRMACAO, DATA_ENTREGA_PREV, ESTADO.DESCRIÇAO, DESCONTO, CLIENTE.NCLIENTE, CLIENTE.NOME AS CNOME, N_GESTOR_VENDA, SUM([PRODUTO-PERSONALIZADO].PRECO*CONTEUDO_ENCOMENDA.QUANTIDADE) AS PRECOTOTAL "
+            SqlCommand cmd = new SqlCommand("SELECT ENCOMENDA.N_ENCOMENDA, [LOCAIS-ENTREGA-ENCOMENDA].DESCRICAO ,DATA_CONFIRMACAO, DATA_ENTREGA_PREV, ESTADO.DESCRIÇAO, DESCONTO, CLIENTE.NCLIENTE, CLIENTE.NOME AS CNOME, N_GESTOR_VENDA, SUM([PRODUTO-PERSONALIZADO].PRECO*CONTEUDO_ENCOMENDA.QUANTIDADE) AS PRECOTOTAL "
                                 + " FROM ENCOMENDA JOIN CLIENTE ON CLIENTE.NCLIENTE = ENCOMENDA.CLIENTE"
                                 + " JOIN CONTEUDO_ENCOMENDA ON CONTEUDO_ENCOMENDA.N_ENCOMENDA=ENCOMENDA.N_ENCOMENDA"
                                 + " JOIN [PRODUTO-PERSONALIZADO] ON CONTEUDO_ENCOMENDA.REFERENCIA_PRODUTO=[PRODUTO-PERSONALIZADO].REFERENCIA"
                                 + " AND CONTEUDO_ENCOMENDA.TAMANHO_PRODUTO = [PRODUTO-PERSONALIZADO].TAMANHO "
                                 + " AND CONTEUDO_ENCOMENDA.ID_PRODUTO = [PRODUTO-PERSONALIZADO].ID"
                                 + " JOIN ESTADO ON ENCOMENDA.ESTADO=ESTADO.ID"
+                                + " JOIN [LOCAIS-ENTREGA-ENCOMENDA] ON [LOCAIS-ENTREGA-ENCOMENDA].ID = ENCOMENDA.LOCALENTREGA"
                                 + " JOIN UTILIZADOR ON UTILIZADOR.N_FUNCIONARIO=N_GESTOR_VENDA"
                                 + " WHERE ENCOMENDA.N_ENCOMENDA=@encomenda"
-                                + " GROUP BY ENCOMENDA.N_ENCOMENDA, DATA_CONFIRMACAO, DATA_ENTREGA_PREV, ESTADO.DESCRIÇAO, DESCONTO, CLIENTE.NCLIENTE, CLIENTE.NOME, N_GESTOR_VENDA;"
+                                + " GROUP BY DESCRICAO ,ENCOMENDA.N_ENCOMENDA, DATA_CONFIRMACAO, DATA_ENTREGA_PREV, ESTADO.DESCRIÇAO, DESCONTO, CLIENTE.NCLIENTE, CLIENTE.NOME, N_GESTOR_VENDA;"
                                 , cn);
             cmd.Parameters.Clear();
             cmd.Parameters.AddWithValue("@encomenda", nEncomenda);
@@ -636,12 +637,13 @@ namespace Trabalho_BD_IHC
                 Enc.DataPrevistaEntrega = Convert.ToDateTime(reader["DATA_ENTREGA_PREV"]);
                 Enc.DataConfirmacao = Convert.ToDateTime(reader["DATA_CONFIRMACAO"]);
                 Enc.Desconto = Convert.ToInt32(reader["DESCONTO"]);
+                Enc.LocalEntrega = reader["DESCRICAO"].ToString();
                 Enc.GestorVendas.NFuncionario = Convert.ToInt32(reader["N_GESTOR_VENDA"].ToString());
                 Enc.Cliente.Nome = reader["CNOME"].ToString();
                 Enc.Cliente.NCliente = Convert.ToInt32(reader["NCLIENTE"].ToString());
-                Console.WriteLine(Enc.Cliente.Nome);
                 Enc.Preco = Convert.ToDouble(reader["PRECOTOTAL"].ToString());
             }
+            
             closeSGBDConnection();
             return Enc;
         }
@@ -1466,7 +1468,11 @@ namespace Trabalho_BD_IHC
             cmd.Parameters.AddWithValue("@DESCONTO", encomenda.Desconto);
             cmd.Parameters.AddWithValue("@GESTOR", encomenda.GestorVendas.NFuncionario);
             cmd.Parameters.AddWithValue("@CLIENTE", encomenda.Cliente.NCliente);
-            cmd.Parameters.AddWithValue("@LOCAL", 1);
+            Console.WriteLine(encomenda.LocalEntrega);
+            if (encomenda.LocalEntrega.Equals("Entrega ao Domicilio"))
+                cmd.Parameters.AddWithValue("@LOCAL", 1);
+            else if (encomenda.LocalEntrega.Equals("Entrega na Fábrica"))
+                cmd.Parameters.AddWithValue("@LOCAL", 2);
             cmd.Parameters.AddWithValue("@DATEP", encomenda.DataPrevistaEntrega);
             cmd.Connection = this.Cn;
             try
