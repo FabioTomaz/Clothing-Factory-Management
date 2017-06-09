@@ -17,7 +17,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <dragablz:TabablzControl SelectionChanged="tabControl_SelectionChanged"  x:Name="tabControl" Grid.Column="0" HorizontalAlignment="Stretch" Grid.Row="0" VerticalAlignment="Stretch">
+        <dragablz:TabablzControl x:Name="tabControl" Grid.Column="0" HorizontalAlignment="Stretch" Grid.Row="0" VerticalAlignment="Stretch">
             <TabItem Name="conta" Header="Minha Conta" IsEnabled="True">
                 <Grid Background="White">
                     <Grid.ColumnDefinitions>
@@ -180,6 +180,7 @@
                             <StackPanel Name="notificationStack">
                                 <materialDesign:Card Name="nEncomendasPrevistas" Margin="5,7,5,0"></materialDesign:Card>
                                 <materialDesign:Card Name="nProdutosMes" Margin="5,7,5,0"></materialDesign:Card>
+                                <materialDesign:Card Name="produtosMaisVendidoMes" Margin="5,7,5,0"></materialDesign:Card>
                             </StackPanel>
                         </ScrollViewer>
                     </GroupBox>

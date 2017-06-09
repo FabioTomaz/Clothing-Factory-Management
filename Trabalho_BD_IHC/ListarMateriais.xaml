@@ -15,7 +15,7 @@
                 <StackPanel Margin="16" HorizontalAlignment="Center">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock VerticalAlignment="Center" Text="Quantidade:  "/>
-                        <TextBox MaxLength="5" Width="40" VerticalAlignment="Center" Name="quantidade" />
+                        <TextBox MaxLength="5" Width="40" VerticalAlignment="Center" Name="quantidade" PreviewTextInput="quantidade_PreviewTextInput"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
                         <Button Style="{StaticResource MaterialDesignFlatButton}"

@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Collections.Generic;
+using System.Data.Common;
 
 namespace Trabalho_BD_IHC
 {
@@ -104,6 +105,24 @@ namespace Trabalho_BD_IHC
                 return true;
             return false;
         }
+
+        public ProdutoPersonalizado getProdutoMaisVendidoMes() {
+            ProdutoPersonalizado prod = new ProdutoPersonalizado();
+            verifySGBDConnection();
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = "SELECT * from dbo.getTipoMaisVendidoMes();";
+            cmd.Connection = cn;
+            cmd.Parameters.Clear();
+            SqlDataReader reader = cmd.ExecuteReader();
+            if (reader.Read())
+            {
+                prod.ProdutoBase.Referencia = Convert.ToInt32(reader["REFERENCIA"].ToString());
+                prod.ProdutoBase.Nome = reader["NOME"].ToString();
+                prod.Quantidade= Convert.ToInt32(reader["QTDPRODUTO"].ToString());
+            }
+            return prod;
+        }
+
 
         public void registarCliente(Cliente cl)
         {
@@ -1156,7 +1175,9 @@ namespace Trabalho_BD_IHC
         public String entregarEncomenda(int nEncomenda)
         {
             verifySGBDConnection();
+            DbTransaction trans = cn.BeginTransaction();
             SqlCommand cmd = new SqlCommand("dbo.entregarEncomenda", cn);
+            trans.Commit();
             cmd.CommandType = CommandType.StoredProcedure;
 
             // set up the parameters

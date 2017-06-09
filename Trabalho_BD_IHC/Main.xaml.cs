@@ -147,8 +147,11 @@ namespace Trabalho_BD_IHC
             int encomendasMes = dataHandler.getEncomendasDesteMes();
             int nProdutos = dataHandler.getNProdutosVendidosAteHoje();
             int nProdutosDesteMes = dataHandler.getNProdutosVendidosMes();
+            ProdutoPersonalizado prod = dataHandler.getProdutoMaisVendidoMes();
             nEncomendasPrevistas.Content = "Existem " + encomendasMes + " encomendas para serem entregues este mês.";
             nProdutosMes.Content = "Neste mês foram vendidos até ao momento " + nProdutosDesteMes + " produtos";
+            if(prod.ProdutoBase.Referencia!=0)
+                produtosMaisVendidoMes.Content = "O tipo de produto mais vendido deste mês foi: "+ prod.ProdutoBase.Nome+ " (Ref:"+prod.ProdutoBase.Referencia+", Qtd:"+ prod.Quantidade +")";
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -214,18 +217,6 @@ namespace Trabalho_BD_IHC
                     sendUserImageToDB(imgLoc);
                 dataHandler.closeSGBDConnection();
             }
-        }
-
-        private void tabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            //if(e.Source is Dragablz.TabablzControl) {
-            //    Dragablz.TabablzControl tabItem = (Dragablz.TabablzControl)e.Source;
-            //    string nome = ((TabItem)tabItem.SelectedItem).Name;
-            //    if(nome.Equals("conta"))
-            //        this.refresh();
-            //    else if(nome.Equals("materiais"))
-            //        listarMateriais.refresh();
-            //}
         }
 
         private void MudarPass_Click_2(object sender, RoutedEventArgs e)

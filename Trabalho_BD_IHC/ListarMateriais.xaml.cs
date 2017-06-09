@@ -128,6 +128,14 @@ namespace Trabalho_BD_IHC
             input.Text = "";
             this.refresh();
         }
+
+        private void quantidade_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9.]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
+
     }
 
 
