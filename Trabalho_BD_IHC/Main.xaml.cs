@@ -145,7 +145,6 @@ namespace Trabalho_BD_IHC
             double dinheiroGasto = dataHandler.getDinheiroGastoMes();
             double dinheiroGerado = dataHandler.getDinheiroGeradoMes();
             int encomendasMes = dataHandler.getEncomendasDesteMes();
-            int nProdutos = dataHandler.getNProdutosVendidosAteHoje();
             int nProdutosDesteMes = dataHandler.getNProdutosVendidosMes();
             ProdutoPersonalizado prod = dataHandler.getProdutoMaisVendidoMes();
             nEncomendasPrevistas.Content = "Existem " + encomendasMes + " encomendas para serem entregues este mês.";

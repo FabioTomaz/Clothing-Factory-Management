@@ -1,5 +1,4 @@
-use p4g3
-go
+
 
 CREATE FUNCTION dbo.getEncomendasMes () RETURNS int
 AS

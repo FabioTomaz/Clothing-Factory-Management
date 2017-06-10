@@ -302,18 +302,6 @@ namespace Trabalho_BD_IHC
             return result;
         }
 
-        public int getNProdutosVendidosAteHoje()
-        {
-            verifySGBDConnection();
-            int result = 0;
-            SqlCommand cmd = new SqlCommand("select dbo.getTotalProdutosVendidos()", cn);
-            String strResult = cmd.ExecuteScalar().ToString();
-            if (!strResult.Equals(""))
-                result = Convert.ToInt32(strResult);
-            closeSGBDConnection();
-            return result;
-        }
-
         public int getNProdutosVendidosMes()
         {
             verifySGBDConnection();
