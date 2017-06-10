@@ -72,15 +72,23 @@ namespace Trabalho_BD_IHC
         private void encomendas_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             e.Handled = true;
-            if (encomendas.SelectedItems.Count > 0)
+            if (encomendas.SelectedItems.Count == 1)
             {
-                detalhesEncomenda.IsEnabled = true;    
-                cancelarEncomenda.IsEnabled = true;
-                editarEncomenda.IsEnabled = true;
-                entregarEncomenda.IsEnabled = true;
+                detalhesEncomenda.IsEnabled = true;
+                if (((Encomenda)encomendas.SelectedItem).Estado.Equals("Aceite"))
+                {
+                    cancelarEncomenda.IsEnabled = true;
+                    editarEncomenda.IsEnabled = true;
+                    entregarEncomenda.IsEnabled = true;
+                }
+                else
+                {
+                    cancelarEncomenda.IsEnabled = false;
+                    editarEncomenda.IsEnabled = false;
+                    entregarEncomenda.IsEnabled = false;
+                }
             }
         }
-
         private void editarEncomenda_Click(object sender, RoutedEventArgs e)
         {
             EditarEncomenda page = new EditarEncomenda(dataHandler, (Encomenda)encomendas.SelectedItem);

@@ -265,16 +265,17 @@ namespace Trabalho_BD_IHC
 
             // set up the parameters
             cmd.Parameters.Add("@nEncomenda", SqlDbType.Int);
-            cmd.Parameters.Add("@out", SqlDbType.VarChar, 70).Direction = ParameterDirection.Output;
 
             // set parameter values
             cmd.Parameters["@nEncomenda"].Value = nEncomenda;
 
             // execute stored procedure
-            cmd.ExecuteNonQuery();
+            cmd.ExecuteScalar();
+
+            String strResult;
 
             // read output value from @NewId
-            String strResult = cmd.Parameters["@out"].Value.ToString();
+            strResult = "Encomenda cancelada com sucesso.";
             return strResult;
         }
 

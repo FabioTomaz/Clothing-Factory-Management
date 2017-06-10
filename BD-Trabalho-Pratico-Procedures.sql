@@ -8,7 +8,7 @@ AS
 		SET @validation = dbo.checkIfProdutoPersonalizadoExits(@REFERENCIA, @TAMANHO, @ID);
 		print @validation;
 		IF @validation=0
-			RETURN;
+			ROLLBACK TRAN;
 		DECLARE @qtdProdutoExistente as int;
 		SELECT @qtdProdutoExistente = UNIDADES_ARMAZEM from [PRODUTO-PERSONALIZADO] 
 		WHERE REFERENCIA=@REFERENCIA AND TAMANHO=@TAMANHO AND ID=@ID;
@@ -61,12 +61,6 @@ AS
 		COMMIT TRAN
 	END
 GO
-
---BEGIN TRAN;
---DECLARE @validation as INT;
---EXEC dbo.produzirProduto 4, 'XL', 1 , 1 , @validation OUTPUT;
---SELECT @validation;
---COMMIT TRAN;
 
 
 CREATE PROC dbo.adicionarMaterial(@ref int, @qtd decimal(10,2), @OUT VARCHAR(70) OUTPUT)
@@ -142,6 +136,7 @@ GO
 CREATE PROC dbo.entregarEncomenda (@NENCOMENDA INT, @OUT VARCHAR(70) OUTPUT)
 as 
 begin
+		BEGIN TRAN;
 		DECLARE @QTDPRECISA INT;
 		DECLARE @QTDEXISTENTE INT;
 		DECLARE @ENTRGAENCOMENDA BIT;
@@ -153,13 +148,11 @@ begin
 		SELECT @ESTADO=ENCOMENDA.ESTADO FROM ENCOMENDA WHERE N_ENCOMENDA=@NENCOMENDA;
 		IF(@ESTADO = 2)
 			BEGIN
-				SET @OUT = 'A encomenda já foi entregue!';
-				RETURN;
+				ROLLBACK TRAN;
 			END		
 		ELSE IF (@ESTADO = 3)
 			BEGIN
-				SET @OUT = 'A encomenda foi cancelada. Não pode ser entregue!';
-				RETURN;
+				ROLLBACK TRAN;
 			END		
 		DECLARE cursorProduto CURSOR LOCAL FOR 
 				SELECT CONTEUDO_ENCOMENDA.QUANTIDADE, [PRODUTO-PERSONALIZADO].UNIDADES_ARMAZEM, [PRODUTO-PERSONALIZADO].REFERENCIA, [PRODUTO-PERSONALIZADO].TAMANHO, [PRODUTO-PERSONALIZADO].ID FROM CONTEUDO_ENCOMENDA 
@@ -198,10 +191,11 @@ begin
 						SET @OUT = 'Encomenda Entregue';
 					END
 				CLOSE cursorProduto;
+				COMMIT TRAN;
 		END
 go
 
-CREATE PROC dbo.cancelarEncomenda (@NENCOMENDA INT, @OUT VARCHAR(70) OUTPUT)
+CREATE PROC dbo.cancelarEncomenda (@NENCOMENDA INT)
 as 
 	BEGIN
 		BEGIN TRAN
@@ -209,19 +203,17 @@ as
 		SELECT @ESTADO=ENCOMENDA.ESTADO FROM ENCOMENDA WHERE N_ENCOMENDA=@NENCOMENDA;
 		IF(@ESTADO = 3)
 			BEGIN
-				SET @OUT = 'A encomenda já foi cancelada!';
-				RETURN
+				ROLLBACK TRAN;
 			END		
 		ELSE IF (@ESTADO =2)
 			BEGIN
-				SET @OUT = 'Uma encomenda já entregue não pode ser cancelada!';
-				RETURN
+				ROLLBACK TRAN;
 			END	
 		ELSE 
 			BEGIN
 				UPDATE ENCOMENDA SET ESTADO=3 WHERE N_ENCOMENDA=@NENCOMENDA;
-				SET @OUT = 'A encomenda foi cancelada com sucesso.';
 			END		
 		COMMIT TRAN
 	END
 go
+
