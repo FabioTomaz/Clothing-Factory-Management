@@ -187,39 +187,3 @@ AS
 	END
 GO
 
-
---DROP FUNCTION dbo.existsEqualProdutoPersonalizado
---SELECT dbo.existsEqualProdutoPersonalizado(1, '#e12022',1);
-
---CREATE PROCEDURE registarProdutoPersonalizado(@ref int, @tamanho varchar(5), @cor varchar(15), @nEtiqueta int, @preco decimal(7,2))
---AS
---	BEGIN
---		DECLARE @ID INT = dbo.existsEqualProdutoPersonalizado(@ref, @cor, @nEtiqueta); 
---		PRINT @ID;
---		if  @ID != NULL
---			BEGIN
---				select @ID=max(ID)+1 from [PRODUTO-PERSONALIZADO] where REFERENCIA=@ref;
---				INSERT INTO [PRODUTO-PERSONALIZADO](REFERENCIA, ID, TAMANHO, PRECO, UNIDADES_ARMAZEM)
---				VALUES(@ref, @ID, @tamanho, @preco, 0);
---				INSERT INTO [PRODUTO-PERSONALIZADO-DETALHES](REFERENCIA, ID, COR, N_ETIQUETA)
---				VALUES(@ref, @ID, @cor, @nEtiqueta);
---			END
---		ELSE 
---			BEGIN
---				DECLARE @COUNT INT;
---				SELECT @COUNT = COUNT(*) FROM [PRODUTO-PERSONALIZADO] WHERE REFERENCIA=@ref AND TAMANHO=@tamanho;
---				IF @COUNT !=0
---					SELECT @ID = MAX(ID)+1 FROM [PRODUTO-PERSONALIZADO] WHERE REFERENCIA=@ref AND TAMANHO=@tamanho;
---				ELSE
---					BEGIN
---						SET @ID=1;
---						INSERT INTO [PRODUTO-PERSONALIZADO](REFERENCIA, ID, TAMANHO, PRECO, UNIDADES_ARMAZEM)
---						VALUES(@ref, @ID, @tamanho, @preco, 0);
---						INSERT INTO [PRODUTO-PERSONALIZADO-DETALHES](REFERENCIA, ID, COR, N_ETIQUETA)
---						VALUES(@ref, @ID, @cor, @nEtiqueta);
---					END
-
---				Print 'else'
---			END
---	END
---GO
